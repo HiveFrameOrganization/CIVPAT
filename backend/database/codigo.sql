@@ -236,6 +236,13 @@ INSERT INTO StatusFunil (idStatusFunil, StatusFunil) VALUES
 (4, 'Em Análise do Cliente'),
 (5, 'Vendido');
 
+INSERT INTO TipoPDF (idTipoPDF, TipoPDF) VALUES
+(1, 'Orçamento'),
+(2, 'Proposta Assinada'),
+(3, 'Relatório Final'),
+(4, 'Pesquisa de Satifação'),
+(5, 'Outros');
+
 INSERT INTO ServicoCategoria (idServicoCategoria, ServicoCategoria) VALUES
 (1, 'Assessoria Tecnológica - Aprimoramento de Produtos e Processos'),
 (2, 'Assessoria Tecnológica - Legislações, Normas e Regulamentos Técnicos'),
