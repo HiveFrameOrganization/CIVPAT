@@ -1,0 +1,12 @@
+docker network create isi --subnet 172.20.0.0/24
+
+docker build -t database -f dockerfileData .
+docker run --ip 172.20.0.2 -p 3307:3306 --network isi -h database --name database database
+
+docker build -t backend -f dockerfileCode .
+docker run --ip 172.20.0.3 -p 8080:80 -v "$(pwd):/var/www/html" --network isi -h isihiveframe --name backend backend
+
+docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' database
+
+to change the localhost, I need to set a new hostname on the host file of the machine, like /etc/hosts
+and to use the database hostname too.

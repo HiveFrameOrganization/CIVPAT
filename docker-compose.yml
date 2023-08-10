@@ -1,0 +1,36 @@
+version: '3'
+services:
+    database:
+        container_name: database
+        image: database
+        ports:
+            - "3307:3306"
+        security_opt:
+            - no-new-privileges:true
+        networks:
+            isi:
+                ipv4_address: 172.20.0.2
+        hostname: database
+
+    backend:
+        container_name: backend
+        image: backend
+        ports:
+            - "8080:80"
+        volumes:
+            - ./:/var/www/html
+        security_opt:
+            - no-new-privileges:true
+        networks:
+            isi:
+                ipv4_address: 172.20.0.3
+        hostname: isihiveframe
+
+networks:
+    isi:
+        name: isi
+        driver: bridge
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.0.0/24
