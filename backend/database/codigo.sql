@@ -62,7 +62,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`ServicoCategoria` (
   `idServicoCategoria` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `ServicoCategoria` VARCHAR(70) NOT NULL,
+  `ServicoCategoria` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idServicoCategoria`))
 ENGINE = InnoDB;
 
