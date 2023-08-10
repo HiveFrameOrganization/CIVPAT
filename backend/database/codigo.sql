@@ -1,8 +1,3 @@
-DROP DATABASE IF EXISTS isihiveframe;
--- CREATE USER 'test'@'172.19.0.2' IDENTIFIED BY 'P4ssword';
--- GRANT ALL PRIVILEGES ON isihiveframe.* TO 'test'@'172.19.0.2';
--- FLUSH PRIVILEGES;
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -16,6 +11,10 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema isihiveframe
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS isihiveframe;
+CREATE USER 'test'@'172.19.0.2' IDENTIFIED BY 'P4ssword';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'test'@'172.19.0.2';
+FLUSH PRIVILEGES;
 CREATE SCHEMA IF NOT EXISTS `isihiveframe` DEFAULT CHARACTER SET utf8 ;
 USE `isihiveframe` ;
 
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `Nome` VARCHAR(100) NOT NULL,
   `Sobrenome` VARCHAR(200) NOT NULL,
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(75) NOT NULL,
   `Senha` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`NIF`))
 ENGINE = InnoDB;
@@ -45,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   `Empresa` VARCHAR(200) NOT NULL,
   `Inicio` DATE NULL,
   `Fim` DATE NULL,
-  `Valor` DECIMAL(6,2) NULL,
+  `Valor` DECIMAL(10,2) NULL,
   `Status` ENUM('EM Analise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
   `Gerente` INT UNSIGNED NOT NULL,
   INDEX `fk_Propostas_Usuarios1_idx` (`Gerente` ASC) VISIBLE,
@@ -86,24 +85,19 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `Area` ENUM("metalmecanica") NOT NULL,
   `ServicoCategoria` INT UNSIGNED NOT NULL,
   `NomeProduto` INT UNSIGNED NOT NULL,
-  `Valor` DECIMAL(6,2) NOT NULL,
+  `Valor` DECIMAL(10,2) NOT NULL,
   `HoraPessoa` TIME NOT NULL,
   `HoraMaquina` TIME NOT NULL,
-  `Unidade` VARCHAR(45) NOT NULL,
+  `Unidade` VARCHAR(100) NOT NULL,
   `DataInicial` DATE NOT NULL,
   `DataFinal` DATE NOT NULL,
-  `idProposta` INT UNSIGNED NOT NULL,
   `Tecnico` INT UNSIGNED NOT NULL,
+  `idProposta` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idProdutos`),
-  INDEX `fk_Produtos_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   INDEX `fk_Produtos_Usuarios1_idx` (`Tecnico` ASC) VISIBLE,
   INDEX `fk_Produtos_ServicoCategoria1_idx` (`ServicoCategoria` ASC) VISIBLE,
   INDEX `fk_Produtos_NomeProduto1_idx` (`NomeProduto` ASC) VISIBLE,
-  CONSTRAINT `fk_Produtos_Propostas1`
-    FOREIGN KEY (`idProposta`)
-    REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_Produtos_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   CONSTRAINT `fk_Produtos_Usuarios1`
     FOREIGN KEY (`Tecnico`)
     REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
@@ -118,6 +112,11 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
     FOREIGN KEY (`NomeProduto`)
     REFERENCES `isihiveframe`.`NomeProduto` (`idNomeProduto`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Produtos_Propostas1`
+    FOREIGN KEY (`idProposta`)
+    REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -126,14 +125,14 @@ ENGINE = InnoDB;
 -- Table `isihiveframe`.`CargaHoraria`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`CargaHoraria` (
-  `Produtos_idProdutos` INT UNSIGNED NOT NULL,
+  `idProdutos` INT UNSIGNED NOT NULL,
   `Tecnico` INT UNSIGNED NOT NULL,
   `Horas` INT NOT NULL,
   `Datas` DATE NOT NULL,
-  INDEX `fk_CargaHoraria_Produtos1_idx` (`Produtos_idProdutos` ASC) VISIBLE,
+  INDEX `fk_CargaHoraria_Produtos1_idx` (`idProdutos` ASC) VISIBLE,
   INDEX `fk_CargaHoraria_Usuarios1_idx` (`Tecnico` ASC) VISIBLE,
   CONSTRAINT `fk_CargaHoraria_Produtos1`
-    FOREIGN KEY (`Produtos_idProdutos`)
+    FOREIGN KEY (`idProdutos`)
     REFERENCES `isihiveframe`.`Produtos` (`idProdutos`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -165,16 +164,16 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`followup` (
   `StatusFunil` INT UNSIGNED NOT NULL,
   `idProposta` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idfollowup`),
-  INDEX `fk_followup_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   INDEX `fk_followup_StatusFunil1_idx` (`StatusFunil` ASC) VISIBLE,
-  CONSTRAINT `fk_followup_Propostas1`
-    FOREIGN KEY (`idProposta`)
-    REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_followup_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   CONSTRAINT `fk_followup_StatusFunil1`
     FOREIGN KEY (`StatusFunil`)
     REFERENCES `isihiveframe`.`StatusFunil` (`idStatusFunil`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_followup_Propostas1`
+    FOREIGN KEY (`idProposta`)
+    REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -195,14 +194,21 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`PDF` (
   `idPDF` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Propostas_idProposta` INT UNSIGNED NOT NULL,
+  `idProposta` INT UNSIGNED NOT NULL,
   `NomePdf` VARCHAR(45) NOT NULL,
   `pdf` LONGBLOB NOT NULL,
+  `TipoPDF` INT NOT NULL,
   PRIMARY KEY (`idPDF`),
-  INDEX `fk_PDF_Propostas1_idx` (`Propostas_idProposta` ASC) VISIBLE,
+  INDEX `fk_PDF_Propostas1_idx` (`idProposta` ASC) VISIBLE,
+  INDEX `fk_PDF_TipoPDF1_idx` (`TipoPDF` ASC) VISIBLE,
   CONSTRAINT `fk_PDF_Propostas1`
-    FOREIGN KEY (`Propostas_idProposta`)
+    FOREIGN KEY (`idProposta`)
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PDF_TipoPDF1`
+    FOREIGN KEY (`TipoPDF`)
+    REFERENCES `isihiveframe`.`TipoPDF` (`idTipoPDF`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -215,15 +221,15 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Historico` (
   `idHistorico` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `statusAtual` INT UNSIGNED NOT NULL,
   `statusAnterior` INT UNSIGNED NOT NULL,
-  `Propostas_idProposta` INT UNSIGNED NOT NULL,
+  `idProposta` INT UNSIGNED NOT NULL,
   `DataInicial` DATE NOT NULL,
   `DataFinal` DATE NOT NULL,
   PRIMARY KEY (`idHistorico`),
-  INDEX `fk_Historico_Propostas1_idx` (`Propostas_idProposta` ASC) VISIBLE,
+  INDEX `fk_Historico_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   INDEX `fk_Historico_StatusFunil1_idx` (`statusAnterior` ASC) VISIBLE,
   INDEX `fk_Historico_StatusFunil2_idx` (`statusAtual` ASC) VISIBLE,
   CONSTRAINT `fk_Historico_Propostas1`
-    FOREIGN KEY (`Propostas_idProposta`)
+    FOREIGN KEY (`idProposta`)
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
