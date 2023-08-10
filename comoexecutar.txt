@@ -10,3 +10,17 @@ docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}
 
 to change the localhost, I need to set a new hostname on the host file of the machine, like /etc/hosts
 and to use the database hostname too.
+
+
+
+ABRA O TERMINAL
+
+Comandos Para rodar o Docker pela primeira vez:
+01: docker build -t database -f dockerfileData .
+02: docker build -t backend -f dockerfileCode .
+(Depois de criar as imagens com os comandos acima, não precisa usar os comandos novamente)
+
+Comandos para iniciar a aplicação:
+01: docker-compose up 
+
+Para parar a aplicação basta teclar no terminal "Ctrl + C"
