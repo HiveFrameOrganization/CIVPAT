@@ -15,6 +15,10 @@ DROP DATABASE IF EXISTS isihiveframe;
 CREATE USER 'test'@'172.19.0.2' IDENTIFIED BY 'P4ssword';
 GRANT ALL PRIVILEGES ON isihiveframe.* TO 'test'@'172.19.0.2';
 FLUSH PRIVILEGES;
+
+CREATE USER 'eu'@'localhost' IDENTIFIED BY 'P4ssword';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'eu'@'localhost';
+FLUSH PRIVILEGES;
 CREATE SCHEMA IF NOT EXISTS `isihiveframe` DEFAULT CHARACTER SET utf8 ;
 USE `isihiveframe` ;
 
