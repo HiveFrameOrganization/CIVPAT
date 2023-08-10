@@ -181,6 +181,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `isihiveframe`.`TipoPDF`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `isihiveframe`.`TipoPDF` (
+  `idTipoPDF` INT NOT NULL AUTO_INCREMENT,
+  `TipoPDF` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idTipoPDF`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `isihiveframe`.`PDF`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`PDF` (
