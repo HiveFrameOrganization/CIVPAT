@@ -9,10 +9,10 @@ form.addEventListener('submit', evento => {
     evento.preventDefault();
 
     // Selecionando os valores presentes nos inputs do formulário HTML
-    const nomeProj = document.getElementsByName('nomeProjeto');
-    const cnpj = document.getElementsByName('cnpj');
-    const uniCriadora = document.getElementsByName('uniCriadora');
-    const empresa = document.getElementsByName('empresa');
+    const nomeProj = document.querySelector('[name="nomeProjeto"]').value;
+    const cnpj = document.querySelector('[name="cnpj"]').value;
+    const uniCriadora = document.querySelector('[name="uniCriadora"]').value;
+    const empresa = document.querySelector('[name="empresa"]').value;
 
     const dadosProj = {
         nomeProj: nomeProj,
@@ -21,20 +21,20 @@ form.addEventListener('submit', evento => {
         empresa: empresa
     }
 
-    enviaBackEnd(dadosProj);
+    let resposta = enviaBackEnd(dadosProj);
+    // console.log(resposta)
 
-    if (dadosProj == 'Deu certo') {
-        alert('aaaaaaaaa')
-    } else {
-        alert('bbbbbbbbb')
-    }
+    // if (resposta == 'Deu certo') {
+    //     alert('aaaaaaaaa')
+    // } else {
+    //     alert('bbbbbbbbb')
+    // }
 });
 
 async function enviaBackEnd(dadosEnviados) {
 
-
     try {
-        const resposta = await fetch(`http://localhost:8080/backend/php/cadastroProj/cadastro.php`, {
+        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProj/cadastro.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -46,11 +46,36 @@ async function enviaBackEnd(dadosEnviados) {
             throw new Error('Erro na requisição');
         }
 
-        const dados = await resposta.json();
+        let dados = await resposta.json();
 
-        alert(dados.mensagem);
+        console.log(dados);
+        return dados;
 
     } catch (error) {
         console.error('Erro', error);
+    }
+}
+
+await function returnGerentes() {
+    try {
+        let resposta = fetch('http://localhost:8080/backend/php/cadastroProj/cadastro.php', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dadosEnviados)
+        });
+
+        if (!resposta.ok) {
+            throw new Error('Erro na requisição');
+        }
+
+        let dados = resposta.json();
+
+        console.log(dados);
+        return dados;
+
+    } catch(error) {
+        console.log('Erro', error);
     }
 }
