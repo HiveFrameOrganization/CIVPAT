@@ -30,7 +30,7 @@ ALTER DATABASE isihiveframe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- Table `isihiveframe`.`Usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
-  `NIF` INT UNSIGNED NOT NULL,
+  `NIF` VARCHAR(7) UNSIGNED NOT NULL,
   `Nome` VARCHAR(100) NOT NULL,
   `Sobrenome` VARCHAR(200) NOT NULL,
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
@@ -38,6 +38,8 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `Senha` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`NIF`))
 ENGINE = InnoDB;
+
+insert into Usuarios values ('123456', 'michael', 'jackson', 'ger', 'teste@sp.senai.br', '$2y$10$uArYdZ0s6dn1iQweTpAWYeWptJPLvCZnvBPuPXgliFUn2fRK6WsqW');
 
 
 -- -----------------------------------------------------
@@ -53,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   `Inicio` DATE NULL,
   `Fim` DATE NULL,
   `Valor` DECIMAL(10,2) NULL,
-  `Status` ENUM('EM Analise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
-  `Gerente` INT UNSIGNED NOT NULL,
+  `Status` ENUM('Em Analise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
+  `Gerente` VARCHAR(7) UNSIGNED NOT NULL,
   INDEX `fk_Propostas_Usuarios1_idx` (`Gerente` ASC) VISIBLE,
   PRIMARY KEY (`idProposta`),
   CONSTRAINT `fk_Propostas_Usuarios1`
@@ -64,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+insert into Propostas (`TituloProj`, `CNPJ`, `UnidadeCriadora`, `Empresa`, `Status`, `Gerente`) values (default, '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 'Jacksons 5', 'Em analise', '123456');
 
 -- -----------------------------------------------------
 -- Table `isihiveframe`.`ServicoCategoria`
@@ -92,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `idProdutos` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Area` ENUM("metalmecanica") NOT NULL,
   `ServicoCategoria` INT UNSIGNED NOT NULL,
-  `NomeProduto` INT UNSIGNED NOT NULL,
+  `fk_idNomeProduto` INT UNSIGNED NOT NULL,
   `Valor` DECIMAL(10,2) NOT NULL,
   `HoraPessoa` TIME NOT NULL,
   `HoraMaquina` TIME NOT NULL,
@@ -117,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Produtos_NomeProduto1`
-    FOREIGN KEY (`NomeProduto`)
+    FOREIGN KEY (`fk_idNomeProduto`)
     REFERENCES `isihiveframe`.`NomeProduto` (`idNomeProduto`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
