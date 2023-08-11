@@ -11,12 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt = $conn->prepare("SELECT StatusFunil FROM StatusFunil");
     $stmt->execute();
     // Pega o resultado da query
-    $stmt->bind_result($statusFunil);
-    $resultados = array();
+    $resultado = $stmt->get_result();
+    $data = $resultado->fetch_all();
 
-    for ($counter = 1; $stmt->fetch(); $counter++) {
-        $resultados += array($counter => $statusFunil);
-    }
-
-    echo json_encode($resultados);
+    echo json_encode($data);
 }

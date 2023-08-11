@@ -8,17 +8,6 @@ function getStatus() {
         return response.json(); // Assuming you are expecting JSON data
     })
     .then(data => {
-        function decodeEntities(encodedString) {
-            let parser = new DOMParser();
-            let dom = parser.parseFromString('<!doctype html><body>' + encodedString, 'text/html');
-            return dom.body.textContent;
-        }
-        
-        // Create a new object with the decoded data
-        let decodedData = {};
-        for (let key in data) {
-            decodedData[key] = decodeEntities(data[key]);
-        }
         alert(data['1'])
     })
     .catch(error => {

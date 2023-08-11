@@ -16,6 +16,10 @@ CREATE USER 'teste'@'172.20.0.3' IDENTIFIED BY 'P4ssword';
 GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
+CREATE USER 'work'@'172.20.0.1' IDENTIFIED BY 'workBench';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'work'@'172.20.0.1';
+FLUSH PRIVILEGES;
+
 CREATE USER 'eu'@'localhost' IDENTIFIED BY 'P4ssword';
 GRANT ALL PRIVILEGES ON isihiveframe.* TO 'eu'@'localhost';
 FLUSH PRIVILEGES;
