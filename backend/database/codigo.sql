@@ -163,15 +163,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `isihiveframe`.`followup`
+-- Table `isihiveframe`.`FollowUp`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `isihiveframe`.`followup` (
-  `idfollowup` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
+  `idFollowUp` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Data` DATETIME NOT NULL,
   `Comentario` TEXT NOT NULL,
   `StatusFunil` INT UNSIGNED NOT NULL,
   `idProposta` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`idfollowup`),
+  PRIMARY KEY (`idFollowUp`),
   INDEX `fk_followup_StatusFunil1_idx` (`StatusFunil` ASC) VISIBLE,
   INDEX `fk_followup_Propostas1_idx` (`idProposta` ASC) VISIBLE,
   CONSTRAINT `fk_followup_StatusFunil1`

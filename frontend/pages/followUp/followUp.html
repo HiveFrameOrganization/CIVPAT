@@ -9,18 +9,18 @@
 <body onload="getStatus()">
     <form id="formulario">
         <label for="dataUp">Data do Follow Up: </label>
-        <input type="date" name="dataUp" id="dataUp">
+        <input type="date" name="dataUp" id="dataUp" required>
 
         <label for="comentario">Comentário: </label>
-        <input type="textarea" name="comentario" id="comentario">
+        <input type="textarea" name="comentario" id="comentario" required>
 
         <label for="funil">Status do Funila: </label>
-        <select name="funil" id="funil">
-            <option value="" select hidden>Selecione uma opção</option>
-        </select>
+        <ul class="dropdown" name="funil" id="funil" required>
+            <li>Selecione uma opção</li>
+        </ul>
 
-        <button onclick="postFollowUp()">Enviar</button>
+        <button>Enviar</button>
     </form>
-    <script src="followUp.js"></script>
+    <script src="../../js/api/followUp.js"></script>
 </body>
 </html>
