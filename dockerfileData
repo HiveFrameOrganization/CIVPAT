@@ -1,10 +1,14 @@
-# Use an official MySQL image as the base image
-FROM mysql:8.1.0
+# Use the official MySQL Docker image
+FROM mysql:8.0-debian
 
-# Environment variables to configure the MySQL database
-ENV MYSQL_ROOT_PASSWORD='P4ssword'
+# Install locales package and generate pt_BR.UTF-8 locale
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+	&& localedef -i pt_BR -c -f UTF-8 -A /usr/share/locale/locale.alias pt_BR.UTF-8
 
-# Expose port for MySQL connections
-EXPOSE 3306
+# Set the locale environment variables to pt_BR.UTF-8
+ENV LANG pt_BR.UTF-8
+ENV LC_ALL pt_BR.UTF-8
+ENV LANGUAGE pt_BR.UTF-8
 
+# Copy your SQL initialization script
 COPY backend/database/codigo.sql /docker-entrypoint-initdb.d/

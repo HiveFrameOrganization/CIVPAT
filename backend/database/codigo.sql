@@ -25,7 +25,7 @@ GRANT ALL PRIVILEGES ON isihiveframe.* TO 'eu'@'localhost';
 FLUSH PRIVILEGES;
 CREATE SCHEMA IF NOT EXISTS `isihiveframe` DEFAULT CHARACTER SET utf8 ;
 USE `isihiveframe` ;
-
+ALTER DATABASE isihiveframe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 -- Table `isihiveframe`.`Usuarios`
 -- -----------------------------------------------------
