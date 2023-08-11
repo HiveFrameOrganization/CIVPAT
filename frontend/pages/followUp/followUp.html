@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow Up</title>
+    <link rel="stylesheet" href="followUp.css">
+</head>
+<body onload="getStatus()">
+    <form id="formulario">
+        <label for="dataUp">Data do Follow Up: </label>
+        <input type="date" name="dataUp" id="dataUp">
+
+        <label for="comentario">Comentário: </label>
+        <input type="textarea" name="comentario" id="comentario">
+
+        <label for="funil">Status do Funila: </label>
+        <select name="funil" id="funil">
+            <option value="" select hidden>Selecione uma opção</option>
+        </select>
+
+        <button onclick="postFollowUp()">Enviar</button>
+    </form>
+    <script src="followUp.js"></script>
+</body>
+</html>

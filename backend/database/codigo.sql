@@ -12,8 +12,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema isihiveframe
 -- -----------------------------------------------------
 DROP DATABASE IF EXISTS isihiveframe;
-CREATE USER 'test'@'172.19.0.2' IDENTIFIED BY 'P4ssword';
-GRANT ALL PRIVILEGES ON isihiveframe.* TO 'test'@'172.19.0.2';
+CREATE USER 'teste'@'172.20.0.3' IDENTIFIED BY 'P4ssword';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 CREATE USER 'eu'@'localhost' IDENTIFIED BY 'P4ssword';

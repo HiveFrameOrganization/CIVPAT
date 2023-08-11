@@ -26,7 +26,7 @@ $resposta = [
 //     $resposta = [
 //         'mensagem' => 'Deu certo'
 //     ];
-// } 
+// }
 // else {
 //     $resposta = [
 //         'mensagem' => 'NÃO deu certo'
