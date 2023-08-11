@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `Nome` VARCHAR(100) NOT NULL,
   `Sobrenome` VARCHAR(200) NOT NULL,
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
-  `Email` VARCHAR(75) NOT NULL,
+  `Email` VARCHAR(75) UNIQUE NOT NULL,
   `Senha` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`NIF`))
 ENGINE = InnoDB;
