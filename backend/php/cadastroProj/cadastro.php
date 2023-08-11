@@ -1,80 +1,84 @@
 <?php
-
 header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
-require_once '../database/conn.php';
+require_once '../../database/conn.php';
 
-$resposta = [
-    'mensagem' => 'Deu certo'
+$dados = json_decode(file_get_contents("php://input")); 
+
+$nomeProj = $dados->nomeProj;
+$cnpj = $dados->cnpj;
+$uniCriadora = $dados->uniCriadora;
+$empresa = $dados->empresa;
+$gerente = 1;
+
+$dadosVerif = [
+    'nomeProj' => $nomeProj
 ];
 
-// $dados = json_decode($_POST['dados']);
+if (verificaRegistro($dadosVerif, $conn) == true) {
+    $resposta = [
+        'retorno' => false,
+        'mensagem' => 'Já existe registro de projeto com esse nome'
+    ];
 
-// $nomeProj = $dados['nomeProj'];
-// $cnpj = $dados['cnpj'];
-// $uniCriadora = $dados['uniCriadora'];
-// $empresa = $dados['empresa'];
+    echo json_encode($resposta);
+    
+} else {
 
-// $stmt = $mysqli->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa) VALUES (?, ?, ?, ?)");
-// $stmt->bind_param("ssss", $nomeProj, $cnpj, $uniCriadora, $empresa);
-// $stmt->execute();
+$stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, Gerente) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
 
-// if (true == true) {
-//     $resposta = [
-//         'mensagem' => 'Deu certo'
-//     ];
-// }
-// else {
-//     $resposta = [
-//         'mensagem' => 'NÃO deu certo'
-//     ];
-// }
+$resposta = ['retorno' => ($stmt->execute() ? true : false)];
 
 echo json_encode($resposta);
+}
 
+//
+// // 
+//
 
-// Função para verificar ja existe os registros antes de salvar
-function verificaRegistro($dados, $conexao)
+function verificaRegistro($dados, $conn)
 {
-    // Pegando os dados pessoais do array de dados para salvar no banco
-    $nome = $dados['nome'];
-    $email = $dados['email'];
+    $nomeProj = $dados['nomeProj'];
 
-    $query = "SELECT * FROM clientes WHERE nome = '$nome' AND email = '$email'";
-    $resultado = mysqli_query($conexao, $query);
+    $stmt = $conn->prepare("SELECT * FROM  Propostas WHERE TituloProj = ?");
+    $stmt->bind_param("s", $nomeProj);
+    $stmt->execute();
 
-    if (mysqli_num_rows($resultado) > 0) {
-        echo json_encode(['mensagem' => 'Esse usuário já existe no banco']);
-    } else {
-        guardaBanco($dados, $conexao);
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        return true;
     }
+
+    return false;
 }
 
 
-// Verificando o tipo de requisição
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Pegar o corpo da requisição
-    $json = file_get_contents('php://input');
+// // Verificando o tipo de requisição
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     // Pegar o corpo da requisição
+//     $json = file_get_contents('php://input');
 
-    // Tranformar o Corpo JSON em um objeto PHP
-    $dados = json_decode($json, true);
+//     // Tranformar o Corpo JSON em um objeto PHP
+//     $dados = json_decode($json, true);
 
-    // Verificar se o JSON é válido
-    if ($dados === null) {
-        $resposta = [
-            'msgErro' => 'JSON inválido'
-        ];
+//     // Verificar se o JSON é válido
+//     if ($dados === null) {
+//         $resposta = [
+//             'msgErro' => 'JSON inválido'
+//         ];
 
-        echo json_encode($resposta);
+//         echo json_encode($resposta);
 
-    } else {
-        // salvando dados no banco
-        verificaRegistro($dados, $conn);
-    }
+//     } else {
+//         // salvando dados no banco
+//         verificaRegistro($dados, $conn);
+//     }
 
-} else {
-    echo json_encode(['msgErro' => 'ALGO DEU ERRADO']);
-}
+// } else {
+//     echo json_encode(['msgErro' => 'ALGO DEU ERRADO']);
+// }
