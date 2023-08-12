@@ -10,3 +10,7 @@ form {
     flex-direction: column;
     gap: 20px;
 }
+
+ul {
+    list-style-type: none;
+}

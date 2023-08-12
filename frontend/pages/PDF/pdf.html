@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="">
+        <label for="orcamento">PDF Orçamento</label>
+        <input type="file" accept=".pdf" id="orcamento"><br><br>
+    
+        <label for="propostaAssinada">PDF Proposta assinada</label>
+        <input type="file" accept=".pdf" id="propostaAssinada"><br><br>
+    
+        <label for="relatorioFinal">PDF Relatorio final</label>
+        <input type="file" accept=".pdf" id="relatorioFinal"><br><br>
+    
+        <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
+        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
+
+        <button type="button" onclick="salvarPdf()"></button>
+    </form>
+
+
+    <script src="../../js/api/pdf.js"></script>
+</body>
+</html>
