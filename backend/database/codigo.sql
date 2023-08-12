@@ -30,7 +30,7 @@ ALTER DATABASE isihiveframe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 -- Table `isihiveframe`.`Usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
-  `NIF` VARCHAR(7) UNSIGNED NOT NULL,
+  `NIF` VARCHAR(7) UNIQUE NOT NULL,
   `Nome` VARCHAR(100) NOT NULL,
   `Sobrenome` VARCHAR(200) NOT NULL,
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   `Fim` DATE NULL,
   `Valor` DECIMAL(10,2) NULL,
   `Status` ENUM('Em Analise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
-  `Gerente` VARCHAR(7) UNSIGNED NOT NULL,
+  `Gerente` VARCHAR(7) NOT NULL,
   INDEX `fk_Propostas_Usuarios1_idx` (`Gerente` ASC) VISIBLE,
   PRIMARY KEY (`idProposta`),
   CONSTRAINT `fk_Propostas_Usuarios1`
