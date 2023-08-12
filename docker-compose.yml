@@ -7,6 +7,8 @@ services:
             - "3307:3306"
         security_opt:
             - no-new-privileges:true
+        volumes:
+            - ./database:/docker-entrypoint-initdb.d
         networks:
             isi:
                 ipv4_address: 172.20.0.2
@@ -34,3 +36,4 @@ networks:
             driver: default
             config:
                 - subnet: 172.20.0.0/24
+                

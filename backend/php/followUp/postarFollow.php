@@ -5,7 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
-require_once '../../database/conn.php';
+require_once '../../../database/conn.php';
 
 // Verificando o tipo de requisição
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,11 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idProposta = 1;
 
         try {
-            $stmt = $conn->prepare("INSERT INTO followup VALUES (default, ?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $dataUp, $comentario, $funil, $idProposta);
+            $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $funil, $idProposta, $dataUp, $comentario);
             $stmt->execute();
             echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso!"]);
-        } catch (e) {
+        } catch (Exception $e) {
+            $errorMessage = "Ocorreu uma falha na inserção do Follow UP";
+            $errorDetails = "Erro no funil: " . $funil . "\nDetalhes do erro: " . $e;
+            error_log($errorMessage . "\n" . $errorDetails);
             echo json_encode(['msgErro' => "Ocorreu uma falha na inserção do Follow UP"]);
         }
 

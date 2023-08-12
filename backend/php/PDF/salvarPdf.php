@@ -17,7 +17,7 @@
     
     function carregarPdfDoBanco () {
         // Buscando o arquivo do banco
-        require_once('../../database/conn.php');
+        require_once '../../../database/conn.php';
     
     
         // Verifique se os dados do PDF estão presentes

@@ -4,9 +4,9 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
-require_once '../../database/conn.php';
+require_once '../../../database/conn.php';
 
-$dados = json_decode(file_get_contents("php://input")); 
+$dados = json_decode(file_get_contents("php://input"));
 
 $nomeProj = $dados->nomeProj;
 $cnpj = $dados->cnpj;
@@ -28,7 +28,7 @@ if (verificaRegistro($dadosVerif, $conn) == true) {
     
 } else {
 
-$stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, Gerente) VALUES (?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
 
 $resposta = ['retorno' => ($stmt->execute() ? true : false)];
@@ -37,7 +37,7 @@ echo json_encode($resposta);
 }
 
 //
-// // 
+// //
 //
 
 function verificaRegistro($dados, $conn)

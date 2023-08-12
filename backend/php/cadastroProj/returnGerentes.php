@@ -4,7 +4,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
-require_once '../../database/conn.php';
+require_once '../../../database/conn.php';
 
 $query = "SELECT * FROM Usuarios WHERE TipoUser = 'ger'";
 $result = mysqli_query($conn, $query);

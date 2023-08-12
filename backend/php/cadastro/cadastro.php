@@ -5,7 +5,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
 // Busacndo o arquivo do banco:
-require_once '../../database/conn.php';
+require_once '../../../database/conn.php';
 
 // Função para salvar os dados de cadastro no banco de dados
 function salvaDadosNoBanco($dados, $conexao)
@@ -48,5 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
     echo json_encode(['Mensagem' => 'Requisição não permitida...']);
 }
-
-?>
