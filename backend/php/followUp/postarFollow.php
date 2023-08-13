@@ -1,5 +1,4 @@
 <?php
-
 header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -17,29 +16,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Verificar se o JSON é válido
     if ($dados === null) {
-        $resposta = [
-            'msgErro' => 'JSON inválido'
-        ];
+        $resposta = ['mensagem' => 'JSON inválido', 'status' => "Erro"];
         echo json_encode($resposta);
-
     } else {
+        // Pega os valores do JSON
         $funil = $dados['funil'];
         $dataUp = $dados['dataUp'];
         $comentario = $dados['comentario'];
-        $idProposta = 1;
+        $idProposta = 1; // Corrigir
 
         try {
+            // Executa a inserção dos dados no banco
             $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?, ?)");
             $stmt->bind_param("ssss", $funil, $idProposta, $dataUp, $comentario);
             $stmt->execute();
-            echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso!"]);
+            // Retorna um aviso de Sucesso para o front
+            echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso!",
+            'status' => "Sucesso"]);
         } catch (Exception $e) {
-            $errorMessage = "Ocorreu uma falha na inserção do Follow UP";
-            $errorDetails = "Erro no funil: " . $funil . "\nDetalhes do erro: " . $e;
-            error_log($errorMessage . "\n" . $errorDetails);
-            echo json_encode(['msgErro' => "Ocorreu uma falha na inserção do Follow UP"]);
+            $errorMessage = "Ocorreu uma falha na inserção do Follow UP: ";
+            error_log($errorMessage . $e);
+            echo json_encode(['mensagem' => "Ocorreu uma falha na inserção do Follow UP",
+            'status' => "Erro"]);
         }
-
     }
 } else {
     echo json_encode(['msgErro' => 'Por favor, use POST']);
