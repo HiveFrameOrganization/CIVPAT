@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./cadastroProj.css">
 </head>
 <body>
-    <form class="formulario" action="http://localhost:8080/backend/php/cadastroProj/cadastro.php" method="post">
+    <form class="formulario">
 
         <label for="">Nome Projeto: </label>
         <input type="text" name="nomeProjeto" maxlength="75" id="">
@@ -15,19 +16,18 @@
         <input type="text" name="cnpj" maxlength="14" id="">
 
         <label for="">Unidade Criadora: </label>
-        <input type="text" name="uniCriadora" maxlength="100" id="">
+        <input type="text" name="uniCriadora" maxlength="100" minlength="4" id="">
 
         <label for="">Empresa: </label>
-        <input type="text" name="empresa" maxlength="200" id="">
+        <input type="text" name="empresa" maxlength="200" minlength="4" id="">
 
         <label for="">Gerente; </label>
-        <ul>
-            <li>...</li>
+        <ul id="listaGerentes">
         </ul>
 
         <button type="submit">Enviar</button>
     </form>
 
-    <script src="./cadastroProj.js"></script>
+    <script src="../../js/api/cadastroProj/cadastroProj.js"></script>
 </body>
 </html>

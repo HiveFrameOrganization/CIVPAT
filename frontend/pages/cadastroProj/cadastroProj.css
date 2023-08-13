@@ -29,12 +29,11 @@ button{
     padding: 10px;
 }
 
-li:active{
-    background-color: blue;
-    color: white;
-}
-
 .box{
     display: flex;
     gap: 10px;
+}
+
+.gerente-encarregado {
+    background-color: rgba(246, 255, 0, 0.371);
 }

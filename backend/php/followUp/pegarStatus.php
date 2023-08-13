@@ -4,7 +4,7 @@ header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json; charset=utf-8");
 
-require_once '../../database/conn.php';
+require_once '../../../database/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Pega os status de funil da tabela StatusFunil

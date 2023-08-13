@@ -43,8 +43,9 @@ formulario.addEventListener('submit', async evento => {
     const nome = document.querySelector('#nome').value;
     const sobrenome = document.querySelector('#sobrenome').value;
     const nif = document.querySelector('#nif').value;
-    const email = document.querySelector('#email').value;
+    const email = document.querySelector('#email').value + '@sp.senai.br';
     const senha = document.querySelector('#senha').value;
+
     
     // Pegando o cargo selecionado através da da função abaixo
     const tipoCargo = retornaCargo(cargo);
@@ -52,10 +53,11 @@ formulario.addEventListener('submit', async evento => {
     // Código para validação, colocar dentro de um try
     try {
 
-        // Verificando se o cargo está vazio
-        if (tipoCargo === 'nada') {
-            throw new Error('O CARGO NÃO FOI SELECIONADO!')
-        }
+        // Verificando se o cargo está selecionado
+        if (tipoCargo === 'nada') throw new Error('O CARGO NÃO FOI SELECIONADO!');
+
+        // Verificando se o campo NIF possui letras ou simbolos
+        if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
 
         const dadosDoCadastro = {
             nome: nome,
@@ -77,7 +79,7 @@ formulario.addEventListener('submit', async evento => {
 
 // Função para fazer a requisição
 async function mandarDadosParaBackend(dados) {
-
+    
     // tentando fazer a requisição para mandar os dados
     try {
 
@@ -88,7 +90,7 @@ async function mandarDadosParaBackend(dados) {
             },
             body: JSON.stringify(dados)
         });
-
+        
         const retornoBackend = await resposta.json();
 
         // Verificando o que foi retornado no back-end
@@ -102,4 +104,10 @@ async function mandarDadosParaBackend(dados) {
 
 }
 
+/*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS -------------------------------------------------------------------------*/
 
+// Função que vai retornar um booleano: se tiver somente números retorna TRUE
+function contemApenasNumeros(str) {
+    return /^\d+$/.test(str);
+  }
+  
