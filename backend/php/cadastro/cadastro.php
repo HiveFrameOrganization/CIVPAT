@@ -4,7 +4,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
-// Busacndo o arquivo do banco:
+// Buscando o arquivo do banco:
 require_once '../../../database/conn.php';
 
 // Função para salvar os dados de cadastro no banco de dados
@@ -33,6 +33,34 @@ function salvaDadosNoBanco($dados, $conexao)
     }
 }
 
+// Função para verificar se os dados ja existem no banco
+function verificaRegistroDuplicado($dados, $conexao) {
+
+    // Desestruturando os dados
+    $nif = $dados['nif'];
+    $email = $dados['email'];
+
+    // Preparando a consulta SQL
+    $stmt = $conexao->prepare("SELECT * FROM Usuarios WHERE Nif = ? OR Email = ?");
+    
+    // Passando os valores por parâmetro
+    $stmt->bind_param('ss', $nif, $email);
+
+    // Excutando a consulta
+    $stmt->execute();
+
+    // Verificando o resultado
+    $resultado = $stmt->get_result();
+
+    // Verificando se retornou algum registro
+    if ($resultado->num_rows > 0) {
+        echo json_encode(['Erro' => 'O usuário já existe, portanto é impossível cadastrá-lo.']);
+    } else {
+        salvaDadosNoBanco($dados, $conexao);
+    }
+
+}
+
 // Verificar o tipo da Aplicação
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -42,8 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Tranformando os dados em objeto PHP
     $dados = json_decode($json, true);
 
-    // Chamando a função para enviar os dados para o banco de dados
-    salvaDadosNoBanco($dados, $conn);
+
+    // Verificando se os dados são duplicados
+    verificaRegistroDuplicado($dados, $conn);
 
 } else {
     echo json_encode(['Mensagem' => 'Requisição não permitida...']);
