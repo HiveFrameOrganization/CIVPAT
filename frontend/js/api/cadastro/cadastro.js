@@ -79,7 +79,7 @@ formulario.addEventListener('submit', async evento => {
 
 // Função para fazer a requisição
 async function mandarDadosParaBackend(dados) {
-
+    
     // tentando fazer a requisição para mandar os dados
     try {
 
@@ -90,7 +90,7 @@ async function mandarDadosParaBackend(dados) {
             },
             body: JSON.stringify(dados)
         });
-
+        
         const retornoBackend = await resposta.json();
 
         // Verificando o que foi retornado no back-end

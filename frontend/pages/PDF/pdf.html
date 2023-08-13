@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <form action="">
+    <form action="" id="uploadForm">
         <label for="orcamento">PDF Orçamento</label>
         <input type="file" accept=".pdf" id="orcamento"><br><br>
     
@@ -18,11 +18,12 @@
         <input type="file" accept=".pdf" id="relatorioFinal"><br><br>
     
         <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
-        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
+        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao"><br><br>
 
-        <button type="button" onclick="salvarPdf()"></button>
+        <button type="button" onclick="salvarPdf()">Salvar PDF</button><br>
+        <button type="button" onclick="carregarPdf(1 )">Carregar os PDF</button>
     </form>
-
+    <a href="#" id="downloadLink" onclick="carregarPdf(1)">Baixar PDF</a>
 
     <script src="../../js/api/pdf.js"></script>
 </body>
