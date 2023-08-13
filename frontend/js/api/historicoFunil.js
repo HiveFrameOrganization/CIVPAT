@@ -1,8 +1,8 @@
 
-const div = document.getElementById('tabelaFollow');
+const div = document.getElementById('tabelaHist');
 
-// Acessa o backend para pegar os follow ups
-fetch(`http://localhost:8080/backend/php/followUp/pegarFollowUp.php?idProposta=1`, {method: 'GET'})
+// Acessa o backend para pegar os historicos do funil de vendas
+fetch(`http://localhost:8080/backend/php/followUp/pegarHistoricoFunil.php?idProposta=1`, {method: 'GET'})
 .then(response => {
     if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status} ${response.statusText}`);
@@ -11,9 +11,9 @@ fetch(`http://localhost:8080/backend/php/followUp/pegarFollowUp.php?idProposta=1
 })
 .then(data => {
     // Loop para criar os ps
-    data.forEach((followUp) => {
+    data.forEach((status) => {
         const p = document.createElement('p');
-        p.textContent = followUp; // Adiciona o texto do p (Para poder ser visto na tela)
+        p.textContent = status; // Adiciona o texto do p (Para poder ser visto na tela)
         div.appendChild(p); // Adiciona o p à div
     });
 })

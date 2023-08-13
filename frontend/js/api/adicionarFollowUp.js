@@ -65,7 +65,7 @@ form.addEventListener('submit', evento => {
 async function enviaBackEnd(dadosEnviados) {
     try {
         // Envia os dados do front pro Backend
-        await fetch(`http://localhost:8080/backend/php/followUp/postarFollow.php`, {
+        await fetch(`http://localhost:8080/backend/php/followUp/postarFollowUp.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
