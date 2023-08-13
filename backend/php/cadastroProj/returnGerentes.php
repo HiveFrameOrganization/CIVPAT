@@ -7,10 +7,29 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 $query = "SELECT * FROM Usuarios WHERE TipoUser = 'ger'";
-$result = mysqli_query($conn, $query);
 
-while ($row = $result) {
-    $rowResposta['nif'] = $row['NIF'];
-    $rowResposta['nome'] = $row['Nome'];
-    $rowResposta['sobrenome'] = $row['Sobrenome'];
+if ($result = mysqli_query($conn, $query)) {
+
+    $gerentes = array(); 
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        $gerente = array(
+            "nif" => $row['NIF'],
+            "nome" => $row['Nome'],
+            "sobrenome" => $row['Sobrenome']
+        );
+        $gerentes[] = $gerente;
+    }
+    
+    $response = array(
+        'retorno' => true,
+        'mensagem' => 'Gerentes buscados com sucesso.',
+        'gerentesRetornados' => $gerentes
+    );
+
+} else {
+    $response = array(
+        'retorno' => false
+    );
 }
+echo json_encode($response);
