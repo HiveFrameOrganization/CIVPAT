@@ -64,7 +64,7 @@ formulario.addEventListener('submit', async evento => {
             sobrenome: sobrenome,
             nif: nif,
             email: email,
-            senha: senha,
+            senha: 'senai115',
             cargo: tipoCargo
         }
 
@@ -83,7 +83,7 @@ async function mandarDadosParaBackend(dados) {
     // tentando fazer a requisição para mandar os dados
     try {
 
-        const resposta = await fetch('http://localhost:8080/backend/php/cadastro/cadastro.php', {
+        const resposta = await fetch('http://localhost:8080/backend/php/cadastroUsuario/cadastro.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
