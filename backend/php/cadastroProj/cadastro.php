@@ -12,29 +12,38 @@ $nomeProj = $dados->nomeProj;
 $cnpj = $dados->cnpj;
 $uniCriadora = $dados->uniCriadora;
 $empresa = $dados->empresa;
-$gerente = 1;
+$gerente = $dados->gerente;
 
 $dadosVerif = [
     'nomeProj' => $nomeProj
 ];
 
-if (verificaRegistro($dadosVerif, $conn) == true) {
+// $resposta = [
+//     'retorno' => false,
+//     'mensagem' => 'registro existe',
+//     'aaa' => array( 
+//         $nomeProj => $dados->nomeProj,
+//         $cnpj => $dados->cnpj,
+//         $uniCriadora => $dados->uniCriadora,
+//         $empresa => $dados->empresa,
+//         $gerente => $dados->gerente
+//     )
+// ];
+
+if (verificaRegistro($dadosVerif, $conn) === true) {
     $resposta = [
         'retorno' => false,
-        'mensagem' => 'Já existe registro de projeto com esse nome'
+        'mensagem' => 'registro existe'
     ];
-
-    echo json_encode($resposta);
     
 } else {
+    $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
 
-$stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
-$stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
-
-$resposta = ['retorno' => ($stmt->execute() ? true : false)];
+    $resposta = ['retorno' => ($stmt->execute() ? true : false)];
+}
 
 echo json_encode($resposta);
-}
 
 //
 // //

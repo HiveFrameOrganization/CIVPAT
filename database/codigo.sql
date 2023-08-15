@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
   `idFollowUp` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_idStatusFunil` INT UNSIGNED NOT NULL,
   `fk_idProposta` INT UNSIGNED NOT NULL,
-  `Data` DATETIME NOT NULL,
+  `Data` DATE NOT NULL,
   `Comentario` TEXT NOT NULL,
   PRIMARY KEY (`idFollowUp`),
   INDEX `fk_followup_StatusFunil1_idx` (`fk_idStatusFunil` ASC) VISIBLE,
