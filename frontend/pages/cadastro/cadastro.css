@@ -37,4 +37,11 @@ li:active{
 .box{
     display: flex;
     gap: 10px;
+    width: 100%;
+    background-color: blue;
+    color: white;
+}
+
+.box input{
+    width: 90%;
 }

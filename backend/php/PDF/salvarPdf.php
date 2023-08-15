@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Função para salvar o conteúdo do PDF no banco de dados (exemplo).
 function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {   
-    require_once('../../../backend/database/conn.php');
+    require_once('../../../database/conn.php');
     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 
     // Preparar a declaração SQL.
@@ -50,7 +50,7 @@ function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {
     $nomePdf = 'Orçamento';
     $idTipoPdf = 1;
     // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
-    $stmt->bind_param("ssss",$idProposta, $nomePdf, $pdfOrcamento, $idTipoPdf);
+    $stmt->bind_param("ssss",$idProposta ,$idTipoPdf, $nomePdf, $pdfOrcamento);
 
     // Executar a declaração SQL.
     if ($stmt->execute()) {
