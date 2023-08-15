@@ -169,18 +169,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
   `idFollowUp` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `fk_idStatusFunil` INT UNSIGNED NOT NULL,
   `fk_idProposta` INT UNSIGNED NOT NULL,
   `Data` DATE NOT NULL,
   `Comentario` TEXT NOT NULL,
   PRIMARY KEY (`idFollowUp`),
-  INDEX `fk_followup_StatusFunil1_idx` (`fk_idStatusFunil` ASC) VISIBLE,
   INDEX `fk_followup_Propostas1_idx` (`fk_idProposta` ASC) VISIBLE,
-  CONSTRAINT `fk_followup_StatusFunil1`
-    FOREIGN KEY (`fk_idStatusFunil`)
-    REFERENCES `isihiveframe`.`StatusFunil` (`idStatusFunil`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_followup_Propostas1`
     FOREIGN KEY (`fk_idProposta`)
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
