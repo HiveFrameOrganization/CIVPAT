@@ -11,11 +11,16 @@ fetch(`http://localhost:8080/backend/php/followUp/pegarFollowUp.php?idProposta=1
 })
 .then(data => {
     // Loop para criar os ps
-    data.forEach((followUp) => {
-        const p = document.createElement('p');
-        p.textContent = followUp; // Adiciona o texto do p (Para poder ser visto na tela)
-        div.appendChild(p); // Adiciona o p à div
-    });
+    if (data.mensagem) {
+        console.log(data.mensagem);
+        console.log(data.status);
+    } else {
+        data.forEach((followUp) => {
+            const p = document.createElement('p');
+            p.textContent = followUp; // Adiciona o texto do p (Para poder ser visto na tela)
+            div.appendChild(p); // Adiciona o p à div
+        });
+    }
 })
 .catch(error => {
     console.error('Error:', error);

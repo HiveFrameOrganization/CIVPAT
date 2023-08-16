@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_param("sss", $idProposta, $dataUp, $comentario);
             $stmt->execute();
             // Retorna um aviso de Sucesso para o front
-            echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso" . $historico,
+            echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso",
             'status' => "Sucesso"]);
         } catch (Exception $e) {
             $errorMessage = "Ocorreu uma falha na inserção do Follow UP: ";
