@@ -74,7 +74,7 @@ form.addEventListener('submit', async evento => {
 
 async function enviaBackEnd(dadosEnviados) {
     try {
-        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProj/cadastro.php`, {
+        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProposta/cadastro.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -97,7 +97,7 @@ async function enviaBackEnd(dadosEnviados) {
 
 async function returnGerentes() {
     try {
-        let resposta = await fetch('http://localhost:8080/backend/php/cadastroProj/returnGerentes.php', {
+        let resposta = await fetch('http://localhost:8080/backend/php/cadastroProposta/returnGerentes.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

@@ -1,6 +1,6 @@
 <?php
 // Função para recuperar o conteúdo do PDF do banco de dados (exemplo usando MySQLi).
-function getConteudoPdfDoBanco(){
+function pegarConteudoPdfDoBanco(){
     require_once('../../../database/conn.php');
 
     // Supondo que você tem uma tabela chamada 'tabela_pdf' que contém o PDF armazenado como BLOB.
@@ -35,7 +35,7 @@ function getConteudoPdfDoBanco(){
 }
 
 // Recuperar o conteúdo do PDF do banco de dados.
-$conteudoPdf = getConteudoPdfDoBanco();
+$conteudoPdf = pegarConteudoPdfDoBanco();
 
 // Defina o cabeçalho para indicar que a resposta é um PDF.
 header('Content-type: application/pdf');
