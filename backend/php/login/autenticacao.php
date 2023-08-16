@@ -18,7 +18,7 @@ function validacao($dados, $conn)
 {
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser = ?");
+    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser IN (?, ?, ?)");
 
     // Jogando os valores no parâmetro
     $stmt->bind_param('sss', $_SESSION['nif'], $_SESSION['email'], $dados['cargo']);

@@ -1,12 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./frontend/pages/login/login.css">
+    <title>Login</title>
 </head>
 <body>
-    <a href="./frontend/pages/cadastroProj/cadastroProj.html">aaaaaaaaaa</a>
+
+    <h1 id="titulo">Login</h1>
+
+    <form id="formulario">
+
+        <label>Email:</label>
+        <div class="box">
+            <input type="text" id="email" required>
+            <p>@sp.senai.br</p>
+        </div>
+
+        <label>Senha:</label>
+        <input type="password" id="senha">
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <!-- Formulário que será vísivel somente para novos usuários para registrar uma nova senha -->
+    <form id="formularioNovaSenha">
+        <h1>Olá, novo usuário. Por favor, redefina a sua senha.</h1>
+
+        <ul>
+            <p>Regras da nova senha:</p>
+            <li>Pelo menos uma letra maiúscula;</li>
+            <li>Pelo menos uma letra minúscula;</li>
+            <li>Pelo menos um número;</li>
+            <li>Mínimo de 8 caracteres.</li>
+        </ul>
+
+        <label>Nova senha:</label>
+        <input type="password" id="novaSenha" required>
+
+        <label>Repita a senha:</label>
+        <input type="password" id="repitaSenha" required>
+
+        <button type="submit">Salvar</button>
+
+
+    </form>
+
+    <script src="./frontend/js/api/login/novoUsuario.js"></script>
+    <script src="./frontend/js/api/login/login.js"></script>
+
+    <a href="./frontend/pages/cadastroProj/cadastroProj.html?">aaaaaaaaaa</a>
     <a href="./frontend/pages/PDF/pdf.html">Lógica dos PDFs</a>
     <a href="./frontend/pages/followUp/telaFollowUp.html">follow up</a>
 </body>

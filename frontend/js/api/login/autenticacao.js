@@ -3,7 +3,7 @@
 */
 
 // Verificação ocorre a cada carregamento de página
-window.addEventListener('load', async () => {
+async function autenticacao(cargo) {
 
     try {
 
@@ -12,7 +12,7 @@ window.addEventListener('load', async () => {
 
         const dados = {
             token: token,
-            cargo: 'adm'
+            cargo: cargo
         }
 
         const verificacao = await fetch(`http://localhost:8080/backend/php/login/autenticacao.php`, {
@@ -31,7 +31,7 @@ window.addEventListener('load', async () => {
         console.error(erro);
     }
 
-});
+}
 
 /*
 ----------------------------------- PROCESSO DE DESLOGAR O FUNCIONÁRIO ----------------------------------------
