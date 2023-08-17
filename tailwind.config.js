@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./frontend/pages/*'],
+    content: [
+        './frontend/pages/*',
+        './frontend/Componentes/*'
+    ],
     theme: {
         colors: {
             'body': 'rgb(var(--bg-body) / <alpha-value>)',

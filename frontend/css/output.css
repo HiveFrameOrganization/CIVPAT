@@ -565,14 +565,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
-.w-screen {
-  width: 100vw;
-}
-
 .bg-body {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--bg-body) / var(--tw-bg-opacity));
