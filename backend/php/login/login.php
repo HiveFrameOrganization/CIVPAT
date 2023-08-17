@@ -21,6 +21,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $_SESSION['token'] = password_hash($dadosBanco['TipoUser'], PASSWORD_DEFAULT);
         $_SESSION['email'] = $dadosBanco['Email'];
         $_SESSION['nif'] = $dadosBanco['NIF'];
+        $_SESSION['cargo'] = $dadosBanco['TipoUser'];
 
         // Mandando o token para o cliente
         $resposta = [

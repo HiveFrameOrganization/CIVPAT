@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
   `Email` VARCHAR(125) NOT NULL,
   `Senha` VARCHAR(256) NOT NULL,
+  `Status` ENUM('ativado', 'desativado') NOT NULL,
   PRIMARY KEY (`NIF`),
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
 ENGINE = InnoDB;
