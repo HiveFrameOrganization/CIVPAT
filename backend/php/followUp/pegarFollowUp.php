@@ -8,7 +8,7 @@ require_once '../../../database/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Pega os status de funil da tabela StatusFunil
-    $stmt = $conn->prepare("SELECT `Data`, Comentario FROM FollowUp where fk_idProposta = ?");
+    $stmt = $conn->prepare("SELECT `Data`, Comentario FROM FollowUp where fk_idProposta = ? ORDER BY `Data`");
     $stmt->bind_param("s", $_GET['idProposta']);
     $stmt->execute();
     // Pega o resultado da query

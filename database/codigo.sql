@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
   `Email` VARCHAR(125) NOT NULL,
   `Senha` VARCHAR(256) NOT NULL,
+  `Status` ENUM('ativado', 'desativado') NOT NULL,
   PRIMARY KEY (`NIF`),
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -521,7 +522,7 @@ insert into Usuarios values
 ('1234567', 'michael', 'jackson', NULL, 'ger', 'teste@sp.senai.br', '$2y$10$uArYdZ0s6dn1iQweTpAWYeWptJPLvCZnvBPuPXgliFUn2fRK6WsqW');
 
 insert into Propostas values 
-(default, '1234567', 'Jacarté a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
+(default, '1234567', 'Jacaré a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
 'Jacksons 5', 'Em Análise', NULL, NULL, NULL, NULL);
 
 
