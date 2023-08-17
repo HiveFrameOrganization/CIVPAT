@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* DAFAULT: Dark */
+        --bg-body: 9 32 48;
+        --bg-component: 18 39 54;
+        --primary-color: 57 118 209;
+        --text-color: 255 255 255;
+        --text-secundary-color: 126 126 126;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-body: 241 245 249;
+            --bg-component: 255 255 255;
+            --text-color: 30 41 59;
+        }
+    }
+
+    :root[data-theme="dark"] {
+        --bg-body: 9 32 48;
+        --bg-component: 18 39 54;
+        --primary-color: 57 118 209;
+        --text-color: 255 255 255;
+        --text-secundary-color: 126 126 126;
+    }   
+
+    :root[data-theme="light"] {
+        --bg-body: 241 245 249;
+        --bg-component: 255 255 255;
+        --text-color: 30 41 59;
+    }   
+}
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
