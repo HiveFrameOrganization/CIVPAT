@@ -565,7 +565,24 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
 .bg-body {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--bg-body) / var(--tw-bg-opacity));
+}
+
+.text-color-text {
+  --tw-text-opacity: 1;
+  color: rgb(var(--primary-text-color) / var(--tw-text-opacity));
+}
+
+* {
+  font-family: 'Rubik', sans-serif;
 }

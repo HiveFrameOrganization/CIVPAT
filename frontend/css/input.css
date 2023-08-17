@@ -34,3 +34,7 @@
         --text-color: 30 41 59;
     }   
 }
+
+* {
+    font-family: 'Rubik', sans-serif;
+}
