@@ -189,6 +189,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
   `fk_idProposta` INT UNSIGNED NOT NULL,
   `Data` DATE NOT NULL,
   `Comentario` TEXT NOT NULL,
+  `DataProxFollowUp` DATE NOT NULL,
   PRIMARY KEY (`idFollowUp`),
   INDEX `fk_followup_Propostas1_idx` (`fk_idProposta` ASC) VISIBLE,
   CONSTRAINT `fk_followup_Propostas1`
@@ -519,7 +520,7 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 (207, 'Validação de Sistemas de Medição', 15);
 
 insert into Usuarios values 
-('1234567', 'michael', 'jackson', NULL, 'ger', 'teste@sp.senai.br', '$2y$10$uArYdZ0s6dn1iQweTpAWYeWptJPLvCZnvBPuPXgliFUn2fRK6WsqW');
+('1234567', 'michael', 'jackson', NULL, 'ger', 'teste@sp.senai.br', '$2y$10$uArYdZ0s6dn1iQweTpAWYeWptJPLvCZnvBPuPXgliFUn2fRK6WsqW', 'ativado');
 
 insert into Propostas values 
 (default, '1234567', 'Jacaré a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 

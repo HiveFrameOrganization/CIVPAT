@@ -1,6 +1,6 @@
 // let liSelected
 
-const data = document.getElementById('dataUp');
+const data = document.getElementById('dataFollowUp');
 
 // Pega data de hoje em yyyy-mm-dd
 const hoje = new Date().toISOString().split('T')[0];
@@ -10,6 +10,17 @@ data.max = hoje;
 data.addEventListener('input', evento => {
     if (data.value > hoje) {
         data.setCustomValidity("A data selecionada não pode ser futura");
+    }
+});
+
+// pega o elemento de input do próximo follow up
+const dataProx = document.getElementById('dataFollowUpProx');
+
+// Determina a data mínima pra hoje
+dataProx.min = hoje;
+dataProx.addEventListener('input', evento => {
+    if (dataProx.value < hoje) {
+        dataProx.setCustomValidity("A data selecionada não pode ser passada");
     }
 });
 
@@ -45,13 +56,16 @@ form.addEventListener('submit', evento => {
     // Pausa o evento para pegar os dados do formulário
     evento.preventDefault();
     // Seleciona os valores presentes nos inputs do formulário HTML
-    const dataUp = document.getElementById('dataUp').value;
+    const dataFollowUp = document.getElementById('dataFollowUp').value;
     const comentario = document.getElementById('comentario').value;
+    const dataFollowUpProx = document.getElementById('dataFollowUpProx').value;
 
     // Monta um objeto para ser enviado com json pro backend
     const dadosFollow = {
-        dataUp: dataUp,
-        comentario: comentario
+        idProposta: '1',
+        dataFollowUp: dataFollowUp,
+        comentario: comentario,
+        dataFollowUpProx: dataFollowUpProx
     }
     enviaBackEnd(dadosFollow);
 });

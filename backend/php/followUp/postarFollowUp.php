@@ -20,14 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode($resposta);
     } else {
         // Pega os valores do JSON
-        $dataUp = $dados['dataUp'];
+        $idProposta = $dados['idProposta']; // Corrigir
+        $dataFollowUp = $dados['dataFollowUp'];
         $comentario = $dados['comentario'];
-        $idProposta = 1; // Corrigir
+        $dataFollowUpProx = $dados['dataFollowUpProx'];
 
         try {
             // Executa a inserção dos dados no banco
-            $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?)");
-            $stmt->bind_param("sss", $idProposta, $dataUp, $comentario);
+            $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $idProposta, $dataFollowUp, $comentario, $dataFollowUpProx);
             $stmt->execute();
             // Retorna um aviso de Sucesso para o front
             echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso",
