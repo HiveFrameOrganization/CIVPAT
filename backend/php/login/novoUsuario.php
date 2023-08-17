@@ -29,13 +29,33 @@ function verificaNoBanco($email, $conexao)
 
         // Verificando se é o primeiro login do funcionario
         if ($linha['Senha'] === 'senai115') {
-            echo json_encode(['novoUsuario' => true]);
+
+            // resposta a ser mandado para o front-end
+            $resposta = [
+                'mensagem' => 'Novo usuário!',
+                'novoUsuario' => true,
+                'status' => 'sucesso'
+            ];
+        
+            echo json_encode($resposta);
         } else {
-            echo json_encode(['novoUsuario' => false]);
+            $resposta = [
+                'mensagem' => 'Não é novo usuário...',
+                'novoUsuario' => false,
+                'status' => 'sucesso'
+            ];
+        
+            echo json_encode($resposta);
         }
 
     } else {
-        echo json_encode(['Erro' => 'USUÁRIO NÃO CADASTRADO']);
+
+        $resposta = [
+            'mensagem' => 'Usuário não cadastrado...',
+            'status' => 'erro'
+        ];
+    
+        echo json_encode($resposta);
     }
 
 }

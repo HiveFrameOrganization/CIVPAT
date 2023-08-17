@@ -14,14 +14,22 @@ require_once '../../../database/conn.php';
     comaprando o email o nif e se o cargo dele corresponde ao cargo que foi pedido ao lado do
     cliente...
 */
-function validacao($dados, $conn)
+function validacao($cargos, $conn)
 {
 
-    // Preparando a query
-    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser IN (?, ?, ?)");
+    // Construir a lista de placeholders (?, ?, ?) com base no tamanho do array
+    $placeholders = implode(', ', array_fill(0, count($cargos), '?'));
 
-    // Jogando os valores no parâmetro
-    $stmt->bind_param('sss', $_SESSION['nif'], $_SESSION['email'], $dados['cargo']);
+    // Preparando a query
+    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser IN ($placeholders)");
+
+
+    // Vincular os valores do array aos placeholders
+    // O primeiro argumento de bind_param é uma string que define os tipos dos parâmetros.
+    // No seu caso, são 2 strings (ss) seguidas do número de cargos (tantos quantos houver no array).
+    $tiposParametro = 'ss' . str_repeat('s', count($cargos));
+    $stmt->bind_param($tiposParametro, $_SESSION['nif'], $_SESSION['email'], ...$cargos);
+
 
     // Excutando
     $stmt->execute();
@@ -47,18 +55,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($dados['token'] === $_SESSION['token']) {
 
         // Se for válido sera feito um processo de avaliação para saber a permissão
-        if (validacao($dados, $conn)) {
-            echo json_encode(['acesso' => true]);
+        if (validacao($dados['cargo'], $conn)) {
+
+            // Resposta a ser retronada para o servidor
+            $resposta = [
+                'autenticação' => true,
+                'mensagem' => 'Usuário autenticado!',
+                'status' => 'sucesso'
+            ];
+
+            echo json_encode($resposta);
+
         } else {
-            echo json_encode(['acesso' => false]);
+            // Resposta a ser retronada para o servidor
+            $resposta = [
+                'autenticação' => false,
+                'mensagem' => 'Usuário não autenticado...',
+                'status' => 'erro'
+            ];
+
+            echo json_encode($resposta);
         }
 
     } else {
-        echo json_encode(['Mensagem' => 'USUÁRIO INVÁLIDO...']);
+
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'Usuário inválido...',
+            'status' => 'erro'
+        ];
+
+        echo json_encode($resposta);
     }
 
 } else {
-    echo json_encode(['ERRO' => 'ALGO DEU ERRADO...']);
+    // Resposta a ser retronada para o servidor
+    $resposta = [
+        'mensagem' => 'Algo deu errado...',
+        'status' => 'erro'
+    ];
+
+    echo json_encode($resposta);
 }
 
 ?>

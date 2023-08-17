@@ -27,9 +27,22 @@ function salvaDadosNoBanco($dados, $conexao)
 
     // Executa a declaração preparada
     if ($stmt->execute()) {
-        echo json_encode(['Mensagem' => 'Usuário cadastrado com sucesso!']);
+
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'Usuário cadastrado com sucesso!',
+            'status' => 'sucesso'
+        ];
+
+        echo json_encode($resposta);
     } else {
-        echo json_encode(['Mensagem' => 'Ocorreu algum erro ao inserir no banco']);
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'Algo deu errado ao cadastrar usuário',
+            'status' => 'erro'
+        ];
+
+        echo json_encode($resposta);
     }
 }
 
@@ -54,7 +67,14 @@ function verificaRegistroDuplicado($dados, $conexao) {
 
     // Verificando se retornou algum registro
     if ($resultado->num_rows > 0) {
-        echo json_encode(['Erro' => 'O usuário já existe, portanto é impossível cadastrá-lo.']);
+
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'O usuário já existe, portanto é impossível cadastrá-lo.',
+            'status' => 'erro'
+        ];
+
+        echo json_encode($resposta);
     } else {
         salvaDadosNoBanco($dados, $conexao);
     }
@@ -75,5 +95,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     verificaRegistroDuplicado($dados, $conn);
 
 } else {
-    echo json_encode(['Mensagem' => 'Requisição não permitida...']);
+    // Resposta a ser retronada para o servidor
+    $resposta = [
+        'mensagem' => 'Algo deu errado na requisição...',
+        'status' => 'erro'
+    ];
+
+    echo json_encode($resposta);
 }

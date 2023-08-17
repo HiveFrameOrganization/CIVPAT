@@ -27,6 +27,11 @@ async function autenticacao(cargo) {
 
         console.log(resposta);
 
+        if (resposta.status === 'erro') {
+            window.location.href = 'http://localhost:8080/frontend/pages/login/erro.html';
+        }
+
+
     } catch (erro) {
         console.error(erro);
     }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 header('Access-Control-Allow-Origin: http://localhost:8080');
 header('Access-Control-Allow-Methods: PUT');
 header('Access-Control-Allow-Headers: Content-Type');
@@ -8,13 +8,14 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 // Função para alterar a senha padrão de novo usuário
-function alteraSenhaBanco ($dados, $conn) {
+function alteraSenhaBanco($dados, $conn)
+{
 
     $email = $dados['email'];
 
     // Criptografando a senha antes de jogar no banco
     $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
-    
+
     // Preparando a query 
     $stmt = $conn->prepare("UPDATE Usuarios SET Senha = ? WHERE Email = ?");
 
@@ -23,12 +24,26 @@ function alteraSenhaBanco ($dados, $conn) {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo json_encode(['Mensagem:' => 'Atualização realizada com sucesso!']);
+
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'Atualização realizada com sucesso!',
+            'status' => 'sucesso'
+        ];
+
+        echo json_encode($resposta);
+
     } else {
-        echo json_encode(['Mensagem:' => 'Algo deu errado...']);
+
+        $resposta = [
+            'mensagem' => 'Não foi possível alterar a senha...',
+            'status' => 'erro'
+        ];
+
+        echo json_encode($resposta);
     }
 
-} 
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     // Guardar o corpo da requisição em uma variável
@@ -40,7 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     alteraSenhaBanco($dados, $conn);
 
 } else {
-    echo json_encode(['ERRO' => "ALGO DEU ERRADO..."]);
+    $resposta = [
+        'mensagem' => 'Algo deu errado...',
+        'status' => 'erro'
+    ];
+
+    echo json_encode($resposta);
 }
 
 ?>

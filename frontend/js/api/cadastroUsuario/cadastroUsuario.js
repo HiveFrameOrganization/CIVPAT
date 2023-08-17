@@ -1,35 +1,3 @@
-/*------------------------------------------ ESQUEMA PARA PEGAR O CARGO... -------------------------------------------------------------------*/
-
-// Criando a variavel cargo no escopo global para conseguir passar o valor para o back-end
-let cargo;
-
-// Pegando o cargo...  
-const listaDeCargo = document.querySelector('#listaDeCargos');
-
-listaDeCargo.addEventListener('click', evento => {
-
-    const elemento = evento.target;
-    cargo = elemento.textContent;
-
-});
-
-// Função para retornar o cargo formatado da forma correta para inserir no banco
-function retornaCargo(cargo) {
-    // Switch para retornar o cargo certo
-    switch (cargo) {
-        case 'Administrador':
-            return 'adm';
-        case 'Gerente':
-            return 'ger';
-        case 'Técnico':
-            return 'tec';
-        case 'Coordenador':
-            return 'coor';
-        default:
-            return 'nada'
-    }
-}
-
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
 
 // Pegando o eveto do formulário
@@ -43,12 +11,9 @@ formulario.addEventListener('submit', async evento => {
     const nome = document.querySelector('#nome').value;
     const sobrenome = document.querySelector('#sobrenome').value;
     const nif = document.querySelector('#nif').value;
-    const email = document.querySelector('#email').value + '@sp.senai.br';
-    const senha = document.querySelector('#senha').value;
-
-    
-    // Pegando o cargo selecionado através da da função abaixo
-    const tipoCargo = retornaCargo(cargo);
+    const email = document.querySelector('#email').value;
+    const cargo = document.querySelector('#tipoCargo').value;
+    console.log(cargo);
 
     // Código para validação, colocar dentro de um try
     try {
@@ -59,14 +24,25 @@ formulario.addEventListener('submit', async evento => {
         // Verificando se o campo NIF possui letras ou simbolos
         if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
 
+        // Verificando se o nome e sobrenome possuem símbolos ou números
+        if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
+
+        // Verificando se o sobrenome possuem símbolos ou números
+        if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
+
+        // Verificando se o email possui pelo menos uma letra:
+        if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
+
         const dadosDoCadastro = {
             nome: nome,
             sobrenome: sobrenome,
             nif: nif,
-            email: email,
+            email: email + '@sp.senai.br',
             senha: 'senai115',
-            cargo: tipoCargo
+            cargo: cargo
         }
+
+        console.log(dadosDoCadastro);
 
         await mandarDadosParaBackend(dadosDoCadastro);
 
@@ -83,7 +59,7 @@ async function mandarDadosParaBackend(dados) {
     // tentando fazer a requisição para mandar os dados
     try {
 
-        const resposta = await fetch('http://localhost:8080/backend/php/cadastroUsuario/cadastro.php', {
+        const resposta = await fetch('http://localhost:8080/backend/php/cadastroUsuario/cadastroUsuario.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -106,8 +82,16 @@ async function mandarDadosParaBackend(dados) {
 
 /*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS -------------------------------------------------------------------------*/
 
-// Função que vai retornar um booleano: se tiver somente números retorna TRUE
-function contemApenasNumeros(str) {
-    return /^\d+$/.test(str);
-  }
-  
+function contemApenasNumeros(string) {
+    return /^\d+$/.test(string);
+}
+
+function contemPeloMenosUmaLetra(string) {
+    const regex = /[a-zA-Z]/;
+    return regex.test(string);
+}
+
+function contemApenasLetrasEspacos(string) {
+    const regex = /^[a-zA-ZÉéÇçãÃõÕit\s]+$/;
+    return regex.test(string);
+}

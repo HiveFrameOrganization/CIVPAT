@@ -6,9 +6,16 @@
 */
 
 const email = document.querySelector('#email');
-email.addEventListener('blur', async () => {
+email.addEventListener('blur', () => {
 
     verificaEmail(email.value + '@sp.senai.br');
+
+});
+
+// Verificando o email caso o cliente aperte a tecla enter enquanto esta digitando o email
+email.addEventListener('keydown', evento => {
+
+    if (evento.key === 'Enter') verificaEmail(email.value + '@sp.senai.br');
 
 });
 

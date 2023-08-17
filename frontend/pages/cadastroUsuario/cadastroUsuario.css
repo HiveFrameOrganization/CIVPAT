@@ -20,18 +20,19 @@ input{
     font-size: 22px;
 }
 
-li{
-    cursor: pointer;
-    margin: 10px;
-    padding: 10px;
-}
+
 button{
+    margin-top: 20px;
     padding: 10px;
 }
 
-li:active{
-    background-color: blue;
-    color: white;
+select{
+    margin: 10px;
+    padding: 10px;
+}
+
+option{
+    padding: 10px;
 }
 
 .box{

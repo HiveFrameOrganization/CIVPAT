@@ -10,10 +10,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     session_unset();
     session_destroy();
 
-    echo json_encode(['Mensagem' => 'O USUÁRIO SAIU DA CONTA...']);
+    $resposta = [
+        'mensagem' => 'O usuário saiu da conta...',
+        'status' => 'sucesso'
+    ];
+
+    echo json_encode($resposta);
 
 } else {
-    echo json_encode(['Erro' => 'ALGO DEU ERRADO...']);
+
+    $resposta = [
+        'mensagem' => 'Algo deu errado...',
+        'status' => 'erro'
+    ];
+
+    echo json_encode($resposta);
 }
 
 ?>

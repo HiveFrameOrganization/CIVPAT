@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./cadastro.css">
+    <link rel="stylesheet" href="./cadastroUsuario.css">
     <title>Cadastro</title>
 </head>
 <body>
@@ -14,10 +14,10 @@
         <input type="text" id="nif" minlength="5" maxlength="7" required>
 
         <label>Nome:</label>
-        <input type="text" id="nome" required maxlength="100">
+        <input type="text" id="nome" required minlength="3" maxlength="100">
 
         <label>Sobrenome:</label>
-        <input type="text" id="sobrenome" required maxlength="200">
+        <input type="text" id="sobrenome" required minlength="3" maxlength="200">
 
         <label>Email:</label>
         <div class="box">
@@ -25,21 +25,21 @@
             <p>@sp.senai.br</p>
         </div>
 
-        <label>Senha:</label>
-        <input type="password" id="senha" disabled value="senai115">
+        <p>Não se preocupe com a senha, será salvo uma senha padrão e o usuário poderá modificar a senha no primeiro acesso.</p>
+        
 
         <label>Selecione o Cargo:</label>
-        <ul id="listaDeCargos">
-            <li>Administrador</li>
-            <li>Gerente</li>
-            <li>Técnico</li>
-            <li>Coordenador</li>
-        </ul>
+        <select id="tipoCargo">
+            <option value="adm">Administrador</option>
+            <option value="coor">Coordenador</option>
+            <option value="ger">Gerente</option>
+            <option value="tec">Técnico</option>
+        </select>
 
         <button type="submit">Enviar</button>
 
     </form>
     
-    <script src="../../js/api/cadastroUsuario/cadastro.js"></script>
+    <script src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
 </body>
 </html>
