@@ -34,10 +34,12 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Usuarios` (
   `NIF` VARCHAR(7) NOT NULL,
   `Nome` VARCHAR(100) NOT NULL,
   `Sobrenome` VARCHAR(200) NOT NULL,
+  `FotoDePerfil` LONGBLOB NULL,
   `TipoUser` ENUM('adm', 'tec', 'ger', 'coor') NOT NULL,
-  `Email` VARCHAR(125) UNIQUE NOT NULL,
+  `Email` VARCHAR(125) NOT NULL,
   `Senha` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`NIF`))
+  PRIMARY KEY (`NIF`),
+  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -81,8 +83,25 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`NomeProduto` (
   `idNomeProduto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fk_idServicoCategoria` INT UNSIGNED NOT NULL,
   `NomeProduto` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`idNomeProduto`))
+  PRIMARY KEY (`idNomeProduto`),
+  INDEX `fk_NomeProduto_ServicoCategoria1_idx` (`fk_idServicoCategoria` ASC) VISIBLE,
+  CONSTRAINT `fk_NomeProduto_ServicoCategoria1`
+    FOREIGN KEY (`fk_idServicoCategoria`)
+    REFERENCES `isihiveframe`.`ServicoCategoria` (`idServicoCategoria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `isihiveframe`.`Maquinas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `isihiveframe`.`Maquinas` (
+  `idMaquinas` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `Maquinas` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idMaquinas`))
 ENGINE = InnoDB;
 
 
@@ -93,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `idProdutos` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_idProposta` INT UNSIGNED NOT NULL,
   `fk_idTecnico` VARCHAR(7) NOT NULL,
+  `fk_idMaquinas` INT UNSIGNED NOT NULL,
   `fk_idNomeProduto` INT UNSIGNED NOT NULL,
   `fk_idServicoCategoria` INT UNSIGNED NOT NULL,
   `Area` ENUM("metalmecanica") NOT NULL,
@@ -107,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   INDEX `fk_Produtos_ServicoCategoria1_idx` (`fk_idServicoCategoria` ASC) VISIBLE,
   INDEX `fk_Produtos_NomeProduto1_idx` (`fk_idNomeProduto` ASC) VISIBLE,
   INDEX `fk_Produtos_Propostas1_idx` (`fk_idProposta` ASC) VISIBLE,
+  INDEX `fk_Produtos_Maquinas1_idx` (`fk_idMaquinas` ASC) VISIBLE,
   CONSTRAINT `fk_Produtos_Usuarios1`
     FOREIGN KEY (`fk_idTecnico`)
     REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
@@ -125,6 +146,11 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   CONSTRAINT `fk_Produtos_Propostas1`
     FOREIGN KEY (`fk_idProposta`)
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Produtos_Maquinas1`
+    FOREIGN KEY (`fk_idMaquinas`)
+    REFERENCES `isihiveframe`.`Maquinas` (`idMaquinas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -155,16 +181,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `isihiveframe`.`StatusFunil`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `isihiveframe`.`StatusFunil` (
-  `idStatusFunil` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `StatusFunil` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idStatusFunil`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `isihiveframe`.`FollowUp`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
@@ -179,6 +195,16 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`FollowUp` (
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `isihiveframe`.`StatusFunil`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `isihiveframe`.`StatusFunil` (
+  `idStatusFunil` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `StatusFunil` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idStatusFunil`))
 ENGINE = InnoDB;
 
 
