@@ -18,18 +18,7 @@ $dadosVerif = [
     'nomeProj' => $nomeProj
 ];
 
-// $resposta = [
-//     'retorno' => false,
-//     'mensagem' => 'registro existe',
-//     'aaa' => array( 
-//         $nomeProj => $dados->nomeProj,
-//         $cnpj => $dados->cnpj,
-//         $uniCriadora => $dados->uniCriadora,
-//         $empresa => $dados->empresa,
-//         $gerente => $dados->gerente
-//     )
-// ];
-
+// Se houver projeto cadastrado com o nome de projeto enviado, não é cadastrado
 if (verificaRegistro($dadosVerif, $conn) === true) {
     $resposta = [
         'retorno' => false,
@@ -37,10 +26,12 @@ if (verificaRegistro($dadosVerif, $conn) === true) {
     ];
     
 } else {
+
+    // Tenta cadastrar os dados enviados no banco e retorna 'sucesso' ou 'erro' dependendo se deu certo a query
     $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
 
-    $resposta = ['retorno' => ($stmt->execute() ? true : false)];
+    $resposta = ['retorno' => ($stmt->execute() ? 'sucesso' : 'erro')];
 }
 
 echo json_encode($resposta);
@@ -53,41 +44,17 @@ function verificaRegistro($dados, $conn)
 {
     $nomeProj = $dados['nomeProj'];
 
+    // Busca o nome de propostas para ver se já existe
     $stmt = $conn->prepare("SELECT * FROM  Propostas WHERE TituloProj = ?");
     $stmt->bind_param("s", $nomeProj);
     $stmt->execute();
 
     $result = $stmt->get_result();
 
+    // Se existir, retorna true
     if ($result->num_rows > 0) {
         return true;
     }
 
     return false;
 }
-
-
-// // Verificando o tipo de requisição
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     // Pegar o corpo da requisição
-//     $json = file_get_contents('php://input');
-
-//     // Tranformar o Corpo JSON em um objeto PHP
-//     $dados = json_decode($json, true);
-
-//     // Verificar se o JSON é válido
-//     if ($dados === null) {
-//         $resposta = [
-//             'msgErro' => 'JSON inválido'
-//         ];
-
-//         echo json_encode($resposta);
-
-//     } else {
-//         // salvando dados no banco
-//         verificaRegistro($dados, $conn);
-//     }
-
-// } else {
-//     echo json_encode(['msgErro' => 'ALGO DEU ERRADO']);
-// }
