@@ -59,9 +59,6 @@ formulario.addEventListener('submit', async evento => {
     // Código para validação, colocar dentro de um try
     try {
 
-        // Verificando se o cargo está selecionado
-        if (tipoCargo === 'nada') throw new Error('O CARGO NÃO FOI SELECIONADO!');
-
         // Verificando se o campo NIF possui letras ou simbolos
         if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
 
@@ -121,7 +118,7 @@ async function mandarDadosParaBackend(dados) {
 
 }
 
-/*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS -------------------------------------------------------------------------*/
+/*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS --------------------------------------------------------------*/
 
 function contemApenasNumeros(string) {
     return /^\d+$/.test(string);

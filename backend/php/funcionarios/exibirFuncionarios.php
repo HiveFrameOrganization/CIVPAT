@@ -20,8 +20,8 @@ function retornaFuncionarios($conn)
     $usuarios = array();
 
     // Iterando sobre os resultados e armazenando em um array
-    while ($row = $resultado->fetch_assoc()) {
-        $usuarios[] = $row;
+    while ($linha = $resultado->fetch_assoc()) {
+        $usuarios[] = $linha;
     }
 
     // Enviando a resposta do servidor
