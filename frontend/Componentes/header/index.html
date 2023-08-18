@@ -61,25 +61,39 @@
         }
     </script>
 </head>
-<body class="bg-body">
+<body class="bg-body transition-colors">
     <header class="py-4 px-6 text-color-text">
 
-        <div class="flex items-center justify-between flex-wrap">
+        <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
 
                 <img src="../../img/icon/align-justify.svg" alt="menu lateral">
 
-                <img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10">
+                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
 
-                <a href="#" class="text-primary font-semibold" aria-label="Ir para página principal">HIVE<span class="text-color-text">FRAME</span></a>
+                <a href="#" class="text-primary font-semibold max-[313px]:hidden" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
 
             </div>
             <div class="flex items-center gap-3">
 
-                <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                </div>
 
-                <div class="w-8 h-8 rounded-full bg-component border-[1px] border-primary">
-                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full rounded-full">
+                <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
+                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+
+                    <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                            <h5 class="text-base text-color-text">Doge do Meme</h5>
+                            <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                        </div>
+                        <ul>
+                            <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -87,6 +101,7 @@
 
     </header>
 
-    <script src="../../js/switchMode/index.js"></script>
+    <script src="../../js/themeSwitch/index.js"></script>
+    <script src="../../js/global.js"></script>
 </body>
 </html>
