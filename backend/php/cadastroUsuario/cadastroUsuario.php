@@ -39,7 +39,7 @@ function salvaDadosNoBanco($dados, $conexao)
         // Resposta a ser retronada para o servidor
         $resposta = [
             'mensagem' => 'Algo deu errado ao cadastrar usuário',
-            'status' => 'erro'
+            'status' => 'error'
         ];
 
         echo json_encode($resposta);
