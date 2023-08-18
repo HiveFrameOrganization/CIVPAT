@@ -1,63 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./cadastroUsuario.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./cadastroUsuario.css" />
     <title>Cadastro</title>
-</head>
+  </head>
 
-<body onload="autenticacao(['coor', 'adm'])">
-
+  <body>
     <div id="divBarraPesquisa">
-        <input type="text" id="pesquisarUsuario" placeholder="pesquise um funcionário">
-        <button id="botaoPesquisar">Pesquisar</button>
+      <input
+        type="text"
+        id="pesquisarUsuario"
+        placeholder="pesquise um funcionário"
+      />
+      <button id="botaoPesquisar">Pesquisar</button>
     </div>
 
     <button id="botaoTodos">Todos</button>
     <button id="botaoAtivos" value="ativado">Ativos</button>
     <button id="botaoDesativos" value="desativado">Desativos</button>
 
-
     <!-- Botão para fazer aparecer o formulário de cadastro -->
     <button id="cadastrar">Cadastrar</button>
 
     <!-- Formulário para enviar dados do cadastro no Back-end -->
     <form id="formulario">
-        <label>NIF:</label>
-        <input type="text" id="nif" minlength="5" maxlength="7" required>
+      <label>NIF:</label>
+      <input type="text" id="nif" minlength="5" maxlength="7" required />
 
-        <label>Nome:</label>
-        <input type="text" id="nome" required minlength="3" maxlength="100">
+      <label>Nome:</label>
+      <input type="text" id="nome" required minlength="3" maxlength="100" />
 
-        <label>Sobrenome:</label>
-        <input type="text" id="sobrenome" required minlength="3" maxlength="200">
+      <label>Sobrenome:</label>
+      <input
+        type="text"
+        id="sobrenome"
+        required
+        minlength="3"
+        maxlength="200"
+      />
 
-        <label>Email:</label>
-        <div class="box">
-            <input type="text" id="email" required maxlength="63">
-            <p>@sp.senai.br</p>
-        </div>
+      <label>Email:</label>
+      <div class="box">
+        <input type="text" id="email" required maxlength="63" />
+        <p>@sp.senai.br</p>
+      </div>
 
-        <p>Não se preocupe com a senha, será salvo uma senha padrão e o usuário poderá modificar a senha no primeiro
-            acesso.</p>
+      <p>
+        Não se preocupe com a senha, será salvo uma senha padrão e o usuário
+        poderá modificar a senha no primeiro acesso.
+      </p>
 
+      <label>Selecione o Cargo:</label>
+      <select id="tipoCargo">
+        <option value="adm">Administrador</option>
+        <option value="coor">Coordenador</option>
+        <option value="ger">Gerente</option>
+        <option value="tec">Técnico</option>
+      </select>
 
-        <label>Selecione o Cargo:</label>
-        <select id="tipoCargo">
-            <option value="adm">Administrador</option>
-            <option value="coor">Coordenador</option>
-            <option value="ger">Gerente</option>
-            <option value="tec">Técnico</option>
-        </select>
+      <button type="submit">Enviar</button>
+    </form>
 
-        <button type="submit">Enviar</button>
+    <!-- Formulário para editar Nome, Sobrenome, Email, cargo e resetar a senha -->
+    <form id="formularioEditarUsuario">
 
+       <h1>Editar</h1>
+
+      <label>Nome:</label>
+      <input type="text" id="editarNome" required minlength="3" maxlength="100" />
+
+      <label>Sobrenome:</label>
+      <input
+        type="text"
+        id="editarSobrenome"
+        required
+        minlength="3"
+        maxlength="200"
+      />
+
+      <label>Email:</label>
+      <div class="box">
+        <input type="text" id="editarEmail" required maxlength="63" />
+        <p>@sp.senai.br</p>
+      </div>
+
+      <button id="resetarSenha" type="button">Resetar a senha</button>
+
+      <label>Selecione o Cargo:</label>
+      <select id="editarCargo">
+        <option value="adm">Administrador</option>
+        <option value="coor">Coordenador</option>
+        <option value="ger">Gerente</option>
+        <option value="tec">Técnico</option>
+      </select>
+
+      <button type="submit">Editar</button>
     </form>
 
     <div id="exibicao">
-        <h1>Funcionários</h1>
+      <h1>Funcionários</h1>
     </div>
 
     <script src="../../js/api/funcionarios/funcionarios.js"></script>
@@ -65,6 +108,5 @@
 
     <!-- Autenticação -->
     <script src="../../js/api/login/autenticacao.js"></script>
-</body>
-
+  </body>
 </html>
