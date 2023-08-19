@@ -13,4 +13,4 @@ ENV LANGUAGE pt_BR.UTF-8
 ENV MYSQL_ROOT_PASSWORD=P4ssword
 
 # Copy your SQL initialization script
-COPY database/codigo.sql /docker-entrypoint-initdb.d/
+COPY database/banco/*.sql /docker-entrypoint-initdb.d/
