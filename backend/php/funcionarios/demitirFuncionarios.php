@@ -13,7 +13,7 @@ function desativarUsuario($nif, $conn) {
     $situacao = 'desativado';
 
     // Preprando a query
-    $stmt = $conn->prepare("UPDATE Usuarios SET Status = ?, SET Email = ? WHERE NIF = ?");
+    $stmt = $conn->prepare("UPDATE Usuarios SET Status = ? WHERE NIF = ?");
     $stmt->bind_param('ss', $situacao, $nif);
 
     // Excutando e desativando o usuário
