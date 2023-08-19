@@ -7,3 +7,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="date"]{
     height: 3rem;
 }
+
+.abre{
+    @apply flex;
+}
