@@ -1,12 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./cadastroUsuario.css">
     <title>Cadastro</title>
 </head>
-<body>
+
+<body onload="autenticacao(['coor', 'adm'])">
+
+    <div id="divBarraPesquisa">
+        <input type="text" id="pesquisarUsuario" placeholder="pesquise um funcionário">
+        <button id="botaoPesquisar">Pesquisar</button>
+    </div>
+
+    <button id="botaoTodos">Todos</button>
+    <button id="botaoAtivos" value="ativado">Ativos</button>
+    <button id="botaoDesativos" value="desativado">Desativos</button>
+
+
+    <!-- Botão para fazer aparecer o formulário de cadastro -->
+    <button id="cadastrar">Cadastrar</button>
 
     <!-- Formulário para enviar dados do cadastro no Back-end -->
     <form id="formulario">
@@ -25,8 +40,9 @@
             <p>@sp.senai.br</p>
         </div>
 
-        <p>Não se preocupe com a senha, será salvo uma senha padrão e o usuário poderá modificar a senha no primeiro acesso.</p>
-        
+        <p>Não se preocupe com a senha, será salvo uma senha padrão e o usuário poderá modificar a senha no primeiro
+            acesso.</p>
+
 
         <label>Selecione o Cargo:</label>
         <select id="tipoCargo">
@@ -40,11 +56,15 @@
 
     </form>
 
-    <h1>Funcionários</h1>
-    <div id="exibicao"></div>
+    <div id="exibicao">
+        <h1>Funcionários</h1>
+    </div>
 
-    <script src="../../js/api/funcionarios/exibirFuncionarios.js"></script>
-    
+    <script src="../../js/api/funcionarios/funcionarios.js"></script>
     <script src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
+
+    <!-- Autenticação -->
+    <script src="../../js/api/login/autenticacao.js"></script>
 </body>
+
 </html>

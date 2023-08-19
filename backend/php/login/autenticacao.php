@@ -9,7 +9,7 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 /*
-    Essa validação consiste em verificar se o nível de permissão esta atrelado ao 
+    Essa validação consiste em verificar se o nível de permissão esta atrelado ao
     próprio nível de acesso do funcionário. A consulta é feita com base nas variáveis de sessão
     comaprando o email o nif e se o cargo dele corresponde ao cargo que foi pedido ao lado do
     cliente...

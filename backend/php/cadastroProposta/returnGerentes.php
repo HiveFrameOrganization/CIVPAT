@@ -10,7 +10,7 @@ $query = "SELECT * FROM Usuarios WHERE TipoUser = 'ger'";
 
 if ($result = mysqli_query($conn, $query)) {
 
-    $gerentes = array(); 
+    $gerentes = array();
     
     while ($row = mysqli_fetch_assoc($result)) {
         $gerente = array(

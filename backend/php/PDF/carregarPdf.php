@@ -43,7 +43,7 @@ header('Content-Disposition: inline; filename="orçamento.pdf"');
 
 //pegar imagem do banco de dados
 //dentro do header o image/ tem que colocar a extensao certinho da imagem.
-// header('Content-type: image/jpg, image/png'); 
+// header('Content-type: image/jpg, image/png');
 
 // Envie o conteúdo do PDF como resposta.
 echo $conteudoPdf;

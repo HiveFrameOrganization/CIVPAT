@@ -5,6 +5,7 @@ header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
+$login = true;
 // Buscando o arquivo do banco:
 require_once '../../../database/conn.php';
 
@@ -15,7 +16,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
     if (password_verify($senhaUsuario, $dadosBanco['Senha'])) {
 
         /*
-            Gerando o Token e também salvando as credênciais de login que só ficara no 
+            Gerando o Token e também salvando as credênciais de login que só ficara no
             back-end para validações de autenticação e afins
         */
         $_SESSION['token'] = password_hash($dadosBanco['TipoUser'], PASSWORD_DEFAULT);

@@ -10,7 +10,7 @@ require_once '../../../database/conn.php';
 function retornaFuncionarios($conn)
 {
     // preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser FROM Usuarios");
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios");
 
     // Excutando a query
     $stmt->execute();

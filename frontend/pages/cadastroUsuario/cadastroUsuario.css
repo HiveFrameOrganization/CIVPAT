@@ -2,12 +2,32 @@ body{
     font-family: sans-serif;
 }
 
-form{
+.demitir {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+
+#divBarraPesquisa {
+    display: flex;
+    width: 50%;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+#divBarraPesquisa input {
+    flex: 1;
+}
+
+
+#formulario{
     margin-left: auto;
     margin-right: auto;
     width: 50%;
     margin-top: 40px;
-    display: flex;
+    display: none;
     flex-direction: column;
 }
 

@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-error_reporting(E_ALL);             
+error_reporting(E_ALL);
 // Definindo qual domínio pode acessar esse arquivo
 header('Access-Control-Allow-Origin: http://localhost:8080');
 
@@ -19,10 +19,10 @@ header("Content-Type: application/json");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifique se um arquivo foi enviado com o nome "pdfFile"
     if (isset($_FILES['pdfOrcamento'])) {
-        $pdfOrcamento = file_get_contents($_FILES['pdfOrcamento']['tmp_name']); //Essa 
-        //linha lê o conteúdo do arquivo PDF enviado pelo formulário. Ela utiliza 
-        //a função file_get_contents() para obter o conteúdo do arquivo a partir 
-        //do caminho temporário onde o arquivo é armazenado temporariamente após 
+        $pdfOrcamento = file_get_contents($_FILES['pdfOrcamento']['tmp_name']); //Essa
+        //linha lê o conteúdo do arquivo PDF enviado pelo formulário. Ela utiliza
+        //a função file_get_contents() para obter o conteúdo do arquivo a partir
+        //do caminho temporário onde o arquivo é armazenado temporariamente após
         //o envio.
         $salvou = salvarPdfOrcamentoNoBanco($pdfOrcamento);
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Função para salvar o conteúdo do PDF no banco de dados (exemplo).
-function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {   
+function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {
     require_once('../../../database/conn.php');
     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 
@@ -70,7 +70,7 @@ function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {
 
 }
 
-// function salvarPdfPropostaAssinadaNoBanco ($pdfPropostaAssinada) {   
+// function salvarPdfPropostaAssinadaNoBanco ($pdfPropostaAssinada) {
 //     require_once('../../backend/database/conn.php');
 //     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 //     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.
@@ -100,7 +100,7 @@ function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {
 
 // }
 
-// function salvarPdfRelatorioFinalNoBanco ($pdfRelatorioFinal) {   
+// function salvarPdfRelatorioFinalNoBanco ($pdfRelatorioFinal) {
 //     require_once('../../backend/database/conn.php');
 //     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 //     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.
@@ -130,7 +130,7 @@ function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {
 
 // }
 
-// function salvarPdfPesquisaDeSatisfacaoNoBanco ($pdfPesquisaDeSatisfacao) {   
+// function salvarPdfPesquisaDeSatisfacaoNoBanco ($pdfPesquisaDeSatisfacao) {
 //     require_once('../../backend/database/conn.php');
 //     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 //     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.

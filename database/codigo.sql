@@ -13,17 +13,6 @@ DROP SCHEMA IF EXISTS `isihiveframe` ;
 -- Schema isihiveframe
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `isihiveframe` ;
-CREATE USER 'teste'@'172.20.0.3' IDENTIFIED BY 'P4ssword';
-GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'172.20.0.3';
-FLUSH PRIVILEGES;
-
-CREATE USER 'work'@'172.20.0.1' IDENTIFIED BY 'workBench';
-GRANT ALL PRIVILEGES ON isihiveframe.* TO 'work'@'172.20.0.1';
-FLUSH PRIVILEGES;
-
-CREATE USER 'eu'@'localhost' IDENTIFIED BY 'P4ssword';
-GRANT ALL PRIVILEGES ON isihiveframe.* TO 'eu'@'localhost';
-FLUSH PRIVILEGES;
 
 USE `isihiveframe` ;
 ALTER DATABASE isihiveframe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -520,12 +509,60 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 (207, 'Validação de Sistemas de Medição', 15);
 
 insert into Usuarios values 
-('1234567', 'michael', 'jackson', NULL, 'ger', 'teste@sp.senai.br', '$2y$10$uArYdZ0s6dn1iQweTpAWYeWptJPLvCZnvBPuPXgliFUn2fRK6WsqW', 'ativado');
+('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
+('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
+('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado');
 
 insert into Propostas values 
 (default, '1234567', 'Jacaré a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
 'Jacksons 5', 'Em Análise', NULL, NULL, NULL, NULL);
 
+CREATE USER 'auth'@'172.20.0.3' IDENTIFIED BY 'fsY9DS&J*bg#49Vpf^9o';
+GRANT SELECT ON `isihiveframe`.`Usuarios` TO 'auth'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
+CREATE USER 'coor'@'172.20.0.3' IDENTIFIED BY 'g0J153!eRB64lEsY3SNa';
+GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.* TO 'coor'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` FROM 'coor'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`StatusFunil` FROM 'coor'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`TipoPDF` FROM 'coor'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
+CREATE USER 'adm'@'172.20.0.3' IDENTIFIED BY 'GPbhjBMD2T9%k&91FND5';
+GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.* TO 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`Usuarios` FROM 'adm'@'172.20.0.3';
+REVOKE SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` FROM 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`StatusFunil` FROM 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`TipoPDF` FROM 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`Maquinas` FROM 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`ServicoCategoria` FROM 'adm'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`NomeProduto` FROM 'adm'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
+CREATE USER 'tec'@'172.20.0.3' IDENTIFIED BY '3HY1O9%g5YrcAVu4cVR#';
+GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`Propostas` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`Produtos` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`ServicoCategoria` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`NomeProduto` TO 'tec'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
+CREATE USER 'ger'@'172.20.0.3' IDENTIFIED BY 'OqxWqi!erb9a&F9Ar750';
+GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.* TO 'ger'@'172.20.0.3';
+REVOKE SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`Usuarios` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`StatusFunil` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`TipoPDF` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`Maquinas` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`ServicoCategoria` FROM 'ger'@'172.20.0.3';
+REVOKE INSERT, UPDATE ON `isihiveframe`.`NomeProduto` FROM 'ger'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
+CREATE USER 'teste'@'localhost' IDENTIFIED BY 'P4ssword';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'localhost';
+FLUSH PRIVILEGES;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

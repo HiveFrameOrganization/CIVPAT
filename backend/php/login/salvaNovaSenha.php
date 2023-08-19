@@ -16,7 +16,7 @@ function alteraSenhaBanco($dados, $conn)
     // Criptografando a senha antes de jogar no banco
     $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
 
-    // Preparando a query 
+    // Preparando a query
     $stmt = $conn->prepare("UPDATE Usuarios SET Senha = ? WHERE Email = ?");
 
     $stmt->bind_param('ss', $senha, $email);
