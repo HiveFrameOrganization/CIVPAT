@@ -7,14 +7,14 @@ header("Content-Type: application/json");
 // Buscando o arquivo do banco:
 require_once '../../../database/conn.php';
 
-function desativarUsuario($nif, $conn) {
+function editarUsuario($dados, $conn)
+{
 
-    // Craindo a variável para passar como parâmetro
-    $situacao = 'desativado';
+    $senhaPadrao = 'senai115';
 
     // Preprando a query
-    $stmt = $conn->prepare("UPDATE Usuarios SET Status = ? WHERE NIF = ?");
-    $stmt->bind_param('ss', $situacao, $nif);
+    $stmt = $conn->prepare("UPDATE Usuarios SET Senha = ?  WHERE NIF = ?");
+    $stmt->bind_param('ss', $senhaPadrao, $dados['nif']);
 
     // Excutando e desativando o usuário
     $stmt->execute();
@@ -25,7 +25,7 @@ function desativarUsuario($nif, $conn) {
         // Resposta a ser retornada para o front-end
         $resposta = [
             'status' => 'sucesso',
-            'mensagem' => 'Usuário desativado com sucesso!'
+            'mensagem' => 'Senha resetada com sucesso!'
         ];
 
         echo json_encode($resposta);
@@ -35,9 +35,9 @@ function desativarUsuario($nif, $conn) {
         // Resposta a ser retornada para o front-end
         $resposta = [
             'status' => 'erro',
-            'mensagem' => 'Não foi possíevl desativar o usuário...'
+            'mensagem' => 'Não foi possível resetar a senha'
         ];
-        
+
         echo json_encode($resposta);
 
     }
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $dados = json_decode($json, true);
 
     // Função para desativar o usuário
-    desativarUsuario($dados['nif'], $conn);
+    editarUsuario($dados, $conn);
 
 } else {
 
@@ -64,4 +64,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
     echo json_encode($resposta);
 }
+
 ?>

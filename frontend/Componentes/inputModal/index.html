@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inputs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+    <!-- <link rel="stylesheet" href="../../css/output.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
+
+        * {
+            font-family: 'Rubik', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                }
+            },
+        }
+    </script>
+</head>
+<body class="bg-body">
+    <main class="py-10 px-10 flex justify-center">
+        <button class="rounded-lg text-color-text bg-primary text-center font-bold text-xl py-2 px-4" onclick="abreModal()">ABRE MODAL</button>
+    </main>
+
+    <!-- centralização -->
+    <div class="caixa min-h-screen hidden lg:h-screen lg:w-full lg:fixed lg:left-0 lg:top-0 backdrop-blur-[2px]">
+        <!-- conteúdo do modal -->
+        <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl">
+            <!-- botão de fechar -->
+            <div class="w-full lg:flex lg:justify-end">
+                <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+            </div>
+            <!-- título e subtítulo -->
+            <div class="text-center lg:text-justify text-color-text">
+                <h1 class="font-bold text-2xl">CADASTRO DE ALGO</h1>
+                <h2 class="text-xs pt-2">Detalhes do que o modal faz</h2>
+            </div>
+            <!-- inputs -->
+            <div class="flex flex-col gap-6 pt-7">
+                <!-- input comum (text) -->
+                <div>
+                    <label class="text-color-text font-bold block mb-3">INPUT NORMAL</label>
+                    <input type="text" value="" id="inputText" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Alguma coisa...">
+                </div>
+                <!-- input type password (com ícone de ver senha) -->
+                <div>
+                    <label class="text-color-text font-bold block mb-3">INPUT PASSWORD</label>
+                    <div class="relative">
+                        <i src="../../img/icon/visibility_on.png" alt="Ícone de visualizar senha" class="icon fa fa-eye absolute top-4 right-4 text-primary" onclick="passShow(this)"></i>
+                        <input type="password" value="" id="inputPass" class="password bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Digite sua senha">
+                    </div>
+                </div>
+                <!-- input type date (com ícone de calendário) -->
+                <div>
+                    <label class="text-color-text font-bold block mb-3">INPUT DATE (ANALISAR OPÇÕES)</label>
+                    <div class="relative">
+                        <img src="../../img/icon/calendario.png" alt="Ícone de calendário" class="absolute top-3 right-4">
+                        <input type="text" value="" id="inputDate" class="text-primary box-border bg-body placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Data de algo..." onfocus="this.type='date'" onblur="this.type='text'" onkeypress="this.style.color='#fff'">
+                    </div>
+                </div>
+                <!-- input type file (upload) -->
+                <div>
+                    <label class="text-color-text font-bold block mb-3">INPUT UPLOAD (INCOMPLETO)</label>
+                    <div class="relative">
+                        <img src="../../img/icon/upload.png" alt="Ícone de upload" class="absolute right-0 h-12 rounded-r-lg">
+                        <input type="text" value="" id="inputFileUp" class="text-primary box-border bg-body placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Upload de arquivos" onclick="document.getElementById('testeUm').click()">
+                        <input type="file" id="testeUm" class="hidden">
+                    </div>
+                </div>
+                <!-- input type file (download) -->
+                <div>
+                    <label class="text-color-text font-bold block mb-3">INPUT DOWNLOAD (INCOMPLETO)</label>
+                    <div class="relative">
+                        <img src="../../img/icon/download.png" alt="Ícone de download" class="absolute right-0 h-12 rounded-r-lg">
+                        <input type="text" value="" id="inputFileDown" class="text-primary box-border bg-body placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Download de arquivos" onclick="document.getElementById('testeDois').click()">
+                        <input type="file" id="testeDois" class="hidden">
+                    </div>
+                </div>
+                <!-- botão -->
+                <div class="pt-14">
+                    <button type="button" class="rounded-lg text-color-text bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Ação realizada</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+
+</body>
+</html>

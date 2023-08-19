@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
 
 });
 
+// Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios() {
 
     try {
@@ -73,19 +74,24 @@ function exibir(dados) {
 
         // Criando o botão de demitir
         if (funcionario.Status === 'ativado') {
-            // Craindo o elemento
+            // Criando botões para editar e desativar funcionários
+            const editar = document.createElement('button');
             const demitir = document.createElement('button');
 
             // Atribuindo o NIF no valor do botão
+            editar.value = funcionario.NIF
             demitir.value = funcionario.NIF
 
             // Atribuindo uma classe no botão de demitir
+            editar.classList.add('editar');
             demitir.classList.add('demitir');
 
             // Atribuindo um texto
+            editar.textContent = 'Editar';
             demitir.textContent = 'Demitir';
 
             // Adicionando na div
+            div.appendChild(editar);
             div.appendChild(demitir);
         }
 
@@ -140,6 +146,7 @@ async function pesquisarFuncionario(valor) {
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
 
+        // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
         exibir(resposta.usuarios);
@@ -222,17 +229,16 @@ async function usuariosFiltrados(valor) {
         exibirErro(erro);
     }
 }
-
-
 /*
 --------------------------------------------------------------------------------------- 
-                        PROCESSO DE DEMITIR O USUÁRIO 
+                        PROCESSO DE EDITAR OU DEMITIR O USUÁRIO 
 ---------------------------------------------------------------------------------------
 */
 
 // Capturando o clique dos botões de demissão
 document.addEventListener('click', evento => {
 
+    // Pegando o elemento clicado pelo usuário
     const elemento = evento.target;
 
     // verificando se é mesmo o botão de demitir
@@ -242,10 +248,161 @@ document.addEventListener('click', evento => {
 
         desativarUsuario(nif);
 
+    } else if (elemento.classList.contains('editar')) {
+
+        // Selecionando o NIF que vai ser usado para desativar o usuário
+        const nif = elemento.value;
+
+        // Salvando o valor do nif para ser usado mais tarde
+        localStorage.setItem('nif', nif);
+
+        // Aparecer com o formulário de editar
+        FormularioEditarUsuario(nif);
+
     }
 
 });
 
+// Função para mostrar a tela de edição do usuário
+async function FormularioEditarUsuario(nif) {
+
+    // Fazendo a lista de funcionários desaparecer
+    const exibicao = document.querySelector('#exibicao');
+
+    // Selecionando o formulário
+    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+
+    // Alterando a visibilidade
+    // Renderizando de acordo o evento
+    if (formularioEditarUsuario.style.display === 'flex') {
+
+        // Escondendo o formulário
+        formularioEditarUsuario.style.display = 'none';
+
+        // Exibindo a lista
+        exibicao.style.display = 'block';
+
+    } else {
+        // Exibindo o formulário
+        formularioEditarUsuario.style.display = 'flex';
+
+        // Escondendo a lista de funcionários
+        exibicao.style.display = 'none';
+
+        // Quando aparecer o formulário será feita uma requisição para retornar os dados
+        dadosParaEditar(nif);
+    }
+}
+
+// Função para fazer a requisição para editar nome, email, cargo e resetar a senha
+async function dadosParaEditar(nif) {
+    try {
+
+        // Requisição ao servidor
+        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
+
+        // Convertendo a resposta em json
+        const resposta = await requisicao.json();
+
+        // Receber erros personalizados do back-end
+        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+
+        // Função para retornar os dados para editar
+        exibirDadosParaEditar(resposta.usuarios);
+
+    } catch (erro) {
+        console.error(erro);
+    }
+}
+
+// Colocando os valores no formulário
+function exibirDadosParaEditar(dados) {
+
+    // Pegando os elementos para editar
+    const editarNome = document.querySelector('#editarNome');
+    const editarSobrenome = document.querySelector('#editarSobrenome');
+    const editarEmail = document.querySelector('#editarEmail');
+    const editarCargo = document.querySelector('#editarCargo');
+
+    for (usuario of dados) {
+        editarNome.value = usuario.Nome;
+        editarSobrenome.value = usuario.Sobrenome;
+        // Tirando o padrão do email do SENAI
+        editarEmail.value = usuario.Email.replace('@sp.senai.br', '');
+        editarCargo.value = usuario.TipoUser;
+    }
+
+}
+
+// Enviar o formulário para editar
+const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+formularioEditarUsuario.addEventListener('submit', evento => {
+
+    // Parando o evento do formulário
+    evento.preventDefault();
+
+    // Pegando os valores do formulário
+    const nome = document.querySelector('#editarNome').value;
+    const sobrenome = document.querySelector('#editarSobrenome').value;
+    const email = document.querySelector('#editarEmail').value;
+    const cargo = document.querySelector('#editarCargo').value;
+
+    try {
+
+        // Pegando o nif armazenado no localStorage
+        const nif = localStorage.getItem('nif');
+
+        // Verificando se o nome e sobrenome possuem símbolos ou números
+        if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
+
+        // Verificando se o sobrenome possuem símbolos ou números
+        if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
+
+        // Verificando se o email possui pelo menos uma letra:
+        if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
+
+        const dadosEditados = {
+            nif: nif,
+            nome: nome,
+            sobrenome: sobrenome,
+            email: email + '@sp.senai.br',
+            cargo: cargo
+        }
+
+        console.log(dadosEditados);
+
+        // Função para editar os funcionários
+        requisicaoEditar(dadosEditados);
+
+    } catch (erro) {
+        console.error(erro);
+    }
+
+});
+
+// Função para mandar os dados para editar
+async function requisicaoEditar(dados) {
+
+    // Requisição PUT para editar
+    const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/editarFuncionario.php`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+    });
+
+    // Pegando a resposta retornado pelo servidor
+    const resposta = await requisicao.json();
+
+    // tratamento caso haja algum erro previsto no back-end
+    if (resposta.status === 'error') throw new Error(resposta.mensagem);
+
+    console.log(resposta);
+
+}
+
+// Função para desativar o usuário
 async function desativarUsuario(nif) {
 
     try {
@@ -273,4 +430,71 @@ async function desativarUsuario(nif) {
         console.error(erro);
     }
 
+}
+
+/*
+--------------------------------------------------------------------------------------- 
+                        RESETAR A SENHA DO USUÁRIO 
+---------------------------------------------------------------------------------------
+*/
+
+// Selecionando o botão para disparar o evento
+const resetarSenha = document.querySelector('#resetarSenha');
+
+// Quando o usuário clicar a senha será resetada
+resetarSenha.addEventListener('click', () => {
+
+    const nif = localStorage.getItem('nif');
+
+    // Função para resetar a senha
+    resetarSenhaUsuario(nif);
+
+});
+
+// Função para desativar o usuário
+async function resetarSenhaUsuario(nif) {
+
+    try {
+
+        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/resetarSenha.php`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nif: nif })
+        });
+
+        // Convertendo a requisição em um objeto JS
+        const resposta = await requisicao.json();
+
+        // Caso a resposta do servidor sej algum erro já previsto...
+        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+
+        console.log(resposta);
+
+        // Atualizando a lista em tempo real
+        retornaFuncionarios();
+
+    } catch (erro) {
+        console.error(erro);
+    }
+
+}
+
+
+
+/*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS --------------------------------------------------------------*/
+
+function contemApenasNumeros(string) {
+    return /^\d+$/.test(string);
+}
+
+function contemPeloMenosUmaLetra(string) {
+    const regex = /[a-zA-Z]/;
+    return regex.test(string);
+}
+
+function contemApenasLetrasEspacos(string) {
+    const regex = /^[a-zA-ZÉéÇçãÃõÕit\s]+$/;
+    return regex.test(string);
 }

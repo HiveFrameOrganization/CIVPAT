@@ -3,67 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="detalhesProdutos.css">
-    <script src="../frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+    <link rel="stylesheet" href="detalhesProposta.css">
     <title>Document</title>
 </head>
 <body>
-
+    
     <div id="detalhesProposta">
         <!-- Campos que ficaram nos detalhes -->
-        <label for="nomeProjeto">Nome Projeto: </label>
-        <input type="text" id="nomeProjeto" maxlength="75"><br><br>
+        <label for="nomeProposta">Nome da proposta: </label>
+        <input type="text" id="nomeProposta" maxlength="75"><br><br>
 
         <label for="cnpj">CNPJ: </label>
         <input type="text" id="cnpj" maxlength="14"><br><br>
-
-        <label for="uniCriadora">Unidade Criadora: </label>
+        
+        <label for="uniCriadora">Unidade criadora: </label>
         <input type="text" id="uniCriadora" maxlength="100" minlength="4"><br><br>
-
+        
         <label for="empresa">Empresa: </label>
         <input type="text" id="empresa" maxlength="200" minlength="4"><br><br>
-
+        
         <label for="statusProposta">Status: </label>
         <input type="text" id="statusProposta"><br><br>
-
+        
         <label for="gerenteProposta">Gerente: </label>
         <input type="text" id="gerenteProposta"><br><br>
-
+        
         <label for="numeroSGSET">Nº SGSET: </label>
         <input type="text" id="numeroSGSET"><br><br>
-
+        
         <label for="dataPrimeiroProduto">Data de início do primeiro produto: </label>
-        <label type="date" id="dataPrimeiroProduto"></label><br><br>
-
+        <input type="date" id="dataPrimeiroProduto"><br><br>
+        
         <label for="dataUltimoProduto">Data final do último produto: </label>
-        <label type="date" id="dataUltimoProduto"></label><br><br>
-    
+        <input type="date" id="dataUltimoProduto"><br><br>
+        
         <label for="valorTotalProdutos">Valor total: </label>
-        <label type="number" id="valorTotalProdutos"></label><br><br>
-
-
+        <input type="number" id="valorTotalProdutos"><br><br>
+        
+        
         <!-- campos que ficaram em PDFs -->
-
+        
         <label for="orcamento">PDF Orçamento</label>
         <input type="file" accept=".pdf" id="orcamento"><br><br>
-    
+        
         <label for="propostaAssinada">PDF Proposta assinada</label>
         <input type="file" accept=".pdf" id="propostaAssinada"><br><br>
-    
+        
         <label for="relatorioFinal">PDF Relatorio final</label>
         <input type="file" accept=".pdf" id="relatorioFinal"><br><br>
-    
+        
         <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
         <input type="file" accept=".pdf" id="pesquisaDeSatisfacao"><br><br>
-
-
+        
+        
         <!-- Botões para acionar as funções no javaScript -->
-
+        
         <input type="button" value="Editar" id="editarProposta" editarProposta()>
         <input type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
         <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
-
+        
     </div>
     
+    <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
 </body>
 </html>
