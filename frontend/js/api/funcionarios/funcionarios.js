@@ -322,12 +322,14 @@ function exibirDadosParaEditar(dados) {
     const editarNome = document.querySelector('#editarNome');
     const editarSobrenome = document.querySelector('#editarSobrenome');
     const editarEmail = document.querySelector('#editarEmail');
+    const editarCargo = document.querySelector('#editarCargo');
 
     for (usuario of dados) {
         editarNome.value = usuario.Nome;
         editarSobrenome.value = usuario.Sobrenome;
         // Tirando o padrão do email do SENAI
         editarEmail.value = usuario.Email.replace('@sp.senai.br', '');
+        editarCargo.value = usuario.TipoUser;
     }
 
 }
