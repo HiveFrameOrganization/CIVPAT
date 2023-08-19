@@ -20,7 +20,7 @@ require_once '../../../database/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
-    $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`, `Usuarios`.`FotoDePerfil` FROM Propostas INNER JOIN Usuarios ON `Propostas`.`fk_idGerente` = `Usuarios`.`NIF`;');
+    $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProj`, `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`, `Usuarios`.`FotoDePerfil` FROM Propostas INNER JOIN Usuarios ON `Propostas`.`fk_idGerente` = `Usuarios`.`NIF`;');
 
     $stmt->execute();
 

@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
 
 
 // Fução para fazer a requisição no back end dos dados
-async function verificarBancoProposta(id){6
+async function verificarBancoProposta(id){
     try{
 
         // Requisição com parâmetro para buscar a proposta pelo id
