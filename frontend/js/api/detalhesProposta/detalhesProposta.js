@@ -135,8 +135,6 @@ function baixarPdf (tipoPdf) {
         //Crie um URL temporário para o blob do PDF.
         const urlPdf = URL.createObjectURL(blob);
 
-        console.log(urlPdf);
-
         // Crie um link <a> para abrir o PDF em uma nova guia do navegador.
         const link = document.createElement('a');
         link.href = urlPdf;

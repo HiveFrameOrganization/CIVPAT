@@ -24,8 +24,6 @@ async function autenticacao(cargo) {
 
         const resposta = await verificacao.json();
 
-        console.log(resposta);
-
         if (resposta.status === 'erro') {
             if (window.location.pathname != '/frontend/pages/todasPropostas/todasPropostas.html'){
                 window.location.pathname = '/frontend/pages/login/erro.html';
