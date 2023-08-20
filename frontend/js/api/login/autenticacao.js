@@ -27,7 +27,11 @@ async function autenticacao(cargo) {
         console.log(resposta);
 
         if (resposta.status === 'erro') {
-            window.location.href = 'http://localhost:8080/frontend/pages/login/erro.html';
+            if (window.location.pathname != '/frontend/pages/todasPropostas/todasPropostas.html'){
+                window.location.pathname = '/frontend/pages/login/erro.html';
+            } else {
+                window.location.pathname = '';
+            }
         }
 
 

@@ -1,5 +1,8 @@
 USE `isihiveframe` ;
---- Inserção dos estados do funil de vendas ---
+
+
+-- Inserção dos estados do funil de vendas
+
 INSERT INTO StatusFunil (idStatusFunil, StatusFunil) VALUES
 (1, '1° Contato'),
 (2, 'Em Prospecção'),
@@ -7,7 +10,9 @@ INSERT INTO StatusFunil (idStatusFunil, StatusFunil) VALUES
 (4, 'Em Análise do Cliente'),
 (5, 'Vendido');
 
---- Inserção dos tipos de pdf ---
+
+-- Inserção dos tipos de pdf
+
 INSERT INTO TipoPDF (idTipoPDF, TipoPDF) VALUES
 (1, 'Orçamento'),
 (2, 'Proposta Assinada'),
@@ -15,7 +20,9 @@ INSERT INTO TipoPDF (idTipoPDF, TipoPDF) VALUES
 (4, 'Pesquisa de Satifação'),
 (5, 'Outros');
 
---- Inserção dos tipos de Serviços/Categorias ---
+
+-- Inserção dos tipos de Serviços/Categorias
+
 INSERT INTO ServicoCategoria VALUES
 (1, 'Assessoria Tecnológica - Aprimoramento de Produtos e Processos'),
 (2, 'Assessoria Tecnológica - Empreendedorismo'),
@@ -34,7 +41,9 @@ INSERT INTO ServicoCategoria VALUES
 (15, 'Serviços Metrológicos - Calibração - Labor. Dimensional'),
 (16, 'Serviços Metrológicos - Ensaios - Labor. Em Implantes');
 
---- Inserção dos Nomes dos Produtos ---
+
+-- Inserção dos Nomes dos Produtos
+
 INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALUES
 (1, 'Branding', 1),
 (2, 'Caderno de Tendências', 1),
@@ -192,7 +201,8 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 (154, 'TPM - Manutenção Produtiva Total', 12),
 (155, 'Usinagem Avançada', 12);
 
---- Cont. inserção dos tipos de Serviços/Categorias ---
+-- Cont. inserção dos tipos de Serviços/Categorias
+
 INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALUES
 (156, 'Análise com Interferometria de Luz', 14),
 (157, 'Análise por tomografia computadorizada industrial (CTRX)', 14),
@@ -247,14 +257,17 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 (206, 'Transferidor de grau', 15),
 (207, 'Validação de Sistemas de Medição', 15);
 
---- Inserção de Usuários para teste ---
+
+-- Inserção de Usuários para teste
+
 insert into Usuarios values 
 ('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
 ('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
 ('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
 ('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado');
 
---- Inserção de Propostas para teste ---
+
+-- Inserção de Propostas para teste
 insert into Propostas values 
 (default, '1234567', 'Jacaré a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
 'Jacksons 5', 'Em Análise', NULL, NULL, NULL, NULL);

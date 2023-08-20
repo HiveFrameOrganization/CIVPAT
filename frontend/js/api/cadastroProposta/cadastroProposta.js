@@ -66,6 +66,7 @@ form.addEventListener('submit', async evento => {
 
     if (resposta.retorno === 'sucesso') {
         console.log('Proposta cadastrada.');
+        window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
     } else {
         if (resposta.mensagem === 'registro existe') {
             console.log('Proposta não cadastrada. (Nome da proposta já existe)');
