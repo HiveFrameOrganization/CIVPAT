@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="detalhesProposta.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="autenticacao(['coor', 'tec', 'ger', 'adm'])">
     
     <div id="detalhesProposta">
         <!-- Campos que ficaram nos detalhes -->
@@ -65,5 +65,8 @@
     </div>
     
     <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+
+    <!-- Autenticação -->
+    <script src="../../js/api/login/autenticacao.js"></script>
 </body>
 </html>

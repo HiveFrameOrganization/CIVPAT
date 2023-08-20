@@ -6,7 +6,6 @@
 async function autenticacao(cargo) {
 
     try {
-
         // Pegando o token para enviar na requisição
         const token = localStorage.getItem('token');
 
@@ -42,22 +41,3 @@ async function autenticacao(cargo) {
 ----------------------------------- PROCESSO DE DESLOGAR O FUNCIONÁRIO ----------------------------------------
 */
 
-const botaoDeslogar = document.querySelector('#deslogar');
-botaoDeslogar.addEventListener('click', async () => {
-
-    try {
-
-        localStorage.clear();
-
-        // Requisição para sair da conta
-        const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
-
-        const resposta = await deslogar.json();
-
-        console.log(resposta);
-
-    } catch (erro) {
-        console.error(erro);
-    }
-
-});
