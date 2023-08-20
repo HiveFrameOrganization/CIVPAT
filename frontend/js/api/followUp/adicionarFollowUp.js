@@ -1,25 +1,28 @@
 // let liSelected
 
-const data = document.getElementById('dataFollowUp');
 
 // Pega data de hoje em yyyy-mm-dd
 const hoje = new Date().toISOString().split('T')[0];
 
+
+const data = document.getElementById('dataFollowUp');
 // Determina a data máxima pra hoje
 data.max = hoje;
 data.addEventListener('input', evento => {
-    if (data.value > hoje) {
+    const dataSelecionada = new Date(data.value);
+    if (dataSelecionada > hoje) {
         data.setCustomValidity("A data selecionada não pode ser futura");
     }
 });
 
+
 // pega o elemento de input do próximo follow up
 const dataProx = document.getElementById('dataFollowUpProx');
-
 // Determina a data mínima pra hoje
 dataProx.min = hoje;
 dataProx.addEventListener('input', evento => {
-    if (dataProx.value < hoje) {
+    const dataSelecionada = new Date(dataProx.value);
+    if (dataSelecionada < hoje) {
         dataProx.setCustomValidity("A data selecionada não pode ser passada");
     }
 });
@@ -83,6 +86,7 @@ async function enviaBackEnd(dadosEnviados) {
         .then(response => response.json())
         .then(data => {
             // Mostra a mensagem e o status no console
+            window.location.pathname = '/frontend/pages/followUp/telaFollowUp.html';
             console.log(data.mensagem);
             console.log(data.status);
         }).catch(error => {
