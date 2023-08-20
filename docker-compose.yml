@@ -7,8 +7,8 @@ services:
             - "3307:3306"
         security_opt:
             - no-new-privileges:true
-        volumes:
-            - ./database/banco:/docker-entrypoint-initdb.d
+        # volumes:
+        #     - ./database/banco:/docker-entrypoint-initdb.d
         networks:
             isi:
                 ipv4_address: 172.20.0.2

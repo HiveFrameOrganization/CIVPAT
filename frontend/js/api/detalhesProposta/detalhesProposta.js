@@ -41,7 +41,7 @@ async function verificarBancoProposta(id){
 async function verificarPdfExistente(idProposta){
 
     try{
-
+        // Cria a requisição 
         const requisicao = await fetch(`../../../backend/php/pdf/verificarPdfExistente.php?id=${idProposta}`)
 
         // Verificando se deu erro ao fazer a requisição
@@ -49,17 +49,19 @@ async function verificarPdfExistente(idProposta){
             throw new Error('Erro na requisição');
         }
 
+        // recebe a resposta do servidor
         const resposta = await requisicao.json();
-        console.log(resposta);
 
-        
+        // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {
             const valor = resposta[chave];
-            console.log(`Chave: ${chave}, Valor: ${valor}`);
+
 
             if (valor == true){
+                // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
             } else {
+                // Se o PDF não for encontrado, o botão ficará em disabled
                 document.getElementById(chave).disabled = true;
             }
 
@@ -108,7 +110,6 @@ function salvarPdf() {
     })
     .then(response => response.text())
     .then(result => {
-        console.log(result); // Exibir a resposta do servidor (opcional)
 
         verificarPdfExistente(identificador);
     })
@@ -132,7 +133,6 @@ function baixarPdf (tipoPdf) {
     .then(response => response.blob())
     .then(blob => {
         //Crie um URL temporário para o blob do PDF.
-        console.log(blob);
         const urlPdf = URL.createObjectURL(blob);
 
         console.log(urlPdf);
@@ -213,7 +213,6 @@ async function postarDetalhesBanco(postDetalhes){
         }
 
         const resposta = await requisicao.json()
-        console.log(resposta)
         
     }catch(error){
         console.error(error)
