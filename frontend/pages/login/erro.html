@@ -6,6 +6,13 @@
     <title>ERRO</title>
 </head>
 <body>
-    <h1>ERRO AO ACESSAR A PÁGINA</h1>
+    <h1>VOCÊ NÃO TEM ACESSO A ESSA PÁGINA</h1>
+    <button id="goBackButton">Voltar</button>
+
+    <script>
+        document.getElementById('goBackButton').addEventListener('click', function() {
+            window.location.href = 'http://localhost:8080/frontend/pages/todasPropostas/todasPropostas.html'; 
+        });
+    </script>
 </body>
 </html>

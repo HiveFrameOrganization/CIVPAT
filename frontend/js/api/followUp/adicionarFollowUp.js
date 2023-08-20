@@ -62,7 +62,7 @@ form.addEventListener('submit', evento => {
 
     // Monta um objeto para ser enviado com json pro backend
     const dadosFollow = {
-        idProposta: '1',
+        idProposta: localStorage.getItem('idProposta'),
         dataFollowUp: dataFollowUp,
         comentario: comentario,
         dataFollowUpProx: dataFollowUpProx

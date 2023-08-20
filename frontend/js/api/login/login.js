@@ -1,7 +1,6 @@
 // Pegando os dados do formulário
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener('submit', async evento => {
-
     // Parando o evento de submit
     evento.preventDefault();
 
@@ -47,7 +46,10 @@ async function login(email, senha) {
         console.log(resposta)
         
         // Validação do login
-        if (!resposta.login) throw new Error(`NÃO LOGADO...`)
+        if (!resposta.login) throw new Error(`NÃO LOGADO...`);
+
+        if(resposta.login) window.location.replace(window.location.origin 
+            + '/frontend/pages/todasPropostas/todasPropostas.html');
         
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);

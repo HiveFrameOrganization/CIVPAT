@@ -1,8 +1,9 @@
 
 const div = document.getElementById('tabelaFollow');
+let idProposta = localStorage.getItem('idProposta');
 
 // Acessa o backend para pegar os follow ups
-fetch(`http://localhost:8080/backend/php/followUp/pegarFollowUp.php?idProposta=1`, {method: 'GET'})
+fetch(`http://localhost:8080/backend/php/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'GET'})
 .then(response => {
     if (!response.ok) {
         throw new Error(`Request failed with status: ${response.status} ${response.statusText}`);

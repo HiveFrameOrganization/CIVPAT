@@ -12,7 +12,8 @@
     <title>Cadastrar Produto</title>
 </head>
 
-<body>
+<body onload="autenticacao(['coor', 'adm', 'ger'])">
+    <a href="../todasPropostas/todasPropostas.html">Home</a>
     <form class="formulario">
 
         <label>Tempo (Máquina): </label>
@@ -75,7 +76,8 @@
 
     <script src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>
     <script src="cadastroProduto.js" defer></script>
-
+    <!-- Autenticação -->
+    <script src="../../js/api/login/autenticacao.js"></script>
 </body>
 
 </html>

@@ -5,8 +5,8 @@ var gerenteEncarregado;
 
 
 // Ao Carregar a janela é retornado todos os gerentes, e adicionados ao dropdown
-window.onload = async function () {
-    var gerentes = await returnGerentes();
+async function getGerentes() {
+    var gerentes = await pegarGerentes();
 
     if (gerentes.retorno === true) {
 
@@ -66,6 +66,7 @@ form.addEventListener('submit', async evento => {
 
     if (resposta.retorno === 'sucesso') {
         console.log('Proposta cadastrada.');
+        window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
     } else {
         if (resposta.mensagem === 'registro existe') {
             console.log('Proposta não cadastrada. (Nome da proposta já existe)');
@@ -76,7 +77,7 @@ form.addEventListener('submit', async evento => {
 // Envia os dados contido no argumento para o back
 async function enviaBackEnd(dadosEnviados) {
     try {
-        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProposta/cadastro.php`, {
+        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProposta/cadastroProposta.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -100,9 +101,9 @@ async function enviaBackEnd(dadosEnviados) {
 }
 
 // Funcao para retornar o nome, sobrenome e NIF dos gerentes
-async function returnGerentes() {
+async function pegarGerentes() {
     try {
-        let resposta = await fetch('http://localhost:8080/backend/php/cadastroProposta/returnGerentes.php', {
+        let resposta = await fetch('http://localhost:8080/backend/php/cadastroProposta/pegarGerentes.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

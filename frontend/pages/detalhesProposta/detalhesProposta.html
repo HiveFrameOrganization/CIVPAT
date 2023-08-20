@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="detalhesProposta.css">
     <title>Document</title>
 </head>
-<body>
+<body onload="autenticacao(['coor', 'tec', 'ger', 'adm'])">
     
+    <a href="../todasPropostas/todasPropostas.html">Home</a>
     <div id="detalhesProposta">
         <!-- Campos que ficaram nos detalhes -->
         <label for="nomeProposta">Nome da proposta: </label>
@@ -70,7 +71,11 @@
         
     </div>
     
+    <a href="../followUp/telaFollowUp.html">follow up</a>
     <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+
+    <!-- Autenticação -->
+    <script src="../../js/api/login/autenticacao.js"></script>
     <script src="/frontend/js/api/pdf/pdf.js"></script>
 </body>
 </html>

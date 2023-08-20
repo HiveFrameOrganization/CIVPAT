@@ -6,7 +6,6 @@
 async function autenticacao(cargo) {
 
     try {
-
         // Pegando o token para enviar na requisição
         const token = localStorage.getItem('token');
 
@@ -28,7 +27,11 @@ async function autenticacao(cargo) {
         console.log(resposta);
 
         if (resposta.status === 'erro') {
-            window.location.href = 'http://localhost:8080/frontend/pages/login/erro.html';
+            if (window.location.pathname != '/frontend/pages/todasPropostas/todasPropostas.html'){
+                window.location.pathname = '/frontend/pages/login/erro.html';
+            } else {
+                window.location.pathname = '';
+            }
         }
 
 
@@ -42,22 +45,3 @@ async function autenticacao(cargo) {
 ----------------------------------- PROCESSO DE DESLOGAR O FUNCIONÁRIO ----------------------------------------
 */
 
-const botaoDeslogar = document.querySelector('#deslogar');
-botaoDeslogar.addEventListener('click', async () => {
-
-    try {
-
-        localStorage.clear();
-
-        // Requisição para sair da conta
-        const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
-
-        const resposta = await deslogar.json();
-
-        console.log(resposta);
-
-    } catch (erro) {
-        console.error(erro);
-    }
-
-});
