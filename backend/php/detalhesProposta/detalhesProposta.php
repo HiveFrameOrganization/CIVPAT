@@ -17,7 +17,7 @@ function verificarDetalhes($idProposta, $conn) {
 
     if ($resultado->num_rows > 0) {
 
-        $pdf = pegarPdfDoBanco($idProposta, $conn);
+        // $pdf = pegarPdfDoBanco($idProposta, $conn);
 
         $dados = mysqli_fetch_assoc($resultado);
 
@@ -34,7 +34,6 @@ function verificarDetalhes($idProposta, $conn) {
                 "dataPrimeiroProduto" => $dados['dataPrimeiroProduto'],
                 "dataUltimoProduto" => $dados['dataUltimoProduto'],
                 "valorTotalProdutos" => $dados['valorTotalProdutos'],
-                "Pdf" => $pdf
             ];
 
             echo json_encode($dealhesProposta);
@@ -55,23 +54,6 @@ function verificarDetalhes($idProposta, $conn) {
     
         echo json_encode($resposta);
     }
-}
-
-function pegarPdfDoBanco($idProposta, $conn) {
-    $stmt = $conn->prepare('SELECT `PDF`.`PDF`, `TipoPDF`.`TipoPDF` FROM PDF INNER JOIN TipoPDF ON `TipoPDF`.`idTipoPDF` = `PDF`.`fk_idTipoPDF` INNER JOIN Propostas ON `PDF`.`fk_idProposta` = `Propostas`.`idProposta` WHERE fk_idProposta = ?;');
-
-    $stmt->bind_param('s', $idProposta);
-
-    $stmt->execute();
-
-    $resultado = $stmt->get_result();
-
-    $dados = mysqli_fetch_assoc($resultado);
-
-    $retorno = json_encode($dados);
-
-    echo $retorno;
-
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

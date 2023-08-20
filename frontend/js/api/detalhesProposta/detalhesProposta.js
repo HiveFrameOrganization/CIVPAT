@@ -5,6 +5,7 @@ window.addEventListener('load', () => {
 
     // Levar o valor do id do local Storage atravez da função para o back end
     verificarBancoProposta(idProposta);
+    verificarPdfExistente(idProposta);
 
 })
 
@@ -18,7 +19,7 @@ async function verificarBancoProposta(id){
         
 
         const resposta = await requisicao.json()
-        console.log(resposta)
+        // console.log(resposta)
 
         //Enviando para o front end os dados vindos do back end
         const nomeProposta = document.querySelector('#nomeProposta').value = resposta['nomeProposta']; 
@@ -35,6 +36,121 @@ async function verificarBancoProposta(id){
     } catch (error){
         console.error(error)
     } 
+}
+
+async function verificarPdfExistente(idProposta){
+
+    try{
+
+        const requisicao = await fetch(`../../../backend/php/pdf/verificarPdfExistente.php?id=${idProposta}`)
+
+        // Verificando se deu erro ao fazer a requisição
+        if (!requisicao.ok) {
+            throw new Error('Erro na requisição');
+        }
+
+        const resposta = await requisicao.json();
+        console.log(resposta);
+
+        
+        for (const chave in resposta) {
+            const valor = resposta[chave];
+            console.log(`Chave: ${chave}, Valor: ${valor}`);
+
+            if (valor == true){
+                document.getElementById(chave).disabled = false;
+            } else {
+                document.getElementById(chave).disabled = true;
+            }
+
+        }
+        
+    }catch(error){
+        console.error(error)
+
+    }
+}
+
+function salvarPdf() {
+
+    // Pegar o id da proposta salvo no localstorage
+    identificador = localStorage.getItem('idProposta');
+
+    // Obter o arquivo PDF selecionado pelo usuário
+    const pdfOrcamento = document.getElementById('orcamento').files[0];
+    const pdfPropostaAssinada = document.getElementById('propostaAssinada').files[0];
+    const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
+    const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
+    
+    
+
+    // Criar um objeto FormData e adicionar o arquivo PDF a ele
+    //formdata serve para mandar dados e arquivos facilmente por via api
+    //usado para enviar dados do cliente para o servidor, especialmente 
+    //quando se envia um formulário HTML através de uma requisição AJAX
+    var formData = new FormData();
+
+    //inserindo o pdf dentro do objeto formdata
+    formData.append('pdfOrcamento', pdfOrcamento);
+    formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
+    formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
+    formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
+
+    // formData.forEach((valor, chave) => {
+    //     console.log(`${chave}: ${valor}`);
+    //   });
+
+
+    // Enviar o formulário como uma solicitação POST usando fetch
+    fetch(`../../../backend/php/pdf/salvarPdf.php?id=${identificador}`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(result => {
+        console.log(result); // Exibir a resposta do servidor (opcional)
+
+        verificarPdfExistente(identificador);
+    })
+    .catch(error => {
+        console.error('Erro ao salvar o PDF:', error);
+    });
+
+
+}
+
+
+function baixarPdf (tipoPdf) {
+
+    const idProposta = localStorage.getItem('idProposta');
+
+    // Caminho para o arquivo PHP que busca o PDF no banco de dados.
+    const url = `../../../backend/php/pdf/baixarPdf.php?id=${idProposta}&tipoPdf=${tipoPdf}`;
+
+    // Faça a requisição usando fetch.
+    fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+        //Crie um URL temporário para o blob do PDF.
+        console.log(blob);
+        const urlPdf = URL.createObjectURL(blob);
+
+        console.log(urlPdf);
+
+        // Crie um link <a> para abrir o PDF em uma nova guia do navegador.
+        const link = document.createElement('a');
+        link.href = urlPdf;
+        link.target = '_blank';
+        link.click();
+        
+
+        // Remova o URL temporário criado para o blob.
+        URL.revokeObjectURL(urlPdf);
+
+    })
+    .catch(error => {
+        console.error('Erro ao obter o PDF:', error);
+    });
 }
 
 
@@ -92,7 +208,7 @@ async function postarDetalhesBanco(postDetalhes){
         })
 
         // Verificando se deu erro ao fazer a requisição
-        if (!resposta.ok) {
+        if (!requisicao.ok) {
             throw new Error('Erro na requisição');
         }
 

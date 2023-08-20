@@ -44,16 +44,22 @@
         <!-- campos que ficaram em PDFs -->
         
         <label for="orcamento">PDF Orçamento</label>
-        <input type="file" accept=".pdf" id="orcamento"><br><br>
+        <input type="file" accept=".pdf" id="orcamento">
+        <button type="button" id="botaoOrcamento" onclick="baixarPdf(1)">Baixar</button><br><br>
         
         <label for="propostaAssinada">PDF Proposta assinada</label>
-        <input type="file" accept=".pdf" id="propostaAssinada"><br><br>
+        <input type="file" accept=".pdf" id="propostaAssinada">
+        <button type="button" id="botaoPropostaAssinada" onclick="baixarPdf(2)">Baixar</button><br><br>
         
         <label for="relatorioFinal">PDF Relatorio final</label>
-        <input type="file" accept=".pdf" id="relatorioFinal"><br><br>
+        <input type="file" accept=".pdf" id="relatorioFinal">
+        <button type="button" id="botaoRelatorioFinal" onclick="baixarPdf(3)">Baixar</button><br><br>
         
         <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
-        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao"><br><br>
+        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
+        <button type="button" id="botaoPesquisaDeSatisfacao" onclick="baixarPdf(4)">Baixar</button><br><br>
+
+        <button type="button" id="botaoPesquisaDeSatisfacao" onclick="salvarPdf()">Salvar PDF</button><br><br>
         
         
         <!-- Botões para acionar as funções no javaScript -->
@@ -65,5 +71,6 @@
     </div>
     
     <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+    <script src="/frontend/js/api/pdf/pdf.js"></script>
 </body>
 </html>

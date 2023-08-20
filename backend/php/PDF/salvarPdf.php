@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 header('Access-Control-Allow-Origin: http://localhost:8080');
 
 // Definindo quais métodos podem ser usados
-header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Methods: POST');
 
 // Definindo quais cabeçalhos serão permitidos na requisição
 header('Access-Control-Allow-Headers: Content-Type');
@@ -13,150 +13,97 @@ header('Access-Control-Allow-Headers: Content-Type');
 // Cabeçalho informando para o navegador que será retornado um JSON
 header("Content-Type: application/json");
 
-
+require_once '../../../database/conn.php' ;
 
 // Verifique se a solicitação é do tipo POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifique se um arquivo foi enviado com o nome "pdfFile"
-    if (isset($_FILES['pdfOrcamento'])) {
-        $pdfOrcamento = file_get_contents($_FILES['pdfOrcamento']['tmp_name']); //Essa 
-        //linha lê o conteúdo do arquivo PDF enviado pelo formulário. Ela utiliza 
-        //a função file_get_contents() para obter o conteúdo do arquivo a partir 
-        //do caminho temporário onde o arquivo é armazenado temporariamente após 
-        //o envio.
-        $salvou = salvarPdfOrcamentoNoBanco($pdfOrcamento);
 
-        if ($salvou !== false) {
-            echo "PDF salvo com sucesso com o ID: ";
-        } else {
-            echo "Falha ao salvar o PDF do orçamento no banco de dados.";
+    // Nome dos PDFs para a realização do loop
+    $listaPdf = ['pdfOrcamento', 'pdfPropostaAssinada', 'pdfRelatorioFinal', 'pdfPesquisaDeSatisfacao'];
+
+    // Contador para a mudança do fk_TIpoPDF do banco
+    $contador = 1;
+
+    // Inicia a transação das inserções no banco
+    $conn->begin_transaction();
+
+    try {
+        // Loop para ver quais PDFs  forão mandados.
+        foreach ($listaPdf as $pdf){
+            if (isset($_FILES[$pdf])) {
+                // Variável que irá pegar o pdf de acordo com a categoria que foi enviado
+                $pdfs = file_get_contents($_FILES[$pdf]['tmp_name']);
+
+                // Pega um dos nomes da lista de PDF para ser enviado como parâmetro da funçao e salvar o PDF com esse nome selecionado
+                $nomeDoPdf = $listaPdf[$contador - 1];
+
+                // Executa a função em si de salvar o pdf no  banco
+                $salvou = salvarPdfNoBanco($pdfs, $conn, $contador, $nomeDoPdf);
+            }
+            $contador += 1;
         }
-    } else {
-        echo "Nenhum arquivo PDF enviado.";
+
+        // Caso todas as inserções sejam realizadas sem erro, isso irá commitar as mudançãs no banco
+        $conn->commit();
+
+        echo json_encode(['mensagem' => "PDFs salvos com sucesso",
+            'status' => "Sucesso"]);
+
+    } catch (Exception $e) {
+
+        // Caso as inserções derem errado, o roolback cancela todas as inserções.
+        $conn->rollback();
+
+        error_log($errorMessage . $e);
+
+        echo json_encode(['mensagem' => "Ocorreu uma falha na inserção dos PDF",
+            'status' => "Erro"]);
     }
+
 } else {
-    echo "Método de solicitação não permitido.";
+    echo json_encode(['mensagem' => "Método de solicitação recusado",
+            'status' => "Erro"]);
 }
 
 // Função para salvar o conteúdo do PDF no banco de dados (exemplo).
-function salvarPdfOrcamentoNoBanco ($pdfOrcamento) {   
-    require_once('../../../database/conn.php');
+function salvarPdfNoBanco ($pdf, $conn, $idTipoPdf, $nomePdf) {   
     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
 
-    // Preparar a declaração SQL.
-    $stmt = $conn->prepare("INSERT INTO PDF VALUES (default, ?, ?, ?, ?);");
+    // Pega o id da proposta enviada pelo link da requisição
+    $idDaProposta = $_GET['id'];
 
-    $idProposta = 1;
-    $nomePdf = 'Orçamento';
-    $idTipoPdf = 1;
-    // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
-    $stmt->bind_param("ssss",$idProposta ,$idTipoPdf, $nomePdf, $pdfOrcamento);
+    // Declaração SQL para verificar se existe um PDF naquela proposta com a mesma categoria do pdf enviado
+    $verificaPdfNoBanco = $conn->prepare("SELECT (PDF) FROM PDF WHERE fk_idProposta = ? AND fk_idTipoPDF = ?");
 
-    // Executar a declaração SQL.
-    if ($stmt->execute()) {
-        // Se a inserção for bem sucedido, a variável irá receber true.
-        $salvou = true;
+    // Vincular o conteúdo pedido na consulta como parâmetro da declaração SQL.
+    $verificaPdfNoBanco->bind_param('ss', $idDaProposta, $idTipoPdf);
+
+     // Executa a declaração SQL
+    $verificaPdfNoBanco->execute();
+
+    // Captura o resultado da execução SQL
+    $resultado = $verificaPdfNoBanco->get_result();
+
+    // Verifica se a declaração SQL retornou algo do banco
+    if ($resultado->num_rows == 0){
+        // Preparar a declaração SQL.
+        $stmt = $conn->prepare("INSERT INTO PDF VALUES (default, ?, ?, ?, ?);");
+
+        // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
+        $stmt->bind_param("ssss",$idDaProposta ,$idTipoPdf, $nomePdf, $pdf);
+
+        // Executa a declaração SQL
+        $stmt->execute();
     } else {
-        // Caso ocorra um erro na inserção, defina o salvamento como false.
-        $salvou = false;
+        // Realiza a substituição do PDF já existente naquela proposta
+        $stmt = $conn->prepare('UPDATE PDF SET PDF = ? WHERE fk_idProposta = ? AND fk_idTipoPDF = ?');
+
+        // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
+        $stmt->bind_param("sss", $pdf, $idDaProposta, $idTipoPdf);
+
+        // Executa a declaração SQL
+        $stmt->execute();
     }
-
-    // Fechar a declaração e a conexão.
-    $stmt->close();
-    $conn->close();
-
-    // Retornar o ID do registro recém-inserido ou false em caso de falha.
-    return $salvou;
-
 }
 
-// function salvarPdfPropostaAssinadaNoBanco ($pdfPropostaAssinada) {   
-//     require_once('../../backend/database/conn.php');
-//     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
-//     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.
-
-//     // Preparar a declaração SQL.
-//     $stmt = $conn->prepare($sql);
-
-//     // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
-//     $stmt->bind_param("ssss", 1, );
-
-//     // Executar a declaração SQL.
-//     // Executar a declaração SQL.
-//     if ($stmt->execute()) {
-//         // Se o salvamento for bem sucedido, a função retornará true.
-//         $salvou = true;
-//     } else {
-//         // Caso ocorra um erro na inserção, defina o salvamento como false.
-//         $salvou = false;
-//     }
-
-//     // Fechar a declaração e a conexão.
-//     $stmt->close();
-//     $conn->close();
-
-//     // Retornar o ID do registro recém-inserido ou false em caso de falha.
-//     return $salvou;
-
-// }
-
-// function salvarPdfRelatorioFinalNoBanco ($pdfRelatorioFinal) {   
-//     require_once('../../backend/database/conn.php');
-//     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
-//     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.
-
-//     // Preparar a declaração SQL.
-//     $stmt = $conn->prepare($sql);
-
-//     // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
-//     $stmt->bind_param("ssss", 1, );
-
-//     // Executar a declaração SQL.
-//     // Executar a declaração SQL.
-//     if ($stmt->execute()) {
-//         // Se o salvamento for bem sucedido, a função retornará true.
-//         $salvou = true;
-//     } else {
-//         // Caso ocorra um erro na inserção, defina o salvamento como false.
-//         $salvou = false;
-//     }
-
-//     // Fechar a declaração e a conexão.
-//     $stmt->close();
-//     $conn->close();
-
-//     // Retornar o ID do registro recém-inserido ou false em caso de falha.
-//     return $salvou;
-
-// }
-
-// function salvarPdfPesquisaDeSatisfacaoNoBanco ($pdfPesquisaDeSatisfacao) {   
-//     require_once('../../backend/database/conn.php');
-//     // Prepare a consulta SQL para inserir o conteúdo do PDF no banco.
-//     $sql = "INSERT INTO PDF VALUES ('default', ?, ?, ?, ?)"; // Substitua 'tabela_pdf' pelo nome da tabela que você utiliza.
-
-//     // Preparar a declaração SQL.
-//     $stmt = $conn->prepare($sql);
-
-//     // Vincular o conteúdo do PDF como parâmetro da declaração SQL.
-//     $stmt->bind_param("ssss", 1, );
-
-//     // Executar a declaração SQL.
-//     // Executar a declaração SQL.
-//     if ($stmt->execute()) {
-//         // Se o salvamento for bem sucedido, a função retornará true.
-//         $salvou = true;
-//     } else {
-//         // Caso ocorra um erro na inserção, defina o salvamento como false.
-//         $salvou = false;
-//     }
-
-//     // Fechar a declaração e a conexão.
-//     $stmt->close();
-//     $conn->close();
-
-//     // Retornar o ID do registro recém-inserido ou false em caso de falha.
-//     return $salvou;
-
-// }
 ?>
