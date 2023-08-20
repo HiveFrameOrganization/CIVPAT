@@ -17,8 +17,6 @@ function verificarDetalhes($idProposta, $conn) {
 
     if ($resultado->num_rows > 0) {
 
-        // $pdf = pegarPdfDoBanco($idProposta, $conn);
-
         $dados = mysqli_fetch_assoc($resultado);
 
 
