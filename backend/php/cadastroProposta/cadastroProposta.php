@@ -21,8 +21,8 @@ $dadosVerif = [
 // Se houver projeto cadastrado com o nome de projeto enviado, não é cadastrado
 if (verificaRegistro($dadosVerif, $conn) === true) {
     $resposta = [
-        'retorno' => false,
-        'mensagem' => 'registro existe'
+        'status' => 'error',
+        'mensagem' => 'Registro existe'
     ];
     
 } else {
@@ -31,7 +31,17 @@ if (verificaRegistro($dadosVerif, $conn) === true) {
     $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
 
-    $resposta = ['retorno' => ($stmt->execute() ? 'sucesso' : 'erro')];
+    if ($stmt->execute()){
+        $resposta = [
+            'status'=> 'success',
+            'mensagem' => 'Produto cadastrado com sucesso'
+        ]
+    } else {
+        $resposta = [
+            'status'=> 'error',
+            'mensagem' => 'Erro ao salvar a proposta'
+        ]
+    }
 }
 
 echo json_encode($resposta);
