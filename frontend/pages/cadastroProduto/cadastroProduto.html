@@ -17,33 +17,25 @@
     <form class="formulario">
 
         <label>Tempo (Máquina): </label>
-        <input type="time" name="tempoMaquina" required><br><br>
+        <input type="number" id="tempoMaquina" required><br><br>
 
         <label>Tempo (Pessoa): </label>
-        <input type="time" name="tempoPessoa" required><br> <br>   
+        <input type="number" id="tempoPessoa" required><br> <br>   
 
         <label>Unidade Realizadora: </label>
-        <input type="text" name="unidade" required><br><br>
+        <input type="text" id="unidade" required><br><br>
 
         <label>Data Inicial: </label>
-        <input type="date" name="dataInicial" required><br><br>
+        <input type="date" id="dataInicial" onchange="validacaoDataFinal()" required><br><br>
 
         <label>Data Final: </label>
-        <input type="date" name="dataFinal" required><br><br>
+        <input type="date" id="dataFinal" required><br><br>
 
-        <label>Técnico: </label>
-        <select name="tecnico" id="listaNIF" required>
-            <option value="1234567">1234567</option>
-
-        </select><br><br>
-
-        <label>Id Proposta: </label>
-        <input type="text" name="idProposta" disabled required><br><br>
 
         <hr><br>
 
         <label>Área: </label>
-        <input type="text" name="area" disabled value="Metal Mecânica"><br><br>
+        <input type="text" id="area" disabled value="Metal Mecânica"><br><br>
 
         <select name="servico" id="servico" required>
             <option value="1">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
@@ -71,7 +63,7 @@
         <label>Valor:</label>
         <input type="number" name="valor" id="valor" required maxlength="6"><br><br>
 
-        <input type="submit" value="Salvar">
+        <button type="button" onclick="salvarProduto()">Salvar</button>
     </form>
 
     <script src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>

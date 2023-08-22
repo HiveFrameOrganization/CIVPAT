@@ -14,10 +14,18 @@ if (dia < 10) {
 
 // Não permitir que marque uma data depois de hoje.
 const dataMaxima = `${ano}-${mes}-${dia}`;
-document.getElementsByName('dataInicial')[0].setAttribute('max', dataMaxima);
-document.getElementsByName('dataFinal')[0].setAttribute('max', dataMaxima);
+document.getElementById('dataInicial').setAttribute('min', dataMaxima);
+// document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
 ////////////////////////////////////////////////
+
+async function validacaoDataFinal () {
+    // Validação para o input da data final nunca receber uma data antes da data inicial
+    const dataInicial = document.getElementById('dataInicial').value;
+
+    document.getElementById('dataFinal').setAttribute('min', dataInicial);
+
+}
 
 // Quando for selecionado executar 
 document.getElementById("servico").addEventListener("change", function() {
