@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `idProdutos` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_idProposta` INT UNSIGNED NOT NULL,
   `fk_idTecnico` VARCHAR(7) NULL,
-  `fk_idMaquinas` INT UNSIGNED  NULL,
+  `fk_idMaquinas` INT UNSIGNED NULL,
   `fk_idNomeProduto` INT UNSIGNED NOT NULL,
   `fk_idServicoCategoria` INT UNSIGNED NOT NULL,
   `Area` ENUM("metalmecanica") NOT NULL,
