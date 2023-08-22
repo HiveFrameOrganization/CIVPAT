@@ -38,7 +38,14 @@ async function salvarProduto () {
 
         const dados = await resposta.json();
 
-        console.log(dados);
+        console.log(dados['status']);
+
+        if (dados['status'] == 'success'){
+            localStorage.setItem('status', dados['status']);
+            localStorage.setItem('mensagem', dados['mensagem']);
+        }
+
+        window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
     
     } catch (erro) {
 

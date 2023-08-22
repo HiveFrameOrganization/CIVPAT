@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $idProduto = intval($linha['idNomeProduto']);
 
 
-        $stmt2 = $conn->prepare('INSERT INTO Produtos (idProduto, fk_idProposta, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, Unidade, DataInicial, DataFinal) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $stmt2 = $conn->prepare('INSERT INTO Produtos (idProdutos, fk_idProposta, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, Unidade, DataInicial, DataFinal) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
 
         $stmt2->bind_param('ssssssssss', $idProposta, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal);
 
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Resposta a ser retronada para o servidor
             $resposta = [
                 'mensagem' => 'Produto cadastrado com sucesso!',
-                'status' => 'sucesso'
+                'status' => 'success'
             ];
 
             echo json_encode($resposta);

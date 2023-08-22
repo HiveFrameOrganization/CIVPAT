@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="detalhesProposta.css">
     <title>Document</title>
 </head>
-<body onload="autenticacao(['coor', 'tec', 'ger', 'adm'])">
+<body onload="autenticacao(['coor', 'tec', 'ger', 'adm']), alertas()">
     
     <a href="../todasPropostas/todasPropostas.html">Home</a>
     <div id="detalhesProposta">
@@ -74,8 +74,10 @@
     <a href="../followUp/telaFollowUp.html">follow up</a>
     <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
     <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+    <script src="../../js/feedback.js"></script>
 
     <!-- Autenticação -->
     <script src="../../js/api/login/autenticacao.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

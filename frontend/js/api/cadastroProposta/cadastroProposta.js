@@ -64,8 +64,9 @@ form.addEventListener('submit', async evento => {
     // Retorna a resposta do back, e se for sucesso, significa que cadastrou
     let resposta = await enviaBackEnd(dadosProj);
 
-    if (resposta.retorno === 'sucesso') {
-        console.log('Proposta cadastrada.');
+    if (resposta.status === 'success') {
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
         window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
     } else {
         if (resposta.mensagem === 'registro existe') {
@@ -91,6 +92,7 @@ async function enviaBackEnd(dadosEnviados) {
         }
 
         let dados = await resposta.json();
+        console.log(dados);
 
         // Retorna 'sucesso' ou 'erro'
         return dados;
