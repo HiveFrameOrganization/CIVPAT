@@ -1,52 +1,124 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./frontend/pages/login/login.css">
     <title>Login</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+        }
+
+
+
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                }
+            },
+        }
+    </script>
 </head>
-<body>
+<body class="bg-body text-color-text flex">
 
-    <h1 id="titulo">Login</h1>
+    <aside class="w-0 md:w-2/3 object-cover flex justify-start items-start">
+        <img src="frontend/img/icon/senai.png" alt="logoSenai" class="object-cover w-36 m-5">
+    </aside>
 
-    <form id="formulario">
+    <aside class="w-full md:w-1/3 h-screen bg-component flex flex-col items-center py-5">
 
-        <label>Email:</label>
-        <div class="box">
-            <input type="text" id="email" required>
-            <p>@sp.senai.br</p>
-        </div>
+        <img src="frontend/img/icon/isi.png" alt="logo" class="w-3/4">
 
-        <label>Senha:</label>
-        <input type="password" id="senha">
+        <form id="formulario" class="w-full px-6 pt-10">
 
-        <button type="submit">Enviar</button>
+            <label class="text-color-text font-bold block mb-3 uppercase">Email</label>
+            <div class="flex w-full mb-5 relative">
+                <input type="text" value="" id="email" required class="text-sm bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Informe seu email...">
+                <p class="bg-body rounded-e-lg flex items-center pe-3 absolute right-0 top-3 text-primary">@sp.senai.br</p>
+            </div>
+            
+            <label class="text-color-text font-bold block mb-3 uppercase">Senha</label>
+            <div class="relative">
+                <i src="frontend/img/icon/visibility_off.png" alt="Ícone de visualizar senha" class="icon fa fa-eye absolute top-4 right-4 text-primary cursor-pointer" onclick="passShow(this)"></i>
+                <input type="password" value="" id="inputPass" class="text-sm password bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Digite sua senha">
+            </div>
 
-    </form>
-
-    <!-- Formulário que será vísivel somente para novos usuários para registrar uma nova senha -->
-    <form id="formularioNovaSenha">
-        <h1>Olá, novo usuário. Por favor, redefina a sua senha.</h1>
-
-        <ul>
-            <p>Regras da nova senha:</p>
-            <li>Pelo menos uma letra maiúscula;</li>
-            <li>Pelo menos uma letra minúscula;</li>
-            <li>Pelo menos um número;</li>
-            <li>Mínimo de 8 caracteres.</li>
-        </ul>
-
-        <label>Nova senha:</label>
-        <input type="password" id="novaSenha" required>
-
-        <label>Repita a senha:</label>
-        <input type="password" id="repitaSenha" required>
-
-        <button type="submit">Salvar</button>
+            <div class="pt-16">
+                <button type="submit" class="rounded-lg text-color-text bg-primary w-full text-center font-bold text-lg py-2 hover:brightness-110">Enviar</button>
+            </div>
 
 
-    </form>
+        </form>
+
+        <!-- Formulário que será vísivel somente para novos usuários para registrar uma nova senha -->
+        <form id="formularioNovaSenha">
+            <h1>Olá, novo usuário. Por favor, redefina a sua senha.</h1>
+
+            <ul>
+                <p>Regras da nova senha:</p>
+                <li>Pelo menos uma letra maiúscula;</li>
+                <li>Pelo menos uma letra minúscula;</li>
+                <li>Pelo menos um número;</li>
+                <li>Mínimo de 8 caracteres.</li>
+            </ul>
+
+            <label>Nova senha:</label>
+            <input type="password" id="novaSenha" required>
+
+            <label>Repita a senha:</label>
+            <input type="password" id="repitaSenha" required>
+
+            <button type="submit">Salvar</button>
+
+
+        </form>
+    </aside>
 
     <script src="./frontend/js/api/login/novoUsuario.js"></script>
     <script src="./frontend/js/api/login/login.js"></script>
@@ -56,5 +128,7 @@
             window.location.href = 'http://localhost:8080/frontend/pages/login/erro.html';
         }
     </script>
+
+    <script src="frontend/Componentes/inputModal/script.js"></script>
 </body>
 </html>
