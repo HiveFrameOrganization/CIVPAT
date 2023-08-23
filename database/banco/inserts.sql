@@ -261,10 +261,10 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 -- Inserção de Usuários para teste
 
 insert into Usuarios values 
-('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
-('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
-('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado'),
-('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$xfDvLB17C8JvErkPshsKNOTyVcNQ8NQDqVrI1WaIIF9CBwzAqyOcS', 'ativado');
+('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', 'senai115', 'ativado'),
+('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativado'),
+('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativado'),
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', 'senai115', 'ativado');
 
 
 -- Inserção de Propostas para teste

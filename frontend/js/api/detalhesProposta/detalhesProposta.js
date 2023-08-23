@@ -80,7 +80,7 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
     baixarPdf(4)
 });
 
-// Fução para fazer a requisição no back end dos dados
+// Fução para fazer a requisição no back-end dos dados
 async function verificarBancoProposta(id){
     try{
 
@@ -91,7 +91,7 @@ async function verificarBancoProposta(id){
         const resposta = await requisicao.json()
         // console.log(resposta)
 
-        //Enviando para o front end os dados vindos do back end
+        //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#nomeProposta').value = resposta['nomeProposta']; 
         const cnpj = document.querySelector('#cnpj').value = resposta['cnpj'];
         const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
@@ -179,6 +179,7 @@ function baixarPdf (tipoPdf) {
 const editandoProposta = document.querySelector('#editarProposta');
 editandoProposta.addEventListener('click', (evento) =>{
 
+    const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
     const nomeProposta = document.querySelector('#nomeProposta').value;
@@ -196,6 +197,7 @@ editandoProposta.addEventListener('click', (evento) =>{
 
 // Criando um objeto com os dados dos input's
     const detalhesProposta = {
+        idProposta: idProposta,
         nomeProposta : nomeProposta,
         cnpj :  cnpj,
         uniCriadora :uniCriadora,
