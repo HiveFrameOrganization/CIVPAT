@@ -1,12 +1,13 @@
+import { back } from '../Rotas/rotas.js'
 const form = document.querySelector('.formulario');
 const listaGerentes = document.querySelector('#listaGerentes');
 
-var gerenteEncarregado;
+let gerenteEncarregado;
 
 
 // Ao Carregar a janela é retornado todos os gerentes, e adicionados ao dropdown
-async function getGerentes() {
-    var gerentes = await pegarGerentes();
+export async function dropdownGerentes() {
+    let gerentes = await pegarGerentes();
 
     if (gerentes.retorno === true) {
 
@@ -78,7 +79,7 @@ form.addEventListener('submit', async evento => {
 // Envia os dados contido no argumento para o back
 async function enviaBackEnd(dadosEnviados) {
     try {
-        let resposta = await fetch(`http://localhost:8080/backend/php/cadastroProposta/cadastroProposta.php`, {
+        let resposta = await fetch(back + `/cadastroProposta/cadastroProposta.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -105,7 +106,7 @@ async function enviaBackEnd(dadosEnviados) {
 // Funcao para retornar o nome, sobrenome e NIF dos gerentes
 async function pegarGerentes() {
     try {
-        let resposta = await fetch('http://localhost:8080/backend/php/cadastroProposta/pegarGerentes.php', {
+        let resposta = await fetch(back + '/cadastroProposta/pegarGerentes.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
@@ -151,9 +152,9 @@ function validacaoCNPJ(cnpj) {
 
         // Definição dos digitos validos
         if (digito == 0) {
-            digito1 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+            var digito1 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
         } else {
-            digito2 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+            var digito2 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
         }
     }
     

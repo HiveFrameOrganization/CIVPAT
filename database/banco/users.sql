@@ -1,3 +1,9 @@
+-- Cria o usuário auth que representa a autenticação
+CREATE USER 'auth'@'172.20.0.3' IDENTIFIED BY 'fsY9DS&J*bg#49Vpf^9o';
+-- Este usuário será utilizado no login, para conferir as credenciais
+GRANT SELECT, UPDATE ON `isihiveframe`.`Usuarios` TO 'auth'@'172.20.0.3';
+FLUSH PRIVILEGES;
+
 
 -- Cria o Role role1 que será utilizado na facilitação de Autorização do usuários
 CREATE ROLE role1;
@@ -14,13 +20,6 @@ GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`Produtos` TO role1;
 GRANT SELECT ON `isihiveframe`.`Usuarios` TO role1;
 GRANT SELECT ON `isihiveframe`.`CargaHoraria` TO role1;
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO role1;
-
-
--- Cria o usuário auth que representa a autenticação
-CREATE USER 'auth'@'172.20.0.3' IDENTIFIED BY 'fsY9DS&J*bg#49Vpf^9o';
--- Este usuário será utilizado no login, para conferir as credenciais
-GRANT SELECT ON `isihiveframe`.`Usuarios` TO 'auth'@'172.20.0.3';
-FLUSH PRIVILEGES;
 
 
 -- Cria o usuário coor que representa os Coordenadores

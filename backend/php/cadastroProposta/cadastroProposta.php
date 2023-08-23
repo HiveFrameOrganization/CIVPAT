@@ -35,12 +35,12 @@ if (verificaRegistro($dadosVerif, $conn) === true) {
         $resposta = [
             'status'=> 'success',
             'mensagem' => 'Produto cadastrado com sucesso'
-        ]
+        ];
     } else {
         $resposta = [
             'status'=> 'error',
             'mensagem' => 'Erro ao salvar a proposta'
-        ]
+        ];
     }
 }
 

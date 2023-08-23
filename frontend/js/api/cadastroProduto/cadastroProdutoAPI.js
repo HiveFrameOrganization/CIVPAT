@@ -1,3 +1,4 @@
+import { back } from '../Rotas/rotas.js'
 async function salvarProduto () {
     idProposta = localStorage.getItem('idProposta');
 
@@ -28,7 +29,7 @@ async function salvarProduto () {
 
     try {
 
-        const resposta = await fetch('http://localhost:8080/backend/php/cadastroProduto/cadastroProduto.php', {
+        const resposta = await fetch(back + '/cadastroProduto/cadastroProduto.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

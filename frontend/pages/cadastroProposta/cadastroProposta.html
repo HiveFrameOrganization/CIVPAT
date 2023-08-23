@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./cadastroProposta.css">
 </head>
-<body onload="autenticacao(['coor', 'adm', 'ger']), getGerentes()">
+<body>
     <form class="formulario">
 
         <label for="">Nome Projeto: </label>
@@ -21,17 +21,22 @@
         <label for="">Empresa: </label>
         <input type="text" name="empresa" maxlength="200" minlength="4" id="">
 
-        <label for="">Gerente; </label>
+        <label for="">Gerente: </label>
         <ul id="listaGerentes">
         </ul>
 
         <button type="submit">Enviar</button>
     </form>
 
-    <script src="../../js/api/cadastroProposta/cadastroProposta.js"></script>
+    <script type="module" src="../../js/api/cadastroProposta/cadastroProposta.js"></script>
     <script src="../../js/feedback.js"></script>
 
     <!-- Autenticação -->
-    <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        import { dropdownGerentes } from '../../js/api/cadastroProposta/cadastroProposta.js'
+        dropdownGerentes()
+        autenticacao(['coor', 'adm', 'ger'])
+    </script>
 </body>
 </html>

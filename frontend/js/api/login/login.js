@@ -1,3 +1,4 @@
+import { back, frontPages } from '../Rotas/rotas.js'
 // Pegando os dados do formulário
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener('submit', async evento => {
@@ -5,7 +6,7 @@ formulario.addEventListener('submit', async evento => {
     evento.preventDefault();
 
     const email = document.querySelector('#email').value + '@sp.senai.br';
-    const senha = document.querySelector('#senha').value;
+    const senha = document.querySelector('#inputPass').value;
 
     await login(email, senha);
 
@@ -32,7 +33,7 @@ async function login(email, senha) {
             senha: senha
         };
 
-        const login = await fetch(`http://localhost:8080/backend/php/login/login.php`, {
+        const login = await fetch(back + `/login/login.php`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -48,8 +49,7 @@ async function login(email, senha) {
         // Validação do login
         if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
-        if(resposta.login) window.location.replace(window.location.origin 
-            + '/frontend/pages/todasPropostas/todasPropostas.html');
+        if(resposta.login) window.location.replace(frontPages + '/todasPropostas/todasPropostas.html');
         
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);

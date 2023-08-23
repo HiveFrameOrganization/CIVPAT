@@ -5,18 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Paginação de Itens</title>
 </head>
-<body onload="autenticacao(['coor', 'adm', 'ger', 'tec']), alertas()">
-  <div id="botoes"></div>
+<body onload="alertas()">
+    <div id="botoes"></div>
 
 
-  <a href="../cadastroUsuario/cadastroUsuario.html">Cadastro Usuário</a>
-  <a href="../cadastroProposta/cadastroProposta.html?">Cadastro Proposta</a>
-  
-  <!-- nome proposta, numero sGSET, data inicio e termino, gerente e status, foto do gerente caso tenha' -->
+    <a href="../cadastroUsuario/cadastroUsuario.html">Cadastro Usuário</a>
+    <a href="../cadastroProposta/cadastroProposta.html?">Cadastro Proposta</a>
+    
+    <!-- nome proposta, numero sGSET, data inicio e termino, gerente e status, foto do gerente caso tenha' -->
 
-  <script src="../../js/api/todasPropostas/todasPropostas.js"></script>
-  <!-- Autenticação -->
-  <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
+    <script src="../../js/feedback.js"></script>
+    <!-- Autenticação -->
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'adm', 'ger', 'tec'])
+    </script>
 </body>
 </html>
 

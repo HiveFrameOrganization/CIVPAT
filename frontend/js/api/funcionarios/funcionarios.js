@@ -1,3 +1,4 @@
+import { back } from '../Rotas/rotas.js'
 /*
 ----------------------------------------------------------------------------------
                         RENDERIZANDO A LISTA DE USUÁRIO
@@ -15,7 +16,7 @@ async function retornaFuncionarios() {
 
     try {
         // Fazendo a requisição para buscar os dados
-        const resposta = await fetch(`http://localhost:8080/backend/php/funcionarios/exibirFuncionarios.php`);
+        const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php`);
 
         const dados = await resposta.json();
 
@@ -40,7 +41,7 @@ function exibir(dados) {
     // Removendo um possível elemento na div de exibição
     exibicao.innerHTML = '';
 
-    for (funcionario of dados) {
+    for (let funcionario of dados) {
 
         // Criando os elementos
         const div = document.createElement('div');
@@ -141,7 +142,7 @@ async function pesquisarFuncionario(valor) {
     try {
 
         // Requisição ao servidor
-        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/pesquisarFuncionario.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
@@ -215,7 +216,7 @@ async function usuariosFiltrados(valor) {
     try {
 
         // Requisição ao servidor
-        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/pesquisaFiltro.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
@@ -299,7 +300,7 @@ async function dadosParaEditar(nif) {
     try {
 
         // Requisição ao servidor
-        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
@@ -324,7 +325,7 @@ function exibirDadosParaEditar(dados) {
     const editarEmail = document.querySelector('#editarEmail');
     const editarCargo = document.querySelector('#editarCargo');
 
-    for (usuario of dados) {
+    for (let usuario of dados) {
         editarNome.value = usuario.Nome;
         editarSobrenome.value = usuario.Sobrenome;
         // Tirando o padrão do email do SENAI
@@ -384,7 +385,7 @@ formularioEditarUsuario.addEventListener('submit', evento => {
 async function requisicaoEditar(dados) {
 
     // Requisição PUT para editar
-    const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/editarFuncionario.php`, {
+    const requisicao = await fetch(back + `/funcionarios/editarFuncionario.php`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -407,7 +408,7 @@ async function desativarUsuario(nif) {
 
     try {
 
-        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/demitirFuncionarios.php`, {
+        const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -456,7 +457,7 @@ async function resetarSenhaUsuario(nif) {
 
     try {
 
-        const requisicao = await fetch(`http://localhost:8080/backend/php/funcionarios/resetarSenha.php`, {
+        const requisicao = await fetch(back + `/funcionarios/resetarSenha.php`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

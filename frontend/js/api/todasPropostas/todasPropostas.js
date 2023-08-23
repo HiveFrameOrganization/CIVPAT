@@ -1,3 +1,4 @@
+import { back } from '../Rotas/rotas.js'
 window.addEventListener('load', () => {
     // ao carregar a página, a função irá executar
     pegarTodasAsPropostas()
@@ -7,7 +8,7 @@ async function pegarTodasAsPropostas () {
 
     try{
         // link da requisição
-        const resposta = await fetch('http://localhost:8080/backend/php/todasPropostas/todasPropostas.php');
+        const resposta = await fetch(back + '/todasPropostas/todasPropostas.php');
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();

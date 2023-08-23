@@ -1,3 +1,4 @@
+import { back } from '../Rotas/rotas.js'
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', () => {
      const idProposta = localStorage.getItem('idProposta');
@@ -15,7 +16,7 @@ async function verificarBancoProposta(id){
     try{
 
         // Requisição com parâmetro para buscar a proposta pelo id
-        const requisicao = await fetch(`http://localhost:8080/backend/php/detalhesProposta/detalhesProposta.php?id=${id}`)
+        const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
         
 
         const resposta = await requisicao.json()
@@ -42,7 +43,7 @@ async function verificarPdfExistente(idProposta){
 
     try{
         // Cria a requisição 
-        const requisicao = await fetch(`../../../backend/php/pdf/verificarPdfExistente.php?id=${idProposta}`)
+        const requisicao = await fetch(back + `/pdf/verificarPdfExistente.php?id=${idProposta}`)
 
         // Verificando se deu erro ao fazer a requisição
         if (!requisicao.ok) {
@@ -104,7 +105,7 @@ function salvarPdf() {
 
 
     // Enviar o formulário como uma solicitação POST usando fetch
-    fetch(`../../../backend/php/pdf/salvarPdf.php?id=${identificador}`, {
+    fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
         method: 'POST',
         body: formData
     })
@@ -126,7 +127,7 @@ function baixarPdf (tipoPdf) {
     const idProposta = localStorage.getItem('idProposta');
 
     // Caminho para o arquivo PHP que busca o PDF no banco de dados.
-    const url = `../../../backend/php/pdf/baixarPdf.php?id=${idProposta}&tipoPdf=${tipoPdf}`;
+    const url = back + `/pdf/baixarPdf.php?id=${idProposta}&tipoPdf=${tipoPdf}`;
 
     // Faça a requisição usando fetch.
     fetch(url)
@@ -196,7 +197,7 @@ async function postarDetalhesBanco(postDetalhes){
 
     try{
 
-        const requisicao = await fetch('http://localhost:8080/backend/php/detalhesProposta/postDetalhesProposta.php',{
+        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php',{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

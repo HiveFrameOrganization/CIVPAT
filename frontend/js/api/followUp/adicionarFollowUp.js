@@ -1,5 +1,5 @@
+import { back } from '../Rotas/rotas.js'
 // let liSelected
-
 
 // Pega data de hoje em yyyy-mm-dd
 const hoje = new Date().toISOString().split('T')[0];
@@ -76,7 +76,7 @@ form.addEventListener('submit', evento => {
 async function enviaBackEnd(dadosEnviados) {
     try {
         // Envia os dados do front pro Backend
-        await fetch(`http://localhost:8080/backend/php/followUp/postarFollowUp.php`, {
+        await fetch(back + `/followUp/postarFollowUp.php`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

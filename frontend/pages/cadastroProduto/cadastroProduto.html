@@ -12,7 +12,7 @@
     <title>Cadastrar Produto</title>
 </head>
 
-<body onload="autenticacao(['coor', 'adm', 'ger'])">
+<body>
     <a href="../todasPropostas/todasPropostas.html">Home</a>
     <form class="formulario">
 
@@ -66,11 +66,14 @@
         <button type="button" onclick="salvarProduto()">Salvar</button>
     </form>
 
-    <script src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>
+    <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>
     <script src="cadastroProduto.js" defer></script>
     <script src="../../js/feedback.js"></script>
     <!-- Autenticação -->
-    <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'adm', 'ger'])
+    </script>
 </body>
 
 </html>

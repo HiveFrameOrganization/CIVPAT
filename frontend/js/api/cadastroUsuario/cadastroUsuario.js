@@ -1,3 +1,4 @@
+import { back } from '../Rotas/rotas.js'
 /*------------------------------------ Fazendo aparecer o formulário -------------------------------------------------------------------------*/
 const cadastrar = document.querySelector('#cadastrar');
 
@@ -97,7 +98,7 @@ async function mandarDadosParaBackend(dados) {
     // tentando fazer a requisição para mandar os dados
     try {
 
-        const resposta = await fetch('http://localhost:8080/backend/php/cadastroUsuario/cadastroUsuario.php', {
+        const resposta = await fetch(back + '/cadastroUsuario/cadastroUsuario.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

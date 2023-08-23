@@ -1,9 +1,10 @@
+import { back } from '../Rotas/rotas.js'
 /*
 ------------------------- PROCESSO DE AUTENTICAÇÃO E NÍVEL DE ACESSO DO USUÁRIO ------------------------------
 */
 
 // Verificação ocorre a cada carregamento de página
-async function autenticacao(cargo) {
+export async function autenticacao(cargo) {
 
     try {
         // Pegando o token para enviar na requisição
@@ -14,7 +15,7 @@ async function autenticacao(cargo) {
             cargo: cargo
         }
 
-        const verificacao = await fetch(`http://localhost:8080/backend/php/login/autenticacao.php`, {
+        const verificacao = await fetch(back + `/login/autenticacao.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

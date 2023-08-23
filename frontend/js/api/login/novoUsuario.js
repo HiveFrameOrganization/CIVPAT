@@ -1,4 +1,4 @@
-
+import { back } from '../Rotas/rotas.js'
 /*------------------------- VERIFICAÇÃO DO EMAIL ---------------------------------------*/
 /*
     Assim que om usuário clicar fora do input do email será feita uma verificação se possui cadastro e se
@@ -25,7 +25,7 @@ async function verificaEmail(email) {
     try {
 
         // Requisição para validação do email
-        const resposta = await fetch('http://localhost:8080/backend/php/login/novoUsuario.php', {
+        const resposta = await fetch(back + '/login/novoUsuario.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ async function salvandoSenha(email, senha) {
         }
 
         // Realizando a requisição
-        const enviaBackend = await fetch(`http://localhost:8080/backend/php/login/salvaNovaSenha.php`, {
+        const enviaBackend = await fetch(back + `/login/salvaNovaSenha.php`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

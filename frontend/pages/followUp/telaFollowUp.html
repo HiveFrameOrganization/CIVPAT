@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Follow Ups</title>
 </head>
-<body onload="autenticacao(['coor', 'adm', 'ger'])">
+<body>
     <a href="../todasPropostas/todasPropostas.html">Home</a>
 
     <div id="tabelaFollow"></div>
@@ -13,9 +13,12 @@
 
 
     
-    <script src="../../js/api/followUp/telaFollowUp.js"></script>
+    <script type="module" src="../../js/api/followUp/telaFollowUp.js"></script>
     <script src="../../js/feedback.js"></script>
     <!-- Autenticação -->
-    <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'adm', 'ger'])
+    </script>
 </body>
 </html>

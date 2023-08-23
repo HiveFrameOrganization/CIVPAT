@@ -6,7 +6,7 @@
     <title>Adicionar Follow Up</title>
     <link rel="stylesheet" href="adicionarFollowUp.css">
 </head>
-<body onload="autenticacao(['coor', 'adm', 'ger'])">
+<body>
     <form id="formulario">
         <a href="telaFollowUp.html">Voltar</a>
         <label for="dataFollowUp">Data do Follow Up: </label>
@@ -28,9 +28,12 @@
 
         <button>Enviar</button>
     </form>
-    <script src="../../js/api/followUp/adicionarFollowUp.js"></script>
+    <script type="module" src="../../js/api/followUp/adicionarFollowUp.js"></script>
     <script src="../../js/feedback.js"></script>
     <!-- Autenticação -->
-    <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'adm', 'ger'])
+    </script>
 </body>
 </html>
