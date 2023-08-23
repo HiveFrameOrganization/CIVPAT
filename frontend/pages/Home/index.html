@@ -62,12 +62,12 @@
         }
     </script>
 </head>
-<body class="bg-body transition-colors overflow-hidden">
-    <header class="py-4 px-6 text-color-text fixed top-0 w-full">
+<body class="bg-body transition-colors">
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full shadow-sm" role="navigation">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20">
+                <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20 group">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
                         <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
@@ -101,10 +101,62 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     </header>
+
+    <main class="mt-[72px] container mx-auto px-6 sm:px-12 md:px-16 py-6 text-color-text">
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold">VISÃO GERAL</h1>
+            <h2 class="text-xs font-normal">Projetos do Instituto Senai de Inovação</h2>
+        </div>
+        <div class="flex gap-6 flex-wrap justify-center md:justify-start">
+            <div class="flex w-screen sm:max-w-[304px]">
+                <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                    <img src="../../img/icon/clipboard-check.svg" alt="Projetos em análise" class="w-8 h-8">
+                </div>
+                <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                    <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
+                    <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                </div>
+            </div>
+            <div class="flex w-screen sm:max-w-[304px]">
+                <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                    <img src="../../img/icon/clipboard-check.svg" alt="Projetos em análise" class="w-8 h-8">
+                </div>
+                <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                    <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
+                    <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                </div>
+            </div>
+            <div class="flex w-screen sm:max-w-[304px]">
+                <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                    <img src="../../img/icon/clipboard-check.svg" alt="Projetos em análise" class="w-8 h-8">
+                </div>
+                <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                    <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
+                    <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                </div>
+            </div>
+            <div class="flex w-screen sm:max-w-[304px]">
+                <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                    <img src="../../img/icon/clipboard-check.svg" alt="Projetos em análise" class="w-8 h-8">
+                </div>
+                <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                    <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
+                    <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center md:justify-start mt-10">
+            <div class="space-x-4">
+                <span role="button" class="font-medium text-xs md:text-lg text-color-text">TODOS</span>
+                <span role="button" class="font-medium text-xs md:text-lg text-color-text">ANÁLISE</span>
+                <span role="button" class="font-medium text-xs md:text-lg text-color-text">DESENVOLVENDO</span>
+                <span role="button" class="font-medium text-xs md:text-lg text-color-text">DECLINADO</span>
+            </div>
+        </div>
+    </main>
 
     <script src="../../js/themeSwitch/index.js"></script>
     <script src="../../js/global.js"></script>
