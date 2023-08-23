@@ -1,5 +1,8 @@
 .ativo{
     color: #3976D1!important;
-    border-bottom: solid 3px #3976D1!important;
-    left: 20%!important;
+    box-shadow: 0 3px #3976D1!important;
+}
+
+.hovered{
+    box-shadow: 0 3px #C8C8C8!important;
 }
