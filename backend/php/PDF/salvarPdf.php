@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->commit();
 
         echo json_encode(['mensagem' => "PDFs salvos com sucesso",
-            'status' => "Sucesso"]);
+            'status' => "success"]);
 
     } catch (Exception $e) {
 
@@ -57,12 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         error_log($errorMessage . $e);
 
         echo json_encode(['mensagem' => "Ocorreu uma falha na inserção dos PDF",
-            'status' => "Erro"]);
+            'status' => "error"]);
     }
 
 } else {
     echo json_encode(['mensagem' => "Método de solicitação recusado",
-            'status' => "Erro"]);
+            'status' => "error"]);
 }
 
 // Função para salvar o conteúdo do PDF no banco de dados (exemplo).

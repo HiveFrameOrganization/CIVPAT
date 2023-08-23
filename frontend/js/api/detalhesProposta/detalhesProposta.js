@@ -10,6 +10,75 @@ window.addEventListener('load', () => {
 
 })
 
+const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
+
+botaoSalvarPdf.addEventListener('click', () => {
+    // Pegar o id da proposta salvo no localstorage
+    const identificador = localStorage.getItem('idProposta');
+
+    // Obter o arquivo PDF selecionado pelo usuário
+    const pdfOrcamento = document.getElementById('orcamento').files[0];
+    const pdfPropostaAssinada = document.getElementById('propostaAssinada').files[0];
+    const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
+    const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
+    
+    
+
+    // Criar um objeto FormData e adicionar o arquivo PDF a ele
+    //formdata serve para mandar dados e arquivos facilmente por via api
+    //usado para enviar dados do cliente para o servidor, especialmente 
+    //quando se envia um formulário HTML através de uma requisição AJAX
+    var formData = new FormData();
+
+    //inserindo o pdf dentro do objeto formdata
+    formData.append('pdfOrcamento', pdfOrcamento);
+    formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
+    formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
+    formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
+
+    // formData.forEach((valor, chave) => {
+    //     console.log(`${chave}: ${valor}`);
+    //   });
+
+
+    // Enviar o formulário como uma solicitação POST usando fetch
+    fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(json => {
+
+        localStorage.setItem('status', json.status);
+        localStorage.setItem('mensagem', json.mensagem);
+        alertas();
+
+        verificarPdfExistente(identificador);
+    })
+    .catch(error => {
+        console.error('Erro ao salvar o PDF:', error);
+    });
+})
+
+const botaoOrcamento = document.getElementById('botaoOrcamento');
+botaoOrcamento.addEventListener('click', () => {
+    baixarPdf(1);
+} );
+
+const botaoPropostaAssinada = document.getElementById('botaoPropostaAssinada');
+botaoPropostaAssinada.addEventListener('click', () => {
+    baixarPdf(2)
+} );
+
+const botaoRelatorioFinal = document.getElementById('botaoRelatorioFinal');
+botaoRelatorioFinal.addEventListener('click', () => {
+    baixarPdf(3)
+});
+
+const botaoPesquisaDeSatisfacao = document.getElementById('botaoPesquisaDeSatisfacao');
+botaoPesquisaDeSatisfacao.addEventListener('click', () => {
+    baixarPdf(4)
+});
 
 // Fução para fazer a requisição no back end dos dados
 async function verificarBancoProposta(id){
@@ -74,52 +143,6 @@ async function verificarPdfExistente(idProposta){
     }
 }
 
-function salvarPdf() {
-
-    // Pegar o id da proposta salvo no localstorage
-    identificador = localStorage.getItem('idProposta');
-
-    // Obter o arquivo PDF selecionado pelo usuário
-    const pdfOrcamento = document.getElementById('orcamento').files[0];
-    const pdfPropostaAssinada = document.getElementById('propostaAssinada').files[0];
-    const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
-    const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
-    
-    
-
-    // Criar um objeto FormData e adicionar o arquivo PDF a ele
-    //formdata serve para mandar dados e arquivos facilmente por via api
-    //usado para enviar dados do cliente para o servidor, especialmente 
-    //quando se envia um formulário HTML através de uma requisição AJAX
-    var formData = new FormData();
-
-    //inserindo o pdf dentro do objeto formdata
-    formData.append('pdfOrcamento', pdfOrcamento);
-    formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
-    formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
-    formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
-
-    // formData.forEach((valor, chave) => {
-    //     console.log(`${chave}: ${valor}`);
-    //   });
-
-
-    // Enviar o formulário como uma solicitação POST usando fetch
-    fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(result => {
-
-        verificarPdfExistente(identificador);
-    })
-    .catch(error => {
-        console.error('Erro ao salvar o PDF:', error);
-    });
-
-
-}
 
 
 function baixarPdf (tipoPdf) {

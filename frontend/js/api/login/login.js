@@ -6,7 +6,7 @@ formulario.addEventListener('submit', async evento => {
     evento.preventDefault();
 
     const email = document.querySelector('#email').value + '@sp.senai.br';
-    const senha = document.querySelector('#inputPass').value;
+    const senha = document.querySelector('#senha').value;
 
     await login(email, senha);
 

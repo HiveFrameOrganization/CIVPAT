@@ -1,7 +1,7 @@
 import { back } from '../Rotas/rotas.js'
 window.addEventListener('load', () => {
     // ao carregar a página, a função irá executar
-    pegarTodasAsPropostas()
+    pegarTodasAsPropostas();
 })
 
 async function pegarTodasAsPropostas () {
@@ -15,8 +15,6 @@ async function pegarTodasAsPropostas () {
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
-
-        console.log(dados);  
         
         exibirPropostas(dados.propostas);
 

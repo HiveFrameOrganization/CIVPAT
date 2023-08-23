@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="detalhesProposta.css">
     <title>Document</title>
 </head>
-<body onload="autenticacao(['coor', 'tec', 'ger', 'adm']), alertas()">
+<body onload="alertas()">
     
     <a href="../todasPropostas/todasPropostas.html">Home</a>
     <div id="detalhesProposta">
@@ -46,21 +46,21 @@
         
         <label for="orcamento">PDF Orçamento</label>
         <input type="file" accept=".pdf" id="orcamento">
-        <button type="button" id="botaoOrcamento" onclick="baixarPdf(1)">Baixar</button><br><br>
+        <button type="button" id="botaoOrcamento">Baixar</button><br><br>
         
         <label for="propostaAssinada">PDF Proposta assinada</label>
         <input type="file" accept=".pdf" id="propostaAssinada">
-        <button type="button" id="botaoPropostaAssinada" onclick="baixarPdf(2)">Baixar</button><br><br>
+        <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
         
         <label for="relatorioFinal">PDF Relatorio final</label>
         <input type="file" accept=".pdf" id="relatorioFinal">
-        <button type="button" id="botaoRelatorioFinal" onclick="baixarPdf(3)">Baixar</button><br><br>
+        <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
         
         <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
         <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
-        <button type="button" id="botaoPesquisaDeSatisfacao" onclick="baixarPdf(4)">Baixar</button><br><br>
+        <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
 
-        <button type="button" id="botaoPesquisaDeSatisfacao" onclick="salvarPdf()">Salvar PDF</button><br><br>
+        <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
         
         
         <!-- Botões para acionar as funções no javaScript -->
@@ -73,11 +73,14 @@
     
     <a href="../followUp/telaFollowUp.html">follow up</a>
     <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
-    <script src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
+    <script type="module" src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
     <script src="../../js/feedback.js"></script>
 
     <!-- Autenticação -->
-    <script src="../../js/api/login/autenticacao.js"></script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'ger', 'tec', 'adm'])
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

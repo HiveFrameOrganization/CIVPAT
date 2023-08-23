@@ -23,7 +23,7 @@ function verificarDetalhes($idProposta, $conn) {
         if ($dados != null) {
             $dealhesProposta = [
                 "nomeProposta" => $dados['TituloProj'],
-                "cnpj" => $dados['cnpj'],
+                "cnpj" => $dados['CNPJ'],
                 "uniCriadora" => $dados['UnidadeCriadora'],
                 "empresa" => $dados['Empresa'],
                 "statusProposta" => $dados['Status'],
