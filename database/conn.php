@@ -18,6 +18,6 @@ try {
     $errorMessage = "Ocorreu uma falha na conexão com o banco: ";
     error_log($errorMessage . $e);
     echo json_encode(['mensagem' => "Ocorreu uma falha na conexão com o banco",
-    'status' => "Erro"]);
+    'status' => "Error"]);
     exit;
 }

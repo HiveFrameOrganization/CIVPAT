@@ -28,7 +28,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $resposta = [
             'login' => true,
             'token' => $_SESSION['token'],
-            'mensagem' => 'Usuário logado com sucesso!',
+            'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
             'status' => 'success'
         ];
 

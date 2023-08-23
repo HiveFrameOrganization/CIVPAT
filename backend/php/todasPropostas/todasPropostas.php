@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 // Definindo qual domínio pode acessar esse arquivo
 header('Access-Control-Allow-Origin: http://localhost:8080');
 
@@ -18,6 +16,23 @@ require_once '../../../database/conn.php';
 
 // nome proposta, numero sGSET, data inicio e termino, gerente e status, foto do gerente caso tenha'
 
+
+function quantidadeDePropostasPeloStatus ($conn) {
+    $stmt = $conn->prepare('SELECT SUM(CASE WHEN Status = "Em Análise" THEN 1 ELSE 0 END) AS somaAnalise,
+    SUM(CASE WHEN Status = "Aceito" THEN 1 ELSE 0 END) AS somaAceito,
+    SUM(CASE WHEN Status = "Declinado" THEN 1 ELSE 0 END) AS somaDeclinado,
+    SUM(CASE WHEN Status = "Concluido" THEN 1 ELSE 0 END) AS somaConcluido
+    FROM Propostas');
+
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    $linha = $resultado->fetch_assoc();
+
+    return $linha;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProj`, `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`, `Usuarios`.`FotoDePerfil` FROM Propostas INNER JOIN Usuarios ON `Propostas`.`fk_idGerente` = `Usuarios`.`NIF`;');
@@ -32,10 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $dados[] = $linha;
     }
 
+    $quantidadeDePropostasPorStatus = quantidadeDePropostasPeloStatus($conn);
+
     $resposta = [
-        'status' => 'sucesso',
+        'status' => 'success',
         'mensagem' => 'Dados retornados com sucesso',
-        'propostas' => $dados
+        'propostas' => $dados,
+        'Em Análise' => $quantidadeDePropostasPorStatus['somaAnalise'],
+        'Aceito' => $quantidadeDePropostasPorStatus['somaAceito'],
+        'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
+        'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido']
     ];
 
     $retorno  = json_encode($resposta);
