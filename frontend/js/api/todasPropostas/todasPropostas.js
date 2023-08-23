@@ -16,10 +16,15 @@ async function pegarTodasAsPropostas () {
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
-        // console.log(dados.length)  
+        console.log(dados);  
         
         exibirPropostas(dados.propostas);
 
+        // Adicionando a quanntidade de propostas de acordo com os seus status
+        document.getElementById('analise').innerHTML ='Projetos Em Análise: ' + dados['Em Análise'];
+        document.getElementById('aceitos').innerHTML ='Projetos Aceitos: ' + dados['Aceito'];
+        document.getElementById('declinados').innerHTML ='Projetos Declinados: ' + dados['Declinado'];
+        document.getElementById('concluidos').innerHTML ='Projetos em Concluídos: ' + dados['Concluido'];
 
     } catch (error){
         console.error(error)

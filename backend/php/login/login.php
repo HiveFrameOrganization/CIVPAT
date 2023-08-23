@@ -28,8 +28,8 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $resposta = [
             'login' => true,
             'token' => $_SESSION['token'],
-            'mensagem' => 'Usuário logado com sucesso!',
-            'status' => 'sucesso'
+            'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
+            'status' => 'success'
         ];
 
         echo json_encode($resposta);
@@ -39,7 +39,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $resposta = [
             'mensagem' => 'Senha inválida...',
             'login' => false,
-            'status' => 'erro'
+            'status' => 'error'
         ];
 
         echo json_encode($resposta);
@@ -74,7 +74,7 @@ function validarDados($dados, $conn)
         $resposta = [
             'mensagem' => 'Usuário não cadastrado...',
             'login' => false,
-            'status' => 'erro'
+            'status' => 'error'
         ];
 
         echo json_encode($resposta);
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resposta = [
         'mensagem' => 'Algo deu errado...',
         'login' => false,
-        'status' => 'erro'
+        'status' => 'error'
     ];
 
     echo json_encode($resposta);

@@ -6,6 +6,21 @@
   <title>Paginação de Itens</title>
 </head>
 <body onload="alertas()">
+    <button id="deslogar" onclick="deslogar()">Deslogar</button>
+    <div>
+        <p id="analise"></p>
+
+
+        <p id="aceitos"></p>
+
+    
+        <p id="declinados"></p>
+
+
+        <p id="concluidos"></p>
+        
+
+    </div>
     <div id="botoes"></div>
 
 
@@ -14,8 +29,11 @@
     
     <!-- nome proposta, numero sGSET, data inicio e termino, gerente e status, foto do gerente caso tenha' -->
 
-    <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
     <script src="../../js/feedback.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../../js/logoff.js"></script>
+    
+    <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
     <!-- Autenticação -->
     <script type="module">
         import { autenticacao } from '../../js/api/login/autenticacao.js'

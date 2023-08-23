@@ -47,7 +47,13 @@ async function login(email, senha) {
         console.log(resposta)
         
         // Validação do login
-        if (!resposta.login) throw new Error(`NÃO LOGADO...`);
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        if(!resposta.login){
+            alertas();
+        }
+        // if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
         if(resposta.login) window.location.replace(frontPages + '/todasPropostas/todasPropostas.html');
         
