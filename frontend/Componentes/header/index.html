@@ -61,20 +61,27 @@
         }
     </script>
 </head>
-<body class="bg-body transition-colors">
+<body class="bg-body transition-colors overflow-hidden">
     <header class="py-4 px-6 text-color-text">
 
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer">
+            <div class="flex items-center gap-3">
+                
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar" class="absolute top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20">
+                    <div class="flex items-center gap-3">
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                    </div>
+                </div>
 
-                <img src="../../img/icon/align-justify.svg" alt="menu lateral">
-
-                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
 
                 <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
 
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 z-20">
 
                 <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
                     <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
