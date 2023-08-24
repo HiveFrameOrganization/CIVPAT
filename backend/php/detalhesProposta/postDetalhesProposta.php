@@ -7,6 +7,24 @@ header("Content-Type: application/json");
 // Buscando o arquivo do banco:
 require_once '../../../database/conn.php';
 
+function salvarNoBanco($dados, $conn) {
+    $stmt = $conn ->prepare ("SELECT NIF FROM Usuarios WHERE NOME = ?");
+    $stmt->bind_param('s', $dados['gerenteProposta']);
+    $stmt->execute();
+
+    $resultado = $stmt-> get_result();
+
+    if ($resultado->num_rows > 0) {
+
+        $dadosBanco = mysqli_fetch_assoc($resultado);
+
+        $nifGerente = $dadosBanco['NIF'];
+
+        $stmt = $conn -> prepare("UPDATE Propostas SET fk_idGerente = ?, TituloProj = ?, CNPJ = ?, UnidadeCriadora =?, Empresa =?, nSGSET = ?, Inicio = ?, Fim = ?, Valor = ? ");
+
+    
+}
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pegar o corpo da requisição
@@ -15,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Tranformar o Corpo JSON em um objeto PHP
     $dados = json_decode($json, true);
 
-   // NALANDA! NÃO PRECISA FAZER INSERT, SOMENTE UPDATE DAS INFORMAÇÕES ATUALIZADAS EXCLUÍ A NOSSO LÓGICA
+    salvarNoBanco($dados, $conn);
 
 } else {
     $resposta = [

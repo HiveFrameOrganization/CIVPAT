@@ -3,7 +3,6 @@ import { back } from '../Rotas/rotas.js'
 window.addEventListener('load', () => {
      const idProposta = localStorage.getItem('idProposta');
    
-
     // Levar o valor do id do local Storage atravez da função para o back end
     verificarBancoProposta(idProposta);
     verificarPdfExistente(idProposta);
@@ -22,8 +21,6 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
     
-    
-
     // Criar um objeto FormData e adicionar o arquivo PDF a ele
     //formdata serve para mandar dados e arquivos facilmente por via api
     //usado para enviar dados do cliente para o servidor, especialmente 
@@ -39,7 +36,6 @@ botaoSalvarPdf.addEventListener('click', () => {
     // formData.forEach((valor, chave) => {
     //     console.log(`${chave}: ${valor}`);
     //   });
-
 
     // Enviar o formulário como uma solicitação POST usando fetch
     fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
@@ -89,7 +85,7 @@ async function verificarBancoProposta(id){
         
 
         const resposta = await requisicao.json()
-        // console.log(resposta)
+        console.log(resposta['valorTotalProdutos'])
 
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#nomeProposta').value = resposta['nomeProposta']; 
@@ -126,7 +122,6 @@ async function verificarPdfExistente(idProposta){
         for (const chave in resposta) {
             const valor = resposta[chave];
 
-
             if (valor == true){
                 // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
@@ -134,15 +129,11 @@ async function verificarPdfExistente(idProposta){
                 // Se o PDF não for encontrado, o botão ficará em disabled
                 document.getElementById(chave).disabled = true;
             }
-
-        }
-        
+        }    
     }catch(error){
         console.error(error)
-
     }
 }
-
 
 
 function baixarPdf (tipoPdf) {
@@ -193,8 +184,6 @@ editandoProposta.addEventListener('click', (evento) =>{
     const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value;
     const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value;
 
-
-
 // Criando um objeto com os dados dos input's
     const detalhesProposta = {
         idProposta: idProposta,
@@ -213,9 +202,6 @@ editandoProposta.addEventListener('click', (evento) =>{
     
     // Enviando o objeto para o back end
     postarDetalhesBanco(detalhesProposta);
-
-    
-
 });
 
 async function postarDetalhesBanco(postDetalhes){
@@ -242,7 +228,4 @@ async function postarDetalhesBanco(postDetalhes){
         console.error(error)
 
     }
-
-
 }
-

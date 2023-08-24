@@ -8,9 +8,9 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProposta, $conn) {
-    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome` FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_idGerente` WHERE idProposta = ?");
-    // $stmt = $conn->prepare("SELECT * FROM Propostas WHERE idProposta = ?");
-    
+    // $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome`FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_idGerente`  WHERE idProposta = ?");
+   
+    $stmt = $conn->prepare(" SELECT Propostas.*, `Usuarios`.`nome` FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_idGerente`  WHERE idProposta = ?");
     $stmt->bind_param('s', $idProposta);
     $stmt->execute();
     $resultado = $stmt-> get_result();
@@ -19,8 +19,27 @@ function verificarDetalhes($idProposta, $conn) {
 
         $dados = mysqli_fetch_assoc($resultado);
 
-
         if ($dados != null) {
+
+            $stmt = $conn->prepare(" SELECT  DataInicial FROM Produtos  WHERE fk_idProposta = ? ORDER BY DataInicial ASC");
+            $stmt->bind_param('s', $idProposta);
+            $stmt->execute();
+            $resultadoDataInicial = $stmt-> get_result();
+            $dadosDataInicial = mysqli_fetch_assoc($resultadoDataInicial);
+
+            $stmt = $conn->prepare(" SELECT  DataFinal FROM Produtos  WHERE fk_idProposta = ? ORDER BY DataFinal DESC");
+            $stmt->bind_param('s', $idProposta);
+            $stmt->execute();
+            $resultadoDataFinal = $stmt-> get_result();
+            $dadosDataFinal = mysqli_fetch_assoc($resultadoDataFinal);
+            
+            // $stmt = $conn->prepare(" SELECT  SUM Valor AS Valor FROM Produtos  WHERE fk_idProposta = ?");
+            // $stmt->bind_param('s', $idProposta);
+            // $stmt->execute();
+            // $resultadoValorTotal = $stmt-> get_result();
+            // $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
+
+
             $dealhesProposta = [
                 "nomeProposta" => $dados['TituloProj'],
                 "cnpj" => $dados['CNPJ'],
@@ -29,9 +48,9 @@ function verificarDetalhes($idProposta, $conn) {
                 "statusProposta" => $dados['Status'],
                 "gerenteProposta" => $dados['nome'],
                 "numeroSGSET" => $dados['numeroSGSET'],
-                "dataPrimeiroProduto" => $dados['dataPrimeiroProduto'],
-                "dataUltimoProduto" => $dados['dataUltimoProduto'],
-                "valorTotalProdutos" => $dados['valorTotalProdutos'],
+                "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
+                "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
+                // "valorTotalProdutos" => $dadosValorTotal['Valor']
             ];
 
             echo json_encode($dealhesProposta);
