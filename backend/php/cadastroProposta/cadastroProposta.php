@@ -27,9 +27,10 @@ if (verificaRegistro($dadosVerif, $conn) === true) {
     
 } else {
 
+    $representante = 1;
     // Tenta cadastrar os dados enviados no banco e retorna 'sucesso' ou 'erro' dependendo se deu certo a query
-    $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
+    $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, fk_idRepresentante, UnidadeCriadora, Empresa, fk_nifUsuarioCriador) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $nomeProj, $representante, $uniCriadora, $empresa, $gerente);
 
     if ($stmt->execute()){
         $resposta = [

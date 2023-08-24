@@ -53,7 +53,7 @@ function validarDados($dados, $conn)
     // Validadando o email primeiro
     $email = $dados['email'];
     $senhaUsuario = $dados['senha'];
-    $status = 'ativado';
+    $status = 'ativo';
 
     // Fazendo a query para a validação
     $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE Email = ? AND `Status` = ?");

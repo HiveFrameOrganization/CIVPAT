@@ -8,8 +8,10 @@ require_once '../../../database/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Pega os status de funil da tabela StatusFunil
-    $stmt = $conn->prepare("SELECT `Data`, `Comentario`, `DataProxFollowUp`
-    FROM FollowUp where fk_idProposta = ? ORDER BY `Data`");
+    $stmt = $conn->prepare("SELECT `Usuarios`.Nome, `Usuarios`.Sobrenome, `Data`, `Comentario`, `DataProxFollowUp`
+    FROM FollowUp 
+    INNER JOIN Usuarios ON `FollowUp`.`fk_nifUsuario` = `Usuarios`.`NIF`
+    WHERE fk_idProposta = ? ORDER BY `Data`");
     $stmt->bind_param("s", $_GET['idProposta']);
     $stmt->execute();
     // Pega o resultado da query

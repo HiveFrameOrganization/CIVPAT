@@ -112,7 +112,7 @@ async function verificarPdfExistente(idProposta){
 
     try{
         // Cria a requisição 
-        const requisicao = await fetch(back + `/pdf/verificarPdfExistente.php?id=${idProposta}`)
+        const requisicao = await fetch(back + `/PDF/verificarPdfExistente.php?id=${idProposta}`)
 
         // Verificando se deu erro ao fazer a requisição
         if (!requisicao.ok) {
@@ -221,7 +221,6 @@ editandoProposta.addEventListener('click', (evento) =>{
 async function postarDetalhesBanco(postDetalhes){
 
     try{
-
         const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php',{
             method: 'POST',
             headers: {
@@ -240,7 +239,6 @@ async function postarDetalhesBanco(postDetalhes){
         
     }catch(error){
         console.error(error)
-
     }
 
 
