@@ -261,13 +261,16 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 -- Inserção de Usuários para teste
 
 insert into Usuarios values 
-('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', 'senai115', 'ativado'),
-('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativado'),
-('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativado'),
-('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', 'senai115', 'ativado');
+('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', 'senai115', 'ativo'),
+('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativo'),
+('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativo'),
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', 'senai115', 'ativo');
 
+-- Inserção de Representantes para teste
+insert into Representantes values 
+(default, 'Josue', '11988776655', 'josue@empresa.com');
 
 -- Inserção de Propostas para teste
 insert into Propostas values 
-(default, '1234567', 'Jacaré a Jato', '75090673000189', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
-'Jacksons 5', 'Em Análise', NULL, NULL, NULL, NULL);
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL);

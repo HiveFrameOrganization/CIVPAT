@@ -73,27 +73,27 @@ function exibir(dados) {
         div.appendChild(status);
 
 
-        // Criando o botão de demitir
-        if (funcionario.Status === 'ativado') {
-            // Criando botões para editar e desativar funcionários
+        // Criando o botão de inativar
+        if (funcionario.Status === 'ativo') {
+            // Criando botões para editar e inativar funcionários
             const editar = document.createElement('button');
-            const demitir = document.createElement('button');
+            const inativar = document.createElement('button');
 
             // Atribuindo o NIF no valor do botão
             editar.value = funcionario.NIF
-            demitir.value = funcionario.NIF
+            inativar.value = funcionario.NIF
 
-            // Atribuindo uma classe no botão de demitir
+            // Atribuindo uma classe no botão de inativar
             editar.classList.add('editar');
-            demitir.classList.add('demitir');
+            inativar.classList.add('inativar');
 
             // Atribuindo um texto
             editar.textContent = 'Editar';
-            demitir.textContent = 'Demitir';
+            inativar.textContent = 'Inativar';
 
             // Adicionando na div
             div.appendChild(editar);
-            div.appendChild(demitir);
+            div.appendChild(inativar);
         }
 
         // Adicionando uma quebra de linha
@@ -232,7 +232,7 @@ async function usuariosFiltrados(valor) {
 }
 /*
 --------------------------------------------------------------------------------------- 
-                        PROCESSO DE EDITAR OU DEMITIR O USUÁRIO 
+                        PROCESSO DE EDITAR OU INATIVAR O USUÁRIO 
 ---------------------------------------------------------------------------------------
 */
 
@@ -242,8 +242,8 @@ document.addEventListener('click', evento => {
     // Pegando o elemento clicado pelo usuário
     const elemento = evento.target;
 
-    // verificando se é mesmo o botão de demitir
-    if (elemento.classList.contains('demitir')) {
+    // verificando se é mesmo o botão de inativar
+    if (elemento.classList.contains('inativar')) {
         // Selecionando o NIF que vai ser usado para desativar o usuário
         const nif = elemento.value;
 

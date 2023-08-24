@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             // Executa a inserção dos dados no banco
-            $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $idProposta, $dataFollowUp, $comentario, $dataFollowUpProx);
+            $stmt = $conn->prepare("INSERT INTO FollowUp VALUES (default, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssss", $idProposta, $_SESSION['nif'], $dataFollowUp, $comentario, $dataFollowUpProx);
             $stmt->execute();
             // Retorna um aviso de Sucesso para o front
             echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso",

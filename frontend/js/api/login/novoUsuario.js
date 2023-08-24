@@ -61,6 +61,12 @@ function novoUsuario() {
 
 }
 
+
+/*------------------------------------ NÃO DEIXA COLAR NA PARTE DE REPETIR SENHA -----------------------------------*/
+const repetirSenha = document.querySelector('#repitaSenha');
+repetirSenha.addEventListener('paste', evento => evento.preventDefault());
+
+
 /*------------------------------------ ETAPA DE VERIFICAÇÃO DA NOVA SENHA -----------------------------------*/
 
 // Pegando novamente o formulário da nova senha pois ela esta um um outro escopo isolado
