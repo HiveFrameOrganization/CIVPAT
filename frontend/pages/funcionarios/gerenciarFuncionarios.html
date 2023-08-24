@@ -78,7 +78,7 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                    <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20 group">
+                    <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 group">
                         <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                             <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
                             <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
@@ -163,26 +163,18 @@
                 <div class="flex flex-row pt-3 sm:pt-6 justify-between">
 
                     <div>
-                        <button type="button" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-body hover:border-primary hover:outline hover:outline-2 hover:outline-primary" onclick="abreModal()">+ Novo funcionário</button>
+                        <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary" onclick="abreModal()">+ Novo funcionário</button>
                     </div>
 
-                    <div class="flexgap-1">
+                    <div class="flex gap-1">
 
                         <!-- barra de pesquisa -->
 
-                        <div class="flex flex-row">
-
-                            <div>
-                                <div class="relative">
-                                    <div class="absolute right-0 py-[7px] px-[7px] rounded-r-lg bg-component">
-                                        <img src="../../img/icon/search.png" alt="Ícone de pesquisa" class="">
-                                    </div>
-                                    <div class="box-border w-full">
-                                        <input type="search" value="" id="inputFileUp" class="text-primary bg-component placeholder-color-text-secundary py-2 px-3 text-xs rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer" placeholder="Pesquise algo...">
-                                    </div>
-                                </div>
+                        <div class="relative">
+                            <div class="lupa absolute right-0 py-[7px] px-[7px] rounded-lg bg-component cursor-pointer">
+                                <img src="../../img/icon/search.png" alt="Ícone de pesquisa" id="botaoPesquisar">
                             </div>
-
+                            <input type="text" value="" id="pesquisarUsuario" class="pesquisa text-color-text box-border bg-component placeholder-color-text-secundary py-2 px-3 text-xs rounded-lg outline-none focus:outline focus:outline-3 focus:outline-primary focus:placeholder-primary w-[32px] hover:w-full cursor-pointer" placeholder="Pesquise algo...">
                         </div>
 
                         <!-- calendário -->
@@ -190,12 +182,13 @@
                         <div>
                             
                         </div>
+
                     </div>
                 </div>
 
                 <!-- tabela -->
 
-                <div>
+                <div id="exibicao" class="py-8">
                 
                 </div>
 
@@ -219,7 +212,7 @@
                 <!-- botão de fechar -->
     
                 <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
                 </div>
     
                 <!-- título e subtítulo -->
@@ -231,7 +224,7 @@
     
                 <!-- inputs -->
     
-                <div class="flex flex-col gap-6 pt-8">
+                <form class="flex flex-col gap-6 pt-8" id="formulario">
     
                     <!-- NIF -->
     
@@ -245,11 +238,11 @@
                     <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">NOME *</label>
-                            <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário">
+                            <input type="text" value="" id="nome" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário">
                         </div>
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
-                            <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário">
+                            <input type="text" value="" id="sobrenome" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário">
                         </div>
                     </div>
     
@@ -257,23 +250,23 @@
     
                     <div>
                         <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="email" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário">
+                        <input type="text" value="" id="email" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário">
                     </div>
     
                     <!-- Função -->
     
                     <div>
                         <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                        <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário">
+                        <input type="text" value="" id="tipoCargo" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário">
                     </div>
                     
                     <!-- botão -->
     
                     <div class="pt-14">
-                        <button type="button" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Cadastrar funcionário</button>
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Cadastrar funcionário</button>
                     </div>
     
-                </div>
+                </form>
             </div>
         </div>
 
@@ -285,6 +278,10 @@
     <script src="../../Componentes/inputModal/script.js"></script>
 
     <script src="./gerenciarFuncionarios.js"></script>
+
+    <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script>
+
+    <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
 
 </body>
 </html>
