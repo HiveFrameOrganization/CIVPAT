@@ -35,7 +35,7 @@ async function login(email, senha) {
 
         const login = await fetch(back + `/login/login.php`, {
             method: 'POST',
-            headers:{
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(dados)
@@ -44,27 +44,29 @@ async function login(email, senha) {
 
         const resposta = await login.json();
 
-        // Verificando se o login for true
-        if (resposta.status === 'error') throw new Error(resposta.mensagem);
-
-        console.log(resposta)
-        
         // Validação do login
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
+        
+        // Apresentar mensagem para o usuário
+        alertas();
+        
+        // Verificando se o login for true
+        if (resposta.status === 'error') throw new Error(resposta.mensagem);
+        
+        console.log(resposta)
 
-        if(!resposta.login){
-            alertas();
-        }
+
         // if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
-        if(resposta.login) window.location.replace(frontPages + '/todasPropostas/todasPropostas.html');
-        
+        if (resposta.login) window.location.replace(frontPages + '/todasPropostas/todasPropostas.html');
+
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);
 
     } catch (erro) {
         console.error(erro);
+
     }
 }
 
