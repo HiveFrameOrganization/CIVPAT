@@ -1,78 +1,220 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="detalhesProposta.css"> -->
     <title>Document</title>
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../../css/output.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
+
+        * {
+            font-family: 'Rubik', sans-serif;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                }
+            },
+        }
+    </script>
 </head>
-<body onload="alertas()">
-    
-    <a href="../todasPropostas/todasPropostas.html">Home</a>
-    <div id="detalhesProposta">
-        <!-- Campos que ficaram nos detalhes -->
-        <label for="nomeProposta">Nome da proposta: </label>
-        <input type="text" id="nomeProposta" maxlength="75"><br><br>
 
-        <label for="cnpj">CNPJ: </label>
-        <input type="text" id="cnpj" maxlength="14"><br><br>
-        
-        <label for="uniCriadora">Unidade criadora: </label>
-        <input type="text" id="uniCriadora" maxlength="100" minlength="4"><br><br>
-        
-        <label for="empresa">Empresa: </label>
-        <input type="text" id="empresa" maxlength="200" minlength="4"><br><br>
-        
-        <label for="statusProposta">Status: </label>
-        <input type="text" id="statusProposta"><br><br>
-        
-        <label for="gerenteProposta">Gerente: </label>
-        <input type="text" id="gerenteProposta"><br><br>
-        
-        <label for="numeroSGSET">Nº SGSET: </label>
-        <input type="text" id="numeroSGSET"><br><br>
-        
-        <label for="dataPrimeiroProduto">Data de início do primeiro produto: </label>
-        <input type="date" id="dataPrimeiroProduto"><br><br>
-        
-        <label for="dataUltimoProduto">Data final do último produto: </label>
-        <input type="date" id="dataUltimoProduto"><br><br>
-        
-        <label for="valorTotalProdutos">Valor total: </label>
-        <input type="number" id="valorTotalProdutos"><br><br>
-        
-        
-        <!-- campos que ficaram em PDFs -->
-        
-        <label for="orcamento">PDF Orçamento</label>
-        <input type="file" accept=".pdf" id="orcamento">
-        <button type="button" id="botaoOrcamento">Baixar</button><br><br>
-        
-        <label for="propostaAssinada">PDF Proposta assinada</label>
-        <input type="file" accept=".pdf" id="propostaAssinada">
-        <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
-        
-        <label for="relatorioFinal">PDF Relatorio final</label>
-        <input type="file" accept=".pdf" id="relatorioFinal">
-        <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
-        
-        <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
-        <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
-        <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
+<body onload="alertas()" class="bg-body text-color-text py-20">
 
-        <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
+    <header class="py-4 px-6 text-color-text fixed top-0 w-full">
+
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
+                    src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar"
+                    class="w-full sm:w-64 fixed top-0 h-screen -left-96 bg-component py-4 px-6 transition-all z-20">
+                    <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
+                            src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo"
+                                class="w-10 h-10"></a>
+                        <a href="../todasPropostas/todasPropostas.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
+                            aria-label="Ir para página principal">HIVE<span
+                                class="text-color-text transition-colors">FRAME</span></a>
+                    </div>
+                    <div class="mt-4 space-y-4">
+                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"
+                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
+                                src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe"
+                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
+                                src="../../img/icon/users.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="#" aria-label="Ir para a página de relatórios"
+                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
+                                src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                        <a href="#" aria-label="Ir para a página de registro de horas"
+                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
+                                src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de
+                            horas</a>
+                    </div>
+                </div>
+
+                <a href="../todasPropostas/todasPropostas.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+
+                <a href="../todasPropostas/todasPropostas.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
+                    aria-label="Ir para página principal">HIVE<span
+                        class="text-color-text transition-colors">FRAME</span></a>
+
+            </div>
+            <div class="flex items-center gap-3 z-20">
+
+                <div id="switch-mode"
+                    class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                </div>
+
+                <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
+                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger"
+                        class="w-full rounded-full cursor-pointer" role="button">
+
+                    <div id="profile-dropdown"
+                        class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                            <h5 class="text-base text-color-text">Doge do Meme</h5>
+                            <a href="#"
+                                class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver
+                                meu perfil</a>
+                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                        </div>
+                        <ul>
+                            <li id="deslogar" onclick="deslogar()"
+                                class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer">
+                                <img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+
+    <main class="px-8">
         
-        
-        <!-- Botões para acionar as funções no javaScript -->
-        
-        <input type="button" value="Editar" id="editarProposta" editarProposta()>
-        <input type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
-        <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
-        
-    </div>
-    
-    <a href="../followUp/telaFollowUp.html">follow up</a>
-    <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
+        <div id="detalhesProposta">
+            <!-- Campos que ficaram nos detalhes -->
+            <label for="nomeProposta">Nome da proposta: </label>
+            <input class="text-color-text bg-component" type="text" id="nomeProposta" maxlength="75"><br><br>
+
+            <label for="cnpj">CNPJ: </label>
+            <input class="text-color-text bg-component" type="text" id="cnpj" maxlength="14"><br><br>
+
+            <label for="uniCriadora">Unidade criadora: </label>
+            <input class="text-color-text bg-component" type="text" id="uniCriadora" maxlength="100" minlength="4"><br><br>
+
+            <label for="empresa">Empresa: </label>
+            <input class="text-color-text bg-component" type="text" id="empresa" maxlength="200" minlength="4"><br><br>
+
+            <label for="statusProposta">Status: </label>
+            <input class="text-color-text bg-component" type="text" id="statusProposta"><br><br>
+
+            <label for="gerenteProposta">Gerente: </label>
+            <input class="text-color-text bg-component" type="text" id="gerenteProposta"><br><br>
+
+            <label for="numeroSGSET">Nº SGSET: </label>
+            <input class="text-color-text bg-component" type="text" id="numeroSGSET"><br><br>
+
+            <label for="dataPrimeiroProduto">Data de início do primeiro produto: </label>
+            <input class="text-color-text bg-component" type="date" id="dataPrimeiroProduto"><br><br>
+
+            <label for="dataUltimoProduto">Data final do último produto: </label>
+            <input class="text-color-text bg-component" type="date" id="dataUltimoProduto"><br><br>
+
+            <label for="valorTotalProdutos">Valor total: </label>
+            <input class="text-color-text bg-component" type="number" id="valorTotalProdutos"><br><br>
+
+
+            <!-- campos que ficaram em PDFs -->
+
+            <label for="orcamento">PDF Orçamento</label>
+            <input type="file" accept=".pdf" id="orcamento">
+            <button type="button" id="botaoOrcamento">Baixar</button><br><br>
+
+            <label for="propostaAssinada">PDF Proposta assinada</label>
+            <input type="file" accept=".pdf" id="propostaAssinada">
+            <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
+
+            <label for="relatorioFinal">PDF Relatorio final</label>
+            <input type="file" accept=".pdf" id="relatorioFinal">
+            <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
+
+            <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
+            <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
+            <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
+
+            <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
+
+
+            <!-- Botões para acionar as funções no javaScript -->
+
+            <input type="button" value="Editar" id="editarProposta" editarProposta()>
+            <input type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
+            <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
+
+        </div>
+
+        <a href="../followUp/telaFollowUp.html">follow up</a>
+        <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
+
+    </main>
+
     <script type="module" src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
     <script src="../../js/feedback.js"></script>
 
@@ -82,5 +224,13 @@
         autenticacao(['coor', 'ger', 'tec', 'adm'])
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- logoff -->
+    <script src="../../js/logoff.js"></script>
+
+    <!-- front-end -->
+    <script src="../../js/themeSwitch/index.js"></script>
+    <script src="../../js/global.js"></script>
 </body>
+
 </html>

@@ -37,27 +37,23 @@ form.addEventListener('submit', async evento => {
 
     evento.preventDefault();
 
-    const nomeProj = document.querySelector('[name="nomeProjeto"]').value;
-    const cnpj = document.querySelector('[name="cnpj"]').value;
-    const uniCriadora = document.querySelector('[name="uniCriadora"]').value;
-    const empresa = document.querySelector('[name="empresa"]').value;
+    const nomeProjeto = document.querySelector('#nomeProjeto').value;
+    const nomeRepresentante = document.querySelector('#nomeRepresentante').value;
+    const emailRepresentante = document.querySelector('#emailRepresentante').value;
+    const telefoneRepresentante = document.querySelector('#telefone').value;
+    const unidadeCriadora = document.querySelector('unidadeCriadora').value;
+    const empresa = document.querySelector('#empresa').value;
+    const resumo = document.querySelector('#resumo').value;
 
     if (gerenteEncarregado === undefined) {
         alert('Selecione um gerente. ');
         return;
     }
 
-    if (!parseInt(cnpj)) {
-        alert('CNPJ aceita apenas números. ');
-    } else if (!validacaoCNPJ(cnpj)) {
-        console.log('invalido')
-        return;
-    }
 
     const dadosProj = {
-        nomeProj: nomeProj,
-        cnpj: cnpj,
-        uniCriadora: uniCriadora,
+        nomeProjeto: nomeProjeto,
+        unidadeCriadora: unidadeCriadora,
         empresa: empresa,
         gerente: gerenteEncarregado
     };

@@ -1,4 +1,22 @@
-import { back } from '../Rotas/rotas.js'
+import { back } from '../Rotas/rotas.js';
+
+const corpoDaPagina = document.querySelector('body');
+
+const botaoSalvarProduto = document.getElementById('salvarProduto');
+
+window.addEventListener('load', () => carregarTecnicos());
+
+botaoSalvarProduto.addEventListener('click', () => salvarProduto());
+
+async function carregarTecnicos () {
+    const requisicao = await fetch(back + 'cadastroProduto/carregarTecnicos.php');
+
+    const resposta = await requisicao.json();
+
+    console.log(resposta);
+
+}
+
 async function salvarProduto () {
     idProposta = localStorage.getItem('idProposta');
 
