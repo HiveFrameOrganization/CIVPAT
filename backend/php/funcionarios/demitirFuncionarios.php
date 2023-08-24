@@ -10,7 +10,7 @@ require_once '../../../database/conn.php';
 function desativarUsuario($nif, $conn) {
 
     // Craindo a variável para passar como parâmetro
-    $situacao = 'desativado';
+    $situacao = 'inativo';
 
     // Preprando a query
     $stmt = $conn->prepare("UPDATE Usuarios SET Status = ? WHERE NIF = ?");
