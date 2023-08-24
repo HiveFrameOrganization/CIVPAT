@@ -1,3 +1,5 @@
+// funções de filtragem de conteúdo
+
 const botaoTodos = document.querySelector('#botaoTodos');
 const botaoAtivos = document.querySelector('#botaoAtivos');
 const botaoDesativos = document.querySelector('#botaoDesativos');
@@ -68,4 +70,37 @@ botaoDesativos.addEventListener('mouseout', () => {
 
     botaoDesativos.classList.remove('hovered');
 
+})
+
+
+// funções da barra de pesquisa
+
+const pesquisa = document.querySelector('.pesquisa');
+const iconePesquisa = document.querySelector('.lupa');
+
+iconePesquisa.addEventListener('mouseover', () => {
+    pesquisa.style.width = '100%';
+    pesquisa.style.paddingRight = '32px';
+})
+
+pesquisa.addEventListener('mouseover', () => {
+    pesquisa.style.width = '100%';
+    pesquisa.style.paddingRight = '32px';
+})
+
+iconePesquisa.addEventListener('mouseout', () => {
+    pesquisa.style.width = '32px';
+    pesquisa.style.paddingRight = '0px';
+})
+
+iconePesquisa.addEventListener('click', () => {
+    pesquisa.style.width = '32px';
+    pesquisa.style.paddingRight = '0px';
+})
+
+document.addEventListener('click', (event) => {
+    if(!pesquisa.contains(event.target)){
+        pesquisa.style.width = '32px';
+        pesquisa.style.paddingRight = '0px';
+    }
 })
