@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./gerenciarFuncionarios.css">
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <title>Gerenciamento de funcionários</title>
 
@@ -66,91 +67,202 @@
         }
     </script>
 </head>
-<body class="bg-body">
+<body class="bg-body transition-colors">
 
-    <!-- header -->
+    <div class="flex flex-col h-screen">
 
-    <header class="py-4 px-6 text-color-text">
-
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                
-                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar" class="absolute top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20">
-                    <div class="flex items-center gap-3">
-                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-                    </div>
-                </div>
-
-                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-
-                <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-
-            </div>
-            <div class="flex items-center gap-3 z-20">
-
-                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
-                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
-                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
-                </div>
-
-                <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
-                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
-
-                    <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
-                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                            <h5 class="text-base text-color-text">Doge do Meme</h5>
-                            <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
-                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+        <!-- header -->
+    
+        <header class="py-4 px-6 text-color-text w-full shadow-sm" role="navigation">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                    <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20 group">
+                        <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                            <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                            <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                            <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                         </div>
-                        <ul>
-                            <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
-                        </ul>
+                        <div class="mt-4 space-y-4">
+                            <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                            <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                            <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                            <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
+                        </div>
                     </div>
+                    <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                    <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                </div>
+                <div class="flex items-center gap-3 z-20">
+                    <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                        <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
+                        <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                    </div>
+                    <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
+                        <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                        <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                            <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                                <h5 class="text-base text-color-text">Doge do Meme</h5>
+                                <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                                <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                            </div>
+                            <ul>
+                                <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    
+        <!-- scripts do header -->
+    
+        <script src="../../js/themeSwitch/index.js"></script>
+        <script src="../../js/global.js"></script>
+    
+        <section class="px-6 2xl:px-16">
+    
+            <!-- título / subtítulo da página -->
+    
+            <div class="pt-8">
+                <h1 class="text-color-text font-bold text-2xl">GERENCIAMENTO DE EQUIPE</h1>
+                <h2 class="text-color-text text-xs pt-2">Cadastre, visualize ou desative funcionários.</h2>
+            </div>
+    
+            <!-- filtros -->
+    
+            <div class="pt-10 2xl:pt-14 flex gap-8 justify-center sm:justify-normal">
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoTodos">TODOS</button>
+                </div>
+    
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoAtivos">ATIVOS</button>
+                </div>
+    
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoDesativos">INATIVOS</button>
+                </div>
+            </div>
+    
+        </section>
+    
+        <!-- tabela com funcionários -->
+
+        <main class="bg-component w-full px-6 pb-8 sm:pb-16 2xl:px-16 mt-[3px] h-full flex flex-col flex-1">
+
+            <div class="pt-12 sm:pt-16 pb-3 sm:pb-6">
+                <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
+            </div>
+
+            <div class="bg-body w-full rounded-md flex-1 px-3 sm:px-8">
+
+                <!-- botões -->
+
+                <div class="flex flex-row pt-3 sm:pt-6">
+                    <div class="justify-normal">
+                        <button type="button" class="rounded-lg text-color-text bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:brightness-110" onclick="abreModal()">+ Novo funcionário</button>
+                    </div>
+                    <div class="flex flex-row gap-1">
+
+                        <!-- barra de pesquisa -->
+
+                        <div>
+
+                        </div>
+
+                        <!-- calendário -->
+
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- tabela -->
+
+                <div>
+
+                </div>
+
+            </div>
+            
+        </main>
+
+    </div>
+
+    <!-- modal -->
+
+    <!-- centralização -->
+
+    <div class="caixa min-h-screen z-10 hidden lg:h-screen lg:w-full lg:absolute lg:left-0 lg:top-0 backdrop-blur-[2px]">
+
+        <!-- conteúdo do modal -->
+
+        <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl">
+
+            <!-- botão de fechar -->
+
+            <div class="w-full lg:flex lg:justify-end">
+                <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+            </div>
+
+            <!-- título e subtítulo -->
+
+            <div class="text-center lg:text-justify text-color-text">
+                <h1 class="font-bold text-2xl">CADASTRO DE FUNCIONÁRIO</h1>
+                <h2 class="text-xs pt-2">Insira as informações do funcionário.</h2>
+            </div>
+
+            <!-- inputs -->
+
+            <div class="flex flex-col gap-6 pt-8">
+
+                <!-- NIF -->
+
+                <div>
+                    <label class="text-color-text font-bold block mb-3">NIF *</label>
+                    <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário">
+                </div>
+
+                <!-- Nome e sobrenome -->
+
+                <div class="flex justify-between gap-9">
+                    <div class="w-full">
+                        <label class="text-color-text font-bold block mb-3">NOME *</label>
+                        <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário">
+                    </div>
+                    <div class="w-full">
+                        <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
+                        <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário">
+                    </div>
+                </div>
+
+                <!-- E-mail -->
+
+                <div>
+                    <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                    <input type="email" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário">
+                </div>
+
+                <!-- Função -->
+
+                <div>
+                    <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                    <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário">
+                </div>
+                
+                <!-- botão -->
+
+                <div class="pt-14">
+                    <button type="button" class="rounded-lg text-color-text bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Cadastrar funcionário</button>
                 </div>
 
             </div>
         </div>
+    </div>
 
-    </header>
-
-    <!-- scripts do header -->
-
-    <script src="../../js/themeSwitch/index.js"></script>
-    <script src="../../js/global.js"></script>
-
-    <section class="px-6 2xl:px-16">
-
-        <!-- título / subtítulo da página -->
-
-        <div class="pt-8">
-            <h1 class="text-color-text font-bold text-2xl">GERENCIAMENTO DE EQUIPE</h1>
-            <h2 class="text-color-text text-xs pt-2">Cadastre, visualize ou desative funcionários.</h2>
-        </div>
-
-        <!-- filtros -->
-
-        <div class="pt-10 2xl:pt-14 flex gap-8 justify-center sm:justify-normal">
-            <div>
-                <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoTodos">TODOS</button>
-            </div>
-
-            <div>
-                <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoAtivos">TODOS</button>
-            </div>
-
-            <div>
-                <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-[#c8c8c8]" id="botaoDesativos">TODOS</button>
-            </div>
-        </div>
-
-    </section>
-
-    <main class="bg-component w-full px-6 2xl:px-16 mt-[3px]">
-        <h1 class="text-color-text font-bold text-2xl pt-16 pb-6">FUNCIONÁRIOS</h1>
-    </main>
+    <script src="../../Componentes/inputModal/script.js"></script>
 
     <script src="./gerenciarFuncionarios.js"></script>
 
