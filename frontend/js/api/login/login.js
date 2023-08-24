@@ -44,6 +44,9 @@ async function login(email, senha) {
 
         const resposta = await login.json();
 
+        // Verificando se o login for true
+        if (resposta.status === 'error') throw new Error(resposta.mensagem);
+
         console.log(resposta)
         
         // Validação do login
