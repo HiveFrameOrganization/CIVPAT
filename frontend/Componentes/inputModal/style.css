@@ -9,5 +9,5 @@ input[type="date"]{
 }
 
 .abre{
-    @apply flex;
+    display: flex;
 }
