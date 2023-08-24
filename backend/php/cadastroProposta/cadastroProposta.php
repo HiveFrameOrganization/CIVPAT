@@ -9,7 +9,6 @@ require_once '../../../database/conn.php';
 $dados = json_decode(file_get_contents("php://input"));
 
 $nomeProj = $dados->nomeProj;
-$cnpj = $dados->cnpj;
 $uniCriadora = $dados->uniCriadora;
 $empresa = $dados->empresa;
 $gerente = $dados->gerente;
@@ -27,9 +26,10 @@ if (verificaRegistro($dadosVerif, $conn) === true) {
     
 } else {
 
+    $representante = 1;
     // Tenta cadastrar os dados enviados no banco e retorna 'sucesso' ou 'erro' dependendo se deu certo a query
-    $stmt = $conn->prepare("INSERT INTO Propostas (TituloProj, CNPJ, UnidadeCriadora, Empresa, fk_idGerente) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $nomeProj, $cnpj, $uniCriadora, $empresa, $gerente);
+    $stmt = $conn->prepare("INSERT INTO Propostas (TituloProposta, fk_idRepresentante, UnidadeCriadora, Empresa, fk_nifUsuarioCriador) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $nomeProj, $representante, $uniCriadora, $empresa, $gerente);
 
     if ($stmt->execute()){
         $resposta = [
@@ -55,7 +55,7 @@ function verificaRegistro($dados, $conn)
     $nomeProj = $dados['nomeProj'];
 
     // Busca o nome de propostas para ver se já existe
-    $stmt = $conn->prepare("SELECT * FROM  Propostas WHERE TituloProj = ?");
+    $stmt = $conn->prepare("SELECT * FROM  Propostas WHERE TituloProposta = ?");
     $stmt->bind_param("s", $nomeProj);
     $stmt->execute();
 

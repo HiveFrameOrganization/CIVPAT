@@ -10,19 +10,30 @@
     <a href="../todasPropostas/todasPropostas.html">Home</a>
     <form class="formulario">
 
-        <label for="">Nome Projeto: </label>
-        <input type="text" name="nomeProjeto" maxlength="75" id="">
+        <label for="">Nome Projeto*: </label>
+        <input type="text" maxlength="75" id="nomeProjeto" required>
 
-        <label for="">CNPJ: </label>
-        <input type="text" name="cnpj" maxlength="14" id="">
+        <label for="">Empresa*: </label>
+        <input type="text" maxlength="200" minlength="4" id="empresa" required>
 
-        <label for="">Unidade Criadora: </label>
-        <input type="text" name="uniCriadora" maxlength="100" minlength="4" id="">
+        <label for="">Nome do representante*: </label>
+        <input type="text" maxlength="200" minlength="3" id="nomeReprsentante" required>
 
-        <label for="">Empresa: </label>
-        <input type="text" name="empresa" maxlength="200" minlength="4" id="">
+        <label for="">Email do representante*: </label>
+        <input type="text" maxlength="200" minlength="4" id="emailRepresentante" required>
 
-        <label for="">Gerente: </label>
+        <label for="">Número de telefone do representante*: </label>
+        <input type="text" maxlength="200" minlength="4" id="telefone" required>
+
+        <label>Resumo*:</label>
+        <textarea id="textoResumo" cols="30" rows="10" required></textarea>
+
+
+        <label for="">Unidade Criadora*: </label>
+        <input type="text" maxlength="100" minlength="4" id="unidadeCriadora" required>
+
+
+        <label for="">Gerente*: </label>
         <ul id="listaGerentes">
         </ul>
 

@@ -15,7 +15,7 @@ function pesquisarUsuario($valor, $conn)
     $nome = $valor . '%';
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF = ? OR  Nome LIKE ?");
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF = ? OR Nome LIKE ?");
 
     $stmt->bind_param('ss', $valor, $nome);
 

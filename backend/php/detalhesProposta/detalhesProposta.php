@@ -8,9 +8,9 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProposta, $conn) {
-    // $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome`FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_idGerente`  WHERE idProposta = ?");
-   
-    $stmt = $conn->prepare(" SELECT Propostas.*, `Usuarios`.`nome` FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_idGerente`  WHERE idProposta = ?");
+    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome` FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` WHERE idProposta = ?");
+    // $stmt = $conn->prepare("SELECT * FROM Propostas WHERE idProposta = ?");
+    
     $stmt->bind_param('s', $idProposta);
     $stmt->execute();
     $resultado = $stmt-> get_result();
@@ -41,7 +41,7 @@ function verificarDetalhes($idProposta, $conn) {
 
 
             $dealhesProposta = [
-                "nomeProposta" => $dados['TituloProj'],
+                "nomeProposta" => $dados['TituloProposta'],
                 "cnpj" => $dados['CNPJ'],
                 "uniCriadora" => $dados['UnidadeCriadora'],
                 "empresa" => $dados['Empresa'],

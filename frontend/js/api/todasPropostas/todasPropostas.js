@@ -45,10 +45,14 @@ function exibirPropostas(propostas){
 
         // adicionando o valor ao botão da proposta
         botao.value = proposta.idProposta;
-        botao.innerHTML = proposta.TituloProj;
+        botao.innerHTML = proposta.TituloProposta;
 
         botao.onclick = () => {
             localStorage.setItem('idProposta', botao.value);
+
+            // salvar dados da proposta para ser consumido nos detalhes da proposta (front-end)
+            localStorage.setItem('dadosProposta', propostas)
+            
             window.location.href = '../detalhesProposta/detalhesProposta.html';
         }
 

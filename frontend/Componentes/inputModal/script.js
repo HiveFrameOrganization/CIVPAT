@@ -1,17 +1,17 @@
-const passShow=(a)=>{
-    let input = document.querySelector('.password');
-    let icon = document.querySelector('.icon');
+const passShow=(e)=>{
+    let input = document.querySelectorAll('.password');
+    let icon = document.querySelectorAll('.icon');
 
-    if (input.type == "password"){
-        input.setAttribute("type", "text");
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-low-vision');
-        icon.classList.add('-mr-[1px]');
+    if (input[e].type == "password"){
+        input[e].setAttribute("type", "text");
+        icon[e].classList.remove('fa-eye');
+        icon[e].classList.add('fa-eye-low-vision');
+        icon[e].classList.add('-mr-[1px]');
     } else {
-        input.setAttribute("type", "password");
-        icon.classList.add('fa-eye');
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.remove('-mr-[1px]');
+        input[e].setAttribute("type", "password");
+        icon[e].classList.add('fa-eye');
+        icon[e].classList.remove('fa-eye-slash');
+        icon[e].classList.remove('-mr-[1px]');
     }
 }
 

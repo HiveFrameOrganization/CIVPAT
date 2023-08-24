@@ -86,9 +86,11 @@ async function enviaBackEnd(dadosEnviados) {
         .then(response => response.json())
         .then(data => {
             // Mostra a mensagem e o status no console
-            window.location.pathname = '/frontend/pages/followUp/telaFollowUp.html';
             console.log(data.mensagem);
             console.log(data.status);
+            if (data.status != 'Erro') {
+                window.location.pathname = '/frontend/pages/followUp/telaFollowUp.html';
+            }
         }).catch(error => {
             console.error('Erro no processamento dos dados', error);
         });;
