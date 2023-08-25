@@ -5,8 +5,8 @@ senha: Hiveframe@115
 ==================================================================
 Congratulations! Installed successfully!
 ==================================================================
-aaPanel Internet Address: https://4.246.178.5:7800/2cc5a281
-aaPanel Internal Address: https://10.0.0.4:7800/2cc5a281
+aaPanel Internet Address: https://4.246.178.5:9999/2cc5a281
+aaPanel Internal Address: https://10.0.0.4:9999/2cc5a281
 username: za84ny0x
 password: 592e2f1d
 Warning:
