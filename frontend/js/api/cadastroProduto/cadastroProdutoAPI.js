@@ -9,11 +9,22 @@ window.addEventListener('load', () => carregarTecnicos());
 botaoSalvarProduto.addEventListener('click', () => salvarProduto());
 
 async function carregarTecnicos () {
-    const requisicao = await fetch(back + 'cadastroProduto/carregarTecnicos.php');
+    const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
+        methods : 'GET'
+    });
 
     const resposta = await requisicao.json();
 
-    console.log(resposta);
+    const opcoesTecnicos = document.getElementById('tecnicos');
+
+    for (var i = 0; i < resposta.length; i++) {
+        var optionElement = document.createElement("option");
+        optionElement.value = resposta[i + 1];
+        optionElement.textContent = resposta[i];
+        opcoesTecnicos.appendChild(optionElement);
+
+        i += 1;
+    }
 
 }
 
