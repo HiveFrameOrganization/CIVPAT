@@ -17,9 +17,11 @@ GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`PDF` TO role1;
 GRANT SELECT ON `isihiveframe`.`ServicoCategoria` TO role1;
 GRANT SELECT ON `isihiveframe`.`NomeProduto` TO role1;
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`Produtos` TO role1;
+GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`Representantes` TO role1;
 GRANT SELECT ON `isihiveframe`.`Usuarios` TO role1;
 GRANT SELECT ON `isihiveframe`.`CargaHoraria` TO role1;
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO role1;
+
 
 
 -- Cria o usuário coor que representa os Coordenadores
