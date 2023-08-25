@@ -18,7 +18,7 @@ export async function dropdownGerentes() {
             li.setAttribute('data-value', gerente.nif);
             listaGerentes.appendChild(li);
 
-            li.addEventListener('click',function () {
+            li.addEventListener('click', function () {
                 listaGerentes.querySelectorAll('li').forEach(function (linha) {
                     if (linha.classList.contains('gerente-encarregado')) {
                         linha.classList.remove('gerente-encarregado');
@@ -29,47 +29,64 @@ export async function dropdownGerentes() {
                 gerenteEncarregado = li.dataset.value;
             });
         });
-    } 
+    }
 };
 
 // Ao form ser ativado, valida-se os dados e caso valido, envia ao back
 form.addEventListener('submit', async evento => {
 
+    // Parando o evento de enviar o formulário
     evento.preventDefault();
 
+    // Pegando os valores do formulário
     const nomeProjeto = document.querySelector('#nomeProjeto').value;
     const nomeRepresentante = document.querySelector('#nomeRepresentante').value;
     const emailRepresentante = document.querySelector('#emailRepresentante').value;
     const telefoneRepresentante = document.querySelector('#telefone').value;
-    const unidadeCriadora = document.querySelector('unidadeCriadora').value;
+    const unidadeCriadora = document.querySelector('#unidadeCriadora').value;
     const empresa = document.querySelector('#empresa').value;
-    const resumo = document.querySelector('#resumo').value;
+    const textoResumo = document.querySelector('#textoResumo').value;
 
-    if (gerenteEncarregado === undefined) {
-        alert('Selecione um gerente. ');
-        return;
-    }
+    try {
 
+        // Algumas validações...
 
-    const dadosProj = {
-        nomeProjeto: nomeProjeto,
-        unidadeCriadora: unidadeCriadora,
-        empresa: empresa,
-        gerente: gerenteEncarregado
-    };
+        // Verificando se o gerente foi selecionado
+        if (gerenteEncarregado === undefined) throw new Error('SELECIONE O GERENTE!');
 
-    // Retorna a resposta do back, e se for sucesso, significa que cadastrou
-    let resposta = await enviaBackEnd(dadosProj);
+        // Verificando se o número de telefone possui algum caractere além de números...
+        if (!contemApenasNumeros(telefoneRepresentante)) throw new Error('O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS...');
 
-    if (resposta.status === 'success') {
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
-        window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
-    } else {
-        if (resposta.mensagem === 'registro existe') {
-            console.log('Proposta não cadastrada. (Nome da proposta já existe)');
+        const dadosProposta = {
+            nomeProjeto: nomeProjeto,
+            representante: nomeRepresentante,
+            emailRepresentante: emailRepresentante,
+            telefoneRepresentante: telefoneRepresentante,
+            resumo: textoResumo,
+            unidadeCriadora: unidadeCriadora,
+            empresa: empresa,
+            gerente: gerenteEncarregado
+        };
+
+        console.log(dadosProposta);
+
+        // Retorna a resposta do back, e se for sucesso, significa que cadastrou
+        let resposta = await enviaBackEnd(dadosProposta);
+
+        if (resposta.status === 'success') {
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
+            window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
+        } else {
+            if (resposta.mensagem === 'registro existe') {
+                console.log('Proposta não cadastrada. (Nome da proposta já existe)');
+            }
         }
+
+    } catch (erro) {
+        console.error(erro);
     }
+
 });
 
 // Envia os dados contido no argumento para o back
@@ -118,45 +135,13 @@ async function pegarGerentes() {
 
         return dados;
 
-    } catch(error) {
+    } catch (error) {
         console.log('Erro', error);
     }
 }
 
-// Função para fazer o cálculo do CNPJ
-function validacaoCNPJ(cnpj) {
+/*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS --------------------------------------------------------------*/
 
-    // Verificar se o CNPJ possui 14 dígitos após a remoção dos não numéricos
-    if (cnpj.length !== 14) {
-      return false;
-    }
-  
-    // Calcular o primeiro dígito verificador
-    for(let digito = 0; digito < 2; digito++) {
-
-        let sum = 0; let num = 0;
-
-        for (let i = 5 + digito; i > 1; i--) {
-          sum += parseInt(cnpj[num]) * i;
-          num++;
-        }
-
-        for (let i = 9; i > 1; i--) {
-            sum += parseInt(cnpj[num]) * i;
-            num++;
-        }
-
-        // Definição dos digitos validos
-        if (digito == 0) {
-            var digito1 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-        } else {
-            var digito2 = sum % 11 < 2 ? 0 : 11 - (sum % 11);
-        }
-    }
-    
-    if (parseInt(cnpj[12]) !== digito1 || parseInt(cnpj[13]) !== digito2) {
-      return false;
-    }
-
-    return true;
+function contemApenasNumeros(string) {
+    return /^\d+$/.test(string);
 }

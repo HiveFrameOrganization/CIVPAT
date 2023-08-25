@@ -11,26 +11,26 @@
     <form class="formulario">
 
         <label for="">Nome Projeto*: </label>
-        <input type="text" maxlength="75" id="nomeProjeto" required>
+        <input type="text" minlength="4" maxlength="75" id="nomeProjeto" required>
 
         <label for="">Empresa*: </label>
-        <input type="text" maxlength="200" minlength="4" id="empresa" required>
+        <input type="text"  minlength="2" maxlength="200" id="empresa" required>
 
         <label for="">Nome do representante*: </label>
-        <input type="text" maxlength="200" minlength="3" id="nomeReprsentante" required>
+        <input type="text" minlength="3" maxlength="100" id="nomeRepresentante" required>
 
         <label for="">Email do representante*: </label>
-        <input type="text" maxlength="200" minlength="4" id="emailRepresentante" required>
+        <input type="email" minlength="4" maxlength="125" id="emailRepresentante" required>
 
         <label for="">Número de telefone do representante*: </label>
-        <input type="text" maxlength="200" minlength="4" id="telefone" required>
+        <input type="text" minlength="10" maxlength="11" id="telefone" required>
 
         <label>Resumo*:</label>
-        <textarea id="textoResumo" cols="30" rows="10" required></textarea>
+        <textarea id="textoResumo" cols="30" rows="10" required minlength="5"></textarea>
 
 
         <label for="">Unidade Criadora*: </label>
-        <input type="text" maxlength="100" minlength="4" id="unidadeCriadora" required>
+        <input type="text" minlength="4" maxlength="100" id="unidadeCriadora" required>
 
 
         <label for="">Gerente*: </label>
