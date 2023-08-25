@@ -2,7 +2,42 @@ import { back } from '../Rotas/rotas.js'
 /*------------------------------------ Fazendo aparecer o formulário -------------------------------------------------------------------------*/
 const cadastrar = document.querySelector('#cadastrar');
 
+cadastrar.addEventListener('click', () => {
+    // Fazendo a lista de funcionários desaparecer
+    const exibicao = document.querySelector('#exibicao');
 
+    // Selecionando o formulário
+    const formulario = document.querySelector('#formulario');
+
+    // Renderizando de acordo o evento
+    if (formulario.style.display === 'flex') {
+
+        // Escondendo o formulário
+        formulario.style.display = 'none';
+
+        // Exibindo a lista
+        exibicao.style.display = 'block';
+
+        // Alterando o nome do botão
+        cadastrar.textContent = 'Cadastrar';
+        console.log(cadastrar.value);
+
+    } else {
+
+        // Exibindo o formulário
+        formulario.style.display = 'flex';
+
+        // Escondendo a lista de funcionários
+        exibicao.style.display = 'none';
+
+        // Alterando o nome do botão
+        cadastrar.textContent = 'Voltar';
+
+        console.log(cadastrar.value);
+
+
+    }
+});
 
 
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
