@@ -3,10 +3,22 @@
 const profileTrigger = document.querySelector('#profile-trigger');
 const profileDropdown = document.querySelector('#profile-dropdown');
 
-profileTrigger.addEventListener('click', () => {
+window.addEventListener('click', (event) => {
 
-    profileDropdown.classList.toggle('hidden');
+    if (event.target.matches('#profile-trigger')) {
+
+        profileDropdown.classList.toggle('hidden');
+
+        return;
+    }
+
+    profileDropdown.classList.add('hidden');
 });
+
+profileDropdown.addEventListener('click', (event) => {
+
+    event.stopPropagation();
+})
 
 // ------------------------------------------------------------------
 
@@ -19,7 +31,7 @@ sidebarBtn.forEach((btn) => {
 
     btn.addEventListener('click', () => {
 
-        sidebar.classList.contains('-left-96') ? sidebar.classList.replace('-left-96', 'left-0') : sidebar.classList.replace('left-0', '-left-96');
+        sidebar.classList.contains('-left-full') ? sidebar.classList.replace('-left-full', 'left-0') : sidebar.classList.replace('left-0', '-left-full');
     });
 });
 
