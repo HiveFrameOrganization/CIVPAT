@@ -23,6 +23,8 @@ function themeCheck() {
         return;
     }
 
+    document.documentElement.setAttribute('data-theme', 'light');
+
     sunIcon.classList.add('hidden');
 };
 
