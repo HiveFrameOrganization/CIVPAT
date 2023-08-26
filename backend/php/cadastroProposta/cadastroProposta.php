@@ -41,18 +41,14 @@ function cadastrarRepresentante($dados, $conn){
     $telefoneRepresentante = $dados['telefoneRepresentante'];
 
     // Preparando a inserção
-    $stmt = $conn->prepare("INSERT INTO Propostas (nomeRepresentante, telefoneRepresentante, emailRepresentante) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Representantes (nomeRepresentante, telefoneRepresentante, emailRepresentante) VALUES (?, ?, ?)");
 
     // Passando os valores como parâmetro
     $stmt->bind_param('sss', $representante, $telefoneRepresentante, $emailRepresentante);
 
     if ($stmt->execute()) {
 
-        $dadosDoRepresentante = [
-            'emailRepresentante' => $emailRepresentante
-        ];
-
-        verificarRepresentante($dadosDoRepresentante, $conn);
+        verificarRepresentante($dados, $conn);
 
     } else {
 
@@ -146,16 +142,14 @@ function verificarRepresentante($dados, $conn){
 -------------------------------------------------------------------------------------------
 */
 
-$dadosVerif = [
-    'nomeProjeto' => $nomeProjeto
-];
-
 // Se houver projeto cadastrado com o nome de projeto enviado, não é cadastrado
-if (verificaRegistro($dadosVerif, $conn) === true) {
+if (verificaRegistro($dados, $conn) === true) {
     $resposta = [
         'status' => 'error',
         'mensagem' => 'Registro existe'
     ];
+
+    echo json_encode($resposta);
 
 } else {
 
