@@ -145,13 +145,13 @@
                         </div>
                     </div>
                     <!-- Exibição da tabela -->
-                    <div role="table" class="mt-8 bg-component rounded-md">
-                        <!-- Row -->
-                        <div class="py-4 px-3 md:px-4 rounded-md">
-                            <div class="flex justify-between items-center gap-3 flex-wrap overflow-x-scroll md:overflow-x-hidden">
-                                <div class="flex items-center gap-3">
-                                    <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md"> <!-- w-10 = 24px -->
-                                    <div class="border-r border-color-text-secundary pr-3 max-w-[250px] overflow-hidden text-ellipsis">
+                    <div role="table" class="mt-8 space-y-1">
+                        <!-- Rows -->
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md">
+                                    <div>
                                         <abbr title="Rebimboca da parafuseta" class="no-underline"><span class="font-semibold text-lg leading-4 whitespace-nowrap">Rebimboca da parafuseta</span></abbr>
                                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                             <span>115 - 2023</span>
@@ -161,17 +161,17 @@
                                     <div class="flex items-center gap-3">
                                         <img src="../../img/icon/perfil.png" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
                                         <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4">Doge do Meme</span>
+                                            <span class="text-lg leading-4 whitespace-nowrap">Doge do Meme</span>
                                             <span class="text-xs text-color-text-secundary">Gerente</span>
                                         </div>
                                     </div>
+                                    <span class="bg-[#7950FF]/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto">ANÁLISE</span>
                                 </div>
-                                <div class="flex items-center">
-                                    <span class="bg-[#7950FF]/20 rounded-md text-primary font-semibold text-xs py-2 px-6">ANÁLISE</span>
-                                    <button type="button" class="px-3 md:px-4">
-                                        <img src="../../img/icon/more-vertical.svg" alt="Opções" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md">
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="w-full">
+                                </button>
                             </div>
                         </div>
                     </div>
