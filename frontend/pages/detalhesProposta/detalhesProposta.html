@@ -23,6 +23,9 @@
                 --primary-color: 57 118 209;
                 --text-color: 255 255 255;
                 --text-secundary-color: 126 126 126;
+                --btn-green: 43 253 190;
+                --btn-blue: 57 118 209;
+                --btn-red: 245 74 76;
             }
 
             @media (prefers-color-scheme: light) {
@@ -61,6 +64,9 @@
                     'primary': 'rgb(var(--primary-color) / <alpha-value>)',
                     'color-text': 'rgb(var(--text-color) / <alpha-value>)',
                     'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                    'btn-green': 'rgb(var(--btn-green) / <alpha-value>)',
+                    'btn-blue': 'rgb(var(--btn-blue) / <alpha-value>)',
+                    'btn-red': 'rgb(var(--btn-red) / <alpha-value>)',
                 }
             },
         }
@@ -69,7 +75,7 @@
 
 <body onload="alertas()" class="bg-body text-color-text py-20">
 
-    <header class="py-4 px-6 text-color-text fixed top-0 w-full">
+    <header class="bg-body py-4 px-6 text-color-text fixed top-0 w-full z-10">
 
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -77,13 +83,14 @@
                 <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
                     src="../../img/icon/align-justify.svg" alt="menu lateral">
                 <div id="sidebar"
-                    class="w-full sm:w-64 fixed top-0 h-screen -left-96 bg-component py-4 px-6 transition-all z-20">
+                    class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-20">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
                             src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo"
-                                class="w-10 h-10"></a>
-                        <a href="../todasPropostas/todasPropostas.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
+                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"><img
+                                src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../todasPropostas/todasPropostas.html"
+                            class="text-primary font-semibold max-[313px]:hidden text-lg"
                             aria-label="Ir para página principal">HIVE<span
                                 class="text-color-text transition-colors">FRAME</span></a>
                     </div>
@@ -91,9 +98,10 @@
                         <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
                                 src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe"
+                        <a href="../cadastroUsuario/cadastroUsuario.html"
+                            aria-label="Ir para a página de gerenciamento de equipe"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
-                                src="../../img/icon/users.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                                src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                         <a href="#" aria-label="Ir para a página de relatórios"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
                                 src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
@@ -104,9 +112,11 @@
                     </div>
                 </div>
 
-                <a href="../todasPropostas/todasPropostas.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../todasPropostas/todasPropostas.html"><img src="../../img/icon/logo.svg" alt="Logo"
+                        class="w-8 h-8"></a>
 
-                <a href="../todasPropostas/todasPropostas.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
+                <a href="../todasPropostas/todasPropostas.html"
+                    class="text-primary font-semibold max-[313px]:hidden text-lg"
                     aria-label="Ir para página principal">HIVE<span
                         class="text-color-text transition-colors">FRAME</span></a>
 
@@ -146,39 +156,132 @@
 
     </header>
 
-    <main class="px-8">
-        
-        <div id="detalhesProposta">
+    <main>
+
+        <div class="px-8">
+            <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
+
+            <ul class="flex gap-8 w-1/2">
+                <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
+                <li
+                    class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max">
+                    detalhes</li>
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max">PDFs</li>
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max">
+                    <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a>
+                </li>
+                <li class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max">produtos</li>
+
+            </ul>
+        </div>
+
+
+        <div id="detalhesProposta" class="bg-component px-8">
+
+            <h2 class="uppercase text-xl font-bold py-8">detalhes da proposta</h2>
+
             <!-- Campos que ficaram nos detalhes -->
-            <label for="nomeProposta">Nome da proposta: </label>
-            <input class="text-color-text bg-component" type="text" id="nomeProposta" maxlength="75"><br><br>
+            <div class="bg-body px-7 pt-7 rounded-xl flex flex-col gap-10">
 
-            <label for="cnpj">CNPJ: </label>
-            <input class="text-color-text bg-component" type="text" id="cnpj" maxlength="14" ><br><br>
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="nomeProposta" class="text-sm opacity-20">Nome da proposta: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="nomeProposta"
+                            maxlength="75">
+                    </div>
 
-            <label for="uniCriadora">Unidade criadora: </label>
-            <input class="text-color-text bg-component" type="text" id="uniCriadora" maxlength="100" minlength="4"><br><br>
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="cnpj" class="text-sm opacity-20">CNPJ: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="cnpj" maxlength="14">
+                    </div>
 
-            <label for="empresa">Empresa: </label>
-            <input class="text-color-text bg-component" type="text" id="empresa" maxlength="200" minlength="4"><br><br>
+                    <div class="flex flex-col w-full md:w-1/3">
 
-            <label for="statusProposta">Status: </label>
-            <input class="text-color-text bg-component" type="text" id="statusProposta"><br><br>
+                        <label for="uniCriadora" class="text-sm opacity-20">Unidade criadora: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="uniCriadora"
+                            maxlength="100" minlength="4">
+                    </div>
+                </div>
 
-            <label for="gerenteProposta">Gerente: </label>
-            <input class="text-color-text bg-component" type="text" id="gerenteProposta"><br><br>
 
-            <label for="numeroSGSET">Nº SGSET: </label>
-            <input class="text-color-text bg-component" type="text" id="numeroSGSET"><br><br>
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
 
-            <label for="dataPrimeiroProduto">Data de início do primeiro produto: </label>
-            <input class="text-color-text bg-component" type="date" id="dataPrimeiroProduto"><br><br>
+                    <div class="flex flex-col w-full md:w-1/3">
 
-            <label for="dataUltimoProduto">Data final do último produto: </label>
-            <input class="text-color-text bg-component" type="date" id="dataUltimoProduto"><br><br>
+                        <label for="empresa" class="text-sm opacity-20">Empresa: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="empresa" maxlength="200"
+                            minlength="4">
+                    </div>
 
-            <label for="valorTotalProdutos">Valor total: </label>
-            <input class="text-color-text bg-component" type="number" id="valorTotalProdutos"><br><br>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="statusProposta" class="text-sm opacity-20">Status: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="statusProposta">
+                    </div>
+
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="gerenteProposta" class="text-sm opacity-20">Gerente: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="gerenteProposta">
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="numeroSGSET">
+                    </div>
+
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="dataPrimeiroProduto" class="text-sm opacity-20 w-full truncate ">
+                            <abbr class="no-underline" title="Data de início do primeiro produto">
+                                Data de início do primeiro produto:
+                            </abbr>
+                        </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date" id="dataPrimeiroProduto">
+                    </div>
+
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date" id="dataUltimoProduto">
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between gap-1 w-full">
+                    <div class="flex flex-col">
+                        <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="number" id="valorTotalProdutos">
+                    </div>
+
+                    <!-- ==================== INPUTS FALTANTES AQUI ============================== -->
+
+                </div>
+
+
+                <!-- BOTOES DE ACEITAR, DECLINAR E EDITAR -->
+                <div class="flex justify-between flex-col sm:flex-row mb-4">
+                    <div class="flex gap-5 flex-col sm:flex-row mb-5">
+                        <input
+                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
+                            type="button" value="Editar" id="editarProposta" editarProposta()>
+                        <input
+                            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
+                            type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
+                    </div>
+                    <input
+                        class="text-btn-red bg-btn-red/20 hover:bg-btn-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
+                        type="button" value="Declinar" id="declinarProposta" declinarProposta()>
+                </div>
+            </div>
 
 
             <!-- campos que ficaram em PDFs -->
