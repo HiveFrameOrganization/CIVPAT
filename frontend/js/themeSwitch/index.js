@@ -20,12 +20,14 @@ function themeCheck() {
 
         document.documentElement.setAttribute('data-theme', 'dark');
         moonIcon.classList.add('hidden');
+        sunIcon.classList.remove('hidden');
         return;
     }
 
     document.documentElement.setAttribute('data-theme', 'light');
 
     sunIcon.classList.add('hidden');
+    moonIcon.classList.remove('hidden');
 };
 
 // Manual Theme Switch
