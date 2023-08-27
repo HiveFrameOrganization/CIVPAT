@@ -73,37 +73,43 @@ botaoDesativos.addEventListener('mouseout', () => {
 })
 
 
-// // funções da barra de pesquisa
+// funções da barra de pesquisa
 
-// const pesquisa = document.querySelector('.pesquisa');
-// const iconePesquisa = document.querySelector('.lupa');
+const pesquisa = document.querySelector('#pesquisarUsuario');
+const iconePesquisa = document.querySelector('#botaoPesquisar');
+const barraPesquisa = document.querySelector('#barraPesquisa');
 
-// iconePesquisa.addEventListener('mouseover', () => {
-//     pesquisa.style.width = '100%';
-//     pesquisa.style.paddingRight = '32px';
-// })
+if(window.screen.width > 422){
 
-// pesquisa.addEventListener('mouseover', () => {
-//     pesquisa.style.width = '100%';
-//     pesquisa.style.paddingRight = '32px';
-// })
-
-// iconePesquisa.addEventListener('mouseout', () => {
-//     pesquisa.style.width = '32px';
-//     pesquisa.style.paddingRight = '0px';
-// })
-
-// iconePesquisa.addEventListener('click', () => {
-//     pesquisa.style.width = '32px';
-//     pesquisa.style.paddingRight = '0px';
-// })
-
-// document.addEventListener('click', (event) => {
-//     if(!pesquisa.contains(event.target)){
-//         pesquisa.style.width = '32px';
-//         pesquisa.style.paddingRight = '0px';
-//     }
-// })
+    iconePesquisa.addEventListener('click', () => {
+        pesquisa.classList.remove('w-[42px]');
+        pesquisa.classList.add('w-[300px]');
+        pesquisa.style.paddingRight = '42px';
+    })
+    
+    document.addEventListener('click', (event) => {
+        if(!barraPesquisa.contains(event.target)){
+            pesquisa.classList.remove('w-[300px]');
+            pesquisa.classList.add('w-[42px]');
+            pesquisa.style.paddingRight = '0px';
+        }
+    })
+} else {
+    
+    iconePesquisa.addEventListener('click', () => {
+        pesquisa.classList.remove('w-[42px]');
+        pesquisa.classList.add('w-[200px]');
+        pesquisa.style.paddingRight = '42px';
+    })
+    
+    document.addEventListener('click', (event) => {
+        if(!barraPesquisa.contains(event.target)){
+            pesquisa.classList.remove('w-[200px]');
+            pesquisa.classList.add('w-[42px]');
+            pesquisa.style.paddingRight = '0px';
+        }
+    })
+}
 
 
 // funções do ícone de detalhes do funcionário
@@ -136,3 +142,21 @@ window.addEventListener('click', (event) => {
         toggleHide();
     }
 });
+
+
+// funções do modal de edição
+
+function abreModalEdit(){
+    let modalEdit = document.querySelector('.edit');
+
+    modalEdit.classList.remove('hidden');
+    modalEdit.classList.add('flex');
+}
+
+function fechaModalEdit(){
+    let modalEdit = document.querySelector('.edit');
+
+    modalEdit.classList.remove('flex');
+    modalEdit.classList.add('hidden');
+}
+

@@ -27,3 +27,17 @@
     background-color: #3976D1!important;
     opacity: 100%!important;
 }
+
+.in-page {
+  background-color: rgb(57, 118, 209) !important;
+  color: #fff !important;
+}
+
+.selected-row {
+  border: 2px solid rgb(57, 118, 209) !important;
+}
+
+select {
+  -moz-appearance: none!important;
+  -webkit-appearance: none!important;
+}

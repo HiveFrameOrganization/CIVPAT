@@ -74,7 +74,7 @@
 
         <!-- header -->
     
-        <header class="py-4 px-6 text-color-text fixed top-0 w-full">
+        <header class="py-4 px-6 text-color-text fixed top-0 w-full z-50">
 
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -176,8 +176,11 @@
 
                     <div class="flex gap-1">
 
-                        <div class="flex gap-1">
-                            <img src="../../img/icon/search.svg" alt="Pesquisar" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
+                        <div class="flex gap-2 flex-wrap">
+                            <div class="relative" id="barraPesquisa">
+                                <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
+                                <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
+                            </div>
                             <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                         </div>
 
@@ -187,7 +190,7 @@
                 <!-- tabela -->
 
                 <div id="exibicao" class="py-8">
-                    <div role="table" class="tabela space-y-1 max-h-[415px] overflow-y-auto -we">
+                    <div role="table" class="tabela space-y-1 max-h-[415px] overflow-y-auto -we4">
                         <!-- Rows -->
                         <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
                             <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
@@ -224,7 +227,7 @@
                                                 </a>
                                             </li>
                                             <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
+                                                <a href="#" class="px-1 py-1" onclick="abreModalEdit()">
                                                     Editar
                                                 </a>
                                             </li>
@@ -484,7 +487,7 @@
 
         
 
-        <!------------------------------ MODAL ------------------------------>
+        <!------------------------------ MODAL DE CADASTRO ------------------------------>
     
         <!-- centralização -->
     
@@ -504,7 +507,7 @@
     
                 <div class="text-center lg:text-justify text-color-text">
                     <h1 class="font-bold text-2xl">CADASTRO DE FUNCIONÁRIO</h1>
-                    <h2 class="text-xs pt-2">Insira as informações do funcionário.</h2>
+                    <h2 class="text-xs pt-2">Insira as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
                 </div>
     
                 <!-- inputs -->
@@ -535,15 +538,22 @@
     
                     <div class="relative">
                         <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="text" value="" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <input type="text" value="" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
                         <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
                     </div>
     
                     <!-- Função -->
     
-                    <div>
+                    <div class="relative">
                         <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                        <input type="text" value="" id="tipoCargo" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário" required>
+                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                        <select id="tipoCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                            <option value="" selected disabled>Cargo do funcionário</option>
+                            <option value="adm">Administrador</option>
+                            <option value="coor">Coordenador</option>
+                            <option value="ger">Gerente</option>
+                            <option value="tec">Técnico</option>
+                          </select>
                     </div>
                     
                     <!-- botão -->
@@ -556,9 +566,98 @@
             </div>
         </div>
 
+        <!------------------------------ MODAL DE EDITAR ------------------------------>
+    
+        <!-- centralização -->
+    
+        <div class="edit min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+    
+            <!-- conteúdo do modal -->
+    
+            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto">
+    
+                <!-- botão de fechar -->
+    
+                <div class="w-full lg:flex lg:justify-end">
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModalEdit()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                </div>
+    
+                <!-- título e subtítulo -->
+    
+                <div class="text-center lg:text-justify text-color-text">
+                    <h1 class="font-bold text-2xl">EDIÇÃO DE FUNCIONÁRIO</h1>
+                    <h2 class="text-xs pt-2">Atualize as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                </div>
+    
+                <!-- inputs -->
+    
+                <form class="flex flex-col gap-6 pt-8" id="formularioEditarUsuario" autocomplete="off">
+    
+                    <!-- Nome e sobrenome -->
+    
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">NOME *</label>
+                            <input type="text" value="" id="editarNome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
+                        </div>
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
+                            <input type="text" value="" id="editarSobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
+                        </div>
+                    </div>
+    
+                    <!-- E-mail -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                        <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                    </div>
+    
+                    <!-- Função -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                        <select id="editarCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                            <option value="" selected disabled>Cargo do funcionário</option>
+                            <option value="adm">Administrador</option>
+                            <option value="coor">Coordenador</option>
+                            <option value="ger">Gerente</option>
+                            <option value="tec">Técnico</option>
+                          </select>
+                    </div>
+                    
+                    <!-- botão -->
+    
+                    <div class="pt-14">
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar funcionário</button>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+
     </div>
 
+    <!-- footer -->
 
+    <!-- <footer class="w-full bg-body text-color-text px-16 py-4">
+        <div class="container mx-auto flex items-center justify-center sm:justify-between flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+            </div>
+        </div>
+        <div class="text-center text-color-text-secundary text-sm mt-6">
+            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+        </div>
+    </footer> -->
 
 
     <script src="../../Componentes/inputModal/script.js"></script>
