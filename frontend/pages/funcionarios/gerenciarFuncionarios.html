@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../../Componentes/inputModal/style.css">
     <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title>Gerenciamento de funcionários</title>
+    <title>Gerenciamento de funcionários - HIVEFRAME</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -74,11 +74,13 @@
 
         <!-- header -->
     
-        <header class="py-4 px-6 text-color-text w-full shadow-sm" role="navigation">
+        <header class="py-4 px-6 text-color-text fixed top-0 w-full">
+
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
+                    
                     <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                    <div id="sidebar" class="fixed top-0 h-screen -left-96 w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 group">
+                    <div id="sidebar" class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-30">
                         <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                             <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
                             <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
@@ -86,21 +88,27 @@
                         </div>
                         <div class="mt-4 space-y-4">
                             <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                            <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                            <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                             <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                             <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                         </div>
                     </div>
+    
                     <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+    
                     <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+    
                 </div>
-                <div class="flex items-center gap-3 z-20">
+                <div class="flex items-center gap-3 z-30">
+    
                     <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
                         <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
                         <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
                     </div>
+    
                     <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
                         <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+    
                         <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
                             <div class="text-color-text-secundary px-4 py-2 space-y-2">
                                 <h5 class="text-base text-color-text">Doge do Meme</h5>
@@ -112,16 +120,16 @@
                             </ul>
                         </div>
                     </div>
+    
                 </div>
             </div>
-        </header>
     
-        <!-- scripts do header -->
+        </header>
     
         <script src="../../js/themeSwitch/index.js"></script>
         <script src="../../js/global.js"></script>
     
-        <section class="px-6 2xl:px-16">
+        <section class="px-6 2xl:px-16 mt-[72px]">
     
             <!-- título / subtítulo da página -->
     
@@ -150,37 +158,27 @@
     
         <!-- tabela com funcionários -->
 
-        <main class="bg-component w-full px-6 pb-8 sm:pb-16 2xl:px-16 mt-[3px] h-full flex flex-col flex-1">
+        <main class="bg-component w-full px-6 pb-3 sm:pb-6 2xl:px-16 mt-[3px] flex flex-col flex-1 h-auto">
 
-            <div class="pt-12 sm:pt-16 pb-3 sm:pb-6">
+            <div class="pt-12 pb-3 sm:pb-6">
                 <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
             </div>
 
-            <div class="bg-body w-full rounded-md flex-1 px-3 sm:px-8">
+            <div class="bg-body w-full rounded-md px-3 sm:px-8">
 
                 <!-- botões -->
 
-                <div class="flex flex-row pt-3 sm:pt-6 justify-between">
+                <div class="flex flex-wrap gap-2 pt-3 sm:pt-6 justify-between">
 
                     <div>
-                        <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary" onclick="abreModal()">+ Novo funcionário</button>
+                        <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ NOVO FUNCIONÁRIO</button>
                     </div>
 
                     <div class="flex gap-1">
 
-                        <!-- barra de pesquisa -->
-
-                        <div class="relative">
-                            <div class="lupa absolute right-0 py-[7px] px-[7px] rounded-lg bg-component cursor-pointer">
-                                <img src="../../img/icon/search.png" alt="Ícone de pesquisa" id="botaoPesquisar">
-                            </div>
-                            <input type="text" value="" id="pesquisarUsuario" class="pesquisa text-color-text box-border bg-component placeholder-color-text-secundary py-2 px-3 text-xs rounded-lg outline-none focus:outline focus:outline-3 focus:outline-primary focus:placeholder-primary w-[32px] hover:w-full cursor-pointer" placeholder="Pesquise algo...">
-                        </div>
-
-                        <!-- calendário -->
-
-                        <div>
-                            
+                        <div class="flex gap-1">
+                            <img src="../../img/icon/search.svg" alt="Pesquisar" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
+                            <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                         </div>
 
                     </div>
@@ -189,9 +187,296 @@
                 <!-- tabela -->
 
                 <div id="exibicao" class="py-8">
-                
-                </div>
+                    <div role="table" class="tabela space-y-1 max-h-[415px] overflow-y-auto -we">
+                        <!-- Rows -->
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
 
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                            <span class="text-xs text-color-text-secundary">Gerente</span>
+                                        </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Visualizar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginação -->
+
+            <div class="w-full mt-4">
+                <div class="flex items-center gap-2 justify-end">
+                    <a href="#" class="w-4 h-4">
+                        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+                    </a>
+                    <a href="#" class="in-page bg-body text-color-text text-sm px-3 py-1 rounded-md">1</a>
+                    <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md">2</a>
+                    <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md">3</a>
+                    <a href="#" class="w-4 h-4">
+                        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+                    </a>
+                </div>
             </div>
             
         </main>
@@ -203,11 +488,11 @@
     
         <!-- centralização -->
     
-        <div class="caixa min-h-screen z-20 hidden lg:h-screen w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+        <div class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
     
             <!-- conteúdo do modal -->
     
-            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl">
+            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto">
     
                 <!-- botão de fechar -->
     
@@ -224,13 +509,13 @@
     
                 <!-- inputs -->
     
-                <form class="flex flex-col gap-6 pt-8" id="formulario">
+                <form class="flex flex-col gap-6 pt-8" id="formulario" autocomplete="off">
     
                     <!-- NIF -->
     
                     <div>
                         <label class="text-color-text font-bold block mb-3">NIF *</label>
-                        <input type="text" value="" id="" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário">
+                        <input type="text" value="" id="nif" minlength="5" maxlength="7" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário" required>
                     </div>
     
                     <!-- Nome e sobrenome -->
@@ -238,26 +523,27 @@
                     <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">NOME *</label>
-                            <input type="text" value="" id="nome" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário">
+                            <input type="text" value="" id="nome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
                         </div>
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
-                            <input type="text" value="" id="sobrenome" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário">
+                            <input type="text" value="" id="sobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
                         </div>
                     </div>
     
                     <!-- E-mail -->
     
-                    <div>
+                    <div class="relative">
                         <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="text" value="" id="email" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário">
+                        <input type="text" value="" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
                     </div>
     
                     <!-- Função -->
     
                     <div>
                         <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                        <input type="text" value="" id="tipoCargo" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário">
+                        <input type="text" value="" id="tipoCargo" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Função do funcionário" required>
                     </div>
                     
                     <!-- botão -->
@@ -279,9 +565,9 @@
 
     <script src="./gerenciarFuncionarios.js"></script>
 
-    <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script>
+    <!-- <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script> -->
 
-    <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
+    <!-- <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script> -->
 
 </body>
 </html>

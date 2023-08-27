@@ -73,34 +73,66 @@ botaoDesativos.addEventListener('mouseout', () => {
 })
 
 
-// funções da barra de pesquisa
+// // funções da barra de pesquisa
 
-const pesquisa = document.querySelector('.pesquisa');
-const iconePesquisa = document.querySelector('.lupa');
+// const pesquisa = document.querySelector('.pesquisa');
+// const iconePesquisa = document.querySelector('.lupa');
 
-iconePesquisa.addEventListener('mouseover', () => {
-    pesquisa.style.width = '100%';
-    pesquisa.style.paddingRight = '32px';
-})
+// iconePesquisa.addEventListener('mouseover', () => {
+//     pesquisa.style.width = '100%';
+//     pesquisa.style.paddingRight = '32px';
+// })
 
-pesquisa.addEventListener('mouseover', () => {
-    pesquisa.style.width = '100%';
-    pesquisa.style.paddingRight = '32px';
-})
+// pesquisa.addEventListener('mouseover', () => {
+//     pesquisa.style.width = '100%';
+//     pesquisa.style.paddingRight = '32px';
+// })
 
-iconePesquisa.addEventListener('mouseout', () => {
-    pesquisa.style.width = '32px';
-    pesquisa.style.paddingRight = '0px';
-})
+// iconePesquisa.addEventListener('mouseout', () => {
+//     pesquisa.style.width = '32px';
+//     pesquisa.style.paddingRight = '0px';
+// })
 
-iconePesquisa.addEventListener('click', () => {
-    pesquisa.style.width = '32px';
-    pesquisa.style.paddingRight = '0px';
-})
+// iconePesquisa.addEventListener('click', () => {
+//     pesquisa.style.width = '32px';
+//     pesquisa.style.paddingRight = '0px';
+// })
 
-document.addEventListener('click', (event) => {
-    if(!pesquisa.contains(event.target)){
-        pesquisa.style.width = '32px';
-        pesquisa.style.paddingRight = '0px';
+// document.addEventListener('click', (event) => {
+//     if(!pesquisa.contains(event.target)){
+//         pesquisa.style.width = '32px';
+//         pesquisa.style.paddingRight = '0px';
+//     }
+// })
+
+
+// funções do ícone de detalhes do funcionário
+
+const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
+
+function toggleHide() {
+
+    optionDropdownTriggers.forEach((trigger) => {
+
+        trigger.parentElement.querySelector('.option-dropdown').classList.add('hidden')
+        trigger.parentElement.parentElement.parentElement.classList.remove('selected-row');
+    });
+}
+
+window.addEventListener('click', (event) => {
+
+
+    if (event.target.matches('.option-dropdown-trigger')) {
+
+        const el = event.target.parentElement.querySelector('.option-dropdown');
+
+        toggleHide();
+
+        el.classList.toggle('hidden');
+
+        event.target.parentElement.parentElement.parentElement.classList.toggle('selected-row');
+    } else {
+
+        toggleHide();
     }
-})
+});
