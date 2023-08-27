@@ -1,27 +1,37 @@
 const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
 
-function toggleHide() {
+// Função para fechar todos os dropdown
+function hiddenAll() {
+    
+    document.querySelectorAll('.option-dropdown').forEach((el) => {
 
-    optionDropdownTriggers.forEach((trigger) => {
+        const row = el.parentElement.parentElement.parentElement;
 
-        trigger.parentElement.querySelector('.option-dropdown').classList.add('hidden')
-        trigger.parentElement.parentElement.parentElement.classList.remove('selected-row');
+        el.classList.add('hidden');
+        row.classList.remove('selected-row');
     });
 }
 
+// Abrir o dropdown específico do botão clicado
+optionDropdownTriggers.forEach((trigger) => {
+
+    trigger.addEventListener('click', () => {
+        
+        const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
+
+        const row = optionDropdown.parentElement.parentElement.parentElement;
+
+        optionDropdown.classList.toggle('hidden');
+        row.classList.toggle('selected-row');
+        
+    });
+});
+
+// Fechar todos ao clicar fora do botão
 window.addEventListener('click', (event) => {
 
-    if (event.target.matches('.option-dropdown-trigger')) {
+    if (!event.target.matches('.option-dropdown-trigger')) {
 
-        const el = event.target.parentElement.querySelector('.option-dropdown');
-
-        toggleHide();
-
-        el.classList.toggle('hidden');
-
-        event.target.parentElement.parentElement.parentElement.classList.toggle('selected-row');
-    } else {
-
-        toggleHide();
+        hiddenAll();
     }
 });
