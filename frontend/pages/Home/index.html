@@ -116,7 +116,7 @@
             <div class="flex gap-6 flex-wrap justify-center  md:justify-start">
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/inventory.svg" alt="Projetos em análise" class="w-8 h-8">
+                        <img src="../../img/icon/inventory.svg" alt="Propostas em análise" class="w-8 h-8">
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
@@ -125,10 +125,28 @@
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/inventory.svg" alt="Projetos em análise" class="w-8 h-8">
+                        <img src="../../img/icon/settings.svg" alt="Propostas em desenvolvimento" class="w-8 h-8">
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
-                        <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
+                        <h5 class="font-medium text-sm text-primary">Propostas em desenvolvimento</h5>
+                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                    </div>
+                </div>
+                <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
+                    <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                        <img src="../../img/icon/alert-circle.svg" alt="Propostas declinadas" class="w-8 h-8">
+                    </div>
+                    <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                        <h5 class="font-medium text-sm text-primary">Propostas declinadas</h5>
+                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                    </div>
+                </div>
+                <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
+                    <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
+                        <img src="../../img/icon/check-circle.svg" alt="Propostas concluídas" class="w-8 h-8">
+                    </div>
+                    <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
+                        <h5 class="font-medium text-sm text-primary">Propostas concluídas</h5>
                         <span class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
@@ -149,7 +167,65 @@
                 </div>
                 <div class="bg-body py-4 px-4 md:px-8 rounded-md">
                     <div class="flex justify-between items-center flex-wrap gap-2">
-                        <button type="button" class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">+ NOVA PROPOSTA</button>
+                        <button id="open-modal-btn" type="button" class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">+ NOVA PROPOSTA</button>
+                        <!-- Área Modal -->
+                        <div id="fade" class="hide"></div>
+                        <div id="modal" class="hide bg-component">
+                            <div class="modal-header flex justify-between items-center mb-8">
+                                <div>
+                                    <h2 class="text-2xl font-bold">CADASTRO DE PROPOSTA</h2>
+                                    <h3 class="text-xs font-normal">Insira as informações da proposta - <strong class="text-[#ef4444]">Obrigatório *</strong></h3>
+                                </div>
+                                <button id="close-modal" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="space-y-4">
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <label for="title" class="font-semibold text-lg">TÍTULO*</label>
+                                        <input type="text" id="title" name="title" placeholder="Título da proposta" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row gap-4">
+                                        <div class="flex flex-col gap-2 w-full">
+                                            <label for="company" class="font-semibold text-lg">EMPRESA*</label>
+                                            <input type="text" id="company" name="company" placeholder="Nome da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        </div>
+                                        <div class="flex flex-col gap-2 w-full">
+                                            <label for="company-contact" class="font-semibold text-lg">CONTATO*</label>
+                                            <input type="text" id="company-contact" name="company-contact" placeholder="Contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row gap-4">
+                                        <div class="flex flex-col gap-2 w-full">
+                                            <label for="company-email" class="font-semibold text-lg">E-MAIL*</label>
+                                            <input type="email" id="company-email" name="email" placeholder="E-mail de contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        </div>
+                                        <div class="flex flex-col gap-2 w-full">
+                                            <label for="company-tel" class="font-semibold text-lg">TELEFONE*</label>
+                                            <input type="text" id="company-tel" name="company-tel" placeholder="Telefone de contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <label for="creation-unit" class="font-semibold text-lg">UNIDADE DE CRIAÇÃO*</label>
+                                        <select name="creation-unit" id="creation-unit" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <option value="" selected disabled>Selecione a unidade de criação</option>
+                                            <option value="test">1</option>
+                                            <option value="test">2</option>
+                                            <option value="test">3</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <label for="manager" class="font-semibold text-lg">GERENTE*</label>
+                                        <select name="manager" id="manager" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <option value="" selected disabled>Selecione o gerente responsável</option>
+                                            <option value="test" class="hover:">1</option>
+                                            <option value="test">2</option>
+                                            <option value="test">3</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="w-full bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">CADASTRAR</button>
+                                </form>
+                            </div>
+                        </div>
                         <div class="flex gap-1">
                             <img src="../../img/icon/search.svg" alt="Pesquisar" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                             <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
