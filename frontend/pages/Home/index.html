@@ -100,7 +100,7 @@
                 </div>
                 <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
                     <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
-                    <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
+                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
                             <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
@@ -121,8 +121,8 @@
                 <h1 class="text-2xl font-bold">VISÃO GERAL</h1>
                 <h2 class="text-xs font-normal">Projetos do Instituto Senai de Inovação</h2>
             </div>
-            <div class="flex gap-6 relative md:flex-wrap justify-center  md:justify-start">
-                <div class="flex absolute md:static sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
+            <div class="flex gap-6 flex-wrap justify-center  md:justify-start">
+                <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
                         <img src="../../img/icon/inventory.svg" alt="Projetos em análise" class="w-8 h-8">
                     </div>
@@ -131,7 +131,7 @@
                         <span class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
-                <div class="flex absolute md:static sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
+                <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
                         <img src="../../img/icon/inventory.svg" alt="Projetos em análise" class="w-8 h-8">
                     </div>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-center items-center md:justify-start mt-[144px] md:mt-10">
+            <div class="flex justify-center items-center md:justify-start mt-10">
                 <div class="flex flex-wrap gap-4 pb-2">
                     <span role="button" class="font-medium text-xs md:text-lg pb-2 text-primary hover:text-primary transition-colors border-b-2 border-primary">TODOS</span>
                     <span role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors">ANÁLISE</span>
@@ -167,79 +167,7 @@
                     <div role="table" class="mt-8 space-y-1">
                         <!-- Rows -->
                         <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent]">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md">
-                                    <div>
-                                        <abbr title="Rebimboca da parafuseta" class="no-underline"><span class="font-semibold text-lg leading-4 whitespace-nowrap">Rebimboca da parafuseta</span></abbr>
-                                        <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                            <span>115 - 2023</span>
-                                            <span>12/07/2021 - 31/12/2022</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <img src="../../img/icon/perfil.png" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-[#7950FF]/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto">ANÁLISE</span>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 bottom-0 right-[125%] h-auto bg-component rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2">
-                                            <li role="option" class="text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent]">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md">
-                                    <div>
-                                        <abbr title="Rebimboca da parafuseta" class="no-underline"><span class="font-semibold text-lg leading-4 whitespace-nowrap">Rebimboca da parafuseta</span></abbr>
-                                        <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                            <span>115 - 2023</span>
-                                            <span>12/07/2021 - 31/12/2022</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <img src="../../img/icon/perfil.png" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-[#7950FF]/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto">ANÁLISE</span>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 bottom-0 right-[125%] h-auto bg-component rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2">
-                                            <li role="option" class="text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent]">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                                 <div class="flex items-center gap-3 lg:w-full">
                                     <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md">
                                     <div>
