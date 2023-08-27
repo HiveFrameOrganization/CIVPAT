@@ -53,3 +53,27 @@ const toggleModal = () => [modal, fade].forEach((el) => el.classList.toggle('hid
 [openModalButton, closeModalButton, fade].forEach((el) => el.addEventListener('click', toggleModal));
 
 // ---------------------------------------------------------
+
+// Input de pesquisa da tabela
+
+// const searchTrigger = document.querySelector('#search-trigger');
+// const searchInput = document.querySelector('#search-input');
+
+// searchTrigger.addEventListener('click', function() {
+
+//     if (searchInput.classList.contains('invisible')) {
+
+//         searchInput.classList.replace('invisible', 'visible');
+//         searchInput.classList.replace('-right-full', 'right-full');
+        
+//         searchTrigger.classList.replace('rounded-md', 'rounded-r-md');
+//     } else {
+
+//         searchInput.classList.replace('visible', 'invisible');
+//         searchInput.classList.replace('right-full', '-right-full');
+
+//         searchTrigger.classList.replace('rounded-r-md', 'rounded-md');
+//     }
+// });
+
+// ---------------------------------------------------------
