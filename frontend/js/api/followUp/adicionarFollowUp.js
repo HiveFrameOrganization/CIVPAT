@@ -93,7 +93,7 @@ async function enviaBackEnd(dadosEnviados) {
             }
         }).catch(error => {
             console.error('Erro no processamento dos dados', error);
-        });;
+        });
     } catch (error) {
         console.error('Erro no Fetch', error);
     }

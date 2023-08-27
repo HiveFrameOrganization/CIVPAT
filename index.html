@@ -129,6 +129,22 @@
         </form>
     </aside>
 
+    <script type="module">
+        import { back } from '/frontend/js/api/Rotas/rotas.js'
+        fetch(back + `/login/pegarLogado.php`, {method: 'GET'})
+        .then(response => response.json())
+        .then(data => {
+            // Mostra a mensagem e o status no console
+            console.log(data.mensagem);
+            console.log(data.status);
+            if (data.logado) {
+                window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
+            }
+        }).catch(error => {
+            console.error('Erro no processamento dos dados', error);
+        });
+    </script>
+
     <script type="module" src="./frontend/js/api/login/novoUsuario.js"></script>
     <script type="module" src="./frontend/js/api/login/login.js"></script>
 
