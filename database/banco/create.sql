@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`ServicoCategoria` (
   `idServicoCategoria` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ServicoCategoria` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idServicoCategoria`))
-ENGINE = InnoDB;
+ENGINE = InnoDB;  
 
 
 -- -----------------------------------------------------
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `idProduto` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_idProposta` INT UNSIGNED NOT NULL,
   `fk_nifTecnico` VARCHAR(7) NOT NULL,
-  `fk_idMaquina` INT UNSIGNED NOT NULL,
+  `fk_idMaquina` INT UNSIGNED NULL,
   `fk_idNomeProduto` INT UNSIGNED NOT NULL,
   `fk_idServicoCategoria` INT UNSIGNED NOT NULL,
   `Area` ENUM("metalmecanica") NOT NULL,

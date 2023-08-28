@@ -18,7 +18,7 @@ async function pegarTodasAsPropostas () {
         
         exibirPropostas(dados.propostas);
 
-        // Adicionando a quanntidade de propostas de acordo com os seus status
+        // Adicionando a quaqntidade de propostas de acordo com os seus status
         document.getElementById('analise').innerHTML ='Projetos Em Análise: ' + dados['Em Análise'];
         document.getElementById('aceitos').innerHTML ='Projetos Aceitos: ' + dados['Aceito'];
         document.getElementById('declinados').innerHTML ='Projetos Declinados: ' + dados['Declinado'];

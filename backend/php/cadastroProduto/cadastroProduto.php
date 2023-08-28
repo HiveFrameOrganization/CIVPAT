@@ -19,50 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dataFinal = $data["dataFinal"];
     $idProposta = intval($data["idProposta"]);
     $servico = intval($data["servico"]);
-    $produto = $data["produto"];
+    $idProduto = $data["produto"];
     $valor = floatval($data["valor"]);
     $area = $data["area"];
+    $nifTecnico = $data["nifTecnico"];
 
 
-    $stmt = $conn->prepare('SELECT idNomeProduto FROM NomeProduto WHERE NomeProduto = ?');
 
-    $stmt->bind_param('s', $produto);
+    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, Unidade, DataInicial, DataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
 
-    $stmt->execute();
+    $stmt2->bind_param('sssssssssss', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal);
+    // Executa a declaração preparada
+    if ($stmt2->execute()) {
 
-    $resultado = $stmt->get_result();
+        // Resposta a ser retronada para o servidor
+        $resposta = [
+            'mensagem' => 'Produto cadastrado com sucesso!',
+            'status' => 'success'
+        ];
 
-    $linha = $resultado->fetch_assoc();
-
-    if($linha){
-        
-        $idProduto = intval($linha['idNomeProduto']);
-
-
-        $stmt2 = $conn->prepare('INSERT INTO Produtos (idProdutos, fk_idProposta, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, Unidade, DataInicial, DataFinal) VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-
-        $stmt2->bind_param('ssssssssss', $idProposta, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal);
-
-        // Executa a declaração preparada
-        if ($stmt2->execute()) {
-
-            // Resposta a ser retronada para o servidor
-            $resposta = [
-                'mensagem' => 'Produto cadastrado com sucesso!',
-                'status' => 'success'
-            ];
-
-            echo json_encode($resposta);
-        } else {
-            // Resposta a ser retronada para o servidor
-            $resposta = [
-                'mensagem' => 'Algo deu errado ao cadastrar o produto',
-                'status' => 'error'
-            ];
-
-            echo json_encode($resposta);
-        }
-
+        echo json_encode($resposta);
     } else {
         // Resposta a ser retronada para o servidor
         $resposta = [
@@ -72,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         echo json_encode($resposta);
     }
+
 
 } else {
     // Handle other HTTP request methods if needed

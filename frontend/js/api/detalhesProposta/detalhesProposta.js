@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
     // Levar o valor do id do local Storage atravez da função para o back end
     verificarBancoProposta(idProposta);
     verificarPdfExistente(idProposta);
+    carregarProdutos(idProposta);
 
 })
 
@@ -225,5 +226,58 @@ async function postarDetalhesBanco(postDetalhes){
         
     }catch(error){
         console.error(error)
+    }
+}
+
+
+async function carregarProdutos(idProposta) {
+    try{
+        // Cria a requisição 
+        const requisicao = await fetch(back + `/detalhesProposta/carregarProdutos.php?id=${idProposta}`)
+
+        // Verificando se deu erro ao fazer a requisição
+        if (!requisicao.ok) {
+            throw new Error('Erro na requisição');
+        }
+
+        // recebe a resposta do servidor
+        const resposta = await requisicao.json();
+
+        console.log(resposta);
+        
+        exibirProdutos(resposta.produtos);
+
+    }catch(error){
+        console.error(error)
+    }
+}
+
+
+async function exibirProdutos(produtos) {
+    // selecionando a div dos botões
+    const botoes = document.getElementById('propostas');
+
+    // limpando os possíveis elementos que possam estar na div
+    propostas.innerHTML = '';
+
+    for (let produto of produtos) {
+        // criando o botão da proposta
+        const botao = document.createElement('button');
+
+        // adicionando o valor ao botão da proposta
+        botao.value = produto.idProduto;
+        botao.innerHTML = produto.NomeProduto;
+
+        botao.onclick = () => {
+            localStorage.setItem('idProduto', botao.value);
+            
+            window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
+        }
+
+        botoes.appendChild(botao);
+
+        // Adicionando uma quebra de linha entre os botões
+        const quebraDeLinha = document.createElement('br');
+        botoes.appendChild(quebraDeLinha);
     }
 }
