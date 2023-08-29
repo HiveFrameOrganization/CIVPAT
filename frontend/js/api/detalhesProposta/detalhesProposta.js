@@ -86,10 +86,10 @@ async function verificarBancoProposta(id){
         
 
         const resposta = await requisicao.json()
-        console.log(resposta['valorTotalProdutos'])
+        console.log(resposta)
 
         //Enviando para o front-end os dados vindos do back end
-        const nomeProposta = document.querySelector('#nomeProposta').value = resposta['nomeProposta']; 
+        const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta']; 
         const cnpj = document.querySelector('#cnpj').value = resposta['cnpj'];
         const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
@@ -169,7 +169,7 @@ function baixarPdf (tipoPdf) {
 
 
 const editandoProposta = document.querySelector('#editarProposta');
-editandoProposta.addEventListener('click', (evento) =>{
+editandoProposta.addEventListener('click', () =>{
 
     const idProposta = localStorage.getItem('idProposta');
 
@@ -181,9 +181,7 @@ editandoProposta.addEventListener('click', (evento) =>{
     const statusProposta = document.querySelector('#statusProposta').value;
     const gerenteProposta = document.querySelector('#gerenteProposta').value;
     const numeroSGSET = document.querySelector('#numeroSGSET').value;
-    const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value;
-    const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value;
-    const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value;
+   
 
 // Criando um objeto com os dados dos input's
     const detalhesProposta = {
@@ -194,11 +192,7 @@ editandoProposta.addEventListener('click', (evento) =>{
         empresa : empresa,
         statusProposta : statusProposta ,
         gerenteProposta : gerenteProposta ,
-        numeroSGSET : numeroSGSET,
-        dataPrimeiroProduto : dataPrimeiroProduto,
-        dataUltimoProduto : dataUltimoProduto,
-        valorTotalProdutos : valorTotalProdutos
-
+        numeroSGSET : numeroSGSET
     }
     
     // Enviando o objeto para o back end

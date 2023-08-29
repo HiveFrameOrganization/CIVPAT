@@ -33,15 +33,15 @@ function verificarDetalhes($idProposta, $conn) {
             $resultadoDataFinal = $stmt-> get_result();
             $dadosDataFinal = mysqli_fetch_assoc($resultadoDataFinal);
             
-            // $stmt = $conn->prepare(" SELECT  SUM Valor AS Valor FROM Produtos  WHERE fk_idProposta = ?");
-            // $stmt->bind_param('s', $idProposta);
-            // $stmt->execute();
-            // $resultadoValorTotal = $stmt-> get_result();
-            // $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
+            $stmt = $conn->prepare(" SELECT SUM(Valor) AS ValorTotal FROM Produtos  WHERE fk_idProposta = ?");
+            $stmt->bind_param('s', $idProposta);
+            $stmt->execute();
+            $resultadoValorTotal = $stmt-> get_result();
+            $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
 
 
             $dealhesProposta = [
-                "nomeProposta" => $dados['TituloProposta'],
+                "TituloProposta" => $dados['TituloProposta'],
                 "cnpj" => $dados['CNPJ'],
                 "uniCriadora" => $dados['UnidadeCriadora'],
                 "empresa" => $dados['Empresa'],
@@ -50,7 +50,7 @@ function verificarDetalhes($idProposta, $conn) {
                 "numeroSGSET" => $dados['numeroSGSET'],
                 "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
                 "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
-                // "valorTotalProdutos" => $dadosValorTotal['Valor']
+                "valorTotalProdutos" => $dadosValorTotal['ValorTotal']
             ];
 
             echo json_encode($dealhesProposta);
