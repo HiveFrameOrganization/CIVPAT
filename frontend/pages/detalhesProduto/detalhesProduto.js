@@ -1,6 +1,5 @@
 import { back } from '../../js/api/Rotas/rotas.js';
 
-
 // formatar a data
 const hoje = new Date();
 const ano = hoje.getFullYear();
@@ -34,14 +33,14 @@ async function validacaoDataFinal () {
 
 }
 
-window.addEventListener('load',async function (){
+window.addEventListener('load', async function (){
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
 
     const dadosProduto = await carregarDetalhesProduto();  
 
-    const idServicoCategoria = dadosProduto.idProduto; 
+    const idServicoCategoria = dadosProduto.fk_idServicoCategoria; 
 
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
     for (var i = 0; i < servicoCategoriaSelect.options.length; i++) {
@@ -60,6 +59,8 @@ window.addEventListener('load',async function (){
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await requisicao.json();
 
+        console.log(dados);
+
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -71,7 +72,7 @@ window.addEventListener('load',async function (){
             produtoSelect.appendChild(option);
         });
 
-        
+        selecionarProduto(dadosProduto);
         
     } catch {
         console.log('Error');
@@ -84,7 +85,6 @@ window.addEventListener('load',async function (){
 document.getElementById("servico").addEventListener("change",async function() {
     const idServicoCategoria = document.getElementById('servico').value;
     const produtoSelect = document.getElementById("produto");
-
 
     
     // Excluir as options anteriores
@@ -125,7 +125,7 @@ async function carregarDetalhesProduto() {
 
     const requisicao = await fetch(back + `/detalhesProduto/detalhesProduto.php?id=${idProduto}`);
 
-    // dados de todas as propostar recebidas (resposta da api)
+    // dados do produto recebido (resposta da api)
     const dados = await requisicao.json();
 
     // caso a requisição de um erro, irá exibir uma mensagem de erro
@@ -136,8 +136,6 @@ async function carregarDetalhesProduto() {
 }
 
 async function selecionarProduto(dadosProduto) {
-
-    console.log(dadosProduto);
 
     const produtoSelect = document.getElementById("produto");
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
