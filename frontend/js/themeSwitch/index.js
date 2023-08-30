@@ -11,7 +11,7 @@ function iconToggle() {
 
     sunIcon.classList.toggle('hidden');
     moonIcon.classList.toggle('hidden');
-};
+}
 
 // Initial Theme Check
 function themeCheck() {
@@ -28,7 +28,7 @@ function themeCheck() {
 
     sunIcon.classList.add('hidden');
     moonIcon.classList.remove('hidden');
-};
+}
 
 // Manual Theme Switch
 function themeSwitch() {
@@ -44,7 +44,7 @@ function themeSwitch() {
     document.documentElement.setAttribute('data-theme', 'dark');
     localStorage.setItem('theme', 'dark');
     iconToggle();
-};
+}
 
 // Theme switch btn
 sunIcon.addEventListener('click', () => {
