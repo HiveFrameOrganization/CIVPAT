@@ -5,10 +5,10 @@ senha: Hiveframe@115
 ==================================================================
 Congratulations! Installed successfully!
 ==================================================================
-aaPanel Internet Address: https://52.170.135.30:7800/448a6647
-aaPanel Internal Address: https://10.0.0.4:7800/448a6647
-username: q1nvibid
-password: 903e5462
+aaPanel Internet Address: https://13.90.142.134:7800/7f4e15d9
+aaPanel Internal Address: https://10.0.0.4:7800/7f4e15d9
+username: g9jt63hq
+password: 0f6c0e58
 Warning:
 If you cannot access the panel,
 release the following port (7800|888|80|443|20|21) in the security group
