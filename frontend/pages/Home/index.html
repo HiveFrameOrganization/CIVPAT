@@ -62,6 +62,11 @@
             },
         }
     </script>
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js';
+        autenticacao(['coor', 'adm', 'ger', 'tec']);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="bg-body transition-colors">
     <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm" role="navigation" >
@@ -98,7 +103,7 @@
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
-                            <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
@@ -121,7 +126,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
-                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="analise" class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -130,7 +135,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em desenvolvimento</h5>
-                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="aceitos" class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -139,7 +144,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas declinadas</h5>
-                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="declinados" class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -148,7 +153,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas concluídas</h5>
-                        <span class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="concluidos" class="font-medium text-lg text-color-text-secundary">#212</span>
                     </div>
                 </div>
             </div>
@@ -228,54 +233,13 @@
                             </div>
                         </div>
                         <div class="flex gap-1">
-                            <!-- <div class="flex relative"> -->
-                            <!-- <input type="text" placeholder="Pesquisar..." id="search-input" class="invisible absolute -right-full px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-l-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"> -->
                             <img src="../../img/icon/search.svg" alt="Pesquisar" id="search-trigger" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
-                            <!-- </div> -->
                             <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                         </div>
                     </div>
                     <!-- Exibição da tabela -->
-                    <div role="table" class="mt-8 space-y-1">
+                    <div id="table" role="table" class="mt-8 space-y-1">
                         <!-- Rows -->
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
-                                <div class="flex items-center gap-8 lg:w-full">
-                                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                                        <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-[#7950FF]/20 rounded-md">
-                                        <div class="max-w-[250px] overflow-hidden text-ellipsis">
-                                            <span title="Rebimboca da parafuseta" class="font-semibold text-lg leading-4 whitespace-nowrap">Rebimboca da parafuseta</span>
-                                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                                <span>115 - 2023</span>
-                                                <span>12/07/2021 - 31/12/2022</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-3">
-                                        <img src="../../img/icon/perfil.png" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-[#7950FF]/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto">ANÁLISE</span>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 bottom-0 right-[125%] h-auto bg-component rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2">
-                                            <li role="option" class="text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
                     </div>
                     <!-- FIM da tabela -->
                 </div>
@@ -315,5 +279,8 @@
 
     <script src="./index.js"></script>
     <script src="../../js/global.js"></script>
+    <script src="../../js/logoff.js"></script>
+    <script src="../../js/feedback.js"></script>
+    <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
 </body>
 </html>

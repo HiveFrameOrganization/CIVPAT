@@ -174,7 +174,7 @@ editandoProposta.addEventListener('click', () =>{
     const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
-    const nomeProposta = document.querySelector('#nomeProposta').value;
+    const nomeProposta = document.querySelector('#tituloProposta').value;
     const cnpj = document.querySelector('#cnpj').value;
     const uniCriadora= document.querySelector('#uniCriadora').value;
     const empresa = document.querySelector('#empresa').value;

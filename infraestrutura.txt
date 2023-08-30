@@ -13,3 +13,5 @@ Warning:
 If you cannot access the panel,
 release the following port (7800|888|80|443|20|21) in the security group
 ==================================================================
+
+Atual: https://13.90.142.134:9999/
