@@ -36,71 +36,195 @@ async function retornaFuncionarios() {
 
 function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
-    const exibicao = document.querySelector('#exibicao');
+    const exibe = document.querySelector('#exibicao');
 
     // Removendo um possível elemento na div de exibição
-    exibicao.innerHTML = '';
+    exibe.innerHTML = '';
 
     for (let funcionario of dados) {
 
         // Criando os elementos
         const div = document.createElement('div');
-        const nome = document.createElement('p');
-        const sobrenome = document.createElement('p');
-        const nif = document.createElement('p');
-        const email = document.createElement('p');
-        const cargo = document.createElement('p');
-        const status = document.createElement('p');
-        const hr = document.createElement('hr');
 
         // Colocando uma classe na div criada
-        div.classList.add('listaUsuario');
+        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'row', 'mt-1');
+
+        const row = document.createElement('div');
+
+        // Colocando uma classe na row criada
+        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we');
+
+        const exibicao = document.createElement('div');
+
+        // Colocando uma classe na div de exibição criada
+        exibicao.classList.add('flex', 'items-center', 'gap-3', 'lg:w-full');
+
+        const img = document.createElement('img');
+
+        // Colocando atributos na img criada
+        img.classList.add('w-8', 'h-8', 'border', 'border-primary', 'rounded-full');
+        img.src = '../../img/icon/perfil.png';
+        img.alt = 'Foto do técnico';
+
+        const nomefuncao = document.createElement('div');
+
+        // Colocando uma classe na div de exibição de nome e função criada
+        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6');
+
+        const nome = document.createElement('span');
+
+        // Colocando uma classe no span de nome criado
+        nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+
+        const funcao = document.createElement('span');
+
+        // Colocando uma classe no span de função criado
+        funcao.classList.add('text-xs', 'text-color-text-secundary');
+
+        const divisor = document.createElement('div');
+
+        // Colocando uma classe na divisória criada
+        divisor.classList.add('w-px', 'h-10', 'bg-color-text', 'opacity-10', 'divider');
+
+        const exibenif = document.createElement('div');
+
+        // Colocando uma classe na div de exibição de nif criada
+        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6');
+
+        const flexnif = document.createElement('div');
+
+        // Colocando uma classe na div de exibição de nif criada
+        flexnif.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold');
+
+        const titulonif = document.createElement('span');
+
+        // Colocando uma classe no span de título de nif criado
+        titulonif.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+
+        const nif = document.createElement('span');
+
+        // Colocando uma classe no span de nif criado
+        nif.classList.add('text-xs', 'text-color-text-secundary');
+
+        const divisordois = document.createElement('div');
+
+        // Colocando uma classe na divisória criada
+        divisordois.classList.add('w-px', 'h-10', 'bg-color-text', 'opacity-10', 'divider');
+
+        const exibeemail = document.createElement('div');
+
+        // Colocando uma classe na div de exibição de nif criada
+        exibeemail.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6');
+
+        const flexemail = document.createElement('div');
+
+        // Colocando uma classe na div de exibição de nif criada
+        flexemail.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold');
+
+        const tituloemail = document.createElement('span');
+
+        // Colocando uma classe no span de título de nif criado
+        tituloemail.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+
+        const email = document.createElement('span');
+
+        // Colocando uma classe no span de nif criado
+        email.classList.add('text-xs', 'text-color-text-secundary');
 
         // Adicionando conteúdo nos elementos
-        nome.textContent = 'Nome: ' + funcionario.Nome;
-        sobrenome.textContent = 'Sobrenome: ' + funcionario.Sobrenome;
-        email.textContent = 'Email: ' + funcionario.Email;
-        nif.textContent = 'NIF: ' + funcionario.NIF;
-        cargo.textContent = 'Cargo: ' + funcionario.TipoUser;
-        status.textContent = 'Status: ' + funcionario.Status;
+        nome.textContent = funcionario.Nome + ' ' + funcionario.Sobrenome;
+        tituloemail.textContent = 'E-mail'
+        email.textContent = funcionario.Email;
+        titulonif.textContent = 'NIF'
+        nif.textContent = funcionario.NIF;
+        funcao.textContent = funcionario.TipoUser;
+        // status.textContent = 'Status: ' + funcionario.Status;
 
-        // Colocando os dados na div a ser renderizada
-        div.appendChild(nif);
-        div.appendChild(nome);
-        div.appendChild(sobrenome);
-        div.appendChild(cargo);
-        div.appendChild(email);
-        div.appendChild(status);
+        // Colocando os dados nas divs a ser renderizadas
+
+        div.appendChild(row);
+        row.appendChild(exibicao);
+        exibicao.appendChild(img);
+        exibicao.appendChild(nomefuncao);
+        nomefuncao.appendChild(nome);
+        nomefuncao.appendChild(funcao);
+        exibicao.appendChild(divisor);
+        exibicao.appendChild(exibenif);
+        exibenif.appendChild(flexnif);
+        flexnif.appendChild(titulonif);
+        flexnif.appendChild(nif);
+        exibicao.appendChild(divisordois);
+        exibicao.appendChild(exibeemail);
+        exibeemail.appendChild(flexemail);
+        flexemail.appendChild(tituloemail);
+        flexemail.appendChild(email);
+
+
+        // div.appendChild(status);
 
 
         // Criando o botão de inativar
         if (funcionario.Status === 'ativo') {
             // Criando botões para editar e inativar funcionários
-            const editar = document.createElement('button');
-            const inativar = document.createElement('button');
+
+            const options = document.createElement('div');
+            const btnOptions = document.createElement('button');
+            const icon = document.createElement('img');
+            const dropdown = document.createElement('div');
+            const lista = document.createElement('ul');
+            const itemEditar = document.createElement('li');
+            const editar = document.createElement('a');
+            const itemInativar = document.createElement('li');
+            const inativar = document.createElement('a');
 
             // Atribuindo o NIF no valor do botão
+
             editar.value = funcionario.NIF
             inativar.value = funcionario.NIF
 
-            // Atribuindo uma classe no botão de inativar
+            // Atribuindo classes
+
+            options.classList.add('bg-component', 'rounded-md', 'px-3', 'md:px-4', 'flex', 'items-center', 'justify-center');
+            btnOptions.classList.add('w-6', 'h-6', 'p-1', 'bg-[#7950FF]/20', 'rounded-md', 'relative');
+            btnOptions.type = 'button';
+            icon.classList.add('option-dropdown-trigger', 'w-full');
+            icon.src = '../../img/icon/more-vertical.svg';
+            icon.alt = 'Opções';
+            dropdown.classList.add('option-dropdown', 'hidden', 'absolute', 'z-10', '-bottom-[42px]', 'right-[125%]', 'h-auto', 'bg-body', 'rounded-md', 'border', 'border-body', 'shadow-sm');
+            lista.classList.add('space-y-2', 'py-2', 'px-2');
+            lista.role = 'listitem';
+            itemEditar.classList.add('text-color-text', 'hover:bg-color-text-secundary/20', 'transition-colors', 'px-4', 'py-1', 'text-sm', 'cursor-pointer', 'rounded-md');
+            itemEditar.role = 'option';
+            editar.classList.add('px-1', 'py-1');
+            editar.href = '#';
             editar.classList.add('editar');
+            itemInativar.classList.add('text-color-text', 'hover:bg-color-text-secundary/20', 'transition-colors', 'px-4', 'py-1', 'text-sm', 'cursor-pointer', 'rounded-md');
+            itemInativar.role = 'option';
+            inativar.classList.add('px-1', 'py-1');
+            inativar.href = '#';
             inativar.classList.add('inativar');
 
             // Atribuindo um texto
+
             editar.textContent = 'Editar';
             inativar.textContent = 'Inativar';
 
             // Adicionando na div
-            div.appendChild(editar);
-            div.appendChild(inativar);
+
+            options.appendChild(btnOptions);
+            btnOptions.appendChild(icon);
+            btnOptions.appendChild(dropdown);
+            dropdown.appendChild(lista);
+            lista.appendChild(itemEditar);
+            itemEditar.appendChild(editar);
+            lista.appendChild(itemInativar);
+            itemInativar.appendChild(inativar);
+            
+            div.appendChild(options);
         }
 
-        // Adicionando uma quebra de linha
-        div.appendChild(hr);
-
         // Colocando a div na exibição HTML
-        exibicao.appendChild(div);
+        exibe.appendChild(div);
 
     }
 
@@ -267,32 +391,39 @@ document.addEventListener('click', evento => {
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
 
-    // Fazendo a lista de funcionários desaparecer
-    const exibicao = document.querySelector('#exibicao');
+    let modalEdit = document.querySelector('.edit');
 
-    // Selecionando o formulário
-    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+    modalEdit.classList.add('flex');
+    modalEdit.classList.remove('hidden');
 
-    // Alterando a visibilidade
-    // Renderizando de acordo o evento
-    if (formularioEditarUsuario.style.display === 'flex') {
+    dadosParaEditar(nif);
 
-        // Escondendo o formulário
-        formularioEditarUsuario.style.display = 'none';
+    // // Fazendo a lista de funcionários desaparecer
+    // const exibicao = document.querySelector('#exibicao');
 
-        // Exibindo a lista
-        exibicao.style.display = 'block';
+    // // Selecionando o formulário
+    // const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 
-    } else {
-        // Exibindo o formulário
-        formularioEditarUsuario.style.display = 'flex';
+    // // Alterando a visibilidade
+    // // Renderizando de acordo o evento
+    // if (formularioEditarUsuario.style.display === 'flex') {
 
-        // Escondendo a lista de funcionários
-        exibicao.style.display = 'none';
+    //     // Escondendo o formulário
+    //     formularioEditarUsuario.style.display = 'none';
 
-        // Quando aparecer o formulário será feita uma requisição para retornar os dados
-        dadosParaEditar(nif);
-    }
+    //     // Exibindo a lista
+    //     exibicao.style.display = 'block';
+
+    // } else {
+    //     // Exibindo o formulário
+    //     formularioEditarUsuario.style.display = 'flex';
+
+    //     // Escondendo a lista de funcionários
+    //     exibicao.style.display = 'none';
+
+    //     // Quando aparecer o formulário será feita uma requisição para retornar os dados
+    //     dadosParaEditar(nif);
+    // }
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
