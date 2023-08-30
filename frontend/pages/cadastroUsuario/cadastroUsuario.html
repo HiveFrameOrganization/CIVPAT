@@ -1,117 +1,465 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./cadastroUsuario.css" />
-    <title>Cadastro</title>
-  </head>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./cadastroUsuario.css">
+    <link rel="stylesheet" href="../../Componentes/inputModal/style.css">
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Gerenciamento de funcionários - HIVEFRAME</title>
 
-  <body>
-    <a href="../todasPropostas/todasPropostas.html">Home</a>
-    <div id="divBarraPesquisa">
-      <input
-        type="text"
-        id="pesquisarUsuario"
-        placeholder="pesquise um funcionário"
-      />
-      <button id="botaoPesquisar">Pesquisar</button>
-    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }
 
-    <button id="botaoTodos">Todos</button>
-    <button id="botaoAtivos" value="ativo">Ativos</button>
-    <button id="botaoDesativos" value="inativo">Inativos</button>
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
 
-    <!-- Botão para fazer aparecer o formulário de cadastro -->
-    <button id="cadastrar">Cadastrar</button>
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
 
-    <!-- Formulário para enviar dados do cadastro no Back-end -->
-    <form id="formulario">
-      <label>NIF:</label>
-      <input type="text" id="nif" minlength="5" maxlength="7" required />
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
 
-      <label>Nome:</label>
-      <input type="text" id="nome" required minlength="3" maxlength="100" />
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+        }
 
-      <label>Sobrenome:</label>
-      <input
-        type="text"
-        id="sobrenome"
-        required
-        minlength="3"
-        maxlength="200"
-      />
 
-      <label>Email:</label>
-      <div class="box">
-        <input type="text" id="email" required maxlength="63" />
-        <p>@sp.senai.br</p>
-      </div>
 
-      <p>
-        Não se preocupe com a senha, será salvo uma senha padrão e o usuário
-        poderá modificar a senha no primeiro acesso.
-      </p>
-
-      <label>Selecione o Cargo:</label>
-      <select id="tipoCargo">
-        <option value="adm">Administrador</option>
-        <option value="coor">Coordenador</option>
-        <option value="ger">Gerente</option>
-        <option value="tec">Técnico</option>
-      </select>
-
-      <button type="submit">Enviar</button>
-    </form>
-
-    <!-- Formulário para editar Nome, Sobrenome, Email, cargo e resetar a senha -->
-    <form id="formularioEditarUsuario">
-
-       <h1>Editar</h1>
-
-      <label>Nome:</label>
-      <input type="text" id="editarNome" required minlength="3" maxlength="100" />
-
-      <label>Sobrenome:</label>
-      <input
-        type="text"
-        id="editarSobrenome"
-        required
-        minlength="3"
-        maxlength="200"
-      />
-
-      <label>Email:</label>
-      <div class="box">
-        <input type="text" id="editarEmail" required maxlength="63" />
-        <p>@sp.senai.br</p>
-      </div>
-
-      <button id="resetarSenha" type="button">Redefinir senha</button>
-
-      <label>Selecione o Cargo:</label>
-      <select id="editarCargo">
-        <option value="adm">Administrador</option>
-        <option value="coor">Coordenador</option>
-        <option value="ger">Gerente</option>
-        <option value="tec">Técnico</option>
-      </select>
-
-      <button type="submit">Editar</button>
-    </form>
-
-    <div id="exibicao">
-      <h1>Funcionários</h1>
-    </div>
-
-    <script type="module" src="../../js/api/funcionarios/funcionarios.js"></script>
-    <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
-    <script src="../../js/feedback.js"></script>
-
-    <!-- Autenticação -->
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js'
-        autenticacao(['coor'])
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                }
+            },
+        }
     </script>
-  </body>
+</head>
+<body class="bg-body transition-colors relative">
+
+    <div class="flex flex-col h-screen z-10 w-full">
+
+        <!-- header -->
+    
+        <header class="py-4 px-6 text-color-text fixed top-0 w-full z-50">
+
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    
+                    <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                    <div id="sidebar" class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-30">
+                        <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                            <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                            <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                            <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                        </div>
+                        <div class="mt-4 space-y-4">
+                            <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                            <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                            <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                            <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
+                        </div>
+                    </div>
+    
+                    <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+    
+                    <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+    
+                </div>
+                <div class="flex items-center gap-3 z-30">
+    
+                    <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                        <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
+                        <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                    </div>
+    
+                    <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
+                        <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+    
+                        <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                            <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                                <h5 class="text-base text-color-text">Doge do Meme</h5>
+                                <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                                <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                            </div>
+                            <ul>
+                                <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+        </header>
+    
+        <script src="../../js/themeSwitch/index.js"></script>
+        <script src="../../js/global.js"></script>
+    
+        <section class="px-6 2xl:px-16 mt-[72px]">
+    
+            <!-- título / subtítulo da página -->
+    
+            <div class="pt-8">
+                <h1 class="text-color-text font-bold text-2xl">GERENCIAMENTO DE EQUIPE</h1>
+                <h2 class="text-color-text text-xs pt-2">Cadastre, visualize ou desative funcionários.</h2>
+            </div>
+    
+            <!-- filtros -->
+    
+            <div class="pt-10 2xl:pt-14 flex gap-8 justify-center sm:justify-normal">
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoTodos">TODOS</button>
+                </div>
+    
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoAtivos" value="ativo">ATIVOS</button>
+                </div>
+    
+                <div>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoDesativos" value="inativo">INATIVOS</button>
+                </div>
+            </div>
+    
+        </section>
+    
+        <!-- tabela com funcionários -->
+
+        <main class="bg-component w-full px-6 pb-3 sm:pb-6 2xl:px-16 mt-[3px] flex flex-col flex-1 h-auto">
+
+            <div class="pt-12 pb-3 sm:pb-6">
+                <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
+            </div>
+
+            <div class="bg-body w-full rounded-md px-3 sm:px-8">
+
+                <!-- botões -->
+
+                <div class="flex flex-wrap gap-2 pt-3 sm:pt-6 justify-between">
+
+                    <div>
+                        <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ NOVO FUNCIONÁRIO</button>
+                    </div>
+
+                    <div class="flex gap-1">
+
+                        <div class="flex gap-2 flex-wrap">
+                            <div class="relative" id="barraPesquisa">
+                                <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
+                                <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
+                            </div>
+                            <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- tabela -->
+
+                <div id="exibicao" class="py-8">
+                    <div role="table" class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
+
+                        <!-- Rows -->
+
+                        <!-- <div class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
+                                <div class="flex items-center gap-3 lg:w-full">
+                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
+                                    <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                        <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                        <span class="text-xs text-color-text-secundary">Gerente</span>
+                                    </div>
+
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
+                                            <span class="text-xs text-color-text-secundary">01234567</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+
+                                    <div class="flex items-center gap-3 px-4 lg:px-6">
+                                        <div class="flex flex-col gap-1 font-semibold">
+                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
+                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div> -->
+
+                            <!-- editar e inativar -->
+
+                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
+                                        <ul role="listitem" class="space-y-2 py-2 px-2">
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1" onclick="abreModalEdit()">
+                                                    Editar
+                                                </a>
+                                            </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Inativar
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </button>
+                            </div>
+
+                        <!-- </div> -->
+
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginação -->
+
+            <div class="w-full mt-4">
+                <div class="flex items-center gap-2 justify-end">
+                    <a href="#" class="w-4 h-4">
+                        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+                    </a>
+                    <a href="#" class="in-page bg-body text-color-text text-sm px-3 py-1 rounded-md">1</a>
+                    <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md">2</a>
+                    <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md">3</a>
+                    <a href="#" class="w-4 h-4">
+                        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+                    </a>
+                </div>
+            </div>
+            
+        </main>
+
+
+        
+
+        <!------------------------------ MODAL DE CADASTRO ------------------------------>
+    
+        <!-- centralização -->
+    
+        <div class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+    
+            <!-- conteúdo do modal -->
+    
+            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto">
+    
+                <!-- botão de fechar -->
+    
+                <div class="w-full lg:flex lg:justify-end">
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                </div>
+    
+                <!-- título e subtítulo -->
+    
+                <div class="text-center lg:text-justify text-color-text">
+                    <h1 class="font-bold text-2xl">CADASTRO DE FUNCIONÁRIO</h1>
+                    <h2 class="text-xs pt-2">Insira as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                </div>
+    
+                <!-- inputs -->
+    
+                <form class="flex flex-col gap-6 pt-8" id="formulario" autocomplete="off">
+    
+                    <!-- NIF -->
+    
+                    <div>
+                        <label class="text-color-text font-bold block mb-3">NIF *</label>
+                        <input type="text" id="nif" minlength="5" maxlength="7" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário" required>
+                    </div>
+    
+                    <!-- Nome e sobrenome -->
+    
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">NOME *</label>
+                            <input type="text" id="nome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
+                        </div>
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
+                            <input type="text" id="sobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
+                        </div>
+                    </div>
+    
+                    <!-- E-mail -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                        <input type="text" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                    </div>
+    
+                    <!-- Função -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                        <select id="tipoCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                            <option value="" selected disabled>Cargo do funcionário</option>
+                            <option value="adm">Administrador</option>
+                            <option value="coor">Coordenador</option>
+                            <option value="ger">Gerente</option>
+                            <option value="tec">Técnico</option>
+                          </select>
+                    </div>
+                    
+                    <!-- botão -->
+    
+                    <div class="pt-14">
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Cadastrar funcionário</button>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+
+        <!------------------------------ MODAL DE EDITAR ------------------------------>
+    
+        <!-- centralização -->
+    
+        <div class="edit min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+    
+            <!-- conteúdo do modal -->
+    
+            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto">
+    
+                <!-- botão de fechar -->
+    
+                <div class="w-full lg:flex lg:justify-end">
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModalEdit()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                </div>
+    
+                <!-- título e subtítulo -->
+    
+                <div class="text-center lg:text-justify text-color-text">
+                    <h1 class="font-bold text-2xl">EDIÇÃO DE FUNCIONÁRIO</h1>
+                    <h2 class="text-xs pt-2">Atualize as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                </div>
+    
+                <!-- inputs -->
+    
+                <form class="flex flex-col gap-6 pt-8" id="formularioEditarUsuario" autocomplete="off">
+    
+                    <!-- Nome e sobrenome -->
+    
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">NOME *</label>
+                            <input type="text" value="" id="editarNome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
+                        </div>
+                        <div class="w-full">
+                            <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
+                            <input type="text" value="" id="editarSobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
+                        </div>
+                    </div>
+    
+                    <!-- E-mail -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                        <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                    </div>
+    
+                    <!-- Função -->
+    
+                    <div class="relative">
+                        <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                        <select id="editarCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                            <option value="" selected disabled>Cargo do funcionário</option>
+                            <option value="adm">Administrador</option>
+                            <option value="coor">Coordenador</option>
+                            <option value="ger">Gerente</option>
+                            <option value="tec">Técnico</option>
+                          </select>
+                    </div>
+                    
+                    <!-- botão -->
+    
+                    <div class="pt-14">
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar funcionário</button>
+                    </div>
+    
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer -->
+
+    <!-- <footer class="w-full bg-body text-color-text px-16 py-4">
+        <div class="container mx-auto flex items-center justify-center sm:justify-between flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+            </div>
+        </div>
+        <div class="text-center text-color-text-secundary text-sm mt-6">
+            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+        </div>
+    </footer> -->
+
+
+    <script src="../../Componentes/inputModal/script.js"></script>
+
+    <script src="./cadastroUsuario.js"></script>
+
+    <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script>
+
+    <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
+
+</body>
 </html>
+
+  <!-- <script type="module">
+      import { autenticacao } from '../../js/api/login/autenticacao.js'
+      autenticacao(['coor'])
+  </script> -->

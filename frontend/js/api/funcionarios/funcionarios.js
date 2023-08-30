@@ -471,7 +471,7 @@ const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario
 formularioEditarUsuario.addEventListener('submit', evento => {
 
     // Parando o evento do formulário
-    // evento.preventDefault();
+    evento.preventDefault();
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
