@@ -210,21 +210,21 @@
 
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
                         <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="empresa" maxlength="200"
-                            minlength="4">
+                       onchange="aceitarProposta()"   minlength="4">
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="statusProposta" class="text-sm opacity-20">Status: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="statusProposta">
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text"  onchange="aceitarProposta()" id="statusProposta">
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="criadorProposta" class="text-sm opacity-20">Criador da proposta: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="criadorProposta">
+                        <label for="gerenteProposta" class="text-sm opacity-20">Gerente: </label>
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="gerenteProposta">
                     </div>
 
                 </div>
@@ -234,7 +234,7 @@
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="numeroSGSET">
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text"   onchange="aceitarProposta()" id="numeroSGSET">
                     </div>
 
 
@@ -245,21 +245,21 @@
                                 Data de início do primeiro produto:
                             </abbr>
                         </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date" id="dataPrimeiroProduto">
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date"   onchange="aceitarProposta()" id="dataPrimeiroProduto">
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date" id="dataUltimoProduto">
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date"  onchange="aceitarProposta()" id="dataUltimoProduto">
                     </div>
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between gap-1 w-full">
                     <div class="flex flex-col">
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="number" id="valorTotalProdutos">
+                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="number"  onchange="aceitarProposta()" id="valorTotalProdutos">
                     </div>
 
                     <label for="primeiroGerente">Gerente 1:</label>
@@ -293,7 +293,7 @@
                             type="button" value="Editar" id="editarProposta" >
                         <input
                             class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
-                            type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
+                            type="button" value="Aceitar" disabled id="aceitarProposta" onclick= "aceitarProposta()">
                     </div>
                     <input
                         class="text-btn-red bg-btn-red/20 hover:bg-btn-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
@@ -305,11 +305,11 @@
             <!-- campos que ficaram em PDFs -->
 
             <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf" id="orcamento">
+            <input type="file" accept=".pdf"  onchange="aceitarProposta()" id="orcamento">
             <button type="button" id="botaoOrcamento">Baixar</button><br><br>
 
             <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" id="propostaAssinada">
+            <input type="file" accept=".pdf"   onchange="aceitarProposta()" id="propostaAssinada">
             <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
 
             <label for="relatorioFinal">PDF Relatorio final</label>
@@ -358,6 +358,47 @@
     <!-- front-end -->
     <script src="../../js/themeSwitch/index.js"></script>
     <script src="../../js/global.js"></script>
+
+
+
+ <!--                       validações e funções JavaScript                              -->
+    
+ <script>
+
+    // Ocultando o botão caso os inputs não estejam preenchidos corretamente
+    
+    function aceitarProposta(){
+        const nomeProposta = document.getElementById("tituloProposta").value;
+        const cnpj = document.getElementById("cnpj").value;
+        const unidadeCriadora = document.getElementById("uniCriadora").value;
+        const empresa = document.getElementById("empresa").value;
+        const status = document.getElementById("statusProposta").value;
+        const gerente = document.getElementById("gerenteProposta").value;
+        const numeroSGSET = document.getElementById("numeroSGSET").value;
+        const dataInicioPrimeiroProduto = document.getElementById("dataPrimeiroProduto").value;
+        const dataFinalUltimoProduto = document.getElementById("dataUltimoProduto").value;
+        const valorTotal = document.getElementById("valorTotalProdutos").value;
+        const pdfOrçamento = document.getElementById("orçamento").value;
+        const pdfPropostaAssinada = document.getElementById("PropostaAssinada").value;
+       
+
+
+        if (nomeProposta && cnpj  && unidadeCriadora && empresa && status && gerente && numeroSGSET && dataInicioPrimeiroProduto && dataFinalUltimoProduto &&
+        valorTotal &&  pdfOrçamento != "" && pdfPropostaAssinada != "") {
+            document.querySelector("#botao").disabled = false;
+            document.querySelector("#botao").textContent = "Aceitar"
+            
+        }else {
+
+            document.querySelector("#botao").disabled = true;
+            
+            document.querySelector("#botao").textContent = "Aceitar"
+            alert("tudo certo");
+        }
+    }
+
+    </script>
+
 </body>
 
 </html>
