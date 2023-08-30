@@ -1,43 +1,44 @@
 import { back } from '../Rotas/rotas.js'
 /*------------------------------------ Fazendo aparecer o formulário -------------------------------------------------------------------------*/
-const cadastrar = document.querySelector('#cadastrar');
 
-cadastrar.addEventListener('click', () => {
-    // Fazendo a lista de funcionários desaparecer
-    const exibicao = document.querySelector('#exibicao');
+// const cadastrar = document.querySelector('#cadastrar');
 
-    // Selecionando o formulário
-    const formulario = document.querySelector('#formulario');
+// cadastrar.addEventListener('click', () => {
+//     // Fazendo a lista de funcionários desaparecer
+//     const exibicao = document.querySelector('#exibicao');
 
-    // Renderizando de acordo o evento
-    if (formulario.style.display === 'flex') {
+//     // Selecionando o formulário
+//     const formulario = document.querySelector('#formulario');
 
-        // Escondendo o formulário
-        formulario.style.display = 'none';
+//     // Renderizando de acordo o evento
+//     if (formulario.style.display === 'flex') {
 
-        // Exibindo a lista
-        exibicao.style.display = 'block';
+//         // Escondendo o formulário
+//         formulario.style.display = 'none';
 
-        // Alterando o nome do botão
-        cadastrar.textContent = 'Cadastrar';
-        console.log(cadastrar.value);
+//         // Exibindo a lista
+//         exibicao.style.display = 'block';
 
-    } else {
+//         // Alterando o nome do botão
+//         cadastrar.textContent = 'Cadastrar';
+//         console.log(cadastrar.value);
 
-        // Exibindo o formulário
-        formulario.style.display = 'flex';
+//     } else {
 
-        // Escondendo a lista de funcionários
-        exibicao.style.display = 'none';
+//         // Exibindo o formulário
+//         formulario.style.display = 'flex';
 
-        // Alterando o nome do botão
-        cadastrar.textContent = 'Voltar';
+//         // Escondendo a lista de funcionários
+//         exibicao.style.display = 'none';
 
-        console.log(cadastrar.value);
+//         // Alterando o nome do botão
+//         cadastrar.textContent = 'Voltar';
+
+//         console.log(cadastrar.value);
 
 
-    }
-});
+//     }
+// });
 
 
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
@@ -110,6 +111,7 @@ async function mandarDadosParaBackend(dados) {
 
         // Verificando o que foi retornado no back-end
         console.log(retornoBackend);
+        console.log(ok)
 
     } catch (erro) {
 

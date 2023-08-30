@@ -146,11 +146,11 @@
                 </div>
     
                 <div>
-                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoAtivos">ATIVOS</button>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoAtivos" value="ativo">ATIVOS</button>
                 </div>
     
                 <div>
-                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoDesativos">INATIVOS</button>
+                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoDesativos" value="inativo">INATIVOS</button>
                 </div>
             </div>
     
@@ -190,277 +190,65 @@
                 <!-- tabela -->
 
                 <div id="exibicao" class="py-8">
-                    <div role="table" class="tabela space-y-1 max-h-[415px] overflow-y-auto -we4">
+                    <div role="table" class="tabela space-y-1 min-h-[240px] max-h-[415px] overflow-y-auto -we4">
+
                         <!-- Rows -->
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
+
+                        <!-- <div class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
                             <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
                                 <div class="flex items-center gap-3 lg:w-full">
                                     <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
+                                    <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
+                                        <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
+                                        <span class="text-xs text-color-text-secundary">Gerente</span>
+                                    </div>
+
                                     <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+
                                     <div class="flex items-center gap-3 px-4 lg:px-6">
                                         <div class="flex flex-col gap-1 font-semibold">
                                             <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
                                             <span class="text-xs text-color-text-secundary">01234567</span>
                                         </div>
                                     </div>
+
                                     <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
+
                                     <div class="flex items-center gap-3 px-4 lg:px-6">
                                         <div class="flex flex-col gap-1 font-semibold">
                                             <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
                                             <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
                                         </div>
                                     </div>
+
                                 </div>
-                            </div>
+                            </div> -->
+
+                            <!-- editar e inativar -->
+
                             <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
                                 <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
                                     <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                                     <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
                                         <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
                                             <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
                                                 <a href="#" class="px-1 py-1" onclick="abreModalEdit()">
                                                     Editar
                                                 </a>
                                             </li>
+                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
+                                                <a href="#" class="px-1 py-1">
+                                                    Inativar
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </button>
                             </div>
-                        </div>
 
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
+                        <!-- </div> -->
 
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div role="row" class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                        <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                            <span class="text-xs text-color-text-secundary">Gerente</span>
-                                        </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Visualizar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
+                        
 
                     </div>
                 </div>
@@ -518,7 +306,7 @@
     
                     <div>
                         <label class="text-color-text font-bold block mb-3">NIF *</label>
-                        <input type="text" value="" id="nif" minlength="5" maxlength="7" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário" required>
+                        <input type="text" id="nif" minlength="5" maxlength="7" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="NIF do funcionário" required>
                     </div>
     
                     <!-- Nome e sobrenome -->
@@ -526,11 +314,11 @@
                     <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">NOME *</label>
-                            <input type="text" value="" id="nome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
+                            <input type="text" id="nome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
                         </div>
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
-                            <input type="text" value="" id="sobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
+                            <input type="text" id="sobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
                         </div>
                     </div>
     
@@ -538,7 +326,7 @@
     
                     <div class="relative">
                         <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="text" value="" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                        <input type="text" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
                         <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
                     </div>
     
@@ -664,9 +452,9 @@
 
     <script src="./gerenciarFuncionarios.js"></script>
 
-    <!-- <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script> -->
+    <script type="module" src="../..//js/api/funcionarios/funcionarios.js"></script>
 
-    <!-- <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script> -->
+    <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
 
 </body>
 </html>

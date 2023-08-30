@@ -146,13 +146,6 @@ window.addEventListener('click', (event) => {
 
 // funções do modal de edição
 
-function abreModalEdit(){
-    let modalEdit = document.querySelector('.edit');
-
-    modalEdit.classList.remove('hidden');
-    modalEdit.classList.add('flex');
-}
-
 function fechaModalEdit(){
     let modalEdit = document.querySelector('.edit');
 
