@@ -4,30 +4,24 @@ const listaGerentes = document.querySelector('#listaGerentes');
 
 let gerenteEncarregado;
 
+// Chamando a função quando carregar a página
+window.addEventListener('load', dropdownGerentes)
 
 // Ao Carregar a janela é retornado todos os gerentes, e adicionados ao dropdown
-export async function dropdownGerentes() {
+async function dropdownGerentes() {
     let gerentes = await pegarGerentes();
+
+    console.log(gerentes.gerentesRetornados);
 
     if (gerentes.retorno === true) {
 
         // Criação do dropdown
         gerentes.gerentesRetornados.forEach(gerente => {
-            const li = document.createElement('li');
-            li.textContent = `${gerente.nome} ${gerente.sobrenome[0]}.`;
-            li.setAttribute('data-value', gerente.nif);
-            listaGerentes.appendChild(li);
+            const option = document.createElement('option');
+            option.textContent = `${gerente.nome} ${gerente.sobrenome[0]}.`;
+            option.setAttribute('value', gerente.nif);
+            listaGerentes.appendChild(option);
 
-            li.addEventListener('click', function () {
-                listaGerentes.querySelectorAll('li').forEach(function (linha) {
-                    if (linha.classList.contains('gerente-encarregado')) {
-                        linha.classList.remove('gerente-encarregado');
-                    }
-                });
-
-                li.classList.add('gerente-encarregado');
-                gerenteEncarregado = li.dataset.value;
-            });
         });
     }
 };
@@ -46,13 +40,11 @@ form.addEventListener('submit', async evento => {
     const unidadeCriadora = document.querySelector('#unidadeCriadora').value;
     const empresa = document.querySelector('#empresa').value;
     const textoResumo = document.querySelector('#textoResumo').value;
+    const gerente = document.querySelector('#listaGerentes').value;
 
     try {
 
         // Algumas validações...
-
-        // Verificando se o gerente foi selecionado
-        if (gerenteEncarregado === undefined) throw new Error('SELECIONE O GERENTE!');
 
         // Verificando se o número de telefone possui algum caractere além de números...
         if (!contemApenasNumeros(telefoneRepresentante)) throw new Error('O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS...');
@@ -65,7 +57,7 @@ form.addEventListener('submit', async evento => {
             resumo: textoResumo,
             unidadeCriadora: unidadeCriadora,
             empresa: empresa,
-            gerente: gerenteEncarregado
+            gerente: gerente
         };
 
         console.log(dadosProposta);
@@ -133,6 +125,7 @@ async function pegarGerentes() {
         // JSON de nome, sobrenome e NIF
         let dados = await resposta.json();
 
+        console.log(dados);
         return dados;
 
     } catch (error) {

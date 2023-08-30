@@ -14,6 +14,76 @@ $dados = json_decode(file_get_contents("php://input"), true);
                             FUNÇÕES
 -------------------------------------------------------------------------------------------
 */
+
+// Cadastrar o gerente responsável
+function cadastrarGerente($dadosProposta, $conn, $dados) {
+
+    // Desestruturando dados
+    $gerente = $dados['gerente'];
+    $idProposta = $dadosProposta['idProposta'];
+
+    // Preparando a inserção
+    $stmt = $conn->prepare("INSERT INTO GerenteResponsavel (fk_nifGerente, fk_idProposta) VALUES (?, ?)");
+
+    // Passando os valores como parâmetro
+    $stmt->bind_param('si', $gerente, $idProposta);
+
+    if ($stmt->execute()) {
+
+        $resposta = [
+            'status' => 'success',
+            'mensagem' => 'Proposta Cadastrada'
+        ];
+
+        json_encode($resposta);
+
+    } else {
+
+        $resposta = [
+            'status' => 'error',
+            'mensagem' => 'Não foi possível cadastrar a proposta'
+        ];
+
+        json_encode($resposta);
+
+    }
+
+}
+
+// Verificar a proposta para vincular ao gerente que vai ser cadastrado 
+function verificarProposta($nomeProjeto, $empresa, $id, $resumo, $conn, $dados) {
+    // Preparando a consulta
+    $stmt = $conn->prepare("SELECT * FROM Propostas WHERE TituloProposta = ? AND Empresa = ? AND fk_idRepresentante = ? AND Resumo = ?");
+
+    // Passando os parâmetros
+    $stmt->bind_param('ssis', $nomeProjeto, $empresa, $id, $resumo);
+
+    // Excutando...
+    $stmt->execute();
+
+    $resultadoConsulta = $stmt->get_result();
+
+    if ($resultadoConsulta->num_rows > 0) {
+        // Pegando os dados que foram retornados do programa
+        $dadosProposta = $resultadoConsulta->fetch_assoc();
+
+        // Linkando o gerente com a proposta
+        cadastrarGerente($dadosProposta, $conn, $dados);
+    } else {
+
+        $resposta = [
+            'status' => 'error',
+            'mensagem' => 'Não foi possível cadastrar a proposta'
+        ];
+
+        json_encode($resposta);
+
+    }
+}
+
+
+
+// Verificação se a proposta já existe
 function verificaRegistro($dados, $conn)
 {
     $nomeProjeto = $dados['nomeProjeto'];
@@ -81,10 +151,8 @@ function cadastrarProposta($dados, $idRepresentante, $conn) {
 
     if ($stmt->execute()) {
 
-        $resposta = [
-            'status' => 'success',
-            'mensagem' => 'Proposta cadastrada com sucesso!'
-        ];
+        // Função para fazer a verificação da proposta e vincular ao gerente responsável 
+        verificarProposta($nomeProjeto, $empresa, $idRepresentante, $resumo, $conn, $dados);
 
     } else {
 
@@ -93,10 +161,10 @@ function cadastrarProposta($dados, $idRepresentante, $conn) {
             'mensagem' => 'Não foi possível cadastrar a proposta'
         ];
 
-    }
+        // Retornando uma resposta para o front-end
+        echo json_encode($resposta);
 
-    // Retornando uma resposta para o front-end
-    echo json_encode($resposta);
+    }
 
 }
 
@@ -138,7 +206,7 @@ function verificarRepresentante($dados, $conn){
 
 /*
 -------------------------------------------------------------------------------------------
-                            LÓGICA DO PROGRAMA
+                            INICIO DO PROGRAMA
 -------------------------------------------------------------------------------------------
 */
 
