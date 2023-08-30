@@ -59,7 +59,7 @@ async function login(email, senha) {
 
         // if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
-        if (resposta.login) window.location.replace(frontPages + '/todasPropostas/todasPropostas.html');
+        if (resposta.login) window.location.replace(frontPages + '/Home/index.html');
 
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);
