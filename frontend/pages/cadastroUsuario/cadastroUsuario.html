@@ -116,7 +116,7 @@
                                 <div class="h-[1px] w-full bg-color-text-secundary"></div>
                             </div>
                             <ul>
-                                <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                                <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                             </ul>
                         </div>
                     </div>
@@ -128,6 +128,7 @@
     
         <script src="../../js/themeSwitch/index.js"></script>
         <script src="../../js/global.js"></script>
+        <script src="../../js/logoff.js"></script>
     
         <section class="px-6 2xl:px-16 mt-[72px]">
     
@@ -189,8 +190,8 @@
 
                 <!-- tabela -->
 
-                <div id="exibicao" class="py-8">
-                    <div role="table" class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
+                <div class="py-8">
+                    <div role="table" id="exibicao" class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
 
                         <!-- Rows -->
 
@@ -226,7 +227,7 @@
 
                             <!-- editar e inativar -->
 
-                            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                            <!-- <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
                                 <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
                                     <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                                     <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
@@ -244,7 +245,7 @@
                                         </ul>
                                     </div>
                                 </button>
-                            </div>
+                            </div> -->
 
                         <!-- </div> -->
 
@@ -358,7 +359,7 @@
     
         <!-- centralização -->
     
-        <div class="edit min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+        <div class="edit min-h-screen hidden z-50 h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
     
             <!-- conteúdo do modal -->
     
@@ -421,6 +422,12 @@
                     <div class="pt-14">
                         <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar funcionário</button>
                     </div>
+
+                    <!-- redefinir senha -->
+
+                    <div>
+                      <h4 class="text-color-text font-bold underline cursor-pointer" id="resetarSenha">Resetar senha</h4>
+                    </div>
     
                 </form>
             </div>
@@ -430,22 +437,22 @@
 
     <!-- footer -->
 
-    <!-- <footer class="w-full bg-body text-color-text px-16 py-4">
-        <div class="container mx-auto flex items-center justify-center sm:justify-between flex-wrap gap-6">
-            <div class="flex items-center gap-3">
-                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-            </div>
-            <div class="flex flex-col items-center gap-3">
-                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
-                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
-                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
-            </div>
-        </div>
-        <div class="text-center text-color-text-secundary text-sm mt-6">
-            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
-        </div>
-    </footer> -->
+    <!-- <footer class="w-full bg-body text-color-text py-4">
+      <div class="mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
+          <div class="flex items-center gap-3">
+              <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+              <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+          </div>
+          <div class="flex flex-col items-center gap-3">
+              <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+              <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+              <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+          </div>
+      </div>
+      <div class="text-center text-color-text-secundary text-sm mt-6">
+          <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+      </div>
+  </footer> -->
 
 
     <script src="../../Componentes/inputModal/script.js"></script>
@@ -456,10 +463,13 @@
 
     <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
 
+    <!-- autenticação -->
+
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor'])
+    </script>
+
 </body>
 </html>
 
-  <!-- <script type="module">
-      import { autenticacao } from '../../js/api/login/autenticacao.js'
-      autenticacao(['coor'])
-  </script> -->

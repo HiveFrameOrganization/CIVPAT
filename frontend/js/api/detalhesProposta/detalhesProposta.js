@@ -94,11 +94,18 @@ async function verificarBancoProposta(id){
         const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
         const statusProposta = document.querySelector('#statusProposta').value = resposta['statusProposta'];
-        const gerenteProposta = document.querySelector('#gerenteProposta').value = resposta['gerenteProposta'];
+        const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
         const numeroSGSET = document.querySelector('#numeroSGSET').value = resposta['numeroSGSET'];
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = resposta['valorTotalProdutos'];
+        const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['primeiroGerente']; 
+        const segundoGerente = document.querySelector('#segundoGerente').value = resposta['segundoGerente'];
+        const funil = document.querySelector('#funil').value = resposta['funil'];
+        const momeContato = document.querySelector('#momeContato').value = resposta['momeContato'];
+        const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
+        const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
+
         
     } catch (error){
         console.error(error)
@@ -168,9 +175,13 @@ function baixarPdf (tipoPdf) {
 }
 
 
+
+
+
 const editandoProposta = document.querySelector('#editarProposta');
 editandoProposta.addEventListener('click', () =>{
 
+    
     const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
@@ -179,8 +190,14 @@ editandoProposta.addEventListener('click', () =>{
     const uniCriadora= document.querySelector('#uniCriadora').value;
     const empresa = document.querySelector('#empresa').value;
     const statusProposta = document.querySelector('#statusProposta').value;
-    const gerenteProposta = document.querySelector('#gerenteProposta').value;
+    const criadorProposta = document.querySelector('#criadorProposta').value;
     const numeroSGSET = document.querySelector('#numeroSGSET').value;
+    const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['primeiroGerente']; 
+    const segundoGerente = document.querySelector('#segundoGerente').value = resposta['segundoGerente'];
+    const funil = document.querySelector('#funil').value = resposta['funil'];
+    const momeContato = document.querySelector('#momeContato').value = resposta['momeContato'];
+    const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
+    const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
    
 
 // Criando um objeto com os dados dos input's
@@ -191,8 +208,14 @@ editandoProposta.addEventListener('click', () =>{
         uniCriadora :uniCriadora,
         empresa : empresa,
         statusProposta : statusProposta ,
-        gerenteProposta : gerenteProposta ,
-        numeroSGSET : numeroSGSET
+        criadorProposta : criadorProposta ,
+        numeroSGSET : numeroSGSET,
+        primeiroGerente : primeiroGerente,         
+        segundoGerente : segundoGerente,          
+        funil : funil,          
+        momeContato : momeContato,          
+        emailContato : emailContato,        
+        numeroContato : numeroContato,          
     }
     
     // Enviando o objeto para o back end
