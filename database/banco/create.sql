@@ -292,7 +292,7 @@ ENGINE = InnoDB;
 -- Table `isihiveframe`.`GerenteResponsavel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`GerenteResponsavel` (
-  `idGerenteResponsavel` INT NOT NULL,
+  `idGerenteResponsavel` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_nifGerente` VARCHAR(7) NOT NULL,
   `fk_idProposta` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`idGerenteResponsavel`),

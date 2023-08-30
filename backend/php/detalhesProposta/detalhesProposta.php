@@ -8,8 +8,8 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProposta, $conn) {
-    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome` FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` WHERE idProposta = ?");
-    // $stmt = $conn->prepare("SELECT * FROM Propostas WHERE idProposta = ?");
+    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome`, `Representantes`.* FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` INNER JOIN Representantes ON `Representantes`.`idRepresentante` = `Propostas`.`fk_idRepresentante` WHERE idProposta = ?");
+
     
     $stmt->bind_param('s', $idProposta);
     $stmt->execute();
@@ -20,6 +20,7 @@ function verificarDetalhes($idProposta, $conn) {
         $dados = mysqli_fetch_assoc($resultado);
 
         if ($dados != null) {
+
 
             $stmt = $conn->prepare(" SELECT  DataInicial FROM Produtos  WHERE fk_idProposta = ? ORDER BY DataInicial ASC");
             $stmt->bind_param('s', $idProposta);
@@ -46,7 +47,7 @@ function verificarDetalhes($idProposta, $conn) {
                 "uniCriadora" => $dados['UnidadeCriadora'],
                 "empresa" => $dados['Empresa'],
                 "statusProposta" => $dados['Status'],
-                "gerenteProposta" => $dados['nome'],
+                "criadorProposta" => $dados['nome'],
                 "numeroSGSET" => $dados['numeroSGSET'],
                 "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
                 "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
