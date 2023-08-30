@@ -11,6 +11,9 @@ module.exports = {
             'primary': 'rgb(var(--primary-color) / <alpha-value>)',
             'color-text': 'rgb(var(--text-color) / <alpha-value>)',
             'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+            'color-red': 'rgb(var(--red) / <alpha-value>)',
+            'color-green': 'rgb(var(--green) / <alpha-value>)',
+            'color-purple': 'rgb(var(--purple) / <alpha-value>)',
         }
     },
     plugins: [],
