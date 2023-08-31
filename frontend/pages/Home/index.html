@@ -193,32 +193,32 @@
                             <div class="modal-body max-h-[300px] sm:max-h-[unset] overflow-y-auto">
                                 <form id="formularioProposta" class="space-y-4">
                                     <div class="flex flex-col gap-2 w-full">
-                                        <label for="title" class="font-semibold text-base">TÍTULO*</label>
-                                        <input type="text" id="nomeProjeto" name="title" placeholder="Título da proposta" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        <label for="nomeProjeto" class="font-semibold text-base">TÍTULO*</label>
+                                        <input type="text" id="nomeProjeto" name="nomeProjeto" placeholder="Título da proposta" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                     </div>
                                     <div class="flex flex-col sm:flex-row gap-4">
                                         <div class="flex flex-col gap-2 w-full">
-                                            <label for="company" class="font-semibold text-base">EMPRESA*</label>
-                                            <input type="text" id="empresa" name="company" placeholder="Nome da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <label for="empresa" class="font-semibold text-base">EMPRESA*</label>
+                                            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                         </div>
                                         <div class="flex flex-col gap-2 w-full">
-                                            <label for="company-contact" class="font-semibold text-base">CONTATO*</label>
-                                            <input type="text" id="nomeRepresentante" name="company-contact" placeholder="Contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <label for="nomeRepresentante" class="font-semibold text-base">REPRESENTANTE*</label>
+                                            <input type="text" id="nomeRepresentante" name="nomeRepresentante" placeholder="Nome do representante" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                         </div>
                                     </div>
                                     <div class="flex flex-col sm:flex-row gap-4">
                                         <div class="flex flex-col gap-2 w-full">
-                                            <label for="company-email" class="font-semibold text-base">E-MAIL*</label>
-                                            <input type="email" id="emailRepresentante" name="email" placeholder="E-mail de contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <label for="emailRepresentante" class="font-semibold text-base">E-MAIL*</label>
+                                            <input type="email" id="emailRepresentante" name="emailRepresentante" placeholder="E-mail do representante" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                         </div>
                                         <div class="flex flex-col gap-2 w-full">
-                                            <label for="company-tel" class="font-semibold text-base">TELEFONE*</label>
-                                            <input type="tel" id="telefone" name="company-tel" minlength="10" maxlength="11" placeholder="Telefone de contato da empresa" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                            <label for="telefone" class="font-semibold text-base">TELEFONE*</label>
+                                            <input type="tel" id="telefone" name="telefone" minlength="10" maxlength="11" placeholder="Telefone do representante" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                         </div>
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
-                                        <label for="creation-unit" class="font-semibold text-base">UNIDADE DE CRIAÇÃO*</label>
-                                        <select name="creation-unit" id="unidadeCriadora" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        <label for="unidadeCriadora" class="font-semibold text-base">UNIDADE DE CRIAÇÃO*</label>
+                                        <select name="unidadeCriadora" id="unidadeCriadora" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                             <option value="" selected disabled>Selecione a unidade de criação</option>
                                             <option value="test">1</option>
                                             <option value="test">2</option>
@@ -226,15 +226,14 @@
                                         </select>
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
-                                        <label for="manager" class="font-semibold text-base">GERENTE*</label>
-                                        <select name="manager" id="listaGerentes" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                                        <label for="listaGerentes" class="font-semibold text-base">GERENTE*</label>
+                                        <select name="listaGerentes" id="listaGerentes" required class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                                             <option value="" selected disabled>Selecione o gerente responsável</option>
-                                            
                                         </select>
                                     </div>
-
-                                    <div>
-                                        <textarea id="textoResumo" cols="30" rows="10" required></textarea>
+                                    <div class="flex flex-col gap-2 w-full">
+                                        <label for="listaGerentes" class="font-semibold text-base">RESUMO*</label>
+                                        <textarea placeholder="Resumo da proposta" class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" id="textoResumo" rows="3" required></textarea>
                                     </div>
                                     <button type="submit" class="w-full bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">CADASTRAR</button>
                                 </form>
