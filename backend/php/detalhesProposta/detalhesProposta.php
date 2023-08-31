@@ -8,7 +8,13 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProposta, $conn) {
-    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`nome`, `Representantes`.* FROM Propostas INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` INNER JOIN Representantes ON `Representantes`.`idRepresentante` = `Propostas`.`fk_idRepresentante` WHERE idProposta = ?");
+    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`Nome`, `Representantes`.* FROM Propostas 
+
+    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` 
+    INNER JOIN Representantes ON `Representantes`.`idRepresentante` = `Propostas`.`fk_idRepresentante`
+    
+    WHERE idProposta = ?");
+
 
     
     $stmt->bind_param('s', $idProposta);
@@ -39,7 +45,22 @@ function verificarDetalhes($idProposta, $conn) {
             $stmt->execute();
             $resultadoValorTotal = $stmt-> get_result();
             $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
+            
+            $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome` 
+            FROM GerenteResponsavel
+            INNER JOIN Usuarios ON `Usuarios`.`NIF` = `GerenteResponsavel`.`fk_nifGerente` 
+            WHERE fk_idProposta = ?");
+            $stmt->bind_param('s', $idProposta);
+            $stmt->execute();
+            $gerentes = $stmt-> get_result();
+            
+            $registros = array();
 
+            while ($row = $gerentes->fetch_assoc()){
+                $registros[] = $row;
+            }
+
+           
 
             $dealhesProposta = [
                 "TituloProposta" => $dados['TituloProposta'],
@@ -47,11 +68,17 @@ function verificarDetalhes($idProposta, $conn) {
                 "uniCriadora" => $dados['UnidadeCriadora'],
                 "empresa" => $dados['Empresa'],
                 "statusProposta" => $dados['Status'],
-                "criadorProposta" => $dados['nome'],
+                "criadorProposta" => $dados['Nome'],
                 "numeroSGSET" => $dados['numeroSGSET'],
                 "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
                 "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
-                "valorTotalProdutos" => $dadosValorTotal['ValorTotal']
+                "valorTotalProdutos" => $dadosValorTotal['ValorTotal'],
+                "Gerentes" => $registros, 
+                "funil" => $dados['funil'],
+                "momeContato" => $dados['nomeRepresentante'],
+                "emailContato" => $dados['emailRepresentante'],
+                "numeroContato" => $dados['telefoneRepresentante']
+
             ];
 
             echo json_encode($dealhesProposta);

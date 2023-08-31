@@ -20,7 +20,7 @@ function salvarNoBanco($dados, $conn) {
 
         $nifGerente = $dadosBanco['NIF'];
 
-        $stmt = $conn -> prepare("UPDATE Propostas SET fk_idGerente = ?, TituloProj = ?, CNPJ = ?, UnidadeCriadora =?, Empresa =?, nSGSET = ? WHERE  idProposta =?"   );
+        $stmt = $conn -> prepare("UPDATE Propostas SET fk_idGerente = ?, TituloProj = ?, CNPJ = ?, UnidadeCriadora =?, Empresa =?, nSGSET = ? WHERE  idProposta =?"  );
 
         $stmt->bind_param('sssssss', $nifGerente, $dados['nomeProposta'], $dados['cnpj'], $dados['uniCriadora'], $dados['empresa'], $dados['numeroSGSET'], $dados['idProposta']);
         $stmt->execute();
