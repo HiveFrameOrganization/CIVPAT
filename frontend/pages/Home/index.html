@@ -82,18 +82,18 @@
                 <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                        <a href="./index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div class="mt-4 space-y-4">
-                        <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="./index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
                         <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                         <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
-                <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-                <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
                 <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
@@ -125,14 +125,14 @@
                 <h1 class="text-2xl font-bold">VISÃO GERAL</h1>
                 <h2 class="text-xs font-normal">Projetos do Instituto Senai de Inovação</h2>
             </div>
-            <div class="flex gap-6 flex-wrap justify-center  md:justify-start">
+            <div class="flex gap-6 flex-wrap justify-center">
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
                         <img src="../../img/icon/inventory.svg" alt="Propostas em análise" class="w-8 h-8">
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
-                        <span id="analise" class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="analise" class="font-medium text-lg text-color-text-secundary"># --</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -141,7 +141,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em desenvolvimento</h5>
-                        <span id="aceitos" class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="aceitos" class="font-medium text-lg text-color-text-secundary"># --</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -150,7 +150,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas declinadas</h5>
-                        <span id="declinados" class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="declinados" class="font-medium text-lg text-color-text-secundary"># --</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -159,7 +159,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas concluídas</h5>
-                        <span id="concluidos" class="font-medium text-lg text-color-text-secundary">#212</span>
+                        <span id="concluidos" class="font-medium text-lg text-color-text-secundary"># --</span>
                     </div>
                 </div>
             </div>
