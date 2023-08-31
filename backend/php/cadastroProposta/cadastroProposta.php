@@ -35,7 +35,7 @@ function cadastrarGerente($dadosProposta, $conn, $dados) {
             'mensagem' => 'Proposta Cadastrada'
         ];
 
-        json_encode($resposta);
+        echo json_encode($resposta);
 
     } else {
 
@@ -44,7 +44,7 @@ function cadastrarGerente($dadosProposta, $conn, $dados) {
             'mensagem' => 'Não foi possível cadastrar a proposta'
         ];
 
-        json_encode($resposta);
+        echo json_encode($resposta);
 
     }
 
