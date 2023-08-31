@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
         @layer base {
@@ -129,15 +128,15 @@
         <section class="bg-component">
             <div class="container mx-auto px-6 py-12">
                 <div class="mb-8">
-                    <div class="flex gap-12 items-center">
-                        <div class="w-[150px] h-[150px] rounded-full">
+                    <div class="flex flex-col sm:flex-row gap-12 items-center">
+                        <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0">
                             <img src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full">
                         </div>
                         <div class="flex flex-col">
                             <span class="text-2xl font-semibold">Doge</span>
                             <span class="text-base text-color-text-secundary font-normal">Gerente</span>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center gap-8 flex-wrap justify-center">
                             <div class="flex items-center gap-2">
                                 <img src="../../img/icon/mail.svg" alt="Email">
                                 <span class="text-base text-color-text-secundary font-normal">doge@host.com</span>
