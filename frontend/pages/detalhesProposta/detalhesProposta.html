@@ -23,7 +23,7 @@
                 --primary-color: 57 118 209;
                 --text-color: 255 255 255;
                 --text-secundary-color: 126 126 126;
-                --btn-green: 43 253 190;
+                --btn-green: 36 194 146;
                 --btn-blue: 57 118 209;
                 --btn-red: 245 74 76;
             }
@@ -158,19 +158,21 @@
 
     <main>
 
-        <div class="px-8">
+        <div class="container mx-auto">
             <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
 
             <ul class="flex gap-8 w-1/2">
                 <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
                 <li
-                    class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max">
+                    class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
                     detalhes</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max">PDFs</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max">
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">PDFs</li>
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">
                     <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a>
                 </li>
-                <li class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max">produtos</li>
+                <li
+                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                    produtos</li>
 
             </ul>
         </div>
@@ -178,10 +180,10 @@
 
         <div id="detalhesProposta" class="bg-component px-8">
 
-            <h2 class="uppercase text-xl font-bold py-8">detalhes da proposta</h2>
+            <h2 class="uppercase text-2xl font-bold py-8 container mx-auto">detalhes da proposta</h2>
 
             <!-- Campos que ficaram nos detalhes -->
-            <div class="bg-body px-7 pt-7 rounded-xl flex flex-col gap-10">
+            <div class="bg-body px-7 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                     <div class="flex flex-col w-full md:w-1/3">
@@ -202,7 +204,7 @@
 
                         <label for="uniCriadora" class="text-sm opacity-20">Unidade criadora: </label>
                         <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
                     </div>
                 </div>
@@ -215,7 +217,8 @@
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="empresa" maxlength="200" onchange="aceitarProposta()" minlength="4" disabled>
+                            type="text" id="empresa" maxlength="200" onchange="aceitarProposta()" minlength="4"
+                            disabled>
                     </div>
 
 
@@ -283,13 +286,15 @@
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="primeiroGerente" class="text-sm opacity-20">Gerente 1:</label>
                         <input type="text" id="primeiroGerente"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="segundoGerente" class="text-sm opacity-20">Gerente 2:</label>
                         <input type="text" id="segundoGerente"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                 </div>
@@ -299,19 +304,22 @@
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="funil" class="text-sm opacity-20">Funil:</label>
                         <input type="text" id="funil"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="nomeContato" class="text-sm opacity-20">Nome de Contato:</label>
                         <input type="text" id="momeContato"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="emailContato" class="text-sm opacity-20">Email de Contato:</label>
                         <input type="email" id="emailContato"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                 </div>
@@ -321,7 +329,8 @@
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="numeroContato" class="text-sm opacity-20">Número de contato:</label>
                         <input type="number" id="numeroContato"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -346,8 +355,8 @@
                             class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
                             type="button" value="Aceitar" disabled id="aceitarProposta" onclick="aceitarProposta()">
                         <input
-                        class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
-                        type="button" value="Editar" id="editarProposta">
+                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
+                            type="button" value="Editar" id="editarProposta">
                     </div>
                     <input
                         class="text-btn-red bg-btn-red/20 hover:bg-btn-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
@@ -357,24 +366,44 @@
 
 
             <!-- campos que ficaram em PDFs -->
+            <div class="mt-10 bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto">
 
-            <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento">
-            <button type="button" id="botaoOrcamento">Baixar</button><br><br>
+                <h2 class="uppercase text text-2xl opacity-20 font-semibold">obrigatorio</h2>
 
-            <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
-            <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
+                <p class="py-1 w-full bg-component"></p>
 
-            <label for="relatorioFinal">PDF Relatorio final</label>
-            <input type="file" accept=".pdf" id="relatorioFinal">
-            <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
+                <label for="orcamento" class="uppercase text-lg">Orçamento</label>
+                <div class="flex flex-col gap-4">
+                    <!-- input de upload -->
+                    <div class="relative w-1/3">
+                        <img src="../../img/icon/upload.png" alt="Ícone de upload" class="absolute right-0 h-12 rounded-r-lg">
+                        <input type="text" value="" id="inputFileUp" class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer" placeholder="Upload de arquivos" onclick="document.querySelector('.inputOrçamento').click()">
+                        <!-- input que sera salvo o pdf -->
+                        <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"  class="inputOrçamento hidden">
+                    </div>
+                    
+                    <div class="relative w-1/3">
+                        <img src="../../img/icon/download.png" alt="Ícone de download" class="absolute right-0 h-12 rounded-r-lg">
+                        <input type="text" value="" id="inputFileDown" class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer" placeholder="Download de arquivos" onclick="document.querySelector('#botaoOrcamento').click()">
+                        <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
+                    </div>    
+                </div>
+                <!-- <button type="button" id="botaoOrcamento">Baixar</button> -->
 
-            <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
-            <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
+                <label for="propostaAssinada">PDF Proposta assinada</label>
+                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
+                <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
 
-            <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
+                <label for="relatorioFinal">PDF Relatorio final</label>
+                <input type="file" accept=".pdf" id="relatorioFinal">
+                <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
+
+                <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
+                <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
+                <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
+
+                <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
+            </div>
 
             <!-- campos que ficarão em Produtos -->
 
