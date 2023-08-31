@@ -86,6 +86,8 @@ formulario.addEventListener('submit', async evento => {
 
         await mandarDadosParaBackend(dadosDoCadastro);
 
+        location.reload();
+
     } catch (erro) {
         console.error(erro)
     }
