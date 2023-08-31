@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, Unidade, DataInicial, DataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, fk_idUnidadeCriadora, DataInicial, DataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
 
     $stmt2->bind_param('sssssssssss', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal);
     // Executa a declaração preparada

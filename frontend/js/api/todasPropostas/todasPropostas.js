@@ -5,6 +5,7 @@ const table = document.querySelector('#table');
 window.addEventListener('load', () => {
     // ao carregar a página, a função irá executar
     pegarTodasAsPropostas();
+    pegarUnidadesCriadoras();
 })
 
 async function pegarTodasAsPropostas () {
@@ -179,3 +180,27 @@ window.addEventListener('click', (event) => {
         hiddenAll();
     }
 });
+
+
+
+async function pegarUnidadesCriadoras() {
+    const unidadesSelect = document.getElementById('unidadeCriadora');
+
+    const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
+
+    // dados de todas as propostar recebidas (resposta da api)
+    const dados = await requisicao.json();
+    
+    // caso a requisição de um erro, irá exibir uma mensagem de erro
+    if (dados.resposta === 'erro') throw new Error(dados.message);
+
+    for (let i = 0; i < dados.length; i++) {
+        let option = document.createElement('option');
+        option.value = dados[i].idUnidadeCriadora;
+        option.textContent = dados[i].UnidadeCriadora;
+        unidadesSelect.appendChild(option);
+    }
+
+    console.log(dados);
+
+}
