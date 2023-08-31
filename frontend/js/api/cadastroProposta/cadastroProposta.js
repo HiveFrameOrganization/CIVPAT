@@ -68,7 +68,7 @@ formularioProposta.addEventListener('submit', async evento => {
         if (resposta.status === 'success') {
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
-            window.location.pathname = '/frontend/pages/todasPropostas/todasPropostas.html';
+            window.location.pathname = '/frontend/pages/Home/index.html';
         } else {
             if (resposta.mensagem === 'registro existe') {
                 console.log('Proposta não cadastrada. (Nome da proposta já existe)');

@@ -24,6 +24,7 @@ GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`GerenteResponsavel` TO role1;
 GRANT SELECT ON `isihiveframe`.`Usuarios` TO role1;
 GRANT SELECT ON `isihiveframe`.`CargaHoraria` TO role1;
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO role1;
+GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO role1;
 
 
 
