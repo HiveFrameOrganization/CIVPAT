@@ -90,8 +90,10 @@ async function verificarBancoProposta(id){
 
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta']; 
+        const TelaNomeProposta = document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] 
         const cnpj = document.querySelector('#cnpj').value = resposta['cnpj'];
         const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
+        const titleUniCriadora = document.querySelector('#uniCriadora').title = resposta['uniCriadora']
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
         const statusProposta = document.querySelector('#statusProposta').value = resposta['statusProposta'];
         const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
@@ -133,9 +135,12 @@ async function verificarPdfExistente(idProposta){
             if (valor == true){
                 // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
+
+                // document.getElementsByClassName(chave).classlist.remove('hidden')
             } else {
                 // Se o PDF não for encontrado, o botão ficará em disabled
                 document.getElementById(chave).disabled = true;
+                // document.getElementsByClassName(chave).classlist.add('hidden')
             }
         }    
     }catch(error){

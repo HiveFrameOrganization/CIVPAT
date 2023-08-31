@@ -2,6 +2,8 @@
 const sunIcon = document.querySelector('#sun-icon');
 const moonIcon = document.querySelector('#moon-icon');
 
+let icons = sunIcon && moonIcon ? true : false
+
 // Variáveis de TEMA
 const userTheme = localStorage.getItem('theme');
 const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -9,8 +11,11 @@ const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 // Icon Toggle
 function iconToggle() {
 
-    sunIcon.classList.toggle('hidden');
-    moonIcon.classList.toggle('hidden');
+    if (icons) {
+
+        sunIcon.classList.toggle('hidden');
+        moonIcon.classList.toggle('hidden');
+    }
 }
 
 // Initial Theme Check
@@ -19,15 +24,15 @@ function themeCheck() {
     if (userTheme == 'dark' || (!userTheme && systemTheme)) {
 
         document.documentElement.setAttribute('data-theme', 'dark');
-        moonIcon.classList.add('hidden');
-        sunIcon.classList.remove('hidden');
+        icons && moonIcon.classList.add('hidden');
+        icons && sunIcon.classList.remove('hidden');
         return;
     }
 
     document.documentElement.setAttribute('data-theme', 'light');
 
-    sunIcon.classList.add('hidden');
-    moonIcon.classList.remove('hidden');
+    icons && sunIcon.classList.add('hidden');
+    icons && moonIcon.classList.remove('hidden');
 }
 
 // Manual Theme Switch
@@ -46,16 +51,19 @@ function themeSwitch() {
     iconToggle();
 }
 
-// Theme switch btn
-sunIcon.addEventListener('click', () => {
+if (icons) {
 
-    themeSwitch();
-});
+    // Theme switch btn
+    sunIcon.addEventListener('click', () => {
 
-moonIcon.addEventListener('click', () => {
+        themeSwitch();
+    });
 
-    themeSwitch();
-});
+    moonIcon.addEventListener('click', () => {
+
+        themeSwitch();
+    });
+}
 
 // Initial theme check
 themeCheck();
