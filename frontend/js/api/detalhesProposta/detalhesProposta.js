@@ -181,6 +181,21 @@ function baixarPdf (tipoPdf) {
 const editandoProposta = document.querySelector('#editarProposta');
 editandoProposta.addEventListener('click', () =>{
 
+    // Mudando estado do botão
+    let estadoInput = document.querySelectorAll('.estadoInput')
+    if(editandoProposta.value == 'Editar'){
+        editandoProposta.value = 'Salvar'
+
+        for (let i = 0; i < estadoInput.length; i++) {
+            estadoInput[i].removeAttribute('disabled')
+        }
+    }else{
+        editandoProposta.value = 'Editar'
+        
+        for (let i = 0; i < estadoInput.length; i++) {
+            estadoInput[i].setAttribute('disabled', 'true')
+        }
+    }
     
     const idProposta = localStorage.getItem('idProposta');
 
@@ -220,6 +235,10 @@ editandoProposta.addEventListener('click', () =>{
     
     // Enviando o objeto para o back end
     postarDetalhesBanco(detalhesProposta);
+
+    
+
+    
 });
 
 async function postarDetalhesBanco(postDetalhes){

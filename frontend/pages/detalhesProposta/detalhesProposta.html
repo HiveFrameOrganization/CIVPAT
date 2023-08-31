@@ -186,20 +186,24 @@
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="nomeProposta" class="text-sm opacity-20">Nome da proposta: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="tituloProposta"
-                            maxlength="75">
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="tituloProposta" maxlength="75" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="cnpj" class="text-sm opacity-20">CNPJ: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="cnpj" maxlength="14">
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="cnpj" maxlength="14" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="uniCriadora" class="text-sm opacity-20">Unidade criadora: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="uniCriadora"
-                            maxlength="100" minlength="4" disabled>
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
                     </div>
                 </div>
 
@@ -209,22 +213,27 @@
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="empresa" maxlength="200"
-                       onchange="aceitarProposta()"   minlength="4">
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="empresa" maxlength="200" onchange="aceitarProposta()" minlength="4" disabled>
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="statusProposta" class="text-sm opacity-20">Status: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text"  onchange="aceitarProposta()" id="statusProposta">
+                        <input
+                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" onchange="aceitarProposta()" id="statusProposta" disabled>
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="gerenteProposta" class="text-sm opacity-20">Gerente: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text" id="gerenteProposta">
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="gerenteProposta" disabled>
                     </div>
 
                 </div>
@@ -234,7 +243,9 @@
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="text"   onchange="aceitarProposta()" id="numeroSGSET">
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" onchange="aceitarProposta()" id="numeroSGSET" disabled>
                     </div>
 
 
@@ -245,55 +256,98 @@
                                 Data de início do primeiro produto:
                             </abbr>
                         </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date"   onchange="aceitarProposta()" id="dataPrimeiroProduto">
+                        <input
+                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="date" onchange="aceitarProposta()" id="dataPrimeiroProduto" disabled>
                     </div>
 
 
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="date"  onchange="aceitarProposta()" id="dataUltimoProduto">
+                        <input
+                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="date" onchange="aceitarProposta()" id="dataUltimoProduto" disabled>
                     </div>
                 </div>
 
-                <div class="flex flex-col md:flex-row justify-between gap-1 w-full">
-                    <div class="flex flex-col">
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
-                        <input class="text-2xl text-color-text bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" type="number"  onchange="aceitarProposta()" id="valorTotalProdutos">
+                        <input
+                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" onchange="aceitarProposta()" id="valorTotalProdutos" disabled>
                     </div>
 
-                    <label for="primeiroGerente">Gerente 1:</label>
-                    <input type="text" id="primeiroGerente">
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="primeiroGerente" class="text-sm opacity-20">Gerente 1:</label>
+                        <input type="text" id="primeiroGerente"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
 
-                    <label for="segundoGerente">Gerente 2:</label>
-                    <input type="text" id="segundoGerente">
-
-                    <label for="funil" >Funil:</label>
-                    <input type="text" id="funil">
-
-                    <label for="nomeContato">Nome de Contato:</label>
-                    <input type="text" id="momeContato">
-
-                    <label for="emailContato">Email de Contato:</label>
-                    <input type="email" id="emailContato">
-
-                    <label for="numeroContato">Número de contato:</label>
-                    <input type="number" id="numeroContato">
-
-                    <!-- ==================== INPUTS FALTANTES AQUI ============================== -->
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="segundoGerente" class="text-sm opacity-20">Gerente 2:</label>
+                        <input type="text" id="segundoGerente"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
 
                 </div>
+
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="funil" class="text-sm opacity-20">Funil:</label>
+                        <input type="text" id="funil"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="nomeContato" class="text-sm opacity-20">Nome de Contato:</label>
+                        <input type="text" id="momeContato"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="emailContato" class="text-sm opacity-20">Email de Contato:</label>
+                        <input type="email" id="emailContato"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="numeroContato" class="text-sm opacity-20">Número de contato:</label>
+                        <input type="number" id="numeroContato"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded" disabled>
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================== INPUTS FALTANTES AQUI ============================== -->
+
 
 
                 <!-- BOTOES DE ACEITAR, DECLINAR E EDITAR -->
                 <div class="flex justify-between flex-col sm:flex-row mb-4">
                     <div class="flex gap-5 flex-col sm:flex-row mb-5">
                         <input
-                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
-                            type="button" value="Editar" id="editarProposta" >
-                        <input
                             class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
-                            type="button" value="Aceitar" disabled id="aceitarProposta" onclick= "aceitarProposta()">
+                            type="button" value="Aceitar" disabled id="aceitarProposta" onclick="aceitarProposta()">
+                        <input
+                        class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
+                        type="button" value="Editar" id="editarProposta">
                     </div>
                     <input
                         class="text-btn-red bg-btn-red/20 hover:bg-btn-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
@@ -305,11 +359,11 @@
             <!-- campos que ficaram em PDFs -->
 
             <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf"  onchange="aceitarProposta()" id="orcamento">
+            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento">
             <button type="button" id="botaoOrcamento">Baixar</button><br><br>
 
             <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf"   onchange="aceitarProposta()" id="propostaAssinada">
+            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
             <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
 
             <label for="relatorioFinal">PDF Relatorio final</label>
@@ -361,41 +415,41 @@
 
 
 
- <!--                       validações e funções JavaScript                              -->
-    
- <script>
+    <!--                       validações e funções JavaScript                              -->
 
-    // Ocultando o botão caso os inputs não estejam preenchidos corretamente
-    
-    function aceitarProposta(){
-        const nomeProposta = document.getElementById("tituloProposta").value;
-        const cnpj = document.getElementById("cnpj").value;
-        const unidadeCriadora = document.getElementById("uniCriadora").value;
-        const empresa = document.getElementById("empresa").value;
-        const status = document.getElementById("statusProposta").value;
-        const gerente = document.getElementById("gerenteProposta").value;
-        const numeroSGSET = document.getElementById("numeroSGSET").value;
-        const dataInicioPrimeiroProduto = document.getElementById("dataPrimeiroProduto").value;
-        const dataFinalUltimoProduto = document.getElementById("dataUltimoProduto").value;
-        const valorTotal = document.getElementById("valorTotalProdutos").value;
-        const pdfOrçamento = document.getElementById("orçamento").value;
-        const pdfPropostaAssinada = document.getElementById("PropostaAssinada").value;
-       
+    <script>
+
+        // Ocultando o botão caso os inputs não estejam preenchidos corretamente
+
+        function aceitarProposta() {
+            const nomeProposta = document.getElementById("tituloProposta").value;
+            const cnpj = document.getElementById("cnpj").value;
+            const unidadeCriadora = document.getElementById("uniCriadora").value;
+            const empresa = document.getElementById("empresa").value;
+            const status = document.getElementById("statusProposta").value;
+            const gerente = document.getElementById("gerenteProposta").value;
+            const numeroSGSET = document.getElementById("numeroSGSET").value;
+            const dataInicioPrimeiroProduto = document.getElementById("dataPrimeiroProduto").value;
+            const dataFinalUltimoProduto = document.getElementById("dataUltimoProduto").value;
+            const valorTotal = document.getElementById("valorTotalProdutos").value;
+            const pdfOrçamento = document.getElementById("orçamento").value;
+            const pdfPropostaAssinada = document.getElementById("PropostaAssinada").value;
 
 
-        if (nomeProposta && cnpj  && unidadeCriadora && empresa && status && gerente && numeroSGSET && dataInicioPrimeiroProduto && dataFinalUltimoProduto &&
-        valorTotal &&  pdfOrçamento != "" && pdfPropostaAssinada != "") {
-            document.querySelector("#botao").disabled = false;
-            document.querySelector("#botao").textContent = "Aceitar"
-            
-        }else {
 
-            document.querySelector("#botao").disabled = true;
-            
-            document.querySelector("#botao").textContent = "Aceitar"
-            alert("tudo certo");
+            if (nomeProposta && cnpj && unidadeCriadora && empresa && status && gerente && numeroSGSET && dataInicioPrimeiroProduto && dataFinalUltimoProduto &&
+                valorTotal && pdfOrçamento != "" && pdfPropostaAssinada != "") {
+                document.querySelector("#botao").disabled = false;
+                document.querySelector("#botao").textContent = "Aceitar"
+
+            } else {
+
+                document.querySelector("#botao").disabled = true;
+
+                document.querySelector("#botao").textContent = "Aceitar"
+                alert("tudo certo");
+            }
         }
-    }
 
     </script>
 
