@@ -39,6 +39,11 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Representantes` (
   PRIMARY KEY (`idRepresentante`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `isihiveframe`.`UnidadeCriadora` (
+  `idUnidadeCriadora` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `UnidadeCriadora` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`idUnidadeCriadora`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `isihiveframe`.`Propostas`
@@ -49,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   `fk_nifUsuarioCriador` VARCHAR(7) NOT NULL,
   `TituloProposta` VARCHAR(75) NOT NULL,
   `Resumo` TEXT NOT NULL,
-  `UnidadeCriadora` VARCHAR(100) NOT NULL,
+  `fk_idUnidadeCriadora` INT UNSIGNED NOT NULL,
   `Empresa` VARCHAR(200) NOT NULL,
   `Status` ENUM('Em Análise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
   `nSGSET` VARCHAR(50) NULL,
@@ -60,6 +65,12 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   INDEX `fk_Propostas_Usuarios1_idx` (`fk_nifUsuarioCriador` ASC) VISIBLE,
   PRIMARY KEY (`idProposta`),
   INDEX `fk_Propostas_Representantes1_idx` (`fk_idRepresentante` ASC) VISIBLE,
+  INDEX `fk_Propostas_UnidadeCriadora1_idx` (`fk_idUnidadeCriadora` ASC) VISIBLE,
+  CONSTRAINT `fk_Propostas_UnidadeCriadora1`
+    FOREIGN KEY (`fk_idUnidadeCriadora`)
+    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Propostas_Usuarios1`
     FOREIGN KEY (`fk_nifUsuarioCriador`)
     REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
@@ -81,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`ServicoCategoria` (
   `ServicoCategoria` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idServicoCategoria`))
 ENGINE = InnoDB;  
+
 
 
 -- -----------------------------------------------------
@@ -120,11 +132,11 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `fk_idMaquina` INT UNSIGNED NULL,
   `fk_idNomeProduto` INT UNSIGNED NOT NULL,
   `fk_idServicoCategoria` INT UNSIGNED NOT NULL,
+  `fk_idUnidadeRealizadora` INT UNSIGNED NOT NULL,
   `Area` ENUM("metalmecanica") NOT NULL,
   `Valor` DECIMAL(10,2) NOT NULL,
   `HoraPessoa` INT NOT NULL,
   `HoraMaquina` INT NOT NULL,
-  `Unidade` VARCHAR(100) NOT NULL,
   `DataInicial` DATE NOT NULL,
   `DataFinal` DATE NOT NULL,
   PRIMARY KEY (`idProduto`),
@@ -133,6 +145,12 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   INDEX `fk_Produtos_Propostas1_idx` (`fk_idProposta` ASC) VISIBLE,
   INDEX `fk_Produtos_Maquinas1_idx` (`fk_idMaquina` ASC) VISIBLE,
   INDEX `fk_Produtos_Usuarios1_idx` (`fk_nifTecnico` ASC) VISIBLE,
+  INDEX `fk_Produtos_UnidadeRealizadora1_idx` (`fk_idUnidadeRealizadora` ASC) VISIBLE,
+  CONSTRAINT `fk_Produtos_UnidadeRealizadora1`
+    FOREIGN KEY (`fk_idUnidadeRealizadora`)
+    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Produtos_ServicoCategoria1`
     FOREIGN KEY (`fk_idServicoCategoria`)
     REFERENCES `isihiveframe`.`ServicoCategoria` (`idServicoCategoria`)

@@ -270,7 +270,52 @@ insert into Usuarios values
 insert into Representantes values 
 (default, 'Josue', '11988776655', 'josue@empresa.com');
 
+-- Insert das Unidades Criadoras
+insert into UnidadeCriadora values
+(default, '103 - Núcleo Logística'),
+(default, '105 - IST Alimentos e Bebidas'),
+(default, '106 - IST Eletrônica e Automação'),
+(default, '107 - IST Têxtil e Vestuário'),
+(default, '109 - Núcleo Tecnologia da Inform.'),
+(default, '110 - ISI Biotecnologia'),
+(default, '111 - IST Construção Civil'),
+(default, '114 - Núcleo Gráfica'),
+(default, '115 - ISI Metalmecânica'),
+(default, '116 - ISI Materiais'),
+(default, '119 - IST Metalurgia'),
+(default, '120 - Núcleo Metalmecânica'),
+(default, '121 - ISI Energia'),
+(default, '123 - IST Metalmecânica'),
+(default, '127 - Núcleo Tecnologia da Inform.'),
+(default, '128 - Núcleo Logística'),
+(default, '132 - IST Tecnologia da Inform.'),
+(default, '134 - IST Tecnologia da Inform.'),
+(default, '201 - Núcleo Instrumentação Industrial'),
+(default, '301 - Núcleo Metalmecânica'),
+(default, '302 - Núcleo Metalmecânica'),
+(default, '401 - IST Tecnologias Assistivas'),
+(default, '402 - Núcleo Metalmecânica'),
+(default, '501 - IST Metalmecânica'),
+(default, '502 - Núcleo Metalmecânica'),
+(default, '503 - Núcleo Metalmecânica'),
+(default, '508 - Núcleo Madeira e Mobiliário'),
+(default, '509 - IST Alimentos e Bebidas'),
+(default, '562 - ISI Energia'),
+(default, '568 - Núcleo Eletrônica e Automação'),
+(default, '601 - Núcleo Eletrônica e Automação'),
+(default, '602 - IST Metalmecânica'),
+(default, '604 - IST Couro e Calçados'),
+(default, '661 - Núcleo Energia'),
+(default, '701 - ISI Energia'),
+(default, '792 - Núcleo Petróleo e Gás'),
+(default, '801 - Núcleo Metalmecânica'),
+(default, '890 - Núcleo Madeira e Mobiliário'),
+(default, '927 - IST Alimentos e Bebidas');
+
+
+
 -- Inserção de Propostas para teste
 insert into Propostas values 
-(default, 1, '1234567', 'Jacaré a Jato', 'Text', '115 - Senai Suiço brasileira Paulo Ernesto Tolle', 
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
 'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL);
+
