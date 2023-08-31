@@ -1,5 +1,6 @@
 usuario: hiveframe
 senha: Hiveframe@115
+link: http://isi.brazilsouth.cloudapp.azure.com:8080/
 
 
 ==================================================================
