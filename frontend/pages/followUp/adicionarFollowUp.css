@@ -1,4 +1,4 @@
-body {
+/* body {
     display: grid;
     height: 100vh;
     align-items: center;
@@ -13,4 +13,25 @@ form {
 
 ul {
     list-style-type: none;
-}
+} */
+
+/* width */
+.tabela::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+  .tabela::-webkit-scrollbar-track {
+    background: #c9c9c9;
+  }
+  
+  /* Handle */
+  .tabela::-webkit-scrollbar-thumb {
+    background: #586065;
+  }
+  
+  /* Handle on hover */
+  .tabela::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

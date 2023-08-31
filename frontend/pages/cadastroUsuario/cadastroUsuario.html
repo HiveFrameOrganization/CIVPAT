@@ -74,7 +74,7 @@
 
         <!-- header -->
     
-        <header class="py-4 px-6 text-color-text fixed top-0 w-full z-50">
+        <header class="py-4 px-6 text-color-text fixed top-0 w-full z-50 bg-body">
 
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
@@ -130,7 +130,7 @@
         <script src="../../js/global.js"></script>
         <script src="../../js/logoff.js"></script>
     
-        <section class="px-6 2xl:px-16 mt-[72px]">
+        <section class="px-6 2xl:px-16">
     
             <!-- título / subtítulo da página -->
     
@@ -229,7 +229,7 @@
 
                             <!-- <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
                                 <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="w-full option-dropdown-trigger">
                                     <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
                                         <ul role="listitem" class="space-y-2 py-2 px-2">
                                             <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
@@ -270,9 +270,26 @@
                     </a>
                 </div>
             </div>
+
             
         </main>
-
+        
+        <footer class="w-full bg-body text-color-text py-12 bottom-0">
+            <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
+                <div class="flex items-center gap-3">
+                    <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                    <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                </div>
+                <div class="flex flex-col items-center gap-3">
+                    <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                    <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                    <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+                </div>
+            </div>
+            <div class="text-center text-color-text-secundary text-sm mt-6">
+                <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+            </div>
+        </footer>
 
         
 
@@ -280,7 +297,7 @@
     
         <!-- centralização -->
     
-        <div class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+        <div class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6]">
     
             <!-- conteúdo do modal -->
     
@@ -359,7 +376,7 @@
     
         <!-- centralização -->
     
-        <div class="edit min-h-screen hidden z-50 h-full w-screen fixed left-0 top-0 backdrop-blur-[2px]">
+        <div class="edit min-h-screen hidden z-50 h-full w-screen fixed left-0 top-0 backdrop-blur-[2px] bg-[#000] bg-opacity-[0.6]">
     
             <!-- conteúdo do modal -->
     
@@ -437,22 +454,6 @@
 
     <!-- footer -->
 
-    <!-- <footer class="w-full bg-body text-color-text py-4">
-      <div class="mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
-          <div class="flex items-center gap-3">
-              <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-              <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-          </div>
-          <div class="flex flex-col items-center gap-3">
-              <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
-              <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
-              <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
-          </div>
-      </div>
-      <div class="text-center text-color-text-secundary text-sm mt-6">
-          <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
-      </div>
-  </footer> -->
 
 
     <script src="../../Componentes/inputModal/script.js"></script>
