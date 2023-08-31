@@ -506,6 +506,8 @@ formularioEditarUsuario.addEventListener('submit', evento => {
         // Função para editar os funcionários
         requisicaoEditar(dadosEditados);
 
+        location.reload();
+
     } catch (erro) {
         console.error(erro);
     }
