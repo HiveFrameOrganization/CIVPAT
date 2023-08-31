@@ -1,14 +1,12 @@
 import { back } from '../Rotas/rotas.js'
-const form = document.querySelector('.formulario');
+const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');
 
 let gerenteEncarregado;
 
 // Chamando a função quando carregar a página
-window.addEventListener('load', dropdownGerentes)
+window.addEventListener('load', async () => {
 
-// Ao Carregar a janela é retornado todos os gerentes, e adicionados ao dropdown
-async function dropdownGerentes() {
     let gerentes = await pegarGerentes();
 
     console.log(gerentes.gerentesRetornados);
@@ -24,10 +22,12 @@ async function dropdownGerentes() {
 
         });
     }
-};
+
+});
+
 
 // Ao form ser ativado, valida-se os dados e caso valido, envia ao back
-form.addEventListener('submit', async evento => {
+formularioProposta.addEventListener('submit', async evento => {
 
     // Parando o evento de enviar o formulário
     evento.preventDefault();
