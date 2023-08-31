@@ -4,12 +4,10 @@ link: http://isi.brazilsouth.cloudapp.azure.com
 
 
 ==================================================================
-Congratulations! Installed successfully!
-==================================================================
-aaPanel Internet Address: https://13.90.142.134:7800/7f4e15d9
-aaPanel Internal Address: https://10.0.0.4:7800/7f4e15d9
-username: g9jt63hq
-password: 0f6c0e58
+aaPanel Internet Address: https://104.211.12.238:7800/aabf8530
+aaPanel Internal Address: https://10.0.0.4:7800/aabf8530
+username: lssxzrli
+password: 2b3b51da
 Warning:
 If you cannot access the panel,
 release the following port (7800|888|80|443|20|21) in the security group
