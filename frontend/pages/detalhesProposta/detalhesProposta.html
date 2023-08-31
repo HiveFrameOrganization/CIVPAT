@@ -215,7 +215,7 @@
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="empresa" maxlength="200" onchange="aceitarProposta()" minlength="4" disabled>
+                            type="text" id="empresa" maxlength="200"  minlength="4" disabled>
                     </div>
 
 
@@ -224,7 +224,7 @@
                         <label for="statusProposta" class="text-sm opacity-20">Status: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" onchange="aceitarProposta()" id="statusProposta" disabled>
+                            type="text" id="statusProposta" disabled>
                     </div>
 
 
@@ -245,7 +245,7 @@
                         <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" onchange="aceitarProposta()" id="numeroSGSET" disabled>
+                            type="text"  id="numeroSGSET" disabled>
                     </div>
 
 
@@ -258,7 +258,7 @@
                         </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="date" onchange="aceitarProposta()" id="dataPrimeiroProduto" disabled>
+                            type="date" id="dataPrimeiroProduto" disabled>
                     </div>
 
 
@@ -267,7 +267,7 @@
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="date" onchange="aceitarProposta()" id="dataUltimoProduto" disabled>
+                            type="date"  id="dataUltimoProduto" disabled>
                     </div>
                 </div>
 
@@ -277,7 +277,7 @@
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" onchange="aceitarProposta()" id="valorTotalProdutos" disabled>
+                            type="text"  id="valorTotalProdutos" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -359,11 +359,11 @@
             <!-- campos que ficaram em PDFs -->
 
             <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento">
+            <input type="file" accept=".pdf" onchange="habilitarBotao()" id="orcamento">
             <button type="button" id="botaoOrcamento">Baixar</button><br><br>
 
             <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
+            <input type="file" accept=".pdf" onchange="habilitarBotao()" id="propostaAssinada">
             <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
 
             <label for="relatorioFinal">PDF Relatorio final</label>
@@ -386,7 +386,7 @@
             <!-- Botões para acionar as funções no javaScript -->
 
             <input type="button" value="Editar" id="editarProposta" editarProposta()>
-            <input type="button" value="Aceitar" id="aceitarProposta" aceitarProposta()>
+            <input type="button" value="Aceitar" id="aceitarProposta" onclick="aceitarProposta()">
             <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
 
         </div>
@@ -419,35 +419,55 @@
 
     <script>
 
-        // Ocultando o botão caso os inputs não estejam preenchidos corretamente
+        // Deixando o botão de aceitar desativado caso os pdfs de orçamento e proposta assinada e os inputs não estejam preenchidos 
+
+        const pdfOrcamento = document.getElementById("orcamento").value;
+        const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
         function aceitarProposta() {
-            const nomeProposta = document.getElementById("tituloProposta").value;
-            const cnpj = document.getElementById("cnpj").value;
-            const unidadeCriadora = document.getElementById("uniCriadora").value;
-            const empresa = document.getElementById("empresa").value;
-            const status = document.getElementById("statusProposta").value;
-            const gerente = document.getElementById("gerenteProposta").value;
-            const numeroSGSET = document.getElementById("numeroSGSET").value;
-            const dataInicioPrimeiroProduto = document.getElementById("dataPrimeiroProduto").value;
-            const dataFinalUltimoProduto = document.getElementById("dataUltimoProduto").value;
-            const valorTotal = document.getElementById("valorTotalProdutos").value;
-            const pdfOrçamento = document.getElementById("orçamento").value;
-            const pdfPropostaAssinada = document.getElementById("PropostaAssinada").value;
+            const pdfOrcamento = document.getElementById("orcamento").value;
+            const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
+
+            console.log(pdfOrcamento);
+            console.log(pdfPropostaAssinada);
+
+            alert('aaaaaaaaaaa')
 
 
+            // if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
+            //     document.querySelector("#aceitarProposta").disabled = false;
+            //     alert("tudo certo");
 
-            if (nomeProposta && cnpj && unidadeCriadora && empresa && status && gerente && numeroSGSET && dataInicioPrimeiroProduto && dataFinalUltimoProduto &&
-                valorTotal && pdfOrçamento != "" && pdfPropostaAssinada != "") {
-                document.querySelector("#botao").disabled = false;
-                document.querySelector("#botao").textContent = "Aceitar"
+            // } else {
+
+            //     document.querySelector("#aceitarProposta").disabled = true;
+      
+                
+            // }
+
+            // console.log(pdfOrcamento);
+            // console.log(pdfPropostaAssinada);
+        }
+
+
+        function checarProposta() {
+            console.log('dddddddd')
+            if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function habilitarBotao() {
+
+            if (checarProposta() == true) {
+                document.querySelector("#aceitarProposta").disabled = false;
+                console.log('bbbbbbb')
 
             } else {
-
-                document.querySelector("#botao").disabled = true;
-
-                document.querySelector("#botao").textContent = "Aceitar"
-                alert("tudo certo");
+                document.querySelector("#aceitarProposta").disabled = true;
+                console.log('aaaaaaaaa')
             }
         }
 

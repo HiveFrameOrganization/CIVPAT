@@ -94,7 +94,7 @@ async function verificarBancoProposta(id){
         const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
         const statusProposta = document.querySelector('#statusProposta').value = resposta['statusProposta'];
-        const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
+        // const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
         const numeroSGSET = document.querySelector('#numeroSGSET').value = resposta['numeroSGSET'];
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
