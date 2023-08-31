@@ -135,16 +135,29 @@ async function verificarPdfExistente(idProposta){
             if (valor == true){
                 // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
-
-                // document.getElementsByClassName(chave).classlist.remove('hidden')
+                console.log(chave)
             } else {
                 // Se o PDF não for encontrado, o botão ficará em disabled
                 document.getElementById(chave).disabled = true;
-                // document.getElementsByClassName(chave).classlist.add('hidden')
+                console.log(chave)
             }
         }    
     }catch(error){
         console.error(error)
+    }
+
+    // sumir o botão se nao ouver pdf no banco
+    if(document.querySelector('#botaoOrcamento').disabled){
+        document.querySelector('.sumirOrcamento').classList.add('hidden')
+    }
+    if(document.querySelector('#botaoPropostaAssinada').disabled){
+        document.querySelector('.sumirPropostaAssinada').classList.add('hidden')
+    }
+    if(document.querySelector('#botaoRelatorioFinal').disabled){
+        document.querySelector('.sumirRelatorioFinal').classList.add('hidden')
+    }
+    if(document.querySelector('#botaoPesquisaDeSatisfacao').disabled){
+        document.querySelector('.sumirPesquisaDeSatisfacao').classList.add('hidden')
     }
 }
 

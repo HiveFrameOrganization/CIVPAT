@@ -87,22 +87,21 @@
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
                             src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"><img
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img
                                 src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../todasPropostas/todasPropostas.html"
-                            class="text-primary font-semibold max-[313px]:hidden text-lg"
+                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
                             aria-label="Ir para página principal">HIVE<span
                                 class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div class="mt-4 space-y-4">
-                        <a href="../todasPropostas/todasPropostas.html" aria-label="Ir para a página inicial"
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
                                 src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
                         <a href="../cadastroUsuario/cadastroUsuario.html"
                             aria-label="Ir para a página de gerenciamento de equipe"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
                                 src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
-                        <a href="#" aria-label="Ir para a página de relatórios"
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de relatórios"
                             class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
                                 src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                         <a href="#" aria-label="Ir para a página de registro de horas"
@@ -112,11 +111,9 @@
                     </div>
                 </div>
 
-                <a href="../todasPropostas/todasPropostas.html"><img src="../../img/icon/logo.svg" alt="Logo"
-                        class="w-8 h-8"></a>
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
 
-                <a href="../todasPropostas/todasPropostas.html"
-                    class="text-primary font-semibold max-[313px]:hidden text-lg"
+                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
                     aria-label="Ir para página principal">HIVE<span
                         class="text-color-text transition-colors">FRAME</span></a>
 
@@ -372,37 +369,134 @@
 
                 <p class="py-1 w-full bg-component"></p>
 
-                <label for="orcamento" class="uppercase text-lg">Orçamento</label>
-                <div class="flex flex-col gap-4">
-                    <!-- input de upload -->
-                    <div class="relative w-1/3">
-                        <img src="../../img/icon/upload.png" alt="Ícone de upload" class="absolute right-0 h-12 rounded-r-lg">
-                        <input type="text" value="" id="inputFileUp" class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer" placeholder="Upload de arquivos" onclick="document.querySelector('.inputOrçamento').click()">
-                        <!-- input que sera salvo o pdf -->
-                        <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"  class="inputOrçamento hidden">
+                <!-- Um dos cards de pdfs -->
+                <div class="flex flex-col gap-2">
+                    <label for="orcamento" class="uppercase text-lg">Orçamento</label>
+                    <div class="flex flex-col gap-4">
+                        <!-- input de upload -->
+                        <div class="relative w-1/3">
+                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileUp"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Upload de arquivos"
+                                onclick="document.querySelector('.inputOrçamento').click()">
+                            <!-- input que sera salvo o pdf -->
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
+                                class="inputOrçamento hidden">
+                        </div>
+
+                        <div class="relative w-1/3 sumirOrcamento">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoOrcamento').click()">
+                            <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
+                        </div>
                     </div>
-                    
-                    <div class="relative w-1/3">
-                        <img src="../../img/icon/download.png" alt="Ícone de download" class="absolute right-0 h-12 rounded-r-lg">
-                        <input type="text" value="" id="inputFileDown" class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer" placeholder="Download de arquivos" onclick="document.querySelector('#botaoOrcamento').click()">
-                        <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
-                    </div>    
                 </div>
-                <!-- <button type="button" id="botaoOrcamento">Baixar</button> -->
+                <!-- Fim dos cards de pdfs -->
 
-                <label for="propostaAssinada">PDF Proposta assinada</label>
-                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
-                <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
+                <!-- Um dos cards de pdfs -->
+                <div class="flex flex-col gap-2">
+                    <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
+                    <div class="flex flex-col gap-4">
+                        <!-- input de upload -->
+                        <div class="relative w-1/3">
+                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileUp"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Upload de arquivos"
+                                onclick="document.querySelector('#propostaAssinada').click()">
 
-                <label for="relatorioFinal">PDF Relatorio final</label>
-                <input type="file" accept=".pdf" id="relatorioFinal">
-                <button type="button" id="botaoRelatorioFinal">Baixar</button><br><br>
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
+                                class="hidden">
+                        </div>
 
-                <label for="pesquisaDeSatisfacao">PDF Proposta assinada</label>
-                <input type="file" accept=".pdf" id="pesquisaDeSatisfacao">
-                <button type="button" id="botaoPesquisaDeSatisfacao">Baixar</button><br><br>
+                        <!-- input download -->
+                        <div class="relative w-1/3 sumirPropostaAssinada">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoPropostaAssinada').click()">
 
-                <button type="button" id="botaoSalvarPdf">Salvar PDF</button><br><br>
+                            <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim dos cards de pdfs -->
+
+                <!-- Um dos cards de pdfs -->
+                <div class="flex flex-col gap-2">
+                    <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
+                    <div class="flex flex-col gap-4">
+                        <!-- input de upload -->
+                        <div class="relative w-1/3">
+                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileUp"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Upload de arquivos"
+                                onclick="document.querySelector('#relatorioFinal').click()">
+
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
+                                class="hidden">
+                        </div>
+
+                        <!-- input download -->
+                        <div class="relative w-1/3 sumirRelatorioFinal">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoRelatorioFinal').click()">
+
+                            <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim dos cards de pdfs -->
+
+                <!-- Um dos cards de pdfs -->
+                <div class="flex flex-col gap-2">
+                    <label for="pesquisaDeSatisfacao" class="uppercase text-lg">pesquisa De Satisfacao</label>
+                    <div class="flex flex-col gap-4">
+                        <!-- input de upload -->
+                        <div class="relative w-1/3">
+                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileUp"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Upload de arquivos"
+                                onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
+
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="pesquisaDeSatisfacao"
+                                class="hidden">
+                        </div>
+
+                        <!-- input download -->
+                        <div class="relative w-1/3 sumirPesquisaDeSatisfacao">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
+
+                            <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fim dos cards de pdfs -->
+
+                <button type="button" id="botaoSalvarPdf" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3">Salvar PDF</button>
+                
             </div>
 
             <!-- campos que ficarão em Produtos -->
