@@ -50,6 +50,21 @@
             font-family: 'Rubik', sans-serif;
         }
 
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -81,11 +96,12 @@
                     </div>
                     <div class="mt-4 space-y-4">
                         <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                        <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                         <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
+                <div id="fade" class="hide transition-opacity"></div>
                 <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
@@ -103,13 +119,15 @@
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
-                            <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <script src="../../js/themeSwitch/index.js"></script>
 
     <main class="mt-[72px] py-6 text-color-text">
         <section class="container mx-auto px-6">
@@ -132,14 +150,14 @@
                         <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0">
                             <img src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full">
                         </div>
-                        <div class="flex flex-col">
-                            <span id="nomeTitulo" class="text-2xl font-semibold">Nome:</span>
-                            <span id="cargoTitulo" class="text-base text-color-text-secundary font-normal">Cargo:</span>
+                        <div class="flex flex-col items-center sm:items-start capitalize">
+                            <span id="nomeTitulo" class="text-2xl font-semibold">N/A</span>
+                            <span id="cargoTitulo" class="text-base text-color-text-secundary font-normal">N/A</span>
                         </div>
                         <div class="flex items-center gap-8 flex-wrap justify-center">
                             <div class="flex items-center gap-2">
                                 <img src="../../img/icon/mail.svg" alt="Email">
-                                <span id="emailTitulo" class="text-base text-color-text-secundary font-normal">Email:</span>
+                                <span id="emailTitulo" class="text-base text-color-text-secundary font-normal">N/A</span>
                             </div>
                         </div>
                     </div>
@@ -149,11 +167,11 @@
                     <div class="flex flex-wrap gap-4">
                         <div class="flex flex-col rounded-md px-4 py-2">
                             <span class="font-semibold text-base">NOME</span>
-                            <span id="nomePequeno" class="text-base font-light"></span>
+                            <span id="nomePequeno" class="text-base font-light capitalize">---</span>
                         </div>
                         <div class="flex flex-col rounded-md px-4 py-2">
                             <span class="font-semibold text-base">E-MAIL</span>
-                            <span id="emailPequeno" class="text-base font-light"></span>
+                            <span id="emailPequeno" class="text-base font-light">---</span>
                         </div>
                     </div>
                 </div>
@@ -191,8 +209,9 @@
         </section>
     </main>
 
-    <script src="../../js/themeSwitch/index.js"></script>
     <script src="../../js/global.js"></script>
+    <script src="../../js/logoff.js"></script>
+    <script src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/perfil/buscarPerfil.js"></script>
     <script type="module" src="../../js/api/perfil/produtos.js"></script>
 </body>

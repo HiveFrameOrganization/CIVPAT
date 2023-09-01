@@ -1,8 +1,8 @@
 import { back } from '../Rotas/rotas.js'
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', () => {
-     const idProposta = localStorage.getItem('idProposta');
-   
+    const idProposta = localStorage.getItem('idProposta');
+
     // Levar o valor do id do local Storage atravez da função para o back end
     verificarBancoProposta(idProposta);
     verificarPdfExistente(idProposta);
@@ -22,7 +22,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfPropostaAssinada = document.getElementById('propostaAssinada').files[0];
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
-    
+
     // Criar um objeto FormData e adicionar o arquivo PDF a ele
     //formdata serve para mandar dados e arquivos facilmente por via api
     //usado para enviar dados do cliente para o servidor, especialmente 
@@ -44,29 +44,29 @@ botaoSalvarPdf.addEventListener('click', () => {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
-    .then(json => {
+        .then(response => response.json())
+        .then(json => {
 
-        localStorage.setItem('status', json.status);
-        localStorage.setItem('mensagem', json.mensagem);
-        alertas();
+            localStorage.setItem('status', json.status);
+            localStorage.setItem('mensagem', json.mensagem);
+            alertas();
 
-        verificarPdfExistente(identificador);
-    })
-    .catch(error => {
-        console.error('Erro ao salvar o PDF:', error);
-    });
+            verificarPdfExistente(identificador);
+        })
+        .catch(error => {
+            console.error('Erro ao salvar o PDF:', error);
+        });
 })
 
 const botaoOrcamento = document.getElementById('botaoOrcamento');
 botaoOrcamento.addEventListener('click', () => {
     baixarPdf(1);
-} );
+});
 
 const botaoPropostaAssinada = document.getElementById('botaoPropostaAssinada');
 botaoPropostaAssinada.addEventListener('click', () => {
     baixarPdf(2)
-} );
+});
 
 const botaoRelatorioFinal = document.getElementById('botaoRelatorioFinal');
 botaoRelatorioFinal.addEventListener('click', () => {
@@ -79,45 +79,45 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
 });
 
 // Fução para fazer a requisição no back-end dos dados
-async function verificarBancoProposta(id){
-    try{
+async function verificarBancoProposta(id) {
+    try {
 
         // Requisição com parâmetro para buscar a proposta pelo id
         const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
-        
+
 
         const resposta = await requisicao.json()
         console.log(resposta)
-
+        
+        
         //Enviando para o front-end os dados vindos do back end
-        const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta']; 
-        const TelaNomeProposta = document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] 
+        const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta'];
+        const TelaNomeProposta = document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
         const cnpj = document.querySelector('#cnpj').value = resposta['cnpj'];
-        const uniCriadora= document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
+        const uniCriadora = document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
         const titleUniCriadora = document.querySelector('#uniCriadora').title = resposta['uniCriadora']
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
         const statusProposta = document.querySelector('#statusProposta').value = resposta['statusProposta'];
-        // const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
+        const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
         const numeroSGSET = document.querySelector('#numeroSGSET').value = resposta['numeroSGSET'];
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = resposta['valorTotalProdutos'];
         const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
-        // const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]['Nome'];
-        const funil = document.querySelector('#funil').value = resposta['funil'];
-        const momeContato = document.querySelector('#momeContato').value = resposta['momeContato'];
+        const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
         const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
+        const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
 
-        
-    } catch (error){
+
+    } catch (error) {
         console.error(error)
-    } 
+    }
 }
 
-async function verificarPdfExistente(idProposta){
+async function verificarPdfExistente(idProposta) {
 
-    try{
+    try {
         // Cria a requisição 
         const requisicao = await fetch(back + `/PDF/verificarPdfExistente.php?id=${idProposta}`)
 
@@ -133,7 +133,7 @@ async function verificarPdfExistente(idProposta){
         for (const chave in resposta) {
             const valor = resposta[chave];
 
-            if (valor == true){
+            if (valor == true) {
                 // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
                 console.log(chave)
@@ -142,28 +142,28 @@ async function verificarPdfExistente(idProposta){
                 document.getElementById(chave).disabled = true;
                 console.log(chave)
             }
-        }    
-    }catch(error){
+        }
+    } catch (error) {
         console.error(error)
     }
 
     // sumir o botão se nao ouver pdf no banco
-    if(document.querySelector('#botaoOrcamento').disabled){
+    if (document.querySelector('#botaoOrcamento').disabled) {
         document.querySelector('.sumirOrcamento').classList.add('hidden')
     }
-    if(document.querySelector('#botaoPropostaAssinada').disabled){
+    if (document.querySelector('#botaoPropostaAssinada').disabled) {
         document.querySelector('.sumirPropostaAssinada').classList.add('hidden')
     }
-    if(document.querySelector('#botaoRelatorioFinal').disabled){
+    if (document.querySelector('#botaoRelatorioFinal').disabled) {
         document.querySelector('.sumirRelatorioFinal').classList.add('hidden')
     }
-    if(document.querySelector('#botaoPesquisaDeSatisfacao').disabled){
+    if (document.querySelector('#botaoPesquisaDeSatisfacao').disabled) {
         document.querySelector('.sumirPesquisaDeSatisfacao').classList.add('hidden')
     }
 }
 
 
-function baixarPdf (tipoPdf) {
+function baixarPdf(tipoPdf) {
 
     const idProposta = localStorage.getItem('idProposta');
 
@@ -172,25 +172,25 @@ function baixarPdf (tipoPdf) {
 
     // Faça a requisição usando fetch.
     fetch(url)
-    .then(response => response.blob())
-    .then(blob => {
-        //Crie um URL temporário para o blob do PDF.
-        const urlPdf = URL.createObjectURL(blob);
+        .then(response => response.blob())
+        .then(blob => {
+            //Crie um URL temporário para o blob do PDF.
+            const urlPdf = URL.createObjectURL(blob);
 
-        // Crie um link <a> para abrir o PDF em uma nova guia do navegador.
-        const link = document.createElement('a');
-        link.href = urlPdf;
-        link.target = '_blank';
-        link.click();
-        
+            // Crie um link <a> para abrir o PDF em uma nova guia do navegador.
+            const link = document.createElement('a');
+            link.href = urlPdf;
+            link.target = '_blank';
+            link.click();
 
-        // Remova o URL temporário criado para o blob.
-        URL.revokeObjectURL(urlPdf);
 
-    })
-    .catch(error => {
-        console.error('Erro ao obter o PDF:', error);
-    });
+            // Remova o URL temporário criado para o blob.
+            URL.revokeObjectURL(urlPdf);
+
+        })
+        .catch(error => {
+            console.error('Erro ao obter o PDF:', error);
+        });
 }
 
 
@@ -247,19 +247,19 @@ function validarCNPJ(cnpj) {
 
 
 const editandoProposta = document.querySelector('#editarProposta');
-editandoProposta.addEventListener('click', () =>{
+editandoProposta.addEventListener('click', () => {
 
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
-    if(editandoProposta.value == 'Editar'){
+    if (editandoProposta.value == 'Editar') {
         editandoProposta.value = 'Salvar'
 
         for (let i = 0; i < estadoInput.length; i++) {
             estadoInput[i].removeAttribute('disabled')
         }
-    }else{
+    } else {
         editandoProposta.value = 'Editar'
-        
+
         for (let i = 0; i < estadoInput.length; i++) {
             estadoInput[i].setAttribute('disabled', 'true')
         }
@@ -315,10 +315,10 @@ editandoProposta.addEventListener('click', () =>{
     
 });
 
-async function postarDetalhesBanco(postDetalhes){
+async function postarDetalhesBanco(postDetalhes) {
 
-    try{
-        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php',{
+    try {
+        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -333,15 +333,15 @@ async function postarDetalhesBanco(postDetalhes){
         }
 
         const resposta = await requisicao.json()
-        
-    }catch(error){
+
+    } catch (error) {
         console.error(error)
     }
 }
 
 
 async function carregarProdutos(idProposta) {
-    try{
+    try {
         // Cria a requisição 
         const requisicao = await fetch(back + `/detalhesProposta/carregarProdutos.php?id=${idProposta}`)
 
@@ -354,10 +354,10 @@ async function carregarProdutos(idProposta) {
         const resposta = await requisicao.json();
 
         console.log(resposta);
-        
+
         exibirProdutos(resposta.produtos);
 
-    }catch(error){
+    } catch (error) {
         console.error(error)
     }
 }
@@ -380,7 +380,7 @@ async function exibirProdutos(produtos) {
 
         botao.onclick = () => {
             localStorage.setItem('idProduto', botao.value);
-            
+
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
         }
 
@@ -393,6 +393,68 @@ async function exibirProdutos(produtos) {
 }
 
 
+// FUNÇAO DE MUDAR A ABA QUE SERA RENDERIZADA
+let mudarAba = document.querySelectorAll('.mudarAba')
+let nomeAba = document.querySelector('.nomeAba')
+let abaInfo = document.querySelector('.abaInfo')
+let abaPdf = document.querySelector('.abaPdf')
+mudarAba[0].addEventListener('click', () => {
+    abaInfo.classList.remove('hidden')
+    abaPdf.classList.add('hidden')
+    mudarAba[0].classList.add('text-primary')
+    mudarAba[0].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != 0) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+
+    nomeAba.innerHTML = 'detalhes de proposta'
+})
+mudarAba[1].addEventListener('click', () => {
+    abaInfo.classList.add('hidden')
+    abaPdf.classList.remove('hidden')
+    mudarAba[1].classList.add('text-primary')
+    mudarAba[1].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != 1) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+
+    
+    nomeAba.innerHTML = 'pdf(s) obrigatorios e opcionais'
+})
+mudarAba[2].addEventListener('click', () => {
+    mudarAba[2].classList.add('text-primary')
+    mudarAba[2].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != 2) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+})
+mudarAba[3].addEventListener('click', () => {
+    mudarAba[3].classList.add('text-primary')
+    mudarAba[3].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != 3) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+})
 
 
 async function carregarTecnicos () {
