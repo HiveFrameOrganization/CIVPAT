@@ -214,7 +214,7 @@
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="empresa" maxlength="200"  minlength="4" disabled>
+                            type="text" id="empresa" maxlength="200" minlength="4" disabled>
                     </div>
 
 
@@ -244,7 +244,7 @@
                         <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text"  id="numeroSGSET" disabled>
+                            type="text" id="numeroSGSET" disabled>
                     </div>
 
 
@@ -266,7 +266,7 @@
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="date"  id="dataUltimoProduto" disabled>
+                            type="date" id="dataUltimoProduto" disabled>
                     </div>
                 </div>
 
@@ -276,7 +276,7 @@
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text"  id="valorTotalProdutos" disabled>
+                            type="text" id="valorTotalProdutos" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -368,6 +368,7 @@
 
                 <p class="py-1 w-full bg-component"></p>
 
+
                 <!-- Um dos cards de pdfs -->
                 <div class="flex flex-col gap-2">
                     <label for="orcamento" class="uppercase text-lg">Orçamento</label>
@@ -379,7 +380,7 @@
                             <input type="text" value="" id="inputFileUp"
                                 class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                 placeholder="Upload de arquivos"
-                                onclick="document.querySelector('.inputOrçamento').click()">
+                                onclick="document.querySelector('.inputOrçamento').click()" desabled>
                             <!-- input que sera salvo o pdf -->
                             <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
                                 class="inputOrçamento hidden">
@@ -462,6 +463,11 @@
                 </div>
                 <!-- Fim dos cards de pdfs -->
 
+
+                <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
+
+                <p class="py-1 w-full bg-component"></p>
+
                 <!-- Um dos cards de pdfs -->
                 <div class="flex flex-col gap-2">
                     <label for="pesquisaDeSatisfacao" class="uppercase text-lg">pesquisa De Satisfacao</label>
@@ -474,23 +480,30 @@
                                 class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                 placeholder="Upload de arquivos"
                                 onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="pesquisaDeSatisfacao"
+                                class="hidden">
+                        </div>
 
-            <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento">
-            <button type="button" id="botaoOrcamento">Baixar</button><br><br>
-
-            <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
-            <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
+                        <!-- input download -->
+                        <div class="relative w-1/3 sumirPesquisaDeSatisfacao">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
 
                             <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
                         </div>
+                        <!-- <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button> -->
                     </div>
                 </div>
                 <!-- Fim dos cards de pdfs -->
 
-                <button type="button" id="botaoSalvarPdf" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3">Salvar PDF</button>
-                
+                <button type="button" id="botaoSalvarPdf"
+                    class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3">Salvar
+                    PDF</button>
+
             </div>
 
             <!-- campos que ficarão em Produtos -->
@@ -534,7 +547,7 @@
 
     <!--                       validações e funções JavaScript                              -->
 
-    <!-- <script>
+    <script>
 
         // Deixando o botão de aceitar desativado caso os pdfs de orçamento e proposta assinada e os inputs não estejam preenchidos 
 
@@ -558,8 +571,8 @@
             // } else {
 
             //     document.querySelector("#aceitarProposta").disabled = true;
-      
-                
+
+
             // }
 
             // console.log(pdfOrcamento);
@@ -569,7 +582,7 @@
 
         function checarProposta() {
             console.log('dddddddd')
-            if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
+            if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
                 return true;
             } else {
                 return false;
@@ -588,9 +601,8 @@
             }
         }
 
-    </script> -->
+    </script>
 
 </body>
 
 </html>
-
