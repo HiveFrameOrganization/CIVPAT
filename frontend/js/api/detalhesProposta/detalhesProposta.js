@@ -7,8 +7,7 @@ window.addEventListener('load', () => {
     verificarBancoProposta(idProposta);
     verificarPdfExistente(idProposta);
     carregarProdutos(idProposta);
-    carregarTecnicos();
-
+    
 })
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
@@ -78,6 +77,33 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
     baixarPdf(4)
 });
 
+async function selecionarGerente(id) {
+
+    // Requisição com parâmetro para buscar a proposta pelo id
+    const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
+
+
+    const resposta = await requisicao.json();
+
+    const gerente1 = document.querySelector('#primeiroGerente');
+    const gerente2 = document.querySelector('#segundoGerente');
+
+    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+    for (var i = 0; i < gerente1.options.length; i++) {
+        if (gerente1.options[i].value == resposta['Gerentes'][0]['fk_nifGerente']) {
+            gerente1.options[i].selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
+
+    for (var j = 0; j < gerente2.options.length; j++) {
+        if (gerente2.options[j].value == resposta['Gerentes'][1]['fk_nifGerente']) {
+            gerente2.options[j].selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
+}
+
 // Fução para fazer a requisição no back-end dos dados
 async function verificarBancoProposta(id) {
     try {
@@ -86,9 +112,11 @@ async function verificarBancoProposta(id) {
         const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
 
 
-        const resposta = await requisicao.json()
-        console.log(resposta)
+        const resposta = await requisicao.json();
+
+        carregarTecnicos();
         
+       
         
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta'];
@@ -103,11 +131,11 @@ async function verificarBancoProposta(id) {
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = resposta['valorTotalProdutos'];
-        const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
+        // const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
         const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
         const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
-        const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
+        // const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
 
 
     } catch (error) {
@@ -215,35 +243,31 @@ function validarCNPJ(cnpj) {
       return false;
     }
   
-    // Verificar se todos os dígitos são iguais (números repetidos não são válidos)
-    if (/^(\d)\1+$/.test(cnpj)) {
-      return false;
-    }
-  
     // Calcular o primeiro dígito verificador
     let soma = 0;
-    for (let i = 0; i < 12; i++) {
-      soma += parseInt(cnpj.charAt(i)) * (13 - i);
+    let peso = 2;
+    for (let i = 11; i >= 0; i--) {
+      soma += parseInt(cnpj.charAt(i)) * peso;
+      peso = peso === 9 ? 2 : peso + 1;
     }
-    soma = (soma % 11) < 2 ? 0 : 11 - (soma % 11);
-    if (parseInt(cnpj.charAt(12)) !== soma) {
-      return false;
-    }
+    const digito1 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
   
     // Calcular o segundo dígito verificador
     soma = 0;
-    for (let i = 0; i < 13; i++) {
-      soma += parseInt(cnpj.charAt(i)) * (14 - i);
+    peso = 2;
+    for (let i = 12; i >= 0; i--) {
+      soma += parseInt(cnpj.charAt(i)) * peso;
+      peso = peso === 9 ? 2 : peso + 1;
     }
-    soma = (soma % 11) < 2 ? 0 : 11 - (soma % 11);
-    if (parseInt(cnpj.charAt(13)) !== soma) {
+    const digito2 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+  
+    // Verificar se os dígitos verificadores calculados são iguais aos dígitos reais
+    if (parseInt(cnpj.charAt(12)) !== digito1 || parseInt(cnpj.charAt(13)) !== digito2) {
       return false;
     }
   
     return true;
   }
-
-
 
 
 const editandoProposta = document.querySelector('#editarProposta');
@@ -272,6 +296,7 @@ editandoProposta.addEventListener('click', () => {
         //Pegando os valores dos input's para transformalos em objeto
         const nomeProposta = document.querySelector('#tituloProposta').value;
         const cnpj = document.querySelector('#cnpj').value;
+        const cnpjString = cnpj.toString();
         const uniCriadora= document.querySelector('#uniCriadora').value;
         const empresa = document.querySelector('#empresa').value;
         const statusProposta = document.querySelector('#statusProposta').value;
@@ -280,13 +305,13 @@ editandoProposta.addEventListener('click', () => {
         const primeiroGerente = document.querySelector('#primeiroGerente').value;
         const segundoGerente = document.querySelector('#segundoGerente').value ;
         const funil = document.querySelector('#funil').value;
-        const momeContato = document.querySelector('#momeContato').value;
+        const nomeContato = document.querySelector('#nomeContato').value;
         const emailContato = document.querySelector('#emailContato').value;
         const numeroContato = document.querySelector('#numeroContato').value; 
         
-        const verificacaoDoCnpj = validarCNPJ(cnpj);
+        const verificacaoDoCnpj = validarCNPJ(cnpjString);
         
-            
+        console.log(verificacaoDoCnpj);
         if (verificacaoDoCnpj == false) {
             alert('CNPJ inválido');
         } else {
@@ -463,11 +488,13 @@ async function carregarTecnicos () {
     const gerente2Dropdown = document.getElementById('segundoGerente');
 
 
-    const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
+    const requisicao = await fetch(back + '/detalhesProposta/carregarTecnicos.php', {
         methods : 'GET'
     });
 
     const resposta = await requisicao.json();
+
+    console.log(resposta);
 
     for (var i = 0; i < resposta.length; i++) {
         var optionElement = document.createElement("option");
@@ -486,4 +513,6 @@ async function carregarTecnicos () {
 
         i += 1;
     }
+
+    selecionarGerente(localStorage.getItem('idProposta'));
 }
