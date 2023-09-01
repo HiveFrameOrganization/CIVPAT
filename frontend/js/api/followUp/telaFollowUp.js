@@ -57,18 +57,18 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
 
             function abreModalEditar(id) {
                 console.log(document.getElementById(`data${id}`).textContent)
-                let modal = document.querySelector('.caixa');
+                let modal = document.querySelector('.edit');
 
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
 
-                let datafollow = document.getElementById('dataFollowUp')
+                let datafollow = document.getElementById('dataFollowUpEdit')
                 datafollow.value = document.getElementById(`data${id}`).textContent
                 datafollow.disabled = true;
                 
-                document.getElementById(`comentario`).textContent = document.getElementById(`p${id}`).textContent
+                document.getElementById(`comentarioEdit`).textContent = document.getElementById(`p${id}`).textContent
 
-                let dataFollowUpProx = document.getElementById('dataFollowUpProx')
+                let dataFollowUpProx = document.getElementById('dataFollowUpProxEdit')
                 dataFollowUpProx.value = document.getElementById(`dataprox${id}`).textContent.split(": ")[1]
                 dataFollowUpProx.disabled = true;
             }
