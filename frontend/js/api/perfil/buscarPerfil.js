@@ -63,27 +63,27 @@ function exibir(dados) {
     const nomePequeno = document.querySelector('#nomePequeno');
     const emailPequeno = document.querySelector('#emailPequeno');
 
-    nomeTitulo.innerText = dados.nome + ' ' + dados.sobrenome;
-    emailTitulo.innerText = dados.email;
-    nomePequeno.innerText = dados.nome + ' ' + dados.sobrenome;
-    emailPequeno.innerText = dados.email;
+    nomeTitulo.textContent = dados.nome + ' ' + dados.sobrenome;
+    emailTitulo.textContent = dados.email;
+    nomePequeno.textContent = dados.nome + ' ' + dados.sobrenome;
+    emailPequeno.textContent = dados.email;
 
     // Verificando qual é o tipo de cargo para exibir corretamente
     if (dados.cargo === 'coor') {
 
-        cargoTitulo.innerText = 'Coordenador';
+        cargoTitulo.textContent = 'Coordenador';
 
     } else if (dados.cargo === 'adm') {
 
-        cargoTitulo.innerText = 'Administrador';
+        cargoTitulo.textContent = 'Administrador';
 
     } else if (dados.cargo === 'ger') {
 
-        cargoTitulo.innerText = 'Gerente';
+        cargoTitulo.textContent = 'Gerente';
 
     } else {
 
-        cargoTitulo.innerText = 'Técnico';
+        cargoTitulo.textContent = 'Técnico';
 
     }
 

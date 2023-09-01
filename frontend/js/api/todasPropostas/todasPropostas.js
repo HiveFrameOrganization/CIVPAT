@@ -23,10 +23,10 @@ async function pegarTodasAsPropostas () {
         exibirPropostas(dados.propostas);
 
         // Adicionando a quaqntidade de propostas de acordo com os seus status
-        document.getElementById('analise').textContent = `# ${dados['Em Análise']}`;
-        document.getElementById('aceitos').textContent = `# ${dados['Aceito']}`;
-        document.getElementById('declinados').textContent = `# ${dados['Declinado']}`;
-        document.getElementById('concluidos').textContent = `# ${dados['Concluido']}`;
+        document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+        document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+        document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+        document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
 
     } catch (error){
         console.error(error)

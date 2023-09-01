@@ -54,6 +54,22 @@
         * {
             font-family: 'Rubik', sans-serif;
         }
+        
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -109,8 +125,11 @@
                                 src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de
                             horas</a>
                     </div>
+                
                 </div>
 
+                <div id="fade" class="hide transition-opacity"></div>
+                
                 <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
 
                 <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
@@ -160,15 +179,14 @@
 
             <ul class="flex gap-8 w-1/2">
                 <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
-                <li
-                    class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                <li class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(0)">
                     detalhes</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">PDFs</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(1)">PDFs</li>
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(2)">
                     <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a>
                 </li>
                 <li
-                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(3)">
                     produtos</li>
 
             </ul>
@@ -177,10 +195,10 @@
 
         <div id="detalhesProposta" class="bg-component px-8">
 
-            <h2 class="uppercase text-2xl font-bold py-8 container mx-auto">detalhes da proposta</h2>
+            <h2 class="nomeAba uppercase text-2xl font-bold py-8 container mx-auto">detalhes da proposta</h2>
 
-            <!-- Campos que ficaram nos detalhes -->
-            <div class="bg-body px-7 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
+            <!-- Campos que ficaram as informaçoes -->
+            <div class="abaInfo bg-body px-7 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                     <div class="flex flex-col w-full md:w-1/3">
@@ -191,34 +209,6 @@
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="cnpj" class="text-sm opacity-20">CNPJ: </label>
-                        <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="cnpj" maxlength="14" disabled>
-                    </div>
-
-                    <div class="flex flex-col w-full md:w-1/3">
-
-                        <label for="uniCriadora" class="text-sm opacity-20">Unidade criadora: </label>
-                        <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                            type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
-                    </div>
-                </div>
-
-
-                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
-
-                    <div class="flex flex-col w-full md:w-1/3">
-
-                        <label for="empresa" class="text-sm opacity-20">Empresa: </label>
-                        <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="empresa" maxlength="200" minlength="4" disabled>
-                    </div>
-
-
-                    <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="statusProposta" class="text-sm opacity-20">Status: </label>
                         <input
@@ -226,28 +216,47 @@
                             type="text" id="statusProposta" disabled>
                     </div>
 
-
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="gerenteProposta" class="text-sm opacity-20">Criador da proposta: </label>
                         <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
                             type="text" id="criadorProposta" disabled>
+                    </div>
+                </div>
+
+
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="cnpj" class="text-sm opacity-20">CNPJ: </label>
+                        <input
+                        class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                        type="text" id="cnpj" maxlength="14" disabled>
+                    </div>
+                    
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="empresa" class="text-sm opacity-20">Empresa: </label>
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="empresa" maxlength="200" minlength="4" disabled>
+                    </div>
+                    
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="uniCriadora" class="text-sm opacity-20">Unidade criadora: </label>
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                            type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
                     </div>
 
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
 
-                    <div class="flex flex-col w-full md:w-1/3">
-
-                        <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
-                        <input
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="numeroSGSET" disabled>
-                    </div>
-
-
+                    
+                    
                     <div class="flex flex-col w-full md:w-1/3">
 
                         <label for="dataPrimeiroProduto" class="text-sm opacity-20 w-full truncate ">
@@ -265,12 +274,9 @@
 
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
                         <input
-                            class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                        class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
                             type="date" id="dataUltimoProduto" disabled>
                     </div>
-                </div>
-
-                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
 
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
@@ -278,21 +284,6 @@
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
                             type="text" id="valorTotalProdutos" disabled>
                     </div>
-
-                    <div class="flex flex-col w-full md:w-1/3">
-                        <label for="primeiroGerente" class="text-sm opacity-20">Gerente 1:</label>
-                        <input type="text" id="primeiroGerente"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            disabled>
-                    </div>
-
-                    <div class="flex flex-col w-full md:w-1/3">
-                        <label for="segundoGerente" class="text-sm opacity-20">Gerente 2:</label>
-                        <input type="text" id="segundoGerente"
-                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            disabled>
-                    </div>
-
                 </div>
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
@@ -305,10 +296,42 @@
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="nomeContato" class="text-sm opacity-20">Nome de Contato:</label>
-                        <input type="text" id="momeContato"
+                        <label for="primeiroGerente" class="text-sm opacity-20">Gerente 1:</label>
+                        <select type="text" id="primeiroGerente"
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
                             disabled>
+
+                            <option value="" disabled selected>Selecione um Gerente</option>
+                        
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for="segundoGerente" class="text-sm opacity-20">Gerente 2:</label>
+                        <select type="text" id="segundoGerente"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled>
+                            <option value="" disabled selected>Selecione um Gerente</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
+
+                    <div class="flex flex-col w-full md:w-1/3">
+
+                        <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
+                        <input
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            type="text" id="numeroSGSET" disabled>
+                    </div>
+
+                    <div class="flex flex-col w-full md:w-1/3">
+                        <label for=" " class="text-sm opacity-20">Nome de Contato:</label>
+                        <input type="text" id="nomeContato"
+                            class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
+                            disabled >
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -323,14 +346,14 @@
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
 
                     <div class="flex flex-col w-full md:w-1/3">
+
+                    </div>
+                    
+                    <div class="flex flex-col w-full md:w-1/3">
                         <label for="numeroContato" class="text-sm opacity-20">Número de contato:</label>
                         <input type="number" id="numeroContato"
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
                             disabled>
-                    </div>
-
-                    <div class="flex flex-col w-full md:w-1/3">
-
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -362,106 +385,108 @@
 
 
             <!-- campos que ficaram em PDFs -->
-            <div class="mt-10 bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto">
+            <div class="abaPdf bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
                 <h2 class="uppercase text text-2xl opacity-20 font-semibold">obrigatorio</h2>
 
                 <p class="py-1 w-full bg-component"></p>
 
+                <div class="flex flex-wrap justify-between items-center">
 
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="orcamento" class="uppercase text-lg">Orçamento</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('.inputOrçamento').click()" desabled>
-                            <!-- input que sera salvo o pdf -->
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
-                                class="inputOrçamento hidden">
-                        </div>
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="orcamento" class="uppercase text-lg">Orçamento</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('.inputOrçamento').click()" desabled>
+                                <!-- input que sera salvo o pdf -->
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
+                                    class="inputOrçamento hidden">
+                            </div>
 
-                        <div class="relative w-1/3 sumirOrcamento">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoOrcamento').click()">
-                            <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fim dos cards de pdfs -->
-
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('#propostaAssinada').click()">
-
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
-                                class="hidden">
-                        </div>
-
-                        <!-- input download -->
-                        <div class="relative w-1/3 sumirPropostaAssinada">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoPropostaAssinada').click()">
-
-                            <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
+                            <div class="relative sumirOrcamento">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoOrcamento').click()">
+                                <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Fim dos cards de pdfs -->
+                    <!-- Fim dos cards de pdfs -->
 
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('#relatorioFinal').click()">
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('#propostaAssinada').click()">
 
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
-                                class="hidden">
-                        </div>
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
+                                    class="hidden">
+                            </div>
 
-                        <!-- input download -->
-                        <div class="relative w-1/3 sumirRelatorioFinal">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoRelatorioFinal').click()">
+                            <!-- input download -->
+                            <div class="relative sumirPropostaAssinada">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoPropostaAssinada').click()">
 
-                            <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
+                                <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
+                            </div>
                         </div>
                     </div>
+                    <!-- Fim dos cards de pdfs -->
+
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('#relatorioFinal').click()">
+
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
+                                    class="hidden">
+                            </div>
+
+                            <!-- input download -->
+                            <div class="relative sumirRelatorioFinal">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoRelatorioFinal').click()">
+
+                                <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim dos cards de pdfs -->
                 </div>
-                <!-- Fim dos cards de pdfs -->
 
 
                 <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
@@ -469,11 +494,11 @@
                 <p class="py-1 w-full bg-component"></p>
 
                 <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
                     <label for="pesquisaDeSatisfacao" class="uppercase text-lg">pesquisa De Satisfacao</label>
                     <div class="flex flex-col gap-4">
                         <!-- input de upload -->
-                        <div class="relative w-1/3">
+                        <div class="relative">
                             <img src="../../img/icon/upload.png" alt="Ícone de upload"
                                 class="absolute right-0 h-12 rounded-r-lg">
                             <input type="text" value="" id="inputFileUp"
@@ -485,7 +510,7 @@
                         </div>
 
                         <!-- input download -->
-                        <div class="relative w-1/3 sumirPesquisaDeSatisfacao">
+                        <div class="relative sumirPesquisaDeSatisfacao">
                             <img src="../../img/icon/download.png" alt="Ícone de download"
                                 class="absolute right-0 h-12 rounded-r-lg">
                             <input type="text" value="" id="inputFileDown"
@@ -501,28 +526,28 @@
                 <!-- Fim dos cards de pdfs -->
 
                 <button type="button" id="botaoSalvarPdf"
-                    class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3">Salvar
+                    class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
                     PDF</button>
 
             </div>
 
             <!-- campos que ficarão em Produtos -->
 
-            <div id="propostas">
+            <div id="propostas" class="abaProdutos bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
             </div>
 
 
             <!-- Botões para acionar as funções no javaScript -->
 
-            <input type="button" value="Editar" id="editarProposta" editarProposta()>
             <input type="button" value="Aceitar" id="aceitarProposta" onclick="aceitarProposta()">
+            <input type="button" value="Editar" id="editarProposta" editarProposta()>
             <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
 
         </div>
-
+<!-- 
         <a href="../followUp/telaFollowUp.html">follow up</a>
-        <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
+        <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a> -->
 
     </main>
 

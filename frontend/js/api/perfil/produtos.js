@@ -38,8 +38,6 @@ spanInformacoes.addEventListener('click', () => {
 
 });
 
-
-
 /*
 
     ------------------------------------------------------------------------------------------
@@ -60,11 +58,13 @@ async function buscarProdutos() {
 
         const resposta = await requisicao.json();
 
-        console.log(resposta);
+        console.log(resposta)
 
     } catch (erro) {
         console.error(erro);
     }
 
 }
+
+
  
