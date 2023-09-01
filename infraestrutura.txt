@@ -1,16 +1,28 @@
 usuario: hiveframe
 senha: Hiveframe@115
-link: http://isi.brazilsouth.cloudapp.azure.com
 
 
-==================================================================
-aaPanel Internet Address: https://104.211.12.238:7800/aabf8530
-aaPanel Internal Address: https://10.0.0.4:7800/aabf8530
-username: lssxzrli
-password: 2b3b51da
-Warning:
-If you cannot access the panel,
-release the following port (7800|888|80|443|20|21) in the security group
-==================================================================
+# CRIAR A CA 
+	# openssl req -x509 -sha256 -days 365 -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.crt
+	# deixar tudo padrão 
+	# ls -las
 
-Atual: https://13.90.142.134:9999/
+
+# GERAR CHAVE IDENTIFICADORA 
+	# openssl genrsa -out certificado.key 2048
+	# ls -las 
+
+# CRIAR CSR (solicitação de assinatura de certificado)
+	# openssl req -new -key centificado.key -out certificado.csr 
+	# ATENÇÃO - COLOCAR O DOMÍNIO // DNS DA MÁQUINA
+
+
+# CRIAR CERTIFICADO ASSINADO PELA CA 
+	# openssl x509 -req -in certificado.csr -CA rootCA.ctr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out certificado.crt -days 365 -sha256
+
+
+
+fonte: https://www.youtube.com/watch?v=HZ2OKVu5O0s
+
+
+
