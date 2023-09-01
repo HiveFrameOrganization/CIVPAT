@@ -2,8 +2,6 @@ import { back } from '../Rotas/rotas.js'
 
 const spanProdutos = document.querySelector('#spanProdutos');
 
-const spanInformacoes = document.querySelector('#spanInformacoes');
-
 // Requisição disparada quando a página carregar
 window.addEventListener('load', () => {
 
