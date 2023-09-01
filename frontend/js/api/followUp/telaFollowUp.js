@@ -42,6 +42,7 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             edicao.id = 'edicao' +followUp[0];
             texto.classList.add('flex', 'flex-col', 'px-3', 'py-2');
             p.classList.add('pt-4', 'text-xs', 'text-color-text');
+            p.id = 'p' +followUp[0];
             dataprox.classList.add('flex', 'py-4', 'px-4', 'justify-end');
             dataprox.id = 'dataprox' + followUp[0];
             prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
@@ -64,6 +65,8 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
                 let datafollow = document.getElementById('dataFollowUp')
                 datafollow.value = document.getElementById(`data${id}`).textContent
                 datafollow.disabled = true;
+                
+                document.getElementById(`comentario`).textContent = document.getElementById(`p${id}`).textContent
 
                 let dataFollowUpProx = document.getElementById('dataFollowUpProx')
                 dataFollowUpProx.value = document.getElementById(`dataprox${id}`).textContent.split(": ")[1]
