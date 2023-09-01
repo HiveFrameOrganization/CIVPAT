@@ -80,7 +80,7 @@ function funMudarAba(pag){
         abaPdf.classList.add('hidden')
         abaInfo.classList.add('hidden')
 
-        nomeAba.innerHTML = 'todos os produtos'
+        nomeAba.innerHTML = 'todos os produtosconse'
     }
 
     // adiciona estilizaçao no elemento selecionado

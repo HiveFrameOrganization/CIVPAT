@@ -137,13 +137,13 @@
             </div>
             <div class="flex justify-center items-center md:justify-start mt-10">
                 <div class="flex flex-wrap gap-4 pb-2">
-                    <span id="spanInformacoes" role="button" class="font-medium text-xs md:text-lg pb-2 text-primary hover:text-primary transition-colors border-b-2 border-primary">INFORMAÇÕES</span>
-                    <span role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden" id="spanProdutos">PRODUTOS</span>
+                    <span id="spanInformacoes" role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors text-primary border-b-2 border-primary">INFORMAÇÕES</span>
+                    <span id="spanProdutos" role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden">PRODUTOS</span>
                 </div>
             </div>
         </section>
 
-        <section id="informacoesPerfil" class="bg-component">
+        <section class="bg-component">
             <div class="container mx-auto px-6 py-12">
                 <div class="mb-8">
                     <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-center">
@@ -151,64 +151,43 @@
                             <img src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full">
                         </div>
                         <div class="flex flex-col items-center sm:items-start capitalize">
-                            <span id="nomeTitulo" class="text-2xl font-semibold">N/A</span>
-                            <span id="cargoTitulo" class="text-base text-color-text-secundary font-normal">N/A</span>
+                            <span id="nome" class="text-2xl font-semibold">N/A</span>
+                            <span id="cargo" class="text-base text-color-text-secundary font-normal">N/A</span>
                         </div>
                         <div class="flex items-center gap-8 flex-wrap justify-center">
                             <div class="flex items-center gap-2">
                                 <img src="../../img/icon/mail.svg" alt="Email">
-                                <span id="emailTitulo" class="text-base text-color-text-secundary font-normal">N/A</span>
+                                <span id="email" class="text-base text-color-text-secundary font-normal">N/A</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-body py-4 px-4 md:px-8 rounded-md">
+                <!-- Area de mostragem de dados -->
+                <div id="area-dados" class="bg-body py-4 px-4 md:px-8 rounded-md">
                     <!-- Area dos inputs -->
-                    <div class="flex flex-wrap gap-4">
+                    <div id="user-info" class="flex flex-wrap gap-4">
                         <div class="flex flex-col rounded-md px-4 py-2">
                             <span class="font-semibold text-base">NOME</span>
-                            <span id="nomePequeno" class="text-base font-light capitalize">---</span>
+                            <span id="nome" class="text-base font-light capitalize">N/A</span>
                         </div>
                         <div class="flex flex-col rounded-md px-4 py-2">
                             <span class="font-semibold text-base">E-MAIL</span>
-                            <span id="emailPequeno" class="text-base font-light">---</span>
+                            <span id="email" class="text-base font-light">N/A</span>
                         </div>
+                    </div>
+                    <div id="user-prod" class="hidden">
+                        <!-- Exibição da tabela -->
+                        <div id="table" role="table" class="mt-8 space-y-1">
+                            <!-- Rows -->
+                        </div>
+                        <!-- FIM da tabela -->
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Section dedicada a informações do produto que inicialmente será invisível -->
-        <section id="informacoesProduto" class="hidden">
-            
-            <span id="nomeProduto" role="button">Nome Do Produto</span>
-            <br><br>
-            <span id="categoriaProduto">categoria</span>
-
-            <br><br>
-            <br><br>
-
-            <span>Máquina</span>
-            <br><br>
-            <span id="nomeMaquina">nome da máquina</span>
-
-            <br><br>
-            <br><br>
-
-            <span>Data de término</span>
-            <br><br>
-            <span id="dataTermino"></span>
-
-            <br><br>
-            <br><br>
-
-            <span>Área</span>
-            <br><br>
-            <span id="nomeArea">Nome da área</span>
-
-        </section>
     </main>
-
+    
+    <script src="./index.js"></script>
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
     <script src="../../js/feedback.js"></script>

@@ -20,9 +20,10 @@ senha: Hiveframe@115
 # CRIAR CERTIFICADO ASSINADO PELA CA 
 	# openssl x509 -req -in certificado.csr -CA rootCA.ctr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out certificado.crt -days 365 -sha256
 
-
+Configurar nginx
+Configurar saida docker
 
 fonte: https://www.youtube.com/watch?v=HZ2OKVu5O0s
-
+fonte: https://projetoisi.eastus.cloudapp.azure.com/frontend/pages/Home/index.html
 
 
