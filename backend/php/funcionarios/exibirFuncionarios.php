@@ -26,7 +26,7 @@ function retornaFuncionarios($conn)
 
     // Enviando a resposta do servidor
     $resposta = [
-        'status' => 'sucesso',
+        'status' => 'success',
         'mensagem' => 'Usuários retornados com sucesso',
         'usuarios' => $usuarios
     ];

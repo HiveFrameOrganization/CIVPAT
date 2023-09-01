@@ -22,12 +22,15 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $_SESSION['token'] = password_hash($dadosBanco['TipoUser'], PASSWORD_DEFAULT);
         $_SESSION['email'] = $dadosBanco['Email'];
         $_SESSION['nif'] = $dadosBanco['NIF'];
+        $_SESSION['nome'] = $dadosBanco['Nome'];
+        $_SESSION['sobrenome'] = $dadosBanco['Sobrenome'];
         $_SESSION['cargo'] = $dadosBanco['TipoUser'];
 
         // Mandando o token para o cliente
         $resposta = [
             'login' => true,
             'token' => $_SESSION['token'],
+            'cargo' => $dadosBanco['TipoUser'],
             'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
             'status' => 'success'
         ];

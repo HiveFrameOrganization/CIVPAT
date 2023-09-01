@@ -59,7 +59,16 @@ async function login(email, senha) {
 
         // if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
-        if (resposta.login) window.location.replace(frontPages + '/Home/index.html');
+        // Verificando o cargo de quem está logando para mandar para telas diferentes
+        if(resposta.cargo === 'tec') {
+
+            window.location.replace(frontPages + '/perfil/index.html');
+
+        } else {
+
+            if (resposta.login) window.location.replace(frontPages + '/Home/index.html');
+            
+        }
 
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);
