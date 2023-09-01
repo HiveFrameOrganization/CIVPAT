@@ -47,9 +47,9 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             dataprox.id = 'dataprox' + followUp[0];
             prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
 
-            data.textContent = followUp[3]; // Adiciona o texto do p de data (Para poder ser visto na tela)
+            data.textContent = followUp[3].split('-').reverse().join('/');; // Adiciona o texto do p de data (Para poder ser visto na tela)
             p.textContent = followUp[4]; // Adiciona o texto do p de comentário (Para poder ser visto na tela)
-            prox.textContent = 'Próximo follow-up: ' + followUp[5]; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
+            prox.textContent = 'Próximo follow-up: ' + followUp[5].split('-').reverse().join('/');; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
 
             edicao.onclick = () => {
                 abreModalEditar(followUp[0])
