@@ -52,3 +52,33 @@ sidebar.addEventListener('click', (event) => {
 });
 
 // ------------------------------------------------------------------
+
+
+// FUNÇAO DE MUDAR A ABA QUE SERA RENDERIZADA
+let mudarAba = document.querySelectorAll('.mudarAba')
+let nomeAba = document.querySelector('.nomeAba')
+let abaInfo = document.querySelector('.abaInfo')
+let abaPdf = document.querySelector('.abaPdf')
+
+function funMudarAba(pag){
+    // renderiza e esconde elementos dependendo de qual é clicado
+    if(pag == 0){
+        abaInfo.classList.add('hidden')
+        abaPdf.classList.remove('hidden')
+    }else{
+        abaInfo.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+    }
+
+    // adiciona estilizaçao no elemento selecionado
+    mudarAba[pag].classList.add('text-primary')
+    mudarAba[pag].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != pag) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+}
