@@ -87,6 +87,8 @@ async function verificarBancoProposta(id){
 
         const resposta = await requisicao.json()
         console.log(resposta)
+        
+        
 
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta']; 
@@ -96,17 +98,26 @@ async function verificarBancoProposta(id){
         const titleUniCriadora = document.querySelector('#uniCriadora').title = resposta['uniCriadora']
         const empresa = document.querySelector('#empresa').value = resposta['empresa'];
         const statusProposta = document.querySelector('#statusProposta').value = resposta['statusProposta'];
-        // const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
+        const criadorProposta = document.querySelector('#criadorProposta').value = resposta['criadorProposta'];
         const numeroSGSET = document.querySelector('#numeroSGSET').value = resposta['numeroSGSET'];
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = resposta['valorTotalProdutos'];
-        const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
-        const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]['Nome'];
+        const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome'];  
         const funil = document.querySelector('#funil').value = resposta['funil'];
-        const momeContato = document.querySelector('#momeContato').value = resposta['momeContato'];
+        const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
         const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
+
+        // const segundoGerente = resposta['Gerente'][1]['Nome'];
+
+        // if(segundoGerente != null){
+        //     document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]['Nome'];
+        // } else {
+        //     document.querySelector('#segundoGerente').value = 'Por enquanto, não há segundo gerente'
+
+        // }
+        const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
 
         
     } catch (error){
@@ -228,7 +239,7 @@ editandoProposta.addEventListener('click', () =>{
     const primeiroGerente = document.querySelector('#primeiroGerente').value;
     const segundoGerente = document.querySelector('#segundoGerente').value ;
     const funil = document.querySelector('#funil').value;
-    const momeContato = document.querySelector('#momeContato').value;
+    const nomeContato = document.querySelector('#nomeContato').value;
     const emailContato = document.querySelector('#emailContato').value;
     const numeroContato = document.querySelector('#numeroContato').value; 
    
@@ -284,7 +295,7 @@ editandoProposta.addEventListener('click', () =>{
                 primeiroGerente : primeiroGerente,         
                 segundoGerente : segundoGerente,          
                 funil : funil,          
-                momeContato : momeContato,          
+                nomeContato : nomeContato,          
                 emailContato : emailContato,        
                 numeroContato : numeroContato,          
             }
