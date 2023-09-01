@@ -47,9 +47,9 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             dataprox.id = 'dataprox' + followUp[0];
             prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
 
-            data.textContent = followUp[3].split('-').reverse().join('/');; // Adiciona o texto do p de data (Para poder ser visto na tela)
+            data.textContent = followUp[3]; // Adiciona o texto do p de data (Para poder ser visto na tela)
             p.textContent = followUp[4]; // Adiciona o texto do p de comentário (Para poder ser visto na tela)
-            prox.textContent = 'Próximo follow-up: ' + followUp[5].split('-').reverse().join('/');; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
+            prox.textContent = 'Próximo follow-up: ' + followUp[5]; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
 
             edicao.onclick = () => {
                 abreModalEditar(followUp[0])
@@ -57,18 +57,18 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
 
             function abreModalEditar(id) {
                 console.log(document.getElementById(`data${id}`).textContent)
-                let modal = document.querySelector('.edit');
+                let modal = document.querySelector('.caixa');
 
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
 
-                let datafollow = document.getElementById('dataFollowUpEdit')
+                let datafollow = document.getElementById('dataFollowUp')
                 datafollow.value = document.getElementById(`data${id}`).textContent
                 datafollow.disabled = true;
                 
-                document.getElementById(`comentarioEdit`).textContent = document.getElementById(`p${id}`).textContent
+                document.getElementById(`comentario`).textContent = document.getElementById(`p${id}`).textContent
 
-                let dataFollowUpProx = document.getElementById('dataFollowUpProxEdit')
+                let dataFollowUpProx = document.getElementById('dataFollowUpProx')
                 dataFollowUpProx.value = document.getElementById(`dataprox${id}`).textContent.split(": ")[1]
                 dataFollowUpProx.disabled = true;
             }
