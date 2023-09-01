@@ -576,55 +576,36 @@
 
         // Deixando o botão de aceitar desativado caso os pdfs de orçamento e proposta assinada e os inputs não estejam preenchidos 
 
-        const pdfOrcamento = document.getElementById("orcamento").value;
-        const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
+       
 
         function aceitarProposta() {
-            const pdfOrcamento = document.getElementById("orcamento").value;
-            const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
+        const pdfOrcamento = document.getElementById("orcamento").value;
+        const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
             console.log(pdfOrcamento);
             console.log(pdfPropostaAssinada);
 
-            alert('aaaaaaaaaaa')
+            
 
 
-            // if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
-            //     document.querySelector("#aceitarProposta").disabled = false;
-            //     alert("tudo certo");
-
-            // } else {
-
-            //     document.querySelector("#aceitarProposta").disabled = true;
-
-
-            // }
-
-            // console.log(pdfOrcamento);
-            // console.log(pdfPropostaAssinada);
-        }
-
-
-        function checarProposta() {
-            console.log('dddddddd')
-            if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        function habilitarBotao() {
-
-            if (checarProposta() == true) {
+            if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
                 document.querySelector("#aceitarProposta").disabled = false;
-                console.log('bbbbbbb')
+                alert("tudo certo, o botão de aceitar está ativo!");
 
             } else {
+
                 document.querySelector("#aceitarProposta").disabled = true;
-                console.log('aaaaaaaaa')
+                alert("o botão de aceitar está desativado!");
+
+
             }
+
+            console.log(pdfOrcamento);
+            console.log(pdfPropostaAssinada);
         }
+
+
+    
 
     </script>
 
