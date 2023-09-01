@@ -39,7 +39,7 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             data.classList.add('text-color-text');
             edicao.classList.add('fas', 'fa-edit', 'text-color-text', 'pt-[2px]', 'cursor-pointer');
             texto.classList.add('flex', 'flex-col', 'px-3', 'py-2');
-            p.classList.add('pt-4', 'text-xs', 'text-color-text');
+            p.classList.add('pt-4', 'text-xs', 'text-color-text', 'break-words');
             dataprox.classList.add('flex', 'py-4', 'px-4', 'justify-end');
             prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
             
