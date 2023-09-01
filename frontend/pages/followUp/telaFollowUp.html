@@ -154,7 +154,7 @@
                 <!-- botão de fechar -->
     
                 <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal(); limpaInput()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
                 </div>
     
                 <!-- título e subtítulo -->
@@ -206,6 +206,14 @@
     <script type="module">
         import { autenticacao } from '../../js/api/login/autenticacao.js'
         autenticacao(['coor', 'ger'])
+    </script>
+
+    <script>
+        function limpaInput() {
+            document.getElementById('dataFollowUp').value = '';
+            document.getElementById('comentario').value = '';
+            document.getElementById('dataFollowUpProx').value = '';
+        }
     </script>
 </body>
 </html>

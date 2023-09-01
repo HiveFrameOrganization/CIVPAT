@@ -56,7 +56,6 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             }
 
             function abreModalEditar(id) {
-                console.log(document.getElementById(`data${id}`).textContent)
                 let modal = document.querySelector('.caixa');
 
                 modal.classList.remove('hidden');
@@ -84,8 +83,6 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             texto.appendChild(p);
             info.appendChild(dataprox);
             dataprox.appendChild(prox);
-
-            console.log(followUp);
 
             div.appendChild(card); // Adiciona o card à div
         });
