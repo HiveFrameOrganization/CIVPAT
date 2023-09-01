@@ -1,6 +1,5 @@
 import { back } from '../Rotas/rotas.js'
 
-// Selecionando a tag span para atribuir o nif do usuário a ele
 const spanProdutos = document.querySelector('#spanProdutos');
 
 // Requisição disparada quando a página carregar
@@ -10,6 +9,7 @@ window.addEventListener('load', () => {
     buscarUsuarioLogado();
 
 });
+
 
 // Função assícrona responsável por fazer a requisição para o back-end e buscar os dados
 async function buscarUsuarioLogado() {
@@ -44,47 +44,38 @@ function exibir(dados) {
     if (dados.cargo === 'tec') {
         
         // Tornando o span visível:
-        spanProdutos.style.display = 'flex';
+        spanProdutos.classList.remove('hidden');
 
         /*
             Salvando o NIF do usuário no span para ser feito a busca dos produtos em que 
             ele esta vinculado...
         */
-        spanProdutos.setAttribute('data-value', dados.nif);
+            spanProdutos.setAttribute('data-value', dados.nif);
 
     }
 
     // Exibindo os dados na tela
-    const nomeTitulo = document.querySelector('#nomeTitulo');
-    const cargoTitulo = document.querySelector('#cargoTitulo');
-    const emailTitulo = document.querySelector('#emailTitulo');
+    const nomes = document.querySelectorAll('#nome');
+    const cargo = document.querySelector('#cargo');
+    const emails = document.querySelectorAll('#email');
 
-    // Selecionando a exibição "menor"
-    const nomePequeno = document.querySelector('#nomePequeno');
-    const emailPequeno = document.querySelector('#emailPequeno');
+    nomes.forEach((nome) => {
 
-    nomeTitulo.textContent = dados.nome + ' ' + dados.sobrenome;
-    emailTitulo.textContent = dados.email;
-    nomePequeno.textContent = dados.nome + ' ' + dados.sobrenome;
-    emailPequeno.textContent = dados.email;
+        nome.textContent = `${dados.nome} ${dados.sobrenome}`
+    });
+
+    emails.forEach((email) => {
+
+        email.textContent = dados.email;
+    });
+
+    const cargos = {
+        'coor': 'Coordenador',
+        'adm': 'Administrador',
+        'ger': 'Gerente',
+        'tec': 'Técnico',
+    };
 
     // Verificando qual é o tipo de cargo para exibir corretamente
-    if (dados.cargo === 'coor') {
-
-        cargoTitulo.textContent = 'Coordenador';
-
-    } else if (dados.cargo === 'adm') {
-
-        cargoTitulo.textContent = 'Administrador';
-
-    } else if (dados.cargo === 'ger') {
-
-        cargoTitulo.textContent = 'Gerente';
-
-    } else {
-
-        cargoTitulo.textContent = 'Técnico';
-
-    }
-
+    cargo.textContent = cargos[dados.cargo] ? cargos[dados.cargo] : 'N/A';
 }
