@@ -9,8 +9,6 @@ FLUSH PRIVILEGES;
 CREATE ROLE role1;
 -- Concede ao role1 a habilidade de consultar, inserir e alterar algumas das tabelas abaixo
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`Propostas` TO role1;
-GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`Representantes` TO role1;
-GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`GerenteResponsavel` TO role1;
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`FollowUp` TO role1;
 GRANT SELECT ON `isihiveframe`.`StatusFunil` TO role1;
 GRANT SELECT, INSERT ON `isihiveframe`.`Historico` TO role1;

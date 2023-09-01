@@ -37,15 +37,38 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             info.classList.add('bg-primary', 'w-64', 'h-60', 'rounded-lg', 'z-20', 'relative', 'ml-2');
             dataedicao.classList.add('rounded-t-lg', 'w-full', 'bg-[#285292]', 'px-3', 'py-2', 'flex', 'justify-between');
             data.classList.add('text-color-text');
+            data.id = 'data' +followUp[0];
             edicao.classList.add('fas', 'fa-edit', 'text-color-text', 'pt-[2px]', 'cursor-pointer');
+            edicao.id = 'edicao' +followUp[0];
             texto.classList.add('flex', 'flex-col', 'px-3', 'py-2');
             p.classList.add('pt-4', 'text-xs', 'text-color-text');
             dataprox.classList.add('flex', 'py-4', 'px-4', 'justify-end');
+            dataprox.id = 'dataprox' + followUp[0];
             prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
 
-            data.textContent = followUp[2]; // Adiciona o texto do p de data (Para poder ser visto na tela)
-            p.textContent = followUp[3]; // Adiciona o texto do p de comentário (Para poder ser visto na tela)
-            prox.textContent = 'Próximo follow-up: ' + followUp[4]; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
+            data.textContent = followUp[3]; // Adiciona o texto do p de data (Para poder ser visto na tela)
+            p.textContent = followUp[4]; // Adiciona o texto do p de comentário (Para poder ser visto na tela)
+            prox.textContent = 'Próximo follow-up: ' + followUp[5]; // Adiciona o texto do h4 de data da próxima follow-up (Para poder ser visto na tela)
+
+            edicao.onclick = () => {
+                abreModalEditar(followUp[0])
+            }
+
+            function abreModalEditar(id) {
+                console.log(document.getElementById(`data${id}`).textContent)
+                let modal = document.querySelector('.caixa');
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+
+                let datafollow = document.getElementById('dataFollowUp')
+                datafollow.value = document.getElementById(`data${id}`).textContent
+                datafollow.disabled = true;
+
+                let dataFollowUpProx = document.getElementById('dataFollowUpProx')
+                dataFollowUpProx.value = document.getElementById(`dataprox${id}`).textContent.split(": ")[1]
+                dataFollowUpProx.disabled = true;
+            }
 
             // juntando os elementos
 
