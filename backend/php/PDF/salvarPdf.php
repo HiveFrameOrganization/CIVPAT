@@ -1,6 +1,4 @@
-<?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);             
+<?php             
 // Definindo qual domínio pode acessar esse arquivo
 header('Access-Control-Allow-Origin: http://localhost:8080');
 

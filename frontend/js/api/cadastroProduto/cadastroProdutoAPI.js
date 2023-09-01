@@ -6,7 +6,7 @@ const botaoSalvarProduto = document.getElementById('salvarProduto');
 
 window.addEventListener('load', () => carregarTecnicos());
 
-window.addEventListener('load', () => pegarUnidadesCriadoras());
+// window.addEventListener('load', () => pegarUnidadesCriadoras());
 
 botaoSalvarProduto.addEventListener('click', () => salvarProduto());
 
@@ -35,7 +35,7 @@ async function salvarProduto () {
 
     const tempoMaquina = document.getElementById('tempoMaquina').value;
     const tempoPessoa = document.getElementById('tempoPessoa').value;
-    const unidadeRealizadora = document.getElementById('unidade').value;
+    const unidadeRealizadora = document.getElementById('unidadeCriadora').value;
     const dataInicial = document.getElementById('dataInicial').value;
     const dataFinal = document.getElementById('dataFinal').value;
     const area = 'metalmecanica';
@@ -95,27 +95,27 @@ async function salvarProduto () {
 }
 
 
-async function pegarUnidadesCriadoras() {
+// async function pegarUnidadesCriadoras() {
     
-    const unidadesSelect = document.getElementById('unidadeCriadora');
+//     const unidadesSelect = document.getElementById('unidadeCriadora');
 
-    const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
+//     const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
 
-    // dados de todas as propostar recebidas (resposta da api)
-    const dados = await requisicao.json();
+//     // dados de todas as propostar recebidas (resposta da api)
+//     const dados = await requisicao.json();
 
-    console.log(dados);
+//     console.log(dados);
     
-    // caso a requisição de um erro, irá exibir uma mensagem de erro
-    if (dados.resposta === 'erro') throw new Error(dados.message);
+//     // caso a requisição de um erro, irá exibir uma mensagem de erro
+//     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-    for (let i = 0; i < dados.length; i++) {
-        let option = document.createElement('option');
-        option.value = dados[i].idUnidadeCriadora;
-        option.textContent = dados[i].UnidadeCriadora;
-        unidadesSelect.appendChild(option);
-    }
+//     for (let i = 0; i < dados.length; i++) {
+//         let option = document.createElement('option');
+//         option.value = dados[i].idUnidadeCriadora;
+//         option.textContent = dados[i].UnidadeCriadora;
+//         unidadesSelect.appendChild(option);
+//     }
 
-    console.log(dados);
+//     console.log(dados);
 
-}
+// }

@@ -31,46 +31,8 @@
             <input type="number" id="tempoPessoa" required><br> <br>   
     
             <label>Unidade Realizadora: </label>
-            <select id="unidade" required>
-                <option value="103 - Núcleo Logística">103 - Núcleo Logística</option>
-                <option value="105 - IST Alimentos e Bebidas">105 - IST Alimentos e Bebidas</option>
-                <option value="106 - IST Eletrônica e Automação">106 - IST Eletrônica e Automação</option>
-                <option value="107 - IST Têxtil e Vestuário">107 - IST Têxtil e Vestuário</option>
-                <option value="109 - Núcleo Tecnologia da Inform.">109 - Núcleo Tecnologia da Inform.</option>
-                <option value="110 - ISI Biotecnologia">110 - ISI Biotecnologia</option>
-                <option value="111 - IST Construção Civil">111 - IST Construção Civil</option>
-                <option value="114 - Núcleo Gráfica">114 - Núcleo Gráfica</option>
-                <option value="115 - ISI Metalmecânica">115 - ISI Metalmecânica</option>
-                <option value="116 - ISI Materiais">116 - ISI Materiais</option>
-                <option value="119 - IST Metalurgia">119 - IST Metalurgia</option>
-                <option value="120 - Núcleo Metalmecânica">120 - Núcleo Metalmecânica</option>
-                <option value="121 - ISI Energia">121 - ISI Energia</option>
-                <option value="123 - IST Metalmecânica">123 - IST Metalmecânica</option>
-                <option value="127 - Núcleo Tecnologia da Inform.">127 - Núcleo Tecnologia da Inform.</option>
-                <option value="128 - Núcleo Logística">128 - Núcleo Logística</option>
-                <option value="132 - IST Tecnologia da Inform.">132 - IST Tecnologia da Inform.</option>
-                <option value="134 - IST Tecnologia da Inform.">134 - IST Tecnologia da Inform.</option>
-                <option value="201 - Núcleo Instrumentação Industrial">201 - Núcleo Instrumentação Industrial</option>
-                <option value="301 - Núcleo Metalmecânica">301 - Núcleo Metalmecânica</option>
-                <option value="302 - Núcleo Metalmecânica">302 - Núcleo Metalmecânica</option>
-                <option value="401 - IST Tecnologias Assistivas">401 - IST Tecnologias Assistivas</option>
-                <option value="402 - Núcleo Metalmecânica">402 - Núcleo Metalmecânica</option>
-                <option value="501 - IST Metalmecânica">501 - IST Metalmecânica</option>
-                <option value="502 - Núcleo Metalmecânica">502 - Núcleo Metalmecânica</option>
-                <option value="503 - Núcleo Metalmecânica">503 - Núcleo Metalmecânica</option>
-                <option value="508 - Núcleo Madeira e Mobiliário">508 - Núcleo Madeira e Mobiliário</option>
-                <option value="509 - IST Alimentos e Bebidas">509 - IST Alimentos e Bebidas</option>
-                <option value="562 - ISI Energia">562 - ISI Energia</option>
-                <option value="568 - Núcleo Eletrônica e Automação">568 - Núcleo Eletrônica e Automação</option>
-                <option value="601 - Núcleo Eletrônica e Automação">601 - Núcleo Eletrônica e Automação</option>
-                <option value="602 - IST Metalmecânica">602 - IST Metalmecânica</option>
-                <option value="604 - IST Couro e Calçados">604 - IST Couro e Calçados</option>
-                <option value="661 - Núcleo Energia">661 - Núcleo Energia</option>
-                <option value="701 - ISI Energia">701 - ISI Energia</option>
-                <option value="792 - Núcleo Petróleo e Gás">792 - Núcleo Petróleo e Gás</option>
-                <option value="801 - Núcleo Metalmecânica">801 - Núcleo Metalmecânica</option>
-                <option value="890 - Núcleo Madeira e Mobiliário">890 - Núcleo Madeira e Mobiliário</option>
-                <option value="927 - IST Alimentos e Bebidas">927 - IST Alimentos e Bebidas</option>
+            <select id="unidadeRealizadora" required>
+                <option value="" disabled>Selecione a unidade criadora</option>
             </select>
     
             <label>Data Inicial: </label>
@@ -83,7 +45,7 @@
             <hr><br>
     
             <label>Área: </label>
-            <input type="text" id="area" disabled value="Metal Mecânica"><br><br>
+            <input type="text" id="area" disabled value="metalmecanica"><br><br>
     
             <label for="servico">Serviço Categoria: </label>
             <select name="servico" id="servico" required>
@@ -118,10 +80,10 @@
                 
             </select>
     
-            <button type="button" id="salvarProduto">Salvar</button>
+            <button type="button" id="modificarProduto">Salvar</button>
         </form>
     
-        <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>
+        <!-- <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script> -->
         <script type="module" src="detalhesProduto.js" defer></script>
         <script src="../../js/feedback.js"></script>
         <!-- Autenticação -->

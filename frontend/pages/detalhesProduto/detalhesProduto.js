@@ -1,4 +1,4 @@
-import { back } from '../../js/api/Rotas/rotas.js';
+import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 
 // formatar a data
 const hoje = new Date();
@@ -33,12 +33,57 @@ async function validacaoDataFinal () {
 
 }
 
+// window.addEventListener('load', () => pegarUnidadesCriadoras());
+
+async function carregarTecnicos () {
+    const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
+        methods : 'GET'
+    });
+
+    const resposta = await requisicao.json();
+
+    const opcoesTecnicos = document.getElementById('tecnicos');
+
+    for (var i = 0; i < resposta.length; i++) {
+        var optionElement = document.createElement("option");
+        optionElement.value = resposta[i + 1];
+        optionElement.textContent = resposta[i];
+        opcoesTecnicos.appendChild(optionElement);
+
+        i += 1;
+    }
+
+}
 window.addEventListener('load', async function (){
+    carregarTecnicos();
+    pegarUnidadesCriadoras();
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
+    const unidadeCriadoraSelect = document.getElementById('unidadeRealizadora');
 
     const dadosProduto = await carregarDetalhesProduto();  
+
+    document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
+    document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+    document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
+    document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
+    document.getElementById('valor').value = dadosProduto['Valor'];
+
+
+    // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+    // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+
+
+    console.log(dadosProduto);
+
+    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+    for (var i = 0; i < unidadeCriadoraSelect.options.length; i++) {
+        if (unidadeCriadoraSelect.options[i].value == dadosProduto.fk_idUnidadeRealizadora) {
+            unidadeCriadoraSelect.options[i].selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
 
     const idServicoCategoria = dadosProduto.fk_idServicoCategoria; 
 
@@ -58,8 +103,6 @@ window.addEventListener('load', async function (){
 
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await requisicao.json();
-
-        console.log(dados);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
@@ -82,7 +125,7 @@ window.addEventListener('load', async function (){
 })
 
 // Quando for selecionado executar 
-document.getElementById("servico").addEventListener("change",async function() {
+document.getElementById("servico").addEventListener("change", async function() {
     const idServicoCategoria = document.getElementById('servico').value;
     const produtoSelect = document.getElementById("produto");
 
@@ -146,6 +189,96 @@ async function selecionarProduto(dadosProduto) {
         }
     }
 }
+
+
+async function pegarUnidadesCriadoras() {
+    const unidadesSelect = document.getElementById('unidadeRealizadora');
+
+    const requisicao = await fetch (back + '/todasPropostas/pegarUnidadesCriadoras.php');
+
+    // dados de todas as propostar recebidas (resposta da api)
+    const dados = await requisicao.json();
+    
+    // caso a requisição de um erro, irá exibir uma mensagem de erro
+    if (dados.resposta === 'erro') throw new Error(dados.message);
+
+    for (let i = 0; i < dados.length; i++) {
+        let option = document.createElement('option');
+        option.value = dados[i].idUnidadeCriadora;
+        option.textContent = dados[i].UnidadeCriadora;
+        unidadesSelect.appendChild(option);
+    }
+
+
+}
+
+async function atualizarProduto(dados){
+
+    try{
+        const requisicao = await fetch(back + '/detalhesProduto/salvarProdutoModificado.php',{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dados)
+
+        })
+
+        // Verificando se deu erro ao fazer a requisição
+        if (!requisicao.ok) {
+            throw new Error('Erro na requisição');
+        }
+
+        const resposta = await requisicao.json();
+
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
+
+        
+    }catch(error){
+        console.error(error)
+    }
+}
+
+const botaoModificarProduto = document.getElementById('modificarProduto');
+
+botaoModificarProduto.addEventListener('click', () => {
+    const idProduto = localStorage.getItem('idProduto');
+
+    const tempoMaquina = document.getElementById('tempoMaquina').value;
+    const tempoPessoa = document.getElementById('tempoPessoa').value;
+    const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
+    const dataInicial = document.getElementById('dataInicial').value;
+    const dataFinal = document.getElementById('dataFinal').value;
+    const area = document.getElementById('area').value;
+    const servico = document.getElementById('servico').value;
+    const produto = document.getElementById('produto').value;
+    const valor = document.getElementById('valor').value;
+    const tecnico = document.getElementById('tecnicos').value;
+
+
+    const dadosParaEnviar = {
+        idProduto: idProduto,
+        tempoMaquina: tempoMaquina,
+        tempoPessoa: tempoPessoa,
+        unidadeRealizadora: unidadeRealizadora,
+        dataInicial : dataInicial ,
+        dataFinal: dataFinal,
+        area: area,
+        servico: servico,
+        produto: produto,
+        valor: valor,
+        tecnico: tecnico
+    }
+
+    atualizarProduto(dadosParaEnviar);
+
+
+
+    
+});
 
 /////////////////////////////
 

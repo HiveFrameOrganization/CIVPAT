@@ -81,8 +81,6 @@ async function pegarUnidadesCriadoras() {
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();
-
-    console.log(dados);
     
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
@@ -93,8 +91,6 @@ async function pegarUnidadesCriadoras() {
         option.textContent = dados[i].UnidadeCriadora;
         unidadesSelect.appendChild(option);
     }
-
-    console.log(dados);
 
 }
 
