@@ -59,15 +59,28 @@ let mudarAba = document.querySelectorAll('.mudarAba')
 let nomeAba = document.querySelector('.nomeAba')
 let abaInfo = document.querySelector('.abaInfo')
 let abaPdf = document.querySelector('.abaPdf')
+let abaProdutos = document.querySelector('.abaProdutos')
 
 function funMudarAba(pag){
     // renderiza e esconde elementos dependendo de qual é clicado
     if(pag == 0){
-        abaInfo.classList.add('hidden')
-        abaPdf.classList.remove('hidden')
-    }else{
         abaInfo.classList.remove('hidden')
         abaPdf.classList.add('hidden')
+        abaProdutos.classList.add('hidden')
+
+        nomeAba.innerHTML = 'detalhes da proposta'
+    }else if(pag == 1){
+        abaPdf.classList.remove('hidden')
+        abaInfo.classList.add('hidden')
+        abaProdutos.classList.add('hidden')
+
+        nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
+    }else{
+        abaProdutos.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+        abaInfo.classList.add('hidden')
+
+        nomeAba.innerHTML = 'todos os produtos'
     }
 
     // adiciona estilizaçao no elemento selecionado
