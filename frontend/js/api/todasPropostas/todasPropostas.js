@@ -17,6 +17,8 @@ async function pegarTodasAsPropostas () {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
+        console.log(dados);
+
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
         
