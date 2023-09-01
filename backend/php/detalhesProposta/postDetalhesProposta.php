@@ -16,18 +16,15 @@ function salvarNoBanco($dados, $conn) {
 
     if ($resultado->num_rows > 0) {
 
-        $dadosBanco = mysqli_fetch_assoc($resultado);
-
-        $nifGerente = $dadosBanco['NIF'];
-
-        $stmt = $conn -> prepare("UPDATE Propostas SET fk_idGerente = ?, TituloProj = ?, CNPJ = ?, UnidadeCriadora =?, Empresa =?, nSGSET = ? WHERE  idProposta =?"  );
-
-        $stmt->bind_param('sssssss', $nifGerente, $dados['nomeProposta'], $dados['cnpj'], $dados['uniCriadora'], $dados['empresa'], $dados['numeroSGSET'], $dados['idProposta']);
-        $stmt->execute();
 
         
 }
 }
+
+
+
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pegar o corpo da requisição

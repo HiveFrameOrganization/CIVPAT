@@ -1,0 +1,11 @@
+select {
+    -webkit-appearance: none!important;
+    -moz-appearance: none!important;
+    text-indent: 1px!important;
+    text-overflow: ''!important;
+}
+
+input:disabled{
+    background-color: rgba(13, 50, 77, 0.7)!important;
+    color: #ffffffce!important;
+}

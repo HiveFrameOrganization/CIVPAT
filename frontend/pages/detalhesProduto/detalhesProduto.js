@@ -70,7 +70,6 @@ window.addEventListener('load', async function (){
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
 
-
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
 
@@ -185,9 +184,12 @@ async function selecionarProduto(dadosProduto) {
     for (var i = 0; i < produtoSelect.options.length; i++) {
         if (produtoSelect.options[i].value == dadosProduto.fk_idNomeProduto) {
             produtoSelect.options[i].selected = true;
+            const titulo = document.getElementById('titulo');
+            titulo.innerText = produtoSelect.options[i].text.toUpperCase();
             break; // Saia do loop após encontrar a opção desejada
         }
     }
+
 }
 
 
@@ -278,6 +280,20 @@ botaoModificarProduto.addEventListener('click', () => {
 
 
     
+});
+
+
+
+document.getElementById('valor').addEventListener('keydown', () => {
+
+    const valorInserido = document.getElementById('valor').value;
+    console.log('oi')
+    if (valorInserido > 99999999.99){
+        alert('Valor Máximo digitado');
+        const inputValor = document.getElementById('valor').value = '';
+    }
+
+
 });
 
 /////////////////////////////
