@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="../../css/output.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
         @layer base {
@@ -47,6 +46,22 @@
         * {
             font-family: 'Rubik', sans-serif;
         }
+
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -74,12 +89,13 @@
                         <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div class="mt-4 space-y-4">
-                        <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                        <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="./index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                         <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
+                <div id="fade" class="hide transition-opacity"></div>
                 <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
@@ -93,11 +109,11 @@
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
-                            <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
-                            <li class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
