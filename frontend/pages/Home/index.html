@@ -51,6 +51,21 @@
             font-family: 'Rubik', sans-serif;
         }
 
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -92,6 +107,7 @@
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
+                <div id="fade" class="hide transition-opacity"></div>
                 <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
@@ -132,7 +148,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
-                        <span id="analise" class="font-medium text-lg text-color-text-secundary"># --</span>
+                        <span id="analise" class="font-medium text-lg text-color-text-secundary"># N/A</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -141,7 +157,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em desenvolvimento</h5>
-                        <span id="aceitos" class="font-medium text-lg text-color-text-secundary"># --</span>
+                        <span id="aceitos" class="font-medium text-lg text-color-text-secundary"># N/A</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -150,7 +166,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas declinadas</h5>
-                        <span id="declinados" class="font-medium text-lg text-color-text-secundary"># --</span>
+                        <span id="declinados" class="font-medium text-lg text-color-text-secundary"># N/A</span>
                     </div>
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
@@ -159,7 +175,7 @@
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas concluídas</h5>
-                        <span id="concluidos" class="font-medium text-lg text-color-text-secundary"># --</span>
+                        <span id="concluidos" class="font-medium text-lg text-color-text-secundary"># N/A</span>
                     </div>
                 </div>
             </div>
@@ -181,7 +197,7 @@
                     <div class="flex justify-between items-center flex-wrap gap-2">
                         <button id="open-modal-btn" type="button" class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">+ NOVA PROPOSTA</button>
                         <!-- Área Modal -->
-                        <div id="fade" class="hide"></div>
+                        <div id="modal-fade" class="hide"></div>
                         <div id="modal" class="hide bg-component w-[600px] max-w-[90%] rounded-md px-4 py-4 sm:px-8 sm:py-8">
                             <div class="modal-header flex justify-between items-start mb-8">
                                 <div>

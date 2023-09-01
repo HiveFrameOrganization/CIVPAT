@@ -160,15 +160,14 @@
 
             <ul class="flex gap-8 w-1/2">
                 <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
-                <li
-                    class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                <li class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
                     detalhes</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">PDFs</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">PDFs</li>
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
                     <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a>
                 </li>
                 <li
-                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary">
+                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
                     produtos</li>
 
             </ul>
@@ -177,10 +176,10 @@
 
         <div id="detalhesProposta" class="bg-component px-8">
 
-            <h2 class="uppercase text-2xl font-bold py-8 container mx-auto">detalhes da proposta</h2>
+            <h2 class="nomeAba uppercase text-2xl font-bold py-8 container mx-auto">detalhes da proposta</h2>
 
-            <!-- Campos que ficaram nos detalhes -->
-            <div class="bg-body px-7 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
+            <!-- Campos que ficaram as informaçoes -->
+            <div class="abaInfo bg-body px-7 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                     <div class="flex flex-col w-full md:w-1/3">
@@ -214,7 +213,7 @@
                         <label for="empresa" class="text-sm opacity-20">Empresa: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text" id="empresa" maxlength="200"  minlength="4" disabled>
+                            type="text" id="empresa" maxlength="200" minlength="4" disabled>
                     </div>
 
 
@@ -244,7 +243,7 @@
                         <label for="numeroSGSET" class="text-sm opacity-20">Nº SGSET: </label>
                         <input
                             class="estadoInput text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text"  id="numeroSGSET" disabled>
+                            type="text" id="numeroSGSET" disabled>
                     </div>
 
 
@@ -266,7 +265,7 @@
                         <label for="dataUltimoProduto" class="text-sm opacity-20">Data final do último produto: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="date"  id="dataUltimoProduto" disabled>
+                            type="date" id="dataUltimoProduto" disabled>
                     </div>
                 </div>
 
@@ -276,7 +275,7 @@
                         <label for="valorTotalProdutos" class="text-sm opacity-20">Valor total: </label>
                         <input
                             class="text-2xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded"
-                            type="text"  id="valorTotalProdutos" disabled>
+                            type="text" id="valorTotalProdutos" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
@@ -362,135 +361,150 @@
 
 
             <!-- campos que ficaram em PDFs -->
-            <div class="mt-10 bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto">
+            <div class="abaPdf bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
                 <h2 class="uppercase text text-2xl opacity-20 font-semibold">obrigatorio</h2>
 
                 <p class="py-1 w-full bg-component"></p>
 
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="orcamento" class="uppercase text-lg">Orçamento</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('.inputOrçamento').click()">
-                            <!-- input que sera salvo o pdf -->
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
-                                class="inputOrçamento hidden">
-                        </div>
+                <div class="flex flex-wrap justify-between items-center">
 
-                        <div class="relative w-1/3 sumirOrcamento">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoOrcamento').click()">
-                            <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fim dos cards de pdfs -->
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="orcamento" class="uppercase text-lg">Orçamento</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('.inputOrçamento').click()" desabled>
+                                <!-- input que sera salvo o pdf -->
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
+                                    class="inputOrçamento hidden">
+                            </div>
 
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('#propostaAssinada').click()">
-
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
-                                class="hidden">
-                        </div>
-
-                        <!-- input download -->
-                        <div class="relative w-1/3 sumirPropostaAssinada">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoPropostaAssinada').click()">
-
-                            <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
+                            <div class="relative sumirOrcamento">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoOrcamento').click()">
+                                <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Fim dos cards de pdfs -->
+                    <!-- Fim dos cards de pdfs -->
 
-                <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
-                    <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
-                    <div class="flex flex-col gap-4">
-                        <!-- input de upload -->
-                        <div class="relative w-1/3">
-                            <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileUp"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Upload de arquivos"
-                                onclick="document.querySelector('#relatorioFinal').click()">
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('#propostaAssinada').click()">
 
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
-                                class="hidden">
-                        </div>
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
+                                    class="hidden">
+                            </div>
 
-                        <!-- input download -->
-                        <div class="relative w-1/3 sumirRelatorioFinal">
-                            <img src="../../img/icon/download.png" alt="Ícone de download"
-                                class="absolute right-0 h-12 rounded-r-lg">
-                            <input type="text" value="" id="inputFileDown"
-                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                placeholder="Download de arquivos"
-                                onclick="document.querySelector('#botaoRelatorioFinal').click()">
+                            <!-- input download -->
+                            <div class="relative sumirPropostaAssinada">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoPropostaAssinada').click()">
 
-                            <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
+                                <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
+                            </div>
                         </div>
                     </div>
+                    <!-- Fim dos cards de pdfs -->
+
+                    <!-- Um dos cards de pdfs -->
+                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
+                        <div class="flex flex-col gap-4">
+                            <!-- input de upload -->
+                            <div class="relative">
+                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileUp"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Upload de arquivos"
+                                    onclick="document.querySelector('#relatorioFinal').click()">
+
+                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
+                                    class="hidden">
+                            </div>
+
+                            <!-- input download -->
+                            <div class="relative sumirRelatorioFinal">
+                                <img src="../../img/icon/download.png" alt="Ícone de download"
+                                    class="absolute right-0 h-12 rounded-r-lg">
+                                <input type="text" value="" id="inputFileDown"
+                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                    placeholder="Download de arquivos"
+                                    onclick="document.querySelector('#botaoRelatorioFinal').click()">
+
+                                <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim dos cards de pdfs -->
                 </div>
-                <!-- Fim dos cards de pdfs -->
+
+
+                <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
+
+                <p class="py-1 w-full bg-component"></p>
 
                 <!-- Um dos cards de pdfs -->
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
                     <label for="pesquisaDeSatisfacao" class="uppercase text-lg">pesquisa De Satisfacao</label>
                     <div class="flex flex-col gap-4">
                         <!-- input de upload -->
-                        <div class="relative w-1/3">
+                        <div class="relative">
                             <img src="../../img/icon/upload.png" alt="Ícone de upload"
                                 class="absolute right-0 h-12 rounded-r-lg">
                             <input type="text" value="" id="inputFileUp"
                                 class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                 placeholder="Upload de arquivos"
                                 onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
+                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="pesquisaDeSatisfacao"
+                                class="hidden">
+                        </div>
 
-            <label for="orcamento">PDF Orçamento</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento">
-            <button type="button" id="botaoOrcamento">Baixar</button><br><br>
-
-            <label for="propostaAssinada">PDF Proposta assinada</label>
-            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada">
-            <button type="button" id="botaoPropostaAssinada">Baixar</button><br><br>
+                        <!-- input download -->
+                        <div class="relative sumirPesquisaDeSatisfacao">
+                            <img src="../../img/icon/download.png" alt="Ícone de download"
+                                class="absolute right-0 h-12 rounded-r-lg">
+                            <input type="text" value="" id="inputFileDown"
+                                class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                placeholder="Download de arquivos"
+                                onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
 
                             <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
                         </div>
+                        <!-- <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button> -->
                     </div>
                 </div>
                 <!-- Fim dos cards de pdfs -->
 
-                <button type="button" id="botaoSalvarPdf" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3">Salvar PDF</button>
-                
+                <button type="button" id="botaoSalvarPdf"
+                    class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
+                    PDF</button>
+
             </div>
 
             <!-- campos que ficarão em Produtos -->
@@ -502,14 +516,14 @@
 
             <!-- Botões para acionar as funções no javaScript -->
 
-            <input type="button" value="Editar" id="editarProposta" editarProposta()>
             <input type="button" value="Aceitar" id="aceitarProposta" onclick="aceitarProposta()">
+            <input type="button" value="Editar" id="editarProposta" editarProposta()>
             <input type="button" value="Declinar" id="declinarProposta" declinarProposta()>
 
         </div>
-
+<!-- 
         <a href="../followUp/telaFollowUp.html">follow up</a>
-        <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a>
+        <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a> -->
 
     </main>
 
@@ -534,7 +548,7 @@
 
     <!--                       validações e funções JavaScript                              -->
 
-    <!-- <script>
+    <script>
 
         // Deixando o botão de aceitar desativado caso os pdfs de orçamento e proposta assinada e os inputs não estejam preenchidos 
 
@@ -558,8 +572,8 @@
             // } else {
 
             //     document.querySelector("#aceitarProposta").disabled = true;
-      
-                
+
+
             // }
 
             // console.log(pdfOrcamento);
@@ -569,7 +583,7 @@
 
         function checarProposta() {
             console.log('dddddddd')
-            if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
+            if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
                 return true;
             } else {
                 return false;
@@ -588,9 +602,8 @@
             }
         }
 
-    </script> -->
+    </script>
 
 </body>
 
 </html>
-

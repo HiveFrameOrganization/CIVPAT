@@ -35,3 +35,8 @@ ul {
   .tabela::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+
+  input:disabled{
+    background-color: rgba(13, 50, 77, 0.7)!important;
+    color: #ffffffce!important;
+  }
