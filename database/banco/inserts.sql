@@ -20,6 +20,8 @@ INSERT INTO TipoPDF (idTipoPDF, TipoPDF) VALUES
 (4, 'Pesquisa de Satifação'),
 (5, 'Outros');
 
+INSERT INTO Maquinas (idMaquina, Maquina) VALUES
+(1, 'Nenhum');
 
 -- Inserção dos tipos de Serviços/Categorias
 

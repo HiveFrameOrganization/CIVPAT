@@ -280,5 +280,19 @@ botaoModificarProduto.addEventListener('click', () => {
     
 });
 
+
+
+document.getElementById('valor').addEventListener('keydown', () => {
+
+    const valorInserido = document.getElementById('valor').value;
+    console.log('oi')
+    if (valorInserido > 99999999.99){
+        alert('Valor Máximo digitado');
+        const inputValor = document.getElementById('valor').value = '';
+    }
+
+
+});
+
 /////////////////////////////
 
