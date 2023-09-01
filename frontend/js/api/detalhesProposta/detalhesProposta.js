@@ -397,8 +397,11 @@ mudarAba[0].addEventListener('click', () => {
     nomeAba.innerHTML = 'detalhes de proposta'
 })
 mudarAba[1].addEventListener('click', () => {
+    // renderiza e esconde elementos dependendo de qual é clicado
     abaInfo.classList.add('hidden')
     abaPdf.classList.remove('hidden')
+
+    // adiciona estilizaçao no elemento selecionado
     mudarAba[1].classList.add('text-primary')
     mudarAba[1].classList.add('border-b-2')
 
@@ -437,3 +440,26 @@ mudarAba[3].addEventListener('click', () => {
         }
     }
 })
+
+function funMudarAba(pag){
+    // renderiza e esconde elementos dependendo de qual é clicado
+    if(pag == 'descricao'){
+        abaInfo.classList.add('hidden')
+        abaPdf.classList.remove('hidden')
+    }else{
+        abaInfo.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+    }
+
+    // adiciona estilizaçao no elemento selecionado
+    mudarAba[pag].classList.add('text-primary')
+    mudarAba[pag].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != pag) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+}
