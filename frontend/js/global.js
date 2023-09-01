@@ -52,3 +52,46 @@ sidebar.addEventListener('click', (event) => {
 });
 
 // ------------------------------------------------------------------
+
+
+// FUNÇAO DE MUDAR A ABA QUE SERA RENDERIZADA
+let mudarAba = document.querySelectorAll('.mudarAba')
+let nomeAba = document.querySelector('.nomeAba')
+let abaInfo = document.querySelector('.abaInfo')
+let abaPdf = document.querySelector('.abaPdf')
+let abaProdutos = document.querySelector('.abaProdutos')
+
+function funMudarAba(pag){
+    // renderiza e esconde elementos dependendo de qual é clicado
+    if(pag == 0){
+        abaInfo.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+        abaProdutos.classList.add('hidden')
+
+        nomeAba.innerHTML = 'detalhes da proposta'
+    }else if(pag == 1){
+        abaPdf.classList.remove('hidden')
+        abaInfo.classList.add('hidden')
+        abaProdutos.classList.add('hidden')
+
+        nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
+    }else{
+        abaProdutos.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+        abaInfo.classList.add('hidden')
+
+        nomeAba.innerHTML = 'todos os produtos'
+    }
+
+    // adiciona estilizaçao no elemento selecionado
+    mudarAba[pag].classList.add('text-primary')
+    mudarAba[pag].classList.add('border-b-2')
+
+    // remove as estilizaçoes de selecionado
+    for (let i = 0; i < mudarAba.length; i++) {
+        if (i != pag) {
+            mudarAba[i].classList.remove('text-primary')
+            mudarAba[i].classList.remove('border-b-2')
+        }
+    }
+}
