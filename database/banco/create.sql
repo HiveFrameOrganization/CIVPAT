@@ -3,11 +3,16 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
 -- -----------------------------------------------------
 -- Schema isihiveframe
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `isihiveframe`;
+DROP SCHEMA IF EXISTS `isihiveframe` ;
 
+-- -----------------------------------------------------
+-- Schema isihiveframe
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `isihiveframe` ;
 USE `isihiveframe` ;
 ALTER DATABASE isihiveframe CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -33,17 +38,22 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`Representantes` (
   `idRepresentante` INT NOT NULL AUTO_INCREMENT,
-  `nomeRepresentante` VARCHAR(100) NOT NULL,
-  `telefoneRepresentante` VARCHAR(11) NOT NULL,
-  `emailRepresentante` VARCHAR(125) NOT NULL,
+  `NomeRepresentante` VARCHAR(100) NOT NULL,
+  `TelefoneRepresentante` VARCHAR(11) NOT NULL,
+  `EmailRepresentante` VARCHAR(125) NOT NULL,
   PRIMARY KEY (`idRepresentante`))
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `isihiveframe`.`UnidadeCriadora`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`UnidadeCriadora` (
   `idUnidadeCriadora` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UnidadeCriadora` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idUnidadeCriadora`))
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `isihiveframe`.`Propostas`
@@ -66,19 +76,19 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   PRIMARY KEY (`idProposta`),
   INDEX `fk_Propostas_Representantes1_idx` (`fk_idRepresentante` ASC) VISIBLE,
   INDEX `fk_Propostas_UnidadeCriadora1_idx` (`fk_idUnidadeCriadora` ASC) VISIBLE,
-  CONSTRAINT `fk_Propostas_UnidadeCriadora1`
-    FOREIGN KEY (`fk_idUnidadeCriadora`)
-    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Propostas_Usuarios1`
     FOREIGN KEY (`fk_nifUsuarioCriador`)
     REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Propostas_Representante1`
+  CONSTRAINT `fk_Propostas_Representantes1`
     FOREIGN KEY (`fk_idRepresentante`)
     REFERENCES `isihiveframe`.`Representantes` (`idRepresentante`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Propostas_UnidadeCriadora1`
+    FOREIGN KEY (`fk_idUnidadeCriadora`)
+    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -91,8 +101,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`ServicoCategoria` (
   `idServicoCategoria` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ServicoCategoria` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idServicoCategoria`))
-ENGINE = InnoDB;  
-
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -146,11 +155,6 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   INDEX `fk_Produtos_Maquinas1_idx` (`fk_idMaquina` ASC) VISIBLE,
   INDEX `fk_Produtos_Usuarios1_idx` (`fk_nifTecnico` ASC) VISIBLE,
   INDEX `fk_Produtos_UnidadeRealizadora1_idx` (`fk_idUnidadeRealizadora` ASC) VISIBLE,
-  CONSTRAINT `fk_Produtos_UnidadeRealizadora1`
-    FOREIGN KEY (`fk_idUnidadeRealizadora`)
-    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_Produtos_ServicoCategoria1`
     FOREIGN KEY (`fk_idServicoCategoria`)
     REFERENCES `isihiveframe`.`ServicoCategoria` (`idServicoCategoria`)
@@ -174,6 +178,11 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   CONSTRAINT `fk_Produtos_Usuarios1`
     FOREIGN KEY (`fk_nifTecnico`)
     REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Produtos_UnidadeRealizadora1`
+    FOREIGN KEY (`fk_idUnidadeRealizadora`)
+    REFERENCES `isihiveframe`.`UnidadeCriadora` (`idUnidadeCriadora`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -311,19 +320,19 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`GerenteResponsavel` (
   `idGerenteResponsavel` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `fk_nifGerente` VARCHAR(7) NOT NULL,
   `fk_idProposta` INT UNSIGNED NOT NULL,
+  `fk_nifGerente` VARCHAR(7) NOT NULL,
   PRIMARY KEY (`idGerenteResponsavel`),
-  INDEX `fk_GerenteResponsavel_Usuarios1_idx` (`fk_nifGerente` ASC) VISIBLE,
   INDEX `fk_GerenteResponsavel_Propostas1_idx` (`fk_idProposta` ASC) VISIBLE,
-  CONSTRAINT `fk_GerenteResponsavel_Usuarios1`
-    FOREIGN KEY (`fk_nifGerente`)
-    REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `fk_GerenteResponsavel_Usuarios1_idx` (`fk_nifGerente` ASC) VISIBLE,
   CONSTRAINT `fk_GerenteResponsavel_Propostas1`
     FOREIGN KEY (`fk_idProposta`)
     REFERENCES `isihiveframe`.`Propostas` (`idProposta`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_GerenteResponsavel_Usuarios1`
+    FOREIGN KEY (`fk_nifGerente`)
+    REFERENCES `isihiveframe`.`Usuarios` (`NIF`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
