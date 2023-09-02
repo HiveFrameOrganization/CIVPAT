@@ -73,7 +73,7 @@ function verificarDetalhes($idProposta, $conn) {
             $dealhesProposta = [
                 "TituloProposta" => $dados['TituloProposta'],
                 "cnpj" => $dados['CNPJ'],
-                "uniCriadora" => $dados['UnidadeCriadora'],
+                "uniCriadora" => $dados['fk_idUnidadeCriadora'],
                 "empresa" => $dados['Empresa'],
                 "statusProposta" => $dados['Status'],
                 "criadorProposta" => $dados['Nome'],

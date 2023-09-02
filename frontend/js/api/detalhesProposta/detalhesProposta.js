@@ -165,11 +165,9 @@ async function verificarPdfExistente(idProposta) {
             if (valor == true) {
                 // Se o PDF do tipo for encontrado, tirará o disable do botão para baixar
                 document.getElementById(chave).disabled = false;
-                console.log(chave)
             } else {
                 // Se o PDF não for encontrado, o botão ficará em disabled
                 document.getElementById(chave).disabled = true;
-                console.log(chave)
             }
         }
     } catch (error) {
@@ -379,7 +377,6 @@ async function carregarProdutos(idProposta) {
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
 
-        console.log(resposta);
 
         exibirProdutos(resposta.produtos);
 
@@ -495,8 +492,6 @@ async function carregarTecnicos () {
 
     const resposta = await requisicao.json();
 
-    console.log(resposta);
-
     for (var i = 0; i < resposta.length; i++) {
         var optionElement = document.createElement("option");
         optionElement.value = resposta[i + 1];
@@ -518,16 +513,36 @@ async function carregarTecnicos () {
     selecionarGerente(localStorage.getItem('idProposta'));
 }
 
+async function selecionarUnidadeCriadora(id) {
+    // Requisição com parâmetro para buscar a proposta pelo id
+    const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
+
+
+    const resposta = await requisicao.json();
+
+    const uniCriadoraDropdown = document.getElementById('uniCriadora');
+
+    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+    for (var i = 0; i < uniCriadoraDropdown.options.length; i++) {
+        if (uniCriadoraDropdown.options[i].value == resposta['uniCriadora']) {
+            uniCriadoraDropdown.options[i].selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
+
+
+}
+
 async function pegarUnidadesCriadoras() {
     
-    const unidadesSelect = document.getElementById('unidadeCriadora');
+    const unidadesSelect = document.getElementById('uniCriadora');
 
     const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();
+   
 
-    console.log(dados);
     
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
@@ -539,6 +554,6 @@ async function pegarUnidadesCriadoras() {
         unidadesSelect.appendChild(option);
     }
 
-    console.log(dados);
+    selecionarUnidadeCriadora(localStorage.getItem('idProposta'));
 
 }
