@@ -1,0 +1,8 @@
+.in-page {
+    background-color: rgb(57, 118, 209) !important;
+    color: #fff !important;
+}
+
+.selected-row {
+    border: 2px solid rgb(57, 118, 209) !important;
+}

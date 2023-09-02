@@ -252,8 +252,11 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="flex gap-1">
-                            <img src="../../img/icon/search.svg" alt="Pesquisar" id="search-trigger" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
+                        <div class="flex gap-1 flex-wrap">
+                            <div class="relative" id="barraPesquisa">
+                                <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
+                                <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
+                            </div>
                             <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                         </div>
                     </div>
@@ -264,7 +267,7 @@
                     <!-- FIM da tabela -->
                 </div>
                 <!-- Paginação -->
-                <div class="w-full mt-4">
+                <div id="paginacao" class="w-full mt-4 hidden">
                     <div class="flex items-center gap-2 justify-end">
                         <a href="#" class="w-4 h-4">
                             <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">

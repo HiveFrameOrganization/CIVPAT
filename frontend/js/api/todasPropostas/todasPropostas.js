@@ -2,6 +2,8 @@ import { back } from '../Rotas/rotas.js'
 
 const table = document.querySelector('#table');
 
+const paginacao = document.querySelector('#paginacao');
+
 window.addEventListener('load', () => {
     // ao carregar a página, a função irá executar
     pegarTodasAsPropostas();
@@ -39,7 +41,11 @@ async function pegarTodasAsPropostas () {
 
 function exibirPropostas(propostas){
 
+    paginacao.classList.add('hidden');
+
     if (propostas) {
+
+        paginacao.classList.remove('hidden');
         
         for (let proposta of propostas) {
 
@@ -127,9 +133,6 @@ function getAllViewButtons() {
         btn.addEventListener('click', () => {
 
             localStorage.setItem('idProposta', btn.getAttribute('itemid'));
-
-            // salvar dados da proposta para ser consumido nos detalhes da proposta (front-end)
-            // localStorage.setItem('dadosProposta', propostas)
             
             window.location.href = '../detalhesProposta/detalhesProposta.html';
         });
