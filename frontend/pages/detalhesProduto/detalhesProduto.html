@@ -170,14 +170,14 @@
 
             </div>
 
-            <form class="formulario w-full bg-body rounded-lg p-12 text-primary">
+            <form class="formulario w-full bg-body rounded-lg p-12 text-primary flex flex-col gap-6">
 
-                <div class="flex gap-6">
+                <div class="flex gap-6 flex-col sm:flex-row">
                     <div class="flex flex-col gap-2 w-full">
                         <label for="produtos" class="text-color-text-secundary font-semibold">NOME DO PRODUTO</label>
                         <select name="produto" id="produto" class="bg-component rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
                             <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
-                        </select><br><br>
+                        </select>
                     </div>
     
                     <div class="flex flex-col gap-2 w-full">
@@ -186,11 +186,10 @@
                             <!-- opções serão adicionadas aqui -->
                         </select>
                     </div>
-
-
                 </div>
 
-                <div class="flex gap-6">
+
+                <div class="flex gap-6 flex-col md:flex-row">
                     <div class="flex flex-col gap-2 w-full">
                         <label for="area" class="text-color-text-secundary font-semibold">ÁREA</label>
                         <input type="text" id="area" value="metalmecanica" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" disabled>
@@ -198,8 +197,8 @@
     
                     <div class="flex flex-col gap-2 w-full">
                         <label for="servico" class="text-color-text-secundary font-semibold">CATEGORIA DO SERVIÇO</label>
-                        <select name="servico" id="servico" class="bg-component rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
-                            <option value="1" selected>Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
+                        <select name="servico" id="servico" class="bg-component rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required> 
+                            <option value="1" selected  disabled>Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
                             <option value="2">Assessoria Tecnológica - Empreendedorismo</option>
                             <option value="3">Assessoria Tecnológica - Gestão</option>
                             <option value="4">Assessoria Tecnológica - Legislações, Normas e Regulamentos Técnicos</option>
@@ -218,29 +217,42 @@
                         </select>
                     </div>
 
-                    
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text-secundary font-semibold" for="unidadeRealizadora ">UNIDADE REALIZADORA</label>
+                        <select id="unidadeRealizadora" class="bg-component rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                            <option value="" disabled>Selecione a unidade criadora</option>
+                        </select>
+                    </div>
                 </div>
-        
-                <label>Tempo (Máquina): </label>
-                <input type="number" id="tempoMaquina" required><br><br>
-        
-                <label>Tempo (Pessoa): </label>
-                <input type="number" id="tempoPessoa" required><br> <br>   
-        
-                <label>Unidade Realizadora: </label>
-                <select id="unidadeRealizadora" required>
-                    <option value="" disabled>Selecione a unidade criadora</option>
-                </select>
-        
-                <label>Data Inicial: </label>
-                <input type="date" id="dataInicial" required><br><br>
-        
-                <label>Data Final: </label>
-                <input type="date" id="dataFinal" required><br><br>
-        
-        
-                <label>Valor:</label>
-                <input type="number" name="valor" id="valor" required><br><br>
+
+                <div class="flex gap-6 flex-col md:flex-row">
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text-secundary font-semibold" for="tempoPessoa">HORA-PESSOA</label>
+                        <input type="number" id="tempoPessoa" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2 w-full">
+                        <label for="tempoMaquina" class="text-color-text-secundary font-semibold">HORA-MÁQUINA</label>
+                        <input type="number" id="tempoMaquina" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text-secundary font-semibold" for="valor">VALOR</label>
+                        <input type="number" name="valor" id="valor" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
+                    </div>
+                </div>
+           
+                <div class="flex gap-6 flex-col sm:flex-row">
+                    <div class="flex flex-col gap-2 w-full">
+                        <label for="dataInicial" class="text-color-text-secundary font-semibold">DATA DE INÍCIO</label>
+                        <input type="date" id="dataInicial" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
+                    </div>
+
+                    <div class="flex flex-col gap-2 w-full">
+                        <label for="dataFinal" class="text-color-text-secundary font-semibold">DATA DE TÉRMINO</label>
+                        <input type="date" id="dataFinal" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
+                    </div>
+                </div>
         
                 <button type="button" id="modificarProduto">Salvar</button>
 
