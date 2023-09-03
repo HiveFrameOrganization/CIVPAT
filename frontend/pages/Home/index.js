@@ -11,38 +11,27 @@ const toggleModal = () => [modal, modalFade].forEach((el) => el.classList.toggle
 
 // funções da barra de pesquisa
 
-const pesquisa = document.querySelector('#pesquisarUsuario');
-const iconePesquisa = document.querySelector('#botaoPesquisar');
-const barraPesquisa = document.querySelector('#barraPesquisa');
+const hiddenInput = document.querySelector('#hidden-input'),
+      searchButton = document.querySelector('#search-btn');
 
-if(window.screen.width > 422){
+// alternar visibilidade do input
+function toggleInputVisibility() {
 
-    iconePesquisa.addEventListener('click', () => {
-        pesquisa.classList.remove('w-[42px]');
-        pesquisa.classList.add('w-[300px]');
-        pesquisa.style.paddingRight = '42px';
-    })
-    
-    document.addEventListener('click', (event) => {
-        if(!barraPesquisa.contains(event.target)){
-            pesquisa.classList.remove('w-[300px]');
-            pesquisa.classList.add('w-[42px]');
-            pesquisa.style.paddingRight = '0px';
-        }
-    })
-} else {
-    
-    iconePesquisa.addEventListener('click', () => {
-        pesquisa.classList.remove('w-[42px]');
-        pesquisa.classList.add('w-[200px]');
-        pesquisa.style.paddingRight = '42px';
-    })
-    
-    document.addEventListener('click', (event) => {
-        if(!barraPesquisa.contains(event.target)){
-            pesquisa.classList.remove('w-[200px]');
-            pesquisa.classList.add('w-[42px]');
-            pesquisa.style.paddingRight = '0px';
-        }
-    })
+    searchButton.classList.contains('rounded-r-md') ? searchButton.classList.replace('rounded-r-md', 'rounded-md') : searchButton.classList.replace('rounded-md', 'rounded-r-md');
+    hiddenInput.classList.toggle('hidden');
 }
+
+searchButton.addEventListener('click', () => {
+
+    // Verifica se o input se visível ou não
+    if (!hiddenInput.classList.contains('hidden') && hiddenInput.value != '') {
+        // Visível e preenchido
+        return;
+    } else if (!hiddenInput.classList.contains('hidden') && hiddenInput.value == '') {
+        // Visível, mas não preenchido
+        toggleInputVisibility();
+        return;
+    }
+    // Escondido
+    toggleInputVisibility();
+});
