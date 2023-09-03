@@ -321,3 +321,7 @@ insert into Propostas values
 (default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
 'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL);
 
+-- Inserção de Historico para teste
+insert into Historico VALUES
+(default, 1, 1, 1, '2023-09-01', NOW());
+

@@ -6,7 +6,6 @@ let gerenteEncarregado;
 
 // Chamando a função quando carregar a página
 window.addEventListener('load', async () => {
-
     let gerentes = await pegarGerentes();
 
     console.log(gerentes.gerentesRetornados);
@@ -28,7 +27,6 @@ window.addEventListener('load', async () => {
 
 // Ao form ser ativado, valida-se os dados e caso valido, envia ao back
 formularioProposta.addEventListener('submit', async evento => {
-
     // Parando o evento de enviar o formulário
     evento.preventDefault();
 
@@ -43,9 +41,7 @@ formularioProposta.addEventListener('submit', async evento => {
     const gerente = document.querySelector('#listaGerentes').value;
 
     try {
-
         // Algumas validações...
-
         // Verificando se o número de telefone possui algum caractere além de números...
         if (!contemApenasNumeros(telefoneRepresentante)) throw new Error('O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS...');
 
@@ -68,6 +64,7 @@ formularioProposta.addEventListener('submit', async evento => {
         if (resposta.status === 'success') {
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
+            localStorage.setItem('historico', resposta.historico);
             window.location.pathname = '/frontend/pages/Home/index.html';
         } else {
             if (resposta.mensagem === 'registro existe') {

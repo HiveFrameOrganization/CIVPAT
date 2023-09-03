@@ -11,10 +11,14 @@ function carregarProdutos($conn) {
 
     $idProposta = $_GET['id'];
 
-    $stmt = $conn->prepare("SELECT `Produtos`.`idProduto`, `NomeProduto`.`NomeProduto`, `ServicoCategoria`.`ServicoCategoria`, `Usuarios`.`Nome`, `Produtos`.`Valor`, `Produtos`.`DataFinal` FROM Produtos
+    $stmt = $conn->prepare("SELECT `Produtos`.`idProduto`, `NomeProduto`.`NomeProduto`,
+    `ServicoCategoria`.`ServicoCategoria`, `Usuarios`.`Nome`, `Produtos`.`Valor`, `Produtos`.`DataFinal`
+    FROM Produtos
+
     INNER JOIN NomeProduto ON `NomeProduto`.`idNomeProduto` = `Produtos`.`fk_idNomeProduto`
     INNER JOIN ServicoCategoria ON `ServicoCategoria`.`idServicoCategoria` = `Produtos`.`fk_idServicoCategoria`
     INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Produtos`.`fk_nifTecnico`
+
     WHERE fk_idProposta = ?");
 
     $stmt->bind_param('s', $idProposta);

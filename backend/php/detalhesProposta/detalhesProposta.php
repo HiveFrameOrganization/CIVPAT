@@ -11,9 +11,17 @@ function verificarDetalhes($idProposta, $conn) {
 
     // Criando uma variavel para reseber o resultado das querys
 
-    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`Nome`, `Representantes`.* FROM Propostas 
-    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador` 
+    $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`Nome`, `Representantes`.*,
+        (SELECT `StatusFunil` FROM Historico
+        INNER JOIN `StatusFunil` ON `StatusFunil`.`idStatusFunil` = Historico.`fk_idStatusAtual`
+        WHERE fk_idProposta = 1
+        ORDER BY `idHistorico` DESC
+        LIMIT 1) AS `StatusFunil`
+    FROM Propostas
+
+    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador`
     INNER JOIN Representantes ON `Representantes`.`idRepresentante` = `Propostas`.`fk_idRepresentante`
+    
     WHERE idProposta = ?");
 
     // Subistituindo o valor do ? pelo parâmetro correnspondente
@@ -30,7 +38,7 @@ function verificarDetalhes($idProposta, $conn) {
         if ($dados != null) {
 
             //Nessa função a variável esta recebendo o primeiro valor da query, sendo ele o menor valor, por data, trazido do banco
-            $stmt = $conn->prepare(" SELECT  DataInicial FROM Produtos  WHERE fk_idProposta = ? ORDER BY DataInicial ASC");
+            $stmt = $conn->prepare(" SELECT DataInicial FROM Produtos  WHERE fk_idProposta = ? ORDER BY DataInicial ASC");
             $stmt->bind_param('s', $idProposta);
             $stmt->execute();
             $resultadoDataInicial = $stmt-> get_result();
@@ -51,11 +59,10 @@ function verificarDetalhes($idProposta, $conn) {
             $resultadoValorTotal = $stmt-> get_result();
             $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
 
-
-            //Buscando os valores dos responsáveis por cadastrar a proposta 
-            $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome` 
+            //Buscando os valores dos responsáveis por cadastrar a proposta
+            $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome`
             FROM GerenteResponsavel
-            INNER JOIN Usuarios ON `Usuarios`.`NIF` = `GerenteResponsavel`.`fk_nifGerente` 
+            INNER JOIN Usuarios ON `Usuarios`.`NIF` = `GerenteResponsavel`.`fk_nifGerente`
             WHERE fk_idProposta = ?");
             $stmt->bind_param('s', $idProposta);
             $stmt->execute();
@@ -81,8 +88,8 @@ function verificarDetalhes($idProposta, $conn) {
                 "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
                 "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
                 "valorTotalProdutos" => $dadosValorTotal['ValorTotal'],
-                "Gerentes" => $registros, 
-                "funil" => $dados['funil'],
+                "Gerentes" => $registros,
+                "StatusFunil" => $dados['StatusFunil'],
                 "nomeContato" => $dados['nomeRepresentante'],
                 "emailContato" => $dados['emailRepresentante'],
                 "numeroContato" => $dados['telefoneRepresentante']
@@ -127,4 +134,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     echo json_encode($resposta);
 }
-?>

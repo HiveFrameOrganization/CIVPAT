@@ -5,6 +5,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 header("Content-Type: application/json");
 
 require_once '../../../database/conn.php';
+require_once '../historico/inserirHistorico.php';
 
 // Pegando os dados que vieram do front-end
 $dados = json_decode(file_get_contents("php://input"), true);
@@ -30,9 +31,12 @@ function cadastrarGerente($dadosProposta, $conn, $dados) {
 
     if ($stmt->execute()) {
 
+        $historico = inserirHistorico($conn, $conn->insert_id);
+
         $resposta = [
             'status' => 'success',
-            'mensagem' => 'Proposta Cadastrada'
+            'mensagem' => 'Proposta Cadastrada',
+            'historico' => $historico['status']
         ];
 
         echo json_encode($resposta);

@@ -132,6 +132,7 @@ async function verificarBancoProposta(id) {
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = resposta['valorTotalProdutos'];
+        document.querySelector('#funil').value = resposta['StatusFunil'];
         // const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
         const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
