@@ -1,28 +1,24 @@
 // Funções para controlar os botões
-const infoBTN = document.querySelector('#spanInformacoes');
-const prodBTN = document.querySelector('#spanProdutos');
+const navButtons = document.querySelectorAll('.nav-btn');
 
-function selectBTN(btn = infoBTN) {
+function removerBotoesSelecionados() {
 
-    
-    // Removendo todas as classes de seleção de todos os botões
-    [ infoBTN, prodBTN ].forEach((el) => {
+    navButtons.forEach((button) => {
 
-        el.classList.remove('text-primary');
-        el.classList.remove('border-b-2');
-        el.classList.remove('border-primary');
+        button.classList.remove('text-primary');
+        button.classList.remove('border-b-2');
+        button.classList.remove('border-primary');
     });
-
-    // Aplicando as classes no botão clicado
-    btn.classList.add('text-primary');
-    btn.classList.add('border-b-2');
-    btn.classList.add('border-primary');
 }
 
-[ infoBTN, prodBTN ].forEach((btn) => {
+navButtons.forEach((button) => {
 
-    btn.addEventListener('click', () => {
+    button.addEventListener('click', () => {
 
-        selectBTN(btn);
-    });
+        removerBotoesSelecionados();
+
+        button.classList.add('text-primary');
+        button.classList.add('border-b-2');
+        button.classList.add('border-primary');
+    })
 });

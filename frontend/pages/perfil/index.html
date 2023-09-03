@@ -57,7 +57,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            z-index: 25;
         }
 
         #fade.hide {
@@ -82,13 +82,14 @@
             },
         }
     </script>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body class="bg-body transition-colors">
     <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm" role="navigation" >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-20 shadow-sm">
+                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
                         <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
@@ -137,8 +138,8 @@
             </div>
             <div class="flex justify-center items-center md:justify-start mt-10">
                 <div class="flex flex-wrap gap-4 pb-2">
-                    <span id="spanInformacoes" role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors text-primary border-b-2 border-primary">INFORMAÇÕES</span>
-                    <span id="spanProdutos" role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden">PRODUTOS</span>
+                    <span id="spanInformacoes" role="button" class="nav-btn font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors text-primary border-b-2 border-primary">INFORMAÇÕES</span>
+                    <span id="spanProdutos" role="button" class="nav-btn font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden">PRODUTOS</span>
                 </div>
             </div>
         </section>
@@ -181,6 +182,20 @@
                             <!-- Rows -->
                         </div>
                         <!-- FIM da tabela -->
+                    </div>
+                </div>
+                <!-- Paginação -->
+                <div id="paginacao" class="w-full mt-4 hidden">
+                    <div class="flex items-center gap-2 justify-end">
+                        <a href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+                        </a>
+                        <a href="#" class="in-page bg-body text-color-text text-sm px-3 py-1 rounded-md border border-[transparent] hover:border-primary transition-colors">1</a>
+                        <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md border border-[transparent] hover:border-primary transition-colors">2</a>
+                        <a href="#" class="bg-body text-color-text text-sm px-3 py-1 rounded-md border border-[transparent] hover:border-primary transition-colors">3</a>
+                        <a href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+                        </a>
                     </div>
                 </div>
             </div>
