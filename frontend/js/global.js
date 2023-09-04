@@ -60,6 +60,7 @@ let nomeAba = document.querySelector('.nomeAba')
 let abaInfo = document.querySelector('.abaInfo')
 let abaPdf = document.querySelector('.abaPdf')
 let abaProdutos = document.querySelector('.abaProdutos')
+let abaFollowUp = document.querySelector('.abaFollowUp')
 
 function funMudarAba(pag){
     // renderiza e esconde elementos dependendo de qual é clicado
@@ -67,20 +68,30 @@ function funMudarAba(pag){
         abaInfo.classList.remove('hidden')
         abaPdf.classList.add('hidden')
         abaProdutos.classList.add('hidden')
+        abaFollowUp.classList.add('hidden')
 
         nomeAba.innerHTML = 'detalhes da proposta'
     }else if(pag == 1){
         abaPdf.classList.remove('hidden')
         abaInfo.classList.add('hidden')
         abaProdutos.classList.add('hidden')
+        abaFollowUp.classList.add('hidden')
 
         nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
+    }else if(pag == 2){
+        abaFollowUp.classList.remove('hidden')
+        abaPdf.classList.add('hidden')
+        abaInfo.classList.add('hidden')
+        abaProdutos.classList.add('hidden')
+
+        nomeAba.innerHTML = 'TODOS OS FOLLOW-UPS'
     }else{
         abaProdutos.classList.remove('hidden')
         abaPdf.classList.add('hidden')
         abaInfo.classList.add('hidden')
+        abaFollowUp.classList.add('hidden')
 
-        nomeAba.innerHTML = 'todos os produtosconse'
+        nomeAba.innerHTML = 'todos os produtos'
     }
 
     // adiciona estilizaçao no elemento selecionado

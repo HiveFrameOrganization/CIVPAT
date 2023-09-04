@@ -35,7 +35,7 @@ async function enviaBackEnd(dadosEnviados) {
             console.log(data.mensagem);
             console.log(data.status);
             if (data.status != 'Erro') {
-                window.location.pathname = '/frontend/pages/followUp/telaFollowUp.html';
+                window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
             }
         }).catch(error => {
             console.error('Erro no processamento dos dados', error);
