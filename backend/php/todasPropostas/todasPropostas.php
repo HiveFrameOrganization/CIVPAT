@@ -35,6 +35,11 @@ function quantidadeDePropostasPeloStatus ($conn) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
+    $numPagina = $_GET['pag'];
+    $qtdFuncionariosTela = 4;
+    $limiteFun = $numPagina * $qtdFuncionariosTela;
+    $inicioFun = $limiteFun - $qtdFuncionariosTela;
+
     $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
     `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
     `Usuarios`.`FotoDePerfil` FROM Propostas
