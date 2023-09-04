@@ -10,7 +10,7 @@ require_once '../../../database/conn.php';
 function retornaFuncionarios($conn)
 {
     $numPagina = $_GET['pag'];
-    $qtdFuncionariosTela = 4;
+    $qtdFuncionariosTela = 10;
     $limiteFun = $numPagina * $qtdFuncionariosTela;
     $inicioFun = $limiteFun - $qtdFuncionariosTela;
     // preparando a query
