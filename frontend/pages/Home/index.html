@@ -49,6 +49,20 @@
 
         * {
             font-family: 'Rubik', sans-serif;
+
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
+        }
+
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
         }
 
         #fade {
