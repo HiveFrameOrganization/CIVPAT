@@ -13,10 +13,13 @@ window.addEventListener('load', () => {
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios() {
+    const paginaFun = localStorage.getItem('paginaFun');
+    const declaradoQtdBotoes = localStorage.getItem('qtdBotoes');
 
     try {
         // Fazendo a requisição para buscar os dados
-        const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php`);
+        const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
+        &qtdBotes=${declaradoQtdBotoes}`);
 
         const dados = await resposta.json();
 
@@ -24,14 +27,53 @@ async function retornaFuncionarios() {
         if (dados.status === 'erro') throw new Error(dados.mensagem);
 
         console.log(dados);
+        console.log(dados.qtdBotoes)
 
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
-
+        botoesPaginacao(dados.qtdBotoes);
 
     } catch (erro) {
         console.error(erro)
     }
+}
+
+// Criar os botões de paginação e adiciona a função que muda a página
+function botoesPaginacao(qtdBotoes) {
+    const containerPaginacao = document.getElementById('paginacao');
+
+    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
+    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    if (localStorage.getItem('qtdBotoes') == null) {
+        localStorage.setItem('qtdBotoes', qtdBotoes)
+    } else {
+        qtdBotoes = localStorage.getItem('qtdBotoes')
+    }
+
+    for (let i = 1; i <= qtdBotoes; i++) {
+        const a = document.createElement('a');
+
+        if (localStorage.getItem('paginaFun') == i) {
+            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        } else {
+            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        }
+
+        a.href = ''
+        a.textContent = i
+        a.onclick = () => {
+            colocarPagina(i)
+        }
+
+        console.log(a)
+        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+        containerPaginacao.insertBefore(a, setaProxPagina);
+    }
+}
+
+// Seta o número da página no localStorage
+function colocarPagina(num) {
+    localStorage.setItem('paginaFun', num);
 }
 
 function exibir(dados) {
