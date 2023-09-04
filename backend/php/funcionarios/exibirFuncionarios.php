@@ -45,8 +45,7 @@ function retornaFuncionarios($conn)
         'status' => 'success',
         'mensagem' => 'Usuários retornados com sucesso',
         'usuarios' => $usuarios,
-        'qtdBotoes' => $qtdBotoes,
-        'teste' => $inicioFun
+        'qtdBotoes' => $qtdBotoes
     ];
 
 
@@ -56,7 +55,6 @@ function retornaFuncionarios($conn)
 
 // Retorna a quantidade de funcionários
 function qtdBotoes($conn, $qtdFuncionariosTela) {
-    error_log('teste');
     // preparando a query
     $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios");
 

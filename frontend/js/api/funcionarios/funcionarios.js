@@ -4,10 +4,10 @@ import { back } from '../Rotas/rotas.js'
                         RENDERIZANDO A LISTA DE USUÁRIO
 ----------------------------------------------------------------------------------
 */
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
 
     // Função para renderizar a lista de usuários
-    retornaFuncionarios();
+    await retornaFuncionarios();
     // Chama a função que cria os botões da página
     botoesPaginacao();
 
@@ -23,11 +23,11 @@ async function retornaFuncionarios() {
 
     // Variável criar para otimização, evitar requisições desnecessárias
     // recalculando a quantidade de botões
-    let declaradoQtdBotoes
-    if (localStorage.getItem('qtdBotoes') == null) {
-        declaradoQtdBotoes = -1;
+    let declaradoqtdBotoesFun
+    if (localStorage.getItem('qtdBotoesFun') == null) {
+        declaradoqtdBotoesFun = -1;
     } else {
-        declaradoQtdBotoes = localStorage.getItem('qtdBotoes');
+        declaradoqtdBotoesFun = localStorage.getItem('qtdBotoesFun');
     }
     // Lembrando que essa variável é destruida no cadastro do usuário
     // pois altera a quantidade de funcionarios e possivelmente
@@ -36,7 +36,7 @@ async function retornaFuncionarios() {
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoQtdBotoes}`);
+        &qtdBotes=${declaradoqtdBotoesFun}`);
 
         const dados = await resposta.json();
 
@@ -49,7 +49,7 @@ async function retornaFuncionarios() {
         exibir(dados.usuarios);
         // Seta a quantidade de botões
         // necessário desetar no cadastro de usuário
-        localStorage.setItem('qtdBotoes', dados.qtdBotoes);
+        localStorage.setItem('qtdBotoesFun', dados.qtdBotoes);
 
     } catch (erro) {
         console.error(erro)
@@ -59,12 +59,12 @@ async function retornaFuncionarios() {
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao() {
     // Puxa a quantidade de botões do localStorage
-    const qtdBotoes = localStorage.getItem('qtdBotoes');
+    const qtdBotoesFun = localStorage.getItem('qtdBotoesFun');
     // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
 
     // Cria os botoes
-    for (let i = 1; i <= qtdBotoes; i++) {
+    for (let i = 1; i <= qtdBotoesFun; i++) {
         const a = document.createElement('a');
 
         // Define a cor dos botoes de acordo do número da página

@@ -264,8 +264,17 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 
 insert into Usuarios values 
 ('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', 'senai115', 'ativo'),
-('1234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativo'),
-('1234569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativo'),
+('9234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativo'),
+('1294569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativo'),
+('1239567', 'michael', 'jackson', NULL, 'ger', 'gerente@sp.senai.br', 'senai115', 'ativo'),
+('1934568', 'michael', 'jackson', NULL, 'coor', 'coordenador@sp.senai.br', 'senai115', 'ativo'),
+('1234969', 'michael', 'jackson', NULL, 'adm', 'administracao@sp.senai.br', 'senai115', 'ativo'),
+('1234667', 'michael', 'jackson', NULL, 'ger', 'gerencio@sp.senai.br', 'senai115', 'ativo'),
+('1264968', 'michael', 'jackson', NULL, 'coor', 'coordenencio@sp.senai.br', 'senai115', 'ativo'),
+('1236569', 'michael', 'jackson', NULL, 'adm', 'administrencio@sp.senai.br', 'senai115', 'ativo'),
+('1634567', 'michael', 'jackson', NULL, 'ger', 'germe@sp.senai.br', 'senai115', 'ativo'),
+('1264568', 'michael', 'jackson', NULL, 'coor', 'coorte@sp.senai.br', 'senai115', 'ativo'),
+('1234566', 'michael', 'jackson', NULL, 'adm', 'adminastror@sp.senai.br', 'senai115', 'ativo'),
 ('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', 'senai115', 'ativo');
 
 -- Inserção de Representantes para teste
@@ -318,6 +327,26 @@ insert into UnidadeCriadora values
 
 -- Inserção de Propostas para teste
 insert into Propostas values 
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
+(default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
+'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
 (default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
 'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL);
 

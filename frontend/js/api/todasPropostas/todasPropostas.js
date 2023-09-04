@@ -4,17 +4,31 @@ const table = document.querySelector('#table');
 
 const paginacao = document.querySelector('#paginacao');
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
-    pegarTodasAsPropostas();
-    pegarUnidadesCriadoras();
+    await pegarTodasAsPropostas();
+    await pegarUnidadesCriadoras();
+    botoesPaginacao();
 })
 
 async function pegarTodasAsPropostas () {
+    if (localStorage.getItem('paginaProposta') == null) {
+        localStorage.setItem('paginaProposta', 1)
+    }
+    const paginaProposta = localStorage.getItem('paginaProposta');
+    console.log(paginaProposta)
+
+    let declaradoQtdBotoes
+    if (localStorage.getItem('qtdBotoesProposta') == null) {
+        declaradoQtdBotoes = -1;
+    } else {
+        declaradoQtdBotoes = localStorage.getItem('qtdBotoesProposta');
+    }
 
     try{
         // link da requisição
-        const resposta = await fetch(back + '/todasPropostas/todasPropostas.php');
+        const resposta = await fetch(back + `/todasPropostas/todasPropostas.php?pag=${paginaProposta}
+        &qtdBotes=${declaradoQtdBotoes}`);
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
@@ -25,6 +39,7 @@ async function pegarTodasAsPropostas () {
         if (dados.resposta === 'erro') throw new Error(dados.message);
         
         exibirPropostas(dados.propostas);
+        localStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
 
         // Adicionando a quaqntidade de propostas de acordo com os seus status
         document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
@@ -36,6 +51,40 @@ async function pegarTodasAsPropostas () {
         console.error(error)
     }
 
+}
+
+
+// Criar os botões de paginação e adiciona a função que muda a página
+function botoesPaginacao() {
+    const qtdBotoes = localStorage.getItem('qtdBotoesProposta');
+    const containerPaginacao = document.getElementById('inserirPaginacao');
+
+    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
+    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+    for (let i = 1; i <= qtdBotoes; i++) {
+        const a = document.createElement('a');
+
+        if (localStorage.getItem('paginaProposta') == i) {
+            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        } else {
+            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        }
+
+        a.href = ''
+        a.textContent = i
+        a.onclick = () => {
+            colocarPagina(i)
+        }
+
+        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+        containerPaginacao.insertBefore(a, setaProxPagina);
+    }
+}
+
+// Seta o número da página no localStorage
+function colocarPagina(num) {
+    localStorage.setItem('paginaProposta', num);
 }
 
 

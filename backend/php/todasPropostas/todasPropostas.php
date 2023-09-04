@@ -36,14 +36,17 @@ function quantidadeDePropostasPeloStatus ($conn) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $numPagina = $_GET['pag'];
-    $qtdFuncionariosTela = 4;
-    $limiteFun = $numPagina * $qtdFuncionariosTela;
-    $inicioFun = $limiteFun - $qtdFuncionariosTela;
+    $qtdPropostasTela = 10;
+    $limiteProposta = $numPagina * $qtdPropostasTela;
+    $inicioProposta = $limiteProposta - $qtdPropostasTela;
 
     $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
     `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
     `Usuarios`.`FotoDePerfil` FROM Propostas
-    INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`;');
+    INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+    LIMIT ?, ?');
+    // Limita os resultados a 10 propostas por página
+    $stmt->bind_param('ii', $inicioProposta, $limiteProposta);
 
     $stmt->execute();
 
@@ -57,6 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $quantidadeDePropostasPorStatus = quantidadeDePropostasPeloStatus($conn);
 
+    // Caso a quantidade de botoes já tenha sido calculada anteriormente
+    // ele evitará de fazer uma busca ao banco desnecessária
+    if ($_GET['qtdBotes'] == -1) {
+        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela);
+    } else {
+        $qtdBotoes = $_GET['qtdBotes'];
+    }
+
     $resposta = [
         'status' => 'success',
         'mensagem' => 'Dados retornados com sucesso',
@@ -64,13 +75,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Em Análise' => $quantidadeDePropostasPorStatus['somaAnalise'],
         'Aceito' => $quantidadeDePropostasPorStatus['somaAceito'],
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
-        'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido']
+        'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
+        'qtdBotoes' => $qtdBotoes
     ];
 
     $retorno  = json_encode($resposta);
 
     echo $retorno;
 
+}
+
+// Retorna a quantidade de Propostas
+function qtdBotoes($conn, $qtdPropostasTela) {
+    // preparando a query
+    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas");
+
+    // Excutando a query
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    $qtdPropostas = intval($resultado->fetch_all()[0][0]);
+
+    return ceil($qtdPropostas / $qtdPropostasTela);
 }
 
 
