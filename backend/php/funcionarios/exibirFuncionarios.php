@@ -14,10 +14,6 @@ function retornaFuncionarios($conn)
     $limiteFun = intval($numPagina) * $qtdFuncionariosTela;
     $inicioFun = $limiteFun - $qtdFuncionariosTela;
 
-    if ($inicioFun < 0) {
-        $inicioFun = 0;
-    }
-
     // preparando a query
     $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");
     // Limita os resultados a 10 funcionarios

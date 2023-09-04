@@ -8,11 +8,15 @@ window.addEventListener('load', () => {
 
     // Função para renderizar a lista de usuários
     retornaFuncionarios();
+    botoesPaginacao();
 
 });
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios() {
+    if (localStorage.getItem('paginaFun') == null) {
+        localStorage.setItem('paginaFun', 1)
+    }
     const paginaFun = localStorage.getItem('paginaFun');
     const declaradoQtdBotoes = localStorage.getItem('qtdBotoes');
 
@@ -27,11 +31,10 @@ async function retornaFuncionarios() {
         if (dados.status === 'erro') throw new Error(dados.mensagem);
 
         console.log(dados);
-        console.log(dados.qtdBotoes)
 
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
-        botoesPaginacao(dados.qtdBotoes);
+        localStorage.setItem('qtdBotoes', dados.qtdBotoes);
 
     } catch (erro) {
         console.error(erro)
@@ -39,16 +42,13 @@ async function retornaFuncionarios() {
 }
 
 // Criar os botões de paginação e adiciona a função que muda a página
-function botoesPaginacao(qtdBotoes) {
+function botoesPaginacao() {
+    const qtdBotoes = localStorage.getItem('qtdBotoes');
     const containerPaginacao = document.getElementById('paginacao');
+    console.log(containerPaginacao)
 
     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-    if (localStorage.getItem('qtdBotoes') == null) {
-        localStorage.setItem('qtdBotoes', qtdBotoes)
-    } else {
-        qtdBotoes = localStorage.getItem('qtdBotoes')
-    }
 
     for (let i = 1; i <= qtdBotoes; i++) {
         const a = document.createElement('a');
