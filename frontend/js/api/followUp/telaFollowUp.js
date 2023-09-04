@@ -32,16 +32,16 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
 
             // adicionando classes aos cards
 
-            card.classList.add('card');
+            card.classList.add('card', 'text-[#fff]');
             sombra.classList.add('bg-[#1A3661]', 'w-64', 'h-[248px]', 'rounded-lg', 'z-10', 'relative');
             info.classList.add('bg-primary', 'w-64', 'h-60', 'rounded-lg', 'z-20', 'relative', 'ml-2');
             dataedicao.classList.add('rounded-t-lg', 'w-full', 'bg-[#285292]', 'px-3', 'py-2', 'flex', 'justify-between');
-            data.classList.add('text-color-text');
-            edicao.classList.add('fas', 'fa-edit', 'text-color-text', 'pt-[2px]', 'cursor-pointer');
+            data.classList.add('text-[#fff]');
+            edicao.classList.add('fas', 'fa-edit', 'text-[#fff]', 'pt-[2px]', 'cursor-pointer');
             texto.classList.add('flex', 'flex-col', 'px-3', 'py-2');
-            p.classList.add('pt-4', 'text-xs', 'text-color-text', 'break-words');
+            p.classList.add('pt-4', 'text-xs', 'text-[#fff]', 'break-words');
             dataprox.classList.add('flex', 'py-4', 'px-4', 'justify-end');
-            prox.classList.add('text-color-text', 'text-xs', 'absolute', 'bottom-4');
+            prox.classList.add('text-[#fff]', 'text-xs', 'absolute', 'bottom-4');
             
             p.id = 'p' + followUp[0];
             data.id = 'data' + followUp[0];
