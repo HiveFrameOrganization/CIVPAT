@@ -8,17 +8,30 @@ window.addEventListener('load', () => {
 
     // Função para renderizar a lista de usuários
     retornaFuncionarios();
+    // Chama a função que cria os botões da página
     botoesPaginacao();
 
 });
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios() {
+    // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (localStorage.getItem('paginaFun') == null) {
         localStorage.setItem('paginaFun', 1)
     }
     const paginaFun = localStorage.getItem('paginaFun');
-    const declaradoQtdBotoes = localStorage.getItem('qtdBotoes');
+
+    // Variável criar para otimização, evitar requisições desnecessárias
+    // recalculando a quantidade de botões
+    let declaradoQtdBotoes
+    if (localStorage.getItem('qtdBotoes') == null) {
+        declaradoQtdBotoes = -1;
+    } else {
+        declaradoQtdBotoes = localStorage.getItem('qtdBotoes');
+    }
+    // Lembrando que essa variável é destruida no cadastro do usuário
+    // pois altera a quantidade de funcionarios e possivelmente
+    // a quantidade de botões
 
     try {
         // Fazendo a requisição para buscar os dados
@@ -34,6 +47,8 @@ async function retornaFuncionarios() {
 
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
+        // Seta a quantidade de botões
+        // necessário desetar no cadastro de usuário
         localStorage.setItem('qtdBotoes', dados.qtdBotoes);
 
     } catch (erro) {
@@ -43,16 +58,16 @@ async function retornaFuncionarios() {
 
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao() {
+    // Puxa a quantidade de botões do localStorage
     const qtdBotoes = localStorage.getItem('qtdBotoes');
+    // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
-    console.log(containerPaginacao)
 
-    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
-    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
+    // Cria os botoes
     for (let i = 1; i <= qtdBotoes; i++) {
         const a = document.createElement('a');
 
+        // Define a cor dos botoes de acordo do número da página
         if (localStorage.getItem('paginaFun') == i) {
             a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
         } else {
@@ -65,7 +80,7 @@ function botoesPaginacao() {
             colocarPagina(i)
         }
 
-        console.log(a)
+        // Adiciona o botão antes da seta de proxima página
         let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
         containerPaginacao.insertBefore(a, setaProxPagina);
     }

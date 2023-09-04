@@ -9,6 +9,7 @@ require_once '../../../database/conn.php';
 
 function retornaFuncionarios($conn)
 {
+    //
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 10;
     $limiteFun = intval($numPagina) * $qtdFuncionariosTela;
@@ -31,7 +32,13 @@ function retornaFuncionarios($conn)
         $usuarios[] = $linha;
     }
 
-    $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela);
+    // Caso a quantidade de botoes já tenha sido calculada anteriormente
+    // ele evitará de fazer uma busca ao banco desnecessária
+    if ($_GET['qtdBotes'] == -1) {
+        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela);
+    } else {
+        $qtdBotoes = $_GET['qtdBotes'];
+    }
 
     // Enviando a resposta do servidor
     $resposta = [
@@ -49,6 +56,7 @@ function retornaFuncionarios($conn)
 
 // Retorna a quantidade de funcionários
 function qtdBotoes($conn, $qtdFuncionariosTela) {
+    error_log('teste');
     // preparando a query
     $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios");
 
@@ -57,8 +65,11 @@ function qtdBotoes($conn, $qtdFuncionariosTela) {
 
     $resultado = $stmt->get_result();
 
+    // Retornando a quantidade de funcionarios
     $qtdFuncionarios = intval($resultado->fetch_all()[0][0]);
 
+    // Calculando a quantidade de botoes, dividindo a quantidade de funcionarios no banco 
+    // pela quantidade de funcionario por tela
     return ceil($qtdFuncionarios / $qtdFuncionariosTela);
 }
 
