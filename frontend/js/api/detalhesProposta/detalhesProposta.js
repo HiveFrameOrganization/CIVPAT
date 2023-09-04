@@ -282,6 +282,7 @@ editandoProposta.addEventListener('click', () => {
             estadoInput[i].removeAttribute('disabled')
         }
     } else {
+        salvarMudancasNaProposta();
         editandoProposta.value = 'Editar'
 
         for (let i = 0; i < estadoInput.length; i++) {
@@ -416,71 +417,6 @@ async function exibirProdutos(produtos) {
     }
 }
 
-
-// FUNÇAO DE MUDAR A ABA QUE SERA RENDERIZADA
-let mudarAba = document.querySelectorAll('.mudarAba')
-let nomeAba = document.querySelector('.nomeAba')
-let abaInfo = document.querySelector('.abaInfo')
-let abaPdf = document.querySelector('.abaPdf')
-mudarAba[0].addEventListener('click', () => {
-    abaInfo.classList.remove('hidden')
-    abaPdf.classList.add('hidden')
-    mudarAba[0].classList.add('text-primary')
-    mudarAba[0].classList.add('border-b-2')
-
-    // remove as estilizaçoes de selecionado
-    for (let i = 0; i < mudarAba.length; i++) {
-        if (i != 0) {
-            mudarAba[i].classList.remove('text-primary')
-            mudarAba[i].classList.remove('border-b-2')
-        }
-    }
-
-    nomeAba.innerHTML = 'detalhes de proposta'
-})
-mudarAba[1].addEventListener('click', () => {
-    abaInfo.classList.add('hidden')
-    abaPdf.classList.remove('hidden')
-    mudarAba[1].classList.add('text-primary')
-    mudarAba[1].classList.add('border-b-2')
-
-    // remove as estilizaçoes de selecionado
-    for (let i = 0; i < mudarAba.length; i++) {
-        if (i != 1) {
-            mudarAba[i].classList.remove('text-primary')
-            mudarAba[i].classList.remove('border-b-2')
-        }
-    }
-
-    
-    nomeAba.innerHTML = 'pdf(s) obrigatorios e opcionais'
-})
-mudarAba[2].addEventListener('click', () => {
-    mudarAba[2].classList.add('text-primary')
-    mudarAba[2].classList.add('border-b-2')
-
-    // remove as estilizaçoes de selecionado
-    for (let i = 0; i < mudarAba.length; i++) {
-        if (i != 2) {
-            mudarAba[i].classList.remove('text-primary')
-            mudarAba[i].classList.remove('border-b-2')
-        }
-    }
-})
-mudarAba[3].addEventListener('click', () => {
-    mudarAba[3].classList.add('text-primary')
-    mudarAba[3].classList.add('border-b-2')
-
-    // remove as estilizaçoes de selecionado
-    for (let i = 0; i < mudarAba.length; i++) {
-        if (i != 3) {
-            mudarAba[i].classList.remove('text-primary')
-            mudarAba[i].classList.remove('border-b-2')
-        }
-    }
-})
-
-
 async function carregarTecnicos () {
 
     const gerente1Dropdown = document.getElementById('primeiroGerente');
@@ -557,4 +493,67 @@ async function pegarUnidadesCriadoras() {
 
     selecionarUnidadeCriadora(localStorage.getItem('idProposta'));
 
+}
+
+
+async function salvarMudancasNaProposta() {
+    const idProposta = localStorage.getItem('idProposta');
+
+    //Pegando os valores dos input's para transformalos em objeto
+    const nomeProposta = document.querySelector('#tituloProposta').value;
+    const statusProposta = document.querySelector('#statusProposta').value;
+    const criadorProposta = document.querySelector('#criadorProposta').value;
+    const cnpj = document.querySelector('#cnpj').value;
+    const cnpjString = cnpj.toString();
+    const empresa = document.querySelector('#empresa').value;
+    const uniCriadora= document.querySelector('#uniCriadora').value;
+    const dataInicio = document.querySelector('#dataPrimeiroProduto').value;
+    const dataFim = document.querySelector('#dataUltimoProduto').value;
+    const valor = document.querySelector('#valorTotalProdutos').value;
+    const funil = document.querySelector('#funil').value;
+    const primeiroGerente = document.querySelector('#primeiroGerente').value;
+    const segundoGerente = document.querySelector('#segundoGerente').value ;
+    const numeroSGSET = document.querySelector('#numeroSGSET').value;
+    const nomeContato = document.querySelector('#nomeContato').value;
+    const emailContato = document.querySelector('#emailContato').value;
+    const numeroContato = document.querySelector('#numeroContato').value; 
+
+    const verificacaoDoCnpj = validarCNPJ(cnpjString);
+        
+        console.log(verificacaoDoCnpj);
+        if (verificacaoDoCnpj == false) {
+            alert('CNPJ inválido');
+        } else {
+            const dados = {
+                idProposta: idProposta,
+                nomeProposta :(nomeProposta == '') ? null : nomeProposta,
+                statusProposta: (statusProposta == '') ? null : statusProposta,
+                criadorProposta: (criadorProposta == '') ? null : criadorProposta,
+                cnpj: (cnpjString == '') ? null : cnpjString,
+                empresa: (empresa == '') ? null : empresa,
+                uniCriadora: (uniCriadora == '') ? null : uniCriadora,
+                dataInicio: (dataInicio == '') ? null : dataInicio,
+                dataFim: (dataFim == '') ? null : dataFim,
+                valor: (valor == '') ? null : valor,
+                funil: (funil == '') ? null : funil,
+                primeiroGerente: (primeiroGerente == '') ? null : primeiroGerente,
+                segundoGerente :(segundoGerente == '') ? null : segundoGerente,
+                numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
+                nomeContato:(nomeContato== '' )?null:nomeContato ,
+                emailContato: (emailContato == '') ? null : emailContato,
+                numeroContato: (numeroContato == '') ? null : numeroContato
+            }
+
+            const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
+                methods: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify(dados)
+            })
+
+            const resposta = await requisicao.json();
+
+            console.log(resposta);
+        }
 }

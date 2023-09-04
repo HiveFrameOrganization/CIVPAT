@@ -26,7 +26,6 @@ spanProdutos.addEventListener('click', () => {
 
     userInfo.classList.add('hidden');
     userProd.classList.remove('hidden');
-    paginacao.classList.remove('hidden');
 
     // Fazendo a requisição para a buscar os produtos
     buscarProdutos();
@@ -83,6 +82,8 @@ function exibirProdutos(produtos) {
     const table = document.querySelector('#table');
 
     if (produtos) {
+
+        paginacao.classList.remove('hidden');
 
         for (let produto of produtos) {
 
