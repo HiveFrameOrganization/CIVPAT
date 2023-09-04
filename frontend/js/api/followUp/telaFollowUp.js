@@ -1,3 +1,4 @@
+
 import { back } from '../Rotas/rotas.js'
 
 const div = document.getElementById('tabelaFollow');

@@ -339,24 +339,27 @@
     
                     <!-- E-mail -->
     
-                    <div class="relative">
-                        <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="text" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
-                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
-                    </div>
-    
-                    <!-- Função -->
-    
-                    <div class="relative">
-                        <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
-                        <select id="tipoCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
-                            <option value="" selected disabled>Cargo do funcionário</option>
-                            <option value="adm">Administrador</option>
-                            <option value="coor">Coordenador</option>
-                            <option value="ger">Gerente</option>
-                            <option value="tec">Técnico</option>
-                          </select>
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+
+                        <div class="relative w-full">
+                            <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                            <input type="text" maxlength="63" id="email" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                            <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                        </div>
+                        
+                        <!-- Função -->
+                        
+                        <div class="relative w-full">
+                            <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                            <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                            <select id="tipoCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                                <option value="" selected disabled>Cargo do funcionário</option>
+                                <option value="adm">Administrador</option>
+                                <option value="coor">Coordenador</option>
+                                <option value="ger">Gerente</option>
+                                <option value="tec">Técnico</option>
+                            </select>
+                        </div>
                     </div>
                     
                     <!-- botão -->
