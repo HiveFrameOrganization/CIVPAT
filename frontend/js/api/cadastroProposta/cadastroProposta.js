@@ -17,6 +17,7 @@ window.addEventListener('load', async () => {
             const option = document.createElement('option');
             option.textContent = `${gerente.nome} ${gerente.sobrenome[0]}.`;
             option.setAttribute('value', gerente.nif);
+            option.classList.add("bg-body");
             listaGerentes.appendChild(option);
 
         });

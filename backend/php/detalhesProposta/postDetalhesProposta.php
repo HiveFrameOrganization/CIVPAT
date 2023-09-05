@@ -27,8 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dataFim = $dados['dataFim'];
     $valor = $dados['valor'];
     $funil = $dados['funil'];
-    $primeiroGerente = $dados['primeiroGerente'];
-    $segundoGerente = $dados['segundoGerente'];
+    $primeiroGerenteAntigo = $dados['primeiroGerenteAntigo'];
+    $segundoGerenteAntigo = $dados['segundoGerenteAntigo'];
+    $primeiroGerenteNovo = $dados['primeiroGerenteNovo'];
+    $segundoGerenteNovo = $dados['segundoGerenteNovo'];
     $numeroSGSET = $dados['numeroSGSET'];
     $nomeContato = $dados['nomeContato'];
     $emailContato = $dados['emailContato'];
@@ -40,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->execute();
 
-    $stmt->bind_result($idRepresentante);
+    $resultado = $stmt->get_result();
 
-    $stmt->fetch();
+    $result = $resultado->fetch_assoc();
 
     $conn->begin_transaction();
 
@@ -53,34 +55,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Empresa = ?,
     `Status` = ?,
     nSGSET = ?,
-    CNPJ = ?
+    CNPJ = ?,
     Inicio = ?,
     Fim = ?,
     Valor = ?
-    WHERE idProposta = ?;');
+    WHERE idProposta = ?');
 
-    $stmt2->bind_param('sssssssssss', $idRepresentante,
+    $stmt2->bind_param('sssssssssss', $result['idRepresentante'],
     $nomeProposta, $uniCriadora, $empresa, $statusProposta,
-    $numeroSGSET, $cnpj, $dataInicio, $dataFim, $valor);
+    $numeroSGSET, $cnpj, $dataInicio, $dataFim, $valor, $idProposta);
 
     $stmt2->execute();
 
     if ($conn->commit()) {
-        // if ($primeiroGerente != null){
-        //     $stmt3 = $conn->prepare('UPDATE GerenteResponsavel
-        //     SET fk_nifGerente = ? where id')
+        if ($segundoGerenteAntigo == null && $segundoGerenteNovo != null) {
+            $stmt3 = $conn->prepare('INSERT INTO GerenteResponsavel VALUES
+            (default, ?,?)');
 
-        // }
+            $stmt3->bind_param('ss', $idProposta, $segundoGerenteNovo);
+
+            $stmt3->execute();
+
+        } else if ($segundoGerenteAntigo != $segundoGerenteNovo){
+            $stmt3 = $conn->prepare('UPDATE GerenteResponsavel
+            SET fk_nifGerente = ? where fk_idProposta = ? and fk_nifGerente = ?');
+
+            $stmt3->bind_param('sss', $segundoGerenteNovo, $idProposta, $segundoGerenteAntigo);
+
+            $stmt3->execute();
+        }
+        
+        if ($primeiroGerenteAntigo != $primeiroGerenteNovo){
+            $stmt4 = $conn->prepare('UPDATE GerenteResponsavel
+            SET fk_nifGerente = ? where fk_idProposta = ? and fk_nifGerente = ?');
+
+            $stmt4->bind_param('sss', $primeiroGerenteNovo, $idProposta, $primeiroGerenteAntigo);
+
+            $stmt4->execute();
+        }
+
+        if ($conn->commit()){
+            $resposta = [
+                'status' => 'success',
+                'mensagem' => 'Atualização feita com sucesso'
+            ];
+
+            echo json_encode($resposta);
+        } else {
+            $resposta = [
+                'status' => 'error',
+                'mensagem' => 'Erro ao atualizar a proposta'
+            ];
+
+            $conn->rollback();
+
+        }
     } else {
         $resposta = [
             'status' => 'error',
             'mensagem' => 'Erro ao atualizar a proposta'
         ];
 
+        $conn->rollback();
+
     }
-
-
-
 
 } else {
     $resposta = [
