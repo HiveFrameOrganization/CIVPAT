@@ -100,7 +100,7 @@ function exibirPropostas(propostas){
 
             let divRow = document.createElement('div');
     
-            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
+            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
     
             const fotoDePerfil = proposta['FotoDePerfil'];
     
