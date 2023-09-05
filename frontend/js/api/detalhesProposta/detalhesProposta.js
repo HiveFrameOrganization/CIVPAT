@@ -88,19 +88,29 @@ async function selecionarGerente(id) {
 
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
+    const gerentes = [gerente1, gerente2]
 
-    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
-    for (var i = 0; i < gerente1.options.length; i++) {
-        if (gerente1.options[i].value == resposta['Gerentes'][0]['fk_nifGerente']) {
-            gerente1.options[i].selected = true;
-            break; // Saia do loop após encontrar a opção desejada
-        }
-    }
+    // // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+    // for (var i = 0; i < gerente1.options.length; i++) {
+    //     if (gerente1.options[i].value == resposta['Gerentes'][0]['fk_nifGerente']) {
+    //         gerente1.options[i].selected = true;
+    //         break; // Saia do loop após encontrar a opção desejada
+    //     }
+    // } 
 
-    for (var j = 0; j < gerente2.options.length; j++) {
-        if (gerente2.options[j].value == resposta['Gerentes'][1]['fk_nifGerente']) {
-            gerente2.options[j].selected = true;
-            break; // Saia do loop após encontrar a opção desejada
+    // for (var j = 0; j < gerente2.options.length; j++) {
+    //     if (gerente2.options[j].value == resposta['Gerentes'][1]['fk_nifGerente']) {
+    //         gerente2.options[j].selected = true;
+    //         break; // Saia do loop após encontrar a opção desejada
+    //     }
+    // }
+
+    for (var k = 0; k < resposta['Gerentes'].length; k++) {
+        for (var j = 0; j < gerentes[k].options.length; j++) {
+            if (gerentes[k].options[j].value == resposta['Gerentes'][k]['fk_nifGerente']) {
+                gerentes[k].options[j].selected = true;
+                break; // Saia do loop após encontrar a opção desejada
+            }
         }
     }
 }
@@ -114,6 +124,15 @@ async function verificarBancoProposta(id) {
 
 
         const resposta = await requisicao.json();
+
+        console.log(resposta);
+
+        // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
+        // na hora do update
+        for (var x = 0; x < resposta['Gerentes'].length; x++){
+            localStorage.setItem('gerente1', resposta['Gerentes'][x]['NIF']);
+        }
+
 
         carregarTecnicos();
         
@@ -235,6 +254,9 @@ function baixarPdf(tipoPdf) {
 // }
 
 function validarCNPJ(cnpj) {
+    if (cnpj == ''){
+        return true
+    }
     // Remover caracteres não numéricos
     cnpj = cnpj.replace(/\D/g, '');
   
@@ -329,7 +351,7 @@ editandoProposta.addEventListener('click', () => {
                 primeiroGerente : primeiroGerente,         
                 segundoGerente : segundoGerente,          
                 funil : funil,          
-                momeContato : momeContato,          
+                nomeContato : nomeContato,          
                 emailContato : emailContato,        
                 numeroContato : numeroContato,          
             }
@@ -433,6 +455,7 @@ async function carregarTecnicos () {
         var optionElement = document.createElement("option");
         optionElement.value = resposta[i + 1];
         optionElement.textContent = resposta[i];
+        optionElement.classList.add("bg-body");
         gerente1Dropdown.appendChild(optionElement);
 
         i += 1;
@@ -442,6 +465,7 @@ async function carregarTecnicos () {
         var optionElement = document.createElement("option");
         optionElement.value = resposta[i + 1];
         optionElement.textContent = resposta[i];
+        optionElement.classList.add("bg-body");
         gerente2Dropdown.appendChild(optionElement);
 
         i += 1;
@@ -488,6 +512,7 @@ async function pegarUnidadesCriadoras() {
         let option = document.createElement('option');
         option.value = dados[i].idUnidadeCriadora;
         option.textContent = dados[i].UnidadeCriadora;
+        option.classList.add("bg-body");
         unidadesSelect.appendChild(option);
     }
 
@@ -518,42 +543,43 @@ async function salvarMudancasNaProposta() {
     const emailContato = document.querySelector('#emailContato').value;
     const numeroContato = document.querySelector('#numeroContato').value; 
 
-    const verificacaoDoCnpj = validarCNPJ(cnpjString);
-        
-        console.log(verificacaoDoCnpj);
-        if (verificacaoDoCnpj == false) {
-            alert('CNPJ inválido');
-        } else {
-            const dados = {
-                idProposta: idProposta,
-                nomeProposta :(nomeProposta == '') ? null : nomeProposta,
-                statusProposta: (statusProposta == '') ? null : statusProposta,
-                criadorProposta: (criadorProposta == '') ? null : criadorProposta,
-                cnpj: (cnpjString == '') ? null : cnpjString,
-                empresa: (empresa == '') ? null : empresa,
-                uniCriadora: (uniCriadora == '') ? null : uniCriadora,
-                dataInicio: (dataInicio == '') ? null : dataInicio,
-                dataFim: (dataFim == '') ? null : dataFim,
-                valor: (valor == '') ? null : valor,
-                funil: (funil == '') ? null : funil,
-                primeiroGerente: (primeiroGerente == '') ? null : primeiroGerente,
-                segundoGerente :(segundoGerente == '') ? null : segundoGerente,
-                numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
-                nomeContato:(nomeContato== '' )?null:nomeContato ,
-                emailContato: (emailContato == '') ? null : emailContato,
-                numeroContato: (numeroContato == '') ? null : numeroContato
-            }
+    var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
-            const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
-                methods: 'POST',
-                headers: {
-                    'Content-Type': "application/json",
-                },
-                body: JSON.stringify(dados)
-            })
-
-            const resposta = await requisicao.json();
-
-            console.log(resposta);
+    if (verificacaoDoCnpj == false) {
+        alert('CNPJ inválido');
+    } else {
+        const dados = {
+            idProposta: idProposta,
+            nomeProposta :(nomeProposta == '') ? null : nomeProposta,
+            statusProposta: (statusProposta == '') ? null : statusProposta,
+            criadorProposta: (criadorProposta == '') ? null : criadorProposta,
+            cnpj: (cnpjString == '') ? null : cnpjString,
+            empresa: (empresa == '') ? null : empresa,
+            uniCriadora: (uniCriadora == '') ? null : uniCriadora,
+            dataInicio: (dataInicio == '') ? null : dataInicio,
+            dataFim: (dataFim == '') ? null : dataFim,
+            valor: (valor == '') ? null : valor,
+            funil: (funil == '') ? null : funil,
+            primeiroGerenteAntigo: localStorage.getItem('gerente1'),
+            segundoGerenteAntigo : localStorage.getItem('gerente2'),
+            primeiroGerenteNovo : (primeiroGerente == '') ? null : primeiroGerente,
+            segundoGerenteNovo : (segundoGerente == '') ? null : segundoGerente,
+            numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
+            nomeContato:(nomeContato== '' )?null:nomeContato ,
+            emailContato: (emailContato == '') ? null : emailContato,
+            numeroContato: (numeroContato == '') ? null : numeroContato
         }
+
+        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': "application/json",
+            },
+            body: JSON.stringify(dados)
+        })
+
+        const resposta = await requisicao.json();
+
+        console.log(resposta);
+    }
 }

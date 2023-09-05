@@ -60,7 +60,7 @@ function verificarDetalhes($idProposta, $conn) {
             $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
 
             //Buscando os valores dos responsáveis por cadastrar a proposta
-            $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome`
+            $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome`, `Usuarios`.`NIF`
             FROM GerenteResponsavel
             INNER JOIN Usuarios ON `Usuarios`.`NIF` = `GerenteResponsavel`.`fk_nifGerente`
             WHERE fk_idProposta = ?");
@@ -90,9 +90,9 @@ function verificarDetalhes($idProposta, $conn) {
                 "valorTotalProdutos" => $dadosValorTotal['ValorTotal'],
                 "Gerentes" => $registros,
                 "StatusFunil" => $dados['StatusFunil'],
-                "nomeContato" => $dados['nomeRepresentante'],
-                "emailContato" => $dados['emailRepresentante'],
-                "numeroContato" => $dados['telefoneRepresentante']
+                "nomeContato" => $dados['NomeRepresentante'],
+                "emailContato" => $dados['EmailRepresentante'],
+                "numeroContato" => $dados['TelefoneRepresentante']
 
             ];
 
