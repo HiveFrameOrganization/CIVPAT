@@ -173,8 +173,7 @@ function exibirPropostas(propostas){
             
             divRow.addEventListener('click', function() {
 
-                localStorage.setItem('idProposta', this.querySelector('.view-btn').getAttribute('itemid'))
-                window.location.href = '../detalhesProposta/detalhesProposta.html';
+                verDetalhesDaProposta(this.querySelector('.view-btn'));
             })
 
             table.appendChild(divRow);
@@ -184,6 +183,13 @@ function exibirPropostas(propostas){
     }
 };
 
+function verDetalhesDaProposta(element) {
+
+    localStorage.setItem('idProposta', element.getAttribute('itemid'));
+            
+    window.location.href = '../detalhesProposta/detalhesProposta.html';
+}
+
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getAllViewButtons() {
 
@@ -191,9 +197,7 @@ function getAllViewButtons() {
 
         btn.addEventListener('click', () => {
 
-            localStorage.setItem('idProposta', btn.getAttribute('itemid'));
-            
-            window.location.href = '../detalhesProposta/detalhesProposta.html';
+            verDetalhesDaProposta(btn);
         });
     });
 }
