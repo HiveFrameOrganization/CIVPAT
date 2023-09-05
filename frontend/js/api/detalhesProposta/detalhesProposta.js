@@ -378,7 +378,7 @@ async function carregarProdutos(idProposta) {
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
-
+        console.log(resposta)
 
         exibirProdutos(resposta.produtos);
 
