@@ -109,19 +109,23 @@ function exibirPropostas(propostas){
             let statusIMG;
             let color;
             let optionIMG;
+            let statusDescricao;
     
             if (status == 'em análise') {
-    
+                
+                statusDescricao = 'análise';
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
             } else if (status == 'cancelado') {
-    
+                
+                statusDescricao = 'cancelado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
             } else if (status == 'desenvolvendo') {
-    
+                
+                statusDescricao = 'desenvolvendo';
                 statusIMG = '../../img/icon/settings-green.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
