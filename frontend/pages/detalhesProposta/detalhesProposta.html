@@ -175,7 +175,7 @@
 
     <main>
 
-        <div class="container mx-auto">
+        <div class="container px-8">
             <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
 
             <ul class="flex gap-8 w-1/2">
@@ -183,7 +183,7 @@
                 <li class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(0)">
                     detalhes</li>
                 <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(1)">PDFs</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(2)">
+                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary whitespace-nowrap mudarAba" onclick="funMudarAba(2)">
                     <!-- <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a> -->
                     FOLLOW-UPs
                 </li>
@@ -536,7 +536,6 @@
 
             </div>
 
-
             <!-- tabela com followups -->
 
             <div class="abaFollowUp bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
@@ -585,6 +584,7 @@
                     </div>
                 </div>
             </div>
+
             <!------------------------------ MODAL DE CADASTRO DE FOLLOW-UP ------------------------------>
         
             <!-- centralização -->
@@ -638,9 +638,7 @@
                     </form>
                 </div>
             </div>
-
-
-        
+     
             <!------------------------------ MODAL DE EDIÇÃO DE FOLLOW-UP ------------------------------>
         
             <!-- centralização -->
@@ -700,7 +698,7 @@
             <!-- campos que ficarão em Produtos -->
 
             <div id="propostas" class="abaProdutos bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
-
+                <a href="../cadastroProduto/cadastroProduto.html">Cadastro de produtos(Provisorio)</a>
             </div>
 
         </div>
