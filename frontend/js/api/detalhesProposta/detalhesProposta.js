@@ -378,7 +378,7 @@ async function carregarProdutos(idProposta) {
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
-
+        console.log(resposta)
 
         exibirProdutos(resposta.produtos);
 
@@ -557,3 +557,73 @@ async function salvarMudancasNaProposta() {
             console.log(resposta);
         }
 }
+
+
+// Função para verificar se os campos de entrada do arquivo PDF, Orçamento e Proposta Assinada foram preenchidos
+
+function aceitarProposta() {
+    const pdfOrcamento = document.getElementById("orcamento").value;
+    const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
+
+        console.log(pdfOrcamento);
+        console.log(pdfPropostaAssinada);
+
+        
+
+
+        if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
+            document.querySelector("#aceitarProposta").disabled = false;
+            alert("tudo certo, o botão de aceitar está ativo!");
+
+        } else {
+
+            document.querySelector("#aceitarProposta").disabled = true;
+            alert("o botão de aceitar está desativado!");
+
+
+        }
+
+        console.log(pdfOrcamento);
+        console.log(pdfPropostaAssinada);
+    }
+
+// Pegando os ID's dos elementos.
+
+const aceitarPropostaButton = document.getElementById('aceitarProposta'); 
+const orcamentoInput = document.getElementById('orcamento');
+const propostaAssinadaInput = document.getElementById('propostaAssinada'); 
+const pesquisaDeSatisfacaoInput = document.getElementById('pesquisaDeSatisfacao');
+
+// Executando a função 'aceitarProposta'.
+
+aceitarPropostaButton.addEventListener('click', () => {
+    try {
+        aceitarProposta()
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+orcamentoInput.addEventListener('change', () => {
+    try {
+        aceitarProposta()
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+propostaAssinadaInput.addEventListener('change', () => {
+    try {
+        aceitarProposta()
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+pesquisaDeSatisfacaoInput.addEventListener('change', () => {
+    try {
+        aceitarProposta()
+    } catch (error) {
+        console.log(error)
+    }
+})
