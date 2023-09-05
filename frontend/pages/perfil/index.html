@@ -48,6 +48,20 @@
 
         * {
             font-family: 'Rubik', sans-serif;
+
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
+        }
+
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
         }
 
         #fade {
@@ -85,7 +99,8 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body class="bg-body transition-colors">
-    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm" role="navigation" >
+    <div id="fade" class="hide transition-opacity"></div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
@@ -102,7 +117,6 @@
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
-                <div id="fade" class="hide transition-opacity"></div>
                 <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
@@ -116,7 +130,7 @@
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
-                            <a href="./index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
