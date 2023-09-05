@@ -170,7 +170,13 @@ function exibirPropostas(propostas){
                     </div>
                 </button>
             </div>`;
-    
+            
+            divRow.addEventListener('click', function() {
+
+                localStorage.setItem('idProposta', this.querySelector('.view-btn').getAttribute('itemid'))
+                window.location.href = '../detalhesProposta/detalhesProposta.html';
+            })
+
             table.appendChild(divRow);
         }
     
