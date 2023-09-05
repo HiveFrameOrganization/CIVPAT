@@ -54,8 +54,22 @@
 
         * {
             font-family: 'Rubik', sans-serif;
+
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
         }
-        
+
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
+        }
+
         #fade {
             position: fixed;
             top: 0;
@@ -63,7 +77,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            z-index: 25;
         }
 
         #fade.hide {
@@ -91,86 +105,47 @@
 </head>
 
 <body onload="alertas()" class="bg-body text-color-text py-20">
-
-    <header class="bg-body py-4 px-6 text-color-text fixed top-0 w-full z-10">
-
+    <div id="fade" class="hide transition-opacity"></div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-
-                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
-                    src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar"
-                    class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-20">
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
-                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
-                            src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img
-                                src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
-                            aria-label="Ir para página principal">HIVE<span
-                                class="text-color-text transition-colors">FRAME</span></a>
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div class="mt-4 space-y-4">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial"
-                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
-                                src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                        <a href="../cadastroUsuario/cadastroUsuario.html"
-                            aria-label="Ir para a página de gerenciamento de equipe"
-                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
-                                src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
-                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de relatórios"
-                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
-                                src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
-                        <a href="#" aria-label="Ir para a página de registro de horas"
-                            class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img
-                                src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de
-                            horas</a>
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                        <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
-                
                 </div>
-
-                <div id="fade" class="hide transition-opacity"></div>
-                
                 <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-
-                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
-                    aria-label="Ir para página principal">HIVE<span
-                        class="text-color-text transition-colors">FRAME</span></a>
-
+                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
-
-                <div id="switch-mode"
-                    class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
-                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
-                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
                 </div>
-
-                <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
-                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger"
-                        class="w-full rounded-full cursor-pointer" role="button">
-
-                    <div id="profile-dropdown"
-                        class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
+                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                            <h5 class="text-base text-color-text">Doge do Meme</h5>
-                            <a href="#"
-                                class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver
-                                meu perfil</a>
+                            <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
-                            <li id="deslogar" onclick="deslogar()"
-                                class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer">
-                                <img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair
-                            </li>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </header>
 
     <main>

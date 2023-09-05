@@ -104,7 +104,8 @@
     </script>
 </head>
 <body class="bg-body transition-colors">
-    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm" role="navigation" >
+    <div id="fade" class="hide transition-opacity"></div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
@@ -121,7 +122,6 @@
                         <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                     </div>
                 </div>
-                <div id="fade" class="hide transition-opacity"></div>
                 <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
