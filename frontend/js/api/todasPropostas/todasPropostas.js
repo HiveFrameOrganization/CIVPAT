@@ -109,19 +109,23 @@ function exibirPropostas(propostas){
             let statusIMG;
             let color;
             let optionIMG;
+            let statusDescricao;
     
             if (status == 'em análise') {
-    
+                
+                statusDescricao = 'análise';
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
             } else if (status == 'cancelado') {
-    
+                
+                statusDescricao = 'cancelado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
             } else if (status == 'desenvolvendo') {
-    
+                
+                statusDescricao = 'desenvolvendo';
                 statusIMG = '../../img/icon/settings-green.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
@@ -148,7 +152,7 @@ function exibirPropostas(propostas){
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
                         </div>
                     </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">${proposta['Status']}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${proposta['Status']}</span>
                 </div>
             </div>
             <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
@@ -166,13 +170,25 @@ function exibirPropostas(propostas){
                     </div>
                 </button>
             </div>`;
-    
+            
+            divRow.addEventListener('click', function() {
+
+                verDetalhesDaProposta(this.querySelector('.view-btn'));
+            })
+
             table.appendChild(divRow);
         }
     
         reloadRows();
     }
 };
+
+function verDetalhesDaProposta(element) {
+
+    localStorage.setItem('idProposta', element.getAttribute('itemid'));
+            
+    window.location.href = '../detalhesProposta/detalhesProposta.html';
+}
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getAllViewButtons() {
@@ -181,9 +197,7 @@ function getAllViewButtons() {
 
         btn.addEventListener('click', () => {
 
-            localStorage.setItem('idProposta', btn.getAttribute('itemid'));
-            
-            window.location.href = '../detalhesProposta/detalhesProposta.html';
+            verDetalhesDaProposta(btn);
         });
     });
 }

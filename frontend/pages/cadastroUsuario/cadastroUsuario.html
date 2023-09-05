@@ -46,9 +46,36 @@
         }
 
         * {
-            margin: 0;
-            padding: 0;
             font-family: 'Rubik', sans-serif;
+
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
+        }
+
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
+        }
+
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 25;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
         }
 
 
@@ -72,65 +99,58 @@
 
     <div class="flex flex-col h-screen z-10 w-full">
 
-        <!-- header -->
+    <!-- header -->
     
-        <header class="py-4 px-6 text-color-text fixed top-0 w-full z-50 bg-body">
+    <div id="fade" class="hide transition-opacity"></div>
 
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    
-                    <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                    <div id="sidebar" class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-30">
-                        <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
-                            <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                            <a href="#" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                            <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-                        </div>
-                        <div class="mt-4 space-y-4">
-                            <a href="#" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                            <a href="#" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
-                            <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
-                            <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
-                        </div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
+                    <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
-    
-                    <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-    
-                    <a href="#" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-    
+                    <div class="mt-4 space-y-4">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                        <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
+                    </div>
                 </div>
-                <div class="flex items-center gap-3 z-30">
-    
-                    <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
-                        <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
-                        <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
-                    </div>
-    
-                    <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
-                        <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
-    
-                        <div id="profile-dropdown" class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
-                            <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                                <h5 class="text-base text-color-text">Doge do Meme</h5>
-                                <a href="#" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
-                                <div class="h-[1px] w-full bg-color-text-secundary"></div>
-                            </div>
-                            <ul>
-                                <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
-                            </ul>
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex items-center gap-3 z-20">
+                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
+                </div>
+                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
+                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
+                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                            <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
+                        <ul>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                        </ul>
                     </div>
-    
                 </div>
             </div>
+        </div>
+    </header>
+
+    <script src="../../js/themeSwitch/index.js"></script>
     
-        </header>
-    
-        <script src="../../js/themeSwitch/index.js"></script>
         <script src="../../js/global.js"></script>
         <script src="../../js/logoff.js"></script>
     
-        <section class="px-6 2xl:px-16 mt-16">
+        <section class="px-6 mt-16 container mx-auto">
     
             <!-- título / subtítulo da página -->
     
@@ -159,7 +179,7 @@
     
         <!-- tabela com funcionários -->
 
-        <main class="bg-component w-full px-6 pb-3 sm:pb-6 2xl:px-16 mt-[3px] flex flex-col flex-1 h-auto">
+        <main class="container mx-auto bg-component w-full px-6 pb-3 sm:pb-6 mt-[3px] flex flex-col flex-1 h-auto">
 
             <div class="pt-12 pb-3 sm:pb-6">
                 <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
@@ -182,7 +202,6 @@
                                 <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
                                 <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
                             </div>
-                            <img src="../../img/icon/calendar.svg" alt="Filtrar por data" role="button" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                         </div>
 
                     </div>
@@ -303,7 +322,7 @@
                 <!-- botão de fechar -->
     
                 <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
                 </div>
     
                 <!-- título e subtítulo -->
@@ -385,7 +404,7 @@
                 <!-- botão de fechar -->
     
                 <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModalEdit()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
                 </div>
     
                 <!-- título e subtítulo -->
@@ -397,7 +416,7 @@
     
                 <!-- inputs -->
     
-                <form class="flex flex-col gap-6 pt-8" id="formularioEditarUsuario" autocomplete="off">
+                <div class="flex flex-col gap-6 pt-8" id="formularioEditarUsuario" autocomplete="off">
     
                     <!-- Nome e sobrenome -->
     
@@ -412,27 +431,29 @@
                         </div>
                     </div>
     
-                    <!-- E-mail -->
+                    <!-- E-mail e função -->
     
-                    <div class="relative">
-                        <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                        <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
-                        <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                        <div class="relative w-full">
+                            <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
+                            <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
+                            <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                        </div>
+
+                        <div class="relative w-full">
+                            <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
+                            <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
+                            <select id="editarCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
+                                <option value="" selected disabled>Cargo do funcionário</option>
+                                <option value="adm">Administrador</option>
+                                <option value="coor">Coordenador</option>
+                                <option value="ger">Gerente</option>
+                                <option value="tec">Técnico</option>
+                              </select>
+                        </div>
                     </div>
     
-                    <!-- Função -->
     
-                    <div class="relative">
-                        <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                        <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
-                        <select id="editarCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
-                            <option value="" selected disabled>Cargo do funcionário</option>
-                            <option value="adm">Administrador</option>
-                            <option value="coor">Coordenador</option>
-                            <option value="ger">Gerente</option>
-                            <option value="tec">Técnico</option>
-                          </select>
-                    </div>
                     
                     <!-- botão -->
     
@@ -473,4 +494,3 @@
 
 </body>
 </html>
-

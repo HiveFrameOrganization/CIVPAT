@@ -39,7 +39,6 @@ spanInformacoes.addEventListener('click', () => {
     userInfo.classList.remove('hidden');
     userProd.classList.add('hidden');
     paginacao.classList.add('hidden');
-
 });
 
 /*
@@ -53,29 +52,30 @@ spanInformacoes.addEventListener('click', () => {
 // Função para bsucar todos os produtos relacionados ao técnico
 async function buscarProdutos() {
 
-    try {
+    if (spanProdutos.getAttribute('data-value') && !userProd.classList.contains('hidden')) {
+        try {
 
-        // Pegando o nif do usuário e passando como parâmetro para realizar a query la no back
-        const nif = spanProdutos.getAttribute('data-value');
+            // Pegando o nif do usuário e passando como parâmetro para realizar a query la no back
+            const nif = spanProdutos.getAttribute('data-value');
 
-        const requisicao = await fetch(back + `/perfil/produtos.php?nif=${nif}`);
+            const requisicao = await fetch(back + `/perfil/produtos.php?nif=${nif}`);
 
-        const resposta = await requisicao.json();
+            const resposta = await requisicao.json();
 
-        if (resposta.status != 'error') {
+            if (resposta.status != 'error') {
 
-            exibirProdutos(resposta);
+                exibirProdutos(resposta);
+            }
+
+            exibirProdutos();
+
+        } catch (erro) {
+            console.error(erro);
         }
 
-        exibirProdutos();
-
-    } catch (erro) {
-        console.error(erro);
     }
 
 }
-
-exibirProdutos();
  
 function exibirProdutos(produtos) {
 

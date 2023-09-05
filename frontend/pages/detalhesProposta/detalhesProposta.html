@@ -377,7 +377,7 @@
                     <div class="flex gap-5 flex-col sm:flex-row mb-5">
                         <input
                             class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
-                            type="button" value="Aceitar" disabled id="aceitarProposta" onclick="aceitarProposta()">
+                            type="button" value="Aceitar" disabled id="aceitarProposta" onclick="">
                         <input
                             class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
                             type="button" value="Editar" id="editarProposta">
@@ -411,7 +411,7 @@
                                     placeholder="Upload de arquivos"
                                     onclick="document.querySelector('.inputOrçamento').click()" desabled>
                                 <!-- input que sera salvo o pdf -->
-                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="orcamento"
+                                <input type="file" accept=".pdf" onchange="" id="orcamento"
                                     class="inputOrçamento hidden">
                             </div>
 
@@ -441,7 +441,7 @@
                                     placeholder="Upload de arquivos"
                                     onclick="document.querySelector('#propostaAssinada').click()">
 
-                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="propostaAssinada"
+                                <input type="file" accept=".pdf" onchange="" id="propostaAssinada"
                                     class="hidden">
                             </div>
 
@@ -473,7 +473,7 @@
                                     placeholder="Upload de arquivos"
                                     onclick="document.querySelector('#relatorioFinal').click()">
 
-                                <input type="file" accept=".pdf" onchange="aceitarProposta()" id="relatorioFinal"
+                                <input type="file" accept=".pdf" onchange="" id="relatorioFinal"
                                     class="hidden">
                             </div>
 
@@ -510,7 +510,7 @@
                                 class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                 placeholder="Upload de arquivos"
                                 onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
-                            <input type="file" accept=".pdf" onchange="aceitarProposta()" id="pesquisaDeSatisfacao"
+                            <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao"
                                 class="hidden">
                         </div>
 
@@ -741,45 +741,6 @@
             document.getElementById('comentario').value = '';
             document.getElementById('dataFollowUpProx').value = '';
         }
-    </script>
-
-    <!--                       validações e funções JavaScript                              -->
-
-    <script>
-
-        // Deixando o botão de aceitar desativado caso os pdfs de orçamento e proposta assinada e os inputs não estejam preenchidos 
-
-       
-
-        function aceitarProposta() {
-        const pdfOrcamento = document.getElementById("orcamento").value;
-        const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
-
-            console.log(pdfOrcamento);
-            console.log(pdfPropostaAssinada);
-
-            
-
-
-            if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
-                document.querySelector("#aceitarProposta").disabled = false;
-                alert("tudo certo, o botão de aceitar está ativo!");
-
-            } else {
-
-                document.querySelector("#aceitarProposta").disabled = true;
-                alert("o botão de aceitar está desativado!");
-
-
-            }
-
-            console.log(pdfOrcamento);
-            console.log(pdfPropostaAssinada);
-        }
-
-
-    
-
     </script>
 
 </body>

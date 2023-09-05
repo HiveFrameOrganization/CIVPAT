@@ -25,6 +25,9 @@
                 --primary-color: 57 118 209;
                 --text-color: 255 255 255;
                 --text-secundary-color: 126 126 126;
+                --btn-green: 36 194 146;
+                --btn-blue: 57 118 209;
+                --btn-red: 245 74 76;
             }
 
             @media (prefers-color-scheme: light) {
@@ -66,6 +69,9 @@
                     'primary': 'rgb(var(--primary-color) / <alpha-value>)',
                     'color-text': 'rgb(var(--text-color) / <alpha-value>)',
                     'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                    'btn-green': 'rgb(var(--btn-green) / <alpha-value>)',
+                    'btn-blue': 'rgb(var(--btn-blue) / <alpha-value>)',
+                    'btn-red': 'rgb(var(--btn-red) / <alpha-value>)',
                 }
             },
         }
@@ -170,7 +176,7 @@
 
             </div>
 
-            <form class="formulario w-full bg-body rounded-lg p-12 text-primary flex flex-col gap-6">
+            <form class="formulario w-full bg-body rounded-lg p-12 text-primary flex flex-col gap-6 relative">
 
                 <div class="flex gap-6 flex-col sm:flex-row">
                     <div class="flex flex-col gap-2 w-full">
@@ -253,8 +259,15 @@
                         <input type="date" id="dataFinal" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" required>
                     </div>
                 </div>
-        
-                <button type="button" id="modificarProduto">Salvar</button>
+
+                <div class="flex flex-col sm:flex-row mt-2">
+                    <div class="flex gap-5 flex-col sm:flex-row">
+                        <input 
+                            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md" 
+                            type="button" id="modificarProduto" value="Salvar">
+    
+                    </div>
+                </div>
 
             </form>
    
