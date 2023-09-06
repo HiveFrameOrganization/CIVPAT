@@ -94,6 +94,8 @@ function exibirPropostas(propostas){
 
     if (propostas) {
 
+        table.innerHTML = '';
+
         paginacao.classList.remove('hidden');
         
         for (let proposta of propostas) {
@@ -181,7 +183,11 @@ function exibirPropostas(propostas){
         }
     
         reloadRows();
+
+        return;
     }
+
+    table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
 };
 
 function verDetalhesDaProposta(element) {
