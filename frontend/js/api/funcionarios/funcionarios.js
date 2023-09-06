@@ -104,12 +104,12 @@ function exibir(dados) {
         const div = document.createElement('div');
 
         // Colocando uma classe na div criada
-        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'row', 'mt-1');
+        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'mt-1');
 
         const row = document.createElement('div');
 
         // Colocando uma classe na row criada
-        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we');
+        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we', 'row');
 
         const exibicao = document.createElement('div');
 
@@ -131,7 +131,7 @@ function exibir(dados) {
         const nome = document.createElement('span');
 
         // Colocando uma classe no span de nome criado
-        nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+        nome.classList.add('text-lg', 'whitespace-nowrap', 'text-color-text', 'overflow-x-hidden', 'text-ellipsis');
 
         nome.title = funcionario.Nome + ' ' + funcionario.Sobrenome;
 

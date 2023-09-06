@@ -48,20 +48,26 @@ async function pegarTodasAsPropostas () {
         console.log(dados);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
-        if (dados.resposta === 'erro') throw new Error(dados.message);
-        
-        exibirPropostas(dados.propostas);
-        sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+        if (dados.status === 'success') {
 
-        // Adicionando a quaqntidade de propostas de acordo com os seus status
-        document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
-        document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
-        document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
-        document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+            exibirPropostas(dados.propostas);
+            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+            
+            // Adicionando a quaqntidade de propostas de acordo com os seus status
+            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+            document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+        } else {
+
+            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
+        }
 
     } catch (error){
         console.error(error)
     }
+
+    
 
 }
 
@@ -106,6 +112,8 @@ function exibirPropostas(propostas){
 
     if (propostas) {
 
+        table.innerHTML = '';
+
         paginacao.classList.remove('hidden');
         
         for (let proposta of propostas) {
@@ -113,7 +121,7 @@ function exibirPropostas(propostas){
             let divRow = document.createElement('div');
     
             divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
-    
+            
             const fotoDePerfil = proposta['FotoDePerfil'];
     
             let status = proposta['Status'].toLowerCase();
@@ -145,7 +153,7 @@ function exibirPropostas(propostas){
     
             // Inserindo o Template na linha
             divRow.innerHTML = `
-            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+            <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
@@ -164,10 +172,10 @@ function exibirPropostas(propostas){
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
                         </div>
                     </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${proposta['Status']}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
                 </div>
             </div>
-            <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+            <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
                 <button type="button" class="w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
                     <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full">
                     <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
@@ -183,15 +191,18 @@ function exibirPropostas(propostas){
                 </button>
             </div>`;
             
-            divRow.addEventListener('click', function() {
+            divRow.querySelector('.area-left').addEventListener('click', function() {
 
-                verDetalhesDaProposta(this.querySelector('.view-btn'));
+                // Recuperando o botão o itemid, ao clicar na linha
+                verDetalhesDaProposta(divRow.querySelector('.view-btn'));
             })
 
             table.appendChild(divRow);
         }
     
         reloadRows();
+
+        return;
     }
 };
 
