@@ -12,7 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="../../css/output.css"> -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
@@ -126,11 +128,11 @@
                                 src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de
                             horas</a>
                     </div>
-                
+
                 </div>
 
                 <div id="fade" class="hide transition-opacity"></div>
-                
+
                 <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
 
                 <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
@@ -178,18 +180,24 @@
         <div class="container px-8">
             <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
 
-            <ul class="flex gap-8 w-1/2">
+            <ul class="flex gap-8 w-full overflow-x-auto">
                 <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
-                <li class="border-b-2 text-primary cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(0)">
+                <li class="border-b-2 text-primary cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba"
+                    onclick="funMudarAba(0)">
                     detalhes</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(1)">PDFs</li>
-                <li class="cursor-pointer text-md font-semibold  border-primary py-3 w-max hover:text-primary whitespace-nowrap mudarAba" onclick="funMudarAba(2)">
+                <li class="cursor-pointer text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba"
+                    onclick="funMudarAba(1)">PDFs</li>
+                <li class="cursor-pointer text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary whitespace-nowrap mudarAba"
+                    onclick="funMudarAba(2)">
                     <!-- <a href="../followUp/telaFollowUp.html">FOLLOW-UPs</a> -->
                     FOLLOW-UPs
                 </li>
-                <li
-                    class="cursor-pointer uppercase text-md font-semibold  border-primary py-3 w-max hover:text-primary mudarAba" onclick="funMudarAba(3)">
+                <li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba"
+                    onclick="funMudarAba(3)">
                     produtos</li>
+                <li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary whitespace-nowrap mudarAba">
+                    <a href="../cadastroProduto/cadastroProduto.html">Cadastro de produto(provisorio)</a>    
+                </li>
 
             </ul>
         </div>
@@ -204,7 +212,8 @@
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="nomeProposta" class="text-xs uppercase text-color-text-secundary font-bold">Nome da proposta: </label>
+                        <label for="nomeProposta" class="text-xs uppercase text-color-text-secundary font-bold">Nome da
+                            proposta: </label>
                         <input
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="tituloProposta" maxlength="75" disabled>
@@ -212,7 +221,8 @@
 
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="statusProposta" class="text-xs uppercase text-color-text-secundary font-bold">Status: </label>
+                        <label for="statusProposta"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Status: </label>
                         <input
                             class="text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="statusProposta" disabled>
@@ -220,7 +230,8 @@
 
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="gerenteProposta" class="text-xs uppercase text-color-text-secundary font-bold">Criador da proposta: </label>
+                        <label for="gerenteProposta"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Criador da proposta: </label>
                         <input
                             class="text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="criadorProposta" disabled>
@@ -233,21 +244,23 @@
                     <div class="flex flex-col w-full md:w-1/3">
                         <label for="cnpj" class="text-xs uppercase text-color-text-secundary font-bold">CNPJ: </label>
                         <input
-                        class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                        type="text" id="cnpj" maxlength="14" disabled>
+                            class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                            type="text" id="cnpj" maxlength="14" disabled>
                     </div>
-                    
+
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="empresa" class="text-xs uppercase text-color-text-secundary font-bold">Empresa: </label>
+                        <label for="empresa" class="text-xs uppercase text-color-text-secundary font-bold">Empresa:
+                        </label>
                         <input
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="empresa" maxlength="200" minlength="4" disabled>
                     </div>
-                    
+
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="uniCriadora" class="text-xs uppercase text-color-text-secundary font-bold">Unidade criadora: </label>
+                        <label for="uniCriadora" class="text-xs uppercase text-color-text-secundary font-bold">Unidade
+                            criadora: </label>
                         <select
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
@@ -260,11 +273,12 @@
 
                 <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
 
-                    
-                    
+
+
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="dataPrimeiroProduto" class="text-xs uppercase text-color-text-secundary font-bold w-full truncate ">
+                        <label for="dataPrimeiroProduto"
+                            class="text-xs uppercase text-color-text-secundary font-bold w-full truncate ">
                             <abbr class="no-underline" title="Data de início do primeiro produto">
                                 Data de início do primeiro produto:
                             </abbr>
@@ -277,14 +291,17 @@
 
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="dataUltimoProduto" class="text-xs uppercase text-color-text-secundary font-bold">Data final do último produto: </label>
+                        <label for="dataUltimoProduto"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Data final do último produto:
+                        </label>
                         <input
-                        class="text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                            class="text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="date" id="dataUltimoProduto" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="valorTotalProdutos" class="text-xs uppercase text-color-text-secundary font-bold">Valor total: </label>
+                        <label for="valorTotalProdutos"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Valor total: </label>
                         <input
                             class="text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="valorTotalProdutos" disabled>
@@ -301,18 +318,20 @@
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="primeiroGerente" class="text-xs uppercase text-color-text-secundary font-bold">Gerente 1:</label>
+                        <label for="primeiroGerente"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Gerente 1:</label>
                         <select type="text" id="primeiroGerente"
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             disabled>
 
                             <option value="" disabled selected>Selecione um Gerente</option>
-                        
+
                         </select>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="segundoGerente" class="text-xs uppercase text-color-text-secundary font-bold">Gerente 2:</label>
+                        <label for="segundoGerente"
+                            class="text-xs uppercase text-color-text-secundary font-bold">Gerente 2:</label>
                         <select type="text" id="segundoGerente"
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             disabled>
@@ -326,21 +345,24 @@
 
                     <div class="flex flex-col w-full md:w-1/3">
 
-                        <label for="numeroSGSET" class="text-xs uppercase text-color-text-secundary font-bold">Nº SGSET: </label>
+                        <label for="numeroSGSET" class="text-xs uppercase text-color-text-secundary font-bold">Nº SGSET:
+                        </label>
                         <input
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             type="text" id="numeroSGSET" disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for=" " class="text-xs uppercase text-color-text-secundary font-bold">Nome de Contato:</label>
+                        <label for=" " class="text-xs uppercase text-color-text-secundary font-bold">Nome de
+                            Contato:</label>
                         <input type="text" id="nomeContato"
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                            disabled >
+                            disabled>
                     </div>
 
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="emailContato" class="text-xs uppercase text-color-text-secundary font-bold">Email de Contato:</label>
+                        <label for="emailContato" class="text-xs uppercase text-color-text-secundary font-bold">Email de
+                            Contato:</label>
                         <input type="email" id="emailContato"
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             disabled>
@@ -353,9 +375,10 @@
                     <div class="flex flex-col w-full md:w-1/3">
 
                     </div>
-                    
+
                     <div class="flex flex-col w-full md:w-1/3">
-                        <label for="numeroContato" class="text-xs uppercase text-color-text-secundary font-bold">Número de contato:</label>
+                        <label for="numeroContato" class="text-xs uppercase text-color-text-secundary font-bold">Número
+                            de contato:</label>
                         <input type="number" id="numeroContato"
                             class="estadoInput text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                             disabled>
@@ -441,8 +464,7 @@
                                     placeholder="Upload de arquivos"
                                     onclick="document.querySelector('#propostaAssinada').click()">
 
-                                <input type="file" accept=".pdf" onchange="" id="propostaAssinada"
-                                    class="hidden">
+                                <input type="file" accept=".pdf" onchange="" id="propostaAssinada" class="hidden">
                             </div>
 
                             <!-- input download -->
@@ -473,8 +495,7 @@
                                     placeholder="Upload de arquivos"
                                     onclick="document.querySelector('#relatorioFinal').click()">
 
-                                <input type="file" accept=".pdf" onchange="" id="relatorioFinal"
-                                    class="hidden">
+                                <input type="file" accept=".pdf" onchange="" id="relatorioFinal" class="hidden">
                             </div>
 
                             <!-- input download -->
@@ -510,8 +531,7 @@
                                 class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                 placeholder="Upload de arquivos"
                                 onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
-                            <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao"
-                                class="hidden">
+                            <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao" class="hidden">
                         </div>
 
                         <!-- input download -->
@@ -538,20 +558,23 @@
 
             <!-- tabela com followups -->
 
-            <div class="abaFollowUp bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
-                
+            <div class="abaFollowUp bg-body px-7  rounded-xl flex flex-col gap-5 container mx-auto hidden">
+
                 <!-- botões -->
-                <div class="flex gap-2 pt-3 sm:pt-6">
+                <div class="flex gap-2 pt-6">
 
                     <div>
-                        <button type="button" id="adicionar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ ADICIONAR</button>
+                        <button type="button" id="adicionar"
+                            class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors"
+                            onclick="abreModal()">+ ADICIONAR</button>
                     </div>
 
                 </div>
 
                 <div class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
 
-                    <div id="tabelaFollow" class="flex flex-wrap gap-8 w-full items-center justify-center md:items-start md:justify-normal">
+                    <div id="tabelaFollow"
+                        class="flex flex-wrap gap-8 w-full items-center justify-center md:items-start md:justify-normal">
 
                         <!-- <div class="card">
 
@@ -586,124 +609,150 @@
             </div>
 
             <!------------------------------ MODAL DE CADASTRO DE FOLLOW-UP ------------------------------>
-        
+
             <!-- centralização -->
-        
+
             <div class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6]">
-        
+
                 <!-- conteúdo do modal -->
-        
-                <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[50%] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
-        
+
+                <div
+                    class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[50%] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
+
                     <!-- botão de fechar -->
-        
+
                     <div class="w-full lg:flex lg:justify-end">
-                        <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModal(); limpaInput()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                        <button
+                            class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary"
+                            onclick="fechaModal(); limpaInput()"><img src="../../img/icon/close.png"
+                                alt="Ícone de fechar modal"></button>
                     </div>
-        
+
                     <!-- título e subtítulo -->
-        
+
                     <div class="text-center lg:text-justify text-color-text">
                         <h1 class="font-bold text-2xl" id="titulo">ADICIONAR FOLLOW-UP</h1>
-                        <h2 class="text-xs pt-2">Insira as informações do follow-up - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                        <h2 class="text-xs pt-2">Insira as informações do follow-up - <strong
+                                class="text-[#ef4444]">Obrigatório *</strong></h2>
                     </div>
-        
+
                     <!-- inputs -->
-        
+
                     <form class="flex flex-col gap-6 pt-8" id="formulario" autocomplete="off">
-        
+
                         <!-- DATA DO FOLLOW-UP -->
-        
+
                         <div>
                             <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
-                            <input type="text" name="dataFollowUp" id="dataFollowUp" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" onfocus="this.type='date'" placeholder="Data do follow-up" required>
+                            <input type="text" name="dataFollowUp" id="dataFollowUp"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                onfocus="this.type='date'" placeholder="Data do follow-up" required>
                         </div>
 
                         <div>
                             <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
-                            <textarea name="comentario" id="comentario" rows="5" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
+                            <textarea name="comentario" id="comentario" rows="5"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                         </div>
-        
+
                         <div>
                             <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
-                            <input type="text" name="dataFollowUpProx" id="dataFollowUpProx" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
+                            <input type="text" name="dataFollowUpProx" id="dataFollowUpProx"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                         </div>
-                        
+
                         <!-- botão -->
-        
+
                         <div class="pt-14">
-                            <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Adicionar follow-up</button>
+                            <button type="submit"
+                                class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Adicionar
+                                follow-up</button>
                         </div>
-        
+
                     </form>
                 </div>
             </div>
-     
+
             <!------------------------------ MODAL DE EDIÇÃO DE FOLLOW-UP ------------------------------>
-        
+
             <!-- centralização -->
-        
+
             <div class="editar min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6]">
-        
+
                 <!-- conteúdo do modal -->
-        
-                <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[50%] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
-        
+
+                <div
+                    class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[50%] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
+
                     <!-- botão de fechar -->
-        
+
                     <div class="w-full lg:flex lg:justify-end">
-                        <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary" onclick="fechaModalEdit()"><img src="../../img/icon/close.png" alt="Ícone de fechar modal"></button>
+                        <button
+                            class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 rounded-lg hover:outline hover:outline-1 hover:outline-primary"
+                            onclick="fechaModalEdit()"><img src="../../img/icon/close.png"
+                                alt="Ícone de fechar modal"></button>
                     </div>
-        
+
                     <!-- título e subtítulo -->
-        
+
                     <div class="text-center lg:text-justify text-color-text">
                         <h1 class="font-bold text-2xl" id="titulo">EDITAR FOLLOW-UP</h1>
-                        <h2 class="text-xs pt-2">Edite as informações do follow-up - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                        <h2 class="text-xs pt-2">Edite as informações do follow-up - <strong
+                                class="text-[#ef4444]">Obrigatório *</strong></h2>
                     </div>
-        
+
                     <!-- inputs -->
-        
+
                     <form class="flex flex-col gap-6 pt-8" id="formularioeditar" autocomplete="off">
-        
+
                         <!-- DATA DO FOLLOW-UP -->
-        
+
                         <p hidden id="idFollowUpModal"></p>
                         <div>
                             <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
-                            <input type="text" name="dataFollowUpEdit" id="dataFollowUpEdit" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" onfocus="this.type='date'" placeholder="Data do follow-up" required>
+                            <input type="text" name="dataFollowUpEdit" id="dataFollowUpEdit"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                onfocus="this.type='date'" placeholder="Data do follow-up" required>
                         </div>
 
                         <div>
                             <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
-                            <textarea name="comentarioEdit" id="comentarioEdit" rows="5" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
+                            <textarea name="comentarioEdit" id="comentarioEdit" rows="5"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                         </div>
-        
+
                         <div>
                             <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
-                            <input type="text" name="dataFollowUpProxEdit" id="dataFollowUpProxEdit" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
+                            <input type="text" name="dataFollowUpProxEdit" id="dataFollowUpProxEdit"
+                                class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                         </div>
-                        
+
                         <!-- botão -->
-        
+
                         <div class="pt-14">
-                            <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar follow-up</button>
+                            <button type="submit"
+                                class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar
+                                follow-up</button>
                         </div>
-        
+
                     </form>
                 </div>
             </div>
-                
+
 
             <!-- campos que ficarão em Produtos -->
 
-            <div id="propostas" class="abaProdutos bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
-                     
-                
+            <div id="propostas"
+                class="abaProdutos bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
+
             </div>
 
         </div>
-<!-- 
+        <!-- 
         <a href="../followUp/telaFollowUp.html">follow up</a>
         <a href="../cadastroProduto/cadastroProduto.html">Cadastro Produto</a> -->
 

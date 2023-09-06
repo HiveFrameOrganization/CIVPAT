@@ -6,6 +6,7 @@ async function deslogar () { {
 
         // Limpando residuos
         localStorage.clear();
+        sessionStorage.clear();
 
         // Salvando novamente o tema, afim de evitar que desapareça ao limpar os residuos do LocalStorage
         localStorage.setItem('theme', tema);

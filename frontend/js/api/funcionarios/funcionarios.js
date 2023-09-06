@@ -16,18 +16,18 @@ window.addEventListener('load', async () => {
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios() {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
-    if (localStorage.getItem('paginaFun') == null) {
-        localStorage.setItem('paginaFun', 1)
+    if (sessionStorage.getItem('paginaFun') == null) {
+        sessionStorage.setItem('paginaFun', 1)
     }
-    const paginaFun = localStorage.getItem('paginaFun');
+    const paginaFun = sessionStorage.getItem('paginaFun');
 
     // Variável criar para otimização, evitar requisições desnecessárias
     // recalculando a quantidade de botões
     let declaradoqtdBotoesFun
-    if (localStorage.getItem('qtdBotoesFun') == null) {
+    if (sessionStorage.getItem('qtdBotoesFun') == null) {
         declaradoqtdBotoesFun = -1;
     } else {
-        declaradoqtdBotoesFun = localStorage.getItem('qtdBotoesFun');
+        declaradoqtdBotoesFun = sessionStorage.getItem('qtdBotoesFun');
     }
     // Lembrando que essa variável é destruida no cadastro do usuário
     // pois altera a quantidade de funcionarios e possivelmente
@@ -49,7 +49,7 @@ async function retornaFuncionarios() {
         exibir(dados.usuarios);
         // Seta a quantidade de botões
         // necessário desetar no cadastro de usuário
-        localStorage.setItem('qtdBotoesFun', dados.qtdBotoes);
+        sessionStorage.setItem('qtdBotoesFun', dados.qtdBotoes);
 
     } catch (erro) {
         console.error(erro)
@@ -58,8 +58,8 @@ async function retornaFuncionarios() {
 
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao() {
-    // Puxa a quantidade de botões do localStorage
-    const qtdBotoesFun = localStorage.getItem('qtdBotoesFun');
+    // Puxa a quantidade de botões do sessionStorage
+    const qtdBotoesFun = sessionStorage.getItem('qtdBotoesFun');
     // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
 
@@ -68,7 +68,7 @@ function botoesPaginacao() {
         const a = document.createElement('a');
 
         // Define a cor dos botoes de acordo do número da página
-        if (localStorage.getItem('paginaFun') == i) {
+        if (sessionStorage.getItem('paginaFun') == i) {
             a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
         } else {
             a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
@@ -86,9 +86,9 @@ function botoesPaginacao() {
     }
 }
 
-// Seta o número da página no localStorage
+// Seta o número da página no sessionStorage
 function colocarPagina(num) {
-    localStorage.setItem('paginaFun', num);
+    sessionStorage.setItem('paginaFun', num);
 }
 
 function exibir(dados) {
@@ -126,12 +126,14 @@ function exibir(dados) {
         const nomefuncao = document.createElement('div');
 
         // Colocando uma classe na div de exibição de nome e função criada
-        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6');
+        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6', 'w-[150px]', 'max-w-[150px]', 'overflow-hidden', 'text-ellipsis');
 
         const nome = document.createElement('span');
 
         // Colocando uma classe no span de nome criado
         nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+
+        nome.title = funcionario.Nome + ' ' + funcionario.Sobrenome;
 
         const funcao = document.createElement('span');
 
@@ -146,7 +148,7 @@ function exibir(dados) {
         const exibenif = document.createElement('div');
 
         // Colocando uma classe na div de exibição de nif criada
-        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6');
+        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6', 'w-[100px]', 'max-w-[100px]', 'overflow-hidden', 'text-ellipsis');
 
         const flexnif = document.createElement('div');
 

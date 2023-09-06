@@ -12,17 +12,17 @@ window.addEventListener('load', async () => {
 })
 
 async function pegarTodasAsPropostas () {
-    if (localStorage.getItem('paginaProposta') == null) {
-        localStorage.setItem('paginaProposta', 1)
+    if (sessionStorage.getItem('paginaProposta') == null) {
+        sessionStorage.setItem('paginaProposta', 1)
     }
-    const paginaProposta = localStorage.getItem('paginaProposta');
+    const paginaProposta = sessionStorage.getItem('paginaProposta');
     console.log(paginaProposta)
 
     let declaradoQtdBotoes
-    if (localStorage.getItem('qtdBotoesProposta') == null) {
+    if (sessionStorage.getItem('qtdBotoesProposta') == null) {
         declaradoQtdBotoes = -1;
     } else {
-        declaradoQtdBotoes = localStorage.getItem('qtdBotoesProposta');
+        declaradoQtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
     }
 
     try{
@@ -39,7 +39,7 @@ async function pegarTodasAsPropostas () {
         if (dados.resposta === 'erro') throw new Error(dados.message);
         
         exibirPropostas(dados.propostas);
-        localStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+        sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
 
         // Adicionando a quaqntidade de propostas de acordo com os seus status
         document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
@@ -56,7 +56,7 @@ async function pegarTodasAsPropostas () {
 
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao() {
-    const qtdBotoes = localStorage.getItem('qtdBotoesProposta');
+    const qtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
@@ -65,7 +65,7 @@ function botoesPaginacao() {
     for (let i = 1; i <= qtdBotoes; i++) {
         const a = document.createElement('a');
 
-        if (localStorage.getItem('paginaProposta') == i) {
+        if (sessionStorage.getItem('paginaProposta') == i) {
             a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
         } else {
             a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
@@ -82,9 +82,9 @@ function botoesPaginacao() {
     }
 }
 
-// Seta o número da página no localStorage
+// Seta o número da página no sessionStorage
 function colocarPagina(num) {
-    localStorage.setItem('paginaProposta', num);
+    sessionStorage.setItem('paginaProposta', num);
 }
 
 
