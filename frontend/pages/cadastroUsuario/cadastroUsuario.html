@@ -115,7 +115,7 @@
                         </div>
                         <div class="mt-4 space-y-4">
                             <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                            <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                            <a href="./cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
                             <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
                             <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
                         </div>
@@ -150,28 +150,28 @@
         <script src="../../js/global.js"></script>
         <script src="../../js/logoff.js"></script>
     
-        <section class="px-6 mt-16 container mx-auto">
+        <section class="mt-[72px] pt-6 px-6 text-color-text container mx-auto">
     
             <!-- título / subtítulo da página -->
     
-            <div class="pt-8">
+            <div>
                 <h1 class="text-color-text font-bold text-2xl">GERENCIAMENTO DE EQUIPE</h1>
                 <h2 class="text-color-text text-xs pt-2">Cadastre, visualize ou desative funcionários.</h2>
             </div>
     
             <!-- filtros -->
     
-            <div class="pt-10 2xl:pt-14 flex gap-8 justify-center sm:justify-normal">
+            <div class="mt-10 flex gap-8 justify-center sm:justify-normal">
                 <div>
-                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoTodos">TODOS</button>
+                    <button class="nav-btn text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary text-primary border-b-2 border-primary transition-colors" id="botaoTodos">TODOS</button>
                 </div>
     
                 <div>
-                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoAtivos" value="ativo">ATIVOS</button>
+                    <button class="nav-btn text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary transition-colors" id="botaoAtivos" value="ativo">ATIVOS</button>
                 </div>
     
                 <div>
-                    <button class="text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary" id="botaoDesativos" value="inativo">INATIVOS</button>
+                    <button class="nav-btn text-color-text font-medium text-xs sm:text-lg pb-2 sm:pb-4 hover:text-primary transition-colors" id="botaoDesativos" value="inativo">INATIVOS</button>
                 </div>
             </div>
     
@@ -179,116 +179,54 @@
     
         <!-- tabela com funcionários -->
 
-        <main class="bg-component w-full px-6 pb-3 sm:pb-6 mt-[3px] flex flex-col flex-1 h-auto">
+        <main class="bg-component">
 
-            <section class="container mx-auto">
+            <section class="container mx-auto px-6 py-12">
+                <h1 class="text-color-text font-bold text-2xl mb-3">FUNCIONÁRIOS</h1>
 
-                
-                <div class="pt-12 pb-3 sm:pb-6">
-                <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
-            </div>
-            
-            <div class="bg-body w-full rounded-md px-3 sm:px-8">
-                
-                <!-- botões -->
-                
-                <div class="flex flex-wrap gap-2 pt-3 sm:pt-6 justify-between">
+                <div class="bg-body py-4 px-4 md:px-8 rounded-md">
                     
-                    <div>
-                        <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ NOVO FUNCIONÁRIO</button>
-                    </div>
+                    <!-- botões -->
                     
-                    <div class="flex gap-1">
+                    <div class="flex flex-wrap gap-2 justify-between">
                         
-                        <div class="flex gap-2 flex-wrap">
-                            <div class="relative" id="barraPesquisa">
-                                <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
-                                <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
-                            </div>
+                        <div>
+                            <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ NOVO FUNCIONÁRIO</button>
                         </div>
-
-                    </div>
-                </div>
-                
-                <!-- tabela -->
-                
-                <div class="py-8">
-                    <div role="table" id="exibicao" class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
                         
-                        <!-- Rows -->
-                        
-                        <!-- <div class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
-                            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
-                                <div class="flex items-center gap-3 lg:w-full">
-                                    <img src="../../img/icon/perfil.png" alt="Foto do técnico" class="w-8 h-8 border border-primary rounded-full">
-                                    <div class="flex flex-col gap-1 font-semibold pr-4 lg:pr-6">
-                                        <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
-                                        <span class="text-xs text-color-text-secundary">Gerente</span>
-                                    </div>
-                                    
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
-                                            <span class="text-xs text-color-text-secundary">01234567</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-                                    
-                                    <div class="flex items-center gap-3 px-4 lg:px-6">
-                                        <div class="flex flex-col gap-1 font-semibold">
-                                            <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
-                                            <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
-                                        </div>
-                                    </div>
-                                    
+                        <div class="flex gap-1">
+                            
+                            <div class="flex gap-2 flex-wrap">
+                                <div class="relative" id="barraPesquisa">
+                                    <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
+                                    <input type="text" value="" id="pesquisarUsuario" class="h-[42px] bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-[42px]" placeholder="Pesquise um funcionário">
                                 </div>
-                            </div> -->
+                            </div>
 
-                            <!-- editar e inativar -->
-
-                            <!-- <div class="bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                                <button type="button" class="w-6 h-6 p-1 bg-[#7950FF]/20 rounded-md relative">
-                                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="w-full option-dropdown-trigger">
-                                    <div class="option-dropdown hidden absolute z-10 -bottom-[42px] right-[125%] h-auto bg-body rounded-md border border-body shadow-sm">
-                                        <ul role="listitem" class="space-y-2 py-2 px-2">
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1" onclick="abreModalEdit()">
-                                                    Editar
-                                                </a>
-                                            </li>
-                                            <li role="option" class="text-color-text hover:bg-color-text-secundary/20 transition-colors px-4 py-1 text-sm cursor-pointer rounded-md">
-                                                <a href="#" class="px-1 py-1">
-                                                    Inativar
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </button>
-                            </div> -->
-
-                            <!-- </div> -->
-                            
-                            
-                            
                         </div>
+                    </div>
+                    
+                    <!-- tabela -->
+                    
+                    <div class="py-8">
+                        <div role="table" id="exibicao" class="tabela space-y-1">  
+                            <!-- Rows -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Paginação -->
-            
-            <div class="w-full mt-4">
-                <div id="paginacao" class="flex items-center gap-2 justify-end">
-                    <a id="antPagina" href="#" class="w-4 h-4">
-                        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
-                    </a>
-                    <a id="proxPagina" href="#" class="w-4 h-4">
-                        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
-                    </a>
+                
+                <!-- Paginação -->
+                
+                <div class="w-full mt-4">
+                    <div id="paginacao" class="flex items-center gap-2 justify-end">
+                        <a id="antPagina" href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+                        </a>
+                        <a id="proxPagina" href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+                        </a>
+                    </div>
                 </div>
-            </div>
             
         </section>
             
