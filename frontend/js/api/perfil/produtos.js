@@ -20,6 +20,8 @@ const userInfo = document.querySelector('#user-info');
 
 const paginacao = document.querySelector('#paginacao');
 
+const table = document.querySelector('#table');
+
 spanProdutos.addEventListener('click', () => {
 
     // Trocando o display para exibir coisas diferentes
@@ -67,7 +69,11 @@ async function buscarProdutos() {
             if (resposta.status != 'error') {
                 
                 exibirProdutos(resposta.produtos);
+            } else {
+                table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
             }
+
+            
 
         } catch (erro) {
             console.error(erro);
@@ -79,13 +85,17 @@ async function buscarProdutos() {
  
 function exibirProdutos(produtos) {
 
-    const table = document.querySelector('#table');
-
     if (produtos) {
+
+
+        // Limpando a tabela
+        table.innerHTML = '';
 
         paginacao.classList.remove('hidden');
 
         for (let produto of produtos) {
+
+            console.log(produto)
 
             let divRow = document.createElement('div');
     
@@ -97,28 +107,28 @@ function exibirProdutos(produtos) {
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-primary/20 rounded-md">
                         <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
-                            <span title="${produtos['Nome'] ? produtos['Nome'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produtos['Nome'] ? produtos['Nome'] : 'N/A'}</span>
+                            <span title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span class="capitalize" title="${produtos['ServicoCategoria'] ? produtos['ServicoCategoria'] : 'N/A'}">${produtos['ServicoCategoria'] ? produtos['ServicoCategoria'] : 'N/A'}</span>
+                                <span class="capitalize" title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Máquina</span>
-                            <span title="${produtos['Maquina'] ? produtos['Maquina'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produtos['Maquina'] ? produtos['Maquina'] : 'N/A'}</span>
+                            <span title="${produto['Maquina'] ? produto['Maquina'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['Maquina'] ? produto['Maquina'] : 'N/A'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Área</span>
-                            <span title="${produtos['Area'] ? produtos['Area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produtos['Area'] ? produtos['Area'] : 'N/A'}</span>
+                            <span title="${produto['Area'] ? produto['Area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['Area'] ? produto['Area'] : 'N/A'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap">Data final</span>
-                            <span title="${produtos['DataFinal'] ? produtos['DataFinal'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produtos['DataFinal'] ? produtos['DataFinal'] : 'N/A'}</span>
+                            <span title="${produto['DataFinal'] ? produto['DataFinal'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['DataFinal'] ? produto['DataFinal'] : 'N/A'}</span>
                         </div>
                     </div>
                     <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">N/A</span>
@@ -128,7 +138,7 @@ function exibirProdutos(produtos) {
                 <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
                     <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                     <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
-                        <div itemid="${produtos['idProduto']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                        <div itemid="${produto['idProduto']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                             <div class="flex items-center gap-2">
                             <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
                                 <a>
@@ -143,7 +153,10 @@ function exibirProdutos(produtos) {
             table.appendChild(divRow);
         }
         reloadRows();
+
+        return;
     }
+
 }   
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela

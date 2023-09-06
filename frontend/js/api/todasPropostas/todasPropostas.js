@@ -11,7 +11,19 @@ window.addEventListener('load', async () => {
     botoesPaginacao();
 })
 
+// botão para primeira
+document.querySelector('#primeiraPagina').addEventListener('click', ()=>{
+    colocarPagina("1")
+    // document.createElement('a').href = ''
+})
+// botão ultima pagina
+document.querySelector('#ultimaPagina').addEventListener('click', ()=>{
+    colocarPagina(sessionStorage.getItem("qtdBotoesProposta"))
+    // document.createElement('a').href = ''
+})
+
 async function pegarTodasAsPropostas () {
+
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
     }
@@ -36,20 +48,26 @@ async function pegarTodasAsPropostas () {
         console.log(dados);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
-        if (dados.resposta === 'erro') throw new Error(dados.message);
-        
-        exibirPropostas(dados.propostas);
-        sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+        if (dados.status === 'success') {
 
-        // Adicionando a quaqntidade de propostas de acordo com os seus status
-        document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
-        document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
-        document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
-        document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+            exibirPropostas(dados.propostas);
+            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+            
+            // Adicionando a quaqntidade de propostas de acordo com os seus status
+            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+            document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+        } else {
+
+            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
+        }
 
     } catch (error){
         console.error(error)
     }
+
+    
 
 }
 
@@ -93,6 +111,8 @@ function exibirPropostas(propostas){
     paginacao.classList.add('hidden');
 
     if (propostas) {
+
+        table.innerHTML = '';
 
         paginacao.classList.remove('hidden');
         
@@ -152,7 +172,7 @@ function exibirPropostas(propostas){
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
                         </div>
                     </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${proposta['Status']}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
@@ -181,6 +201,8 @@ function exibirPropostas(propostas){
         }
     
         reloadRows();
+
+        return;
     }
 };
 

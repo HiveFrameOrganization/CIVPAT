@@ -4,73 +4,31 @@ const botaoTodos = document.querySelector('#botaoTodos');
 const botaoAtivos = document.querySelector('#botaoAtivos');
 const botaoDesativos = document.querySelector('#botaoDesativos');
 
-// adicionar estilização de botão de filtro ativo
+// Funções para controlar os botões
+const navButtons = document.querySelectorAll('.nav-btn');
 
-// filtro todos
+function removerBotoesSelecionados() {
 
-botaoTodos.addEventListener('click', () => {
+    navButtons.forEach((button) => {
 
-    botaoTodos.classList.add('ativo');
-    botaoAtivos.classList.remove('ativo');
-    botaoDesativos.classList.remove('ativo');
+        button.classList.remove('text-primary');
+        button.classList.remove('border-b-2');
+        button.classList.remove('border-primary');
+    });
+}
 
-})
+navButtons.forEach((button) => {
 
-botaoTodos.addEventListener('mouseover', () => {
+    button.addEventListener('click', () => {
 
-    botaoTodos.classList.add('hovered');
+        removerBotoesSelecionados();
 
-})
+        button.classList.add('text-primary');
+        button.classList.add('border-b-2');
+        button.classList.add('border-primary');
+    })
+});
 
-botaoTodos.addEventListener('mouseout', () => {
-
-    botaoTodos.classList.remove('hovered');
-
-})
-
-// filtro ativos
-
-botaoAtivos.addEventListener('click', () => {
-
-    botaoTodos.classList.remove('ativo');
-    botaoAtivos.classList.add('ativo');
-    botaoDesativos.classList.remove('ativo');
-
-})
-
-botaoAtivos.addEventListener('mouseover', () => {
-
-    botaoAtivos.classList.add('hovered');
-
-})
-
-botaoAtivos.addEventListener('mouseout', () => {
-
-    botaoAtivos.classList.remove('hovered');
-
-})
-
-// filtro inativos
-
-botaoDesativos.addEventListener('click', () => {
-
-    botaoTodos.classList.remove('ativo');
-    botaoAtivos.classList.remove('ativo');
-    botaoDesativos.classList.add('ativo');
-
-})
-
-botaoDesativos.addEventListener('mouseover', () => {
-
-    botaoDesativos.classList.add('hovered');
-
-})
-
-botaoDesativos.addEventListener('mouseout', () => {
-
-    botaoDesativos.classList.remove('hovered');
-
-})
 
 
 // funções da barra de pesquisa

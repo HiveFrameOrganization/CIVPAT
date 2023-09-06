@@ -17,14 +17,22 @@ const passShow=(e)=>{
 
 function abreModal(){
     let modal = document.querySelector('.caixa');
-
+    
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
 
+let cad = document.querySelector('.modalCadastroProdudo')
 function fechaModal(){
     let modal = document.querySelector('.caixa');
 
+    cad.classList.remove('flex')
+    cad.classList.add('hidden')
     modal.classList.remove('flex');
     modal.classList.add('hidden');
 }
+
+document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
+    cad.classList.remove('hidden')
+    cad.classList.add('flex')
+})

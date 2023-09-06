@@ -103,186 +103,77 @@ function exibir(dados) {
         // Criando os elementos
         const div = document.createElement('div');
 
-        // Colocando uma classe na div criada
-        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'row', 'mt-1');
+        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
 
-        const row = document.createElement('div');
+        let fotoDePerfil = funcionario['FotoDePerfil'];
 
-        // Colocando uma classe na row criada
-        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we');
+        let cargo;
 
-        const exibicao = document.createElement('div');
+        if (funcionario['TipoUser'] == 'tec') {
 
-        // Colocando uma classe na div de exibição criada
-        exibicao.classList.add('flex', 'items-center', 'gap-3', 'lg:w-full');
+            cargo = 'Técnico';
+        } else if (funcionario['TipoUser'] == 'adm') {
 
-        const img = document.createElement('img');
-
-        // Colocando atributos na img criada
-        img.classList.add('w-8', 'h-8', 'border', 'border-primary', 'rounded-full');
-        img.src = '../../img/icon/perfil.png';
-        img.alt = 'Foto do técnico';
-
-        const nomefuncao = document.createElement('div');
-
-        // Colocando uma classe na div de exibição de nome e função criada
-        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6', 'w-[150px]', 'max-w-[150px]', 'overflow-hidden', 'text-ellipsis');
-
-        const nome = document.createElement('span');
-
-        // Colocando uma classe no span de nome criado
-        nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
-
-        nome.title = funcionario.Nome + ' ' + funcionario.Sobrenome;
-
-        const funcao = document.createElement('span');
-
-        // Colocando uma classe no span de função criado
-        funcao.classList.add('text-xs', 'text-color-text-secundary');
-
-        const divisor = document.createElement('div');
-
-        // Colocando uma classe na divisória criada
-        divisor.classList.add('w-px', 'h-10', 'bg-color-text', 'opacity-10', 'divider');
-
-        const exibenif = document.createElement('div');
-
-        // Colocando uma classe na div de exibição de nif criada
-        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6', 'w-[100px]', 'max-w-[100px]', 'overflow-hidden', 'text-ellipsis');
-
-        const flexnif = document.createElement('div');
-
-        // Colocando uma classe na div de exibição de nif criada
-        flexnif.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold');
-
-        const titulonif = document.createElement('span');
-
-        // Colocando uma classe no span de título de nif criado
-        titulonif.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
-
-        const nif = document.createElement('span');
-
-        // Colocando uma classe no span de nif criado
-        nif.classList.add('text-xs', 'text-color-text-secundary');
-
-        const divisordois = document.createElement('div');
-
-        // Colocando uma classe na divisória criada
-        divisordois.classList.add('w-px', 'h-10', 'bg-color-text', 'opacity-10', 'divider');
-
-        const exibeemail = document.createElement('div');
-
-        // Colocando uma classe na div de exibição de nif criada
-        exibeemail.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6');
-
-        const flexemail = document.createElement('div');
-
-        // Colocando uma classe na div de exibição de nif criada
-        flexemail.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold');
-
-        const tituloemail = document.createElement('span');
-
-        // Colocando uma classe no span de título de nif criado
-        tituloemail.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
-
-        const email = document.createElement('span');
-
-        // Colocando uma classe no span de nif criado
-        email.classList.add('text-xs', 'text-color-text-secundary');
-
-        // Adicionando conteúdo nos elementos
-        nome.textContent = funcionario.Nome + ' ' + funcionario.Sobrenome;
-        tituloemail.textContent = 'E-mail'
-        email.textContent = funcionario.Email;
-        titulonif.textContent = 'NIF'
-        nif.textContent = funcionario.NIF;
-        funcao.textContent = funcionario.TipoUser;
-        // status.textContent = 'Status: ' + funcionario.Status;
-
-        // Colocando os dados nas divs a ser renderizadas
-
-        div.appendChild(row);
-        row.appendChild(exibicao);
-        exibicao.appendChild(img);
-        exibicao.appendChild(nomefuncao);
-        nomefuncao.appendChild(nome);
-        nomefuncao.appendChild(funcao);
-        exibicao.appendChild(divisor);
-        exibicao.appendChild(exibenif);
-        exibenif.appendChild(flexnif);
-        flexnif.appendChild(titulonif);
-        flexnif.appendChild(nif);
-        exibicao.appendChild(divisordois);
-        exibicao.appendChild(exibeemail);
-        exibeemail.appendChild(flexemail);
-        flexemail.appendChild(tituloemail);
-        flexemail.appendChild(email);
-
-
-        // div.appendChild(status);
-
-
-        // Criando o botão de inativar
-        if (funcionario.Status === 'ativo') {
-            // Criando botões para editar e inativar funcionários
-
-            const options = document.createElement('div');
-            const btnOptions = document.createElement('button');
-            const icon = document.createElement('img');
-            const dropdown = document.createElement('div');
-            const lista = document.createElement('ul');
-            const itemEditar = document.createElement('li');
-            const editar = document.createElement('a');
-            const itemInativar = document.createElement('li');
-            const inativar = document.createElement('a');
-
-            // Atribuindo o NIF no valor do botão
-
-            editar.value = funcionario.NIF
-            inativar.value = funcionario.NIF
-
-            // Atribuindo classes
-
-            options.classList.add('bg-component', 'rounded-md', 'px-3', 'md:px-4', 'flex', 'items-center', 'justify-center');
-            btnOptions.classList.add('w-6', 'h-6', 'p-1', 'bg-[#7950FF]/20', 'rounded-md', 'relative');
-            btnOptions.type = 'button';
-            icon.classList.add('option-dropdown-trigger', 'w-full');
-            icon.src = '../../img/icon/more-vertical.svg';
-            icon.alt = 'Opções';
-            dropdown.classList.add('option-dropdown', 'hidden', 'absolute', 'z-10', '-bottom-[42px]', 'right-[125%]', 'h-auto', 'bg-body', 'rounded-md', 'border', 'border-body', 'shadow-sm');
-            lista.classList.add('space-y-2', 'py-2', 'px-2');
-            lista.role = 'listitem';
-            itemEditar.classList.add('text-color-text', 'hover:bg-color-text-secundary/20', 'transition-colors', 'px-4', 'py-1', 'text-sm', 'cursor-pointer', 'rounded-md');
-            itemEditar.role = 'option';
-            editar.classList.add('px-1', 'py-1');
-            editar.href = '#';
-            editar.classList.add('editar');
-            itemInativar.classList.add('text-color-text', 'hover:bg-color-text-secundary/20', 'transition-colors', 'px-4', 'py-1', 'text-sm', 'cursor-pointer', 'rounded-md');
-            itemInativar.role = 'option';
-            inativar.classList.add('px-1', 'py-1');
-            inativar.href = '#';
-            inativar.classList.add('inativar');
-
-            // Atribuindo um texto
-
-            editar.textContent = 'Editar';
-            inativar.textContent = 'Inativar';
-
-            // Adicionando na div
-
-            options.appendChild(btnOptions);
-            btnOptions.appendChild(icon);
-            btnOptions.appendChild(dropdown);
-            dropdown.appendChild(lista);
-            lista.appendChild(itemEditar);
-            itemEditar.appendChild(editar);
-            lista.appendChild(itemInativar);
-            itemInativar.appendChild(inativar);
+            cargo = 'Administrador';
+        } else if (funcionario['TipoUser'] == 'ger') {
             
-            div.appendChild(options);
+            cargo = 'Gerente';
+        } else {
+
+            cargo = 'N/A'
         }
 
-        // Colocando a div na exibição HTML
+        div.innerHTML = `
+        <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+            <div class="flex items-center gap-8 lg:w-full">
+                <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                    <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
+                        <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
+                        <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                            <span class="text-xs text-color-text-secundary capitalize">${cargo}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                    <div class="flex flex-col gap-1 font-semibold">
+                        <span class="text-lg leading-4 whitespace-nowrap">NIF</span>
+                        <span class="text-xs text-color-text-secundary capitalize">${funcionario['NIF'] ? funcionario['NIF'] : 'N/A'}</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="flex flex-col gap-1 font-semibold">
+                        <span class="text-lg leading-4 whitespace-nowrap">Email</span>
+                        <span class="text-xs text-color-text-secundary capitalize">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
+                    </div>
+                </div>
+                <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
+            </div>
+        </div>
+        <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+            <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
+                <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
+                    <div itemid="${funcionario['NIF']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                        <div class="flex items-center gap-2">
+                        <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
+                            <a>
+                                Editar
+                            </a>
+                        </div>
+                    </div>
+                    <div itemid="${funcionario['NIF']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                        <div class="flex items-center gap-2">
+                        <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
+                            <a>
+                                Inativar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>`;
+
         exibe.appendChild(div);
 
     }

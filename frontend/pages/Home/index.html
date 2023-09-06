@@ -58,6 +58,7 @@
         /* Works on Chrome, Edge, and Safari */
         ::-webkit-scrollbar {
             width: 6px;
+            height: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -194,7 +195,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center md:justify-start mt-10">
-                <div class="flex flex-wrap gap-4 pb-2">
+                <div class="flex flex-wrap gap-4">
                     <span role="button" class="font-medium text-xs md:text-lg pb-2 text-primary hover:text-primary transition-colors border-b-2 border-primary">TODOS</span>
                     <span role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors">ANÁLISE</span>
                     <span role="button" class="font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors">DESENVOLVENDO</span>
@@ -282,7 +283,8 @@
                     <!-- FIM da tabela -->
                 </div>
                 <!-- Paginação -->
-                <div id="paginacao" class="w-full mt-4 hidden">
+                <div id="paginacao" class="w-max mt-4 flex gap-2 float-right">
+                    <a id="primeiraPagina" alt="Voltar para a primeira pagina" class="w-full pt-[2px] text-primary" href=""><<</a>
                     <div id="inserirPaginacao" class="flex items-center gap-2 justify-end">
                         <a id="antPagina" href="#" class="w-4 h-4">
                             <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
@@ -291,6 +293,7 @@
                             <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
                         </a>
                     </div>
+                    <a id="ultimaPagina" alt="Ir para a ultima pagina" class="w-full pt-[2px] text-primary" href="">>></a>
                 </div>
             </div>
         </section>
@@ -315,8 +318,15 @@
     <script src="./index.js"></script>
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
-    <script src="../../js/feedback.js"></script>
+    <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/cadastroProposta/cadastroProposta.js"></script>
     <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+
+        window.addEventListener('load', () => {
+            alertas();
+        })
+    </script>
 </body>
 </html>
