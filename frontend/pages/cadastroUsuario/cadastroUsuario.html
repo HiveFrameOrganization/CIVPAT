@@ -99,53 +99,53 @@
 
     <div class="flex flex-col h-screen z-10 w-full">
 
-    <!-- header -->
-    
-    <div id="fade" class="hide transition-opacity"></div>
+        <!-- header -->
+        
+        <div id="fade" class="hide transition-opacity"></div>
 
-    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
-        <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
-                    <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
-                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-                    </div>
-                    <div class="mt-4 space-y-4">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
-                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
-                        <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
-                        <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
-                    </div>
-                </div>
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-            </div>
-            <div class="flex items-center gap-3 z-20">
-                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
-                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
-                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
-                </div>
-                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
-                    <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
-                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
-                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                            <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
-                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
-                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+        <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                    <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
+                        <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                            <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                            <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                            <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                         </div>
-                        <ul>
-                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
-                        </ul>
+                        <div class="mt-4 space-y-4">
+                            <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                            <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                            <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                            <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
+                        </div>
+                    </div>
+                    <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                    <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                </div>
+                <div class="flex items-center gap-3 z-20">
+                    <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                        <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
+                        <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
+                    </div>
+                    <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
+                        <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                        <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
+                            <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                                <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
+                                <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                                <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                            </div>
+                            <ul>
+                                <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <script src="../../js/themeSwitch/index.js"></script>
+        <script src="../../js/themeSwitch/index.js"></script>
     
         <script src="../../js/global.js"></script>
         <script src="../../js/logoff.js"></script>
@@ -179,24 +179,27 @@
     
         <!-- tabela com funcionários -->
 
-        <main class="container mx-auto bg-component w-full px-6 pb-3 sm:pb-6 mt-[3px] flex flex-col flex-1 h-auto">
+        <main class="bg-component w-full px-6 pb-3 sm:pb-6 mt-[3px] flex flex-col flex-1 h-auto">
 
-            <div class="pt-12 pb-3 sm:pb-6">
+            <section class="container mx-auto">
+
+                
+                <div class="pt-12 pb-3 sm:pb-6">
                 <h1 class="text-color-text font-bold text-2xl">FUNCIONÁRIOS</h1>
             </div>
-
+            
             <div class="bg-body w-full rounded-md px-3 sm:px-8">
-
+                
                 <!-- botões -->
-
+                
                 <div class="flex flex-wrap gap-2 pt-3 sm:pt-6 justify-between">
-
+                    
                     <div>
                         <button type="button" id="cadastrar" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" onclick="abreModal()">+ NOVO FUNCIONÁRIO</button>
                     </div>
-
+                    
                     <div class="flex gap-1">
-
+                        
                         <div class="flex gap-2 flex-wrap">
                             <div class="relative" id="barraPesquisa">
                                 <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar funcionário" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors absolute right-0">
@@ -206,14 +209,14 @@
 
                     </div>
                 </div>
-
+                
                 <!-- tabela -->
-
+                
                 <div class="py-8">
                     <div role="table" id="exibicao" class="tabela space-y-1 overflow-y-auto -we min-h-[240px] max-h-[415px]">
-
+                        
                         <!-- Rows -->
-
+                        
                         <!-- <div class="flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-2 hover:border-primary row">
                             <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto -we">
                                 <div class="flex items-center gap-3 lg:w-full">
@@ -222,9 +225,9 @@
                                         <span class="text-lg leading-4 whitespace-nowrap text-color-text">Doge do Meme</span>
                                         <span class="text-xs text-color-text-secundary">Gerente</span>
                                     </div>
-
+                                    
                                     <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-
+                                    
                                     <div class="flex items-center gap-3 px-4 lg:px-6">
                                         <div class="flex flex-col gap-1 font-semibold">
                                             <span class="text-lg leading-4 whitespace-nowrap text-color-text">NIF</span>
@@ -233,14 +236,14 @@
                                     </div>
 
                                     <div class="w-px h-10 bg-color-text opacity-10 divider"></div>
-
+                                    
                                     <div class="flex items-center gap-3 px-4 lg:px-6">
                                         <div class="flex flex-col gap-1 font-semibold">
                                             <span class="text-lg leading-4 whitespace-nowrap text-color-text">E-mail</span>
                                             <span class="text-xs text-color-text-secundary">funcionario@sp.senai.br</span>
                                         </div>
                                     </div>
-
+                                    
                                 </div>
                             </div> -->
 
@@ -266,16 +269,16 @@
                                 </button>
                             </div> -->
 
-                        <!-- </div> -->
-
-                        
-
-                    </div>
+                            <!-- </div> -->
+                            
+                            
+                            
+                        </div>
                 </div>
             </div>
-
+            
             <!-- Paginação -->
-
+            
             <div class="w-full mt-4">
                 <div id="paginacao" class="flex items-center gap-2 justify-end">
                     <a id="antPagina" href="#" class="w-4 h-4">
@@ -286,7 +289,8 @@
                     </a>
                 </div>
             </div>
-
+            
+        </section>
             
         </main>
         
@@ -472,9 +476,6 @@
         </div>
 
     </div>
-
-    <!-- footer -->
-
 
 
     <script src="../../Componentes/inputModal/script.js"></script>
