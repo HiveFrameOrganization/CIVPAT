@@ -20,6 +20,8 @@ const userInfo = document.querySelector('#user-info');
 
 const paginacao = document.querySelector('#paginacao');
 
+const table = document.querySelector('#table');
+
 spanProdutos.addEventListener('click', () => {
 
     // Trocando o display para exibir coisas diferentes
@@ -69,6 +71,8 @@ async function buscarProdutos() {
                 exibirProdutos(resposta.produtos);
             }
 
+            table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
+
         } catch (erro) {
             console.error(erro);
         }
@@ -78,8 +82,6 @@ async function buscarProdutos() {
 }
  
 function exibirProdutos(produtos) {
-
-    const table = document.querySelector('#table');
 
     if (produtos) {
 
@@ -100,7 +102,7 @@ function exibirProdutos(produtos) {
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-primary/20 rounded-md">
                         <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
-                            <span title="${produto['Nome'] ? produto['Nome'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['Nome'] ? produto['Nome'] : 'N/A'}</span>
+                            <span title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span class="capitalize" title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                             </div>
@@ -149,8 +151,6 @@ function exibirProdutos(produtos) {
 
         return;
     }
-
-    table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
 
 }   
 
