@@ -58,6 +58,7 @@
         /* Works on Chrome, Edge, and Safari */
         ::-webkit-scrollbar {
             width: 6px;
+            height: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -317,8 +318,15 @@
     <script src="./index.js"></script>
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
-    <script src="../../js/feedback.js"></script>
+    <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/cadastroProposta/cadastroProposta.js"></script>
     <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+
+        window.addEventListener('load', () => {
+            alertas();
+        })
+    </script>
 </body>
 </html>

@@ -38,3 +38,8 @@
     opacity: 0;
     pointer-events: none;
 }
+
+
+.row-item::-webkit-scrollbar {
+    height: 3px;
+}
