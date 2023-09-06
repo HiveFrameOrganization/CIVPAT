@@ -1,4 +1,4 @@
-import { back } from '../Rotas/rotas.js'
+import { back } from '../Rotas/rotas.js';
 const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');
 

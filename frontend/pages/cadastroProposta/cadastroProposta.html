@@ -81,6 +81,13 @@
     <script type="module">
       import { autenticacao } from "../../js/api/login/autenticacao.js";
       autenticacao(["coor", "adm", "ger"]);
+
+      import alertas from '../../js/feedback.js';
+
+      window.addEventListener('load', () => {
+          alertas();
+      })
+      
     </script>
   </body>
 </html>

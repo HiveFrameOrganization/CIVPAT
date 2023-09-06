@@ -1,4 +1,6 @@
-import { back } from '../Rotas/rotas.js'
+import { back } from '../Rotas/rotas.js';
+import  alertas  from '../../feedback.js';
+
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', () => {
     const idProposta = localStorage.getItem('idProposta');
@@ -304,6 +306,7 @@ editandoProposta.addEventListener('click', () => {
         }
     } else {
         salvarMudancasNaProposta();
+        
         editandoProposta.value = 'Editar'
 
         for (let i = 0; i < estadoInput.length; i++) {
@@ -400,6 +403,8 @@ async function carregarProdutos(idProposta) {
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         exibirProdutos(resposta.produtos);
 
@@ -512,7 +517,7 @@ async function exibirProdutos(produtos) {
 
 
         divRow.onclick = () => {
-            localStorage.setItem('idProduto', divRow.value);
+            localStorage.setItem('idProduto', produto['idProduto']);
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
         }
@@ -668,7 +673,11 @@ async function salvarMudancasNaProposta() {
 
         const resposta = await requisicao.json();
 
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
         console.log(resposta);
+        alertas();
     }
 }
 

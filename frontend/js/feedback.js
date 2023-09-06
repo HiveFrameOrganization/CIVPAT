@@ -1,4 +1,4 @@
-function alertas () {
+export default function alertas () {
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -25,6 +25,5 @@ function alertas () {
 
 
       }
-      
-      
-}
+    
+} 
