@@ -11,14 +11,13 @@ function retornaFuncionarios($conn)
 {
     //
     $numPagina = $_GET['pag'];
-    $qtdFuncionariosTela = 10;
-    $limiteFun = intval($numPagina) * $qtdFuncionariosTela;
-    $inicioFun = $limiteFun - $qtdFuncionariosTela;
+    $qtdFuncionariosTela = 5;
+    $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
 
     // preparando a query
     $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");
     // Limita os resultados a 10 funcionarios
-    $stmt->bind_param('ii', $inicioFun, $limiteFun);
+    $stmt->bind_param('ii', $inicioFun, $qtdFuncionariosTela);
 
     // Excutando a query
     $stmt->execute();

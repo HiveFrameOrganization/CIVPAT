@@ -86,7 +86,7 @@ formulario.addEventListener('submit', async evento => {
 
         await mandarDadosParaBackend(dadosDoCadastro);
 
-        localStorage.removeItem('qtdBotoesFun');
+        sessionStorage.removeItem('qtdBotoesFun');
         location.reload();
 
     } catch (erro) {
