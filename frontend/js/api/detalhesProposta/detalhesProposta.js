@@ -424,7 +424,7 @@ async function exibirProdutos(produtos) {
     const botoes = document.getElementById('propostas');
 
     // limpando os possíveis elementos que possam estar na div
-    propostas.innerHTML = '';
+    // propostas.innerHTML = '';
 
     for (let produto of produtos) {
 
@@ -471,8 +471,8 @@ async function exibirProdutos(produtos) {
                         <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
                         <div class="w-[300px] max-w-[300px] overflow-hidden text-ellipsis">
                             <span title="${produto['NomeProduto']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto']}</span>
-                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span title="Serviço e categoria do Produto">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap">
+                                <span title="${produto['ServicoCategoria']}" class="overflow-hidden text-ellipsis">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                             </div>
                         </div>
                     </div>
@@ -507,12 +507,7 @@ async function exibirProdutos(produtos) {
                             </div>
                         </div>
                     </div>
-            </div>
-            
-            
-            
-            
-            `
+            </div>`
           
 
 
@@ -525,9 +520,7 @@ async function exibirProdutos(produtos) {
         botoes.append(divRow)
        
 
-        // Adicionando uma quebra de linha entre os botões
-        const quebraDeLinha = document.createElement('br');
-        botoes.appendChild(quebraDeLinha);
+        
 
     }
 }

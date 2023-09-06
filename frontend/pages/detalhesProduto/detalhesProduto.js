@@ -173,6 +173,7 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
+
     return dados[0];
 
 }
@@ -186,6 +187,8 @@ async function selecionarProduto(dadosProduto) {
             produtoSelect.options[i].selected = true;
             const titulo = document.getElementById('titulo');
             titulo.innerText = produtoSelect.options[i].text.toUpperCase();
+
+            console.log(produtoSelect.options[i].value)
             break; // Saia do loop após encontrar a opção desejada
         }
     }

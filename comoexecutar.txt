@@ -24,6 +24,3 @@ Comandos para iniciar a aplicação:
 01: docker-compose up 
 
 Para parar a aplicação basta teclar no terminal "Ctrl + C"
-
-
-1Mm@1Mm@
