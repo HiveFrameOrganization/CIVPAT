@@ -69,9 +69,11 @@ async function buscarProdutos() {
             if (resposta.status != 'error') {
                 
                 exibirProdutos(resposta.produtos);
+            } else {
+                table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
             }
 
-            table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
+            
 
         } catch (erro) {
             console.error(erro);
@@ -85,12 +87,15 @@ function exibirProdutos(produtos) {
 
     if (produtos) {
 
+
         // Limpando a tabela
         table.innerHTML = '';
 
         paginacao.classList.remove('hidden');
 
         for (let produto of produtos) {
+
+            console.log(produto)
 
             let divRow = document.createElement('div');
     
