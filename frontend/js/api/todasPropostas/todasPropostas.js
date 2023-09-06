@@ -33,10 +33,10 @@ async function pegarTodasAsPropostas () {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados);
+        console.log(dados.status);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
-        if (!dados.status === 'erro') {
+        if (dados.status === 'success') {
 
             exibirPropostas(dados.propostas);
             sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
