@@ -685,8 +685,6 @@ function aceitarProposta() {
     console.log(pdfPropostaAssinada);
 
 
-
-
     if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
         document.querySelector("#aceitarProposta").disabled = false;
         alert("tudo certo, o botão de aceitar está ativo!");
@@ -699,8 +697,7 @@ function aceitarProposta() {
 
     }
 
-    console.log(pdfOrcamento);
-    console.log(pdfPropostaAssinada);
+ 
 }
 
 // Pegando os ID's dos elementos.
@@ -708,7 +705,6 @@ function aceitarProposta() {
 const aceitarPropostaButton = document.getElementById('aceitarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
-const pesquisaDeSatisfacaoInput = document.getElementById('pesquisaDeSatisfacao');
 
 // Executando a função 'aceitarProposta'.
 
@@ -736,12 +732,25 @@ propostaAssinadaInput.addEventListener('change', () => {
     }
 })
 
-pesquisaDeSatisfacaoInput.addEventListener('change', () => {
-    try {
-        aceitarProposta()
-    } catch (error) {
-        console.log(error)
-    }
+//Função para enviar e atualizar os dados no banco
+
+async function aceitarPropostaBanco(){
+    const idProposta = getItem.localStorage('idProposta');
+    
+
+    // criando uma variável para enviar a lista para o php, transformando o string em objeto json
+    const requisicao = await fetch(back + `/detalhesProposta/aceitarProposta.php?id=${idProposta}`);
+
+    const resposta = await requisicao.json();
+
+    console.log(resposta);
+   
+}
+
+const botaoAceitarProposta = document.getElementById('aceitarProposta');
+
+botaoAceitarProposta.addEventListener('click', () => {
+    aceitarPropostaBanco();
 })
 
 // abrir modal de cadastro de produto
