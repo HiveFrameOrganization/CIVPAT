@@ -154,7 +154,7 @@ function exibir(dados) {
             <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
                 <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
-                    <div itemid="${funcionario['NIF']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="editar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
                             <a>
@@ -162,7 +162,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    <div itemid="${funcionario['NIF']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="inativar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
                             <a>
@@ -180,6 +180,72 @@ function exibir(dados) {
 
 
 };
+
+function verDetalhesDaProposta(element) {
+
+    localStorage.setItem('idProposta', element.getAttribute('itemid'));
+            
+    window.location.href = '../detalhesProposta/detalhesProposta.html';
+}
+
+// Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
+function getAllViewButtons() {
+
+    document.querySelectorAll('.view-btn').forEach((btn) => {
+
+        btn.addEventListener('click', () => {
+
+            verDetalhesDaProposta(btn);
+        });
+    });
+}
+
+// Reaplicar as funções referentes a linhas da tabela
+function reloadRows() {
+
+    const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
+
+    // Abrir o dropdown específico do botão clicado
+    optionDropdownTriggers.forEach((trigger) => {
+
+        trigger.addEventListener('click', () => {
+            
+            const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
+
+            const row = optionDropdown.parentElement.parentElement.parentElement;
+
+            optionDropdown.classList.toggle('hidden');
+            row.classList.toggle('selected-row');
+            
+        });
+    });
+
+    getAllViewButtons();
+}
+
+// Função para fechar todos os dropdown
+function hiddenAll() {
+
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+
+            const row = el.parentElement.parentElement.parentElement;
+    
+            el.classList.add('hidden');
+            row.classList.remove('selected-row');
+        });
+    }
+}
+
+// Fechar todos ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        hiddenAll();
+    }
+});
 
 
 /*
@@ -309,6 +375,11 @@ async function usuariosFiltrados(valor) {
                         PROCESSO DE EDITAR OU INATIVAR O USUÁRIO 
 ---------------------------------------------------------------------------------------
 */
+
+document.querySelector('.inativar').addEventListener((event) => {
+
+    
+});
 
 // Capturando o clique dos botões de demissão
 document.addEventListener('click', evento => {

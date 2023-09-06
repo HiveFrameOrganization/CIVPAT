@@ -32,7 +32,10 @@ function fechaModal(){
     modal.classList.add('hidden');
 }
 
-document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
-    cad.classList.remove('hidden')
-    cad.classList.add('flex')
-})
+if (document.querySelector('#btnNovoProduto')) {
+
+    document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
+        cad.classList.remove('hidden')
+        cad.classList.add('flex')
+    })
+}
