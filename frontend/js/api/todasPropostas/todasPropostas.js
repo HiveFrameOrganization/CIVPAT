@@ -33,23 +33,29 @@ async function pegarTodasAsPropostas () {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados);
+        console.log(dados.status);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
-        if (dados.resposta === 'erro') throw new Error(dados.message);
-        
-        exibirPropostas(dados.propostas);
-        sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+        if (dados.status === 'success') {
 
-        // Adicionando a quaqntidade de propostas de acordo com os seus status
-        document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
-        document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
-        document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
-        document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+            exibirPropostas(dados.propostas);
+            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+            
+            // Adicionando a quaqntidade de propostas de acordo com os seus status
+            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+            document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+        } else {
+
+            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
+        }
 
     } catch (error){
         console.error(error)
     }
+
+    
 
 }
 
@@ -186,8 +192,6 @@ function exibirPropostas(propostas){
 
         return;
     }
-
-    table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
 };
 
 function verDetalhesDaProposta(element) {

@@ -20,6 +20,8 @@ const userInfo = document.querySelector('#user-info');
 
 const paginacao = document.querySelector('#paginacao');
 
+const table = document.querySelector('#table');
+
 spanProdutos.addEventListener('click', () => {
 
     // Trocando o display para exibir coisas diferentes
@@ -69,6 +71,8 @@ async function buscarProdutos() {
                 exibirProdutos(resposta.produtos);
             }
 
+            table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
+
         } catch (erro) {
             console.error(erro);
         }
@@ -78,8 +82,6 @@ async function buscarProdutos() {
 }
  
 function exibirProdutos(produtos) {
-
-    const table = document.querySelector('#table');
 
     if (produtos) {
 
@@ -149,8 +151,6 @@ function exibirProdutos(produtos) {
 
         return;
     }
-
-    table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
 
 }   
 
