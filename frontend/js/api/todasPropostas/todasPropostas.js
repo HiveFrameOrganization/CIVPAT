@@ -51,8 +51,6 @@ async function pegarTodasAsPropostas () {
             table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
 
-        throw new Error(dados.mensagem);
-
     } catch (error){
         console.error(error)
     }
