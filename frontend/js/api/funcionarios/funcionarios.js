@@ -126,12 +126,14 @@ function exibir(dados) {
         const nomefuncao = document.createElement('div');
 
         // Colocando uma classe na div de exibição de nome e função criada
-        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6');
+        nomefuncao.classList.add('flex', 'flex-col', 'gap-1', 'font-semibold', 'pr-4', 'lg:pr-6', 'w-[150px]', 'max-w-[150px]', 'overflow-hidden', 'text-ellipsis');
 
         const nome = document.createElement('span');
 
         // Colocando uma classe no span de nome criado
         nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+
+        nome.title = funcionario.Nome + ' ' + funcionario.Sobrenome;
 
         const funcao = document.createElement('span');
 
@@ -146,7 +148,7 @@ function exibir(dados) {
         const exibenif = document.createElement('div');
 
         // Colocando uma classe na div de exibição de nif criada
-        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6');
+        exibenif.classList.add('flex', 'items-center', 'gap-3', 'px-4', 'lg:px-6', 'w-[100px]', 'max-w-[100px]', 'overflow-hidden', 'text-ellipsis');
 
         const flexnif = document.createElement('div');
 
