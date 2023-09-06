@@ -125,7 +125,6 @@ async function verificarBancoProposta(id) {
 
         const resposta = await requisicao.json();
 
-        console.log(resposta);
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
@@ -393,6 +392,7 @@ async function carregarProdutos(idProposta) {
         // Cria a requisição 
         const requisicao = await fetch(back + `/detalhesProposta/carregarProdutos.php?id=${idProposta}`)
 
+
         // Verificando se deu erro ao fazer a requisição
         if (!requisicao.ok) {
             throw new Error('Erro na requisição');
@@ -400,9 +400,11 @@ async function carregarProdutos(idProposta) {
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
-        console.log(resposta)
 
         exibirProdutos(resposta.produtos);
+
+        console.log(resposta.produtos[0]);
+
 
     } catch (error) {
         console.error(error)
@@ -418,28 +420,86 @@ async function exibirProdutos(produtos) {
     propostas.innerHTML = '';
 
     for (let produto of produtos) {
+
         // criando o botão da proposta
-        const botao = document.createElement('button');
+        const row = document.createElement('div');
+        const divMaior = document.createElement('div');
+        const divNomeProduto = document.createElement('div');
+        const divNomeProdutoMenor = document.createElement('div');
+        
+        const spanNomeProduto = document.createElement('span');
+        const spanCategoria = document.createElement('span');
+        const imgRow = document.createElement('img');
+        
+        const divMaquina = document.createElement('div');
+        const spanNomeMaquina = document.createElement('span');
+        const spanCategoria = document.createElement('span');
+
+        // Adicionando a classes na linha da proposta
+        row.classList.add('row-item', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-primary', 'transition-colors', 'cursor-pointer')
+        
+        // Adicionando classes na div maior contida na linha
+        divMaior.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto')
+
+        // Adicionando classes na div do titulo 
+        divNomeProduto.classList.add('flex', 'items-center', 'gap-3', 'border-r', 'border-color-text-secundary', 'pr-8')
+
+        // Adiconando o atributo src na imagem e classes 
+        imgRow.src =  '../../img/icon/inventory.svg'
+        imgRow.classList.add('w-10', 'h-10', 'p-2', 'bg-primary/20', 'rounded-md')
+
+        // Adicionando as classes na div que contém o titulo e o span
+        divNomeProdutoMenor.classList.add('w-[350px]', 'max-w-[350px]', 'overflow-hidden', 'text-ellipsis')
+        
+
+        // Adicionando classes no span do titulo 
+        spanNomeProduto.classList.add('font-semibold', 'text-lg', 'leading-4', 'whitespace-nowrap', 'capitalize')
+
+        // Adicionando classes no span da categoria 
+        spanCategoria.classList.add('text-xs', 'text-color-text-secundary', 'capitalize')
 
         // adicionando o valor ao botão da proposta
-        botao.value = produto.idProduto;
-        botao.innerHTML = produto.NomeProduto;
+        row.value = produto.idProduto;
+        spanNomeProduto.innerHTML = produto.NomeProduto;
+        spanCategoria.innerHTML = produto.ServicoCategoria;
 
-        botao.onclick = () => {
-            localStorage.setItem('idProduto', botao.value);
+        // Adicionando classes na dov
+        divMaquina.classList.add('flex', 'items-center', 'gap-3')
+
+
+        row.onclick = () => {
+            localStorage.setItem('idProduto', row.value);
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
         }
 
-        botoes.appendChild(botao);
+
+        
+
+        
+
+
+
+        botoes.append(row)
+        row.append(divMaior)
+        divMaior.append(divNomeProduto)
+        divNomeProduto.append(imgRow)
+        divNomeProduto.append(divNomeProdutoMenor)
+
+        divNomeProdutoMenor.append(spanNomeProduto)
+        divNomeProdutoMenor.append(spanCategoria)
 
         // Adicionando uma quebra de linha entre os botões
         const quebraDeLinha = document.createElement('br');
         botoes.appendChild(quebraDeLinha);
+
+
+        
+        
     }
 }
 
-async function carregarTecnicos () {
+async function carregarTecnicos() {
 
     const gerente1Dropdown = document.getElementById('primeiroGerente');
     const gerente2Dropdown = document.getElementById('segundoGerente');

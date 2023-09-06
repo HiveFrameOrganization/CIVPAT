@@ -274,12 +274,9 @@ botaoModificarProduto.addEventListener('click', () => {
         valor: valor,
         tecnico: tecnico
     }
-
+    
     atualizarProduto(dadosParaEnviar);
 
-
-
-    
 });
 
 

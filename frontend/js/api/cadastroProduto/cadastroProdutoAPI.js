@@ -74,6 +74,7 @@ async function salvarProduto () {
             });
     
             const dados = await resposta.json();
+
     
             console.log(dados['status']);
     
