@@ -65,6 +65,7 @@ GRANT SELECT ON `isihiveframe`.`Usuarios` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
 -- e só poderá inserir ou alterar na tabela Carga Horária
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO 'tec'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 

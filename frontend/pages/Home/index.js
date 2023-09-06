@@ -1,3 +1,6 @@
+// import alertas from "../../js/feedback";
+
+
 // Modal
 
 const openModalButton = document.querySelector('#open-modal-btn');
@@ -35,3 +38,9 @@ searchButton.addEventListener('click', () => {
     // Escondido
     toggleInputVisibility();
 });
+
+
+// // Ao carregar a página
+// window.addEventListener('load', () => {
+//     alertas();
+// })

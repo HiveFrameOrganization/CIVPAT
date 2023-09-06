@@ -131,7 +131,7 @@ function exibir(dados) {
         const nome = document.createElement('span');
 
         // Colocando uma classe no span de nome criado
-        nome.classList.add('text-lg', 'leading-4', 'whitespace-nowrap', 'text-color-text');
+        nome.classList.add('text-lg', 'whitespace-nowrap', 'text-color-text', 'overflow-x-hidden', 'text-ellipsis');
 
         nome.title = funcionario.Nome + ' ' + funcionario.Sobrenome;
 

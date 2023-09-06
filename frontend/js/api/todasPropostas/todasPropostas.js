@@ -11,7 +11,19 @@ window.addEventListener('load', async () => {
     botoesPaginacao();
 })
 
+// botão para primeira
+document.querySelector('#primeiraPagina').addEventListener('click', ()=>{
+    colocarPagina("1")
+    // document.createElement('a').href = ''
+})
+// botão ultima pagina
+document.querySelector('#ultimaPagina').addEventListener('click', ()=>{
+    colocarPagina(sessionStorage.getItem("qtdBotoesProposta"))
+    // document.createElement('a').href = ''
+})
+
 async function pegarTodasAsPropostas () {
+
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
     }
@@ -33,7 +45,7 @@ async function pegarTodasAsPropostas () {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados.status);
+        console.log(dados);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
@@ -50,8 +62,6 @@ async function pegarTodasAsPropostas () {
 
             table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
-
-        throw new Error(dados.mensagem);
 
     } catch (error){
         console.error(error)
@@ -162,7 +172,7 @@ function exibirPropostas(propostas){
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
                         </div>
                     </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${proposta['Status']}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
