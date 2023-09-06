@@ -317,19 +317,19 @@
     
             <!-- conteúdo do modal -->
     
-            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
-    
-                <!-- botão de fechar -->
-    
-                <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
-                </div>
-    
+            <div class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full lg:w-[670px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
+
                 <!-- título e subtítulo -->
-    
-                <div class="text-center lg:text-justify text-color-text">
-                    <h1 class="font-bold text-2xl">CADASTRO DE FUNCIONÁRIO</h1>
-                    <h2 class="text-xs pt-2">Insira as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+                
+                <div class="flex flex-col lg:flex-row justify-between">
+                    <div class="text-center lg:text-justify text-color-text w-full">
+                        <h1 class="font-bold text-2xl">CADASTRO DE FUNCIONÁRIO</h1>
+                        <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
+                    </div>
+                    <div class="flex justify-end absolute top-4 right-4 lg:relative lg:top-0 lg:right-0">
+                        <button class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                    </div>
+
                 </div>
     
                 <!-- inputs -->
@@ -345,7 +345,7 @@
     
                     <!-- Nome e sobrenome -->
     
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">NOME *</label>
                             <input type="text" id="nome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
@@ -358,7 +358,7 @@
     
                     <!-- E-mail -->
     
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
 
                         <div class="relative w-full">
                             <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
@@ -383,8 +383,8 @@
                     
                     <!-- botão -->
     
-                    <div class="pt-14">
-                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Cadastrar funcionário</button>
+                    <div class="pt-6">
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:brightness-110">Cadastrar funcionário</button>
                     </div>
     
                 </form>
@@ -399,19 +399,19 @@
     
             <!-- conteúdo do modal -->
     
-            <div class="bg-component px-12 py-16 lg:pt-8 lg:pb-16 w-full lg:w-[950px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
-    
-                <!-- botão de fechar -->
-    
-                <div class="w-full lg:flex lg:justify-end">
-                    <button class="absolute right-4 top-4 lg:relative lg:-right-8 lg:-top-4 hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
-                </div>
+            <div class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full lg:w-[670px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
     
                 <!-- título e subtítulo -->
-    
-                <div class="text-center lg:text-justify text-color-text">
-                    <h1 class="font-bold text-2xl">EDIÇÃO DE FUNCIONÁRIO</h1>
-                    <h2 class="text-xs pt-2">Atualize as informações do funcionário - <strong class="text-[#ef4444]">Obrigatório *</strong></h2>
+
+                <div class="flex flex-col lg:flex-row justify-between">
+                    <div class="text-center lg:text-justify text-color-text w-full">
+                        <h1 class="font-bold text-2xl">EDIÇÃO DE FUNCIONÁRIO</h1>
+                        <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
+                    </div>
+                    <div class="flex justify-end absolute top-4 right-4 lg:relative lg:top-0 lg:right-0">
+                        <button class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                    </div>
+
                 </div>
     
                 <!-- inputs -->
@@ -420,7 +420,7 @@
     
                     <!-- Nome e sobrenome -->
     
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
                         <div class="w-full">
                             <label class="text-color-text font-bold block mb-3">NOME *</label>
                             <input type="text" value="" id="editarNome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
@@ -433,7 +433,7 @@
     
                     <!-- E-mail e função -->
     
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-9">
+                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
                         <div class="relative w-full">
                             <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
                             <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
@@ -457,8 +457,8 @@
                     
                     <!-- botão -->
     
-                    <div class="pt-14">
-                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-xl py-2 hover:brightness-110">Editar funcionário</button>
+                    <div class="pt-6">
+                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:brightness-110">Editar funcionário</button>
                     </div>
 
                     <!-- redefinir senha -->
@@ -494,3 +494,4 @@
 
 </body>
 </html>
+
