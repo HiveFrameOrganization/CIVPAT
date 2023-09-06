@@ -36,9 +36,8 @@ function quantidadeDePropostasPeloStatus ($conn) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $numPagina = $_GET['pag'];
-    $qtdPropostasTela = 10;
-    $limiteProposta = $numPagina * $qtdPropostasTela;
-    $inicioProposta = $limiteProposta - $qtdPropostasTela;
+    $qtdPropostasTela = 5;
+    $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
 
     $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
     `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
@@ -46,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
     LIMIT ?, ?');
     // Limita os resultados a 10 propostas por página
-    $stmt->bind_param('ii', $inicioProposta, $limiteProposta);
+    $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
 
     $stmt->execute();
 

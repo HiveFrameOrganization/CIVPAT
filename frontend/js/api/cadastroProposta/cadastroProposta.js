@@ -66,7 +66,7 @@ formularioProposta.addEventListener('submit', async evento => {
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
             localStorage.setItem('historico', resposta.historico);
-            localStorage.removeItem('qtdBotoesProposta');
+            sessionStorage.removeItem('qtdBotoesProposta');
             window.location.pathname = '/frontend/pages/Home/index.html';
         } else {
             if (resposta.mensagem === 'registro existe') {
