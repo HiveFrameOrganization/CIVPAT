@@ -403,8 +403,10 @@ async function carregarProdutos(idProposta) {
 
         exibirProdutos(resposta.produtos);
 
-        console.log(resposta.produtos[0]);
+        console.log(resposta.produtos);
+       
 
+        
 
     } catch (error) {
         console.error(error)
@@ -421,81 +423,107 @@ async function exibirProdutos(produtos) {
 
     for (let produto of produtos) {
 
-        // criando o botão da proposta
-        const row = document.createElement('div');
-        const divMaior = document.createElement('div');
-        const divNomeProduto = document.createElement('div');
-        const divNomeProdutoMenor = document.createElement('div');
+        const divRow = document.createElement('div');
+
+
+    
+        divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
+
+
+
+        let statusIMG;
+        let color;
+        let optionIMG;
+        let statusDescricao;
+
+        let status = 'em análise'
+
+        if (status == 'em análise') {
+            
+            statusDescricao = 'análise';
+            statusIMG = '../../img/icon/inventory.svg';
+            optionIMG = '../../img/icon/more-vertical.svg';
+            color = 'primary';
+        } else if (status == 'cancelado') {
+            
+            statusDescricao = 'cancelado';
+            statusIMG = '../../img/icon/alert-circle-red.svg';
+            optionIMG = '../../img/icon/more-vertical-red.svg';
+            color = 'color-red';
+        } else if (status == 'desenvolvendo') {
+            
+            statusDescricao = 'desenvolvendo';
+            statusIMG = '../../img/icon/settings-green.svg';
+            optionIMG = '../../img/icon/more-vertical-green.svg';
+            color = 'color-green'
+        }
+    
         
-        const spanNomeProduto = document.createElement('span');
-        const spanCategoria = document.createElement('span');
-        const imgRow = document.createElement('img');
-        
-        const divMaquina = document.createElement('div');
-        const spanNomeMaquina = document.createElement('span');
-        const spanCategoria = document.createElement('span');
-
-        // Adicionando a classes na linha da proposta
-        row.classList.add('row-item', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-primary', 'transition-colors', 'cursor-pointer')
-        
-        // Adicionando classes na div maior contida na linha
-        divMaior.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto')
-
-        // Adicionando classes na div do titulo 
-        divNomeProduto.classList.add('flex', 'items-center', 'gap-3', 'border-r', 'border-color-text-secundary', 'pr-8')
-
-        // Adiconando o atributo src na imagem e classes 
-        imgRow.src =  '../../img/icon/inventory.svg'
-        imgRow.classList.add('w-10', 'h-10', 'p-2', 'bg-primary/20', 'rounded-md')
-
-        // Adicionando as classes na div que contém o titulo e o span
-        divNomeProdutoMenor.classList.add('w-[350px]', 'max-w-[350px]', 'overflow-hidden', 'text-ellipsis')
-        
-
-        // Adicionando classes no span do titulo 
-        spanNomeProduto.classList.add('font-semibold', 'text-lg', 'leading-4', 'whitespace-nowrap', 'capitalize')
-
-        // Adicionando classes no span da categoria 
-        spanCategoria.classList.add('text-xs', 'text-color-text-secundary', 'capitalize')
-
-        // adicionando o valor ao botão da proposta
-        row.value = produto.idProduto;
-        spanNomeProduto.innerHTML = produto.NomeProduto;
-        spanCategoria.innerHTML = produto.ServicoCategoria;
-
-        // Adicionando classes na dov
-        divMaquina.classList.add('flex', 'items-center', 'gap-3')
+        divRow.innerHTML = `
+            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+                <div class="flex items-center gap-8 lg:w-full">
+                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                        <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        <div class="w-[300px] max-w-[300px] overflow-hidden text-ellipsis">
+                            <span title="${produto['NomeProduto']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto']}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                                <span title="Serviço e categoria do Produto">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
 
 
-        row.onclick = () => {
-            localStorage.setItem('idProduto', row.value);
+                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                        <div class="w-[120px] max-w-[120px] overflow-hidden text-ellipsis">
+                            <span title="${produto['Nome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['Nome']}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                                <span title="Técnico">Técnico</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                        <div class="w-[120px] max-w-[120px] overflow-hidden text-ellipsis">
+                            <span title="Valor do produto" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['Valor']}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                                <span title="Valor">Valor</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="flex items-center gap-3 pr-8">
+                        <div class=" overflow-hidden text-ellipsis">
+                            <span title="Data de término" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['DataFinal']}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                                <span title="Data de término">Data de término</span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            
+            
+            
+            
+            `
+          
+
+
+        divRow.onclick = () => {
+            localStorage.setItem('idProduto', divRow.value);
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
         }
 
-
-        
-
-        
-
-
-
-        botoes.append(row)
-        row.append(divMaior)
-        divMaior.append(divNomeProduto)
-        divNomeProduto.append(imgRow)
-        divNomeProduto.append(divNomeProdutoMenor)
-
-        divNomeProdutoMenor.append(spanNomeProduto)
-        divNomeProdutoMenor.append(spanCategoria)
+        botoes.append(divRow)
+       
 
         // Adicionando uma quebra de linha entre os botões
         const quebraDeLinha = document.createElement('br');
         botoes.appendChild(quebraDeLinha);
 
-
-        
-        
     }
 }
 
