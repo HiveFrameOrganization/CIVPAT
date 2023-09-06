@@ -734,3 +734,8 @@ pesquisaDeSatisfacaoInput.addEventListener('change', () => {
         console.log(error)
     }
 })
+
+// abrir modal de cadastro de produto
+document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
+    
+})
