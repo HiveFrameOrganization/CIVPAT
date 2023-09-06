@@ -1,4 +1,5 @@
 import { back, frontPages } from '../Rotas/rotas.js'
+import alertas from '../../feedback.js';
 // Pegando os dados do formulário
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener('submit', async evento => {
