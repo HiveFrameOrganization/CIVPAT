@@ -104,12 +104,12 @@ function exibir(dados) {
         const div = document.createElement('div');
 
         // Colocando uma classe na div criada
-        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'row', 'mt-1');
+        div.classList.add('listaUsuario', 'flex', 'flex-nowrap', 'bg-component', 'rounded-md', 'border-2', 'border-[transparent]', 'hover:border-2', 'hover:border-primary', 'mt-1');
 
         const row = document.createElement('div');
 
         // Colocando uma classe na row criada
-        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we');
+        row.classList.add('flex-1', 'flex', 'flex-nowrap', 'items-center', 'justify-between', 'rounded-l-md', 'py-4', 'px-3', 'md:px-4', 'overflow-x-auto', '-we', 'row');
 
         const exibicao = document.createElement('div');
 
