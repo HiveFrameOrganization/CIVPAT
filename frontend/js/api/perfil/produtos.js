@@ -62,12 +62,12 @@ async function buscarProdutos() {
 
             const resposta = await requisicao.json();
 
+            console.log(resposta);
+            
             if (resposta.status != 'error') {
-
-                exibirProdutos(resposta);
+                
+                exibirProdutos(resposta.produtos);
             }
-
-            exibirProdutos();
 
         } catch (erro) {
             console.error(erro);

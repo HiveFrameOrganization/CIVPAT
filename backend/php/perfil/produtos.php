@@ -39,7 +39,7 @@ function retornaProdutos($nif, $conn) {
         $resposta = [
             'status' => 'success',
             'mensagem' => 'Produtos retornados com sucesso',
-            'usuarios' => $produtos
+            'produtos' => $produtos
         ];
 
     } else {
