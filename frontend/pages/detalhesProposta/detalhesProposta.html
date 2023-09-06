@@ -92,7 +92,7 @@
     </script>
 </head>
 
-<body onload="alertas()" class="bg-body text-color-text py-20">
+<body class="bg-body text-color-text py-20">
 
     <header class="bg-body py-4 px-6 text-color-text fixed top-0 w-full z-10">
 
@@ -762,13 +762,7 @@
     </main>
 
     <script type="module" src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
-    <script src="../../js/feedback.js"></script>
 
-    <!-- Autenticação -->
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js'
-        autenticacao(['coor', 'ger', 'tec', 'adm'])
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- logoff -->
@@ -784,7 +778,14 @@
     <script type="module" src="../../js/api/followUp/adicionarFollowUp.js"></script>
     <script type="module" src="../../js/api/followUp/editarFollowUp.js"></script>
     <script type="module" src="../../js/api/followUp/telaFollowUp.js"></script>
-    <script src="../../js/feedback.js"></script>
+    <script type="module" src="../../js/feedback.js"></script>
+
+    <!-- Autenticação -->
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'ger', 'tec', 'adm'])
+
+    </script>
 
     <script>
         function limpaInput() {
@@ -792,7 +793,7 @@
             document.getElementById('comentario').value = '';
             document.getElementById('dataFollowUpProx').value = '';
         }
-    </script>
+        </script>
 
 </body>
 
