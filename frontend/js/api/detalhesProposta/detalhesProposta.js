@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     verificarPdfExistente(idProposta);
     carregarProdutos(idProposta);
     pegarUnidadesCriadoras();
-    
+
 })
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
@@ -129,15 +129,15 @@ async function verificarBancoProposta(id) {
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
-        for (var x = 0; x < resposta['Gerentes'].length; x++){
+        for (var x = 0; x < resposta['Gerentes'].length; x++) {
             localStorage.setItem('gerente1', resposta['Gerentes'][x]['NIF']);
         }
 
 
         carregarTecnicos();
-        
-       
-        
+
+
+
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta'];
         const TelaNomeProposta = document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
@@ -254,42 +254,42 @@ function baixarPdf(tipoPdf) {
 // }
 
 function validarCNPJ(cnpj) {
-    if (cnpj == ''){
+    if (cnpj == '') {
         return true
     }
     // Remover caracteres não numéricos
     cnpj = cnpj.replace(/\D/g, '');
-  
+
     // Verificar se o CNPJ tem 14 dígitos
     if (cnpj.length !== 14) {
-      return false;
+        return false;
     }
-  
+
     // Calcular o primeiro dígito verificador
     let soma = 0;
     let peso = 2;
     for (let i = 11; i >= 0; i--) {
-      soma += parseInt(cnpj.charAt(i)) * peso;
-      peso = peso === 9 ? 2 : peso + 1;
+        soma += parseInt(cnpj.charAt(i)) * peso;
+        peso = peso === 9 ? 2 : peso + 1;
     }
     const digito1 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  
+
     // Calcular o segundo dígito verificador
     soma = 0;
     peso = 2;
     for (let i = 12; i >= 0; i--) {
-      soma += parseInt(cnpj.charAt(i)) * peso;
-      peso = peso === 9 ? 2 : peso + 1;
+        soma += parseInt(cnpj.charAt(i)) * peso;
+        peso = peso === 9 ? 2 : peso + 1;
     }
     const digito2 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  
+
     // Verificar se os dígitos verificadores calculados são iguais aos dígitos reais
     if (parseInt(cnpj.charAt(12)) !== digito1 || parseInt(cnpj.charAt(13)) !== digito2) {
-      return false;
+        return false;
     }
-  
+
     return true;
-  }
+}
 
 
 const editandoProposta = document.querySelector('#editarProposta');
@@ -313,54 +313,54 @@ editandoProposta.addEventListener('click', () => {
     }
 
 
-    
-    if(editandoProposta.value == 'Editar'){
+
+    if (editandoProposta.value == 'Editar') {
         const idProposta = localStorage.getItem('idProposta');
         //Pegando os valores dos input's para transformalos em objeto
         const nomeProposta = document.querySelector('#tituloProposta').value;
         const cnpj = document.querySelector('#cnpj').value;
         const cnpjString = cnpj.toString();
-        const uniCriadora= document.querySelector('#uniCriadora').value;
+        const uniCriadora = document.querySelector('#uniCriadora').value;
         const empresa = document.querySelector('#empresa').value;
         const statusProposta = document.querySelector('#statusProposta').value;
         const criadorProposta = document.querySelector('#criadorProposta').value;
         const numeroSGSET = document.querySelector('#numeroSGSET').value;
         const primeiroGerente = document.querySelector('#primeiroGerente').value;
-        const segundoGerente = document.querySelector('#segundoGerente').value ;
+        const segundoGerente = document.querySelector('#segundoGerente').value;
         const funil = document.querySelector('#funil').value;
         const nomeContato = document.querySelector('#nomeContato').value;
         const emailContato = document.querySelector('#emailContato').value;
-        const numeroContato = document.querySelector('#numeroContato').value; 
-        
+        const numeroContato = document.querySelector('#numeroContato').value;
+
         const verificacaoDoCnpj = validarCNPJ(cnpjString);
-        
+
         console.log(verificacaoDoCnpj);
         if (verificacaoDoCnpj == false) {
             alert('CNPJ inválido');
         } else {
-        // Criando um objeto com os dados dos input's
+            // Criando um objeto com os dados dos input's
             const detalhesProposta = {
                 idProposta: idProposta,
-                nomeProposta : nomeProposta,
-                cnpj :  cnpj,
-                uniCriadora :uniCriadora,
-                empresa : empresa,
-                statusProposta : statusProposta ,
-                criadorProposta : criadorProposta ,
-                numeroSGSET : numeroSGSET,
-                primeiroGerente : primeiroGerente,         
-                segundoGerente : segundoGerente,          
-                funil : funil,          
-                nomeContato : nomeContato,          
-                emailContato : emailContato,        
-                numeroContato : numeroContato,          
+                nomeProposta: nomeProposta,
+                cnpj: cnpj,
+                uniCriadora: uniCriadora,
+                empresa: empresa,
+                statusProposta: statusProposta,
+                criadorProposta: criadorProposta,
+                numeroSGSET: numeroSGSET,
+                primeiroGerente: primeiroGerente,
+                segundoGerente: segundoGerente,
+                funil: funil,
+                nomeContato: nomeContato,
+                emailContato: emailContato,
+                numeroContato: numeroContato,
             }
-            
+
             // Enviando o objeto para o back end
             postarDetalhesBanco(detalhesProposta);
         }
     }
-    
+
 });
 
 async function postarDetalhesBanco(postDetalhes) {
@@ -439,14 +439,14 @@ async function exibirProdutos(produtos) {
     }
 }
 
-async function carregarTecnicos () {
+async function carregarTecnicos() {
 
     const gerente1Dropdown = document.getElementById('primeiroGerente');
     const gerente2Dropdown = document.getElementById('segundoGerente');
 
 
     const requisicao = await fetch(back + '/detalhesProposta/carregarTecnicos.php', {
-        methods : 'GET'
+        methods: 'GET'
     });
 
     const resposta = await requisicao.json();
@@ -495,16 +495,16 @@ async function selecionarUnidadeCriadora(id) {
 }
 
 async function pegarUnidadesCriadoras() {
-    
+
     const unidadesSelect = document.getElementById('uniCriadora');
 
-    const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
+    const requisicao = await fetch(back + '/todasPropostas/PegarUnidadesCriadoras.php');
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();
-   
 
-    
+
+
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -531,17 +531,17 @@ async function salvarMudancasNaProposta() {
     const cnpj = document.querySelector('#cnpj').value;
     const cnpjString = cnpj.toString();
     const empresa = document.querySelector('#empresa').value;
-    const uniCriadora= document.querySelector('#uniCriadora').value;
+    const uniCriadora = document.querySelector('#uniCriadora').value;
     const dataInicio = document.querySelector('#dataPrimeiroProduto').value;
     const dataFim = document.querySelector('#dataUltimoProduto').value;
     const valor = document.querySelector('#valorTotalProdutos').value;
     const funil = document.querySelector('#funil').value;
     const primeiroGerente = document.querySelector('#primeiroGerente').value;
-    const segundoGerente = document.querySelector('#segundoGerente').value ;
+    const segundoGerente = document.querySelector('#segundoGerente').value;
     const numeroSGSET = document.querySelector('#numeroSGSET').value;
     const nomeContato = document.querySelector('#nomeContato').value;
     const emailContato = document.querySelector('#emailContato').value;
-    const numeroContato = document.querySelector('#numeroContato').value; 
+    const numeroContato = document.querySelector('#numeroContato').value;
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
@@ -550,7 +550,7 @@ async function salvarMudancasNaProposta() {
     } else {
         const dados = {
             idProposta: idProposta,
-            nomeProposta :(nomeProposta == '') ? null : nomeProposta,
+            nomeProposta: (nomeProposta == '') ? null : nomeProposta,
             statusProposta: (statusProposta == '') ? null : statusProposta,
             criadorProposta: (criadorProposta == '') ? null : criadorProposta,
             cnpj: (cnpjString == '') ? null : cnpjString,
@@ -561,11 +561,11 @@ async function salvarMudancasNaProposta() {
             valor: (valor == '') ? null : valor,
             funil: (funil == '') ? null : funil,
             primeiroGerenteAntigo: localStorage.getItem('gerente1'),
-            segundoGerenteAntigo : localStorage.getItem('gerente2'),
-            primeiroGerenteNovo : (primeiroGerente == '') ? null : primeiroGerente,
-            segundoGerenteNovo : (segundoGerente == '') ? null : segundoGerente,
+            segundoGerenteAntigo: localStorage.getItem('gerente2'),
+            primeiroGerenteNovo: (primeiroGerente == '') ? null : primeiroGerente,
+            segundoGerenteNovo: (segundoGerente == '') ? null : segundoGerente,
             numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
-            nomeContato:(nomeContato== '' )?null:nomeContato ,
+            nomeContato: (nomeContato == '') ? null : nomeContato,
             emailContato: (emailContato == '') ? null : emailContato,
             numeroContato: (numeroContato == '') ? null : numeroContato
         }
@@ -591,33 +591,33 @@ function aceitarProposta() {
     const pdfOrcamento = document.getElementById("orcamento").value;
     const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
-        console.log(pdfOrcamento);
-        console.log(pdfPropostaAssinada);
-
-        
+    console.log(pdfOrcamento);
+    console.log(pdfPropostaAssinada);
 
 
-        if ( pdfOrcamento != '' && pdfPropostaAssinada != '') {
-            document.querySelector("#aceitarProposta").disabled = false;
-            alert("tudo certo, o botão de aceitar está ativo!");
-
-        } else {
-
-            document.querySelector("#aceitarProposta").disabled = true;
-            alert("o botão de aceitar está desativado!");
 
 
-        }
+    if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
+        document.querySelector("#aceitarProposta").disabled = false;
+        alert("tudo certo, o botão de aceitar está ativo!");
 
-        console.log(pdfOrcamento);
-        console.log(pdfPropostaAssinada);
+    } else {
+
+        document.querySelector("#aceitarProposta").disabled = true;
+        alert("o botão de aceitar está desativado!");
+
+
     }
+
+    console.log(pdfOrcamento);
+    console.log(pdfPropostaAssinada);
+}
 
 // Pegando os ID's dos elementos.
 
-const aceitarPropostaButton = document.getElementById('aceitarProposta'); 
+const aceitarPropostaButton = document.getElementById('aceitarProposta');
 const orcamentoInput = document.getElementById('orcamento');
-const propostaAssinadaInput = document.getElementById('propostaAssinada'); 
+const propostaAssinadaInput = document.getElementById('propostaAssinada');
 const pesquisaDeSatisfacaoInput = document.getElementById('pesquisaDeSatisfacao');
 
 // Executando a função 'aceitarProposta'.
