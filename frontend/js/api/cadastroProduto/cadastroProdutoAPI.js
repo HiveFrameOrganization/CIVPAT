@@ -4,7 +4,16 @@ const corpoDaPagina = document.querySelector('body');
 
 const botaoSalvarProduto = document.getElementById('salvarProduto');
 
-window.addEventListener('load', () => carregarTecnicos());
+window.addEventListener('load', () => {
+
+    // Função para carregar os técnicos no dropdown
+    carregarTecnicos();
+
+    // Função para carregar as máquinas
+    carregarMaquinas();
+
+
+});
 
 // window.addEventListener('load', () => pegarUnidadesCriadoras());
 
@@ -43,8 +52,9 @@ async function salvarProduto () {
     const produto = document.getElementById('produto').value;
     const valor = document.getElementById('valor').value;
     const nifTecnico = document.getElementById('tecnicos').value;
+    const maquina = document.getElementById('maquinas').value;
 
-    if (!tempoMaquina || !tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico ) {
+    if (!tempoMaquina || !tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico || !maquina ) {
         alert('Por favor, preencha todos os campos obrigatórios.');
     } else {
         const dadosEnviados = {
@@ -58,7 +68,8 @@ async function salvarProduto () {
             produto: produto,
             valor: valor,
             idProposta: idProposta,
-            nifTecnico: nifTecnico
+            nifTecnico: nifTecnico,
+            maquina: Number(maquina)
         }
     
         console.log(dadosEnviados);
@@ -95,4 +106,46 @@ async function salvarProduto () {
         
 }
 
+async function carregarMaquinas() {
 
+    try {
+
+        const requisicao = await fetch(back + '/cadastroProduto/carregarMaquinas.php');
+
+        const resposta = await requisicao.json();
+
+        // Caso ocorra algum erro previsto no back-end
+        if(resposta.status === 'error') throw new Error(resposta.mensagem);
+
+        console.log(resposta);
+
+        exibirMaquinas(resposta.maquinas)
+
+    } catch(erro) {
+        console.error(erro);
+    }
+
+}
+
+function exibirMaquinas(vetor) {
+    
+    // Selecionando o dropdown que vai guardar as máquinas
+    const maquinas = document.querySelector('#maquinas');
+
+    for(let maquina of vetor) {
+
+        // Criando cada opção do meu dropdown
+        const option = document.createElement('option');
+
+        // Colocando o valor da máquina
+        option.value = maquina.idMaquina;
+
+        // Colocando o nome da máquina
+        option.textContent = maquina.Maquina;
+
+        // Jogando dentro do dropdown
+        maquinas.appendChild(option);
+
+    }
+
+}

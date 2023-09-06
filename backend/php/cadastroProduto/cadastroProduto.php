@@ -23,12 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $valor = floatval($data["valor"]);
     $area = $data["area"];
     $nifTecnico = $data["nifTecnico"];
+    $idMaquina = $data['maquina'];
+    
 
+    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
 
-
-    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
-
-    $stmt2->bind_param('sssssssssss', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal);
+    $stmt2->bind_param('sssssssssssi', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal, $idMaquina);
     // Executa a declaração preparada
     if ($stmt2->execute()) {
 
