@@ -106,16 +106,16 @@ function colocarPagina(num) {
 
 const inputPesquisa = document.getElementById('hidden-input');
 
-sessionStorage.removeItem('paginaProposta');
-sessionStorage.getItem('qtdBotoesProposta');
 
-inputPesquisa.addEventListener('keydown', () => {
+
+inputPesquisa.addEventListener('keyup', () => {
     pegarTodasAsPropostasFiltradas();
 })
 
 async function pegarTodasAsPropostasFiltradas () {
-
-    const filtro = document.getElementById('hidden-input').value;
+    // sessionStorage.removeItem('paginaProposta');
+    // sessionStorage.getItem('qtdBotoesProposta');
+    const filtro = '%' + document.getElementById('hidden-input').value + '%';
 
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
@@ -137,7 +137,6 @@ async function pegarTodasAsPropostasFiltradas () {
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
-
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
