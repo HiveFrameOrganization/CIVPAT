@@ -36,7 +36,6 @@ function quantidadeDePropostasPeloStatus ($conn) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $filtro = $_GET['filtro'];
-    $stringFiltro = '"%"'. $filtro . '"%"';
     $numPagina = $_GET['pag'];
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
     LIMIT ?, ?');
     // Limita os resultados a 10 propostas por página
-    $stmt->bind_param('sii', $stringfiltro, $inicioProposta, $qtdPropostasTela);
+    $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
 
     $stmt->execute();
 
