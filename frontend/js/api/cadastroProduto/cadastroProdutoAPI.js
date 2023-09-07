@@ -74,7 +74,6 @@ async function salvarProduto () {
             maquina: Number(maquina)
         }
     
-        console.log(dadosEnviados);
     
         try {
     
@@ -88,8 +87,7 @@ async function salvarProduto () {
     
             const dados = await resposta.json();
 
-    
-            console.log(dados['status']);
+
     
             if (dados['status'] == 'success'){
                 localStorage.setItem('status', dados['status']);

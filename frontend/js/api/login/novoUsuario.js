@@ -43,13 +43,16 @@ async function verificaEmail(email) {
             alertas();
         }
 
-        console.log(retornoServidor);
 
         // Veririfcando o retorno do servidor e verificando se é novo usuário
         if (retornoServidor.novoUsuario === true) novoUsuario();
 
-        // Caso o usuário não esteja cadastrado
-        if (retornoServidor.Erro) throw new Error(`USUÁRIO NÃO CADASTRADO!!!!`);
+        if (retornoServidor.status == 'error'){
+            localStorage.setItem('status', retornoServidor.status);
+            localStorage.setItem('mensagem', retornoServidor.mensagem);
+
+            alertas();
+        }
 
     } catch (erro) {
         console.error(erro);
@@ -90,8 +93,6 @@ formularioNovaSenha.addEventListener('submit', async evento => {
     const novaSenha = document.querySelector('#novaSenha').value;
     const repitaSenha = document.querySelector('#repitaSenha').value;
 
-    console.log(novaSenha);
-    console.log(repitaSenha);
 
     try {
 

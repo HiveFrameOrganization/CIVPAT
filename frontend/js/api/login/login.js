@@ -45,6 +45,8 @@ async function login(email, senha) {
 
         const resposta = await login.json();
 
+        console.log(resposta);
+
         // Validação do login
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
@@ -54,7 +56,6 @@ async function login(email, senha) {
         // // Verificando se o login for true
         // if (resposta.status === 'error') throw new Error(resposta.mensagem);
         
-        console.log(resposta)
         if (resposta.status == 'error'){
             alertas();
         } 

@@ -1,4 +1,5 @@
 import { back } from '../Rotas/rotas.js'
+import alertas from '../../feedback.js'
 /*------------------------------------ Fazendo aparecer o formulário -------------------------------------------------------------------------*/
 
 // const cadastrar = document.querySelector('#cadastrar');
@@ -43,6 +44,9 @@ import { back } from '../Rotas/rotas.js'
 
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
 
+window.addEventListener('load', () => {
+    alertas();
+})
 // Pegando o eveto do formulário
 const formulario = document.querySelector('#formulario');
 // Função para selecionar o evento do formulário, essa função lida com operações assincronas...
@@ -56,38 +60,46 @@ formulario.addEventListener('submit', async evento => {
     const nif = document.querySelector('#nif').value;
     const email = document.querySelector('#email').value;
     const cargo = document.querySelector('#tipoCargo').value;
-    console.log(cargo);
 
     // Código para validação, colocar dentro de um try
     try {
 
-        // Verificando se o campo NIF possui letras ou simbolos
-        if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
+        // // Verificando se o campo NIF possui letras ou simbolos
+        // if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
 
-        // Verificando se o nome e sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o nome e sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o email possui pelo menos uma letra:
-        if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
+        // // Verificando se o email possui pelo menos uma letra:
+        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
 
-        const dadosDoCadastro = {
-            nome: nome,
-            sobrenome: sobrenome,
-            nif: nif,
-            email: email + '@sp.senai.br',
-            senha: 'senai115',
-            cargo: cargo
+        if (!contemApenasNumeros(nif) || !contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
+
+            alertas();
+        } else {
+
+            const dadosDoCadastro = {
+                nome: nome,
+                sobrenome: sobrenome,
+                nif: nif,
+                email: email + '@sp.senai.br',
+                senha: 'senai115',
+                cargo: cargo
+            }
+    
+           
+    
+            await mandarDadosParaBackend(dadosDoCadastro);
+    
+            sessionStorage.removeItem('qtdBotoesFun');
+            location.reload();
         }
 
-        console.log(dadosDoCadastro);
-
-        await mandarDadosParaBackend(dadosDoCadastro);
-
-        sessionStorage.removeItem('qtdBotoesFun');
-        location.reload();
 
     } catch (erro) {
         console.error(erro)
@@ -112,9 +124,13 @@ async function mandarDadosParaBackend(dados) {
 
         const retornoBackend = await resposta.json();
 
-        // Verificando o que foi retornado no back-end
-        console.log(retornoBackend);
-        console.log(ok)
+        localStorage.setItem('status', retornoBackend.status);
+        localStorage.setItem('mensagem', retornoBackend.mensagem);
+
+        if (retornoBackend.status == 'error'){
+            alertas();
+
+        }
 
     } catch (erro) {
 

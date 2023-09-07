@@ -1,4 +1,6 @@
+import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js'
+
 /*
 ----------------------------------------------------------------------------------
                         RENDERIZANDO A LISTA DE USUÁRIO
@@ -43,7 +45,6 @@ async function retornaFuncionarios() {
         // Caso retorne algum erro previsto no back-end
         if (dados.status === 'erro') throw new Error(dados.mensagem);
 
-        console.log(dados);
 
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
@@ -376,10 +377,10 @@ async function usuariosFiltrados(valor) {
 ---------------------------------------------------------------------------------------
 */
 
-document.querySelector('.inativar').addEventListener((event) => {
+// document.querySelector('.inativar').addEventListener((event) => {
 
     
-});
+// });
 
 // Capturando o clique dos botões de demissão
 document.addEventListener('click', evento => {
@@ -505,29 +506,37 @@ formularioEditarUsuario.addEventListener('submit', evento => {
         // Pegando o nif armazenado no localStorage
         const nif = localStorage.getItem('nif');
 
-        // Verificando se o nome e sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o nome e sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o email possui pelo menos uma letra:
-        if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
+        // // Verificando se o email possui pelo menos uma letra:
+        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
 
-        const dadosEditados = {
-            nif: nif,
-            nome: nome,
-            sobrenome: sobrenome,
-            email: email + '@sp.senai.br',
-            cargo: cargo
+        if (!contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
+
+            alertas();
+        } else {
+
+            const dadosEditados = {
+                nif: nif,
+                nome: nome,
+                sobrenome: sobrenome,
+                email: email + '@sp.senai.br',
+                cargo: cargo
+            }
+    
+
+            // Função para editar os funcionários
+            requisicaoEditar(dadosEditados);
+    
+            location.reload();
         }
 
-        console.log(dadosEditados);
-
-        // Função para editar os funcionários
-        requisicaoEditar(dadosEditados);
-
-        location.reload();
 
     } catch (erro) {
         console.error(erro);
@@ -553,7 +562,6 @@ async function requisicaoEditar(dados) {
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
-    console.log(resposta);
 
 }
 
@@ -575,8 +583,6 @@ async function desativarUsuario(nif) {
 
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-
-        console.log(resposta);
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();
@@ -625,7 +631,6 @@ async function resetarSenhaUsuario(nif) {
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
-        console.log(resposta);
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();
