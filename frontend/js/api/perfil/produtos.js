@@ -109,7 +109,7 @@ function exibirProdutos(produtos) {
                         <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
                             <span title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span class="capitalize" title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
+                                <span class="capitalize whitespace-nowrap" title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                             </div>
                         </div>
                     </div>
