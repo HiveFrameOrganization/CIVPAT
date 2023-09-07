@@ -22,15 +22,21 @@ const paginacao = document.querySelector('#paginacao');
 
 const table = document.querySelector('#table');
 
-spanProdutos.addEventListener('click', () => {
+
+spanProdutos.addEventListener('click', async () => {
 
     // Trocando o display para exibir coisas diferentes
 
     userInfo.classList.add('hidden');
     userProd.classList.remove('hidden');
 
+    sessionStorage.setItem('aba', 'produto');
     // Fazendo a requisição para a buscar os produtos
-    buscarProdutos();
+    await buscarProdutos();
+
+    botoesPaginacao();
+
+
 });
 
 
@@ -41,6 +47,8 @@ spanInformacoes.addEventListener('click', () => {
     userInfo.classList.remove('hidden');
     userProd.classList.add('hidden');
     paginacao.classList.add('hidden');
+
+    sessionStorage.removeItem('aba');
 });
 
 /*
@@ -54,26 +62,47 @@ spanInformacoes.addEventListener('click', () => {
 // Função para bsucar todos os produtos relacionados ao técnico
 async function buscarProdutos() {
 
-    if (spanProdutos.getAttribute('data-value') && !userProd.classList.contains('hidden')) {
+    if (localStorage.getItem('nifPerfil') && !userProd.classList.contains('hidden')) {
         try {
 
-            // Pegando o nif do usuário e passando como parâmetro para realizar a query la no back
-            const nif = spanProdutos.getAttribute('data-value');
+            // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
+            if (sessionStorage.getItem('paginaProduto') == null) {
+                sessionStorage.setItem('paginaProduto', 0)
+            }
 
-            const requisicao = await fetch(back + `/perfil/produtos.php?nif=${nif}`);
+            const paginaProduto = sessionStorage.getItem('paginaProduto');
+
+            // Variável criar para otimização, evitar requisições desnecessárias
+            // recalculando a quantidade de botões
+            let declaradoqtdBotoesProduto
+            if (sessionStorage.getItem('qtdBotoesProduto') == null) {
+                declaradoqtdBotoesProduto = -1;
+            } else {
+                declaradoqtdBotoesProduto = sessionStorage.getItem('qtdBotoesProduto');
+            }
+            // Lembrando que essa variável é destruida no cadastro do usuário
+            // pois altera a quantidade de funcionarios e possivelmente
+            // a quantidade de botões
+
+            // Pegando o nif do usuário e passando como parâmetro para realizar a query la no back
+            const nif = localStorage.getItem('nifPerfil');
+
+            const requisicao = await fetch(back + `/perfil/produtos.php?nif=${nif}&pagina=${paginaProduto}&qtdBotoes=${declaradoqtdBotoesProduto}`);
 
             const resposta = await requisicao.json();
 
             console.log(resposta);
-            
+
             if (resposta.status != 'error') {
-                
+
                 exibirProdutos(resposta.produtos);
+
+                sessionStorage.setItem('qtdBotoesProduto', resposta.qtdBotoes);
+
             } else {
                 table.innerHTML = '<p class="text-center">Nenhum produto foi encontrado!</p>';
             }
 
-            
 
         } catch (erro) {
             console.error(erro);
@@ -82,7 +111,45 @@ async function buscarProdutos() {
     }
 
 }
- 
+
+// Criar os botões de paginação e adiciona a função que muda a página
+function botoesPaginacao() {
+    // Puxa a quantidade de botões do sessionStorage
+    const qtdBotoesProduto = sessionStorage.getItem('qtdBotoesProduto');
+    // Puxa o elemento que irá receber os botoes
+    const containerPaginacao = document.getElementById('containerPaginacao');
+
+    // Cria os botoes
+    for (let i = 0; i < qtdBotoesProduto; i++) {
+        const a = document.createElement('a');
+
+        // Define a cor dos botoes de acordo do número da página
+        if (sessionStorage.getItem('paginaProduto') == i) {
+            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        } else {
+            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        }
+
+        a.href = ''
+        a.textContent = i + 1
+        a.onclick = () => {
+            colocarPagina(i)
+        }
+
+        console.log(a);
+        
+        // Adiciona o botão antes da seta de proxima página
+        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+        containerPaginacao.insertBefore(a, setaProxPagina);
+    }
+}
+
+// Seta o número da página no sessionStorage
+function colocarPagina(num) {
+    sessionStorage.setItem('paginaProduto', num);
+}
+
+
 function exibirProdutos(produtos) {
 
     if (produtos) {
@@ -98,7 +165,7 @@ function exibirProdutos(produtos) {
             console.log(produto)
 
             let divRow = document.createElement('div');
-    
+
             divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
 
             divRow.innerHTML = `
@@ -157,7 +224,7 @@ function exibirProdutos(produtos) {
         return;
     }
 
-}   
+}
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getAllViewButtons() {
@@ -167,7 +234,7 @@ function getAllViewButtons() {
         btn.addEventListener('click', () => {
 
             localStorage.setItem('idProduto', btn.getAttribute('itemid'));
-            
+
             window.location.href = '../detalhesProduto/detalhesProduto.html';
         });
     });
@@ -182,14 +249,14 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
-            
+
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
             const row = optionDropdown.parentElement.parentElement.parentElement;
 
             optionDropdown.classList.toggle('hidden');
             row.classList.toggle('selected-row');
-            
+
         });
     });
 
@@ -200,11 +267,11 @@ function reloadRows() {
 function hiddenAll() {
 
     if (document.querySelector('.option-dropdown')) {
-        
+
         document.querySelectorAll('.option-dropdown').forEach((el) => {
 
             const row = el.parentElement.parentElement.parentElement;
-    
+
             el.classList.add('hidden');
             row.classList.remove('selected-row');
         });
@@ -219,3 +286,27 @@ window.addEventListener('click', (event) => {
         hiddenAll();
     }
 });
+
+
+window.addEventListener('load', async () => {
+
+    if(sessionStorage.getItem('aba') == 'produto') {
+        
+        // Fazendo a requisição para a buscar os produto        
+        userInfo.classList.add('hidden');
+        userProd.classList.remove('hidden');
+        
+        await buscarProdutos();
+    
+        botoesPaginacao();
+        
+    } else {
+
+        userInfo.classList.remove('hidden');
+        userProd.classList.add('hidden');
+
+    }
+    
+
+});
+

@@ -17,7 +17,7 @@ window.addEventListener('load', async () => {
 async function retornaFuncionarios() {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
-        sessionStorage.setItem('paginaFun', 1)
+        sessionStorage.setItem('paginaFun', 0)
     }
     const paginaFun = sessionStorage.getItem('paginaFun');
 
@@ -64,7 +64,7 @@ function botoesPaginacao() {
     const containerPaginacao = document.getElementById('paginacao');
 
     // Cria os botoes
-    for (let i = 1; i <= qtdBotoesFun; i++) {
+    for (let i = 0; i < qtdBotoesFun; i++) {
         const a = document.createElement('a');
 
         // Define a cor dos botoes de acordo do número da página
@@ -75,7 +75,7 @@ function botoesPaginacao() {
         }
 
         a.href = ''
-        a.textContent = i
+        a.textContent = i + 1
         a.onclick = () => {
             colocarPagina(i)
         }
