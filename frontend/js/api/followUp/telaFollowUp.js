@@ -34,7 +34,7 @@ fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'G
             // adicionando classes aos cards
 
             card.classList.add('card', 'text-[#fff]');
-            sombra.classList.add('bg-[#1A3661]', 'w-64', 'h-60', 'rounded-lg', 'z-10', 'pt-2');
+            sombra.classList.add('bg-[#1A3661]', 'w-64', 'h-60', 'rounded-lg', 'z-10', 'pt-2', 'relative');
             info.classList.add('bg-primary', 'w-64', 'h-60', 'rounded-lg', 'relative', 'ml-2');
             dataedicao.classList.add('rounded-t-lg', 'w-full', 'bg-[#285292]', 'px-3', 'py-2', 'flex', 'justify-between');
             data.classList.add('text-[#fff]');
