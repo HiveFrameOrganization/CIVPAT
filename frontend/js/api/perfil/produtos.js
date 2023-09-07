@@ -24,18 +24,10 @@ const table = document.querySelector('#table');
 
 
 spanProdutos.addEventListener('click', async () => {
-
-    // Trocando o display para exibir coisas diferentes
-
-    userInfo.classList.add('hidden');
-    userProd.classList.remove('hidden');
-
+    
     sessionStorage.setItem('aba', 'produto');
-    // Fazendo a requisição para a buscar os produtos
-    await buscarProdutos();
 
-    botoesPaginacao();
-
+    location.reload();
 
 });
 
@@ -114,6 +106,7 @@ async function buscarProdutos() {
 
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao() {
+
     // Puxa a quantidade de botões do sessionStorage
     const qtdBotoesProduto = sessionStorage.getItem('qtdBotoesProduto');
     // Puxa o elemento que irá receber os botoes
@@ -299,12 +292,13 @@ window.addEventListener('load', async () => {
         await buscarProdutos();
     
         botoesPaginacao();
-        
-    } else {
 
-        userInfo.classList.remove('hidden');
-        userProd.classList.add('hidden');
+        spanInformacoes.classList.remove('text-primary');
+        spanInformacoes.classList.remove('border-b-2');
 
+
+        spanProdutos.classList.add('text-primary');
+        spanProdutos.classList.add('border-b-2');
     }
     
 
