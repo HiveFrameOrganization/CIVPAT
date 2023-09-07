@@ -921,7 +921,7 @@
 
 
     <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script>
-    <script type="module" src="cadastroProduto.js" defer></script>
+    <!-- <script type="module" src="cadastroProduto.js" defer></script>  -->
     <script type="module" src="/frontend/js/api/detalhesProposta/detalhesProposta.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -944,8 +944,14 @@
     <!-- Autenticação -->
     <script type="module">
         import { autenticacao } from '../../js/api/login/autenticacao.js'
+
         autenticacao(['coor', 'ger', 'tec', 'adm'])
 
+    </script>
+
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+        alertas();
     </script>
 
     <script>

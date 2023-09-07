@@ -8,8 +8,6 @@ let gerenteEncarregado;
 window.addEventListener('load', async () => {
     let gerentes = await pegarGerentes();
 
-    console.log(gerentes.gerentesRetornados);
-
     if (gerentes.retorno === true) {
 
         // Criação do dropdown
@@ -57,7 +55,7 @@ formularioProposta.addEventListener('submit', async evento => {
             gerente: gerente
         };
 
-        console.log(dadosProposta);
+
 
         // Retorna a resposta do back, e se for sucesso, significa que cadastrou
         let resposta = await enviaBackEnd(dadosProposta);
@@ -124,7 +122,6 @@ async function pegarGerentes() {
         // JSON de nome, sobrenome e NIF
         let dados = await resposta.json();
 
-        console.log(dados);
         return dados;
 
     } catch (error) {

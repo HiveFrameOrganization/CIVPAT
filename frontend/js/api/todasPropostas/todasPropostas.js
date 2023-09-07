@@ -28,7 +28,7 @@ async function pegarTodasAsPropostas () {
         sessionStorage.setItem('paginaProposta', 1)
     }
     const paginaProposta = sessionStorage.getItem('paginaProposta');
-    console.log(paginaProposta)
+
 
     let declaradoQtdBotoes
     if (sessionStorage.getItem('qtdBotoesProposta') == null) {
@@ -45,7 +45,6 @@ async function pegarTodasAsPropostas () {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados);
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
@@ -104,6 +103,165 @@ function botoesPaginacao() {
 function colocarPagina(num) {
     sessionStorage.setItem('paginaProposta', num);
 }
+
+const inputPesquisa = document.getElementById('hidden-input');
+
+sessionStorage.removeItem('paginaProposta');
+sessionStorage.getItem('qtdBotoesProposta');
+
+inputPesquisa.addEventListener('keydown', () => {
+    pegarTodasAsPropostasFiltradas();
+})
+
+async function pegarTodasAsPropostasFiltradas () {
+
+    const filtro = document.getElementById('hidden-input').value;
+
+    if (sessionStorage.getItem('paginaProposta') == null) {
+        sessionStorage.setItem('paginaProposta', 1)
+    }
+    const paginaProposta = sessionStorage.getItem('paginaProposta');
+
+
+    let declaradoQtdBotoes
+    if (sessionStorage.getItem('qtdBotoesProposta') == null) {
+        declaradoQtdBotoes = -1;
+    } else {
+        declaradoQtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
+    }
+
+    try{
+        // link da requisição
+        const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}
+        &qtdBotes=${declaradoQtdBotoes}&filtro=${filtro}`);
+        
+        // dados de todas as propostar recebidas (resposta da api)
+        const dados = await resposta.json();
+
+
+        // caso a requisição de um erro, irá exibir uma mensagem de erro
+        if (dados.status === 'success') {
+
+            exibirPropostasFiltradas(dados.propostas);
+            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+            
+            // Adicionando a quaqntidade de propostas de acordo com os seus status
+            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+            document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
+        } else {
+
+            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
+        }
+
+    } catch (error){
+        console.error(error)
+    }
+
+    
+
+}
+
+function exibirPropostasFiltradas(propostas){
+
+    paginacao.classList.add('hidden');
+
+    if (propostas) {
+
+        table.innerHTML = '';
+
+        paginacao.classList.remove('hidden');
+        
+        for (let proposta of propostas) {
+
+            let divRow = document.createElement('div');
+    
+            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
+            
+            const fotoDePerfil = proposta['FotoDePerfil'];
+    
+            let status = proposta['Status'].toLowerCase();
+    
+            let statusIMG;
+            let color;
+            let optionIMG;
+            let statusDescricao;
+    
+            if (status == 'em análise') {
+                
+                statusDescricao = 'análise';
+                statusIMG = '../../img/icon/inventory.svg';
+                optionIMG = '../../img/icon/more-vertical.svg';
+                color = 'primary';
+            } else if (status == 'cancelado') {
+                
+                statusDescricao = 'cancelado';
+                statusIMG = '../../img/icon/alert-circle-red.svg';
+                optionIMG = '../../img/icon/more-vertical-red.svg';
+                color = 'color-red';
+            } else if (status == 'desenvolvendo') {
+                
+                statusDescricao = 'desenvolvendo';
+                statusIMG = '../../img/icon/settings-green.svg';
+                optionIMG = '../../img/icon/more-vertical-green.svg';
+                color = 'color-green'
+            }
+    
+            // Inserindo o Template na linha
+            divRow.innerHTML = `
+            <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+                <div class="flex items-center gap-8 lg:w-full">
+                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                        <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
+                            <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
+                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
+                                <span title="Número do SGSET">${proposta['nSGSET'] ? proposta['nSGSET'] : 'N/A'}</span>
+                                <span title="Data de início e fim">${proposta['Inicio'] && proposta['Fim'] ? proposta['Inicio']+' - '+proposta['Fim'] : 'N/A'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                        <div class="flex flex-col gap-1 font-semibold">
+                            <span class="text-lg leading-4 whitespace-nowrap capitalize">${proposta['Nome']}</span>
+                            <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
+                        </div>
+                    </div>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
+                </div>
+            </div>
+            <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+                <button type="button" class="w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
+                    <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full">
+                    <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
+                        <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                            <div class="flex items-center gap-2">
+                            <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
+                                <a>
+                                    Visualizar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </button>
+            </div>`;
+            
+            divRow.querySelector('.area-left').addEventListener('click', function() {
+
+                // Recuperando o botão o itemid, ao clicar na linha
+                verDetalhesDaProposta(divRow.querySelector('.view-btn'));
+            })
+
+            table.appendChild(divRow);
+        }
+    
+        reloadRows();
+
+        return;
+    }
+};
 
 
 function exibirPropostas(propostas){
@@ -291,7 +449,5 @@ async function pegarUnidadesCriadoras() {
         option.textContent = dados[i].UnidadeCriadora;
         unidadesSelect.appendChild(option);
     }
-
-    console.log(dados);
 
 }
