@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Verificar se o JSON é válido
     if ($dados === null) {
-        $resposta = ['mensagem' => 'JSON inválido', 'status' => "Erro"];
+        $resposta = ['mensagem' => 'JSON inválido', 'status' => "error"];
         echo json_encode($resposta);
     } else {
         // Pega os valores do JSON
@@ -32,15 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
             // Retorna um aviso de Sucesso para o front
             echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso",
-            'status' => "Sucesso"]);
+            'status' => "success"]);
         } catch (Exception $e) {
             $errorMessage = "Ocorreu uma falha na inserção do Follow UP: ";
             error_log($errorMessage . $e);
             echo json_encode(['mensagem' => "Ocorreu uma falha na inserção do Follow UP",
-            'status' => "Erro"]);
+            'status' => "error"]);
         }
     }
 } else {
     echo json_encode(['mensagem' => 'Por favor, use POST',
-    'status' => "Erro"]);
+    'status' => "error"]);
 }

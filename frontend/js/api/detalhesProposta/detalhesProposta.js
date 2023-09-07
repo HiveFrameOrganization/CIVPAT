@@ -550,6 +550,7 @@ async function salvarMudancasNaProposta() {
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
+    
     if (verificacaoDoCnpj == false) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'CNPJ inválido');
@@ -597,8 +598,15 @@ async function salvarMudancasNaProposta() {
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
 
-        alertas();
+        if (resposta.status == 'success'){
+            window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
+
+        }
+
+        
+
     }
+    
 }
 
 

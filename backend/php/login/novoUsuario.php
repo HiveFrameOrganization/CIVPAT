@@ -34,7 +34,7 @@ function verificaNoBanco($email, $conexao)
             $resposta = [
                 'mensagem' => 'Novo usuário!',
                 'novoUsuario' => true,
-                'status' => 'sucesso'
+                'status' => 'warning'
             ];
         
             echo json_encode($resposta);
@@ -52,7 +52,7 @@ function verificaNoBanco($email, $conexao)
 
         $resposta = [
             'mensagem' => 'Usuário não cadastrado...',
-            'status' => 'erro'
+            'status' => 'error'
         ];
     
         echo json_encode($resposta);

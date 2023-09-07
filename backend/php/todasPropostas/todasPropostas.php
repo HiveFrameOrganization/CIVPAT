@@ -35,17 +35,30 @@ function quantidadeDePropostasPeloStatus ($conn) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
+    $filtros = $_GET['filtros'];
     $numPagina = $_GET['pag'];
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
+    
+    if ($filtros == ''){
+        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+        `Usuarios`.`FotoDePerfil` FROM Propostas
+        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+        LIMIT ?, ?');
 
-    $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-    `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-    `Usuarios`.`FotoDePerfil` FROM Propostas
-    INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-    LIMIT ?, ?');
-    // Limita os resultados a 10 propostas por página
-    $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
+        $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
+    } else {
+        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+        `Usuarios`.`FotoDePerfil` FROM Propostas
+        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+        WHERE `Propostas`.`Status` = ?
+        LIMIT ?, ?');
+        // Limita os resultados a 10 propostas por página
+        $stmt->bind_param('sii', $filtros, $inicioProposta, $qtdPropostasTela);
+
+    }
 
     $stmt->execute();
 

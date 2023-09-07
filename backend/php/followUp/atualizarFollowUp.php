@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
     
     // Verificar se o JSON é válido
     if ($dados === null) {
-        $resposta = ['mensagem' => 'JSON inválido', 'status' => "Erro"];
+        $resposta = ['mensagem' => 'JSON inválido', 'status' => "error"];
         echo json_encode($resposta);
     } else {
         // Pega os valores do JSON
@@ -29,16 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             $stmt->bind_param("ss", $comentario, $idFollowUp);
             $stmt->execute();
             // Retorna um aviso de Sucesso para o front
-            echo json_encode(['mensagem' => "Follow Up adicionado com Sucesso",
-            'status' => "Sucesso"]);
+            echo json_encode(['mensagem' => "Follow Up editado com Sucesso",
+            'status' => "success"]);
         } catch (Exception $e) {
-            $errorMessage = "Ocorreu uma falha na inserção do Follow UP: ";
+            $errorMessage = "Ocorreu uma falha na edição do Follow UP: ";
             error_log($errorMessage . $e);
             echo json_encode(['mensagem' => "Ocorreu uma falha na inserção do Follow UP",
-            'status' => "Erro"]);
+            'status' => "error"]);
         }
     }
 } else {
     echo json_encode(['mensagem' => 'Por favor, use POST',
-    'status' => "Erro"]);
+    'status' => "error"]);
 }

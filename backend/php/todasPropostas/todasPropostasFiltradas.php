@@ -35,19 +35,49 @@ function quantidadeDePropostasPeloStatus ($conn) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
+    $filtroPagina = $_GET['filtroPagina'];
     $filtro = $_GET['filtro'];
     $numPagina = $_GET['pag'];
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
 
-    $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-    `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-    `Usuarios`.`FotoDePerfil` FROM Propostas
-    INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-    WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-    LIMIT ?, ?');
-    // Limita os resultados a 10 propostas por página
-    $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
+    if ($filtro == ''){
+        
+        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+        `Usuarios`.`FotoDePerfil` FROM Propostas
+        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+        WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+        LIMIT ?, ?');
+        // Limita os resultados a 10 propostas por página
+        $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
+
+    } else {
+
+        if ($filtroPagina == ''){
+            $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+            `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+            `Usuarios`.`FotoDePerfil` FROM Propostas
+            INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+            WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+            LIMIT ?, ?');
+            // Limita os resultados a 10 propostas por página
+            $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
+
+        } else {
+            $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+            `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+            `Usuarios`.`FotoDePerfil` FROM Propostas
+            INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+            WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+            LIMIT ?, ?');
+            // Limita os resultados a 10 propostas por página
+            $stmt->bind_param('ssii', $filtroPagina, $filtro, $inicioProposta, $qtdPropostasTela);
+
+        }
+
+    }
+
 
     $stmt->execute();
 

@@ -48,14 +48,20 @@ async function login(email, senha) {
         // Validação do login
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
+
+
         
-        // Apresentar mensagem para o usuário
-        alertas();
-        
-        // Verificando se o login for true
-        if (resposta.status === 'error') throw new Error(resposta.mensagem);
+        // // Verificando se o login for true
+        // if (resposta.status === 'error') throw new Error(resposta.mensagem);
         
         console.log(resposta)
+        if (resposta.status == 'error'){
+            alertas();
+        } 
+
+        if (resposta.status == 'success'){
+            localStorage.setItem('filtroPadrao', '');
+        }
 
 
         // if (!resposta.login) throw new Error(`NÃO LOGADO...`);

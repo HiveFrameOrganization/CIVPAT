@@ -27,8 +27,8 @@ function alteraSenhaBanco($dados, $conn)
 
         // Resposta a ser retronada para o servidor
         $resposta = [
-            'mensagem' => 'Atualização realizada com sucesso!',
-            'status' => 'sucesso'
+            'mensagem' => 'Senha salva com sucesso!',
+            'status' => 'success'
         ];
 
         echo json_encode($resposta);
@@ -37,7 +37,7 @@ function alteraSenhaBanco($dados, $conn)
 
         $resposta = [
             'mensagem' => 'Não foi possível alterar a senha...',
-            'status' => 'erro'
+            'status' => 'error'
         ];
 
         echo json_encode($resposta);

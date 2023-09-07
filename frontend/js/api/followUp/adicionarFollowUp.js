@@ -86,6 +86,8 @@ async function enviaBackEnd(dadosEnviados) {
         .then(response => response.json())
         .then(data => {
             // Mostra a mensagem e o status no console
+            localStorage.setItem('status', data.status);
+            localStorage.setItem('mensagem', data.mensagem);
             console.log(data.mensagem);
             console.log(data.status);
             if (data.status != 'Erro') {

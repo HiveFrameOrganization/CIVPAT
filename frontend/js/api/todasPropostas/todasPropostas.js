@@ -1,4 +1,5 @@
-import { back } from '../Rotas/rotas.js'
+import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
 const table = document.querySelector('#table');
 
@@ -6,7 +7,9 @@ const paginacao = document.querySelector('#paginacao');
 
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
-    await pegarTodasAsPropostas();
+    const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
+    // alertas();
+    await pegarTodasAsPropostas(filtroAoCarregarPagina);
     await pegarUnidadesCriadoras();
     botoesPaginacao();
 })
@@ -22,7 +25,7 @@ document.querySelector('#ultimaPagina').addEventListener('click', ()=>{
     // document.createElement('a').href = ''
 })
 
-async function pegarTodasAsPropostas () {
+async function pegarTodasAsPropostas (filtros) {
 
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
@@ -40,10 +43,12 @@ async function pegarTodasAsPropostas () {
     try{
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostas.php?pag=${paginaProposta}
-        &qtdBotes=${declaradoQtdBotoes}`);
+        &qtdBotes=${declaradoQtdBotoes}&filtros=${filtros}`);
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
+
+        console.log(dados);
 
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
@@ -106,13 +111,12 @@ function colocarPagina(num) {
 
 const inputPesquisa = document.getElementById('hidden-input');
 
-
-
 inputPesquisa.addEventListener('keyup', () => {
-    pegarTodasAsPropostasFiltradas();
+    const filtroAoCarreparPagina = localStorage.getItem('filtroPadrao');
+    pegarTodasAsPropostasFiltradas(filtroAoCarreparPagina);
 })
 
-async function pegarTodasAsPropostasFiltradas () {
+async function pegarTodasAsPropostasFiltradas (filt) {
     // sessionStorage.removeItem('paginaProposta');
     // sessionStorage.getItem('qtdBotoesProposta');
     const filtro = '%' + document.getElementById('hidden-input').value + '%';
@@ -133,7 +137,7 @@ async function pegarTodasAsPropostasFiltradas () {
     try{
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}
-        &qtdBotes=${declaradoQtdBotoes}&filtro=${filtro}`);
+        &qtdBotes=${declaradoQtdBotoes}&filtro=${filtro}&filtroPagina=${filt}`);
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
@@ -265,6 +269,7 @@ function exibirPropostasFiltradas(propostas){
 
 function exibirPropostas(propostas){
 
+
     paginacao.classList.add('hidden');
 
     if (propostas) {
@@ -300,7 +305,7 @@ function exibirPropostas(propostas){
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
-            } else if (status == 'desenvolvendo') {
+            } else if (status == 'Aceitoq') {
                 
                 statusDescricao = 'desenvolvendo';
                 statusIMG = '../../img/icon/settings-green.svg';
@@ -450,3 +455,24 @@ async function pegarUnidadesCriadoras() {
     }
 
 }
+
+
+document.getElementById('todasPropostas').addEventListener('click', () => {
+    localStorage.setItem('filtroPadrao', '');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+});
+
+document.getElementById('propostasEmAnalise').addEventListener('click', () => {
+    localStorage.setItem('filtroPadrao', 'Em Análise');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+});
+
+document.getElementById('propostasEmDesenvolvimento').addEventListener('click', () => {
+    localStorage.setItem('filtroPadrao', 'Aceito');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+});
+
+document.getElementById('propostasDeclinadas').addEventListener('click', () => {
+    localStorage.setItem('filtroPadrao', 'Declinado');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+});

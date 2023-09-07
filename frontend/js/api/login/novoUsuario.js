@@ -1,3 +1,4 @@
+import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js'
 /*------------------------- VERIFICAÇÃO DO EMAIL ---------------------------------------*/
 /*
@@ -34,6 +35,13 @@ async function verificaEmail(email) {
         });
 
         const retornoServidor = await resposta.json();
+
+        if (retornoServidor.novoUsuario == true){
+            localStorage.setItem('status', retornoServidor.status);
+            localStorage.setItem('mensagem', retornoServidor.mensagem);
+
+            alertas();
+        }
 
         console.log(retornoServidor);
 
@@ -87,33 +95,45 @@ formularioNovaSenha.addEventListener('submit', async evento => {
 
     try {
 
-        // Veririficando se a senha possui alguma letra maiúscula
-        if (!letraMaiuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MAIÚSCULA!!!!`);
+        // // Veririficando se a senha possui alguma letra maiúscula
+        // if (!letraMaiuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MAIÚSCULA!!!!`);
 
-        // Veririficando se a senha possui alguma letra minuscula
-        if (!letraMinuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MINÚSCULA!!!!`);
+        // // Veririficando se a senha possui alguma letra minuscula
+        // if (!letraMinuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MINÚSCULA!!!!`);
 
-        // Veririficando se a senha possui algum número
-        if (!possuiNumero(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR ALGUM NÚMERO!!!!`);
+        // // Veririficando se a senha possui algum número
+        // if (!possuiNumero(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR ALGUM NÚMERO!!!!`);
 
-        // Verificando se ela tem o tamanho mínimo de 8 caracteres
-        if (!tamanhoMinimo(novaSenha)) throw new Error(`A SENHA DEVE TER PELO MENOS 8 CARACTERES!!!!`);
+        // // Verificando se ela tem o tamanho mínimo de 8 caracteres
+        // if (!tamanhoMinimo(novaSenha)) throw new Error(`A SENHA DEVE TER PELO MENOS 8 CARACTERES!!!!`);
 
-        // Verificando se as senhas digitadas são iguais
-        if (!senhasIguais(novaSenha, repitaSenha)) throw new Error(`AS SENHAS NÃO CONFEREM!!!!`);
+        // // Verificando se as senhas digitadas são iguais
+        // if (!senhasIguais(novaSenha, repitaSenha)) throw new Error(`AS SENHAS NÃO CONFEREM!!!!`);
 
-        console.log('SENHA VÁLIDA!!!!');
+        if (!letraMaiuscula(novaSenha) ||!letraMinuscula(novaSenha) || !possuiNumero(novaSenha) || !tamanhoMinimo(novaSenha)) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Requisitos não atendidos nas senhas');
 
-        // Função para mandar o email e a senha para o banco de dados e salvar a nova senha
-        await salvandoSenha(email.value + '@sp.senai.br', repitaSenha);
+            alertas();
+        } else if (!senhasIguais(novaSenha, repitaSenha)) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Diferença entre as senhas');
 
-        // Fazendo o formulário de novo usuário desaparecer
-        const formularioNovaSenha = document.querySelector('#formularioNovaSenha');
-        formularioNovaSenha.style.display = 'none'
+            alertas();
+        } else {
+    
+            // Função para mandar o email e a senha para o banco de dados e salvar a nova senha
+            await salvandoSenha(email.value + '@sp.senai.br', repitaSenha);
+    
+            // Fazendo o formulário de novo usuário desaparecer
+            const formularioNovaSenha = document.querySelector('#formularioNovaSenha');
+            formularioNovaSenha.style.display = 'none'
+    
+            // Fazendo o formulário antigo aparecer
+            const formulario = document.querySelector('#formulario');
+            formulario.style.display = 'flex';
+        }
 
-        // Fazendo o formulário antigo aparecer
-        const formulario = document.querySelector('#formulario');
-        formulario.style.display = 'flex';
 
     } catch (erro) {
         console.error(erro);
@@ -147,7 +167,12 @@ async function salvandoSenha(email, senha) {
         // Pegando a resposta do servidor
         const resposta = await enviaBackend.json();
 
-        console.log(resposta);
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        alertas();
+
+        // console.log(resposta);
 
     } catch (erro) {
         console.error(erro);
