@@ -334,7 +334,7 @@ async function carregarProdutos(idProposta) {
         const resposta = await requisicao.json();
 
        
-
+        // console.log(resposta.produtos)
         exibirProdutos(resposta.produtos);
 
     
@@ -357,6 +357,8 @@ async function exibirProdutos(produtos) {
         
         divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
 
+        let optionIMG
+        let statusDescricao
         let statusIMG;
         let color;
     
