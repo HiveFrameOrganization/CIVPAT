@@ -168,6 +168,8 @@ async function pegarTodasAsPropostasFiltradas (filt) {
 
 function exibirPropostasFiltradas(propostas){
 
+    console.log(propostas);
+
     paginacao.classList.add('hidden');
 
     if (propostas) {
@@ -203,7 +205,7 @@ function exibirPropostasFiltradas(propostas){
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
-            } else if (status == 'desenvolvendo') {
+            } else if (status == 'aceito') {
                 
                 statusDescricao = 'desenvolvendo';
                 statusIMG = '../../img/icon/settings-green.svg';
@@ -305,7 +307,7 @@ function exibirPropostas(propostas){
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
-            } else if (status == 'Aceitoq') {
+            } else if (status == 'aceito') {
                 
                 statusDescricao = 'desenvolvendo';
                 statusIMG = '../../img/icon/settings-green.svg';
