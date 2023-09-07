@@ -7,6 +7,7 @@ const paginacao = document.querySelector('#paginacao');
 
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
+    localStorage.setItem('filtroPadrao', '');
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
     // alertas();
     await pegarTodasAsPropostas(filtroAoCarregarPagina);
@@ -26,6 +27,7 @@ document.querySelector('#ultimaPagina').addEventListener('click', ()=>{
 })
 
 async function pegarTodasAsPropostas (filtros) {
+
 
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
@@ -81,6 +83,15 @@ function botoesPaginacao() {
     const qtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
+    containerPaginacao.innerHTML = `
+    <a id="antPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+    </a>
+    <a id="proxPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+    </a>
+    `
+
     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
@@ -95,6 +106,7 @@ function botoesPaginacao() {
 
         a.href = ''
         a.textContent = i
+        a.id = `pesquisa${i}`
         a.onclick = () => {
             colocarPagina(i)
         }
@@ -460,21 +472,38 @@ async function pegarUnidadesCriadoras() {
 
 
 document.getElementById('todasPropostas').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', '');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao();
 });
 
 document.getElementById('propostasEmAnalise').addEventListener('click', () => {
+    
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Em Análise');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao();
 });
 
 document.getElementById('propostasEmDesenvolvimento').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Aceito');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao();
 });
 
 document.getElementById('propostasDeclinadas').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Declinado');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao();
 });
