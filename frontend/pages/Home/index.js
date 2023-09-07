@@ -1,7 +1,4 @@
-// import alertas from "../../js/feedback";
-
-
-// Modal
+// Controlar a Modal de cadastrar propostas
 
 const openModalButton = document.querySelector('#open-modal-btn');
 const closeModalButton = document.querySelector('#close-modal');
@@ -12,6 +9,7 @@ const toggleModal = () => [modal, modalFade].forEach((el) => el.classList.toggle
 
 [openModalButton, closeModalButton, modalFade].forEach((el) => el.addEventListener('click', toggleModal));
 
+// ----------------------------------------------------------
 // funções da barra de pesquisa
 
 const hiddenInput = document.querySelector('#hidden-input'),
@@ -38,9 +36,30 @@ searchButton.addEventListener('click', () => {
     // Escondido
     toggleInputVisibility();
 });
+// ----------------------------------------------------------
 
+// Funções para controlar os botões de filtragem
+const filterButtons = document.querySelectorAll('.filter-btn');
 
-// // Ao carregar a página
-// window.addEventListener('load', () => {
-//     alertas();
-// })
+function removerBotoesSelecionados() {
+
+    filterButtons.forEach((button) => {
+
+        button.classList.remove('text-primary');
+        button.classList.remove('border-b-2');
+        button.classList.remove('border-primary');
+    });
+}
+
+filterButtons.forEach((button) => {
+
+    button.addEventListener('click', () => {
+
+        removerBotoesSelecionados();
+
+        button.classList.add('text-primary');
+        button.classList.add('border-b-2');
+        button.classList.add('border-primary');
+    })
+});
+// ----------------------------------------------------------
