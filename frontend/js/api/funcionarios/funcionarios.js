@@ -1,4 +1,6 @@
+import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js'
+
 /*
 ----------------------------------------------------------------------------------
                         RENDERIZANDO A LISTA DE USUÁRIO
@@ -43,7 +45,6 @@ async function retornaFuncionarios() {
         // Caso retorne algum erro previsto no back-end
         if (dados.status === 'erro') throw new Error(dados.mensagem);
 
-        console.log(dados);
 
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
@@ -154,7 +155,7 @@ function exibir(dados) {
             <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
                 <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
-                    <div itemid="${funcionario['NIF']}" class="editar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
                             <a>
@@ -162,7 +163,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    <div itemid="${funcionario['NIF']}" class="inativar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
                             <a>
@@ -175,30 +176,11 @@ function exibir(dados) {
         </div>`;
 
         exibe.appendChild(div);
-
     }
 
-
+    reloadRowsButtons();
 };
 
-function verDetalhesDaProposta(element) {
-
-    localStorage.setItem('idProposta', element.getAttribute('itemid'));
-            
-    window.location.href = '../detalhesProposta/detalhesProposta.html';
-}
-
-// Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
-function getAllViewButtons() {
-
-    document.querySelectorAll('.view-btn').forEach((btn) => {
-
-        btn.addEventListener('click', () => {
-
-            verDetalhesDaProposta(btn);
-        });
-    });
-}
 
 // Reaplicar as funções referentes a linhas da tabela
 function reloadRows() {
@@ -376,38 +358,52 @@ async function usuariosFiltrados(valor) {
 ---------------------------------------------------------------------------------------
 */
 
-document.querySelector('.inativar').addEventListener((event) => {
+// Recuperar os botões das linhas da tabela
+function reloadRowsButtons() {
 
-    
-});
+    const inativarButtons = document.querySelectorAll('.inativar');
+    const editarrButtons = document.querySelectorAll('.editar');
+}
+
+// Aplicando os eventos aos botões das linhas da tabela
+function addEventToRowButtons(inativarButtons, editarrButtons) {
+
+    inativarButtons.forEach((btn) => {
+
+        btn.addEventListener('click', function() {
+
+            console.log(this.getAttribute('itemid'));
+        });
+    });
+}
 
 // Capturando o clique dos botões de demissão
-document.addEventListener('click', evento => {
+// document.addEventListener('click', evento => {
 
-    // Pegando o elemento clicado pelo usuário
-    const elemento = evento.target;
+//     // Pegando o elemento clicado pelo usuário
+//     const elemento = evento.target;
 
-    // verificando se é mesmo o botão de inativar
-    if (elemento.classList.contains('inativar')) {
-        // Selecionando o NIF que vai ser usado para desativar o usuário
-        const nif = elemento.value;
+//     // verificando se é mesmo o botão de inativar
+//     if (elemento.classList.contains('inativar')) {
+//         // Selecionando o NIF que vai ser usado para desativar o usuário
+//         const nif = elemento.value;
 
-        desativarUsuario(nif);
+//         desativarUsuario(nif);
 
-    } else if (elemento.classList.contains('editar')) {
+//     } else if (elemento.classList.contains('editar')) {
 
-        // Selecionando o NIF que vai ser usado para desativar o usuário
-        const nif = elemento.value;
+//         // Selecionando o NIF que vai ser usado para desativar o usuário
+//         const nif = elemento.value;
 
-        // Salvando o valor do nif para ser usado mais tarde
-        localStorage.setItem('nif', nif);
+//         // Salvando o valor do nif para ser usado mais tarde
+//         localStorage.setItem('nif', nif);
 
-        // Aparecer com o formulário de editar
-        FormularioEditarUsuario(nif);
+//         // Aparecer com o formulário de editar
+//         FormularioEditarUsuario(nif);
 
-    }
+//     }
 
-});
+// });
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
@@ -505,29 +501,37 @@ formularioEditarUsuario.addEventListener('submit', evento => {
         // Pegando o nif armazenado no localStorage
         const nif = localStorage.getItem('nif');
 
-        // Verificando se o nome e sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o nome e sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o sobrenome possuem símbolos ou números
-        if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
+        // // Verificando se o sobrenome possuem símbolos ou números
+        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
 
-        // Verificando se o email possui pelo menos uma letra:
-        if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
+        // // Verificando se o email possui pelo menos uma letra:
+        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
 
-        const dadosEditados = {
-            nif: nif,
-            nome: nome,
-            sobrenome: sobrenome,
-            email: email + '@sp.senai.br',
-            cargo: cargo
+        if (!contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
+
+            alertas();
+        } else {
+
+            const dadosEditados = {
+                nif: nif,
+                nome: nome,
+                sobrenome: sobrenome,
+                email: email + '@sp.senai.br',
+                cargo: cargo
+            }
+    
+
+            // Função para editar os funcionários
+            requisicaoEditar(dadosEditados);
+    
+            location.reload();
         }
 
-        console.log(dadosEditados);
-
-        // Função para editar os funcionários
-        requisicaoEditar(dadosEditados);
-
-        location.reload();
 
     } catch (erro) {
         console.error(erro);
@@ -553,7 +557,6 @@ async function requisicaoEditar(dados) {
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
-    console.log(resposta);
 
 }
 
@@ -575,8 +578,6 @@ async function desativarUsuario(nif) {
 
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-
-        console.log(resposta);
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();
@@ -625,7 +626,6 @@ async function resetarSenhaUsuario(nif) {
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
-        console.log(resposta);
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();

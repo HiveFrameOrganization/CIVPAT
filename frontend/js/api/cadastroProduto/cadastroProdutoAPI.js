@@ -1,4 +1,5 @@
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
 const corpoDaPagina = document.querySelector('body');
 
@@ -42,6 +43,11 @@ async function carregarTecnicos () {
 async function salvarProduto () {
     const idProposta = localStorage.getItem('idProposta');
 
+     // Obter a data atual
+    var dataAtual = new Date();
+
+    
+
     const tempoMaquina = document.getElementById('tempoMaquina').value;
     const tempoPessoa = document.getElementById('tempoPessoa').value;
     const unidadeRealizadora = document.getElementById('unidadeCriadora').value;
@@ -54,10 +60,31 @@ async function salvarProduto () {
     const nifTecnico = document.getElementById('tecnicos').value;
     const maquina = document.getElementById('maquinas').value;
 
+    // Obter a data inserida pelo usuário
+    var dataInicialInserida = new Date(dataInicial);
+    var dataFinalInserida = new Date(dataFinal);
+
     if (!tempoMaquina || !tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico || !maquina ) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Preencha todos os campos');
+
+        alertas();
+        
     } else if (tempoMaquina < 0 || tempoPessoa < 0 || valor < 0){
-        alert('Valores negativos ou zerados inválidos')
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Proibido valores menores que 1');
+
+        alertas();
+    } else if (dataInicialInserida < dataAtual){
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
+
+        alertas();
+    } else if (dataFinalInserida < dataInicialInserida){
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
+
+        alertas();
     } else {
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
@@ -74,7 +101,6 @@ async function salvarProduto () {
             maquina: Number(maquina)
         }
     
-        console.log(dadosEnviados);
     
         try {
     
@@ -88,8 +114,7 @@ async function salvarProduto () {
     
             const dados = await resposta.json();
 
-    
-            console.log(dados['status']);
+
     
             if (dados['status'] == 'success'){
                 localStorage.setItem('status', dados['status']);

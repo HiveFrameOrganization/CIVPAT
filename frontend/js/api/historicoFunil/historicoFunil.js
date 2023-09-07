@@ -12,8 +12,7 @@ fetch(back + `/followUp/pegarHistoricoFunil.php?idProposta=1`, {method: 'GET'})
 .then(data => {
     // Loop para criar os ps
     if (data.mensagem) {
-        console.log(data.mensagem);
-        console.log(data.status);
+        
     } else {
         data.forEach((status) => {
             const p = document.createElement('p');

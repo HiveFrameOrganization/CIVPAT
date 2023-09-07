@@ -17,7 +17,6 @@ async function buscarUsuarioLogado() {
     // Tratamento para possíevl erro...
     try {
 
-        console.log(back + '/perfil/perfil.php');
 
         // Requisição
         const requisicao = await fetch(back + '/perfil/perfil.php');
@@ -25,7 +24,7 @@ async function buscarUsuarioLogado() {
         // Resposta que veio do servidor
         const resposta = await requisicao.json();
 
-        console.log(resposta);
+
 
         // Exibir os dados retornados na tela...
         exibir(resposta.dados)

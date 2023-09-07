@@ -88,8 +88,7 @@ async function enviaBackEnd(dadosEnviados) {
             // Mostra a mensagem e o status no console
             localStorage.setItem('status', data.status);
             localStorage.setItem('mensagem', data.mensagem);
-            console.log(data.mensagem);
-            console.log(data.status);
+
             if (data.status != 'Erro') {
                 window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
             }

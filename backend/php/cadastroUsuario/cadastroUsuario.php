@@ -31,7 +31,7 @@ function salvaDadosNoBanco($dados, $conexao)
         // Resposta a ser retronada para o servidor
         $resposta = [
             'mensagem' => 'Usuário cadastrado com sucesso!',
-            'status' => 'sucesso'
+            'status' => 'success'
         ];
 
         echo json_encode($resposta);
@@ -71,7 +71,7 @@ function verificaRegistroDuplicado($dados, $conexao) {
         // Resposta a ser retronada para o servidor
         $resposta = [
             'mensagem' => 'O usuário já existe, portanto é impossível cadastrá-lo.',
-            'status' => 'erro'
+            'status' => 'error'
         ];
 
         echo json_encode($resposta);
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Resposta a ser retronada para o servidor
     $resposta = [
         'mensagem' => 'Algo deu errado na requisição...',
-        'status' => 'erro'
+        'status' => 'error'
     ];
 
     echo json_encode($resposta);
