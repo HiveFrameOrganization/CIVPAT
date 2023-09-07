@@ -1,4 +1,4 @@
-import { back } from '../Rotas/rotas.js';
+import { back, frontPages } from '../Rotas/rotas.js';
 import  alertas  from '../../feedback.js';
 
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
     verificarPdfExistente(idProposta);
     carregarProdutos(idProposta);
     pegarUnidadesCriadoras();
+    alertas();
 
 })
 
@@ -51,8 +52,8 @@ botaoSalvarPdf.addEventListener('click', () => {
 
             localStorage.setItem('status', json.status);
             localStorage.setItem('mensagem', json.mensagem);
-            alertas();
-
+            window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+            
             verificarPdfExistente(identificador);
         })
         .catch(error => {
@@ -315,79 +316,7 @@ editandoProposta.addEventListener('click', () => {
     }
 
 
-
-    if (editandoProposta.value == 'Editar') {
-        const idProposta = localStorage.getItem('idProposta');
-        //Pegando os valores dos input's para transformalos em objeto
-        const nomeProposta = document.querySelector('#tituloProposta').value;
-        const cnpj = document.querySelector('#cnpj').value;
-        const cnpjString = cnpj.toString();
-        const uniCriadora = document.querySelector('#uniCriadora').value;
-        const empresa = document.querySelector('#empresa').value;
-        const statusProposta = document.querySelector('#statusProposta').value;
-        const criadorProposta = document.querySelector('#criadorProposta').value;
-        const numeroSGSET = document.querySelector('#numeroSGSET').value;
-        const primeiroGerente = document.querySelector('#primeiroGerente').value;
-        const segundoGerente = document.querySelector('#segundoGerente').value;
-        const funil = document.querySelector('#funil').value;
-        const nomeContato = document.querySelector('#nomeContato').value;
-        const emailContato = document.querySelector('#emailContato').value;
-        const numeroContato = document.querySelector('#numeroContato').value;
-
-        const verificacaoDoCnpj = validarCNPJ(cnpjString);
-
-        console.log(verificacaoDoCnpj);
-        if (verificacaoDoCnpj == false) {
-            alert('CNPJ inválido');
-        } else {
-            // Criando um objeto com os dados dos input's
-            const detalhesProposta = {
-                idProposta: idProposta,
-                nomeProposta: nomeProposta,
-                cnpj: cnpj,
-                uniCriadora: uniCriadora,
-                empresa: empresa,
-                statusProposta: statusProposta,
-                criadorProposta: criadorProposta,
-                numeroSGSET: numeroSGSET,
-                primeiroGerente: primeiroGerente,
-                segundoGerente: segundoGerente,
-                funil: funil,
-                nomeContato: nomeContato,
-                emailContato: emailContato,
-                numeroContato: numeroContato,
-            }
-
-            // Enviando o objeto para o back end
-            postarDetalhesBanco(detalhesProposta);
-        }
-    }
-
 });
-
-async function postarDetalhesBanco(postDetalhes) {
-
-    try {
-        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(postDetalhes)
-
-        })
-
-        // Verificando se deu erro ao fazer a requisição
-        if (!requisicao.ok) {
-            throw new Error('Erro na requisição');
-        }
-
-        const resposta = await requisicao.json()
-
-    } catch (error) {
-        console.error(error)
-    }
-}
 
 
 async function carregarProdutos(idProposta) {
@@ -404,15 +333,11 @@ async function carregarProdutos(idProposta) {
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
 
-        console.log(resposta);
+       
 
         exibirProdutos(resposta.produtos);
 
-        console.log(resposta.produtos);
-       
-
-        
-
+    
     } catch (error) {
         console.error(error)
     }
@@ -626,7 +551,16 @@ async function salvarMudancasNaProposta() {
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
     if (verificacaoDoCnpj == false) {
-        alert('CNPJ inválido');
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'CNPJ inválido');
+
+        alertas();
+
+    } else if (primeiroGerente == segundoGerente){
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
+
+        alertas();
     } else {
         const dados = {
             idProposta: idProposta,
@@ -663,7 +597,6 @@ async function salvarMudancasNaProposta() {
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
 
-        console.log(resposta);
         alertas();
     }
 }
@@ -675,8 +608,7 @@ function aceitarProposta() {
     const pdfOrcamento = document.getElementById("orcamento").value;
     const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
-    console.log(pdfOrcamento);
-    console.log(pdfPropostaAssinada);
+    
 
 
     if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
@@ -737,7 +669,7 @@ async function aceitarPropostaBanco(){
 
     const resposta = await requisicao.json();
 
-    console.log(resposta);
+   
    
 }
 

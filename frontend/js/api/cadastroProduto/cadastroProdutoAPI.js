@@ -56,6 +56,8 @@ async function salvarProduto () {
 
     if (!tempoMaquina || !tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico || !maquina ) {
         alert('Por favor, preencha todos os campos obrigatórios.');
+    } else if (tempoMaquina < 0 || tempoPessoa < 0 || valor < 0){
+        alert('Valores negativos ou zerados inválidos')
     } else {
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
@@ -116,8 +118,6 @@ async function carregarMaquinas() {
 
         // Caso ocorra algum erro previsto no back-end
         if(resposta.status === 'error') throw new Error(resposta.mensagem);
-
-        console.log(resposta);
 
         exibirMaquinas(resposta.maquinas)
 
