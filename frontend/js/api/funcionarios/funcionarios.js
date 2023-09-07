@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
 async function retornaFuncionarios() {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
-        sessionStorage.setItem('paginaFun', 1)
+        sessionStorage.setItem('paginaFun', 0)
     }
     const paginaFun = sessionStorage.getItem('paginaFun');
 
@@ -65,7 +65,7 @@ function botoesPaginacao() {
     const containerPaginacao = document.getElementById('paginacao');
 
     // Cria os botoes
-    for (let i = 1; i <= qtdBotoesFun; i++) {
+    for (let i = 0; i < qtdBotoesFun; i++) {
         const a = document.createElement('a');
 
         // Define a cor dos botoes de acordo do número da página
@@ -76,7 +76,7 @@ function botoesPaginacao() {
         }
 
         a.href = ''
-        a.textContent = i
+        a.textContent = i + 1
         a.onclick = () => {
             colocarPagina(i)
         }
@@ -155,7 +155,7 @@ function exibir(dados) {
             <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
                 <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
-                    <div itemid="${funcionario['NIF']}" class="editar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
                             <a>
@@ -163,7 +163,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    <div itemid="${funcionario['NIF']}" class="inativar view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
                             <a>
@@ -176,30 +176,11 @@ function exibir(dados) {
         </div>`;
 
         exibe.appendChild(div);
-
     }
 
-
+    reloadRowsButtons();
 };
 
-function verDetalhesDaProposta(element) {
-
-    localStorage.setItem('idProposta', element.getAttribute('itemid'));
-            
-    window.location.href = '../detalhesProposta/detalhesProposta.html';
-}
-
-// Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
-function getAllViewButtons() {
-
-    document.querySelectorAll('.view-btn').forEach((btn) => {
-
-        btn.addEventListener('click', () => {
-
-            verDetalhesDaProposta(btn);
-        });
-    });
-}
 
 // Reaplicar as funções referentes a linhas da tabela
 function reloadRows() {
@@ -377,38 +358,52 @@ async function usuariosFiltrados(valor) {
 ---------------------------------------------------------------------------------------
 */
 
-// document.querySelector('.inativar').addEventListener((event) => {
+// Recuperar os botões das linhas da tabela
+function reloadRowsButtons() {
 
-    
-// });
+    const inativarButtons = document.querySelectorAll('.inativar');
+    const editarrButtons = document.querySelectorAll('.editar');
+}
+
+// Aplicando os eventos aos botões das linhas da tabela
+function addEventToRowButtons(inativarButtons, editarrButtons) {
+
+    inativarButtons.forEach((btn) => {
+
+        btn.addEventListener('click', function() {
+
+            console.log(this.getAttribute('itemid'));
+        });
+    });
+}
 
 // Capturando o clique dos botões de demissão
-document.addEventListener('click', evento => {
+// document.addEventListener('click', evento => {
 
-    // Pegando o elemento clicado pelo usuário
-    const elemento = evento.target;
+//     // Pegando o elemento clicado pelo usuário
+//     const elemento = evento.target;
 
-    // verificando se é mesmo o botão de inativar
-    if (elemento.classList.contains('inativar')) {
-        // Selecionando o NIF que vai ser usado para desativar o usuário
-        const nif = elemento.value;
+//     // verificando se é mesmo o botão de inativar
+//     if (elemento.classList.contains('inativar')) {
+//         // Selecionando o NIF que vai ser usado para desativar o usuário
+//         const nif = elemento.value;
 
-        desativarUsuario(nif);
+//         desativarUsuario(nif);
 
-    } else if (elemento.classList.contains('editar')) {
+//     } else if (elemento.classList.contains('editar')) {
 
-        // Selecionando o NIF que vai ser usado para desativar o usuário
-        const nif = elemento.value;
+//         // Selecionando o NIF que vai ser usado para desativar o usuário
+//         const nif = elemento.value;
 
-        // Salvando o valor do nif para ser usado mais tarde
-        localStorage.setItem('nif', nif);
+//         // Salvando o valor do nif para ser usado mais tarde
+//         localStorage.setItem('nif', nif);
 
-        // Aparecer com o formulário de editar
-        FormularioEditarUsuario(nif);
+//         // Aparecer com o formulário de editar
+//         FormularioEditarUsuario(nif);
 
-    }
+//     }
 
-});
+// });
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {

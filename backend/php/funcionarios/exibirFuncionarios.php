@@ -12,7 +12,7 @@ function retornaFuncionarios($conn)
     //
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 5;
-    $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
+    $inicioFun = $numPagina * $qtdFuncionariosTela;
 
     // preparando a query
     $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");

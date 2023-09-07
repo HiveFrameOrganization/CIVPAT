@@ -50,6 +50,7 @@ function exibir(dados) {
             ele esta vinculado...
         */
             spanProdutos.setAttribute('data-value', dados.nif);
+            localStorage.setItem('nifPerfil', dados.nif);
 
     }
 
