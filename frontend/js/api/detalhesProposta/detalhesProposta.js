@@ -429,18 +429,12 @@ async function exibirProdutos(produtos) {
     for (let produto of produtos) {
 
         const divRow = document.createElement('div');
-
-
-    
+        
         divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
-
-
 
         let statusIMG;
         let color;
-        let optionIMG;
-        let statusDescricao;
-
+    
         let status = 'em análise'
 
         if (status == 'em análise') {
@@ -501,7 +495,7 @@ async function exibirProdutos(produtos) {
 
                     <div class="flex items-center gap-3 pr-8">
                         <div class=" overflow-hidden text-ellipsis">
-                            <span title="Data de término" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['DataFinal']}</span>
+                            <span title="Data de término" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['DataFinal']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Data de término">Data de término</span>
                             </div>
