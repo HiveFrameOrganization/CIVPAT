@@ -33,6 +33,7 @@ async function carregarTecnicos () {
         var optionElement = document.createElement("option");
         optionElement.value = resposta[i + 1];
         optionElement.textContent = resposta[i];
+        optionElement.classList.add('bg-body')
         opcoesTecnicos.appendChild(optionElement);
 
         i += 1;

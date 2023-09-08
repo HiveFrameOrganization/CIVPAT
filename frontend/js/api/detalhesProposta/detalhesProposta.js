@@ -693,3 +693,19 @@ botaoAceitarProposta.addEventListener('click', () => {
 document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
     
 })
+
+// Modal de varias etapas de cadastro de produto
+let primerioCadastroProduto = document.querySelector('#primerioCadastroProduto')
+let segundoCadastroProduto = document.querySelector('#segundoCadastroProduto')
+let paraPrimeiroModal = document.querySelector('#paraPrimeiroModal')
+let paraSegundoModal = document.querySelector('#paraSegundoModal')
+
+paraSegundoModal.addEventListener('click', ()=>{
+    primerioCadastroProduto.classList.add('hidden')
+    segundoCadastroProduto.classList.remove('hidden')
+})
+
+paraPrimeiroModal.addEventListener('click', ()=>{
+    primerioCadastroProduto.classList.remove('hidden')
+    segundoCadastroProduto.classList.add('hidden')
+})
