@@ -151,7 +151,7 @@ function exibir(dados) {
                 <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
             </div>
         </div>
-        <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+        <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
             <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
                 <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
