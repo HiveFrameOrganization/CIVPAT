@@ -201,6 +201,7 @@ function reloadRows() {
             
         });
     });
+    
 
     getAllViewButtons();
 }
@@ -390,33 +391,6 @@ function addEventToRowButtons(inativarButtons, editarrButtons) {
     });
 }
 
-// Capturando o clique dos botões de demissão
-// document.addEventListener('click', evento => {
-
-//     // Pegando o elemento clicado pelo usuário
-//     const elemento = evento.target;
-
-//     // verificando se é mesmo o botão de inativar
-//     if (elemento.classList.contains('inativar')) {
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         desativarUsuario(nif);
-
-//     } else if (elemento.classList.contains('editar')) {
-
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         // Salvando o valor do nif para ser usado mais tarde
-//         localStorage.setItem('nif', nif);
-
-//         // Aparecer com o formulário de editar
-//         FormularioEditarUsuario(nif);
-
-//     }
-
-// });
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
@@ -428,32 +402,32 @@ async function FormularioEditarUsuario(nif) {
 
     dadosParaEditar(nif);
 
-    // // Fazendo a lista de funcionários desaparecer
-    // const exibicao = document.querySelector('#exibicao');
+    // Fazendo a lista de funcionários desaparecer
+    const exibicao = document.querySelector('#exibicao');
 
-    // // Selecionando o formulário
-    // const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+    // Selecionando o formulário
+    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 
-    // // Alterando a visibilidade
-    // // Renderizando de acordo o evento
-    // if (formularioEditarUsuario.style.display === 'flex') {
+    // Alterando a visibilidade
+    // Renderizando de acordo o evento
+    if (formularioEditarUsuario.style.display === 'flex') {
 
-    //     // Escondendo o formulário
-    //     formularioEditarUsuario.style.display = 'none';
+        // Escondendo o formulário
+        formularioEditarUsuario.style.display = 'none';
 
-    //     // Exibindo a lista
-    //     exibicao.style.display = 'block';
+        // Exibindo a lista
+        exibicao.style.display = 'block';
 
-    // } else {
-    //     // Exibindo o formulário
-    //     formularioEditarUsuario.style.display = 'flex';
+    } else {
+        // Exibindo o formulário
+        formularioEditarUsuario.style.display = 'flex';
 
-    //     // Escondendo a lista de funcionários
-    //     exibicao.style.display = 'none';
+        // Escondendo a lista de funcionários
+        exibicao.style.display = 'none';
 
-    //     // Quando aparecer o formulário será feita uma requisição para retornar os dados
-    //     dadosParaEditar(nif);
-    // }
+        // Quando aparecer o formulário será feita uma requisição para retornar os dados
+        dadosParaEditar(nif);
+    }
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
