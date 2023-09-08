@@ -178,12 +178,12 @@ function exibir(dados) {
         exibe.appendChild(div);
     }
 
-    reloadRowsButtons();
+    reloadBotoesLinhas();
 };
 
 
 // Reaplicar as funções referentes a linhas da tabela
-function reloadRows() {
+function reloadLinhas() {
 
     const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
 
@@ -202,12 +202,11 @@ function reloadRows() {
         });
     });
     
-
-    getAllViewButtons();
+    pegarTodosBotoesVisualizar();
 }
 
 // Função para fechar todos os dropdown
-function hiddenAll() {
+function esconderTudo() {
 
     if (document.querySelector('.option-dropdown')) {
         
@@ -226,7 +225,7 @@ window.addEventListener('click', (event) => {
 
     if (!event.target.matches('.option-dropdown-trigger')) {
 
-        hiddenAll();
+        esconderTudo();
     }
 });
 
@@ -360,16 +359,16 @@ async function usuariosFiltrados(valor) {
 */
 
 // Recuperar os botões das linhas da tabela
-function reloadRowsButtons() {
+function reloadBotoesLinhas() {
 
     const inativarButtons = document.querySelectorAll('.inativar');
     const editarrButtons = document.querySelectorAll('.editar');
 
-    addEventToRowButtons(inativarButtons, editarrButtons);
+    addEventoLinhasBotoes(inativarButtons, editarrButtons);
 }
 
 // Aplicando os eventos aos botões das linhas da tabela
-function addEventToRowButtons(inativarButtons, editarrButtons) {
+function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
 
     inativarButtons.forEach((btn) => {
 
@@ -427,6 +426,7 @@ async function FormularioEditarUsuario(nif) {
 
         // Quando aparecer o formulário será feita uma requisição para retornar os dados
         dadosParaEditar(nif);
+
     }
 }
 
@@ -473,8 +473,7 @@ function exibirDadosParaEditar(dados) {
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 formularioEditarUsuario.addEventListener('submit', evento => {
-
-    // Parando o evento do formulário
+    // Parando o evento do formulário   
     evento.preventDefault();
 
     // Pegando os valores do formulário
