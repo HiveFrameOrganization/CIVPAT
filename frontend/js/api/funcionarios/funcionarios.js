@@ -124,6 +124,18 @@ function exibir(dados) {
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
         let cargo;
+        let cor;
+        let imgOpcao;
+
+        if (funcionario['Status'].toLowerCase() == 'ativo') {
+
+            cor = 'primary';
+            imgOpcao = '../../img/icon/more-vertical.svg';
+        } else {
+
+            cor = 'color-red';
+            imgOpcao = '../../img/icon/more-vertical-red.svg';
+        }
 
         if (funcionario['TipoUser'] == 'tec') {
 
@@ -143,7 +155,7 @@ function exibir(dados) {
         <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
                     <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -163,12 +175,12 @@ function exibir(dados) {
                         <span class="text-xs text-color-text-secundary capitalize">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
-                <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
+                <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
             </div>
         </div>
-        <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
-                <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+        <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+            <button type="button" class="w-6 h-6 p-1 bg-${cor}/20 rounded-md relative">
+                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
@@ -193,7 +205,8 @@ function exibir(dados) {
         exibe.appendChild(div);
     }
 
-    reloadRowsButtons();
+    reloadBotoesLinhas();
+    reloadRows();
 };
 
 
@@ -206,6 +219,8 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
@@ -216,8 +231,6 @@ function reloadRows() {
             
         });
     });
-
-    getAllViewButtons();
 }
 
 // Função para fechar todos os dropdown
@@ -241,6 +254,31 @@ window.addEventListener('click', (event) => {
     if (!event.target.matches('.option-dropdown-trigger')) {
 
         hiddenAll();
+    }
+});
+
+
+// Função para fechar todos os dropdown
+function esconderTudo() {
+
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+
+            const row = el.parentElement.parentElement.parentElement;
+    
+            el.classList.add('hidden');
+            row.classList.remove('selected-row');
+        });
+    }
+}
+
+// Fechar todos ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        esconderTudo();
     }
 });
 
@@ -401,16 +439,16 @@ async function usuariosFiltrados(valor) {
 */
 
 // Recuperar os botões das linhas da tabela
-function reloadRowsButtons() {
+function reloadBotoesLinhas() {
 
     const inativarButtons = document.querySelectorAll('.inativar');
     const editarrButtons = document.querySelectorAll('.editar');
 
-    addEventToRowButtons(inativarButtons, editarrButtons);
+    addEventoLinhasBotoes(inativarButtons, editarrButtons);
 }
 
 // Aplicando os eventos aos botões das linhas da tabela
-function addEventToRowButtons(inativarButtons, editarrButtons) {
+function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
 
     inativarButtons.forEach((btn) => {
 
@@ -432,33 +470,6 @@ function addEventToRowButtons(inativarButtons, editarrButtons) {
     });
 }
 
-// Capturando o clique dos botões de demissão
-// document.addEventListener('click', evento => {
-
-//     // Pegando o elemento clicado pelo usuário
-//     const elemento = evento.target;
-
-//     // verificando se é mesmo o botão de inativar
-//     if (elemento.classList.contains('inativar')) {
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         desativarUsuario(nif);
-
-//     } else if (elemento.classList.contains('editar')) {
-
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         // Salvando o valor do nif para ser usado mais tarde
-//         localStorage.setItem('nif', nif);
-
-//         // Aparecer com o formulário de editar
-//         FormularioEditarUsuario(nif);
-
-//     }
-
-// });
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
@@ -470,32 +481,33 @@ async function FormularioEditarUsuario(nif) {
 
     dadosParaEditar(nif);
 
-    // // Fazendo a lista de funcionários desaparecer
-    // const exibicao = document.querySelector('#exibicao');
+    // Fazendo a lista de funcionários desaparecer
+    const exibicao = document.querySelector('#exibicao');
 
-    // // Selecionando o formulário
-    // const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+    // Selecionando o formulário
+    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 
-    // // Alterando a visibilidade
-    // // Renderizando de acordo o evento
-    // if (formularioEditarUsuario.style.display === 'flex') {
+    // Alterando a visibilidade
+    // Renderizando de acordo o evento
+    if (formularioEditarUsuario.style.display === 'flex') {
 
-    //     // Escondendo o formulário
-    //     formularioEditarUsuario.style.display = 'none';
+        // Escondendo o formulário
+        formularioEditarUsuario.style.display = 'none';
 
-    //     // Exibindo a lista
-    //     exibicao.style.display = 'block';
+        // Exibindo a lista
+        exibicao.style.display = 'block';
 
-    // } else {
-    //     // Exibindo o formulário
-    //     formularioEditarUsuario.style.display = 'flex';
+    } else {
+        // Exibindo o formulário
+        formularioEditarUsuario.style.display = 'flex';
 
-    //     // Escondendo a lista de funcionários
-    //     exibicao.style.display = 'none';
+        // Escondendo a lista de funcionários
+        exibicao.style.display = 'none';
 
-    //     // Quando aparecer o formulário será feita uma requisição para retornar os dados
-    //     dadosParaEditar(nif);
-    // }
+        // Quando aparecer o formulário será feita uma requisição para retornar os dados
+        dadosParaEditar(nif);
+
+    }
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
