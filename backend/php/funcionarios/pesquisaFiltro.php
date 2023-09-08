@@ -9,10 +9,15 @@ require_once '../../../database/conn.php';
 
 // Função para fazer a pesquisa no banco
 function pesquisarUsuario($valor, $conn){
-    // Preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE Status = ?");
 
-    $stmt->bind_param('s', $valor);
+    $numPagina = $_GET['pag'];
+    $qtdFuncionariosTela = 5;
+    $inicioFun = $numPagina * $qtdFuncionariosTela;
+
+    // Preparando a query
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE Status = ? LIMIT ?, ?");
+
+    $stmt->bind_param('sii', $valor, $inicioFun, $qtdFuncionariosTela);
 
     // Excutando a query
     $stmt->execute();

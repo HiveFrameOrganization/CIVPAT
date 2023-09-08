@@ -8,15 +8,22 @@ import { back } from '../Rotas/rotas.js'
 */
 window.addEventListener('load', async () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', '');
+    const filtroAoCarregarPagina = localStorage.getItem('filtroPadraoFuncionario');
+
+    alertas();
+
     // Função para renderizar a lista de usuários
-    await retornaFuncionarios();
+    await retornaFuncionarios(filtroAoCarregarPagina);
     // Chama a função que cria os botões da página
     botoesPaginacao();
+
+    
 
 });
 
 // Funão para retornar uma lisat de funcionários
-async function retornaFuncionarios() {
+async function retornaFuncionarios(filtro) {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
         sessionStorage.setItem('paginaFun', 0)
@@ -38,7 +45,7 @@ async function retornaFuncionarios() {
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoqtdBotoesFun}`);
+        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}`);
 
         const dados = await resposta.json();
 
@@ -64,6 +71,16 @@ function botoesPaginacao() {
     // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
 
+    containerPaginacao.innerHTML = `
+    <a id="antPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+    </a>
+    <a id="proxPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+    </a>
+    
+    `
+
     // Cria os botoes
     for (let i = 0; i < qtdBotoesFun; i++) {
         const a = document.createElement('a');
@@ -77,6 +94,7 @@ function botoesPaginacao() {
 
         a.href = ''
         a.textContent = i + 1
+        a.id = `pesquisa${i}`
         a.onclick = () => {
             colocarPagina(i)
         }
@@ -94,6 +112,7 @@ function colocarPagina(num) {
 
 function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
+
     const exibe = document.querySelector('#exibicao');
 
     // Removendo um possível elemento na div de exibição
@@ -283,7 +302,13 @@ const pesquisarUsuario = document.querySelector('#pesquisarUsuario');
 
 // Pegando o evento de click para realizar a pesquisa
 botaoPesquisar.addEventListener('click', () => {
-    pesquisarFuncionario(pesquisarUsuario.value);
+
+    if (pesquisarUsuario.value === '') return;
+
+    const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
+
+    pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+    botoesPaginacao();
 });
 
 // Para melhorar a experiência do usuário, quando apertar o enter no input também será realizada a pesquisa
@@ -291,21 +316,31 @@ botaoPesquisar.addEventListener('click', () => {
 pesquisarUsuario.addEventListener('keydown', evento => {
 
     if (evento.key === 'Enter') {
-        pesquisarFuncionario(pesquisarUsuario.value);
+
+        const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
+
+        pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+        botoesPaginacao();
     }
 
 });
 
 // Função específica para realizar a pesquisa do funcionário
-async function pesquisarFuncionario(valor) {
+async function pesquisarFuncionario(valor, filtro) {
+
+    const numPagina = sessionStorage.getItem('paginaFun');
+
+    sessionStorage.setItem('paginaFun', 0);
 
     try {
 
         // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}&pag=${numPagina}&filtros=${filtro}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
@@ -347,8 +382,11 @@ function exibirErro(erro) {
 const botaoTodos = document.querySelector('#botaoTodos');
 botaoTodos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', '');
+
+
     // Função para renderizar a lista de usuários
-    retornaFuncionarios();
+    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
 
 });
 
@@ -357,6 +395,11 @@ botaoTodos.addEventListener('click', () => {
 const botaoAtivos = document.querySelector('#botaoAtivos');
 botaoAtivos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', 'Ativo');
+
+
+    // Função para renderizar a lista de usuários
+    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
     // Função para renderizar a lista de usuários
     usuariosFiltrados(botaoAtivos.value);
 
@@ -367,16 +410,19 @@ botaoAtivos.addEventListener('click', () => {
 const botaoDesativos = document.querySelector('#botaoDesativos');
 botaoDesativos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', 'Inativo');
+
     // Função para renderizar a lista de usuários
-    usuariosFiltrados(botaoDesativos.value);
+    usuariosFiltrados(localStorage.getItem('filtroPadraoFuncionario'));
 
 });
 
 async function usuariosFiltrados(valor) {
     try {
 
+        const numPagina = sessionStorage.getItem('paginaFun');
         // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}&pag=${numPagina}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
@@ -509,10 +555,9 @@ function exibirDadosParaEditar(dados) {
 }
 
 // Enviar o formulário para editar
-const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-formularioEditarUsuario.addEventListener('submit', evento => {
-    // Parando o evento do formulário   
-    evento.preventDefault();
+const formularioEditarUsuario = document.querySelector('#editarUsuario');
+formularioEditarUsuario.addEventListener('click', async () => {
+
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
@@ -551,7 +596,12 @@ formularioEditarUsuario.addEventListener('submit', evento => {
     
 
             // Função para editar os funcionários
-            requisicaoEditar(dadosEditados);
+            const resp = await requisicaoEditar(dadosEditados);
+
+            // console.log(resp);
+
+            localStorage.setItem('status', resp.status);
+            localStorage.setItem('mensagem', resp.mensagem);
     
             location.reload();
         }
@@ -578,9 +628,11 @@ async function requisicaoEditar(dados) {
     // Pegando a resposta retornado pelo servidor
     const resposta = await requisicao.json();
 
+
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
+    return resposta;
 
 }
 
@@ -603,8 +655,13 @@ async function desativarUsuario(nif) {
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        alertas();
+
         // Atualizando a lista em tempo real
-        retornaFuncionarios();
+        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
 
     } catch (erro) {
         console.error(erro);
