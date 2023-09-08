@@ -45,6 +45,7 @@ async function salvarProduto () {
 
      // Obter a data atual
     var dataAtual = new Date();
+    var dataLimite = new Date('9999-12-31');
 
     
 
@@ -85,7 +86,19 @@ async function salvarProduto () {
         localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
 
         alertas();
-    } else {
+    }   else if (dataInicialInserida > dataLimite) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data inicial fora do limite');
+
+        alertas();
+    } else if (dataFinalInserida > dataLimite) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data final fora do limite');
+
+        alertas();
+    }
+    
+    else {
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
             tempoPessoa: tempoPessoa,

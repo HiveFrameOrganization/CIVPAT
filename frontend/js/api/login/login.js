@@ -52,15 +52,15 @@ async function login(email, senha) {
         localStorage.setItem('mensagem', resposta.mensagem);
         localStorage.setItem('cargo', resposta.cargo);
 
-        
+
         // // Verificando se o login for true
         // if (resposta.status === 'error') throw new Error(resposta.mensagem);
-        
-        if (resposta.status == 'error'){
-            alertas();
-        } 
 
-        if (resposta.status == 'success'){
+        if (resposta.status == 'error') {
+            alertas();
+        }
+
+        if (resposta.status == 'success') {
             localStorage.setItem('filtroPadrao', '');
         }
 
@@ -68,7 +68,7 @@ async function login(email, senha) {
         // if (!resposta.login) throw new Error(`NÃO LOGADO...`);
 
         // Verificando o cargo de quem está logando para mandar para telas diferentes
-        if(resposta.cargo === 'tec') {
+        if (resposta.cargo === 'tec') {
 
 
             window.location.replace(frontPages + '/perfil/index.html');
@@ -76,15 +76,26 @@ async function login(email, senha) {
         } else {
 
             if (resposta.login) window.location.replace(frontPages + '/Home/index.html');
-            
+
         }
 
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);
 
     } catch (erro) {
-        console.error(erro);
 
+
+        // Verifica se 'erro' é uma string, se não for, converte para string e faz a substituição
+        if (typeof erro !== 'string') {
+            erro = erro.toString();
+        }
+
+        const erroFormatado = erro.replace('Error:', '');
+        console.log(erroFormatado);
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', erroFormatado);
+        alertas();
     }
 }
 

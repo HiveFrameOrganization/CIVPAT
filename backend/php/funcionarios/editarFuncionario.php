@@ -23,7 +23,7 @@ function editarUsuario($dados, $conn)
 
         // Resposta a ser retornada para o front-end
         $resposta = [
-            'status' => 'sucesso',
+            'status' => 'success',
             'mensagem' => 'Usuário alterado com sucesso!'
         ];
 
@@ -33,8 +33,8 @@ function editarUsuario($dados, $conn)
 
         // Resposta a ser retornada para o front-end
         $resposta = [
-            'status' => 'erro',
-            'mensagem' => 'Não foi possíevl alterar o usuário...'
+            'status' => 'error',
+            'mensagem' => 'Não foi possível alterar o usuário...'
         ];
 
         echo json_encode($resposta);
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
     // Resposta de erro a ser enviada para o front-end
     $resposta = [
-        'status' => 'erro',
+        'status' => 'error',
         'mensagem' => 'Algo deu errado...'
     ];
 
