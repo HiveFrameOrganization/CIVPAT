@@ -64,9 +64,6 @@ async function pegarTodasAsPropostas (filtros) {
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
             document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
-        } else {
-
-            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
 
     } catch (error){
@@ -165,9 +162,6 @@ async function pegarTodasAsPropostasFiltradas (filt) {
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
             document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
-        } else {
-
-            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
 
     } catch (error){

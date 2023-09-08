@@ -363,6 +363,8 @@ function reloadRowsButtons() {
 
     const inativarButtons = document.querySelectorAll('.inativar');
     const editarrButtons = document.querySelectorAll('.editar');
+
+    addEventToRowButtons(inativarButtons, editarrButtons);
 }
 
 // Aplicando os eventos aos botões das linhas da tabela
@@ -372,7 +374,18 @@ function addEventToRowButtons(inativarButtons, editarrButtons) {
 
         btn.addEventListener('click', function() {
 
-            console.log(this.getAttribute('itemid'));
+            desativarUsuario(this.getAttribute('itemid'));
+            console.log(`${this.getAttribute('itemid')} desativado!`);
+        });
+    });
+
+    editarrButtons.forEach((btn) => {
+
+        btn.addEventListener('click', function() {
+
+            localStorage.setItem('nif', this.getAttribute('itemid'));
+
+            FormularioEditarUsuario(this.getAttribute('itemid'));
         });
     });
 }
