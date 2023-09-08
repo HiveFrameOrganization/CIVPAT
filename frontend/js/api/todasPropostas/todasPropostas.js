@@ -144,7 +144,7 @@ function botoesPaginacao() {
         }
     }
 
-    if (paginaAtual < 5) {
+    if (paginaAtual < 4) {
         const divisor2 = document.createElement('span');
         divisor2.textContent = '...'
         containerPaginacao.insertBefore(divisor2, setaProxPagina);
