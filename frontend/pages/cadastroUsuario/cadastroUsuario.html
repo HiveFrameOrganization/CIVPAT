@@ -102,7 +102,7 @@
         }
     </script>
 </head>
-<body class="bg-body transition-colors relative">
+<body class="bg-body transition-colors relative text-color-text">
 
     <div class="flex flex-col h-screen z-10 w-full">
 
@@ -344,80 +344,48 @@
 
         <!------------------------------ MODAL DE EDITAR ------------------------------>
     
-        <!-- centralização -->
-    
-        <div class="edit min-h-screen hidden z-50 h-full w-screen fixed left-0 top-0 backdrop-blur-[2px] bg-[#000] bg-opacity-[0.6]">
-    
-            <!-- conteúdo do modal -->
-    
-            <div class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full lg:w-[670px] min-h-screen lg:min-h-0 lg:h-auto lg:mx-auto lg:my-auto lg:rounded-xl overflow-y-auto max-h-full">
-    
-                <!-- título e subtítulo -->
-
-                <div class="flex flex-col lg:flex-row justify-between">
-                    <div class="text-center lg:text-justify text-color-text w-full">
-                        <h1 class="font-bold text-2xl">EDIÇÃO DE FUNCIONÁRIO</h1>
-                        <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
-                    </div>
-                    <div class="flex justify-end absolute top-4 right-4 lg:relative lg:top-0 lg:right-0">
-                        <button class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
-                    </div>
-
+        <!-- Área Modal -->
+        <div id="modal-fade" class="hide"></div>
+        <div id="modal" class="hide bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8">
+            <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-red">EDITAR FUNCIONÁRIO</h2>
+                    <h3 class="text-xs font-normal">Insira as informações do funcionário - <strong class="text-color-red">Obrigatório *</strong></h3>
                 </div>
-    
-                <!-- inputs -->
-    
-                <div class="flex flex-col gap-6 pt-8" id="formularioEditarUsuario" autocomplete="off">
-    
-                    <!-- Nome e sobrenome -->
-    
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
-                        <div class="w-full">
-                            <label class="text-color-text font-bold block mb-3">NOME *</label>
-                            <input type="text" value="" id="editarNome" minlength="3" maxlength="100" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Nome do funcionário" required>
+                <button id="close-modal" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formularioEditarUsuario" class="space-y-4 max-h-[50vh] overflow-y-auto px-4 sm:px-8" autocomplete="off">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="editarNome" class="font-semibold text-base">NOME*</label>
+                            <input type="text" id="editarNome" minlength="3" maxlength="100" name="editarNome" placeholder="Nome do funcionário" required class="capitalize px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                         </div>
-                        <div class="w-full">
-                            <label class="text-color-text font-bold block mb-3">SOBRENOME *</label>
-                            <input type="text" value="" id="editarSobrenome" minlength="3" maxlength="200" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="Sobrenome do funcionário" required>
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="editarSobrenome" class="font-semibold text-base">SOBRENOME*</label>
+                            <input type="text" id="editarSobrenome" minlength="3" maxlength="200" name="editarSobrenome" placeholder="Sobrenome do funcionário" required class="capitalize px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                         </div>
                     </div>
-    
-                    <!-- E-mail e função -->
-    
-                    <div class="flex flex-col sm:flex-row justify-between gap-6 sm:gap-4">
-                        <div class="relative w-full">
-                            <label class="text-color-text font-bold block mb-3">E-MAIL *</label>
-                            <input type="text" value="" maxlength="63" id="editarEmail" class="bg-body rounded-lg placeholder-color-text-secundary text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" placeholder="E-mail do funcionário" required >
-                            <p class="bg-body rounded-e-lg flex items-center pl-1 pe-3 right-0 bottom-3 text-primary absolute">@sp.senai.br</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="editarEmail" class="font-semibold text-base">E-MAIL*</label>
+                            <input type="email" maxlength="63" id="editarEmail" name="editarEmail" placeholder="E-mail do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                         </div>
-
-                        <div class="relative w-full">
-                            <label class="text-color-text font-bold block mb-3">FUNÇÃO *</label>
-                            <!-- <img src="../../img/icon/arrow_back_ios.png" id="iconeAbrir" alt="Ícone de abrir dropdown" class="absolute top-[50px] right-4 text-primary cursor-pointer"></img> -->
-                            <select id="editarCargo" class="bg-body rounded-lg text-color-text py-3 px-3 outline-none focus:outline-3 focus:outline-primary w-full cursor-pointer" required>
-                                <option value="" selected disabled>Cargo do funcionário</option>
-                                <option value="adm">Administrador</option>
-                                <option value="coor">Coordenador</option>
-                                <option value="ger">Gerente</option>
-                                <option value="tec">Técnico</option>
-                              </select>
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="editarCargo" class="font-semibold text-base">FUNÇÃO*</label>
+                            <select name="editarCargo" id="editarCargo" required class="capitalize px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary valid:bg-primary/20 transition-all">
+                                <option value="" selected disabled class="bg-body">Selecione uma função</option>
+                                <option value="adm" class="bg-body">Administrador</option>
+                                <option value="cor" class="bg-body">Coordenador</option>
+                                <option value="ger" class="bg-body">Gerente</option>
+                                <option value="tec" class="bg-body">Técnico</option>
+                            </select>
                         </div>
                     </div>
-    
-    
-                    
-                    <!-- botão -->
-    
-                    <div class="pt-6">
-                        <button type="submit" class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:brightness-110">Editar funcionário</button>
-                    </div>
-
-                    <!-- redefinir senha -->
-
                     <div>
-                      <h4 class="text-color-text font-bold underline cursor-pointer" id="resetarSenha">Resetar senha</h4>
+                        <span id="resetarSenha" class="font-semibold text-base cursor-pointer">Resetar senha</span>
                     </div>
-    
+                    <button type="submit" class="w-full bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">EDITAR</button>
                 </form>
             </div>
         </div>
