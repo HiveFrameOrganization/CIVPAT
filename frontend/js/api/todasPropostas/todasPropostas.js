@@ -15,17 +15,6 @@ window.addEventListener('load', async () => {
     botoesPaginacao();
 })
 
-// botão para primeira
-document.querySelector('#primeiraPagina').addEventListener('click', ()=>{
-    colocarPagina("1")
-    // document.createElement('a').href = ''
-})
-// botão ultima pagina
-document.querySelector('#ultimaPagina').addEventListener('click', ()=>{
-    colocarPagina(sessionStorage.getItem("qtdBotoesProposta"))
-    // document.createElement('a').href = ''
-})
-
 async function pegarTodasAsPropostas (filtros) {
 
 

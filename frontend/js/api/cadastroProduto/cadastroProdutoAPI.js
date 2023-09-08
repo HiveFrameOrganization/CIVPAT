@@ -71,9 +71,19 @@ async function salvarProduto () {
 
         alertas();
         
-    } else if (tempoMaquina < 1 || tempoPessoa < 1 || valor < 1){
+    } else if (tempoPessoa < 1 || valor < 1){
+        var mensagem = 'Proibido valores menores que 1'
+        if (tempoPessoa < 1){
+            document.getElementById('tempoPessoa').classList.add('border-btn-red');
+            mensagem = mensagem + ' (tempo pessoa) ';
+
+        }
+        if (valor < 1) {
+            document.getElementById('valor').classList.add('border-btn-red');
+            mensagem = mensagem + ' (valor) ';
+        }
         localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'Proibido valores menores que 1');
+        localStorage.setItem('mensagem', mensagem);
 
         alertas();
     } else if (dataInicialInserida < dataAtual){
