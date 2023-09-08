@@ -11,10 +11,14 @@ window.addEventListener('load', async () => {
     localStorage.setItem('filtroPadraoFuncionario', '');
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadraoFuncionario');
 
+    alertas();
+
     // Função para renderizar a lista de usuários
     await retornaFuncionarios(filtroAoCarregarPagina);
     // Chama a função que cria os botões da página
     botoesPaginacao();
+
+    
 
 });
 
@@ -166,21 +170,21 @@ function exibir(dados) {
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                     <div class="flex flex-col gap-1 font-semibold">
                         <span class="text-lg leading-4 whitespace-nowrap">NIF</span>
-                        <span class="text-xs text-color-text-secundary capitalize">${funcionario['NIF'] ? funcionario['NIF'] : 'N/A'}</span>
+                        <span class="text-xs text-color-text-secundary">${funcionario['NIF'] ? funcionario['NIF'] : 'N/A'}</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="flex flex-col gap-1 font-semibold">
                         <span class="text-lg leading-4 whitespace-nowrap">Email</span>
-                        <span class="text-xs text-color-text-secundary capitalize">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
+                        <span class="text-xs text-color-text-secundary">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
                 <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 p-1 bg-${cor}/20 rounded-md relative">
-                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full">
+            <button type="button" class="w-6 h-6 bg-${cor}/20 rounded-md relative">
+                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
@@ -206,12 +210,12 @@ function exibir(dados) {
     }
 
     reloadBotoesLinhas();
-    reloadRows();
+    recarregarLinhas();
 };
 
 
 // Reaplicar as funções referentes a linhas da tabela
-function reloadRows() {
+function recarregarLinhas() {
 
     const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
 
@@ -219,8 +223,6 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
-
-            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
@@ -231,30 +233,17 @@ function reloadRows() {
             
         });
     });
+
 }
 
-// Função para fechar todos os dropdown
-function hiddenAll() {
-
-    if (document.querySelector('.option-dropdown')) {
-        
-        document.querySelectorAll('.option-dropdown').forEach((el) => {
-
-            const row = el.parentElement.parentElement.parentElement;
-    
-            el.classList.add('hidden');
-            row.classList.remove('selected-row');
-        });
-    }
-}
 
 // Fechar todos ao clicar fora do botão
 window.addEventListener('click', (event) => {
 
     if (!event.target.matches('.option-dropdown-trigger')) {
 
-        hiddenAll();
-    }
+        esconderTudo();
+    } 
 });
 
 
@@ -470,44 +459,26 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
     });
 }
 
+// Abertura e Fechamento da Modal
+let modalEdit = document.querySelector('#modal');
+let modalEditFade = document.querySelector('#modal-fade');
+let fecharModal = document.querySelector('#close-modal');
+
+const toggleModal = () => {
+
+    [modalEdit, modalEditFade].forEach((el) => el.classList.toggle('hide'));
+
+};
+
+[fecharModal, modalEditFade].forEach((el) => el.addEventListener('click', toggleModal));
+
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
-
-    let modalEdit = document.querySelector('.edit');
-
-    modalEdit.classList.add('flex');
-    modalEdit.classList.remove('hidden');
-
+    // Quando aparecer o formulário será feita uma requisição para retornar os dados
     dadosParaEditar(nif);
 
-    // Fazendo a lista de funcionários desaparecer
-    const exibicao = document.querySelector('#exibicao');
-
-    // Selecionando o formulário
-    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-
-    // Alterando a visibilidade
-    // Renderizando de acordo o evento
-    if (formularioEditarUsuario.style.display === 'flex') {
-
-        // Escondendo o formulário
-        formularioEditarUsuario.style.display = 'none';
-
-        // Exibindo a lista
-        exibicao.style.display = 'block';
-
-    } else {
-        // Exibindo o formulário
-        formularioEditarUsuario.style.display = 'flex';
-
-        // Escondendo a lista de funcionários
-        exibicao.style.display = 'none';
-
-        // Quando aparecer o formulário será feita uma requisição para retornar os dados
-        dadosParaEditar(nif);
-
-    }
+    toggleModal();
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
@@ -543,8 +514,7 @@ function exibirDadosParaEditar(dados) {
     for (let usuario of dados) {
         editarNome.value = usuario.Nome;
         editarSobrenome.value = usuario.Sobrenome;
-        // Tirando o padrão do email do SENAI
-        editarEmail.value = usuario.Email.replace('@sp.senai.br', '');
+        editarEmail.value = usuario.Email
         editarCargo.value = usuario.TipoUser;
     }
 
@@ -552,13 +522,13 @@ function exibirDadosParaEditar(dados) {
 
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#editarUsuario');
-formularioEditarUsuario.addEventListener('click', () => {
+formularioEditarUsuario.addEventListener('click', async () => {
 
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
     const sobrenome = document.querySelector('#editarSobrenome').value;
-    const email = document.querySelector('#editarEmail').value;
+    const email = document.querySelector('#editarEmail').value.replace('@sp.senai.br', '');
     const cargo = document.querySelector('#editarCargo').value;
 
     try {
@@ -592,7 +562,12 @@ formularioEditarUsuario.addEventListener('click', () => {
     
 
             // Função para editar os funcionários
-            requisicaoEditar(dadosEditados);
+            const resp = await requisicaoEditar(dadosEditados);
+
+            // console.log(resp);
+
+            localStorage.setItem('status', resp.status);
+            localStorage.setItem('mensagem', resp.mensagem);
     
             location.reload();
         }
@@ -619,9 +594,11 @@ async function requisicaoEditar(dados) {
     // Pegando a resposta retornado pelo servidor
     const resposta = await requisicao.json();
 
+
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
+    return resposta;
 
 }
 

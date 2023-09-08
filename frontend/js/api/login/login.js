@@ -83,19 +83,7 @@ async function login(email, senha) {
         localStorage.setItem('token', resposta.token);
 
     } catch (erro) {
-
-
-        // Verifica se 'erro' é uma string, se não for, converte para string e faz a substituição
-        if (typeof erro !== 'string') {
-            erro = erro.toString();
-        }
-
-        const erroFormatado = erro.replace('Error:', '');
-        console.log(erroFormatado);
-        
-        localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', erroFormatado);
-        alertas();
+        console.log(erro);
     }
 }
 
