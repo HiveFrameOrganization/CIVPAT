@@ -125,7 +125,7 @@ function exibir(dados) {
         }
 
         div.innerHTML = `
-        <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+        <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                     <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
