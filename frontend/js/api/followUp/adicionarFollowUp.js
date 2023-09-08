@@ -1,4 +1,5 @@
 import { back } from '../Rotas/rotas.js'
+import alertas from '../../feedback.js';
 // let liSelected
 
 // Pega data de hoje em yyyy-mm-dd
@@ -55,26 +56,55 @@ dataProx.addEventListener('input', evento => {
 // Pegando o evento de "submit" do formulário
 const form = document.querySelector('#formulario');
 
+// if(dadosEnviados.dataFollowUpProx.length > 10)  dadosEnviados.dataFollowUpProx.slice(0, -1)
+
+
 form.addEventListener('submit', evento => {
+
+    const dataLimite = new Date('9999-12-31');
+
+
     // Pausa o evento para pegar os dados do formulário
     evento.preventDefault();
     // Seleciona os valores presentes nos inputs do formulário HTML
     const dataFollowUp = document.getElementById('dataFollowUp').value;
     const comentario = document.getElementById('comentario').value;
     const dataFollowUpProx = document.getElementById('dataFollowUpProx').value;
+    const dataFollowUpInserido = new Date(dataFollowUp);
+    const dataFollowUpInseridoProx = new Date(dataFollowUpProx);
 
-    // Monta um objeto para ser enviado com json pro backend
+    if (dataFollowUpInserido > dataLimite) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'A data está incorreta.');
+
+        alertas();
+    } else if (dataFollowUpInseridoProx > dataLimite) {
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'A data está incorreta.');
+
+        alertas();
+
+    } else {
+
+        // Monta um objeto para ser enviado com json pro backend
     const dadosFollow = {
         idProposta: localStorage.getItem('idProposta'),
         dataFollowUp: dataFollowUp,
         comentario: comentario,
         dataFollowUpProx: dataFollowUpProx
     }
+
     enviaBackEnd(dadosFollow);
+
+    }
+
+    
 });
 
 async function enviaBackEnd(dadosEnviados) {
     try {
+
         // Envia os dados do front pro Backend
         await fetch(back + `/followUp/postarFollowUp.php`, {
             method: 'POST',
