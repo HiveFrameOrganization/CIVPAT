@@ -8,15 +8,18 @@ import { back } from '../Rotas/rotas.js'
 */
 window.addEventListener('load', async () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', '');
+    const filtroAoCarregarPagina = localStorage.getItem('filtroPadraoFuncionario');
+
     // Função para renderizar a lista de usuários
-    await retornaFuncionarios();
+    await retornaFuncionarios(filtroAoCarregarPagina);
     // Chama a função que cria os botões da página
     botoesPaginacao();
 
 });
 
 // Funão para retornar uma lisat de funcionários
-async function retornaFuncionarios() {
+async function retornaFuncionarios(filtro) {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
         sessionStorage.setItem('paginaFun', 0)
@@ -38,7 +41,7 @@ async function retornaFuncionarios() {
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoqtdBotoesFun}`);
+        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}`);
 
         const dados = await resposta.json();
 
@@ -64,6 +67,16 @@ function botoesPaginacao() {
     // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
 
+    containerPaginacao.innerHTML = `
+    <a id="antPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+    </a>
+    <a id="proxPagina" href="#" class="w-4 h-4">
+        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+    </a>
+    
+    `
+
     // Cria os botoes
     for (let i = 0; i < qtdBotoesFun; i++) {
         const a = document.createElement('a');
@@ -77,6 +90,7 @@ function botoesPaginacao() {
 
         a.href = ''
         a.textContent = i + 1
+        a.id = `pesquisa${i}`
         a.onclick = () => {
             colocarPagina(i)
         }
@@ -94,6 +108,7 @@ function colocarPagina(num) {
 
 function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
+
     const exibe = document.querySelector('#exibicao');
 
     // Removendo um possível elemento na div de exibição
@@ -109,6 +124,18 @@ function exibir(dados) {
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
         let cargo;
+        let cor;
+        let imgOpcao;
+
+        if (funcionario['Status'].toLowerCase() == 'ativo') {
+
+            cor = 'primary';
+            imgOpcao = '../../img/icon/more-vertical.svg';
+        } else {
+
+            cor = 'color-red';
+            imgOpcao = '../../img/icon/more-vertical-red.svg';
+        }
 
         if (funcionario['TipoUser'] == 'tec') {
 
@@ -125,10 +152,10 @@ function exibir(dados) {
         }
 
         div.innerHTML = `
-        <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+        <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
                     <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -148,12 +175,12 @@ function exibir(dados) {
                         <span class="text-xs text-color-text-secundary capitalize">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
-                <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
+                <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
             </div>
         </div>
-        <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
-                <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+        <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
+            <button type="button" class="w-6 h-6 p-1 bg-${cor}/20 rounded-md relative">
+                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
@@ -178,7 +205,8 @@ function exibir(dados) {
         exibe.appendChild(div);
     }
 
-    reloadRowsButtons();
+    reloadBotoesLinhas();
+    reloadRows();
 };
 
 
@@ -191,6 +219,8 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
@@ -201,8 +231,6 @@ function reloadRows() {
             
         });
     });
-
-    getAllViewButtons();
 }
 
 // Função para fechar todos os dropdown
@@ -230,6 +258,31 @@ window.addEventListener('click', (event) => {
 });
 
 
+// Função para fechar todos os dropdown
+function esconderTudo() {
+
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+
+            const row = el.parentElement.parentElement.parentElement;
+    
+            el.classList.add('hidden');
+            row.classList.remove('selected-row');
+        });
+    }
+}
+
+// Fechar todos ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        esconderTudo();
+    }
+});
+
+
 /*
 --------------------------------------------------------------------------------------- 
                         PROCESSO DE PESQUISAR USUÁRIO 
@@ -245,7 +298,13 @@ const pesquisarUsuario = document.querySelector('#pesquisarUsuario');
 
 // Pegando o evento de click para realizar a pesquisa
 botaoPesquisar.addEventListener('click', () => {
-    pesquisarFuncionario(pesquisarUsuario.value);
+
+    if (pesquisarUsuario.value === '') return;
+
+    const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
+
+    pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+    botoesPaginacao();
 });
 
 // Para melhorar a experiência do usuário, quando apertar o enter no input também será realizada a pesquisa
@@ -253,21 +312,31 @@ botaoPesquisar.addEventListener('click', () => {
 pesquisarUsuario.addEventListener('keydown', evento => {
 
     if (evento.key === 'Enter') {
-        pesquisarFuncionario(pesquisarUsuario.value);
+
+        const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
+
+        pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+        botoesPaginacao();
     }
 
 });
 
 // Função específica para realizar a pesquisa do funcionário
-async function pesquisarFuncionario(valor) {
+async function pesquisarFuncionario(valor, filtro) {
+
+    const numPagina = sessionStorage.getItem('paginaFun');
+
+    sessionStorage.setItem('paginaFun', 0);
 
     try {
 
         // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}&pag=${numPagina}&filtros=${filtro}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
@@ -309,8 +378,11 @@ function exibirErro(erro) {
 const botaoTodos = document.querySelector('#botaoTodos');
 botaoTodos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', '');
+
+
     // Função para renderizar a lista de usuários
-    retornaFuncionarios();
+    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
 
 });
 
@@ -319,6 +391,11 @@ botaoTodos.addEventListener('click', () => {
 const botaoAtivos = document.querySelector('#botaoAtivos');
 botaoAtivos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', 'Ativo');
+
+
+    // Função para renderizar a lista de usuários
+    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
     // Função para renderizar a lista de usuários
     usuariosFiltrados(botaoAtivos.value);
 
@@ -329,16 +406,19 @@ botaoAtivos.addEventListener('click', () => {
 const botaoDesativos = document.querySelector('#botaoDesativos');
 botaoDesativos.addEventListener('click', () => {
 
+    localStorage.setItem('filtroPadraoFuncionario', 'Inativo');
+
     // Função para renderizar a lista de usuários
-    usuariosFiltrados(botaoDesativos.value);
+    usuariosFiltrados(localStorage.getItem('filtroPadraoFuncionario'));
 
 });
 
 async function usuariosFiltrados(valor) {
     try {
 
+        const numPagina = sessionStorage.getItem('paginaFun');
         // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}&pag=${numPagina}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
@@ -359,51 +439,37 @@ async function usuariosFiltrados(valor) {
 */
 
 // Recuperar os botões das linhas da tabela
-function reloadRowsButtons() {
+function reloadBotoesLinhas() {
 
     const inativarButtons = document.querySelectorAll('.inativar');
     const editarrButtons = document.querySelectorAll('.editar');
+
+    addEventoLinhasBotoes(inativarButtons, editarrButtons);
 }
 
 // Aplicando os eventos aos botões das linhas da tabela
-function addEventToRowButtons(inativarButtons, editarrButtons) {
+function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
 
     inativarButtons.forEach((btn) => {
 
         btn.addEventListener('click', function() {
 
-            console.log(this.getAttribute('itemid'));
+            desativarUsuario(this.getAttribute('itemid'));
+            console.log(`${this.getAttribute('itemid')} desativado!`);
+        });
+    });
+
+    editarrButtons.forEach((btn) => {
+
+        btn.addEventListener('click', function() {
+
+            localStorage.setItem('nif', this.getAttribute('itemid'));
+
+            FormularioEditarUsuario(this.getAttribute('itemid'));
         });
     });
 }
 
-// Capturando o clique dos botões de demissão
-// document.addEventListener('click', evento => {
-
-//     // Pegando o elemento clicado pelo usuário
-//     const elemento = evento.target;
-
-//     // verificando se é mesmo o botão de inativar
-//     if (elemento.classList.contains('inativar')) {
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         desativarUsuario(nif);
-
-//     } else if (elemento.classList.contains('editar')) {
-
-//         // Selecionando o NIF que vai ser usado para desativar o usuário
-//         const nif = elemento.value;
-
-//         // Salvando o valor do nif para ser usado mais tarde
-//         localStorage.setItem('nif', nif);
-
-//         // Aparecer com o formulário de editar
-//         FormularioEditarUsuario(nif);
-
-//     }
-
-// });
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
@@ -415,32 +481,33 @@ async function FormularioEditarUsuario(nif) {
 
     dadosParaEditar(nif);
 
-    // // Fazendo a lista de funcionários desaparecer
-    // const exibicao = document.querySelector('#exibicao');
+    // Fazendo a lista de funcionários desaparecer
+    const exibicao = document.querySelector('#exibicao');
 
-    // // Selecionando o formulário
-    // const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
+    // Selecionando o formulário
+    const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 
-    // // Alterando a visibilidade
-    // // Renderizando de acordo o evento
-    // if (formularioEditarUsuario.style.display === 'flex') {
+    // Alterando a visibilidade
+    // Renderizando de acordo o evento
+    if (formularioEditarUsuario.style.display === 'flex') {
 
-    //     // Escondendo o formulário
-    //     formularioEditarUsuario.style.display = 'none';
+        // Escondendo o formulário
+        formularioEditarUsuario.style.display = 'none';
 
-    //     // Exibindo a lista
-    //     exibicao.style.display = 'block';
+        // Exibindo a lista
+        exibicao.style.display = 'block';
 
-    // } else {
-    //     // Exibindo o formulário
-    //     formularioEditarUsuario.style.display = 'flex';
+    } else {
+        // Exibindo o formulário
+        formularioEditarUsuario.style.display = 'flex';
 
-    //     // Escondendo a lista de funcionários
-    //     exibicao.style.display = 'none';
+        // Escondendo a lista de funcionários
+        exibicao.style.display = 'none';
 
-    //     // Quando aparecer o formulário será feita uma requisição para retornar os dados
-    //     dadosParaEditar(nif);
-    // }
+        // Quando aparecer o formulário será feita uma requisição para retornar os dados
+        dadosParaEditar(nif);
+
+    }
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
@@ -484,11 +551,9 @@ function exibirDadosParaEditar(dados) {
 }
 
 // Enviar o formulário para editar
-const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-formularioEditarUsuario.addEventListener('submit', evento => {
+const formularioEditarUsuario = document.querySelector('#editarUsuario');
+formularioEditarUsuario.addEventListener('click', () => {
 
-    // Parando o evento do formulário
-    evento.preventDefault();
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
@@ -579,8 +644,13 @@ async function desativarUsuario(nif) {
         // Caso a resposta do servidor sej algum erro já previsto...
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        alertas();
+
         // Atualizando a lista em tempo real
-        retornaFuncionarios();
+        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
 
     } catch (erro) {
         console.error(erro);

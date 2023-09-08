@@ -263,19 +263,19 @@ INSERT INTO NomeProduto (idNomeProduto, NomeProduto, fk_idServicoCategoria) VALU
 -- Inserção de Usuários para teste
 
 insert into Usuarios values 
-('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', 'senai115', 'ativo'),
-('9234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', 'senai115', 'ativo'),
-('1294569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', 'senai115', 'ativo'),
-('1239567', 'michael', 'jackson', NULL, 'ger', 'gerente@sp.senai.br', 'senai115', 'ativo'),
-('1934568', 'michael', 'jackson', NULL, 'coor', 'coordenador@sp.senai.br', 'senai115', 'ativo'),
-('1234969', 'michael', 'jackson', NULL, 'adm', 'administracao@sp.senai.br', 'senai115', 'ativo'),
-('1234667', 'michael', 'jackson', NULL, 'ger', 'gerencio@sp.senai.br', 'senai115', 'ativo'),
-('1264968', 'michael', 'jackson', NULL, 'coor', 'coordenencio@sp.senai.br', 'senai115', 'ativo'),
-('1236569', 'michael', 'jackson', NULL, 'adm', 'administrencio@sp.senai.br', 'senai115', 'ativo'),
-('1634567', 'michael', 'jackson', NULL, 'ger', 'germe@sp.senai.br', 'senai115', 'ativo'),
-('1264568', 'michael', 'jackson', NULL, 'coor', 'coorte@sp.senai.br', 'senai115', 'ativo'),
-('1234566', 'michael', 'jackson', NULL, 'adm', 'adminastror@sp.senai.br', 'senai115', 'ativo'),
-('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', 'senai115', 'ativo');
+('1234567', 'michael', 'jackson', NULL, 'ger', 'ger@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('9234568', 'michael', 'jackson', NULL, 'coor', 'coor@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1294569', 'michael', 'jackson', NULL, 'adm', 'adm@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1239567', 'michael', 'jackson', NULL, 'ger', 'gerente@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1934568', 'michael', 'jackson', NULL, 'coor', 'coordenador@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1234969', 'michael', 'jackson', NULL, 'adm', 'administracao@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1234667', 'michael', 'jackson', NULL, 'ger', 'gerencio@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1264968', 'michael', 'jackson', NULL, 'coor', 'coordenencio@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1236569', 'michael', 'jackson', NULL, 'adm', 'administrencio@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1634567', 'michael', 'jackson', NULL, 'ger', 'germe@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1264568', 'michael', 'jackson', NULL, 'coor', 'coorte@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1234566', 'michael', 'jackson', NULL, 'adm', 'adminastror@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo');
 
 -- Inserção de Representantes para teste
 insert into Representantes values 
@@ -389,6 +389,39 @@ insert into Propostas values
 'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL),
 (default, 1, '1234567', 'Jacaré a Jato', 'Text', 9, 
 'Jacksons 5', 'Em Análise', NULL, '75090673000189', NULL, NULL, NULL);
+
+insert into GerenteResponsavel values 
+(default, 1, '1234567'),
+(default, 2, '1234567'),
+(default, 3, '1234567'),
+(default, 4, '1234567'),
+(default, 5, '1234567'),
+(default, 6, '1234567'),
+(default, 7, '1234567'),
+(default, 8, '1234567'),
+(default, 9, '1234567'),
+(default, 10, '1234567'),
+(default, 11, '1234567'),
+(default, 12, '1234567'),
+(default, 13, '1234567'),
+(default, 14, '1234567'),
+(default, 15, '1234567'),
+(default, 16, '1234567'),
+(default, 17, '1234567'),
+(default, 18, '1234567'),
+(default, 19, '1234567'),
+(default, 20, '1234567'),
+(default, 21, '1234567'),
+(default, 22, '1234567'),
+(default, 23, '1234567'),
+(default, 24, '1234567'),
+(default, 25, '1234567'),
+(default, 26, '1234567'),
+(default, 27, '1234567'),
+(default, 28, '1234567'),
+(default, 29, '1234567'),
+(default, 30, '1234567'),
+(default, 31, '1234567');
 
 -- Inserção de Historico para teste
 insert into Historico VALUES

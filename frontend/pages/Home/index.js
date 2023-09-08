@@ -5,6 +5,11 @@ const closeModalButton = document.querySelector('#close-modal');
 const modal = document.querySelector('#modal');
 const modalFade = document.querySelector('#modal-fade');
 
+const fechaModal = document.getElementById('modal');
+fechaModal.addEventListener('click', function(e) {
+  if (e.target == this) toggleModal();
+});
+
 const toggleModal = () => [modal, modalFade].forEach((el) => el.classList.toggle('hide'));
 
 [openModalButton, closeModalButton, modalFade].forEach((el) => el.addEventListener('click', toggleModal));

@@ -2,29 +2,8 @@ usuario: hiveframe
 senha: Hiveframe@115
 
 
-# CRIAR A CA 
-	# openssl req -x509 -sha256 -days 365 -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.crt
-	# deixar tudo padrão 
-	# ls -las
-
-
-# GERAR CHAVE IDENTIFICADORA 
-	# openssl genrsa -out certificado.key 2048
-	# ls -las 
-
-# CRIAR CSR (solicitação de assinatura de certificado)
-	# openssl req -new -key centificado.key -out certificado.csr 
-	# ATENÇÃO - COLOCAR O DOMÍNIO // DNS DA MÁQUINA
-
-
-# CRIAR CERTIFICADO ASSINADO PELA CA 
-	# openssl x509 -req -in certificado.csr -CA rootCA.ctr -CA rootCA.crt -CAkey rootCA.key -CAcreateserial -out certificado.crt -days 365 -sha256
-
-Configurar nginx
-Configurar saida docker
-
-fonte: https://www.youtube.com/watch?v=HZ2OKVu5O0s
-fonte: https://projetoisi.eastus.cloudapp.azure.com/frontend/pages/Home/index.html
+link deploy: projetoisi.eastus.cloudapp.azure.com:8080
+link erros: https://rebel-azimuth-2e5.notion.site/ERROS-TCC-a13520208c064a5fa792554d8f6e3ac2
 
 
 

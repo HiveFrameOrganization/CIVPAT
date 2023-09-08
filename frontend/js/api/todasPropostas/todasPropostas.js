@@ -64,9 +64,6 @@ async function pegarTodasAsPropostas (filtros) {
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
             document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
-        } else {
-
-            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
 
     } catch (error){
@@ -92,28 +89,86 @@ function botoesPaginacao() {
     </a>
     `
 
-    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
-    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+    // Criando o primeiro botão
+    const priBotao = document.createElement('a');
 
-    for (let i = 1; i <= qtdBotoes; i++) {
-        const a = document.createElement('a');
-
-        if (sessionStorage.getItem('paginaProposta') == i) {
-            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        } else {
-            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        }
-
-        a.href = ''
-        a.textContent = i
-        a.id = `pesquisa${i}`
-        a.onclick = () => {
-            colocarPagina(i)
-        }
-
-        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
-        containerPaginacao.insertBefore(a, setaProxPagina);
+    if (sessionStorage.getItem('paginaProposta') == 1) {
+        // pagina selecionado
+        priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+    } else {
+        // outros botoes
+        priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
     }
+
+    priBotao.href = ''
+    priBotao.textContent = 1
+    priBotao.id = `pesquisa${1}`
+    priBotao.onclick = () => {
+        colocarPagina(1)
+    }
+
+    const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+    containerPaginacao.insertBefore(priBotao, setaProxPagina);
+    // Final Primeiro Botão
+
+    const paginaAtual = sessionStorage.getItem('paginaProposta');
+    if (paginaAtual > 3) {
+        const divisor = document.createElement('span');
+        divisor.textContent = '...'
+        containerPaginacao.insertBefore(divisor, setaProxPagina);
+    }
+
+    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
+    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
+        if (i > 1 && i < qtdBotoes  ) {
+            const a = document.createElement('a');
+    
+            if (sessionStorage.getItem('paginaProposta') == i) {
+                // pagina selecionado
+                a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            } else {
+                // outros botoes
+                a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            }
+    
+            a.href = ''
+            a.textContent = i
+            a.id = `pesquisa${i}`
+            a.onclick = () => {
+                colocarPagina(i)
+            }
+            console.log(a)
+    
+            containerPaginacao.insertBefore(a, setaProxPagina);
+        }
+    }
+
+    if (paginaAtual < 4) {
+        const divisor2 = document.createElement('span');
+        divisor2.textContent = '...'
+        containerPaginacao.insertBefore(divisor2, setaProxPagina);
+    }
+    // Criando o ultimo botão
+    const ultBotao = document.createElement('a');
+
+    if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
+        // pagina selecionado
+        ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+    } else {
+        // outros botoes
+        ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+    }
+
+    ultBotao.href = ''
+    ultBotao.textContent = qtdBotoes
+    ultBotao.id = `pesquisa${qtdBotoes}`
+    ultBotao.onclick = () => {
+        colocarPagina(qtdBotoes)
+    }
+
+    containerPaginacao.insertBefore(ultBotao, setaProxPagina);
+    // Final Ultimo Botão
 }
 
 // Seta o número da página no sessionStorage
@@ -165,9 +220,6 @@ async function pegarTodasAsPropostasFiltradas (filt) {
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
             document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
-        } else {
-
-            table.innerHTML = '<p class="text-center">Nenhuma proposta foi encontrada!</p>';
         }
 
     } catch (error){
@@ -231,7 +283,7 @@ function exibirPropostasFiltradas(propostas){
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
-                        <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
+                        <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Número do SGSET">${proposta['nSGSET'] ? proposta['nSGSET'] : 'N/A'}</span>
@@ -333,7 +385,7 @@ function exibirPropostas(propostas){
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
-                        <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
+                        <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Número do SGSET">${proposta['nSGSET'] ? proposta['nSGSET'] : 'N/A'}</span>
@@ -401,6 +453,7 @@ function getAllViewButtons() {
     });
 }
 
+
 // Reaplicar as funções referentes a linhas da tabela
 function reloadRows() {
 
@@ -410,6 +463,8 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 

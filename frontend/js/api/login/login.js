@@ -50,7 +50,7 @@ async function login(email, senha) {
         // Validação do login
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
-
+        localStorage.setItem('cargo', resposta.cargo);
 
 
         // // Verificando se o login for true
@@ -69,6 +69,7 @@ async function login(email, senha) {
 
         // Verificando o cargo de quem está logando para mandar para telas diferentes
         if (resposta.cargo === 'tec') {
+
 
             window.location.replace(frontPages + '/perfil/index.html');
 

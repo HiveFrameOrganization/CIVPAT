@@ -24,7 +24,7 @@ function desativarUsuario($nif, $conn) {
 
         // Resposta a ser retornada para o front-end
         $resposta = [
-            'status' => 'sucesso',
+            'status' => 'success',
             'mensagem' => 'Usuário desativado com sucesso!'
         ];
 
