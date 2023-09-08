@@ -452,8 +452,6 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
-
-            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 

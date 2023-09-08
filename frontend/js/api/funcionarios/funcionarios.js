@@ -223,8 +223,6 @@ function recarregarLinhas() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
-
-            esconderTudo();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
