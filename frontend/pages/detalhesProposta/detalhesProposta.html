@@ -219,7 +219,7 @@
         <div id="detalhesProposta" class="bg-component pb-12">
 
             <div class="container mx-auto px-6">
-                <h2 class="nomeAba uppercase text-2xl font-bold py-8  mx-auto">detalhes da proposta</h2>
+                <h2 class="nomeAba uppercase text-2xl font-bold py-8 mx-auto">detalhes da proposta</h2>
 
                 <!-- Campos que ficaram as informaçoes -->
                 <div class="abaInfo bg-body px-6 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
@@ -594,7 +594,7 @@
 
                     </div>
 
-                    <div class="tabela space-y-1 overflow-auto -we min-h-[280px] max-h-[415px]">
+                    <div class="tabela space-y-1 overflow-auto -we min-h-[450px]">
 
                         <div id="tabelaFollow"
                             class="flex flex-wrap gap-8 w-full md:items-start md:justify-normal pb-7 overflow-y-auto">
@@ -641,7 +641,7 @@
                     <!-- conteúdo do modal -->
 
                     <div
-                        class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto max-h-full">
+                        class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto max-h-[75vh]">
 
                         <!-- título e subtítulo -->
 
@@ -665,21 +665,21 @@
                             <div>
                                 <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUp" id="dataFollowUp"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
                             <div>
                                 <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
                                 <textarea name="comentario" id="comentario" rows="5"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
                             <div>
                                 <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProx" id="dataFollowUpProx"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                             </div>
 
@@ -687,7 +687,7 @@
 
                             <div class="pt-6">
                                 <button type="submit"
-                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:brightness-110">Adicionar
+                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Adicionar
                                     follow-up</button>
                             </div>
 
@@ -705,7 +705,7 @@
                     <!-- conteúdo do modal -->
 
                     <div
-                        class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto max-h-full">
+                        class="bg-component px-8 sm:px-12 lg:px-8 py-16 lg:pt-8 lg:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto max-h-[75vh]">
 
                         <!-- título e subtítulo -->
 
@@ -730,21 +730,21 @@
                             <div>
                                 <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpEdit" id="dataFollowUpEdit"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
                             <div>
                                 <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
                                 <textarea name="comentarioEdit" id="comentarioEdit" rows="5"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
                             <div>
                                 <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProxEdit" id="dataFollowUpProxEdit"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full"
+                                    class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                             </div>
 
@@ -752,7 +752,7 @@
 
                             <div class="pt-6">
                                 <button type="submit"
-                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:brightness-110">Editar
+                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Editar
                                     follow-up</button>
                             </div>
 
@@ -765,25 +765,31 @@
 
             <!-- campos que ficarão em Produtos -->
 
-            <div class="abaProdutos bg-body px-4 md:px-8 py-6 rounded-xl flex flex-col container mx-auto hidden w-[90.5%] gap-5">
+            <div class="container mx-auto px-6">
 
-                <button type="button" id="btnNovoProduto"
-                class="rounded-lg text-[#fff] hover:text-primary bg-primary w-max text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors uppercase">
-                    +Novo Produto</button>
-
-                <div role="table" id="propostas"
-                    class="tabela space-y-1 overflow-y-auto min-h-[240px] max-h-[415px]">
-
+                <div class="abaProdutos bg-body px-4 md:px-8 py-6 rounded-xl flex flex-col hidden w-full gap-5">
+    
+                    <button type="button" id="btnNovoProduto"
+                    class="rounded-lg text-[#fff] hover:text-primary bg-primary w-max text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors uppercase">
+                        + Novo Produto</button>
+    
+                    <div role="table" id="propostas"
+                        class="tabela space-y-1 overflow-y-auto min-h-[240px] max-h-[415px]">
+    
+                    </div>
                 </div>
+
             </div>
+
 
         </div>
 
         <!-- modal de cadastro de produto -->
 
-        <div class="modalCadastroProdudo z-50 h-screen w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6] hidden">
+        <div class="modalCadastroProdudo z-50 h-screen w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6] flex items-center hidden">
 
-            <form class="formulario flex flex-col gap-5 w-full md:w-1/2 bg-component p-8 h-full overflow-y-auto mt-5 mx-auto rounded-xl">
+            
+            <form class="formulario flex flex-col gap-5 w-full md:w-1/2 h-max bg-component p-8 overflow-y-auto  mx-auto rounded-xl absolute">
 
                 <div class="flex justify-between items-start">
                     <div class="flex flex-col gap-0">
@@ -794,67 +800,81 @@
                     <img src="../../img/icon/close.png" class="cursor-pointer" alt="Ícone de fechar modal" onclick="fechaModal()">
                 </div>
 
-                <label class="text-color-text font-bold block mb-3">Tempo (Máquina): </label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" type="number" id="tempoMaquina" required>
+                <!-- Primeira metade do modal de cadastro de produto -->
+                <div id="primerioCadastroProduto">
+                    <label class="text-color-text font-bold block mb-2">Área: </label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
 
-                <label class="text-color-text font-bold block mb-3">Tempo (Pessoa): </label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" type="number" id="tempoPessoa" required>
+                    <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="servico" id="servico" required>
+                        <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
+                        <option value="2" class="bg-body">Assessoria Tecnológica - Empreendedorismo</option>
+                        <option value="3" class="bg-body">Assessoria Tecnológica - Gestão</option>
+                        <option value="4" class="bg-body">Assessoria Tecnológica - Legislações, Normas e Regulamentos Técnicos</option>
+                        <option value="5" class="bg-body">Assessoria Tecnológica - Processo Produtivo</option>
+                        <option value="6" class="bg-body">Certificação - Processos</option>
+                        <option value="7" class="bg-body">Certificação - Produtos</option>
+                        <option value="8" class="bg-body">Desenvolvimento Tecnológico - Aprimoramento de Produtos e Processos</option>
+                        <option value="9" class="bg-body">Desenvolvimento Tecnológico - Pesquisa e Desenvolvimento de Processos</option>
+                        <option value="10" class="bg-body">Desenvolvimento Tecnológico - Pesquisa e Desenvolvimento de Produtos</option>
+                        <option value="11" class="bg-body">Informação Tecnológica - Disseminação da Informação</option>
+                        <option value="12" class="bg-body">Informação Tecnológica - Eventos Técnicos</option>
+                        <option value="13" class="bg-body">Serviços Especializados - Serviços de Inspeção</option>
+                        <option value="14" class="bg-body">Serviços Especializados - Serviços Operacionais</option>
+                        <option value="15" class="bg-body">Serviços Metrológicos - Calibração - Labor. Dimensional</option>
+                        <option value="16" class="bg-body">Serviços Metrológicos - Ensaios - Labor. Em Implantes</option>
+                    </select>
 
-                <label class="text-color-text font-bold block mb-3">Unidade Realizadora: </label>
-                <select class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" id="unidadeCriadora" required>
-                    <option value="" disabled selected>Selecione a unidade Criadora</option>
-                </select>
+                    <label class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="produto" id="produto" required>
+                        <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
+                    </select>
 
-                <label class="text-color-text font-bold block mb-3">Data Inicial: </label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full py-5" type="date" id="dataInicial" required>
+                    <label class="text-color-text font-bold block mb-2">Valor:</label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="number" name="valor" id="valor" step="0.01"
+                        max="99999999.99" required>
 
-                <label class="text-color-text font-bold block mb-3">Data Final: </label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full py-5" type="date" id="dataFinal" required>
+                    <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="tecnicos" id="tecnicos" required>
 
+                    </select>
 
-                <label class="text-color-text font-bold block mb-3">Área: </label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" type="text" id="area" disabled value="Metal Mecânica">
+                    <label class="text-color-text font-bold block mb-2">Máquina utilizada no produto</label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" id="maquinas" required>
 
-                <label class="text-color-text font-bold block mb-3" for="servico">Serviço Categoria: </label>
-                <select class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" name="servico" id="servico" required>
-                    <option value="1">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
-                    <option value="2">Assessoria Tecnológica - Empreendedorismo</option>
-                    <option value="3">Assessoria Tecnológica - Gestão</option>
-                    <option value="4">Assessoria Tecnológica - Legislações, Normas e Regulamentos Técnicos</option>
-                    <option value="5">Assessoria Tecnológica - Processo Produtivo</option>
-                    <option value="6">Certificação - Processos</option>
-                    <option value="7">Certificação - Produtos</option>
-                    <option value="8">Desenvolvimento Tecnológico - Aprimoramento de Produtos e Processos</option>
-                    <option value="9">Desenvolvimento Tecnológico - Pesquisa e Desenvolvimento de Processos</option>
-                    <option value="10">Desenvolvimento Tecnológico - Pesquisa e Desenvolvimento de Produtos</option>
-                    <option value="11">Informação Tecnológica - Disseminação da Informação</option>
-                    <option value="12">Informação Tecnológica - Eventos Técnicos</option>
-                    <option value="13">Serviços Especializados - Serviços de Inspeção</option>
-                    <option value="14">Serviços Especializados - Serviços Operacionais</option>
-                    <option value="15">Serviços Metrológicos - Calibração - Labor. Dimensional</option>
-                    <option value="16">Serviços Metrológicos - Ensaios - Labor. Em Implantes</option>
-                </select>
+                    </select>
 
-                <label class="text-color-text font-bold block mb-3" for="produtos">Produtos: </label>
-                <select class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" name="produto" id="produto" required>
-                    <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
-                </select>
+                    <!-- botão para continuar para o resto do modal -->
+                    <div class="flex justify-end w-full">
+                        <button id="paraSegundoModal" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button">Continuar</button>
+                    </div>
+                </div>
 
-                <label class="text-color-text font-bold block mb-3">Valor:</label>
-                <input class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" type="number" name="valor" id="valor" step="0.01"
-                    max="99999999.99" required>
+                <!-- Segunda metade do modal de cadastro de produto -->
+                <div id="segundoCadastroProduto" class="hidden">
+                    <label class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
 
-                <label class="text-color-text font-bold block mb-3" for="tecnicos">Técnico Responsável</label>
-                <select class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" name="tecnicos" id="tecnicos" required>
+                    <label class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
 
-                </select>
+                    <label class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" id="unidadeCriadora" required>
+                        <option value="" disabled selected>Selecione a unidade Criadora</option>
+                    </select>
 
-                <label class="text-color-text font-bold block mb-3">Máquina utilizada no produto</label>
-                <select class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full" id="maquinas" required>
+                    <label class="text-color-text font-bold block mb-2">Data Inicial: </label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataInicial" required>
 
-                </select>
+                    <label class="text-color-text font-bold block mb-2">Data Final: </label>
+                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataFinal" required>
+                
+                    <div class="flex justify-between w-full">
+                        <button class="rounded-lg text-[#fff] hover:text-primary bg-btn-red w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="paraPrimeiroModal">Voltar</button>
+                        <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="salvarProduto">Salvar</button>
+                    </div>
+                </div>
 
-                <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full mb-7 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="salvarProduto">Salvar</button>
             </form>
         </div>
 
@@ -889,11 +909,11 @@
     <script src="../../js/logoff.js"></script>
 
     <!-- front-end -->
+    <script src="./detalhesProposta.js"></script>
     <script src="../../js/themeSwitch/index.js"></script>
     <script src="../../js/global.js"></script>
 
     <!-- pdfs -->
-    <script src="../followUp/telaFollowUp.js"></script>
     <script src="../../Componentes/inputModal/script.js"></script>
     <script type="module" src="../../js/api/followUp/adicionarFollowUp.js"></script>
     <script type="module" src="../../js/api/followUp/editarFollowUp.js"></script>

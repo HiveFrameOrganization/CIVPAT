@@ -33,6 +33,7 @@ async function carregarTecnicos () {
         var optionElement = document.createElement("option");
         optionElement.value = resposta[i + 1];
         optionElement.textContent = resposta[i];
+        optionElement.classList.add('bg-body')
         opcoesTecnicos.appendChild(optionElement);
 
         i += 1;
@@ -45,6 +46,7 @@ async function salvarProduto () {
 
      // Obter a data atual
     var dataAtual = new Date();
+    var dataLimite = new Date('9999-12-31');
 
     
 
@@ -70,9 +72,19 @@ async function salvarProduto () {
 
         alertas();
         
-    } else if (tempoMaquina < 1 || tempoPessoa < 1 || valor < 1){
+    } else if (tempoPessoa < 1 || valor < 1){
+        var mensagem = 'Proibido valores menores que 1'
+        if (tempoPessoa < 1){
+            document.getElementById('tempoPessoa').classList.add('border-btn-red');
+            mensagem = mensagem + ' (tempo pessoa) ';
+
+        }
+        if (valor < 1) {
+            document.getElementById('valor').classList.add('border-btn-red');
+            mensagem = mensagem + ' (valor) ';
+        }
         localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'Proibido valores menores que 1');
+        localStorage.setItem('mensagem', mensagem);
 
         alertas();
     } else if (dataInicialInserida < dataAtual){
@@ -85,7 +97,19 @@ async function salvarProduto () {
         localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
 
         alertas();
-    } else {
+    }   else if (dataInicialInserida > dataLimite) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data inicial fora do limite');
+
+        alertas();
+    } else if (dataFinalInserida > dataLimite) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Data final fora do limite');
+
+        alertas();
+    }
+    
+    else {
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
             tempoPessoa: tempoPessoa,

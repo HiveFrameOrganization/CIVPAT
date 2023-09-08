@@ -57,6 +57,7 @@ document.getElementById("servico").addEventListener("change",async function() {
             var option = document.createElement('option');
             option.value = dado.idNomeProduto;
             option.text = dado.NomeProduto;
+            option.classList.add('bg-body')
             produtoSelect.appendChild(option);
         });
     } catch {

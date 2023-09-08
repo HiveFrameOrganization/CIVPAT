@@ -222,7 +222,7 @@
                                 <button id="close-modal" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="formularioProposta" class="space-y-4 max-h-[50vh] overflow-y-auto px-4 sm:px-8">
+                                <form id="formularioProposta" class="space-y-4 max-h-[50vh] overflow-y-auto px-4 sm:px-8" autocomplete="off">
                                     <div class="flex flex-col gap-2 w-full">
                                         <label for="nomeProjeto" class="font-semibold text-base">TÍTULO*</label>
                                         <input type="text" id="nomeProjeto" name="nomeProjeto" placeholder="Título da proposta" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
@@ -284,7 +284,7 @@
                 </div>
                 <!-- Paginação -->
                 <div id="paginacao" class="w-max mt-4 flex gap-2 float-right">
-                    <a id="primeiraPagina" alt="Voltar para a primeira pagina" class="w-full pt-[2px] text-primary" href=""><<</a>
+                    <!-- <a id="primeiraPagina" alt="Voltar para a primeira pagina" class="w-full pt-[2px] text-primary" href=""><<</a> -->
                     <div id="inserirPaginacao" class="flex items-center gap-2 justify-end">
                         <!-- <a id="antPagina" href="#" class="w-4 h-4">
                             <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
@@ -293,7 +293,7 @@
                             <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
                         </a> -->
                     </div>
-                    <a id="ultimaPagina" alt="Ir para a ultima pagina" class="w-full pt-[2px] text-primary" href="">>></a>
+                    <!-- <a id="ultimaPagina" alt="Ir para a ultima pagina" class="w-full pt-[2px] text-primary" href="">>></a> -->
                 </div>
             </div>
         </section>
