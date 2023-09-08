@@ -70,7 +70,7 @@ async function salvarProduto () {
 
         alertas();
         
-    } else if (tempoMaquina < 0 || tempoPessoa < 0 || valor < 0){
+    } else if (tempoMaquina < 1 || tempoPessoa < 1 || valor < 1){
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Proibido valores menores que 1');
 
