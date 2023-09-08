@@ -109,6 +109,18 @@ function exibir(dados) {
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
         let cargo;
+        let cor;
+        let imgOpcao;
+
+        if (funcionario['Status'].toLowerCase() == 'ativo') {
+
+            cor = 'primary';
+            imgOpcao = '../../img/icon/more-vertical.svg';
+        } else {
+
+            cor = 'color-red';
+            imgOpcao = '../../img/icon/more-vertical-red.svg';
+        }
 
         if (funcionario['TipoUser'] == 'tec') {
 
@@ -128,7 +140,7 @@ function exibir(dados) {
         <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
                     <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -148,12 +160,12 @@ function exibir(dados) {
                         <span class="text-xs text-color-text-secundary capitalize">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
-                <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
+                <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 p-1 bg-primary/20 rounded-md relative">
-                <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+            <button type="button" class="w-6 h-6 p-1 bg-${cor}/20 rounded-md relative">
+                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full">
                 <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
@@ -179,11 +191,12 @@ function exibir(dados) {
     }
 
     reloadBotoesLinhas();
+    reloadRows();
 };
 
 
 // Reaplicar as funções referentes a linhas da tabela
-function reloadLinhas() {
+function reloadRows() {
 
     const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
 
@@ -191,6 +204,8 @@ function reloadLinhas() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
@@ -201,9 +216,32 @@ function reloadLinhas() {
             
         });
     });
-    
-    pegarTodosBotoesVisualizar();
 }
+
+// Função para fechar todos os dropdown
+function hiddenAll() {
+
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+
+            const row = el.parentElement.parentElement.parentElement;
+    
+            el.classList.add('hidden');
+            row.classList.remove('selected-row');
+        });
+    }
+}
+
+// Fechar todos ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        hiddenAll();
+    }
+});
+
 
 // Função para fechar todos os dropdown
 function esconderTudo() {
