@@ -453,6 +453,7 @@ function getAllViewButtons() {
     });
 }
 
+
 // Reaplicar as funções referentes a linhas da tabela
 function reloadRows() {
 
@@ -462,6 +463,8 @@ function reloadRows() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
