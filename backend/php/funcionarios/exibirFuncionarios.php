@@ -10,14 +10,23 @@ require_once '../../../database/conn.php';
 function retornaFuncionarios($conn)
 {
     //
+    $filtro = $_GET['filtros'];
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 5;
     $inicioFun = $numPagina * $qtdFuncionariosTela;
 
-    // preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");
-    // Limita os resultados a 10 funcionarios
-    $stmt->bind_param('ii', $inicioFun, $qtdFuncionariosTela);
+    if ($filtro == ''){
+        // preparando a query
+        $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");
+        // Limita os resultados a 10 funcionarios
+        $stmt->bind_param('ii', $inicioFun, $qtdFuncionariosTela);
+
+    } else {
+        // preparando a query
+        $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE Status = ? LIMIT ?, ?");
+        // Limita os resultados a 10 funcionarios
+        $stmt->bind_param('sii', $filtro, $inicioFun, $qtdFuncionariosTela);
+    }
 
     // Excutando a query
     $stmt->execute();

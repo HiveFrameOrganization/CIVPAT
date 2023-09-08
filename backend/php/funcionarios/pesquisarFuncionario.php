@@ -10,14 +10,18 @@ require_once '../../../database/conn.php';
 // Função para fazer a pesquisa no banco
 function pesquisarUsuario($valor, $conn)
 {
+    $filtro = $_GET['filtros'];
+    $numPagina = $_GET['pag'];
+    $qtdFuncionariosTela = 5;
+    $inicioFun = $numPagina * $qtdFuncionariosTela;
 
     // Jogando o nome em outra variável
     $nome = $valor . '%';
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF = ? OR Nome LIKE ?");
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF = ? OR Nome LIKE ? AND `Status` = ? LIMIT ?, ?");
 
-    $stmt->bind_param('ss', $valor, $nome);
+    $stmt->bind_param('sssii', $valor, $nome, $filtro, $inicioFun, $qtdFuncionariosTela);
 
     // Excutando a query
     $stmt->execute();
@@ -35,7 +39,7 @@ function pesquisarUsuario($valor, $conn)
 
         // Enviando a resposta do servidor
         $resposta = [
-            'status' => 'sucesso',
+            'status' => 'success',
             'mensagem' => 'Usuários retornados com sucesso',
             'usuarios' => $usuarios
         ];
@@ -45,7 +49,7 @@ function pesquisarUsuario($valor, $conn)
 
     } else {
         $resposta = [
-            'status' => 'erro',
+            'status' => 'error',
             'mensagem' => 'Nenhum Usuário encontrado'
         ];
 
@@ -66,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Resposta de erro enviada ao front-end
     $resposta = [
         'mensagem' => 'Aconteceu algum erro...',
-        'status' => 'erro'
+        'status' => 'error'
     ];
 
     echo json_encode($resposta);
