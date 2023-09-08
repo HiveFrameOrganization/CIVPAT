@@ -11,10 +11,14 @@ window.addEventListener('load', async () => {
     localStorage.setItem('filtroPadraoFuncionario', '');
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadraoFuncionario');
 
+    alertas();
+
     // Função para renderizar a lista de usuários
     await retornaFuncionarios(filtroAoCarregarPagina);
     // Chama a função que cria os botões da página
     botoesPaginacao();
+
+    
 
 });
 
@@ -552,7 +556,7 @@ function exibirDadosParaEditar(dados) {
 
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#editarUsuario');
-formularioEditarUsuario.addEventListener('click', () => {
+formularioEditarUsuario.addEventListener('click', async () => {
 
 
     // Pegando os valores do formulário
@@ -592,7 +596,12 @@ formularioEditarUsuario.addEventListener('click', () => {
     
 
             // Função para editar os funcionários
-            requisicaoEditar(dadosEditados);
+            const resp = await requisicaoEditar(dadosEditados);
+
+            // console.log(resp);
+
+            localStorage.setItem('status', resp.status);
+            localStorage.setItem('mensagem', resp.mensagem);
     
             location.reload();
         }
@@ -619,9 +628,11 @@ async function requisicaoEditar(dados) {
     // Pegando a resposta retornado pelo servidor
     const resposta = await requisicao.json();
 
+
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
+    return resposta;
 
 }
 
