@@ -191,11 +191,12 @@ function exibir(dados) {
     }
 
     reloadBotoesLinhas();
+    reloadRows();
 };
 
 
 // Reaplicar as funções referentes a linhas da tabela
-function reloadLinhas() {
+function reloadRows() {
 
     const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
 
@@ -203,6 +204,8 @@ function reloadLinhas() {
     optionDropdownTriggers.forEach((trigger) => {
 
         trigger.addEventListener('click', () => {
+
+            hiddenAll();
             
             const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
 
@@ -213,9 +216,32 @@ function reloadLinhas() {
             
         });
     });
-    
-    pegarTodosBotoesVisualizar();
 }
+
+// Função para fechar todos os dropdown
+function hiddenAll() {
+
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+
+            const row = el.parentElement.parentElement.parentElement;
+    
+            el.classList.add('hidden');
+            row.classList.remove('selected-row');
+        });
+    }
+}
+
+// Fechar todos ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        hiddenAll();
+    }
+});
+
 
 // Função para fechar todos os dropdown
 function esconderTudo() {
