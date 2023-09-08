@@ -127,6 +127,7 @@ async function verificarBancoProposta(id) {
 
 
         const resposta = await requisicao.json();
+        console.log(resposta);
 
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação

@@ -92,7 +92,8 @@ function verificarDetalhes($idProposta, $conn) {
                 "StatusFunil" => $dados['StatusFunil'],
                 "nomeContato" => $dados['NomeRepresentante'],
                 "emailContato" => $dados['EmailRepresentante'],
-                "numeroContato" => $dados['TelefoneRepresentante']
+                "numeroContato" => $dados['TelefoneRepresentante'],
+                "resumo" => $dados['Resumo']
 
             ];
 
