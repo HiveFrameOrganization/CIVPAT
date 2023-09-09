@@ -118,6 +118,18 @@ async function selecionarGerente(id) {
     }
 }
 
+async function selecionarFunil(statusFunil) {
+    const options = Array.from(document.getElementById('funil').options);
+
+    console.log(statusFunil)
+    for (const option of options) {
+        if (option.textContent === statusFunil) {
+            option.selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
+}
+
 // Fução para fazer a requisição no back-end dos dados
 async function verificarBancoProposta(id) {
     try {
@@ -154,7 +166,7 @@ async function verificarBancoProposta(id) {
         const dataPrimeiroProduto = document.querySelector('#dataPrimeiroProduto').value = resposta['dataPrimeiroProduto'];
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = (resposta['valorTotalProdutos'] == null) ? 0 : resposta['valorTotalProdutos'];
-        document.querySelector('#funil').value = resposta['StatusFunil'];
+        selecionarFunil(resposta['StatusFunil']);
         // const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
         const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
@@ -506,7 +518,7 @@ async function pegarUnidadesCriadoras() {
 
     const unidadesSelect = document.getElementById('uniCriadora');
 
-    const requisicao = await fetch(back + '/todasPropostas/PegarUnidadesCriadoras.php');
+    const requisicao = await fetch(back + '/todasPropostas/pegarUnidadesCriadoras.php');
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();

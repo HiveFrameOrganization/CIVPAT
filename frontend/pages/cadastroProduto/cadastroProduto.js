@@ -78,7 +78,7 @@ async function pegarUnidadesCriadoras() {
     
     const unidadesSelect = document.getElementById('unidadeCriadora');
 
-    const requisicao = await fetch (back + '/todasPropostas/PegarUnidadesCriadoras.php');
+    const requisicao = await fetch (back + '/todasPropostas/pegarUnidadesCriadoras.php');
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();

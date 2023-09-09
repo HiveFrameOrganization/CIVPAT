@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 // Buscando o arquivo do banco:
 require_once '../../../database/conn.php';
 
-
+require_once '../historico/inserirHistorico.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pegar o corpo da requisição
@@ -93,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt4->execute();
         }
+
+        inserirHistorico($conn, $funil, $idProposta);
 
         if ($conn->commit()){
             $resposta = [
