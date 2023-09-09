@@ -291,7 +291,7 @@ function exibirPropostasFiltradas(propostas){
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                <button type="button" class="w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
+                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
                     <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full">
                     <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                         <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
@@ -315,7 +315,7 @@ function exibirPropostasFiltradas(propostas){
             table.appendChild(divRow);
         }
     
-        reloadRows();
+        reloadLinhas();
 
         return;
     }
@@ -393,8 +393,8 @@ function exibirPropostas(propostas){
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                <button type="button" class="w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
-                    <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full">
+                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-6 bg-${color}/20 rounded-md relative">
+                    <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full p-1">
                     <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                         <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                             <div class="flex items-center gap-2">
@@ -417,7 +417,7 @@ function exibirPropostas(propostas){
             table.appendChild(divRow);
         }
     
-        reloadRows();
+        reloadLinhas();
 
         return;
     }
@@ -431,7 +431,7 @@ function verDetalhesDaProposta(element) {
 }
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
-function getAllViewButtons() {
+function getTodosBotoes() {
 
     document.querySelectorAll('.view-btn').forEach((btn) => {
 
@@ -442,51 +442,53 @@ function getAllViewButtons() {
     });
 }
 
-
-// Reaplicar as funções referentes a linhas da tabela
-function reloadRows() {
-
-    const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
-
-    // Abrir o dropdown específico do botão clicado
-    optionDropdownTriggers.forEach((trigger) => {
-
-        trigger.addEventListener('click', () => {
-            
-            const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
-
-            const row = optionDropdown.parentElement.parentElement.parentElement;
-
-            optionDropdown.classList.toggle('hidden');
-            row.classList.toggle('selected-row');
-            
-        });
-    });
-
-    getAllViewButtons();
-}
-
-// Função para fechar todos os dropdown
-function hiddenAll() {
+// Função para fechar todos menus das linhas
+function esconderTudo() {
 
     if (document.querySelector('.option-dropdown')) {
         
         document.querySelectorAll('.option-dropdown').forEach((el) => {
+            
+            if (!el.classList.contains('hidden')) {
 
-            const row = el.parentElement.parentElement.parentElement;
-    
-            el.classList.add('hidden');
-            row.classList.remove('selected-row');
+                let row = el.parentElement.parentElement.parentElement;
+
+                el.classList.add('hidden');
+                row.classList.remove('selected-row');
+            }   
         });
     }
 }
 
-// Fechar todos ao clicar fora do botão
+// Reaplicar as funções referentes a linhas da tabela
+function reloadLinhas() {
+
+    const btnAcionadores = document.querySelectorAll('.btn-trigger');
+
+    btnAcionadores.forEach((btn) => {
+
+        // Abrir o menu específico do botão clicado, na linha
+        btn.addEventListener('click', () => {
+            
+            esconderTudo();
+
+            let linhaMenu = btn.querySelector('.option-dropdown'),
+                linha = btn.parentElement.parentElement;
+            
+            linhaMenu.classList.toggle('hidden');
+            linha.classList.toggle('selected-row');
+        });
+    });
+
+    getTodosBotoes();
+}
+
+// Fechar todos os menus de opções das linhas, ao clicar fora do botão
 window.addEventListener('click', (event) => {
 
     if (!event.target.matches('.option-dropdown-trigger')) {
 
-        hiddenAll();
+        esconderTudo();
     }
 });
 
