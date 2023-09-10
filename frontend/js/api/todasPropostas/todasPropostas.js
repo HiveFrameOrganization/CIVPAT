@@ -504,6 +504,7 @@ async function pegarUnidadesCriadoras() {
 
     for (let i = 0; i < dados.length; i++) {
         let option = document.createElement('option');
+        option.classList.add('bg-body');
         option.value = dados[i].idUnidadeCriadora;
         option.textContent = dados[i].UnidadeCriadora;
         unidadesSelect.appendChild(option);

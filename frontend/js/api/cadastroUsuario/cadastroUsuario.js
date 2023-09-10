@@ -48,18 +48,18 @@ window.addEventListener('load', () => {
     alertas();
 })
 // Pegando o eveto do formulário
-const formulario = document.querySelector('#formulario');
+const formulario = document.querySelector('#form-cadastrar');
 // Função para selecionar o evento do formulário, essa função lida com operações assincronas...
 formulario.addEventListener('submit', async evento => {
 
     evento.preventDefault();
 
     // Pegando os valores do formulário
-    const nome = document.querySelector('#nome').value;
-    const sobrenome = document.querySelector('#sobrenome').value;
-    const nif = document.querySelector('#nif').value;
-    const email = document.querySelector('#email').value;
-    const cargo = document.querySelector('#tipoCargo').value;
+    const nome = document.querySelector('#cad-nome').value;
+    const sobrenome = document.querySelector('#cad-sobrenome').value;
+    const nif = document.querySelector('#cad-nif').value;
+    const email = document.querySelector('#cad-email').value;
+    const cargo = document.querySelector('#cad-cargo').value;
 
     // Código para validação, colocar dentro de um try
     try {

@@ -30,11 +30,7 @@ navButtons.forEach((button) => {
 });
 
 
-
 // funções da barra de pesquisa
-
-// funções da barra de pesquisa
-
 const hiddenInput = document.querySelector('#pesquisarUsuario'),
       searchButton = document.querySelector('#botaoPesquisar');
 
@@ -60,11 +56,14 @@ searchButton.addEventListener('click', () => {
     toggleInputVisibility();
 });
 
-// funções do modal de edição
+const modalCadastrar = document.querySelector('#modal-cadastrar');
+const fecharModalCadastrar = document.querySelector('#close-modal-cad');
+const modalCadFade = document.querySelector('#modal-fade');
 
-function fechaModalEdit(){
-    let modalEdit = document.querySelector('.edit');
+const openAndCloseModal = () => {
 
-    modalEdit.classList.remove('flex');
-    modalEdit.classList.add('hidden');
-}
+    [modalCadastrar, modalCadFade].forEach((el) => el.classList.toggle('hide'));
+
+};
+
+[fecharModalCadastrar, modalCadFade, document.querySelector('#cadastrar-btn')].forEach((el) => el.addEventListener('click', openAndCloseModal));
