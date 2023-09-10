@@ -31,7 +31,7 @@ function cadastrarGerente($dadosProposta, $conn, $dados) {
 
     if ($stmt->execute()) {
 
-        $historico = inserirHistorico($conn, $conn->insert_id);
+        $historico = inserirHistorico($conn, $conn->insert_id, $idProposta);
 
         $resposta = [
             'status' => 'success',

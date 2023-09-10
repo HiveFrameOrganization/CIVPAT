@@ -16,17 +16,7 @@ formulario.addEventListener('submit', async evento => {
 // Função para fazer o login
 async function login(email, senha) {
     try {
-        // Veririficando se a senha possui alguma letra maiúscula
-        if (!letraMaiuscula(senha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MAIÚSCULA!!!!`);
-
-        // Veririficando se a senha possui alguma letra minuscula
-        if (!letraMinuscula(senha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MINÚSCULA!!!!`);
-
-        // Veririficando se a senha possui algum número
-        if (!possuiNumero(senha)) throw new Error(`A SENHA DEVE POSSUIR ALGUM NÚMERO!!!!`);
-
-        // Verificando se ela tem o tamanho mínimo de 8 caracteres
-        if (!tamanhoMinimo(senha)) throw new Error(`A SENHA DEVE TER PELO MENOS 8 CARACTERES!!!!`);
+        
 
         // Dados para ser enviado na requisição
         const dados = {
@@ -45,7 +35,6 @@ async function login(email, senha) {
 
         const resposta = await login.json();
 
-        console.log(resposta);
 
         // Validação do login
         localStorage.setItem('status', resposta.status);

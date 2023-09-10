@@ -39,8 +39,6 @@ async function pegarTodasAsPropostas (filtros) {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados);
-
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
@@ -127,7 +125,7 @@ function botoesPaginacao() {
             a.onclick = () => {
                 colocarPagina(i)
             }
-            console.log(a)
+    
     
             containerPaginacao.insertBefore(a, setaProxPagina);
         }
@@ -221,7 +219,6 @@ async function pegarTodasAsPropostasFiltradas (filt) {
 
 function exibirPropostasFiltradas(propostas){
 
-    console.log(propostas);
 
     paginacao.classList.add('hidden');
 

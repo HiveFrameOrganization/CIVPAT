@@ -96,7 +96,7 @@ async function enviaBackEnd(dadosEnviados) {
 
         let dados = await resposta.json();
 
-
+        console.log(dados);
         // Retorna 'sucesso' ou 'erro'
         return dados;
 
