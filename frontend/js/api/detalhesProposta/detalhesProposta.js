@@ -123,7 +123,7 @@ async function selecionarFunil(statusFunil) {
 
     console.log(statusFunil)
     for (const option of options) {
-        if (option.textContent === statusFunil) {
+        if (option.value == statusFunil) {
             option.selected = true;
             break; // Saia do loop após encontrar a opção desejada
         }

@@ -12,9 +12,8 @@ function verificarDetalhes($idProposta, $conn) {
     // Criando uma variavel para reseber o resultado das querys
 
     $stmt = $conn->prepare("SELECT Propostas.*, `Usuarios`.`Nome`, `Representantes`.*,
-        (SELECT `StatusFunil` FROM Historico
-        INNER JOIN `StatusFunil` ON `StatusFunil`.`idStatusFunil` = Historico.`fk_idStatusAtual`
-        WHERE fk_idProposta = 1
+        (SELECT `fk_idStatusAtual` FROM Historico
+        WHERE fk_idProposta = ?
         ORDER BY `idHistorico` DESC
         LIMIT 1) AS `StatusFunil`
     FROM Propostas
@@ -25,7 +24,7 @@ function verificarDetalhes($idProposta, $conn) {
     WHERE idProposta = ?");
 
     // Subistituindo o valor do ? pelo parâmetro correnspondente
-    $stmt->bind_param('s', $idProposta);
+    $stmt->bind_param('ss', $idProposta, $idProposta);
     $stmt->execute();
     $resultado = $stmt-> get_result();
 

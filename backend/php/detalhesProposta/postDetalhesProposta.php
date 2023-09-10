@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt4->execute();
         }
 
-        inserirHistorico($conn, $funil, $idProposta);
+        inserirHistorico($conn, $funil, $idProposta, false);
 
         if ($conn->commit()){
             $resposta = [
