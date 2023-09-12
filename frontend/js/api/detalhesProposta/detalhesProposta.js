@@ -722,3 +722,15 @@ paraPrimeiroModal.addEventListener('click', ()=>{
     primerioCadastroProduto.classList.remove('hidden')
     segundoCadastroProduto.classList.add('hidden')
 })
+
+// abre aba para mostrar resumo
+let abaResumo = document.querySelector('#abaResumo')
+document.querySelector('#btnResumo').addEventListener('click', ()=>{
+    if(abaResumo.classList.contains('h-24')){
+        abaResumo.classList.remove('h-24')
+        abaResumo.classList.add('h-0')        
+    }else{
+        abaResumo.classList.add('h-24')
+        abaResumo.classList.remove('h-0')
+    }
+})
