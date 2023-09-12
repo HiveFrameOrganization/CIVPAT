@@ -130,13 +130,16 @@ function exibir(dados) {
         let cargo;
         let cor;
         let imgOpcao;
+        let mostrarBotao
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
 
+            mostrarBotao = ''
             cor = 'primary';
             imgOpcao = '../../img/icon/more-vertical.svg';
         } else {
-
+            
+            mostrarBotao = 'hidden'
             cor = 'color-red';
             imgOpcao = '../../img/icon/more-vertical-red.svg';
         }
@@ -183,9 +186,9 @@ function exibir(dados) {
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 bg-${cor}/20 rounded-md relative">
+            <button type="button" class="w-6 h-max bg-${cor}/20 rounded-md relative">
                 <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
-                <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
+                <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
@@ -194,7 +197,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    <div itemid="${funcionario['NIF']}" class="${mostrarBotao} inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
                             <a>
