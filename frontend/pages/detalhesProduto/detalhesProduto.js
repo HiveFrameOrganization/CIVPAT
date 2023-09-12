@@ -46,6 +46,7 @@ async function carregarTecnicos () {
 
     for (var i = 0; i < resposta.length; i++) {
         var optionElement = document.createElement("option");
+        optionElement.classList.add('bg-body');
         optionElement.value = resposta[i + 1];
         optionElement.textContent = resposta[i];
         opcoesTecnicos.appendChild(optionElement);
@@ -109,6 +110,7 @@ window.addEventListener('load', async function (){
         // Loop pelos resultados e crie as options
         dados.forEach(function(dado) {
             var option = document.createElement('option');
+            option.classList.add('bg-body');
             option.value = dado.idNomeProduto;
             option.text = dado.NomeProduto;
             produtoSelect.appendChild(option);
@@ -144,6 +146,7 @@ document.getElementById("servico").addEventListener("change", async function() {
         // Loop pelos resultados e crie as options
         dados.forEach(function(dado) {
             var option = document.createElement('option');
+            option.classList.add('bg-body');
             option.value = dado.idNomeProduto;
             option.text = dado.NomeProduto;
             produtoSelect.appendChild(option);
@@ -209,6 +212,7 @@ async function pegarUnidadesCriadoras() {
 
     for (let i = 0; i < dados.length; i++) {
         let option = document.createElement('option');
+        option.classList.add('bg-body');
         option.value = dados[i].idUnidadeCriadora;
         option.textContent = dados[i].UnidadeCriadora;
         unidadesSelect.appendChild(option);

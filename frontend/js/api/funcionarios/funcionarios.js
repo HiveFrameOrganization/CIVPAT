@@ -18,8 +18,6 @@ window.addEventListener('load', async () => {
     // Chama a função que cria os botões da página
     botoesPaginacao();
 
-    
-
 });
 
 // Funão para retornar uma lisat de funcionários
@@ -155,7 +153,7 @@ function exibir(dados) {
             cargo = 'Gerente';
         } else {
 
-            cargo = 'N/A'
+            cargo = 'Coordenador'
         }
 
         div.innerHTML = `
@@ -301,21 +299,16 @@ botaoPesquisar.addEventListener('click', () => {
 
 // Para melhorar a experiência do usuário, quando apertar o enter no input também será realizada a pesquisa
 
-pesquisarUsuario.addEventListener('keydown', evento => {
+pesquisarUsuario.addEventListener('keyup', () => {
+    const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
 
-    if (evento.key === 'Enter') {
-
-        const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
-
-        pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
-        botoesPaginacao();
-    }
+    pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+    botoesPaginacao();
 
 });
 
 // Função específica para realizar a pesquisa do funcionário
 async function pesquisarFuncionario(valor, filtro) {
-
     const numPagina = sessionStorage.getItem('paginaFun');
 
     sessionStorage.setItem('paginaFun', 0);
@@ -328,11 +321,12 @@ async function pesquisarFuncionario(valor, filtro) {
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
 
-        console.log(resposta);
+
 
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        
         exibir(resposta.usuarios);
 
     } catch (erro) {
@@ -497,6 +491,8 @@ async function dadosParaEditar(nif) {
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        console.log(resposta)
+
         // Função para retornar os dados para editar
         exibirDadosParaEditar(resposta.usuarios);
 
@@ -524,9 +520,9 @@ function exibirDadosParaEditar(dados) {
 }
 
 // Enviar o formulário para editar
-const formularioEditarUsuario = document.querySelector('#editarUsuario');
+const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 formularioEditarUsuario.addEventListener('click', async () => {
-
+ir
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
