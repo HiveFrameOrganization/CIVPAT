@@ -16,7 +16,7 @@ function pesquisarUsuario($valor, $conn)
     $inicioFun = $numPagina * $qtdFuncionariosTela;
 
     // Jogando o nome em outra variável
-    $nome = '%' . $valor . '%';
+    $valor = '%' . $valor . '%';
     // $sobrenome = '%' . $nome;
 
     if ($filtro == '') {
@@ -24,7 +24,7 @@ function pesquisarUsuario($valor, $conn)
     }
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF = ? OR Nome LIKE ? OR Sobrenome LIKE ? AND `Status`LIKE ? LIMIT ?, ?");
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ? AND `Status`LIKE ? LIMIT ?, ?");
 
     $stmt->bind_param('ssssii', $valor, $nome, $nome, $filtro, $inicioFun, $qtdFuncionariosTela);
 

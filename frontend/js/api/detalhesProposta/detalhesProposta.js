@@ -663,13 +663,13 @@ function aceitarProposta() {
 
 
     }
-
  
 }
 
 // Pegando os ID's dos elementos.
 
 const aceitarPropostaButton = document.getElementById('aceitarProposta');
+const declinarPropostaButton = document.getElementById('declinarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
 
@@ -678,6 +678,14 @@ const propostaAssinadaInput = document.getElementById('propostaAssinada');
 aceitarPropostaButton.addEventListener('click', () => {
     try {
         aceitarProposta()
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+declinarPropostaButton.addEventListener('click', () => {
+    try {
+        declinarProposta()
     } catch (error) {
         console.log(error)
     }
@@ -702,7 +710,7 @@ propostaAssinadaInput.addEventListener('change', () => {
 //Função para enviar e atualizar os dados no banco
 
 async function aceitarPropostaBanco(){
-    const idProposta = getItem.localStorage('idProposta');
+    const idProposta = localStorage.getItem('idProposta');
     
 
     // criando uma variável para enviar a lista para o php, transformando o string em objeto json
@@ -714,10 +722,34 @@ async function aceitarPropostaBanco(){
    
 }
 
+///////////////////////
+
+async function declinarPropostaBanco(){
+    const idProposta = localStorage.getItem('idProposta');
+    
+
+    // criando uma variável para enviar a lista para o php, transformando o string em objeto json
+    const requisicao = await fetch(back + `/detalhesProposta/declinarProposta.php?id=${idProposta}`);
+
+    const resposta = await requisicao.json();
+
+   
+   
+}
+
+
+
+
 const botaoAceitarProposta = document.getElementById('aceitarProposta');
 
 botaoAceitarProposta.addEventListener('click', () => {
     aceitarPropostaBanco();
+})
+
+const botaoDeclinarProposta = document.getElementById('declinarProposta');
+
+botaoDeclinarProposta.addEventListener('click', () => {
+    declinarPropostaBanco();
 })
 
 // abrir modal de cadastro de produto
@@ -752,3 +784,4 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
         abaResumo.classList.remove('h-0')
     }
 })
+
