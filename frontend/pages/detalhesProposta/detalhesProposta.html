@@ -201,6 +201,7 @@
 
     <main>
 
+        <!-- aba de links -->
         <div class="container mx-auto px-6">
             <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
 
@@ -429,14 +430,14 @@
 
                     <div class="flex justify-center w-full">
                         <div id="btnResumo" class="naoSelecionavel flex flex-row justify-center gap-2 w-2/3 border-b-2 border-color-text-secundary cursor-pointer transition-[padding] hover:pb-1">
-                            <p class="rotate-0 text-color-text-secundary">Remuso</p><span class="rotate-90 pt-1 transition-all text-color-text-secundary">></span>
+                            <p class="rotate-0 text-color-text-secundary">Resumo</p><span class="rotate-90 pt-1 transition-all text-color-text-secundary">></span>
                         </div>
 
                     </div>
                     
                     <div id="abaResumo" class="w-full h-0 overflow-y-hidden transition-[height]">
-                        <textarea name="Resumo" id="" cols="30" rows="10"
-                        class="estadoInput w-full h-24 bg-component disabled:bg-body p-2 resize-none rounded" disabled>TextoTextoTextoTexto</textarea>
+                        <textarea name="Resumo" id="campoResumo" cols="30" rows="10"
+                        class="w-full h-24 bg-component disabled:bg-body p-2 resize-none rounded" disabled>TextoTextoTextoTexto</textarea>
                     </div>
 
                     <!-- ==================== INPUTS FALTANTES AQUI ============================== -->
@@ -471,7 +472,7 @@
 
                         <!-- Um dos cards de pdfs -->
                         <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
-                            <label for="orcamento" class="uppercase text-lg">Orçamento</label>
+                            <label for="orcamento" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">Orçamento</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
                                 <div class="relative">
@@ -501,7 +502,7 @@
 
                         <!-- Um dos cards de pdfs -->
                         <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
-                            <label for="orcamento" class="uppercase text-lg">Proposta assinada</label>
+                            <label for="orcamento" class="uppercase text-lg whitespace-nowrap">Proposta assinada</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
                                 <div class="relative">
@@ -532,7 +533,7 @@
 
                         <!-- Um dos cards de pdfs -->
                         <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
-                            <label for="relatorioFinal" class="uppercase text-lg">relatorio Final</label>
+                            <label for="relatorioFinal" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">relatorio Final</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
                                 <div class="relative">
@@ -569,7 +570,7 @@
 
                     <!-- Um dos cards de pdfs -->
                     <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
-                        <label for="pesquisaDeSatisfacao" class="uppercase text-lg">pesquisa De Satisfacao</label>
+                        <label for="pesquisaDeSatisfacao" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">pesquisa De Satisfacao</label>
                         <div class="flex flex-col gap-4">
                             <!-- input de upload -->
                             <div class="relative">
@@ -833,6 +834,7 @@
 
                     <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="servico" id="servico" required>
+                        <option value="" disabled selected class="text-color-text-secundary">Selecione a categoria...</option>
                         <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
                         <option value="2" class="bg-body">Assessoria Tecnológica - Empreendedorismo</option>
                         <option value="3" class="bg-body">Assessoria Tecnológica - Gestão</option>
@@ -860,15 +862,20 @@
                     <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="number" name="valor" id="valor" step="0.01"
                         max="99999999.99" required>
 
-                    <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="tecnicos" id="tecnicos" required>
+                    <div class="flex flex-col lg:flex-row gap-2">
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="tecnicos" id="tecnicos" required>
+                            </select>
+                        </div>
+                        
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2">Máquina utilizada</label>
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" id="maquinas" required>   
+                            </select>
+                        </div>
 
-                    </select>
-
-                    <label class="text-color-text font-bold block mb-2">Máquina utilizada no produto</label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" id="maquinas" required>
-
-                    </select>
+                    </div>
 
                     <!-- botão para continuar para o resto do modal -->
                     <div class="flex justify-end w-full">
@@ -878,23 +885,36 @@
 
                 <!-- Segunda metade do modal de cadastro de produto -->
                 <div id="segundoCadastroProduto" class="hidden">
-                    <label class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
+                    <div class="flex flex-col lg:flex-row gap-2">
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
+                        </div>
+                        
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
+                        </div>
+                    </div>
 
-                    <label class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
+                    
+                    <div class="flex flex-col lg:flex-row gap-2">
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2">Data Inicial: </label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataInicial" required>
+                        </div>
 
+                        <div class="w-full lg:w-1/2">
+                            <label class="text-color-text font-bold block mb-2">Data Final: </label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataFinal" required>
+                        </div>
+                    </div>
+                    
                     <label class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" id="unidadeCriadora" required>
                         <option value="" disabled selected>Selecione a unidade Criadora</option>
                     </select>
-
-                    <label class="text-color-text font-bold block mb-2">Data Inicial: </label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataInicial" required>
-
-                    <label class="text-color-text font-bold block mb-2">Data Final: </label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataFinal" required>
-                
+                    
                     <div class="flex justify-between w-full">
                         <button class="rounded-lg text-[#fff] hover:text-primary bg-btn-red w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="paraPrimeiroModal">Voltar</button>
                         <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="salvarProduto">Salvar</button>
