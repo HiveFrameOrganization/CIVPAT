@@ -382,7 +382,7 @@ function exibirPropostas(propostas){
                 color = 'color-red';
             } else if (status == 'aceito') {
                 
-                statusDescricao = 'desenvolvendo';
+                statusDescricao = 'aceito';
                 statusIMG = '../../img/icon/settings-green.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
