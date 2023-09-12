@@ -349,7 +349,8 @@ function exibirErro(erro) {
     const titulo = document.createElement('h1');
 
     // Adicionando texto e estilo
-    titulo.textContent = erro;
+    titulo.classList = 'w-full text-center'
+    titulo.textContent = 'NENHUM FUNCIONARIO ENCONTRADO...';
     titulo.style.color = 'red';
 
     exibicao.appendChild(titulo);
