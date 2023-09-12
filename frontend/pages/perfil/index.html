@@ -162,8 +162,14 @@
             <div class="container mx-auto px-6 py-12">
                 <div class="mb-8">
                     <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-center">
-                        <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0">
-                            <img src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full">
+                        <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0 relative overflow-hidden border border-primary group">
+                            <img id="perfil-image" src="../../img/icon/perfil.png" alt="Foto de perfil" class="w-full h-full">
+                            <div id="upload-image"  class="bg-[#00000099] absolute top-1/2 bottom-0 right-0 left-0 flex items-center justify-center opacity-0 cursor-pointer group-hover:opacity-100 transition-opacity">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                                <input class="hidden" type="file" id="image-input" name="image-input" accept="image/*">
+                            </div>
                         </div>
                         <div class="flex flex-col items-center sm:items-start capitalize">
                             <span id="nome" class="text-2xl font-semibold">N/A</span>

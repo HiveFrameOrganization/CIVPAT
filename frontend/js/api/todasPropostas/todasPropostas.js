@@ -105,6 +105,16 @@ function botoesPaginacao() {
     containerPaginacao.insertBefore(priBotao, setaProxPagina);
     // Final Primeiro Botão
 
+    // adcionar funçoes no botao de ir e voltar
+    setaProxPagina.addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
+        setaProxPagina.href = ''
+    })
+    document.querySelector('#antPagina').addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
+        document.querySelector('#antPagina').href = ''
+    })
+
     const paginaAtual = sessionStorage.getItem('paginaProposta');
     if (paginaAtual > 3) {
         const divisor = document.createElement('span');
@@ -257,9 +267,9 @@ function exibirPropostasFiltradas(propostas){
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
-            } else if (status == 'cancelado') {
+            } else if (status == 'declinado') {
                 
-                statusDescricao = 'cancelado';
+                statusDescricao = 'declinado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
@@ -319,6 +329,11 @@ function exibirPropostasFiltradas(propostas){
 
             table.appendChild(divRow);
         }
+
+        // erro avisando que nenhuma proposta foi encontrada
+        if(propostas.length == 0){
+            table.innerHTML = '<p class="w-full text-center text-[red]">NENHUMA PROPOSTA ENCONTRADA...</p>'
+        }
     
         reloadLinhas();
 
@@ -359,16 +374,22 @@ function exibirPropostas(propostas){
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
-            } else if (status == 'cancelado') {
+            } else if (status == 'declinado') {
                 
-                statusDescricao = 'cancelado';
+                statusDescricao = 'declinado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
             } else if (status == 'aceito') {
                 
-                statusDescricao = 'desenvolvendo';
+                statusDescricao = 'aceito';
                 statusIMG = '../../img/icon/settings-green.svg';
+                optionIMG = '../../img/icon/more-vertical-green.svg';
+                color = 'color-green'
+            } else if (status == 'concluido') {
+
+                statusDescricao = 'concluido';
+                statusIMG = '../../img/icon/check-circle.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
             }
