@@ -95,8 +95,25 @@ function botoesPaginacao() {
     }
 
     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+    // impedir que botoes apareçam em determinados casos
+    if(sessionStorage.getItem('qtdBotoesProposta') == sessionStorage.getItem('paginaProposta')){
+        setaProxPagina.classList.add('hidden')
+    }
+    if(sessionStorage.getItem('paginaProposta') == 1){
+        document.querySelector('#antPagina').classList.add('hidden')
+    }
     containerPaginacao.insertBefore(priBotao, setaProxPagina);
     // Final Primeiro Botão
+
+    // adcionar funçoes no botao de ir e voltar
+    setaProxPagina.addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
+        setaProxPagina.href = ''
+    })
+    document.querySelector('#antPagina').addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
+        document.querySelector('#antPagina').href = ''
+    })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
     if (paginaAtual > 3) {
@@ -125,7 +142,6 @@ function botoesPaginacao() {
             a.onclick = () => {
                 colocarPagina(i)
             }
-    
     
             containerPaginacao.insertBefore(a, setaProxPagina);
         }
@@ -156,6 +172,8 @@ function botoesPaginacao() {
 
     containerPaginacao.insertBefore(ultBotao, setaProxPagina);
     // Final Ultimo Botão
+
+    
 }
 
 // Seta o número da página no sessionStorage
