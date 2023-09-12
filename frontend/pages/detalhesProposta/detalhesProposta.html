@@ -477,11 +477,13 @@
                                 <!-- input de upload -->
                                 <div class="relative">
                                     <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('.inputOrçamento').click()">
                                     <input type="text" value="" id="inputFileUp"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Upload de arquivos"
-                                        onclick="document.querySelector('.inputOrçamento').click()" desabled>
+                                        readonly desabled
+                                        onclick="document.querySelector('.inputOrçamento').click()">
                                     <!-- input que sera salvo o pdf -->
                                     <input type="file" accept=".pdf" onchange="" id="orcamento"
                                         class="inputOrçamento hidden">
@@ -489,7 +491,8 @@
 
                                 <div class="relative sumirOrcamento">
                                     <img src="../../img/icon/download.png" alt="Ícone de download"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('#botaoOrcamento').click()">
                                     <input type="text" value="" id="inputFileDown"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Download de arquivos"
@@ -507,10 +510,12 @@
                                 <!-- input de upload -->
                                 <div class="relative">
                                     <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('.inputOrçamento').click()">
                                     <input type="text" value="" id="inputFileUp"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Upload de arquivos"
+                                        readonly
                                         onclick="document.querySelector('#propostaAssinada').click()">
 
                                     <input type="file" accept=".pdf" onchange="" id="propostaAssinada" class="hidden">
@@ -519,7 +524,8 @@
                                 <!-- input download -->
                                 <div class="relative sumirPropostaAssinada">
                                     <img src="../../img/icon/download.png" alt="Ícone de download"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('#botaoOrcamento').click()">
                                     <input type="text" value="" id="inputFileDown"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Download de arquivos"
@@ -538,10 +544,12 @@
                                 <!-- input de upload -->
                                 <div class="relative">
                                     <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('.inputOrçamento').click()">
                                     <input type="text" value="" id="inputFileUp"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Upload de arquivos"
+                                        readonly
                                         onclick="document.querySelector('#relatorioFinal').click()">
 
                                     <input type="file" accept=".pdf" onchange="" id="relatorioFinal" class="hidden">
@@ -550,7 +558,8 @@
                                 <!-- input download -->
                                 <div class="relative sumirRelatorioFinal">
                                     <img src="../../img/icon/download.png" alt="Ícone de download"
-                                        class="absolute right-0 h-12 rounded-r-lg">
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('#botaoOrcamento').click()">
                                     <input type="text" value="" id="inputFileDown"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Download de arquivos"
@@ -575,10 +584,12 @@
                             <!-- input de upload -->
                             <div class="relative">
                                 <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                    class="absolute right-0 h-12 rounded-r-lg">
+                                    class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                    onclick="document.querySelector('.inputOrçamento').click()">
                                 <input type="text" value="" id="inputFileUp"
                                     class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                     placeholder="Upload de arquivos"
+                                    readonly
                                     onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
                                 <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao" class="hidden">
                             </div>
@@ -586,7 +597,8 @@
                             <!-- input download -->
                             <div class="relative sumirPesquisaDeSatisfacao">
                                 <img src="../../img/icon/download.png" alt="Ícone de download"
-                                    class="absolute right-0 h-12 rounded-r-lg">
+                                    class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                    onclick="document.querySelector('#botaoOrcamento').click()">
                                 <input type="text" value="" id="inputFileDown"
                                     class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                     placeholder="Download de arquivos"
