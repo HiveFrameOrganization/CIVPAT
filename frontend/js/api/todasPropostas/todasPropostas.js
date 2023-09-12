@@ -105,6 +105,16 @@ function botoesPaginacao() {
     containerPaginacao.insertBefore(priBotao, setaProxPagina);
     // Final Primeiro Botão
 
+    // adcionar funçoes no botao de ir e voltar
+    setaProxPagina.addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
+        setaProxPagina.href = ''
+    })
+    document.querySelector('#antPagina').addEventListener('click', ()=>{
+        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
+        document.querySelector('#antPagina').href = ''
+    })
+
     const paginaAtual = sessionStorage.getItem('paginaProposta');
     if (paginaAtual > 3) {
         const divisor = document.createElement('span');
