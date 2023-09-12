@@ -89,6 +89,7 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
 
+    console.log(resposta)
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
     const gerentes = [gerente1, gerente2]
@@ -139,14 +140,16 @@ async function verificarBancoProposta(id) {
 
 
         const resposta = await requisicao.json();
-        console.log(resposta);
+
+        console.log(resposta['Gerentes']);
 
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
         for (var x = 0; x < resposta['Gerentes'].length; x++) {
-            localStorage.setItem('gerente1', resposta['Gerentes'][x]['NIF']);
+            localStorage.setItem(`gerente${x + 1}`, resposta['Gerentes'][x]['NIF']);
         }
+
 
 
         carregarTecnicos();
@@ -155,7 +158,6 @@ async function verificarBancoProposta(id) {
 
         //Enviando para o front-end os dados vindos do back end
         const nomeProposta = document.querySelector('#tituloProposta').value = resposta['TituloProposta'];
-        const TelaNomeProposta = document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
         const cnpj = document.querySelector('#cnpj').value = resposta['cnpj'];
         const uniCriadora = document.querySelector('#uniCriadora').value = resposta['uniCriadora'];
         const titleUniCriadora = document.querySelector('#uniCriadora').title = resposta['uniCriadora']
@@ -171,8 +173,16 @@ async function verificarBancoProposta(id) {
         const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
         const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
+        document.querySelector('#campoResumo').value = resposta['resumo']
         // const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
 
+        // verifica se existe numeroSGSET cadastrado para ser mostrado no titulo da pagina
+        let TelaNomeProposta = ''
+        if(resposta['numeroSGSET']) {
+            document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] + ' / ' + resposta['numeroSGSET']
+        }else{
+            document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
+        }
 
     } catch (error) {
         console.error(error)

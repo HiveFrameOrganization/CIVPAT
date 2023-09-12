@@ -3,16 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERRO</title>
-</head>
-<body>
-    <h1>VOCÊ NÃO TEM ACESSO A ESSA PÁGINA</h1>
-    <button id="goBackButton">Voltar</button>
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
+    <title>Erro de acesso - HIVEFRAME</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+                --btn-green: 36 194 146;
+                --btn-blue: 57 118 209;
+                --btn-red: 245 74 76;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Rubik', sans-serif;
+        }
+
+    </style>
     <script>
-        document.getElementById('goBackButton').addEventListener('click', function() {
-            window.location.pathname = '/frontend/pages/Home/index.html'; 
-        });
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                    'btn-green': 'rgb(var(--btn-green) / <alpha-value>)',
+                    'btn-blue': 'rgb(var(--btn-blue) / <alpha-value>)',
+                    'btn-red': 'rgb(var(--btn-red) / <alpha-value>)',
+                }
+            },
+        }
     </script>
+
+</head>
+
+<body class="bg-body text-color-text">
+
+    <div class="flex flex-col justify-center text-center items-center h-screen px-4">
+
+        <img src="../../img/icon/erro_acesso.png" alt="ícone de erro" class="w-16 mb-12">
+        <h1 class="font-bold text-2xl sm:text-3xl mb-6 sm:mb-2">VOCÊ NÃO TEM ACESSO A ESSA PÁGINA</h1>
+        <h2 class="font-semibold text-sm mb-12">Você não possui o nível de acesso necessário para acessar essa página.</h2>
+        <button id="goBackButton" onclick="history.back()" class="bg-primary py-2 px-6 sm:px-32 text-[#fff] rounded-md font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">Voltar</button>
+
+    </div>
+    
 </body>
+
 </html>
