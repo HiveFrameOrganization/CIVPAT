@@ -386,6 +386,12 @@ function exibirPropostas(propostas){
                 statusIMG = '../../img/icon/settings-green.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
+            } else if (status == 'concluido') {
+
+                statusDescricao = 'concluido';
+                statusIMG = '../../img/icon/check-circle.svg';
+                optionIMG = '../../img/icon/more-vertical-green.svg';
+                color = 'color-green'
             }
     
             // Inserindo o Template na linha
