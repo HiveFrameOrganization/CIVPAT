@@ -132,12 +132,12 @@ function exibir(dados) {
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
 
-            mostrarBotao = ''
+            mostrarBotao = true
             cor = 'primary';
             imgOpcao = '../../img/icon/more-vertical.svg';
         } else {
             
-            mostrarBotao = 'hidden'
+            mostrarBotao = false
             cor = 'color-red';
             imgOpcao = '../../img/icon/more-vertical-red.svg';
         }
@@ -195,7 +195,8 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    <div itemid="${funcionario['NIF']}" class="${mostrarBotao} inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                    ${mostrarBotao && `
+                    <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
                             <a>
@@ -203,6 +204,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
+                    `}
                 </div>
             </button>
         </div>`;
@@ -347,7 +349,8 @@ function exibirErro(erro) {
     const titulo = document.createElement('h1');
 
     // Adicionando texto e estilo
-    titulo.textContent = erro;
+    titulo.classList = 'w-full text-center'
+    titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
     titulo.style.color = 'red';
 
     exibicao.appendChild(titulo);
@@ -441,7 +444,6 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
         btn.addEventListener('click', function() {
 
             desativarUsuario(this.getAttribute('itemid'));
-            console.log(`${this.getAttribute('itemid')} desativado!`);
         });
     });
 
@@ -604,32 +606,38 @@ async function requisicaoEditar(dados) {
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
 
-    try {
+    let confirmarInativar = confirm('Tem certeza?');
 
-        const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nif: nif })
-        });
+    if (confirmarInativar) {
 
-        // Convertendo a requisição em um objeto JS
-        const resposta = await requisicao.json();
+        try {
 
-        // Caso a resposta do servidor sej algum erro já previsto...
-        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+            const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nif: nif })
+            });
 
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
+            // Convertendo a requisição em um objeto JS
+            const resposta = await requisicao.json();
 
-        alertas();
+            // Caso a resposta do servidor sej algum erro já previsto...
+            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
-        // Atualizando a lista em tempo real
-        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
 
-    } catch (erro) {
-        console.error(erro);
+            alertas();
+
+            // Atualizando a lista em tempo real
+            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+
+        } catch (erro) {
+            console.error(erro);
+        }
+
     }
 
 }
