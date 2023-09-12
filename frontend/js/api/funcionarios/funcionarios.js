@@ -18,8 +18,6 @@ window.addEventListener('load', async () => {
     // Chama a função que cria os botões da página
     botoesPaginacao();
 
-    
-
 });
 
 // Funão para retornar uma lisat de funcionários
@@ -152,7 +150,7 @@ function exibir(dados) {
             cargo = 'Gerente';
         } else {
 
-            cargo = 'N/A'
+            cargo = 'Coordenador'
         }
 
         div.innerHTML = `
@@ -494,6 +492,8 @@ async function dadosParaEditar(nif) {
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        console.log(resposta)
+
         // Função para retornar os dados para editar
         exibirDadosParaEditar(resposta.usuarios);
 
@@ -521,7 +521,7 @@ function exibirDadosParaEditar(dados) {
 }
 
 // Enviar o formulário para editar
-const formularioEditarUsuario = document.querySelector('#editarUsuario');
+const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 formularioEditarUsuario.addEventListener('click', async () => {
 
 
