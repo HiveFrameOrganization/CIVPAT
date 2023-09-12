@@ -249,9 +249,9 @@ function exibirPropostasFiltradas(propostas){
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
-            } else if (status == 'cancelado') {
+            } else if (status == 'declinado') {
                 
-                statusDescricao = 'cancelado';
+                statusDescricao = 'declinado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
@@ -351,9 +351,9 @@ function exibirPropostas(propostas){
                 statusIMG = '../../img/icon/inventory.svg';
                 optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary';
-            } else if (status == 'cancelado') {
+            } else if (status == 'declinado') {
                 
-                statusDescricao = 'cancelado';
+                statusDescricao = 'declinado';
                 statusIMG = '../../img/icon/alert-circle-red.svg';
                 optionIMG = '../../img/icon/more-vertical-red.svg';
                 color = 'color-red';
