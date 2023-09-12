@@ -524,7 +524,6 @@ function exibirDadosParaEditar(dados) {
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 formularioEditarUsuario.addEventListener('click', async () => {
-ir
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
@@ -565,12 +564,13 @@ ir
             // Função para editar os funcionários
             const resp = await requisicaoEditar(dadosEditados);
 
-            // console.log(resp);
+            console.log(resp);
 
             localStorage.setItem('status', resp.status);
             localStorage.setItem('mensagem', resp.mensagem);
     
             location.reload();
+
         }
 
 
@@ -582,6 +582,8 @@ ir
 
 // Função para mandar os dados para editar
 async function requisicaoEditar(dados) {
+
+    console.log(dados)
 
     // Requisição PUT para editar
     const requisicao = await fetch(back + `/funcionarios/editarFuncionario.php`, {

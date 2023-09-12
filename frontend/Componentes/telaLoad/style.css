@@ -1,0 +1,24 @@
+.animaLogo{
+    animation: logo 1s;
+}
+
+.animaTexto{
+    animation: texto 1s;
+}
+
+@keyframes logo {
+    0%{
+        margin-left: 200px;
+        rotate: 90deg;
+    }
+    100%{
+        margin-left: 0px;
+        rotate: 0deg;       
+    }
+}
+
+@keyframes texto {
+    0%{
+        
+    }
+}
