@@ -329,6 +329,11 @@ function exibirPropostasFiltradas(propostas){
 
             table.appendChild(divRow);
         }
+
+        // erro avisando que nenhuma proposta foi encontrada
+        if(propostas.length == 0){
+            table.innerHTML = '<p class="w-full text-center text-[red]">NENHUMA PROPOSTA ENCONTRADA...</p>'
+        }
     
         reloadLinhas();
 
