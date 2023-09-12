@@ -22,3 +22,30 @@ navButtons.forEach((button) => {
         button.classList.add('border-primary');
     })
 });
+
+// Controlar o Upload de images
+
+const uploadImageBtn = document.querySelector('#upload-image');
+const imageInput = document.querySelector('#image-input');
+
+uploadImageBtn.addEventListener('click', function() {
+
+    imageInput.click();
+});
+
+imageInput.addEventListener('change', (event) => {
+
+    if (imageInput.files.length <= 0) {
+
+        return;
+    }
+    
+    let leitor = new FileReader();
+
+    leitor.onload = () => {
+
+        uploadImageBtn.parentElement.querySelector('#perfil-image').src = leitor.result;
+    }
+
+    leitor.readAsDataURL(imageInput.files[0]);
+});
