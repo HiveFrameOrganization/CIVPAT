@@ -89,6 +89,7 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
 
+    console.log(resposta)
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
     const gerentes = [gerente1, gerente2]
@@ -139,14 +140,16 @@ async function verificarBancoProposta(id) {
 
 
         const resposta = await requisicao.json();
-        console.log(resposta);
+
+        console.log(resposta['Gerentes']);
 
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
         for (var x = 0; x < resposta['Gerentes'].length; x++) {
-            localStorage.setItem('gerente1', resposta['Gerentes'][x]['NIF']);
+            localStorage.setItem(`gerente${x + 1}`, resposta['Gerentes'][x]['NIF']);
         }
+
 
 
         carregarTecnicos();
