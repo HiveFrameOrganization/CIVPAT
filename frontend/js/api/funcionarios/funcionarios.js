@@ -18,8 +18,6 @@ window.addEventListener('load', async () => {
     // Chama a função que cria os botões da página
     botoesPaginacao();
 
-    
-
 });
 
 // Funão para retornar uma lisat de funcionários
@@ -130,13 +128,16 @@ function exibir(dados) {
         let cargo;
         let cor;
         let imgOpcao;
+        let mostrarBotao
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
 
+            mostrarBotao = true
             cor = 'primary';
             imgOpcao = '../../img/icon/more-vertical.svg';
         } else {
-
+            
+            mostrarBotao = false
             cor = 'color-red';
             imgOpcao = '../../img/icon/more-vertical-red.svg';
         }
@@ -152,7 +153,7 @@ function exibir(dados) {
             cargo = 'Gerente';
         } else {
 
-            cargo = 'N/A'
+            cargo = 'Coordenador'
         }
 
         div.innerHTML = `
@@ -183,9 +184,9 @@ function exibir(dados) {
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-6 bg-${cor}/20 rounded-md relative">
+            <button type="button" class="w-6 h-max bg-${cor}/20 rounded-md relative">
                 <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
-                <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
+                <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
                     <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
@@ -194,6 +195,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
+                    ${mostrarBotao && `
                     <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
@@ -202,6 +204,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
+                    `}
                 </div>
             </button>
         </div>`;
@@ -346,7 +349,8 @@ function exibirErro(erro) {
     const titulo = document.createElement('h1');
 
     // Adicionando texto e estilo
-    titulo.textContent = erro;
+    titulo.classList = 'w-full text-center'
+    titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
     titulo.style.color = 'red';
 
     exibicao.appendChild(titulo);
@@ -440,7 +444,6 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
         btn.addEventListener('click', function() {
 
             desativarUsuario(this.getAttribute('itemid'));
-            console.log(`${this.getAttribute('itemid')} desativado!`);
         });
     });
 
@@ -490,6 +493,8 @@ async function dadosParaEditar(nif) {
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
+        console.log(resposta)
+
         // Função para retornar os dados para editar
         exibirDadosParaEditar(resposta.usuarios);
 
@@ -517,7 +522,7 @@ function exibirDadosParaEditar(dados) {
 }
 
 // Enviar o formulário para editar
-const formularioEditarUsuario = document.querySelector('#editarUsuario');
+const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
 formularioEditarUsuario.addEventListener('click', async () => {
 ir
 
@@ -601,32 +606,38 @@ async function requisicaoEditar(dados) {
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
 
-    try {
+    let confirmarInativar = confirm('Tem certeza?');
 
-        const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nif: nif })
-        });
+    if (confirmarInativar) {
 
-        // Convertendo a requisição em um objeto JS
-        const resposta = await requisicao.json();
+        try {
 
-        // Caso a resposta do servidor sej algum erro já previsto...
-        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+            const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nif: nif })
+            });
 
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
+            // Convertendo a requisição em um objeto JS
+            const resposta = await requisicao.json();
 
-        alertas();
+            // Caso a resposta do servidor sej algum erro já previsto...
+            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
-        // Atualizando a lista em tempo real
-        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
 
-    } catch (erro) {
-        console.error(erro);
+            alertas();
+
+            // Atualizando a lista em tempo real
+            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+
+        } catch (erro) {
+            console.error(erro);
+        }
+
     }
 
 }

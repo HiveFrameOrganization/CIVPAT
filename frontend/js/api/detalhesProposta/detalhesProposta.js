@@ -26,39 +26,47 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
-    // Criar um objeto FormData e adicionar o arquivo PDF a ele
-    //formdata serve para mandar dados e arquivos facilmente por via api
-    //usado para enviar dados do cliente para o servidor, especialmente 
-    //quando se envia um formulário HTML através de uma requisição AJAX
-    var formData = new FormData();
+    if (pdfOrcamento == undefined && pdfPropostaAssinada == undefined && pdfRelatorioFinal == undefined && pdfPesquisaDeSatisfacao == undefined) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Campos vazios');
 
-    //inserindo o pdf dentro do objeto formdata
-    formData.append('pdfOrcamento', pdfOrcamento);
-    formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
-    formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
-    formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
-
-    // formData.forEach((valor, chave) => {
-    //     console.log(`${chave}: ${valor}`);
-    //   });
-
-    // Enviar o formulário como uma solicitação POST usando fetch
-    fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(json => {
-
-            localStorage.setItem('status', json.status);
-            localStorage.setItem('mensagem', json.mensagem);
-            window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
-            
-            verificarPdfExistente(identificador);
+        alertas();
+    } else {
+        // Criar um objeto FormData e adicionar o arquivo PDF a ele
+        // formdata serve para mandar dados e arquivos facilmente por via api
+        // usado para enviar dados do cliente para o servidor, especialmente 
+        // quando se envia um formulário HTML através de uma requisição AJAX
+        var formData = new FormData();
+    
+        //inserindo o pdf dentro do objeto formdata
+        formData.append('pdfOrcamento', pdfOrcamento);
+        formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
+        formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
+        formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
+    
+        // formData.forEach((valor, chave) => {
+        //     console.log(`${chave}: ${valor}`);
+        //   });
+    
+        // Enviar o formulário como uma solicitação POST usando fetch
+        fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
+            method: 'POST',
+            body: formData
         })
-        .catch(error => {
-            console.error('Erro ao salvar o PDF:', error);
-        });
+            .then(response => response.json())
+            .then(json => {
+    
+                localStorage.setItem('status', json.status);
+                localStorage.setItem('mensagem', json.mensagem);
+                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                
+                verificarPdfExistente(identificador);
+            })
+            .catch(error => {
+                console.error('Erro ao salvar o PDF:', error);
+            });
+
+    }
 })
 
 const botaoOrcamento = document.getElementById('botaoOrcamento');

@@ -208,7 +208,7 @@
                                 </div> -->
                                 <div id="search-bar" class="flex flex-row-reverse">
                                     <img src="../../img/icon/search.svg" id="botaoPesquisar" alt="Pesquisar" class="p-2 bg-component rounded-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
-                                    <input type="text" id="pesquisarUsuario" class="hidden w-full px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-l-md outline-none text-base font-normal focus:border-primary transition-all" placeholder="Pesquisar...">
+                                    <input type="text" id="pesquisarUsuario" class="hidden w-full px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-l-md outline-none text-base font-normal focus:border-primary transition-all" placeholder="NIF ou nome/sobrenome">
                                 </div>
                             </div>
 
@@ -244,8 +244,8 @@
         <footer class="w-full bg-body text-color-text py-12 bottom-0">
             <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
                 <div class="flex items-center gap-3">
-                    <a href="#"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                    <a href="#" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                    <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                    <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                 </div>
                 <div class="flex flex-col items-center gap-3">
                     <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
@@ -293,7 +293,7 @@
                     <div class="flex flex-col sm:flex-row gap-4">
                         <div class="flex flex-col gap-2 w-full">
                             <label for="cad-email" class="font-semibold text-base">E-MAIL*</label>
-                            <input type="email" maxlength="63" id="cad-email" name="cad-email" placeholder="E-mail do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                            <input type="text" maxlength="63" id="cad-email" name="cad-email" placeholder="E-mail do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                         </div>
                         <div class="flex flex-col gap-2 w-full">
                             <label for="cad-cargo" class="font-semibold text-base">FUNÇÃO*</label>
@@ -344,7 +344,7 @@
                             <select name="editarCargo" id="editarCargo" required class="capitalize px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary valid:bg-primary/20 transition-all">
                                 <option value="" selected disabled class="bg-body">Selecione uma função</option>
                                 <option value="adm" class="bg-body">Administrador</option>
-                                <option value="cor" class="bg-body">Coordenador</option>
+                                <option value="coor" class="bg-body">Coordenador</option>
                                 <option value="ger" class="bg-body">Gerente</option>
                                 <option value="tec" class="bg-body">Técnico</option>
                             </select>
