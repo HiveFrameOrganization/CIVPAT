@@ -24,7 +24,7 @@ select {
 
 /* Modal */
 
-#modal-fade, #modal, #modal-cadastrar {
+#modal-fade, #modal, #modal-cadastrar, #modal-confirmar {
   transition: 0.5s;
   opacity: 1;
   pointer-events: all;
@@ -40,7 +40,7 @@ select {
   z-index: 100;
 }
 
-#modal, #modal-cadastrar {
+#modal, #modal-cadastrar, #modal-confirmar {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -48,7 +48,7 @@ select {
   transform: translate(-50%, -50%);
 }
 
-#modal-fade.hide, #modal.hide, #modal-cadastrar.hide {
+#modal-fade.hide, #modal.hide, #modal-cadastrar.hide, #modal-confirmar.hide {
   opacity: 0;
   pointer-events: none;
 }
