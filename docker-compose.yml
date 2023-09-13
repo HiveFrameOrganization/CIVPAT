@@ -2,7 +2,9 @@ version: '3'
 services:
     database:
         container_name: database
-        image: database
+        build:
+            context: .
+            dockerfile: dockerfileData
         ports:
             - "3307:3306"
         security_opt:
@@ -16,7 +18,9 @@ services:
 
     backend:
         container_name: backend
-        image: backend
+        build:
+            context: . 
+            dockerfile: dockerfileCode
         ports:
             - "8080:80"
         volumes:
