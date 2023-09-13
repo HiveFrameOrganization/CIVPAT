@@ -23,7 +23,7 @@ const paginacao = document.querySelector('#paginacao');
 const table = document.querySelector('#table');
 
 
-spanProdutos.addEventListener('click', async () => {
+spanProdutos && spanProdutos.addEventListener('click', async () => {
     
     sessionStorage.setItem('aba', 'produto');
 
