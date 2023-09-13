@@ -225,12 +225,12 @@
                 
                 <div class="flex gap-6 flex-col md:flex-row">
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text-secundary font-semibold">HORA-PESSOA</label>
+                        <label class="text-color-text-secundary font-semibold">HORAS-PESSOA</label>
                         <input type="number" id="tempoPessoa" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60" required>
                     </div>
 
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text-secundary font-semibold">HORA-MÁQUINA</label>
+                        <label class="text-color-text-secundary font-semibold">HORAS-MÁQUINA</label>
                         <input type="number" id="tempoMaquina" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60" required>
                     </div>
                     
@@ -263,6 +263,28 @@
             </form>
 
         </section>
+
+        <label for="">Hora pessoa:</label>
+        <label for="">Horas totais:</label>
+        <input type="text">
+        <label for="">Horas diarias:</label>
+        <input type="number"  min="1" max="10">
+        <label for="">Horas acomuladas:</label>
+        <input type="text">
+
+
+        <label for="">Hora maquina:</label><hr>
+ 
+        
+
+        <label for="">Horas totais:</label>
+        <input type="text">
+        <label for="">Horas diarias:</label>
+        <input type="number">
+        <label for="">Horas acomuladas:</label>
+        <input type="text">
+
+        <button id="salvarLancamentoHoras">Enviar</button>
 
     </main>
 
@@ -318,8 +340,26 @@
             document.getElementById('dataFinal').disabled = true;
         } else if (localStorage.getItem('status') == 'Declinado'){
             document.getElementById("modificarProduto").disabled = true;
+            document.getElementById('produto').disabled = true;
+            document.getElementById('tecnicos').disabled = true;
+            document.getElementById('servico').disabled = true;
+            document.getElementById('unidadeRealizadora').disabled = true;
+            document.getElementById('tempoPessoa').disabled = true;
+            document.getElementById('tempoMaquina').disabled = true;
+            document.getElementById('valor').disabled = true;
+            document.getElementById('dataInicial').disabled = true;
+            document.getElementById('dataFinal').disabled = true;
         } else if (localStorage.getItem('status') == 'Concluido'){
             document.getElementById("modificarProduto").disabled = true;
+            document.getElementById('produto').disabled = true;
+            document.getElementById('tecnicos').disabled = true;
+            document.getElementById('servico').disabled = true;
+            document.getElementById('unidadeRealizadora').disabled = true;
+            document.getElementById('tempoPessoa').disabled = true;
+            document.getElementById('tempoMaquina').disabled = true;
+            document.getElementById('valor').disabled = true;
+            document.getElementById('dataInicial').disabled = true;
+            document.getElementById('dataFinal').disabled = true;
         }
 
     </script>
