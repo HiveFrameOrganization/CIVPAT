@@ -79,28 +79,103 @@ function botoesPaginacao() {
     
     `
 
-    // Cria os botoes
-    for (let i = 0; i < qtdBotoesFun; i++) {
-        const a = document.createElement('a');
+     // Criando o primeiro botão
+     const priBotao = document.createElement('a');
 
-        // Define a cor dos botoes de acordo do número da página
-        if (sessionStorage.getItem('paginaFun') == i) {
-            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        } else {
-            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        }
-
-        a.href = ''
-        a.textContent = i + 1
-        a.id = `pesquisa${i}`
-        a.onclick = () => {
-            colocarPagina(i)
-        }
-
-        // Adiciona o botão antes da seta de proxima página
-        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
-        containerPaginacao.insertBefore(a, setaProxPagina);
-    }
+     if (sessionStorage.getItem('paginaFun') == 1) {
+         // pagina selecionado
+         priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     } else {
+         // outros botoes
+         priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     }
+ 
+     priBotao.href = ''
+     priBotao.textContent = 1
+     priBotao.id = `pesquisa${1}`
+     priBotao.onclick = () => {
+         colocarPagina(1)
+     }
+ 
+     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+     // impedir que botoes apareçam em determinados casos
+     if(sessionStorage.getItem('qtdBotoesProposta') == sessionStorage.getItem('paginaFun')){
+         setaProxPagina.classList.add('hidden')
+     }
+     if(sessionStorage.getItem('paginaFun') == 1){
+         document.querySelector('#antPagina').classList.add('hidden')
+     }
+     containerPaginacao.insertBefore(priBotao, setaProxPagina);
+     // Final Primeiro Botão
+ 
+     // adcionar funçoes no botao de ir e voltar
+     setaProxPagina.addEventListener('click', ()=>{
+         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) + 1)
+         setaProxPagina.href = ''
+     })
+     document.querySelector('#antPagina').addEventListener('click', ()=>{
+         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) - 1)
+         document.querySelector('#antPagina').href = ''
+     })
+ 
+     const paginaAtual = sessionStorage.getItem('paginaFun');
+     if (paginaAtual > 4) {
+         const divisor = document.createElement('span');
+         divisor.textContent = '...'
+         containerPaginacao.insertBefore(divisor, setaProxPagina);
+     }
+ 
+     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
+     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
+         if (i > 1 && i < qtdBotoesFun  ) {
+             const a = document.createElement('a');
+     
+             if (sessionStorage.getItem('paginaFun') == i) {
+                 // pagina selecionado
+                 a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+             } else {
+                 // outros botoes
+                 a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+             }
+     
+             a.href = ''
+             a.textContent = i
+             a.id = `pesquisa${i}`
+             a.onclick = () => {
+                 colocarPagina(i)
+             }
+     
+             containerPaginacao.insertBefore(a, setaProxPagina);
+         }
+     }
+ 
+     if (paginaAtual < 4) {
+         const divisor2 = document.createElement('span');
+         divisor2.textContent = '...'
+         containerPaginacao.insertBefore(divisor2, setaProxPagina);
+     }
+     // Criando o ultimo botão
+     const ultBotao = document.createElement('a');
+ 
+     if (sessionStorage.getItem('paginaProposta') == qtdBotoesFun) {
+         // pagina selecionado
+         ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     } else {
+         // outros botoes
+         ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     }
+ 
+     ultBotao.href = ''
+     ultBotao.textContent = qtdBotoesFun
+     ultBotao.id = `pesquisa${qtdBotoesFun}`
+     ultBotao.onclick = () => {
+         colocarPagina(qtdBotoesFun)
+     }
+ 
+     containerPaginacao.insertBefore(ultBotao, setaProxPagina);
+     // Final Ultimo Botão
+ 
 }
 
 // Seta o número da página no sessionStorage
@@ -121,7 +196,7 @@ function exibir(dados) {
         // Criando os elementos
         const div = document.createElement('div');
 
-        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
+        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
 
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
@@ -157,7 +232,7 @@ function exibir(dados) {
         }
 
         div.innerHTML = `
-        <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+        <div class="area-left cursor-pointer text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                     <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
@@ -184,27 +259,29 @@ function exibir(dados) {
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="w-6 h-max bg-${cor}/20 rounded-md relative">
+            <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${cor}/20 rounded-md relative">
                 <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
                 <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
-                    <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                        <div class="flex items-center gap-2">
-                        <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
-                            <a>
-                                Editar
-                            </a>
-                        </div>
-                    </div>
-                    ${mostrarBotao && `
-                    <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                        <div class="flex items-center gap-2">
-                        <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
-                            <a>
-                                Inativar
-                            </a>
-                        </div>
-                    </div>
-                    `}
+                    ${
+                        mostrarBotao ? `
+                            <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                                <div class="flex items-center gap-2">
+                                <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
+                                    <a>
+                                        Editar
+                                    </a>
+                                </div>
+                            </div>
+                            <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                                <div class="flex items-center gap-2">
+                                    <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
+                                    <a>
+                                        Inativar
+                                    </a>
+                                </div>
+                            </div>
+                        ` : ''
+                    }
                 </div>
             </button>
         </div>`;
@@ -220,23 +297,22 @@ function exibir(dados) {
 // Reaplicar as funções referentes a linhas da tabela
 function recarregarLinhas() {
 
-    const optionDropdownTriggers = document.querySelectorAll('.option-dropdown-trigger');
+    const btnAcionadores = document.querySelectorAll('.btn-trigger');
 
-    // Abrir o dropdown específico do botão clicado
-    optionDropdownTriggers.forEach((trigger) => {
+    btnAcionadores.forEach((btn) => {
 
-        trigger.addEventListener('click', () => {
+        // Abrir o menu específico do botão clicado, na linha
+        btn.addEventListener('click', () => {
             
-            const optionDropdown = trigger.parentElement.querySelector('.option-dropdown');
+            esconderTudo();
 
-            const row = optionDropdown.parentElement.parentElement.parentElement;
-
-            optionDropdown.classList.toggle('hidden');
-            row.classList.toggle('selected-row');
+            let linhaMenu = btn.querySelector('.option-dropdown'),
+                linha = btn.parentElement.parentElement;
             
+            linhaMenu.classList.toggle('hidden');
+            linha.classList.toggle('selected-row');
         });
     });
-
 }
 
 
@@ -256,11 +332,14 @@ function esconderTudo() {
     if (document.querySelector('.option-dropdown')) {
         
         document.querySelectorAll('.option-dropdown').forEach((el) => {
+            
+            if (!el.classList.contains('hidden')) {
 
-            const row = el.parentElement.parentElement.parentElement;
-    
-            el.classList.add('hidden');
-            row.classList.remove('selected-row');
+                let row = el.parentElement.parentElement.parentElement;
+
+                el.classList.add('hidden');
+                row.classList.remove('selected-row');
+            }   
         });
     }
 }

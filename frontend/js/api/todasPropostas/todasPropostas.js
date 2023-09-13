@@ -250,7 +250,7 @@ function exibirPropostasFiltradas(propostas){
 
             let divRow = document.createElement('div');
     
-            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
+            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
             
             const fotoDePerfil = proposta['FotoDePerfil'];
     
@@ -289,7 +289,7 @@ function exibirPropostasFiltradas(propostas){
     
             // Inserindo o Template na linha
             divRow.innerHTML = `
-            <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+            <div class="area-left cursor-pointer flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
@@ -363,7 +363,7 @@ function exibirPropostas(propostas){
 
             let divRow = document.createElement('div');
     
-            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
+            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
             
             const fotoDePerfil = proposta['FotoDePerfil'];
     
@@ -402,7 +402,7 @@ function exibirPropostas(propostas){
     
             // Inserindo o Template na linha
             divRow.innerHTML = `
-            <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+            <div class="area-left cursor-pointer flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
@@ -425,9 +425,9 @@ function exibirPropostas(propostas){
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-6 bg-${color}/20 rounded-md relative">
+                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${color}/20 rounded-md relative">
                     <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full p-1">
-                    <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
+                    <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                         <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                             <div class="flex items-center gap-2">
                             <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
@@ -506,6 +506,8 @@ function reloadLinhas() {
 
             let linhaMenu = btn.querySelector('.option-dropdown'),
                 linha = btn.parentElement.parentElement;
+
+        
             
             linhaMenu.classList.toggle('hidden');
             linha.classList.toggle('selected-row');
