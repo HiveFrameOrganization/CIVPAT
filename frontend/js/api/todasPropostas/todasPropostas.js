@@ -116,7 +116,7 @@ function botoesPaginacao() {
     })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
-    if (paginaAtual > 3) {
+    if (paginaAtual > 4) {
         const divisor = document.createElement('span');
         divisor.textContent = '...'
         containerPaginacao.insertBefore(divisor, setaProxPagina);
@@ -264,9 +264,9 @@ function exibirPropostasFiltradas(propostas){
             if (status == 'em análise') {
                 
                 statusDescricao = 'análise';
-                statusIMG = '../../img/icon/inventory.svg';
-                optionIMG = '../../img/icon/more-vertical.svg';
-                color = 'primary';
+                statusIMG = '../../img/icon/inventory-orange.svg';
+                optionIMG = '../../img/icon/more-vertical-orange.svg';
+                color = 'color-orange';
             } else if (status == 'declinado') {
                 
                 statusDescricao = 'declinado';
@@ -279,6 +279,12 @@ function exibirPropostasFiltradas(propostas){
                 statusIMG = '../../img/icon/settings-green.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
                 color = 'color-green'
+            } else if (status == 'concluido') {
+
+                statusDescricao = 'concluido';
+                statusIMG = '../../img/icon/check-circle.svg';
+                optionIMG = '../../img/icon/more-vertical.svg';
+                color = 'primary'
             }
     
             // Inserindo o Template na linha
@@ -286,7 +292,7 @@ function exibirPropostasFiltradas(propostas){
             <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
                         <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -371,9 +377,9 @@ function exibirPropostas(propostas){
             if (status == 'em análise') {
                 
                 statusDescricao = 'análise';
-                statusIMG = '../../img/icon/inventory.svg';
-                optionIMG = '../../img/icon/more-vertical.svg';
-                color = 'primary';
+                statusIMG = '../../img/icon/inventory-orange.svg';
+                optionIMG = '../../img/icon/more-vertical-orange.svg';
+                color = 'color-orange';
             } else if (status == 'declinado') {
                 
                 statusDescricao = 'declinado';
@@ -391,7 +397,7 @@ function exibirPropostas(propostas){
                 statusDescricao = 'concluido';
                 statusIMG = '../../img/icon/check-circle.svg';
                 optionIMG = '../../img/icon/more-vertical-green.svg';
-                color = 'color-green'
+                color = 'primary'
             }
     
             // Inserindo o Template na linha
@@ -399,7 +405,7 @@ function exibirPropostas(propostas){
             <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
                         <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">

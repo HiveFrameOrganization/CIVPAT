@@ -14,6 +14,7 @@ module.exports = {
             'color-red': 'rgb(var(--red) / <alpha-value>)',
             'color-green': 'rgb(var(--green) / <alpha-value>)',
             'color-purple': 'rgb(var(--purple) / <alpha-value>)',
+            'color-orange': 'rgb(var(--orange) / <alpha-value>)'
         }
     },
     plugins: [],

@@ -13,6 +13,7 @@
         --red: 245 74 76;
         --green: 36 194 146;
         --purple: 121 80 255;
+        --orange: 252 160 1;
     }
 
     @media (prefers-color-scheme: light) {

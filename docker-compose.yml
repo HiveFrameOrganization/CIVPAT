@@ -2,7 +2,7 @@ version: '3'
 services:
     database:
         container_name: database
-        build:
+        build: 
             context: .
             dockerfile: dockerfileData
         ports:
@@ -18,8 +18,8 @@ services:
 
     backend:
         container_name: backend
-        build:
-            context: . 
+        build: 
+            context: .
             dockerfile: dockerfileCode
         ports:
             - "8080:80"
