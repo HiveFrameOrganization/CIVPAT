@@ -116,7 +116,7 @@ function botoesPaginacao() {
     })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
-    if (paginaAtual > 3) {
+    if (paginaAtual > 4) {
         const divisor = document.createElement('span');
         divisor.textContent = '...'
         containerPaginacao.insertBefore(divisor, setaProxPagina);
