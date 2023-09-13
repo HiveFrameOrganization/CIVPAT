@@ -39,7 +39,6 @@ async function pegarTodasAsPropostas (filtros) {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
 
@@ -230,13 +229,9 @@ async function pegarTodasAsPropostasFiltradas (filt) {
     } catch (error){
         console.error(error)
     }
-
-    
-
 }
 
 function exibirPropostasFiltradas(propostas){
-
 
     paginacao.classList.add('hidden');
 
@@ -349,7 +344,6 @@ function exibirPropostasFiltradas(propostas){
 
 
 function exibirPropostas(propostas){
-
 
     paginacao.classList.add('hidden');
 
