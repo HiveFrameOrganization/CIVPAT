@@ -26,11 +26,7 @@ export async function autenticacao(cargo) {
         const resposta = await verificacao.json();
 
         if (resposta.status === 'erro') {
-            if (window.location.pathname != '/frontend/pages/Home/index.html'){
-                window.location.pathname = '/frontend/pages/login/erro.html';
-            } else {
-                window.location.pathname = '';
-            }
+            window.location.pathname = '/frontend/pages/login/erro.html';
         }
 
 
