@@ -285,11 +285,40 @@
 
     
 
-    <!-- desabilitando o botão de salvar -->
+    <!-- desabilitando o botão de salvar para técnicos (apenas visualização) -->
 
     <script>
 
         if (localStorage.getItem('cargo') == 'tec'){
+            document.getElementById("modificarProduto").disabled = true;
+            document.getElementById('produto').disabled = true;
+            document.getElementById('tecnicos').disabled = true;
+            document.getElementById('servico').disabled = true;
+            document.getElementById('unidadeRealizadora').disabled = true;
+            document.getElementById('tempoPessoa').disabled = true;
+            document.getElementById('tempoMaquina').disabled = true;
+            document.getElementById('valor').disabled = true;
+            document.getElementById('dataInicial').disabled = true;
+            document.getElementById('dataFinal').disabled = true;
+        }
+
+    </script>
+
+    <!-- desabilitando a opção de editar determinados itens de acordo com o status da proposta -->
+
+    <script>
+        if (localStorage.getItem('status') == 'Aceito'){
+            document.getElementById('produto').disabled = true;
+            document.getElementById('servico').disabled = true;
+            document.getElementById('unidadeRealizadora').disabled = true;
+            document.getElementById('tempoPessoa').disabled = true;
+            document.getElementById('tempoMaquina').disabled = true;
+            document.getElementById('valor').disabled = true;
+            document.getElementById('dataInicial').disabled = true;
+            document.getElementById('dataFinal').disabled = true;
+        } else if (localStorage.getItem('status') == 'Declinado'){
+            document.getElementById("modificarProduto").disabled = true;
+        } else if (localStorage.getItem('status') == 'Concluido'){
             document.getElementById("modificarProduto").disabled = true;
         }
 
