@@ -195,7 +195,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    ${mostrarBotao && `
+                    ${mostrarBotao ? `
                     <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                         <div class="flex items-center gap-2">
                         <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
@@ -204,7 +204,7 @@ function exibir(dados) {
                             </a>
                         </div>
                     </div>
-                    `}
+                    ` : ''}
                 </div>
             </button>
         </div>`;
