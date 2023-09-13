@@ -501,16 +501,26 @@ function reloadLinhas() {
 
         // Abrir o menu específico do botão clicado, na linha
         btn.addEventListener('click', () => {
-            
             esconderTudo();
 
             let linhaMenu = btn.querySelector('.option-dropdown'),
                 linha = btn.parentElement.parentElement;
 
-        
-            
             linhaMenu.classList.toggle('hidden');
             linha.classList.toggle('selected-row');
+            // console.log(linhaMenu.className);
+            // if (linhaMenu.classList.contains('hidden')) {
+
+            //     console.log(linhaMenu);
+
+            //     linhaMenu.classList.remove('hidden');
+            //     linha.classList.remove('selected-row');
+
+            //     console.log(linhaMenu);
+            // } else {
+
+            //     console.log()
+            // }
         });
     });
 

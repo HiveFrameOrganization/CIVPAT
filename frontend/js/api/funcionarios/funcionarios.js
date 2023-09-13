@@ -527,7 +527,7 @@ function exibirDadosParaEditar(dados) {
 
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-formularioEditarUsuario.addEventListener('click', async () => {
+formularioEditarUsuario.addEventListener('submit', async () => {
 
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
