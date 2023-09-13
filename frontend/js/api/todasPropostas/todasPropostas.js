@@ -508,19 +508,6 @@ function reloadLinhas() {
 
             linhaMenu.classList.toggle('hidden');
             linha.classList.toggle('selected-row');
-            // console.log(linhaMenu.className);
-            // if (linhaMenu.classList.contains('hidden')) {
-
-            //     console.log(linhaMenu);
-
-            //     linhaMenu.classList.remove('hidden');
-            //     linha.classList.remove('selected-row');
-
-            //     console.log(linhaMenu);
-            // } else {
-
-            //     console.log()
-            // }
         });
     });
 
