@@ -179,6 +179,8 @@ async function carregarDetalhesProduto() {
 
     return dados[0];
 
+   LancamentoHoras(idProduto)
+
 }
 
 async function selecionarProduto(dadosProduto) {
@@ -300,5 +302,26 @@ document.getElementById('valor').addEventListener('keydown', () => {
 
 });
 
+// const salvarLancamentoHoras = document.getElementById('salvarLancamentoHoras');
+// verificarLancamentoHoras.addEventListener('click', () => {
+
+
+// });
+
+async function LancamentoHoras(id){
+
+    try{
+        const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
+
+        const resposta = await exibirHoras.json();
+
+        console.log(resposta)
+    }catch (error) {
+        console.error(error)
+    }
+
+}
+
 /////////////////////////////
+
 
