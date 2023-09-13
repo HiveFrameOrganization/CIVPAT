@@ -13,7 +13,7 @@ function retornaFuncionarios($conn)
     $filtro = $_GET['filtros'];
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 5;
-    $inicioFun = $numPagina * $qtdFuncionariosTela;
+    $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
 
     if ($filtro == ''){
         // preparando a query
