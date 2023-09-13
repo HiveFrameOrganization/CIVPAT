@@ -79,28 +79,103 @@ function botoesPaginacao() {
     
     `
 
-    // Cria os botoes
-    for (let i = 0; i < qtdBotoesFun; i++) {
-        const a = document.createElement('a');
+     // Criando o primeiro botão
+     const priBotao = document.createElement('a');
 
-        // Define a cor dos botoes de acordo do número da página
-        if (sessionStorage.getItem('paginaFun') == i) {
-            a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        } else {
-            a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        }
-
-        a.href = ''
-        a.textContent = i + 1
-        a.id = `pesquisa${i}`
-        a.onclick = () => {
-            colocarPagina(i)
-        }
-
-        // Adiciona o botão antes da seta de proxima página
-        let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
-        containerPaginacao.insertBefore(a, setaProxPagina);
-    }
+     if (sessionStorage.getItem('paginaFun') == 1) {
+         // pagina selecionado
+         priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     } else {
+         // outros botoes
+         priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     }
+ 
+     priBotao.href = ''
+     priBotao.textContent = 1
+     priBotao.id = `pesquisa${1}`
+     priBotao.onclick = () => {
+         colocarPagina(1)
+     }
+ 
+     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
+     // impedir que botoes apareçam em determinados casos
+     if(sessionStorage.getItem('qtdBotoesProposta') == sessionStorage.getItem('paginaFun')){
+         setaProxPagina.classList.add('hidden')
+     }
+     if(sessionStorage.getItem('paginaFun') == 1){
+         document.querySelector('#antPagina').classList.add('hidden')
+     }
+     containerPaginacao.insertBefore(priBotao, setaProxPagina);
+     // Final Primeiro Botão
+ 
+     // adcionar funçoes no botao de ir e voltar
+     setaProxPagina.addEventListener('click', ()=>{
+         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) + 1)
+         setaProxPagina.href = ''
+     })
+     document.querySelector('#antPagina').addEventListener('click', ()=>{
+         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) - 1)
+         document.querySelector('#antPagina').href = ''
+     })
+ 
+     const paginaAtual = sessionStorage.getItem('paginaFun');
+     if (paginaAtual > 4) {
+         const divisor = document.createElement('span');
+         divisor.textContent = '...'
+         containerPaginacao.insertBefore(divisor, setaProxPagina);
+     }
+ 
+     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
+     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
+         if (i > 1 && i < qtdBotoesFun  ) {
+             const a = document.createElement('a');
+     
+             if (sessionStorage.getItem('paginaFun') == i) {
+                 // pagina selecionado
+                 a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+             } else {
+                 // outros botoes
+                 a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+             }
+     
+             a.href = ''
+             a.textContent = i
+             a.id = `pesquisa${i}`
+             a.onclick = () => {
+                 colocarPagina(i)
+             }
+     
+             containerPaginacao.insertBefore(a, setaProxPagina);
+         }
+     }
+ 
+     if (paginaAtual < 4) {
+         const divisor2 = document.createElement('span');
+         divisor2.textContent = '...'
+         containerPaginacao.insertBefore(divisor2, setaProxPagina);
+     }
+     // Criando o ultimo botão
+     const ultBotao = document.createElement('a');
+ 
+     if (sessionStorage.getItem('paginaProposta') == qtdBotoesFun) {
+         // pagina selecionado
+         ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     } else {
+         // outros botoes
+         ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+     }
+ 
+     ultBotao.href = ''
+     ultBotao.textContent = qtdBotoesFun
+     ultBotao.id = `pesquisa${qtdBotoesFun}`
+     ultBotao.onclick = () => {
+         colocarPagina(qtdBotoesFun)
+     }
+ 
+     containerPaginacao.insertBefore(ultBotao, setaProxPagina);
+     // Final Ultimo Botão
+ 
 }
 
 // Seta o número da página no sessionStorage
