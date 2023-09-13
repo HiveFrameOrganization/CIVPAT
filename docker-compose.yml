@@ -2,7 +2,11 @@ version: '3'
 services:
     database:
         container_name: database
+<<<<<<< HEAD
         build: 
+=======
+        build:
+>>>>>>> a497779a9a8099a66829e099d1383ad050e2cdbc
             context: .
             dockerfile: dockerfileData
         ports:
@@ -18,8 +22,13 @@ services:
 
     backend:
         container_name: backend
+<<<<<<< HEAD
         build: 
             context: .
+=======
+        build:
+            context: . 
+>>>>>>> a497779a9a8099a66829e099d1383ad050e2cdbc
             dockerfile: dockerfileCode
         ports:
             - "8080:80"
