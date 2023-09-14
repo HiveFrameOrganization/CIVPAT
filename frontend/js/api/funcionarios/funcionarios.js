@@ -537,6 +537,8 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
     });
 }
 
+const resetSenhaContainer = document.querySelector('#reset-container');
+
 // Abertura e Fechamento da Modal
 let modalEdit = document.querySelector('#modal');
 let modalFade = document.querySelector('#modal-fade');
@@ -544,7 +546,12 @@ let fecharModal = document.querySelector('#close-modal');
 
 const toggleModal = () => {
 
-    [modalEdit, modalFade].forEach((el) => el.classList.toggle('hide'));
+    [modalEdit, modalFade].forEach((el) => {
+
+        el.classList.toggle('hide');
+
+        resetSenhaContainer.innerHTML = '';
+    });
 
 };
 
@@ -553,10 +560,30 @@ const toggleModal = () => {
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
+
     // Quando aparecer o formulário será feita uma requisição para retornar os dados
     dadosParaEditar(nif);
 
     toggleModal();
+
+    // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
+    resetSenhaContainer.innerHTML = '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
+
+    /*
+    --------------------------------------------------------------------------------------- 
+                            RESETAR A SENHA DO USUÁRIO 
+    ---------------------------------------------------------------------------------------
+    */
+
+    // Quando o usuário clicar a senha será resetada
+    resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
+
+        const nif = localStorage.getItem('nif');
+
+        // Função para resetar a senha
+        resetarSenhaUsuario(nif);
+
+    });
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
@@ -684,6 +711,7 @@ async function requisicaoEditar(dados) {
 
 }
 
+// Função para renderizar a modal de confirmar inativação do funcionário
 function renderizarModalConfirmar() {
 
     const div = document.createElement('div');
@@ -789,24 +817,6 @@ async function desativarUsuario(nif) {
     })
 }
 
-/*
---------------------------------------------------------------------------------------- 
-                        RESETAR A SENHA DO USUÁRIO 
----------------------------------------------------------------------------------------
-*/
-
-// Selecionando o botão para disparar o evento
-const resetarSenha = document.querySelector('#resetarSenha');
-
-// Quando o usuário clicar a senha será resetada
-resetarSenha.addEventListener('click', () => {
-
-    const nif = localStorage.getItem('nif');
-
-    // Função para resetar a senha
-    resetarSenhaUsuario(nif);
-
-});
 
 // Função para desativar o usuário
 async function resetarSenhaUsuario(nif) {
@@ -830,6 +840,8 @@ async function resetarSenhaUsuario(nif) {
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();
+
+        resetSenhaContainer.innerHTML = '';
 
     } catch (erro) {
         console.error(erro);
