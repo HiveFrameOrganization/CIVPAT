@@ -232,7 +232,7 @@ function exibir(dados) {
         }
 
         div.innerHTML = `
-        <div class="area-left cursor-pointer text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+        <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                     <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
@@ -537,26 +537,53 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
     });
 }
 
+const resetSenhaContainer = document.querySelector('#reset-container');
+
 // Abertura e Fechamento da Modal
 let modalEdit = document.querySelector('#modal');
-let modalEditFade = document.querySelector('#modal-fade');
+let modalFade = document.querySelector('#modal-fade');
 let fecharModal = document.querySelector('#close-modal');
 
 const toggleModal = () => {
 
-    [modalEdit, modalEditFade].forEach((el) => el.classList.toggle('hide'));
+    [modalEdit, modalFade].forEach((el) => {
+
+        el.classList.toggle('hide');
+
+        resetSenhaContainer.innerHTML = '';
+    });
 
 };
 
-[fecharModal, modalEditFade].forEach((el) => el.addEventListener('click', toggleModal));
+[fecharModal, modalFade].forEach((el) => el.addEventListener('click', toggleModal));
 
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
+
     // Quando aparecer o formulário será feita uma requisição para retornar os dados
     dadosParaEditar(nif);
 
     toggleModal();
+
+    // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
+    resetSenhaContainer.innerHTML = '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
+
+    /*
+    --------------------------------------------------------------------------------------- 
+                            RESETAR A SENHA DO USUÁRIO 
+    ---------------------------------------------------------------------------------------
+    */
+
+    // Quando o usuário clicar a senha será resetada
+    resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
+
+        const nif = localStorage.getItem('nif');
+
+        // Função para resetar a senha
+        resetarSenhaUsuario(nif);
+
+    });
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
@@ -684,63 +711,112 @@ async function requisicaoEditar(dados) {
 
 }
 
+// Função para renderizar a modal de confirmar inativação do funcionário
+function renderizarModalConfirmar() {
+
+    const div = document.createElement('div');
+
+    div.setAttribute('id', 'modal-confirmar');
+    div.classList = 'hide bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8';
+
+    const templateModalConfirmar = `
+    <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+        <div>
+            <h2 class="text-2xl font-bold text-red">INATIVAR FUNCIONÁRIO</h2>
+            <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
+        </div>
+        <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+    </div>
+    <div class="modal-body">
+        <div class="px-4 sm:px-8 flex justify-between">
+            <button id="btn-confirmar" value="yes"  type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
+            <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
+        </div>
+    </div>
+    `;
+
+    div.innerHTML = templateModalConfirmar;
+
+    document.body.appendChild(div);
+}
+
+let modalConfirmar;
+let fecharModalConfirmar;
+
+const toggleModalConfirmar = () => {
+
+    [modalConfirmar, modalFade].forEach((el) => el.classList.toggle('hide'));
+
+};
+
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
 
-    let confirmarInativar = confirm('Tem certeza?');
+    renderizarModalConfirmar();
 
-    if (confirmarInativar) {
+    modalConfirmar = document.querySelector('#modal-confirmar');
+    fecharModalConfirmar = document.querySelector('#close-modal-confirmar');
 
-        try {
+    [fecharModalConfirmar, modalFade].forEach((el) => el.addEventListener('click', toggleModalConfirmar));
 
-            const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nif: nif })
-            });
+    let btnCancelar = document.querySelector('#btn-cancelar');
+    let btnConfirmar = document.querySelector('#btn-confirmar');
 
-            // Convertendo a requisição em um objeto JS
-            const resposta = await requisicao.json();
+    toggleModalConfirmar();
 
-            // Caso a resposta do servidor sej algum erro já previsto...
-            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+    let confirmarInativar;
 
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
+    btnConfirmar.addEventListener('click', async () => {
 
-            alertas();
+        confirmarInativar = true;
 
-            // Atualizando a lista em tempo real
-            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+        if (confirmarInativar === true && nif) {
 
-        } catch (erro) {
-            console.error(erro);
+            try {
+    
+                const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nif: nif })
+                });
+    
+                // Convertendo a requisição em um objeto JS
+                const resposta = await requisicao.json();
+    
+                // Caso a resposta do servidor sej algum erro já previsto...
+                if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+    
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
+    
+                alertas();
+    
+                // Atualizando a lista em tempo real
+                retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+    
+            } catch (erro) {
+                console.error(erro);
+            }
+
+            toggleModalConfirmar();
         }
 
-    }
+        document.body.removeChild(document.querySelector('#modal-confirmar'));
 
+        window.location.reload();
+    })
+    
+    btnCancelar.addEventListener('click', () => {
+    
+        confirmarInativar = false;
+        toggleModalConfirmar();
+
+        document.body.removeChild(document.querySelector('#modal-confirmar'));
+    })
 }
 
-/*
---------------------------------------------------------------------------------------- 
-                        RESETAR A SENHA DO USUÁRIO 
----------------------------------------------------------------------------------------
-*/
-
-// Selecionando o botão para disparar o evento
-const resetarSenha = document.querySelector('#resetarSenha');
-
-// Quando o usuário clicar a senha será resetada
-resetarSenha.addEventListener('click', () => {
-
-    const nif = localStorage.getItem('nif');
-
-    // Função para resetar a senha
-    resetarSenhaUsuario(nif);
-
-});
 
 // Função para desativar o usuário
 async function resetarSenhaUsuario(nif) {
@@ -764,6 +840,8 @@ async function resetarSenhaUsuario(nif) {
 
         // Atualizando a lista em tempo real
         retornaFuncionarios();
+
+        resetSenhaContainer.innerHTML = '';
 
     } catch (erro) {
         console.error(erro);

@@ -66,12 +66,21 @@ async function salvarProduto () {
     var dataInicialInserida = new Date(dataInicial);
     var dataFinalInserida = new Date(dataFinal);
 
-    if (!tempoMaquina || !tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico || !maquina ) {
+    if (!tempoPessoa || !unidadeRealizadora || !dataInicial || !dataFinal || !servico || !produto || !valor || !nifTecnico ) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Preencha todos os campos');
 
         alertas();
         
+    } else if(maquina != 1){
+        // verifica se existe maquina selecionada
+        // se estiver, precisa de ter horas maquina
+        if(!tempoMaquina){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Preencha todos os campos(Horas maquina)');
+
+            alertas();
+        }
     } else if (tempoPessoa < 1 || valor < 1){
         var mensagem = 'Proibido valores menores que 1'
         if (tempoPessoa < 1){
@@ -138,7 +147,6 @@ async function salvarProduto () {
     
             const dados = await resposta.json();
 
-
     
             if (dados['status'] == 'success'){
                 localStorage.setItem('status', dados['status']);
@@ -177,6 +185,7 @@ async function carregarMaquinas() {
 }
 
 function exibirMaquinas(vetor) {
+    // console.log(vetor)
     
     // Selecionando o dropdown que vai guardar as máquinas
     const maquinas = document.querySelector('#maquinas');
