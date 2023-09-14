@@ -74,10 +74,10 @@ function botoesPaginacao(filtro) {
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
     containerPaginacao.innerHTML = `
-    <a id="antPagina" href="#Propostas" class="w-4 h-4">
+    <a id="antPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
     </a>
-    <a id="proxPagina" href="#Propostas" class="w-4 h-4">
+    <a id="proxPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
     </a>
     `
