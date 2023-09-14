@@ -26,12 +26,29 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
+    if (pdfOrcamento != null && pdfOrcamento != undefined) {
+
+        document.getElementById('inputFileUp').placeholder =  pdfOrcamento.name;
+    } 
+    if (pdfPropostaAssinada != null && pdfPropostaAssinada != undefined) {
+        document.getElementById('inputOrcamentoo').placeholder = pdfPropostaAssinada.name;
+    }
+    if (pdfRelatorioFinal != null && pdfRelatorioFinal != undefined) {
+        document.getElementById('inputRelatorioFinal').placeholder = pdfRelatorioFinal.name;
+    }
+    if (pdfPesquisaDeSatisfacao != null && pdfPesquisaDeSatisfacao != undefined) {
+        document.getElementById('inputPesquisaDeSaisfacao').placeholder = pdfPesquisaDeSatisfacao.name;
+    }
+
+
     if (pdfOrcamento == undefined && pdfPropostaAssinada == undefined && pdfRelatorioFinal == undefined && pdfPesquisaDeSatisfacao == undefined) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Campos vazios');
 
         alertas();
     } else {
+        
+        
         // Criar um objeto FormData e adicionar o arquivo PDF a ele
         // formdata serve para mandar dados e arquivos facilmente por via api
         // usado para enviar dados do cliente para o servidor, especialmente 
@@ -58,7 +75,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
@@ -97,7 +114,6 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
 
-    console.log(resposta)
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
     const gerentes = [gerente1, gerente2]
@@ -764,10 +780,30 @@ let primerioCadastroProduto = document.querySelector('#primerioCadastroProduto')
 let segundoCadastroProduto = document.querySelector('#segundoCadastroProduto')
 let paraPrimeiroModal = document.querySelector('#paraPrimeiroModal')
 let paraSegundoModal = document.querySelector('#paraSegundoModal')
+let tempo = document.getElementById('tempoMaquina')
 
 paraSegundoModal.addEventListener('click', ()=>{
     primerioCadastroProduto.classList.add('hidden')
     segundoCadastroProduto.classList.remove('hidden')
+
+    console.log(tempo.value)
+    if(tempo.value == ''){
+        tempo.setAttribute('type', 'text')
+        tempo.value = 'Nenhuma maquina selecionada'
+        tempo.classList.add('text-[90%]')
+        tempo.setAttribute('readonly', 'true')
+        tempo.classList.add('bg-component')
+        tempo.classList.add('cursor-default')
+        tempo.classList.remove('focus:outline-primary')
+    }else{
+        tempo.value = ''
+        tempo.setAttribute('type', 'number')
+        tempo.classList.remove('text-[90%]')
+        tempo.setAttribute('readonly', 'false')
+        tempo.classList.remove('bg-component')
+        tempo.classList.remove('cursor-default')
+        tempo.classList.add('focus:outline-primary')
+    }
 })
 
 paraPrimeiroModal.addEventListener('click', ()=>{

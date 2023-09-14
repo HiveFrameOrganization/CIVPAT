@@ -8,8 +8,13 @@ import { back } from '../Rotas/rotas.js'
 
 const email = document.querySelector('#email');
 email.addEventListener('blur', () => {
+    const inputEmail = document.getElementById('email').value;
+    
 
-    verificaEmail(email.value + '@sp.senai.br');
+    if (inputEmail != '') {
+
+        verificaEmail(email.value + '@sp.senai.br');
+    }
 
 });
 

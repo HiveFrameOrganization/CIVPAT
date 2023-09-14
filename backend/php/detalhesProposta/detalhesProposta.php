@@ -83,7 +83,7 @@ function verificarDetalhes($idProposta, $conn) {
                 "empresa" => $dados['Empresa'],
                 "statusProposta" => $dados['Status'],
                 "criadorProposta" => $dados['Nome'],
-                "numeroSGSET" => $dados['numeroSGSET'],
+                "numeroSGSET" => $dados['nSGSET'],
                 "dataPrimeiroProduto" => $dadosDataInicial['DataInicial'],
                 "dataUltimoProduto" => $dadosDataFinal['DataFinal'],
                 "valorTotalProdutos" => $dadosValorTotal['ValorTotal'],
