@@ -275,7 +275,7 @@
                 
                 <div class="flex flex-col gap-2 w-full">
                     <label class="text-color-text font-semibold">HORAS-PESSOA TOTAIS</label>
-                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                 </div>
 
                 <div class="flex flex-col gap-2 w-full">
@@ -285,7 +285,7 @@
 
                 <div class="flex flex-col gap-2 w-full">
                     <label class="text-color-text font-semibold">HORAS-PESSOA ACUMULADAS</label>
-                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                 </div>
 
             </div>
@@ -300,7 +300,7 @@
 
                 <div class="flex flex-col gap-2 w-full">
                     <label class="text-color-text font-semibold">HORAS-MÁQUINA TOTAIS</label>
-                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                 </div>
 
                 <div class="flex flex-col gap-2 w-full">
@@ -310,7 +310,7 @@
 
                 <div class="flex flex-col gap-2 w-full">
                     <label class="text-color-text font-semibold">HORAS-MÁQUINA ACUMULADAS</label>
-                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                 </div>
 
             </div>
@@ -372,6 +372,7 @@
             document.getElementById('valor').disabled = true;
             document.getElementById('dataInicial').disabled = true;
             document.getElementById('dataFinal').disabled = true;
+
         } else if (localStorage.getItem('status') == 'Declinado'){
             document.getElementById("modificarProduto").disabled = true;
             document.getElementById('produto').disabled = true;
@@ -383,6 +384,7 @@
             document.getElementById('valor').disabled = true;
             document.getElementById('dataInicial').disabled = true;
             document.getElementById('dataFinal').disabled = true;
+
         } else if (localStorage.getItem('status') == 'Concluido'){
             document.getElementById("modificarProduto").disabled = true;
             document.getElementById('produto').disabled = true;
