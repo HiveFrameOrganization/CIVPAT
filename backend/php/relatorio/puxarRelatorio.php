@@ -14,12 +14,12 @@ require_once '../../../database/conn.php';
 function puxarRelatorio($mes, $ano, $conn)
 {
 
-    $stmt = $conn->prepare("SELECT Usuarios.Nome, NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
+    $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
     INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
     INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto 
     INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-GROUP BY Datas, Usuarios.Nome, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0,100");
+GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0,100");
 
     // SELECT Usuarios.Nome, Propostas.TituloProposta, NomeProduto.NomeProduto, SUM(HorasPessoa), SUM(`HorasMaquina`), CargaHoraria.`Datas` FROM `Usuarios`
     // INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
