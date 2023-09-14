@@ -539,16 +539,16 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
 
 // Abertura e Fechamento da Modal
 let modalEdit = document.querySelector('#modal');
-let modalEditFade = document.querySelector('#modal-fade');
+let modalFade = document.querySelector('#modal-fade');
 let fecharModal = document.querySelector('#close-modal');
 
 const toggleModal = () => {
 
-    [modalEdit, modalEditFade].forEach((el) => el.classList.toggle('hide'));
+    [modalEdit, modalFade].forEach((el) => el.classList.toggle('hide'));
 
 };
 
-[fecharModal, modalEditFade].forEach((el) => el.addEventListener('click', toggleModal));
+[fecharModal, modalFade].forEach((el) => el.addEventListener('click', toggleModal));
 
 
 // Função para mostrar a tela de edição do usuário
@@ -684,43 +684,72 @@ async function requisicaoEditar(dados) {
 
 }
 
+const modalConfirmar = document.querySelector('#modal-confirmar');
+const fecharModalConfirmar = document.querySelector('#close-modal-confirmar');
+
+const toggleModalConfirmar = () => {
+
+    [modalConfirmar, modalFade].forEach((el) => el.classList.toggle('hide'));
+
+};
+
+[fecharModalConfirmar, modalFade].forEach((el) => el.addEventListener('click', toggleModalConfirmar));
+
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
 
-    let confirmarInativar = confirm('Tem certeza?');
+    let btnCancelar = document.querySelector('#btn-cancelar');
+    let btnConfirmar = document.querySelector('#btn-confirmar');
 
-    if (confirmarInativar) {
+    let confirmarInativar;
 
-        try {
+    btnConfirmar.addEventListener('click', async () => {
 
-            const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nif: nif })
-            });
+        confirmarInativar = true;
 
-            // Convertendo a requisição em um objeto JS
-            const resposta = await requisicao.json();
+        if (confirmarInativar === true && nif) {
 
-            // Caso a resposta do servidor sej algum erro já previsto...
-            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+            try {
+    
+                const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nif: nif })
+                });
+    
+                // Convertendo a requisição em um objeto JS
+                const resposta = await requisicao.json();
+    
+                // Caso a resposta do servidor sej algum erro já previsto...
+                if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+    
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
+    
+                alertas();
+    
+                // Atualizando a lista em tempo real
+                retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+    
+            } catch (erro) {
+                console.error(erro);
+            }
 
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
-
-            alertas();
-
-            // Atualizando a lista em tempo real
-            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-
-        } catch (erro) {
-            console.error(erro);
+            toggleModalConfirmar();
+    
         }
+    })
+    
+    btnCancelar.addEventListener('click', () => {
+    
+        confirmarInativar = false;
+        toggleModalConfirmar();
+    })
+    
 
-    }
-
+    toggleModalConfirmar();
 }
 
 /*
