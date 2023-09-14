@@ -145,7 +145,7 @@
 
     <main class="bg-component w-full pb-12 flex flex-col flex-1 h-auto pt-12">
 
-        <section class="container mx-auto px-6">
+        <section class="container mx-auto px-6 mb-12">
 
             
             <!-- título, subtítulo e botão de voltar -->
@@ -264,27 +264,61 @@
 
         </section>
 
-        <label for="">Hora pessoa:</label>
-        <label for="">Horas totais:</label>
-        <input type="text">
-        <label for="">Horas diarias:</label>
-        <input type="number"  min="1" max="10">
-        <label for="">Horas acomuladas:</label>
-        <input type="text">
+        <section class="container mx-auto px-6 mb-6">
 
+            <div class="flex flex-col mb-8">
+                <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS TRABALHADAS</h2>
+                <h3 class="text-xs text-color-text pt-2">Insira a quantidade de horas trabalhadas no produto.</h3>
+            </div>
 
-        <label for="">Hora maquina:</label><hr>
- 
-        
+            <div class="flex flex-col sm:flex-row gap-12 mb-12">
+                
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS-PESSOA TOTAIS</label>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                </div>
 
-        <label for="">Horas totais:</label>
-        <input type="text">
-        <label for="">Horas diarias:</label>
-        <input type="number">
-        <label for="">Horas acomuladas:</label>
-        <input type="text">
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS TRABALHADAS (DIA)</label>
+                    <input type="number" min="1" max="10" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                </div>
 
-        <button id="salvarLancamentoHoras">Enviar</button>
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS-PESSOA ACUMULADAS</label>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                </div>
+
+            </div>
+    
+            
+            <div class="flex flex-col mb-8">
+                <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
+                <h3 class="text-xs text-color-text pt-2">Insira a quantidade de horas-máquina trabalhadas no produto.</h3>
+            </div>
+     
+            <div class="flex flex-col sm:flex-row gap-12 mb-12">
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS-MÁQUINA TOTAIS</label>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS-MÁQUINA TRABALHADAS (DIA)</label>
+                    <input type="number" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60">
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold">HORAS-MÁQUINA ACUMULADAS</label>
+                    <input type="text" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                </div>
+
+            </div>
+    
+            <button id="salvarLancamentoHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md">Salvar</button>
+
+        </section>
+
 
     </main>
 
