@@ -180,7 +180,7 @@
                         class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text">Doge do Meme</h5>
-                            <a href="#"
+                            <a href="../perfil/index.html"
                                 class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver
                                 meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
@@ -828,7 +828,7 @@
 
             <div onclick="fechaModal()" class="z-0 absolute w-screen h-screen"></div>
 
-            <form class="formulario z-10 flex flex-col gap-5 w-full md:w-1/2 h-[80%] bg-component p-8 overflow-y-auto mx-auto rounded-xl">
+            <form class="formulario z-10 flex flex-col gap-5 w-full md:w-1/2 max-h-[80%] bg-component p-8 overflow-y-auto mx-auto rounded-xl">
 
                 <div class="flex justify-between items-start">
                     <div class="flex flex-col gap-0">
@@ -845,7 +845,7 @@
                     <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
 
                     <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="servico" id="servico" required>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="servico" id="servico" required>
                         <option value="" disabled selected class="text-color-text-secundary">Selecione a categoria...</option>
                         <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
                         <option value="2" class="bg-body">Assessoria Tecnológica - Empreendedorismo</option>
@@ -866,7 +866,7 @@
                     </select>
 
                     <label class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="produto" id="produto" required>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="produto" id="produto" required>
                         <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
                     </select>
 
@@ -877,13 +877,13 @@
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
                             <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
-                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" name="tecnicos" id="tecnicos" required>
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="tecnicos" id="tecnicos" required>
                             </select>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
                             <label class="text-color-text font-bold block mb-2">Máquina utilizada</label>
-                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" id="maquinas" required>   
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" id="maquinas" required>   
                             </select>
                         </div>
 
@@ -913,17 +913,17 @@
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
                             <label class="text-color-text font-bold block mb-2">Data Inicial: </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataInicial" required>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5 cursor-pointer" type="date" id="dataInicial" required>
                         </div>
 
                         <div class="w-full lg:w-1/2">
                             <label class="text-color-text font-bold block mb-2">Data Final: </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5" type="date" id="dataFinal" required>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 py-5 cursor-pointer" type="date" id="dataFinal" required>
                         </div>
                     </div>
                     
                     <label class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" id="unidadeCriadora" required>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" id="unidadeCriadora" required>
                         <option value="" disabled selected>Selecione a unidade Criadora</option>
                     </select>
                     

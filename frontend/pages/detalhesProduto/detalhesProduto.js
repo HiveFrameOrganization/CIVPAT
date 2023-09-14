@@ -74,6 +74,13 @@ window.addEventListener('load', async function (){
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
 
+    // inativar horas maquina se nao houver maquina selecionada
+    let tempo = document.getElementById('tempoMaquina')
+    if(dadosProduto['fk_idMaquina'] == 1){
+        tempo.setAttribute('disabled', 'true')
+        // tempo.classList.add()
+    }
+
 
     console.log(dadosProduto);
 
