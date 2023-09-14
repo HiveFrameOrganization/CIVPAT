@@ -1,6 +1,6 @@
 import { back } from '../Rotas/rotas.js'
 
-const linksNavegacao = document.querySelector('#nav-links');
+const spanProdutos = document.querySelector('#spanProdutos');
 
 // Requisição disparada quando a página carregar
 window.addEventListener('load', () => {
@@ -43,9 +43,7 @@ function exibir(dados) {
     if (dados.cargo === 'tec') {
         
         // Tornando o span visível:
-        linksNavegacao.innerHTML += `
-            <span id="spanProdutos" role="button" class="nav-btn font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden">PRODUTOS</span>
-        `;
+        spanProdutos.classList.remove('hidden');
 
         /*
             Salvando o NIF do usuário no span para ser feito a busca dos produtos em que 
