@@ -40,7 +40,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
 
         // resposta a ser mandado para o front-end
         $resposta = [
-            'mensagem' => 'Senha inválida...',
+            'mensagem' => 'Login ou senha inválido',
             'login' => false,
             'status' => 'error'
         ];
@@ -76,7 +76,7 @@ function validarDados($dados, $conn)
     } else {
 
         $resposta = [
-            'mensagem' => 'Usuário não cadastrado...',
+            'mensagem' => 'Login ou senha inválido',
             'login' => false,
             'status' => 'error'
         ];

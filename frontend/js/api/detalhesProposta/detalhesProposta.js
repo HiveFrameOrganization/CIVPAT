@@ -26,12 +26,29 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
+    if (pdfOrcamento != null && pdfOrcamento != undefined) {
+
+        document.getElementById('inputFileUp').placeholder =  pdfOrcamento.name;
+    } 
+    if (pdfPropostaAssinada != null && pdfPropostaAssinada != undefined) {
+        document.getElementById('inputOrcamentoo').placeholder = pdfPropostaAssinada.name;
+    }
+    if (pdfRelatorioFinal != null && pdfRelatorioFinal != undefined) {
+        document.getElementById('inputRelatorioFinal').placeholder = pdfRelatorioFinal.name;
+    }
+    if (pdfPesquisaDeSatisfacao != null && pdfPesquisaDeSatisfacao != undefined) {
+        document.getElementById('inputPesquisaDeSaisfacao').placeholder = pdfPesquisaDeSatisfacao.name;
+    }
+
+
     if (pdfOrcamento == undefined && pdfPropostaAssinada == undefined && pdfRelatorioFinal == undefined && pdfPesquisaDeSatisfacao == undefined) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Campos vazios');
 
         alertas();
     } else {
+        
+        
         // Criar um objeto FormData e adicionar o arquivo PDF a ele
         // formdata serve para mandar dados e arquivos facilmente por via api
         // usado para enviar dados do cliente para o servidor, especialmente 
@@ -58,7 +75,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
@@ -97,7 +114,6 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
 
-    console.log(resposta)
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
     const gerentes = [gerente1, gerente2]
