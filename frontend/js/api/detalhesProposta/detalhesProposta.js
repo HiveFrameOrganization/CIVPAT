@@ -763,10 +763,24 @@ let primerioCadastroProduto = document.querySelector('#primerioCadastroProduto')
 let segundoCadastroProduto = document.querySelector('#segundoCadastroProduto')
 let paraPrimeiroModal = document.querySelector('#paraPrimeiroModal')
 let paraSegundoModal = document.querySelector('#paraSegundoModal')
+let tempo = document.getElementById('tempoMaquina')
 
 paraSegundoModal.addEventListener('click', ()=>{
     primerioCadastroProduto.classList.add('hidden')
     segundoCadastroProduto.classList.remove('hidden')
+
+    console.log(tempo.value)
+    if(tempo.value == ''){
+        tempo.setAttribute('readonly', 'true')
+        tempo.classList.add('bg-component')
+        tempo.classList.add('cursor-default')
+        tempo.classList.remove('focus:outline-primary')
+    }else{
+        tempo.setAttribute('readonly', 'false')
+        tempo.classList.remove('bg-component')
+        tempo.classList.remove('cursor-default')
+        tempo.classList.add('focus:outline-primary')
+    }
 })
 
 paraPrimeiroModal.addEventListener('click', ()=>{
