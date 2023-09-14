@@ -656,12 +656,12 @@ function aceitarProposta() {
 
     if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
         document.querySelector("#aceitarProposta").disabled = false;
-        console.log("tudo certo, o botão de aceitar está ativo!");
+        alert("tudo certo, o botão de aceitar está ativo!");
 
     } else {
 
         document.querySelector("#aceitarProposta").disabled = true;
-        console.log("o botão de aceitar está desativado!");
+        alert("o botão de aceitar está desativado!");
 
 
     }
@@ -675,7 +675,7 @@ const declinarPropostaButton = document.getElementById('declinarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
 
-// Executando a função 'aceitarProposta' e 'declinarProposta'.
+// Executando a função 'aceitarProposta'.
 
 aceitarPropostaButton.addEventListener('click', () => {
     try {
@@ -709,7 +709,7 @@ propostaAssinadaInput.addEventListener('change', () => {
     }
 })
 
-//Função assincrona para enviar e atualizar os dados no banco
+//Função para enviar e atualizar os dados no banco
 
 async function aceitarPropostaBanco(){
     const idProposta = localStorage.getItem('idProposta');
@@ -724,7 +724,7 @@ async function aceitarPropostaBanco(){
    
 }
 
-// Função assincrona para enviar e atualizar os dados no banco
+///////////////////////
 
 async function declinarPropostaBanco(){
     const idProposta = localStorage.getItem('idProposta');
@@ -739,7 +739,8 @@ async function declinarPropostaBanco(){
    
 }
 
-//adionando um evento na função para chamar a função 'aceitarPropostaBanco' e 'declinarPropostaBanco' que é responsavel por enviar e atualizar os dados no banco
+
+
 
 const botaoAceitarProposta = document.getElementById('aceitarProposta');
 
@@ -771,11 +772,17 @@ paraSegundoModal.addEventListener('click', ()=>{
 
     console.log(tempo.value)
     if(tempo.value == ''){
+        tempo.setAttribute('type', 'text')
+        tempo.value = 'Nenhuma maquina selecionada'
+        tempo.classList.add('text-[90%]')
         tempo.setAttribute('readonly', 'true')
         tempo.classList.add('bg-component')
         tempo.classList.add('cursor-default')
         tempo.classList.remove('focus:outline-primary')
     }else{
+        tempo.value = ''
+        tempo.setAttribute('type', 'number')
+        tempo.classList.remove('text-[90%]')
         tempo.setAttribute('readonly', 'false')
         tempo.classList.remove('bg-component')
         tempo.classList.remove('cursor-default')
