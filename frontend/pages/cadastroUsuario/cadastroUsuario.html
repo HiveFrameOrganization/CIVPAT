@@ -362,23 +362,9 @@
 
          <!------------------------------ MODAL DE CONFIRMAR ------------------------------>
 
-        <div id="modal-confirmar" class="hide bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8">
-            <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
-                <div>
-                    <h2 class="text-2xl font-bold text-red">INATIVAR FUNCIONÁRIO</h2>
-                    <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
-                </div>
-                <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
-            </div>
-            <div class="modal-body">
-                <div class="px-4 sm:px-8 flex justify-between">
-                    <button id="btn-confirmar" value="yes"  type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
-                    <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
-                </div>
-            </div>
-        </div>
-
     </div>
+
+</body>
 
     <script src="./cadastroUsuario.js"></script>
 
@@ -396,7 +382,5 @@
         import { autenticacao } from '../../js/api/login/autenticacao.js'
         autenticacao(['coor'])
     </script>
-
-</body>
 </html>
 

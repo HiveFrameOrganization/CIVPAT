@@ -684,8 +684,36 @@ async function requisicaoEditar(dados) {
 
 }
 
-const modalConfirmar = document.querySelector('#modal-confirmar');
-const fecharModalConfirmar = document.querySelector('#close-modal-confirmar');
+function renderizarModalConfirmar() {
+
+    const div = document.createElement('div');
+
+    div.setAttribute('id', 'modal-confirmar');
+    div.classList = 'hide bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8';
+
+    const templateModalConfirmar = `
+    <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+        <div>
+            <h2 class="text-2xl font-bold text-red">INATIVAR FUNCIONÁRIO</h2>
+            <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
+        </div>
+        <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+    </div>
+    <div class="modal-body">
+        <div class="px-4 sm:px-8 flex justify-between">
+            <button id="btn-confirmar" value="yes"  type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
+            <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
+        </div>
+    </div>
+    `;
+
+    div.innerHTML = templateModalConfirmar;
+
+    document.body.appendChild(div);
+}
+
+let modalConfirmar;
+let fecharModalConfirmar;
 
 const toggleModalConfirmar = () => {
 
@@ -693,13 +721,20 @@ const toggleModalConfirmar = () => {
 
 };
 
-[fecharModalConfirmar, modalFade].forEach((el) => el.addEventListener('click', toggleModalConfirmar));
-
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
 
+    renderizarModalConfirmar();
+
+    modalConfirmar = document.querySelector('#modal-confirmar');
+    fecharModalConfirmar = document.querySelector('#close-modal-confirmar');
+
+    [fecharModalConfirmar, modalFade].forEach((el) => el.addEventListener('click', toggleModalConfirmar));
+
     let btnCancelar = document.querySelector('#btn-cancelar');
     let btnConfirmar = document.querySelector('#btn-confirmar');
+
+    toggleModalConfirmar();
 
     let confirmarInativar;
 
@@ -738,18 +773,20 @@ async function desativarUsuario(nif) {
             }
 
             toggleModalConfirmar();
-    
         }
+
+        document.body.removeChild(document.querySelector('#modal-confirmar'));
+
+        window.location.reload();
     })
     
     btnCancelar.addEventListener('click', () => {
     
         confirmarInativar = false;
         toggleModalConfirmar();
-    })
-    
 
-    toggleModalConfirmar();
+        document.body.removeChild(document.querySelector('#modal-confirmar'));
+    })
 }
 
 /*
