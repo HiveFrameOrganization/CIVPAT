@@ -24,7 +24,7 @@ window.addEventListener('load', async () => {
 async function retornaFuncionarios(filtro) {
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
-        sessionStorage.setItem('paginaFun', 0)
+        sessionStorage.setItem('paginaFun', 1)
     }
     const paginaFun = sessionStorage.getItem('paginaFun');
 
@@ -99,7 +99,7 @@ function botoesPaginacao() {
  
      const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
      // impedir que botoes apareçam em determinados casos
-     if(sessionStorage.getItem('qtdBotoesProposta') == sessionStorage.getItem('paginaFun')){
+     if(sessionStorage.getItem('qtdBotoesFun') == sessionStorage.getItem('paginaFun')){
          setaProxPagina.classList.add('hidden')
      }
      if(sessionStorage.getItem('paginaFun') == 1){
@@ -150,7 +150,7 @@ function botoesPaginacao() {
          }
      }
  
-     if (paginaAtual < 4) {
+     if (paginaAtual < 4 && qtdBotoesFun > 4) {
          const divisor2 = document.createElement('span');
          divisor2.textContent = '...'
          containerPaginacao.insertBefore(divisor2, setaProxPagina);
@@ -158,7 +158,7 @@ function botoesPaginacao() {
      // Criando o ultimo botão
      const ultBotao = document.createElement('a');
  
-     if (sessionStorage.getItem('paginaProposta') == qtdBotoesFun) {
+     if (sessionStorage.getItem('paginaFun') == qtdBotoesFun) {
          // pagina selecionado
          ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
      } else {
