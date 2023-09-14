@@ -7,6 +7,17 @@ import { back } from "../Rotas/rotas.js";
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
+window.addEventListener('load', async () => {
+
+    const data = new Date();
+
+    const mes = data.getMonth() + 1;
+    const ano = data.getFullYear();
+
+    await buscarRelatorio(mes.toString(), ano.toString());
+
+});
+
 // Pegando o evento de click para mandar a data para o back-end
 const botaoPesquisar = document.querySelector('#pesquisarData');
 botaoPesquisar.addEventListener('click', async () => {

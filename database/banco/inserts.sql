@@ -457,3 +457,9 @@ insert into Historico VALUES
 (default, 1, 1, 30, '2023-09-01', NOW()),
 (default, 1, 1, 31, '2023-09-01', NOW());
 
+INSERT INTO Produtos VALUES
+(1, 1, '1234560', 1, 1, 1, 1, 'metalmecanica', 123, 123, 123, '2023-09-12', '2023-09-23');
+
+INSERT INTO CargaHoraria VALUES
+(1, 1, '1234560', 10, 12, '2023-09-14'),
+(2, 1, '1234560', 10, 12, '2023-09-14');

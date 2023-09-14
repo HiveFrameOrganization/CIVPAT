@@ -192,13 +192,14 @@ ENGINE = InnoDB;
 -- Table `isihiveframe`.`CargaHoraria`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`CargaHoraria` (
+  `idCargaHoraria` INT UNSIGNED NOT NULL,
   `fk_idProduto` INT UNSIGNED NOT NULL,
   `fk_nifTecnico` VARCHAR(7) NOT NULL,
   `HorasPessoa` INT NOT NULL,
   `HorasMaquina` INT NOT NULL,
   `Datas` DATE NOT NULL,
   INDEX `fk_CargaHoraria_Produtos1_idx` (`fk_idProduto` ASC) VISIBLE,
-  PRIMARY KEY (`fk_idProduto`, `fk_nifTecnico`),
+  PRIMARY KEY (`idCargaHoraria`),
   INDEX `fk_CargaHoraria_Usuarios1_idx` (`fk_nifTecnico` ASC) VISIBLE,
   CONSTRAINT `fk_CargaHoraria_Produtos1`
     FOREIGN KEY (`fk_idProduto`)
