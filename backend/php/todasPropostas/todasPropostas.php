@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
     if ($_GET['qtdBotes'] == -1) {
-        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela);
+        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtros);
     } else {
         $qtdBotoes = $_GET['qtdBotes'];
     }
@@ -98,9 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Retorna a quantidade de Propostas
-function qtdBotoes($conn, $qtdPropostasTela) {
+function qtdBotoes($conn, $qtdPropostasTela, $filtros) {
     // preparando a query
-    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas");
+    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas WHERE Status LIKE ?");
+
+    $filtro = '%' . $filtros . '%';
+    $stmt->bind_param('s', $filtro);
 
     // Excutando a query
     $stmt->execute();
