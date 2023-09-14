@@ -126,7 +126,8 @@ function botoesPaginacao(filtro) {
     })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
-    if (paginaAtual > 4) {
+    console.log(qtdBotoes)
+    if (paginaAtual > 4 && qtdBotoes > 4) {
         const divisor = document.createElement('span');
         divisor.textContent = '...'
         containerPaginacao.insertBefore(divisor, setaProxPagina);
@@ -159,35 +160,37 @@ function botoesPaginacao(filtro) {
         }
     }
 
-    if (paginaAtual < 4) {
+    if (paginaAtual < 4  && qtdBotoes > 4) {
         const divisor2 = document.createElement('span');
         divisor2.textContent = '...'
         containerPaginacao.insertBefore(divisor2, setaProxPagina);
     }
-    // Criando o ultimo botão
-    const ultBotao = document.createElement('a');
 
-    if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
-        // pagina selecionado
-        ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    } else {
-        // outros botoes
-        ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    }
-
-    ultBotao.href = '#Proposta'
-    ultBotao.textContent = qtdBotoes
-    ultBotao.id = `pesquisa${qtdBotoes}`
-    ultBotao.onclick = () => {
-        colocarPagina(qtdBotoes)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-        botoesPaginacao(localStorage.getItem('filtroPadrao'));
-    }
-
-    containerPaginacao.insertBefore(ultBotao, setaProxPagina);
-    // Final Ultimo Botão
-
+    if (qtdBotoes > 1) {
+        // Criando o ultimo botão
+        const ultBotao = document.createElement('a');
     
+        if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
+            // pagina selecionado
+            ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        } else {
+            // outros botoes
+            ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        }
+    
+        ultBotao.href = '#Proposta'
+        ultBotao.textContent = qtdBotoes
+        ultBotao.id = `pesquisa${qtdBotoes}`
+        ultBotao.onclick = () => {
+            colocarPagina(qtdBotoes)
+            pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+            botoesPaginacao(localStorage.getItem('filtroPadrao'));
+        }
+    
+        containerPaginacao.insertBefore(ultBotao, setaProxPagina);
+        // Final Ultimo Botão
+    }
+
 }
 
 // Seta o número da página no sessionStorage
