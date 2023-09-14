@@ -656,12 +656,12 @@ function aceitarProposta() {
 
     if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
         document.querySelector("#aceitarProposta").disabled = false;
-        alert("tudo certo, o botão de aceitar está ativo!");
+        console.log("tudo certo, o botão de aceitar está ativo!");
 
     } else {
 
         document.querySelector("#aceitarProposta").disabled = true;
-        alert("o botão de aceitar está desativado!");
+        console.log("o botão de aceitar está desativado!");
 
 
     }
@@ -675,7 +675,7 @@ const declinarPropostaButton = document.getElementById('declinarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
 
-// Executando a função 'aceitarProposta'.
+// Executando a função 'aceitarProposta' e 'declinarProposta'.
 
 aceitarPropostaButton.addEventListener('click', () => {
     try {
@@ -709,7 +709,7 @@ propostaAssinadaInput.addEventListener('change', () => {
     }
 })
 
-//Função para enviar e atualizar os dados no banco
+//Função assincrona para enviar e atualizar os dados no banco
 
 async function aceitarPropostaBanco(){
     const idProposta = localStorage.getItem('idProposta');
@@ -724,7 +724,7 @@ async function aceitarPropostaBanco(){
    
 }
 
-///////////////////////
+// Função assincrona para enviar e atualizar os dados no banco
 
 async function declinarPropostaBanco(){
     const idProposta = localStorage.getItem('idProposta');
@@ -739,8 +739,7 @@ async function declinarPropostaBanco(){
    
 }
 
-
-
+//adionando um evento na função para chamar a função 'aceitarPropostaBanco' e 'declinarPropostaBanco' que é responsavel por enviar e atualizar os dados no banco
 
 const botaoAceitarProposta = document.getElementById('aceitarProposta');
 
