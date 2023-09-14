@@ -45,6 +45,8 @@ imageInput.addEventListener('change', (event) => {
     leitor.onload = () => {
 
         uploadImageBtn.parentElement.querySelector('#perfil-image').src = leitor.result;
+
+        document.querySelector('#profile-trigger').src = leitor.result;
     }
 
     leitor.readAsDataURL(imageInput.files[0]);
