@@ -7,12 +7,19 @@ const paginacao = document.querySelector('#paginacao');
 
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
-    localStorage.setItem('filtroPadrao', '');
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
     // alertas();
     await pegarTodasAsPropostas(filtroAoCarregarPagina);
     await pegarUnidadesCriadoras();
-    botoesPaginacao();
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
+    console.log(`propostas${filtroAoCarregarPagina}`)
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary')
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-b-2')
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-primary')
+
+    document.getElementById(`todasPropostas`).classList.remove('text-primary')
+    document.getElementById(`todasPropostas`).classList.remove('border-b-2')
+    document.getElementById(`todasPropostas`).classList.remove('border-primary')
 })
 
 async function pegarTodasAsPropostas (filtros) {
@@ -25,10 +32,10 @@ async function pegarTodasAsPropostas (filtros) {
 
 
     let declaradoQtdBotoes
-    if (sessionStorage.getItem('qtdBotoesProposta') == null) {
+    if (sessionStorage.getItem(`qtdBotoesProposta${filtros}`) == null) {
         declaradoQtdBotoes = -1;
     } else {
-        declaradoQtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
+        declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtros}`);;
     }
 
     try{
@@ -43,8 +50,8 @@ async function pegarTodasAsPropostas (filtros) {
         if (dados.status === 'success') {
 
             exibirPropostas(dados.propostas);
-            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
-            
+            sessionStorage.setItem(`qtdBotoesProposta${filtros}`, dados.qtdBotoes);
+            console.log(dados)
             // Adicionando a quaqntidade de propostas de acordo com os seus status
             document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
@@ -62,15 +69,15 @@ async function pegarTodasAsPropostas (filtros) {
 
 
 // Criar os botões de paginação e adiciona a função que muda a página
-function botoesPaginacao() {
-    const qtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
+function botoesPaginacao(filtro) {
+    const qtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
     containerPaginacao.innerHTML = `
-    <a id="antPagina" href="#" class="w-4 h-4">
+    <a id="antPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
     </a>
-    <a id="proxPagina" href="#" class="w-4 h-4">
+    <a id="proxPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
     </a>
     `
@@ -86,16 +93,18 @@ function botoesPaginacao() {
         priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
     }
 
-    priBotao.href = ''
+    priBotao.href = '#Proposta'
     priBotao.textContent = 1
     priBotao.id = `pesquisa${1}`
     priBotao.onclick = () => {
         colocarPagina(1)
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        botoesPaginacao(localStorage.getItem('filtroPadrao'));
     }
 
     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
     // impedir que botoes apareçam em determinados casos
-    if(sessionStorage.getItem('qtdBotoesProposta') == sessionStorage.getItem('paginaProposta')){
+    if(sessionStorage.getItem(`qtdBotoesProposta${filtro}`) == sessionStorage.getItem('paginaProposta')){
         setaProxPagina.classList.add('hidden')
     }
     if(sessionStorage.getItem('paginaProposta') == 1){
@@ -107,15 +116,18 @@ function botoesPaginacao() {
     // adcionar funçoes no botao de ir e voltar
     setaProxPagina.addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
-        setaProxPagina.href = ''
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        botoesPaginacao(localStorage.getItem('filtroPadrao'));
     })
     document.querySelector('#antPagina').addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
-        document.querySelector('#antPagina').href = ''
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        botoesPaginacao(localStorage.getItem('filtroPadrao'));
     })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
-    if (paginaAtual > 4) {
+    console.log(qtdBotoes)
+    if (paginaAtual > 4 && qtdBotoes > 4) {
         const divisor = document.createElement('span');
         divisor.textContent = '...'
         containerPaginacao.insertBefore(divisor, setaProxPagina);
@@ -135,44 +147,50 @@ function botoesPaginacao() {
                 a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
             }
     
-            a.href = ''
+            a.href = '#Proposta'
             a.textContent = i
             a.id = `pesquisa${i}`
             a.onclick = () => {
                 colocarPagina(i)
+                pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+                botoesPaginacao(localStorage.getItem('filtroPadrao'));
             }
     
             containerPaginacao.insertBefore(a, setaProxPagina);
         }
     }
 
-    if (paginaAtual < 4) {
+    if (paginaAtual < 4  && qtdBotoes > 4) {
         const divisor2 = document.createElement('span');
         divisor2.textContent = '...'
         containerPaginacao.insertBefore(divisor2, setaProxPagina);
     }
-    // Criando o ultimo botão
-    const ultBotao = document.createElement('a');
 
-    if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
-        // pagina selecionado
-        ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    } else {
-        // outros botoes
-        ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    }
-
-    ultBotao.href = ''
-    ultBotao.textContent = qtdBotoes
-    ultBotao.id = `pesquisa${qtdBotoes}`
-    ultBotao.onclick = () => {
-        colocarPagina(qtdBotoes)
-    }
-
-    containerPaginacao.insertBefore(ultBotao, setaProxPagina);
-    // Final Ultimo Botão
-
+    if (qtdBotoes > 1) {
+        // Criando o ultimo botão
+        const ultBotao = document.createElement('a');
     
+        if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
+            // pagina selecionado
+            ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        } else {
+            // outros botoes
+            ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        }
+    
+        ultBotao.href = '#Proposta'
+        ultBotao.textContent = qtdBotoes
+        ultBotao.id = `pesquisa${qtdBotoes}`
+        ultBotao.onclick = () => {
+            colocarPagina(qtdBotoes)
+            pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+            botoesPaginacao(localStorage.getItem('filtroPadrao'));
+        }
+    
+        containerPaginacao.insertBefore(ultBotao, setaProxPagina);
+        // Final Ultimo Botão
+    }
+
 }
 
 // Seta o número da página no sessionStorage
@@ -199,10 +217,10 @@ async function pegarTodasAsPropostasFiltradas (filt) {
 
 
     let declaradoQtdBotoes
-    if (sessionStorage.getItem('qtdBotoesProposta') == null) {
+    if (sessionStorage.getItem(`qtdBotoesProposta${filtro}`) == null) {
         declaradoQtdBotoes = -1;
     } else {
-        declaradoQtdBotoes = sessionStorage.getItem('qtdBotoesProposta');
+        declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
     }
 
     try{
@@ -217,7 +235,7 @@ async function pegarTodasAsPropostasFiltradas (filt) {
         if (dados.status === 'success') {
 
             exibirPropostasFiltradas(dados.propostas);
-            sessionStorage.setItem('qtdBotoesProposta', dados.qtdBotoes);
+            sessionStorage.setItem(`qtdBotoesProposta${filtro}`, dados.qtdBotoes);
             
             // Adicionando a quaqntidade de propostas de acordo com os seus status
             document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
@@ -547,33 +565,33 @@ document.getElementById('todasPropostas').addEventListener('click', () => {
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', '');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
-    botoesPaginacao();
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });
 
-document.getElementById('propostasEmAnalise').addEventListener('click', () => {
+document.getElementById('propostasEm Análise').addEventListener('click', () => {
     
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Em Análise');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
-    botoesPaginacao();
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });
 
-document.getElementById('propostasEmDesenvolvimento').addEventListener('click', () => {
+document.getElementById('propostasAceito').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Aceito');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
-    botoesPaginacao();
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });
 
-document.getElementById('propostasDeclinadas').addEventListener('click', () => {
+document.getElementById('propostasDeclinado').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Declinado');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
-    botoesPaginacao();
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });

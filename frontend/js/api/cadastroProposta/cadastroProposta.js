@@ -65,7 +65,7 @@ formularioProposta.addEventListener('submit', async evento => {
             localStorage.setItem('mensagem', resposta.mensagem);
             localStorage.setItem('historico', resposta.historico);
             sessionStorage.removeItem('qtdBotoesProposta');
-            window.location.pathname = '/frontend/pages/Home/index.html';
+            window.location.href = '';
         } else {
             if (resposta.mensagem === 'registro existe') {
                 console.log('Proposta não cadastrada. (Nome da proposta já existe)');

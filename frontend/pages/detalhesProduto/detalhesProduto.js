@@ -58,6 +58,7 @@ async function carregarTecnicos () {
 window.addEventListener('load', async function (){
     carregarTecnicos();
     pegarUnidadesCriadoras();
+    LancamentoHoras();
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
@@ -186,7 +187,6 @@ async function carregarDetalhesProduto() {
 
     return dados[0];
 
-   LancamentoHoras(idProduto)
 
 }
 
@@ -309,13 +309,11 @@ document.getElementById('valor').addEventListener('keydown', () => {
 
 });
 
-// const salvarLancamentoHoras = document.getElementById('salvarLancamentoHoras');
-// verificarLancamentoHoras.addEventListener('click', () => {
-
 
 // });
 
-async function LancamentoHoras(id){
+async function LancamentoHoras(){
+    const id = localStorage.getItem('idProduto');
 
     try{
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
@@ -323,11 +321,54 @@ async function LancamentoHoras(id){
         const resposta = await exibirHoras.json();
 
         console.log(resposta)
+
+        const horasPessoa = document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+        const horasMaquina = document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+        const horasAcomuladasPessoa = document.querySelector("#horasPessoaAcomuladas").value = resposta['horasAcomuladasPessoa']
+        const horasAcomuladasMaquina = document.querySelector("#horasMaquinaAcomuladas").value = resposta['horasAcomuladasMaquina']
+
+
+
+        
     }catch (error) {
         console.error(error)
     }
 
 }
+
+const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
+    const id = localStorage.getItem('idProduto');
+    const nifPerfil = localStorage.getItem('nifPerfil');
+
+    const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+    const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+
+    const dados = {
+        nifPerfil: nifPerfil,
+        id: id,
+        horaPessoaDiaria: horaPessoaDiaria,
+        horaMaquinaDiaria: horaMaquinaDiaria
+    };
+
+    try {
+        const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dados)
+        });
+
+        const resposta = await requisicao.json();
+        // Faça algo com a resposta, se necessário.
+        console.log(resposta)
+        
+    } catch (error) {
+        console.error(error);
+        // Trate o erro adequadamente, se necessário.
+    }
+});
+
 
 /////////////////////////////
 
