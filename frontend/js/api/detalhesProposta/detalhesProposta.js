@@ -75,7 +75,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
@@ -669,18 +669,22 @@ function aceitarProposta() {
     const pdfOrcamento = document.getElementById("orcamento").value;
     const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
+    const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
+    const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
+
     
+    //baixarOrcamento
+    //baixarPropostaAssinada
 
+    if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
 
-    if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
-        document.querySelector("#aceitarProposta").disabled = false;
-        alert("tudo certo, o botão de aceitar está ativo!");
+        alertas();
 
     } else {
 
-        document.querySelector("#aceitarProposta").disabled = true;
-        alert("o botão de aceitar está desativado!");
-
+        aceitarPropostaBanco();
 
     }
  
@@ -738,6 +742,15 @@ async function aceitarPropostaBanco(){
 
     const resposta = await requisicao.json();
 
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
+
+    if (resposta.status == 'error') {
+        alertas();
+    } else {
+        window.location.href = '/frontend/pages/Home/index.html';
+    }
+
    
    
 }
@@ -770,9 +783,9 @@ async function declinarPropostaBanco(){
 
 const botaoAceitarProposta = document.getElementById('aceitarProposta');
 
-botaoAceitarProposta.addEventListener('click', () => {
-    aceitarPropostaBanco();
-})
+// botaoAceitarProposta.addEventListener('click', () => {
+//     aceitarPropostaBanco();
+// })
 
 const botaoDeclinarProposta = document.getElementById('declinarProposta');
 
