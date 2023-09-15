@@ -165,6 +165,8 @@ async function verificarBancoProposta(id) {
 
         const resposta = await requisicao.json();
 
+        sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
+
         console.log(resposta['Gerentes']);
 
 
@@ -173,7 +175,6 @@ async function verificarBancoProposta(id) {
         for (var x = 0; x < resposta['Gerentes'].length; x++) {
             localStorage.setItem(`gerente${x + 1}`, resposta['Gerentes'][x]['NIF']);
         }
-
 
 
         carregarTecnicos();
@@ -633,7 +634,8 @@ async function salvarMudancasNaProposta() {
             numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
             nomeContato: (nomeContato == '') ? null : nomeContato,
             emailContato: (emailContato == '') ? null : emailContato,
-            numeroContato: (numeroContato == '') ? null : numeroContato
+            numeroContato: (numeroContato == '') ? null : numeroContato,
+            idRepresentante: sessionStorage.getItem('idRepresentante')
         }
 
         const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
@@ -703,7 +705,7 @@ aceitarPropostaButton.addEventListener('click', () => {
 
 declinarPropostaButton.addEventListener('click', () => {
     try {
-        declinarProposta()
+        declinarPropostaBanco()
     } catch (error) {
         console.log(error)
     }
@@ -751,8 +753,16 @@ async function declinarPropostaBanco(){
 
     const resposta = await requisicao.json();
 
-   
-   
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
+
+    if (resposta.status == 'error'){
+        alertas();
+    }
+
+    window.location.href = '/frontend/pages/Home/index.html';
+
+
 }
 
 

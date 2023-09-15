@@ -23,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if($stmt->execute()){
         $resposta = [
             "status"=> "success",
-            "mensagem"=>"Atualizado com sucesso!"
+            "mensagem"=>"Proposta aceita com sucesso!"
         ];
     }else{
         $resposta =[
             "status"=>"error",
-            "mensagem"=>"Não foi atualizado!"
+            "mensagem"=>"Erro ao aceitar proposta!"
         ];
     }
 

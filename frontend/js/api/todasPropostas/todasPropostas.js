@@ -8,7 +8,7 @@ const paginacao = document.querySelector('#paginacao');
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
-    // alertas();
+    alertas();
     await pegarTodasAsPropostas(filtroAoCarregarPagina);
     await pegarUnidadesCriadoras();
     botoesPaginacao(localStorage.getItem('filtroPadrao'));
@@ -592,6 +592,15 @@ document.getElementById('propostasDeclinado').addEventListener('click', () => {
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Declinado');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
+});
+
+document.getElementById('propostasConcluidas').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
+    localStorage.setItem('filtroPadrao', 'Concluido');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
     botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });
