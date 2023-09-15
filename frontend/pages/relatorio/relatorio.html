@@ -9,8 +9,11 @@
 
     <h1>Relatório</h1>
 
-    <input type="month" id="dataMesAno">
-    <button id="pesquisarData">Pesquisar</button>
+    <form id="formularioRelatorio">
+        <input type="month" id="dataMesAno" required>
+        <input type="text" id="pesquisaFuncionario" required minlength="5" maxlength="7">
+        <button id="botaoPesquisarFuncionario" type="submit" >Pesquisar</button>
+    </form>
     
     <script type="module" src="../../js/api/relatorio/relatorio.js"></script>
 </body>

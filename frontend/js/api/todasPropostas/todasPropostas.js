@@ -3,6 +3,7 @@ import pegarUnidadesCriadoras from './pegarUnidadesCriadoras.js';
 import botoesPaginacao, { mudarAba } from './paginacao.js';
 import pegarTodasAsPropostas from './pegarPropostas.js';
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
 const table = document.querySelector('#table');
 const paginacao = document.querySelector('#paginacao');
@@ -12,7 +13,7 @@ const inputPesquisa = document.getElementById('hidden-input');
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
-    // alertas();
+    alertas();
     await pegarTodasAsPropostas(filtroAoCarregarPagina);
     await pegarUnidadesCriadoras();
     botoesPaginacao(localStorage.getItem('filtroPadrao'));
@@ -52,6 +53,11 @@ document.getElementById('propostasAceito').addEventListener('click', () => {
 document.getElementById('propostasDeclinado').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
     mudarAba('Declinado')
+});
+
+document.getElementById('propostasConcluidas').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    mudarAba('Concluido')
 });
 
 // -------------------------------------------- Corrigir --------------------------------------------------

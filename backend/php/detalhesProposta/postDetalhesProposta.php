@@ -35,18 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nomeContato = $dados['nomeContato'];
     $emailContato = $dados['emailContato'];
     $numeroContato = $dados['numeroContato'];
+    $idRepresentante = $dados['idRepresentante'];
 
-    $stmt= $conn->prepare('SELECT idRepresentante FROM Representantes WHERE NomeRepresentante = ?;');
-
-    $stmt->bind_param('s', $nomeContato);
-
-    $stmt->execute();
-
-    $resultado = $stmt->get_result();
-
-    $result = $resultado->fetch_assoc();
-
-    $conn->begin_transaction();
 
     $stmt2 = $conn->prepare('UPDATE Propostas SET 
     fk_idRepresentante = ?,
@@ -61,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     Valor = ?
     WHERE idProposta = ?');
 
-    $stmt2->bind_param('sssssssssss', $result['idRepresentante'],
+    $stmt2->bind_param('sssssssssss', $idRepresentante,
     $nomeProposta, $uniCriadora, $empresa, $statusProposta,
     $numeroSGSET, $cnpj, $dataInicio, $dataFim, $valor, $idProposta);
 
@@ -112,6 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->rollback();
 
         }
+
+        $stmt4 = $conn->prepare('UPDATE Representantes SET NomeRepresentante = ?,  TelefoneRepresentante = ?,EmailRepresentante = ? WHERE idRepresentante = ?; ');
+
+        $stmt4->bind_param('ssss', $nomeContato, $numeroContato, $emailContato, $idRepresentante);
+
+        $stmt4->execute();
     } else {
         $resposta = [
             'status' => 'error',

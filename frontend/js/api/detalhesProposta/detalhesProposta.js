@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('click', () => {
+botaoSalvarPdf.addEventListener('change', () => {
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 
@@ -75,7 +75,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
@@ -165,6 +165,8 @@ async function verificarBancoProposta(id) {
 
         const resposta = await requisicao.json();
 
+        sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
+
         console.log(resposta['Gerentes']);
 
 
@@ -173,7 +175,6 @@ async function verificarBancoProposta(id) {
         for (var x = 0; x < resposta['Gerentes'].length; x++) {
             localStorage.setItem(`gerente${x + 1}`, resposta['Gerentes'][x]['NIF']);
         }
-
 
 
         carregarTecnicos();
@@ -208,7 +209,7 @@ async function verificarBancoProposta(id) {
             document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
         }
 
-        localStorage.setItem('status', resposta['statusProposta']);
+        localStorage.setItem('statusProposta', resposta['statusProposta']);
 
     } catch (error) {
         console.error(error)
@@ -228,6 +229,8 @@ async function verificarPdfExistente(idProposta) {
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {
@@ -280,6 +283,7 @@ function baixarPdf(tipoPdf) {
             link.href = urlPdf;
             link.target = '_blank';
             link.click();
+            windows.open(urlPdf,'_blank')
 
 
             // Remova o URL temporário criado para o blob.
@@ -633,7 +637,8 @@ async function salvarMudancasNaProposta() {
             numeroSGSET: (numeroSGSET == '') ? null : numeroSGSET,
             nomeContato: (nomeContato == '') ? null : nomeContato,
             emailContato: (emailContato == '') ? null : emailContato,
-            numeroContato: (numeroContato == '') ? null : numeroContato
+            numeroContato: (numeroContato == '') ? null : numeroContato,
+            idRepresentante: sessionStorage.getItem('idRepresentante')
         }
 
         const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
@@ -667,18 +672,22 @@ function aceitarProposta() {
     const pdfOrcamento = document.getElementById("orcamento").value;
     const pdfPropostaAssinada = document.getElementById("propostaAssinada").value;
 
+    const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
+    const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
+
+    //baixarOrcamento
+    //baixarPropostaAssinada
+
     
 
-
-    if (pdfOrcamento != '' && pdfPropostaAssinada != '') {
-        document.querySelector("#aceitarProposta").disabled = false;
-        alert("tudo certo, o botão de aceitar está ativo!");
+    if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
+        alertas();
 
     } else {
 
-        document.querySelector("#aceitarProposta").disabled = true;
-        alert("o botão de aceitar está desativado!");
-
+        // aceitarPropostaBanco();
 
     }
  
@@ -703,7 +712,7 @@ aceitarPropostaButton.addEventListener('click', () => {
 
 declinarPropostaButton.addEventListener('click', () => {
     try {
-        declinarProposta()
+        declinarPropostaBanco()
     } catch (error) {
         console.log(error)
     }
@@ -736,8 +745,15 @@ async function aceitarPropostaBanco(){
 
     const resposta = await requisicao.json();
 
-   
-   
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
+
+    if (resposta.status == 'error') {
+        alertas();
+    } else {
+        // window.location.href = '/frontend/pages/Home/index.html';
+    }
+
 }
 
 ///////////////////////
@@ -751,8 +767,16 @@ async function declinarPropostaBanco(){
 
     const resposta = await requisicao.json();
 
-   
-   
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
+
+    if (resposta.status == 'error'){
+        alertas();
+    }
+
+    window.location.href = '/frontend/pages/Home/index.html';
+
+
 }
 
 
@@ -822,4 +846,3 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
         abaResumo.classList.remove('h-0')
     }
 })
-

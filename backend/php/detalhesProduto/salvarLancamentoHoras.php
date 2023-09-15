@@ -18,25 +18,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idProduto = $dados['id'] ;
     $horaPessoaDiaria= $dados['horaPessoaDiaria'] ;
     $horaMaquinaDiaria= $dados['horaMaquinaDiaria'];
-
-
     $dataHoje = date('Y-m-d');
 
-    $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ?");
-    $stmt -> bind_param('s', $dataHoje);
-    $stmt -> execute();
-    $somaHoras = $stmt -> get_result();
-    $somaHoras = mysqli_fetch_assoc($somaHoras);
-
-    
-    // $stmt = $conn -> prepare("INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico,  HorasPessoa,  HorasMaquina, Datas) values (?, ?, ?, ?, ?)");
-    // $stmt->bind_param('iiss', $idProduto, $nifPerfil, $horaPessoaDiaria, $horaMaquinaDiaria, $dataHoje);
-    // $stmt -> execute();
-    // $resultado = $stmt -> get_result();
-    // $resultado = mysqli_fetch_assoc($resultado);
+    $stmt = $conn ->prepare("INSERT INTO CargaHoraria ( idCargaHoraria,fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUE (default,?,?,?,?,?)");
+    $stmt-> bind_param('sssss',  $idProduto, $nifPerfil,$horaPessoaDiaria, $horaMaquinaDiaria, $dataHoje);
 
 
+    if ($stmt->execute()) {
+        $resposta = [
+            'mensagem' => 'Lancameto de horas feita com sucesso',
+            'status' => 'success'
+        ];
+    } else {
+        $resposta = [
+            'mensagem' => 'Erro ao lançar hora',
+            'status' => 'error'
+        ];
+    }
 
-    echo json_encode($somaHoras);
+    echo json_encode($resposta);
+   
+  
 }
 ?>

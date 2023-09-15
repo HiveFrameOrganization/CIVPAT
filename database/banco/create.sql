@@ -192,7 +192,7 @@ ENGINE = InnoDB;
 -- Table `isihiveframe`.`CargaHoraria`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `isihiveframe`.`CargaHoraria` (
-  `idCargaHoraria` INT UNSIGNED NOT NULL,
+  `idCargaHoraria` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `fk_idProduto` INT UNSIGNED NOT NULL,
   `fk_nifTecnico` VARCHAR(7) NOT NULL,
   `HorasPessoa` INT NOT NULL,

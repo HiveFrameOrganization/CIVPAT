@@ -49,7 +49,7 @@ function exibirPropostas(propostas){
 
                 statusDescricao = 'concluido';
                 statusIMG = '../../img/icon/check-circle.svg';
-                optionIMG = '../../img/icon/more-vertical-green.svg';
+                optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary'
             }
     

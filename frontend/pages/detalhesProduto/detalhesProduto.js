@@ -1,4 +1,5 @@
 import { back, frontPages } from '../../js/api/Rotas/rotas.js';
+import alertas from '../../js/feedback.js';
 
 // formatar a data
 const hoje = new Date();
@@ -80,6 +81,7 @@ window.addEventListener('load', async function (){
     if(dadosProduto['fk_idMaquina'] == 1){
         tempo.setAttribute('disabled', 'true')
         // tempo.classList.add()
+        localStorage.setItem('maquina', 'Nenhuma')
     }
 
 
@@ -200,7 +202,7 @@ async function selecionarProduto(dadosProduto) {
             const titulo = document.getElementById('titulo');
             titulo.innerText = produtoSelect.options[i].text.toUpperCase();
 
-            console.log(produtoSelect.options[i].value)
+            // console.log(produtoSelect.options[i].value)
             break; // Saia do loop após encontrar a opção desejada
         }
     }
@@ -322,19 +324,60 @@ async function LancamentoHoras(){
 
         console.log(resposta)
 
-        const horasPessoa = document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-        const horasMaquina = document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-        const horasAcomuladasPessoa = document.querySelector("#horasPessoaAcomuladas").value = resposta['horasAcomuladasPessoa']
-        const horasAcomuladasMaquina = document.querySelector("#horasMaquinaAcomuladas").value = resposta['horasAcomuladasMaquina']
+        document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+        document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+        document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa']
+        document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina']
+
+        const horasRestantes = 10 - resposta.horasDiariasPessoas;
+        const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+
+        console.log(resposta.horasDiariasPessoas);
+
+        const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
+        const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
+
+        opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
+        opcoesHoraMaquina.innerHTML = '';
+
+        if (horasRestantes == 0) {
+            let option = document.createElement('option');
+            option.value = 0;
+            option.textContent = 0;
+            opcoesHoraPessoa.appendChild(option);
+        } else {
+            for (let i = 0; i < horasRestantes; i++) {
+                let option = document.createElement('option');
+                option.value = i + 1;
+                option.textContent = i + 1;
+                opcoesHoraPessoa.appendChild(option);
+            }
+        }
+
+        if (horasRestantesMaquina == 0) {
+            let option = document.createElement('option');
+            option.value = 0;
+            option.textContent = 0;
+            opcoesHoraMaquina.appendChild(option);
+        } else {
+            if (resposta.horasDiariasMaquina != null) {
+                for (let i = 0; i < horasRestantesMaquina; i++) {
+                    let option = document.createElement('option');
+                    option.value = i + 1;
+                    option.textContent = i + 1;
+                    opcoesHoraMaquina.appendChild(option);
+                }
+            }
+        }
 
 
-
-        
     }catch (error) {
         console.error(error)
     }
 
 }
+
+if (localStorage.getItem('cargo') == 'tec'){
 
 const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
     const id = localStorage.getItem('idProduto');
@@ -350,6 +393,8 @@ const salvarHoras = document.getElementById('salvarHoras').addEventListener('cli
         horaMaquinaDiaria: horaMaquinaDiaria
     };
 
+    console.log(dados)
+
     try {
         const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
             method: 'POST',
@@ -362,12 +407,24 @@ const salvarHoras = document.getElementById('salvarHoras').addEventListener('cli
         const resposta = await requisicao.json();
         // Faça algo com a resposta, se necessário.
         console.log(resposta)
-        
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+
+        if (resposta.status == 'error'){
+            alertas();
+        } else {
+            window.location.href = '/frontend/pages/perfil/index.html';
+        }
+       
+      
     } catch (error) {
         console.error(error);
         // Trate o erro adequadamente, se necessário.
     }
 });
+
+
+
 
 
 /////////////////////////////

@@ -11,24 +11,27 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 // Função para puxar o relatório
-function puxarRelatorio($mes, $ano, $conn)
+function puxarRelatorio($conn)
 {
 
-    $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
-    INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
-    INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
-    INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto 
-    INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0,100");
+    $mes = $_GET['mes'];
+    $ano = $_GET['ano'];
+    $valor = $_GET['valor'];
 
-    // SELECT Usuarios.Nome, Propostas.TituloProposta, NomeProduto.NomeProduto, SUM(HorasPessoa), SUM(`HorasMaquina`), CargaHoraria.`Datas` FROM `Usuarios`
-    // INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
-    // INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto
-    // INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto 
-    // INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta
-    // GROUP BY Datas, Usuarios.Nome, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0,100
 
-    $stmt->bind_param('ss', $mes, $ano);
+    $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, Usuarios.Sobrenome, NomeProduto.NomeProduto, Propostas.TituloProposta, Maquinas.Maquina, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
+        INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
+        INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
+        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
+        INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina 
+        INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
+        AND Usuarios.NIF = ?
+        GROUP BY Datas, Usuarios.NIF, Maquinas.Maquina, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
+
+    $stmt->bind_param('sss', $mes, $ano, $valor);
+
+
+
 
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -48,7 +51,6 @@ GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto 
             'status' => 'success',
             'mensagem' => 'dados retornados com sucesso',
             'dados' => $dados
-            
         ];
 
     } else {
@@ -67,10 +69,7 @@ GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    $mes = $_GET['mes'];
-    $ano = $_GET['ano'];
-
-    puxarRelatorio($mes, $ano, $conn);
+    puxarRelatorio($conn);
 
 } else {
     http_response_code(404);

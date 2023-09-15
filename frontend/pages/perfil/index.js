@@ -1,4 +1,9 @@
 // Funções para controlar os botões
+import alertas from "../../js/feedback";
+window.addEventListener('load', ()=>{
+    alertas()
+})
+
 const navButtons = document.querySelectorAll('.nav-btn');
 
 function removerBotoesSelecionados() {
