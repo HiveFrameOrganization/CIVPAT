@@ -230,6 +230,8 @@ async function verificarPdfExistente(idProposta) {
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
 
+        console.log(resposta);
+
         // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {
             const valor = resposta[chave];
@@ -685,7 +687,7 @@ function aceitarProposta() {
 
     } else {
 
-        alertas();
+        // aceitarPropostaBanco();
 
     }
  
@@ -749,11 +751,9 @@ async function aceitarPropostaBanco(){
     if (resposta.status == 'error') {
         alertas();
     } else {
-        window.location.href = '/frontend/pages/Home/index.html';
+        // window.location.href = '/frontend/pages/Home/index.html';
     }
 
-
-   
 }
 
 ///////////////////////

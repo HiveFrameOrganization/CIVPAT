@@ -270,11 +270,66 @@
 
         <section class="container mx-auto px-6" id="lancamentoHoras">
 
-            <!-- campos de lançamento de horas renderizados no javascript -->
+            <div class="flex flex-col mb-8">
+                <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS TRABALHADAS</h2>
+                <h3 class="text-xs text-color-text pt-2">Insira a quantidade de horas trabalhadas no produto.</h3>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
+                
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA TOTAIS</label>
+                    <input type="text" id="horasPessoa" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS TRABALHADAS</label>
+                    <select type="number" id="horaPessoaDiaria" min="1" max="10" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
+                        
+                    </select>
+
+
+                </div>
+                
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
+                    <input type="text" id="horasPessoaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                </div>
+
+            </div>
+    
+            
+            <div class="flex flex-col mb-8">
+                <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
+                <h3 class="text-xs text-color-text pt-2">Insira a quantidade de horas-máquina trabalhadas no produto.</h3>
+            </div>
+     
+            <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TOTAIS</label>
+                    <input type="text" id="horasMaquina" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TRABALHADAS</label>
+                    <select type="number" id="horaMaquinaDiaria" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full disabled:bg-primary/10 disabled:text-color-text/60 maquina">
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
+                    <input type="text" id="horasMaquinaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                </div>
+
+            </div>
+    
+            <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md">SALVAR</button>
 
         </section>
 
-
+      
     </main>
 
     <footer class="w-full bg-body text-color-text py-12">
