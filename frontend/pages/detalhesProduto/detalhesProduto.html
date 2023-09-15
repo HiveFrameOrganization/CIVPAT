@@ -372,7 +372,7 @@
 
         // renderizando o botão de salvar de acordo com o cargo e status da proposta
         
-        if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('status') == 'Em Análise') || (localStorage.getItem('status') == 'Aceito'))){
+        if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))){
             const divBotao = document.getElementById('botaoSalvar');
             
             divBotao.innerHTML += `<input 
@@ -399,7 +399,7 @@
     <!-- desabilitando a opção de editar determinados itens de acordo com o status da proposta -->
 
     <script>
-        if (localStorage.getItem('status') == 'Aceito'){
+        if (localStorage.getItem('statusProposta') == 'Aceito'){
             document.getElementById('produto').disabled = true;
             document.getElementById('servico').disabled = true;
             document.getElementById('unidadeRealizadora').disabled = true;
@@ -409,7 +409,7 @@
             document.getElementById('dataInicial').disabled = true;
             document.getElementById('dataFinal').disabled = true;
 
-        } else if (localStorage.getItem('status') == 'Declinado'){
+        } else if (localStorage.getItem('statusProposta') == 'Declinado'){
             document.getElementById('produto').disabled = true;
             document.getElementById('tecnicos').disabled = true;
             document.getElementById('servico').disabled = true;
@@ -420,7 +420,7 @@
             document.getElementById('dataInicial').disabled = true;
             document.getElementById('dataFinal').disabled = true;
 
-        } else if (localStorage.getItem('status') == 'Concluido'){
+        } else if (localStorage.getItem('statusProposta') == 'Concluido'){
             document.getElementById('produto').disabled = true;
             document.getElementById('tecnicos').disabled = true;
             document.getElementById('servico').disabled = true;

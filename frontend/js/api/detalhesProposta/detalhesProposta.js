@@ -208,7 +208,7 @@ async function verificarBancoProposta(id) {
             document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta']
         }
 
-        localStorage.setItem('status', resposta['statusProposta']);
+        localStorage.setItem('statusProposta', resposta['statusProposta']);
 
     } catch (error) {
         console.error(error)
