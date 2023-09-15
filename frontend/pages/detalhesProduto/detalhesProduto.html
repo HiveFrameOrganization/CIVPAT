@@ -239,6 +239,12 @@
                         <input type="number" name="valor" id="valor" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
                     </div>
                 </div>
+
+                <div class="flex gap-6 flex-col md:flex-row" id="acumuladas">
+
+                    <!-- campos não aparecem para técnico -->
+
+                </div>
                 
                 <div class="flex gap-6 flex-col sm:flex-row">
                     <div class="flex flex-col gap-2 w-full">
@@ -287,6 +293,29 @@
             <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
         </div>
     </footer>
+
+
+    <!-- renderizando campos para todos menos técnicos -->
+
+    <script>
+
+        if ((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')){
+
+            const acumuladas = document.getElementById('acumuladas');
+            
+            acumuladas.innerHTML += `<div class="flex flex-col gap-2 w-full">
+                <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
+                <input type="text" id="horasPessoaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+            </div>
+            
+            <div class="flex flex-col gap-2 w-full">
+                <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
+                <input type="text" id="horasMaquinaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+            </div>`;
+
+        }
+
+    </script>
 
 
     <!-- renderizando lançamento de horas apenas para técnicos -->

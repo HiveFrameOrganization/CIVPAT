@@ -322,52 +322,60 @@ async function LancamentoHoras(){
 
         console.log(resposta)
 
-        const horasPessoa = document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-        const horasMaquina = document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-        const horasAcomuladasPessoa = document.querySelector("#horasPessoaAcomuladas").value = resposta['horasAcomuladasPessoa']
-        const horasAcomuladasMaquina = document.querySelector("#horasMaquinaAcomuladas").value = resposta['horasAcomuladasMaquina']
+        if (localStorage.getItem('cargo') == 'tec'){
+            const horasPessoa = document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+            const horasMaquina = document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+            const horasAcomuladasPessoa = document.querySelector("#horasPessoaAcomuladas").value = resposta['horasAcomuladasPessoa']
+            const horasAcomuladasMaquina = document.querySelector("#horasMaquinaAcomuladas").value = resposta['horasAcomuladasMaquina']
+        } else {
+            const horasAcumuladasPessoa = document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcomuladasPessoa']
+            const horasAcumuladasMaquina = document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcomuladasMaquina']
+        }
 
 
 
-        
+
     }catch (error) {
         console.error(error)
     }
 
 }
 
-const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
-    const id = localStorage.getItem('idProduto');
-    const nifPerfil = localStorage.getItem('nifPerfil');
+if (localStorage.getItem('cargo') == 'tec'){
 
-    const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-    const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
-
-    const dados = {
-        nifPerfil: nifPerfil,
-        id: id,
-        horaPessoaDiaria: horaPessoaDiaria,
-        horaMaquinaDiaria: horaMaquinaDiaria
-    };
-
-    try {
-        const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dados)
-        });
-
-        const resposta = await requisicao.json();
-        // Faça algo com a resposta, se necessário.
-        console.log(resposta)
-        
-    } catch (error) {
-        console.error(error);
-        // Trate o erro adequadamente, se necessário.
-    }
-});
+    const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
+        const id = localStorage.getItem('idProduto');
+        const nifPerfil = localStorage.getItem('nifPerfil');
+    
+        const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+        const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+    
+        const dados = {
+            nifPerfil: nifPerfil,
+            id: id,
+            horaPessoaDiaria: horaPessoaDiaria,
+            horaMaquinaDiaria: horaMaquinaDiaria
+        };
+    
+        try {
+            const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados)
+            });
+    
+            const resposta = await requisicao.json();
+            // Faça algo com a resposta, se necessário.
+            console.log(resposta)
+            
+        } catch (error) {
+            console.error(error);
+            // Trate o erro adequadamente, se necessário.
+        }
+    });
+}
 
 
 /////////////////////////////
