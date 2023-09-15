@@ -26,44 +26,48 @@ function verificarHoras($idProduto, $conn) {
     if ($resultado -> num_rows > 0){
         $dados = mysqli_fetch_assoc($resultado);
 
-        $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasDiarias
-            FROM CargaHoraria WHERE Datas =?
-         ");
-        $stmt -> bind_param('s', $datas);
-        $stmt -> execute();
-        $horasDiarias = $stmt -> get_result();
-        $horasDiariasPessoa = mysqli_fetch_assoc($horasDiarias);
-
-      
-
-        $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasAcomuladasPessoa 
+        $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasAcumuladasPessoa 
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
         $stmt -> bind_param('s', $idProduto);
         $stmt -> execute();
         $horasTotalPessoa = $stmt -> get_result();
-        $horasAcomuladasPessoa = mysqli_fetch_assoc($horasTotalPessoa);
+        $horasAcumuladasPessoa = mysqli_fetch_assoc($horasTotalPessoa);
         
 
-        $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS horasAcomuladasMaquina
+        $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS horasAcumuladasMaquina
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
         $stmt -> bind_param('s', $idProduto);
         $stmt -> execute();
         $horasTotalMaquina = $stmt -> get_result();
-        $horasAcomuladasMaquina = mysqli_fetch_assoc($horasTotalMaquina);
-
+        $horasAcumuladasMaquina = mysqli_fetch_assoc($horasTotalMaquina);
         
-    
+
+        $dataHoje = date('Y-m-d');
+        $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ?");
+        $stmt -> bind_param('s', $dataHoje);
+        $stmt -> execute();
+        $somaHoras = $stmt -> get_result();
+        $somaHoras = mysqli_fetch_assoc($somaHoras);
+
+        $dataHoje = date('Y-m-d');
+        $stmt = $conn -> prepare("SELECT SUM(HorasMaquina) AS somaHorasMaquina from CargaHoraria WHERE Datas = ?");
+        $stmt -> bind_param('s', $dataHoje);
+        $stmt -> execute();
+        $somaHorasMaquinas = $stmt -> get_result();
+        $somaHorasMaquina = mysqli_fetch_assoc($somaHorasMaquinas);
+
 
         $resposta = [
             "horaTotalPessoa" => $dados['HoraPessoa'],
             "horaTotalMaquina" => $dados['HoraMaquina'],
             "datas" => $dados['Datas'],
-            "horasAcomuladasPessoa" => $horasAcomuladasPessoa['horasAcomuladasPessoa'],
-            "horasAcomuladasMaquina" => $horasAcomuladasMaquina['horasAcomuladasMaquina'],
-            "horasDiariasPessoas" => $horasDiariasPessoa['horasDiarias']
-          
+            "horasAcumuladasPessoa" => $horasAcumuladasPessoa['horasAcumuladasPessoa'],
+            "horasAcumuladasMaquina" => $horasAcumuladasMaquina['horasAcumuladasMaquina'],
+            "horasDiariasPessoas" => $somaHoras['somaHoras'],
+            "horasDiariasMaquina" => $somaHorasMaquina['somaHorasMaquina'],
+            
         ];
         //Passando ele em formato json para o front
         echo json_encode($resposta);
