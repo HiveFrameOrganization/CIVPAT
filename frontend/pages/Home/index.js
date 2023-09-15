@@ -63,3 +63,20 @@ filterButtons.forEach((button) => {
     })
 });
 // ----------------------------------------------------------
+
+// Feedback de a mostragem de caracteres do resumo do Cadastro de proposta
+
+const tamanhoAtual = document.querySelector('#tamanho-atual');
+const textoResumo = document.querySelector('#textoResumo');
+const tamanhoMaximo = 500;
+
+textoResumo.setAttribute('maxlength', '500');
+
+textoResumo.addEventListener('keyup', () => {
+
+    if (textoResumo.value.length <= 500) {
+
+        tamanhoAtual.textContent = textoResumo.value.length;
+    }
+
+});
