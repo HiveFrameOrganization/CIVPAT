@@ -468,10 +468,10 @@
 
                     <p class="py-1 w-full bg-component"></p>
 
-                    <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex flex-wrap justify-around items-center">
 
                         <!-- Um dos cards de pdfs -->
-                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-2/6">
                             <label for="orcamento" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">Orçamento</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
@@ -504,7 +504,7 @@
                         <!-- Fim dos cards de pdfs -->
 
                         <!-- Um dos cards de pdfs -->
-                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-2/6">
                             <label for="orcamento" class="uppercase text-lg whitespace-nowrap">Proposta assinada</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
@@ -537,8 +537,18 @@
                         </div>
                         <!-- Fim dos cards de pdfs -->
 
+                        
+                    </div>
+
+
+                    <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
+
+                    <p class="py-1 w-full bg-component"></p>
+
+                    <div class="flex flex-wrap justify-around items-center">
+
                         <!-- Um dos cards de pdfs -->
-                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
+                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-2/6">
                             <label for="relatorioFinal" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">relatorio Final</label>
                             <div class="flex flex-col gap-4">
                                 <!-- input de upload -->
@@ -570,46 +580,42 @@
                             </div>
                         </div>
                         <!-- Fim dos cards de pdfs -->
-                    </div>
 
+                        <!-- Um dos cards de pdfs -->
+                        <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-2/6">
+                            <label for="pesquisaDeSatisfacao" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">pesquisa De Satisfacao</label>
+                            <div class="flex flex-col gap-4">
+                                <!-- input de upload -->
+                                <div class="relative">
+                                    <img src="../../img/icon/upload.png" alt="Ícone de upload"
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('.inputOrçamento').click()">
+                                    <input type="text" value="" id="inputPesquisaDeSaisfacao"
+                                        class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                        placeholder="Upload de arquivos"
+                                        readonly
+                                        onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
+                                    <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao" class="hidden">
+                                </div>
 
-                    <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
+                                <!-- input download -->
+                                <div class="relative sumirPesquisaDeSatisfacao">
+                                    <img src="../../img/icon/download.png" alt="Ícone de download"
+                                        class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
+                                        onclick="document.querySelector('#botaoOrcamento').click()">
+                                    <input type="text" value="" id="inputFileDown"
+                                        class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
+                                        placeholder="Download de arquivos"
+                                        onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
 
-                    <p class="py-1 w-full bg-component"></p>
-
-                    <!-- Um dos cards de pdfs -->
-                    <div class="flex flex-col gap-2 py-2 w-full md:w-1/3 md:px-2 lg:w-1/4">
-                        <label for="pesquisaDeSatisfacao" class="uppercase text-md md:text-lg whitespace-nowrap overflow-ellipsis">pesquisa De Satisfacao</label>
-                        <div class="flex flex-col gap-4">
-                            <!-- input de upload -->
-                            <div class="relative">
-                                <img src="../../img/icon/upload.png" alt="Ícone de upload"
-                                    class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
-                                    onclick="document.querySelector('.inputOrçamento').click()">
-                                <input type="text" value="" id="inputPesquisaDeSaisfacao"
-                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                    placeholder="Upload de arquivos"
-                                    readonly
-                                    onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
-                                <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao" class="hidden">
+                                    <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
+                                </div>
+                                <!-- <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button> -->
                             </div>
-
-                            <!-- input download -->
-                            <div class="relative sumirPesquisaDeSatisfacao">
-                                <img src="../../img/icon/download.png" alt="Ícone de download"
-                                    class="absolute right-0 h-12 rounded-r-lg cursor-pointer"
-                                    onclick="document.querySelector('#botaoOrcamento').click()">
-                                <input type="text" value="" id="inputFileDown"
-                                    class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
-                                    placeholder="Download de arquivos"
-                                    onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
-
-                                <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
-                            </div>
-                            <!-- <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button> -->
                         </div>
+                        <!-- Fim dos cards de pdfs -->
                     </div>
-                    <!-- Fim dos cards de pdfs -->
+
 
                     <button type="button" id="botaoSalvarPdf"
                         class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
