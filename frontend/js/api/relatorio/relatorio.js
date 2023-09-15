@@ -7,62 +7,15 @@ import { back } from "../Rotas/rotas.js";
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-window.addEventListener('load', async () => {
-
-    const data = new Date();
-
-    const mes = data.getMonth() + 1;
-    const ano = data.getFullYear();
-
-    await buscarRelatorio(mes.toString(), ano.toString());
-
-});
-
-// Pegando o evento de click para mandar a data para o back-end
-const botaoPesquisar = document.querySelector('#pesquisarData');
-botaoPesquisar.addEventListener('click', async () => {
-
-    const data = document.querySelector('#dataMesAno').value;
-
-    const dataArray = dividirData(data);
-
-    // Pegando o ano
-    const ano = dataArray[0];
-
-    // Pegando o mês
-    const mes = dataArray[1];
-
-    // Conferindo a data mínima
-    if (dataMinima(mes, ano)) {
-
-        console.log(`Data Incorreta`);
-
-        return;
-    }
-
-    console.log(`Data correta`);
-    await buscarRelatorio(mes, ano);
-
-
-});
-
-/*
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                                FUNÇÃO PARA BUSCAR O RELATÓRIO NO BAK-END
---------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
-
 /*
     O terceiro valor da função esta colocando por padrão um valor vazio caso esteja recebendo um valor 
     indefinido. Importante para a lógica do back-end
 */
-async function buscarRelatorio(mes, ano, valor = '') {
+async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
-
-        console.log(valor)
-        console.log(mes)
-        console.log(ano)
+        
+        if (!valor) throw new Error(`Digite o NIF do funcionário para pesquisar`);
 
         const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
 
@@ -87,7 +40,7 @@ function dividirData(data) {
 }
 
 
-function dataMinima(mes, ano) {
+function dataMaxima(mes, ano) {
 
     const data = new Date();
 
@@ -110,8 +63,11 @@ function dataMinima(mes, ano) {
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-const botaoPesquisarFuncionario = document.querySelector('#botaoPesquisarFuncionario');
-botaoPesquisarFuncionario.addEventListener('click', async () => {
+const formularioRelatorio = document.querySelector('#formularioRelatorio');
+formularioRelatorio.addEventListener('submit', async evento => {
+
+    evento.preventDefault();
+    
     
     // Pegando o valor digitado
     const valor = document.querySelector('#pesquisaFuncionario').value;
@@ -127,7 +83,7 @@ botaoPesquisarFuncionario.addEventListener('click', async () => {
     const mes = dataArray[1];
 
     // Conferindo a data mínima
-    if (dataMinima(mes, ano)) {
+    if (dataMaxima(mes, ano)) {
 
         console.log(`Data Incorreta`);
 
