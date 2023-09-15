@@ -87,10 +87,10 @@ function botoesPaginacao(filtro) {
 
     if (sessionStorage.getItem('paginaProposta') == 1) {
         // pagina selecionado
-        priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        priBotao.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
     } else {
         // outros botoes
-        priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        priBotao.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
     }
 
     priBotao.href = '#Proposta'
@@ -141,10 +141,10 @@ function botoesPaginacao(filtro) {
     
             if (sessionStorage.getItem('paginaProposta') == i) {
                 // pagina selecionado
-                a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+                a.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
             } else {
                 // outros botoes
-                a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+                a.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
             }
     
             a.href = '#Proposta'
@@ -172,10 +172,10 @@ function botoesPaginacao(filtro) {
     
         if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
             // pagina selecionado
-            ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            ultBotao.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
         } else {
             // outros botoes
-            ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            ultBotao.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
         }
     
         ultBotao.href = '#Proposta'
