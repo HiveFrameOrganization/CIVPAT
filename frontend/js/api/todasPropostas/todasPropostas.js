@@ -1,6 +1,9 @@
-import { back } from '../Rotas/rotas.js';
+import exibirPropostas from './renderizarProposta.js';
+import esconderTudo from './renderizarProposta.js';
+import pegarUnidadesCriadoras from './pegarUnidadesCriadoras.js';
 import pegarTodasAsPropostas from './pegarPropostas.js';
-// import alertas from '../../feedback.js';
+import botoesPaginacao from './paginacao.js';
+import { back } from '../Rotas/rotas.js';
 
 const table = document.querySelector('#table');
 
@@ -23,136 +26,6 @@ window.addEventListener('load', async () => {
     document.getElementById(`todasPropostas`).classList.remove('border-primary')
 })
 
-// Criar os botões de paginação e adiciona a função que muda a página
-function botoesPaginacao(filtro) {
-    const qtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
-    const containerPaginacao = document.getElementById('inserirPaginacao');
-
-    containerPaginacao.innerHTML = `
-    <a id="antPagina" href="#Proposta" class="w-4 h-4">
-        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
-    </a>
-    <a id="proxPagina" href="#Proposta" class="w-4 h-4">
-        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
-    </a>
-    `
-
-    // Criando o primeiro botão
-    const priBotao = document.createElement('a');
-
-    if (sessionStorage.getItem('paginaProposta') == 1) {
-        // pagina selecionado
-        priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    } else {
-        // outros botoes
-        priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-    }
-
-    priBotao.href = '#Proposta'
-    priBotao.textContent = 1
-    priBotao.id = `pesquisa${1}`
-    priBotao.onclick = () => {
-        colocarPagina(1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-        botoesPaginacao(localStorage.getItem('filtroPadrao'));
-    }
-
-    const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
-    // impedir que botoes apareçam em determinados casos
-    if(sessionStorage.getItem(`qtdBotoesProposta${filtro}`) == sessionStorage.getItem('paginaProposta')){
-        setaProxPagina.classList.add('hidden')
-    }
-    if(sessionStorage.getItem('paginaProposta') == 1){
-        document.querySelector('#antPagina').classList.add('hidden')
-    }
-    containerPaginacao.insertBefore(priBotao, setaProxPagina);
-    // Final Primeiro Botão
-
-    // adcionar funçoes no botao de ir e voltar
-    setaProxPagina.addEventListener('click', ()=>{
-        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-        botoesPaginacao(localStorage.getItem('filtroPadrao'));
-    })
-    document.querySelector('#antPagina').addEventListener('click', ()=>{
-        colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-        botoesPaginacao(localStorage.getItem('filtroPadrao'));
-    })
-
-    const paginaAtual = sessionStorage.getItem('paginaProposta');
-    console.log(qtdBotoes)
-    if (paginaAtual > 4 && qtdBotoes > 4) {
-        const divisor = document.createElement('span');
-        divisor.textContent = '...'
-        containerPaginacao.insertBefore(divisor, setaProxPagina);
-    }
-
-    // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
-    // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
-        if (i > 1 && i < qtdBotoes  ) {
-            const a = document.createElement('a');
-    
-            if (sessionStorage.getItem('paginaProposta') == i) {
-                // pagina selecionado
-                a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-            } else {
-                // outros botoes
-                a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-            }
-    
-            a.href = '#Proposta'
-            a.textContent = i
-            a.id = `pesquisa${i}`
-            a.onclick = () => {
-                colocarPagina(i)
-                pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-                botoesPaginacao(localStorage.getItem('filtroPadrao'));
-            }
-    
-            containerPaginacao.insertBefore(a, setaProxPagina);
-        }
-    }
-
-    if (paginaAtual < 4  && qtdBotoes > 4) {
-        const divisor2 = document.createElement('span');
-        divisor2.textContent = '...'
-        containerPaginacao.insertBefore(divisor2, setaProxPagina);
-    }
-
-    if (qtdBotoes > 1) {
-        // Criando o ultimo botão
-        const ultBotao = document.createElement('a');
-    
-        if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
-            // pagina selecionado
-            ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        } else {
-            // outros botoes
-            ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-        }
-    
-        ultBotao.href = '#Proposta'
-        ultBotao.textContent = qtdBotoes
-        ultBotao.id = `pesquisa${qtdBotoes}`
-        ultBotao.onclick = () => {
-            colocarPagina(qtdBotoes)
-            pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
-            botoesPaginacao(localStorage.getItem('filtroPadrao'));
-        }
-    
-        containerPaginacao.insertBefore(ultBotao, setaProxPagina);
-        // Final Ultimo Botão
-    }
-
-}
-
-// Seta o número da página no sessionStorage
-function colocarPagina(num) {
-    sessionStorage.setItem('paginaProposta', num);
-}
-
 const inputPesquisa = document.getElementById('hidden-input');
 
 inputPesquisa.addEventListener('keyup', () => {
@@ -160,6 +33,7 @@ inputPesquisa.addEventListener('keyup', () => {
     pegarTodasAsPropostasFiltradas(filtroAoCarreparPagina);
 })
 
+// -------------------------------------------- Corrigir --------------------------------------------------
 async function pegarTodasAsPropostasFiltradas (filt) {
     // sessionStorage.removeItem('paginaProposta');
     // sessionStorage.getItem('qtdBotoesProposta');
@@ -189,7 +63,7 @@ async function pegarTodasAsPropostasFiltradas (filt) {
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
 
-            exibirPropostasFiltradas(dados.propostas);
+            exibirPropostas(dados.propostas);
             sessionStorage.setItem(`qtdBotoesProposta${filtro}`, dados.qtdBotoes);
             
             // Adicionando a quaqntidade de propostas de acordo com os seus status
@@ -203,142 +77,8 @@ async function pegarTodasAsPropostasFiltradas (filt) {
         console.error(error)
     }
 }
+// -------------------------------------------- Corrigir --------------------------------------------------
 
-function exibirPropostasFiltradas(propostas){
-
-    paginacao.classList.add('hidden');
-
-    if (propostas) {
-
-        table.innerHTML = '';
-
-        paginacao.classList.remove('hidden');
-        
-        for (let proposta of propostas) {
-
-            let divRow = document.createElement('div');
-    
-            divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
-            
-            const fotoDePerfil = proposta['FotoDePerfil'];
-    
-            let status = proposta['Status'].toLowerCase();
-    
-            let statusIMG;
-            let color;
-            let optionIMG;
-            let statusDescricao;
-    
-            if (status == 'em análise') {
-                
-                statusDescricao = 'análise';
-                statusIMG = '../../img/icon/inventory-orange.svg';
-                optionIMG = '../../img/icon/more-vertical-orange.svg';
-                color = 'color-orange';
-            } else if (status == 'declinado') {
-                
-                statusDescricao = 'declinado';
-                statusIMG = '../../img/icon/alert-circle-red.svg';
-                optionIMG = '../../img/icon/more-vertical-red.svg';
-                color = 'color-red';
-            } else if (status == 'aceito') {
-                
-                statusDescricao = 'desenvolvendo';
-                statusIMG = '../../img/icon/settings-green.svg';
-                optionIMG = '../../img/icon/more-vertical-green.svg';
-                color = 'color-green'
-            } else if (status == 'concluido') {
-
-                statusDescricao = 'concluido';
-                statusIMG = '../../img/icon/check-circle.svg';
-                optionIMG = '../../img/icon/more-vertical.svg';
-                color = 'primary'
-            }
-    
-            // Inserindo o Template na linha
-            divRow.innerHTML = `
-            <div class="area-left cursor-pointer flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
-                <div class="flex items-center gap-8 lg:w-full">
-                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
-                        <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
-                            <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
-                            <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span title="Número do SGSET">${proposta['nSGSET'] ? proposta['nSGSET'] : 'N/A'}</span>
-                                <span title="Data de início e fim">${proposta['Inicio'] && proposta['Fim'] ? proposta['Inicio']+' - '+proposta['Fim'] : 'N/A'}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
-                        <div class="flex flex-col gap-1 font-semibold">
-                            <span class="text-lg leading-4 whitespace-nowrap capitalize">${proposta['Nome']}</span>
-                            <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
-                        </div>
-                    </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
-                </div>
-            </div>
-            <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-6 p-1 bg-${color}/20 rounded-md relative">
-                    <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full">
-                    <div class="option-dropdown hidden absolute min-w-[150px] min-h-[75px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
-                        <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                            <div class="flex items-center gap-2">
-                            <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
-                                <a>
-                                    Visualizar
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-            </div>`;
-            
-            divRow.querySelector('.area-left').addEventListener('click', function() {
-
-                // Recuperando o botão o itemid, ao clicar na linha
-                verDetalhesDaProposta(divRow.querySelector('.view-btn'));
-            })
-
-            table.appendChild(divRow);
-        }
-
-        // erro avisando que nenhuma proposta foi encontrada
-        if(propostas.length == 0){
-            table.innerHTML = '<p class="w-full text-center text-[red]">NENHUMA PROPOSTA ENCONTRADA...</p>'
-        }
-    
-        reloadLinhas();
-
-        return;
-    }
-};
-
-function verDetalhesDaProposta(element) {
-
-    localStorage.setItem('idProposta', element.getAttribute('itemid'));
-            
-    window.location.href = '../detalhesProposta/detalhesProposta.html';
-}
-
-// Função para fechar todos menus das linhas
-function esconderTudo() {
-
-    if (document.querySelector('.option-dropdown')) {
-        
-        document.querySelectorAll('.option-dropdown').forEach((el) => {
-            
-            if (!el.classList.contains('hidden')) {
-
-                let row = el.parentElement.parentElement.parentElement;
-
-                el.classList.add('hidden');
-                row.classList.remove('selected-row');
-            }   
-        });
-    }
-}
 
 // Fechar todos os menus de opções das linhas, ao clicar fora do botão
 window.addEventListener('click', (event) => {
@@ -348,30 +88,6 @@ window.addEventListener('click', (event) => {
         esconderTudo();
     }
 });
-
-
-
-async function pegarUnidadesCriadoras() {
-    const unidadesSelect = document.getElementById('unidadeCriadora');
-
-    const requisicao = await fetch (back + '/todasPropostas/pegarUnidadesCriadoras.php');
-
-    // dados de todas as propostar recebidas (resposta da api)
-    const dados = await requisicao.json();
-    
-    // caso a requisição de um erro, irá exibir uma mensagem de erro
-    if (dados.resposta === 'erro') throw new Error(dados.message);
-
-    for (let i = 0; i < dados.length; i++) {
-        let option = document.createElement('option');
-        option.classList.add('bg-body');
-        option.value = dados[i].idUnidadeCriadora;
-        option.textContent = dados[i].UnidadeCriadora;
-        unidadesSelect.appendChild(option);
-    }
-
-}
-
 
 document.getElementById('todasPropostas').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';

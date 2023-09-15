@@ -28,31 +28,6 @@ dataProx.addEventListener('input', evento => {
     }
 });
 
-// const select = document.getElementById('funil');
-// Acessa o backend para pegar os status do funil
-// fetch(`http://localhost:8080/backend/php/followUp/pegarStatus.php`, {method: 'GET'})
-// .then(response => {
-//     if (!response.ok) {
-//         throw new Error(`Request failed with status: ${response.status} ${response.statusText}`);
-//     }
-//     return response.json();
-// })
-// .then(data => {
-//     // Loop para criar os options
-//     data.forEach((status, index) => {
-//         const li = document.createElement('li');
-//         li.value = index + 1; // Adiciona o valor do option (É um número devido ao fk_idStatusFunil)
-//         li.textContent = status[0];     // Adiciona o texto do option (Para poder ser visto na tela)
-//         li.addEventListener('click', (e) => {
-//             liSelected = e.target.value
-//         });
-//         select.appendChild(li); // Adiciona o option ao select
-//     });
-// })
-// .catch(error => {
-//     console.error('Error:', error);
-// });
-
 // Pegando o evento de "submit" do formulário
 const form = document.querySelector('#formulario');
 

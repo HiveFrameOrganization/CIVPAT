@@ -1,3 +1,5 @@
+// Puxa os dados das propostas (utiliza a API)
+
 import { back } from '../Rotas/rotas.js';
 import exibirPropostas from './renderizarProposta.js';
 

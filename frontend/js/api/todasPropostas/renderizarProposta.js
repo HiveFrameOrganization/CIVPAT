@@ -1,6 +1,25 @@
 // Arquivo responsável por Gerar os cards 
 // e fazer alterações visuais na tela de proposota
 
+
+// Função para fechar todos menus das linhas
+function esconderTudo() {
+    console.log('teste')
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+            
+            if (!el.classList.contains('hidden')) {
+
+                let row = el.parentElement.parentElement.parentElement;
+
+                el.classList.add('hidden');
+                row.classList.remove('selected-row');
+            }   
+        });
+    }
+}
+
 function exibirPropostas(propostas){
 
     paginacao.classList.add('hidden');
@@ -107,7 +126,6 @@ function exibirPropostas(propostas){
     }
 };
 
-
 // Reaplicar as funções referentes a linhas da tabela
 function reloadLinhas() {
 
@@ -130,7 +148,6 @@ function reloadLinhas() {
     getTodosBotoes();
 }
 
-
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getTodosBotoes() {
 
@@ -143,5 +160,11 @@ function getTodosBotoes() {
     });
 }
 
+function verDetalhesDaProposta(element) {
+
+    localStorage.setItem('idProposta', element.getAttribute('itemid'));
+            
+    window.location.href = '../detalhesProposta/detalhesProposta.html';
+}
 
 export default exibirPropostas
