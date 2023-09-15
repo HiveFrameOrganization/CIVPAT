@@ -122,14 +122,20 @@ function botoesPaginacao(filtro) {
         containerPaginacao.insertBefore(ultBotao, setaProxPagina);
         // Final Ultimo Botão
     }
-
 }
-
 
 // Seta o número da página no sessionStorage
 function colocarPagina(num) {
     sessionStorage.setItem('paginaProposta', num);
 }
 
+function mudarAba(filtro) {
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
+    localStorage.setItem('filtroPadrao', filtro);
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
+}
 
-export default botoesPaginacao;
+export default botoesPaginacao
+export { mudarAba }

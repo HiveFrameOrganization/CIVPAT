@@ -2,24 +2,6 @@
 // e fazer alterações visuais na tela de proposota
 
 
-// Função para fechar todos menus das linhas
-function esconderTudo() {
-    console.log('teste')
-    if (document.querySelector('.option-dropdown')) {
-        
-        document.querySelectorAll('.option-dropdown').forEach((el) => {
-            
-            if (!el.classList.contains('hidden')) {
-
-                let row = el.parentElement.parentElement.parentElement;
-
-                el.classList.add('hidden');
-                row.classList.remove('selected-row');
-            }   
-        });
-    }
-}
-
 function exibirPropostas(propostas){
 
     paginacao.classList.add('hidden');
@@ -160,6 +142,24 @@ function getTodosBotoes() {
     });
 }
 
+// Função para fechar todos menus das linhas
+function esconderTudo() {
+    console.log('teste')
+    if (document.querySelector('.option-dropdown')) {
+        
+        document.querySelectorAll('.option-dropdown').forEach((el) => {
+            
+            if (!el.classList.contains('hidden')) {
+
+                let row = el.parentElement.parentElement.parentElement;
+
+                el.classList.add('hidden');
+                row.classList.remove('selected-row');
+            }   
+        });
+    }
+}
+
 function verDetalhesDaProposta(element) {
 
     localStorage.setItem('idProposta', element.getAttribute('itemid'));
@@ -167,4 +167,15 @@ function verDetalhesDaProposta(element) {
     window.location.href = '../detalhesProposta/detalhesProposta.html';
 }
 
+function selecionarAba(filtroAoCarregarPagina) {
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary')
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-b-2')
+    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-primary')
+
+    document.getElementById(`todasPropostas`).classList.remove('text-primary')
+    document.getElementById(`todasPropostas`).classList.remove('border-b-2')
+    document.getElementById(`todasPropostas`).classList.remove('border-primary')
+}
+
 export default exibirPropostas
+export { esconderTudo, selecionarAba }
