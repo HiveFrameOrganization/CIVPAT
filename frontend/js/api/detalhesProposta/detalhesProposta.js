@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('click', () => {
+botaoSalvarPdf.addEventListener('change', () => {
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 
@@ -283,6 +283,7 @@ function baixarPdf(tipoPdf) {
             link.href = urlPdf;
             link.target = '_blank';
             link.click();
+            windows.open(urlPdf,'_blank')
 
 
             // Remova o URL temporário criado para o blob.
@@ -674,14 +675,14 @@ function aceitarProposta() {
     const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
     const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
 
-    
     //baixarOrcamento
     //baixarPropostaAssinada
+
+    
 
     if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
-
         alertas();
 
     } else {
@@ -783,9 +784,9 @@ async function declinarPropostaBanco(){
 
 const botaoAceitarProposta = document.getElementById('aceitarProposta');
 
-// botaoAceitarProposta.addEventListener('click', () => {
-//     aceitarPropostaBanco();
-// })
+botaoAceitarProposta.addEventListener('click', () => {
+    aceitarPropostaBanco();
+})
 
 const botaoDeclinarProposta = document.getElementById('declinarProposta');
 
@@ -845,4 +846,3 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
         abaResumo.classList.remove('h-0')
     }
 })
-
