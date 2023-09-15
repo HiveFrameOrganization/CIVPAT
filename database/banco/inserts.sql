@@ -275,7 +275,8 @@ insert into Usuarios values
 ('1634567', 'Eu', 'jackson', NULL, 'ger', 'germe@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
 ('1264568', 'michael', 'jackson', NULL, 'coor', 'coorte@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
 ('1234566', 'michael', 'jackson', NULL, 'adm', 'adminastror@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
-('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo');
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('7777777', 'Naldo', 'Benny', NULL, 'tec', 'naldo@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo');
 
 -- Inserção de Representantes para teste
 insert into Representantes values 
@@ -462,4 +463,4 @@ INSERT INTO Produtos VALUES
 
 INSERT INTO CargaHoraria VALUES
 (1, 1, '1234560', 10, 12, '2023-09-14'),
-(2, 1, '1234560', 10, 12, '2023-09-14');
+(2, 1, '7777777', 10, 12, '2023-09-14');
