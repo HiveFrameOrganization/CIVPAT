@@ -717,7 +717,7 @@ declinarPropostaButton.addEventListener('click', () => {
 
 orcamentoInput.addEventListener('change', () => {
     try {
-        aceitarProposta()
+        aceitarPropostaBanco()
     } catch (error) {
         console.log(error)
     }
@@ -725,7 +725,7 @@ orcamentoInput.addEventListener('change', () => {
 
 propostaAssinadaInput.addEventListener('change', () => {
     try {
-        aceitarProposta()
+        aceitarPropostaBanco()
     } catch (error) {
         console.log(error)
     }
@@ -778,20 +778,6 @@ async function declinarPropostaBanco(){
 
 }
 
-
-
-
-const botaoAceitarProposta = document.getElementById('aceitarProposta');
-
-// botaoAceitarProposta.addEventListener('click', () => {
-//     aceitarPropostaBanco();
-// })
-
-const botaoDeclinarProposta = document.getElementById('declinarProposta');
-
-botaoDeclinarProposta.addEventListener('click', () => {
-    declinarPropostaBanco();
-})
 
 // abrir modal de cadastro de produto
 document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
