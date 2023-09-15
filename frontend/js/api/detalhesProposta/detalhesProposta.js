@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('click', () => {
+botaoSalvarPdf.addEventListener('change', () => {
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 
@@ -247,17 +247,17 @@ async function verificarPdfExistente(idProposta) {
     }
 
     // sumir o botão se nao ouver pdf no banco
-    if (document.querySelector('#botaoOrcamento').disabled == false) {
-        document.querySelector('.sumirOrcamento').classList.remove('hidden')
+    if (document.querySelector('#botaoOrcamento').disabled) {
+        document.querySelector('.sumirOrcamento').classList.add('hidden')
     }
-    if (document.querySelector('#botaoPropostaAssinada').disabled == false) {
-        document.querySelector('.sumirPropostaAssinada').classList.remove('hidden')
+    if (document.querySelector('#botaoPropostaAssinada').disabled) {
+        document.querySelector('.sumirPropostaAssinada').classList.add('hidden')
     }
-    if (document.querySelector('#botaoRelatorioFinal').disabled == false) {
-        document.querySelector('.sumirRelatorioFinal').classList.remove('hidden')
+    if (document.querySelector('#botaoRelatorioFinal').disabled) {
+        document.querySelector('.sumirRelatorioFinal').classList.add('hidden')
     }
-    if (document.querySelector('#botaoPesquisaDeSatisfacao').disabled == false) {
-        document.querySelector('.sumirPesquisaDeSatisfacao').classList.remove('hidden')
+    if (document.querySelector('#botaoPesquisaDeSatisfacao').disabled) {
+        document.querySelector('.sumirPesquisaDeSatisfacao').classList.add('hidden')
     }
 }
 
@@ -281,6 +281,7 @@ function baixarPdf(tipoPdf) {
             link.href = urlPdf;
             link.target = '_blank';
             link.click();
+            windows.open(urlPdf,'_blank')
 
 
             // Remova o URL temporário criado para o blob.
@@ -672,19 +673,19 @@ function aceitarProposta() {
     const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
     const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
 
-    
     //baixarOrcamento
     //baixarPropostaAssinada
+
+    
 
     if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
-
         alertas();
 
     } else {
 
-        aceitarPropostaBanco();
+        alertas();
 
     }
  
@@ -717,7 +718,7 @@ declinarPropostaButton.addEventListener('click', () => {
 
 orcamentoInput.addEventListener('change', () => {
     try {
-        aceitarPropostaBanco()
+        aceitarProposta()
     } catch (error) {
         console.log(error)
     }
@@ -725,7 +726,7 @@ orcamentoInput.addEventListener('change', () => {
 
 propostaAssinadaInput.addEventListener('change', () => {
     try {
-        aceitarPropostaBanco()
+        aceitarProposta()
     } catch (error) {
         console.log(error)
     }
@@ -751,7 +752,7 @@ async function aceitarPropostaBanco(){
         window.location.href = '/frontend/pages/Home/index.html';
     }
 
-   
+
    
 }
 
@@ -778,6 +779,20 @@ async function declinarPropostaBanco(){
 
 }
 
+
+
+
+const botaoAceitarProposta = document.getElementById('aceitarProposta');
+
+botaoAceitarProposta.addEventListener('click', () => {
+    aceitarPropostaBanco();
+})
+
+const botaoDeclinarProposta = document.getElementById('declinarProposta');
+
+botaoDeclinarProposta.addEventListener('click', () => {
+    declinarPropostaBanco();
+})
 
 // abrir modal de cadastro de produto
 document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
@@ -831,4 +846,3 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
         abaResumo.classList.remove('h-0')
     }
 })
-
