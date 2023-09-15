@@ -253,10 +253,8 @@
                 </div>
                 
                 <div class="flex flex-col sm:flex-row mt-2">
-                    <div class="flex gap-5 flex-col sm:flex-row">
-                        <input 
-                            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md" 
-                            type="button" id="modificarProduto" value="SALVAR">
+                    <div class="flex gap-5 flex-col sm:flex-row" id="botaoSalvar">
+                        
                     </div>
                 </div>
                 
@@ -315,7 +313,9 @@
 
             </div>
     
-            <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md">SALVAR</button>
+            <div id="">
+                <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md">SALVAR</button>
+            </div>
 
         </section>
 
@@ -354,12 +354,22 @@
 
     </script>
 
-    <!-- desabilitando o botão de salvar para técnicos (apenas visualização) -->
-
+    
     <script>
 
+        // renderizando o botão de salvar de acordo com o cargo e status da proposta
+        
+        if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('status') == 'Em Análise') || (localStorage.getItem('status') == 'Aceito'))){
+            const divBotao = document.getElementById('botaoSalvar');
+            
+            divBotao.innerHTML += `<input 
+            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md" 
+            type="button" id="modificarProduto" value="SALVAR">`;
+        }
+
+        // desabilitando o botão de salvar para técnicos (apenas visualização)
+        
         if (localStorage.getItem('cargo') == 'tec'){
-            document.getElementById("modificarProduto").disabled = true;
             document.getElementById('produto').disabled = true;
             document.getElementById('tecnicos').disabled = true;
             document.getElementById('servico').disabled = true;
@@ -387,7 +397,6 @@
             document.getElementById('dataFinal').disabled = true;
 
         } else if (localStorage.getItem('status') == 'Declinado'){
-            document.getElementById("modificarProduto").disabled = true;
             document.getElementById('produto').disabled = true;
             document.getElementById('tecnicos').disabled = true;
             document.getElementById('servico').disabled = true;
@@ -399,7 +408,6 @@
             document.getElementById('dataFinal').disabled = true;
 
         } else if (localStorage.getItem('status') == 'Concluido'){
-            document.getElementById("modificarProduto").disabled = true;
             document.getElementById('produto').disabled = true;
             document.getElementById('tecnicos').disabled = true;
             document.getElementById('servico').disabled = true;
