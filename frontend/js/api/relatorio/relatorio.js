@@ -52,11 +52,19 @@ botaoPesquisar.addEventListener('click', async () => {
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 */
 
-async function buscarRelatorio(mes, ano) {
+/*
+    O terceiro valor da função esta colocando por padrão um valor vazio caso esteja recebendo um valor 
+    indefinido. Importante para a lógica do back-end
+*/
+async function buscarRelatorio(mes, ano, valor = '') {
 
     try {
 
-        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}`);
+        console.log(valor)
+        console.log(mes)
+        console.log(ano)
+
+        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
 
         const resposta = await requisicao.json();
 
@@ -95,3 +103,38 @@ function dataMinima(mes, ano) {
 
     return false;
 }
+
+/*
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                PESQUISAR PELO FUNCIONÁRIO: NIF, NOME E SOBRENOME
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+const botaoPesquisarFuncionario = document.querySelector('#botaoPesquisarFuncionario');
+botaoPesquisarFuncionario.addEventListener('click', async () => {
+    
+    // Pegando o valor digitado
+    const valor = document.querySelector('#pesquisaFuncionario').value;
+
+    const data = document.querySelector('#dataMesAno').value;
+
+    const dataArray = dividirData(data);
+
+    // Pegando o ano
+    const ano = dataArray[0];
+
+    // Pegando o mês
+    const mes = dataArray[1];
+
+    // Conferindo a data mínima
+    if (dataMinima(mes, ano)) {
+
+        console.log(`Data Incorreta`);
+
+        return;
+    }
+
+    console.log(`Data correta`);
+    await buscarRelatorio(mes, ano, valor);
+
+});
