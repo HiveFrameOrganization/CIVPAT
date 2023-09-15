@@ -133,8 +133,8 @@ function mudarAba(filtro) {
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', filtro);
-    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
-    botoesPaginacao(localStorage.getItem('filtroPadrao'));
+    pegarTodasAsPropostas(filtro);
+    botoesPaginacao(filtro);
 }
 
 export default botoesPaginacao
