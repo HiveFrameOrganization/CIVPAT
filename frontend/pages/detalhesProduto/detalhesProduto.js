@@ -81,6 +81,7 @@ window.addEventListener('load', async function (){
     if(dadosProduto['fk_idMaquina'] == 1){
         tempo.setAttribute('disabled', 'true')
         // tempo.classList.add()
+        localStorage.setItem('maquina', 'Nenhuma')
     }
 
 
@@ -369,12 +370,14 @@ async function LancamentoHoras(){
             }
         }
 
-        
+
     }catch (error) {
         console.error(error)
     }
 
 }
+
+if (localStorage.getItem('cargo') == 'tec'){
 
 const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
     const id = localStorage.getItem('idProduto');

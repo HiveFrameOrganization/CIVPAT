@@ -275,7 +275,8 @@ insert into Usuarios values
 ('1634567', 'Eu', 'jackson', NULL, 'ger', 'germe@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
 ('1264568', 'michael', 'jackson', NULL, 'coor', 'coorte@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
 ('1234566', 'michael', 'jackson', NULL, 'adm', 'adminastror@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
-('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo');
+('1234560', 'michael', 'jackson', NULL, 'tec', 'tec@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo'),
+('7777777', 'Naldo', 'Benny', NULL, 'tec', 'naldo@sp.senai.br', '$2y$10$E7UMnumHaqDt6wHBMwCVE.Bv7kGU0XaugH7zQS3ivUAISk8/tlmay', 'ativo');
 
 -- Inserção de Representantes para teste
 insert into Representantes values 
@@ -458,8 +459,25 @@ insert into Historico VALUES
 (default, 1, 1, 31, '2023-09-01', NOW());
 
 INSERT INTO Produtos VALUES
-(1, 1, '1234560', 1, 1, 1, 1, 'metalmecanica', 123, 123, 123, '2023-09-12', '2023-09-23');
+(1, 1, '1234560', 1, 1, 1, 1, 'metalmecanica', 123, 123, 123, '2023-09-12', '2023-09-23'),
+(2, 1, '1234560', 1, 1, 1, 1, 'metalmecanica', 123, 123, 123, '2023-09-12', '2023-09-23'),
+(3, 1, '1234560', 1, 1, 1, 1, 'metalmecanica', 123, 123, 123, '2023-09-12', '2023-09-23');
 
 INSERT INTO CargaHoraria VALUES
-(1, 1, '1234560', 10, 12, '2023-09-14'),
-(2, 1, '1234560', 10, 12, '2023-09-14');
+(1, 1, '1234560', 10, 12, '2023-09-01'),
+(2, 2, '1234560', 10, 12, '2023-09-02'),
+(3, 2, '1234560', 10, 12, '2023-09-02'),
+(4, 2, '1234560', 10, 12, '2023-09-02'),
+(5, 2, '1234560', 10, 12, '2023-09-03'),
+(6, 3, '1234560', 10, 12, '2023-09-04'),
+(7, 3, '1234560', 10, 12, '2023-09-05'),
+(8, 3, '1234560', 10, 12, '2023-09-06'),
+(9, 2, '7777777', 10, 12, '2023-09-01'),
+(10, 1, '7777777', 10, 12, '2023-09-02'),
+(11, 1, '7777777', 10, 12, '2023-09-02'),
+(12, 1, '7777777', 10, 12, '2023-09-02'),
+(13, 1, '7777777', 10, 12, '2023-09-02'),
+(14, 3, '7777777', 10, 12, '2023-09-03'),
+(15, 2, '7777777', 10, 12, '2023-09-04'),
+(16, 2, '7777777', 10, 12, '2023-09-05'),
+(17, 1, '7777777', 10, 12, '2023-09-06');

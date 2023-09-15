@@ -8,7 +8,7 @@ const paginacao = document.querySelector('#paginacao');
 window.addEventListener('load', async () => {
     // ao carregar a página, a função irá executar
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
-    // alertas();
+    alertas();
     await pegarTodasAsPropostas(filtroAoCarregarPagina);
     await pegarUnidadesCriadoras();
     botoesPaginacao(localStorage.getItem('filtroPadrao'));
@@ -87,10 +87,10 @@ function botoesPaginacao(filtro) {
 
     if (sessionStorage.getItem('paginaProposta') == 1) {
         // pagina selecionado
-        priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        priBotao.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
     } else {
         // outros botoes
-        priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+        priBotao.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
     }
 
     priBotao.href = '#Proposta'
@@ -141,10 +141,10 @@ function botoesPaginacao(filtro) {
     
             if (sessionStorage.getItem('paginaProposta') == i) {
                 // pagina selecionado
-                a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+                a.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
             } else {
                 // outros botoes
-                a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+                a.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
             }
     
             a.href = '#Proposta'
@@ -172,10 +172,10 @@ function botoesPaginacao(filtro) {
     
         if (sessionStorage.getItem('paginaProposta') == qtdBotoes) {
             // pagina selecionado
-            ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            ultBotao.classList = 'in-page border border-primary bg-body text-color-text text-sm px-3 py-1 rounded-md'
         } else {
             // outros botoes
-            ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
+            ultBotao.classList = 'bg-body border border-[transparent] hover:border-primary text-color-text text-sm px-3 py-1 rounded-md'
         }
     
         ultBotao.href = '#Proposta'
@@ -408,7 +408,7 @@ function exibirPropostas(propostas){
 
                 statusDescricao = 'concluido';
                 statusIMG = '../../img/icon/check-circle.svg';
-                optionIMG = '../../img/icon/more-vertical-green.svg';
+                optionIMG = '../../img/icon/more-vertical.svg';
                 color = 'primary'
             }
     
@@ -592,6 +592,15 @@ document.getElementById('propostasDeclinado').addEventListener('click', () => {
     colocarPagina(1);
     sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', 'Declinado');
+    pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
+    botoesPaginacao(localStorage.getItem('filtroPadrao'));
+});
+
+document.getElementById('propostasConcluidas').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    colocarPagina(1);
+    sessionStorage.removeItem('paginaProposta');
+    localStorage.setItem('filtroPadrao', 'Concluido');
     pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'));
     botoesPaginacao(localStorage.getItem('filtroPadrao'));
 });

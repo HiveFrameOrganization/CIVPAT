@@ -16,31 +16,22 @@ function puxarRelatorio($conn)
 
     $mes = $_GET['mes'];
     $ano = $_GET['ano'];
-    $valor = '%' . $_GET['valor'] . '%';
+    $valor = $_GET['valor'];
 
-    // Verifcando o valor de filtor do funcionário
-    if ($valor == 'undefined' OR $valor == '') {
 
-        $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.Sobrenome, Usuarios.NIF, NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
+    $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, Usuarios.Sobrenome, NomeProduto.NomeProduto, Propostas.TituloProposta, Maquinas.Maquina, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
         INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
         INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
-        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto 
+        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
+        INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina 
         INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-        GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
+        AND Usuarios.NIF = ?
+        GROUP BY Datas, Usuarios.NIF, Maquinas.Maquina, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
 
-    } else {
+    $stmt->bind_param('sss', $mes, $ano, $valor);
 
-        $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, Usuarios.Sobrenome, NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
-        INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
-        INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
-        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto 
-        INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-        AND Usuarios.NIF LIKE ? OR Usuarios.Nome LIKE ? OR Usuarios.Sobrenome LIKE ?
-        GROUP BY Datas, Usuarios.NIF, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
 
-    }
 
-    $stmt->bind_param('sssss', $mes, $ano, $valor, $valor, $valor);
 
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -60,7 +51,6 @@ function puxarRelatorio($conn)
             'status' => 'success',
             'mensagem' => 'dados retornados com sucesso',
             'dados' => $dados
-
         ];
 
     } else {
