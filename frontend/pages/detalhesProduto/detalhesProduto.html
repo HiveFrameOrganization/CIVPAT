@@ -239,6 +239,12 @@
                         <input type="number" name="valor" id="valor" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
                     </div>
                 </div>
+
+                <div class="flex gap-6 flex-col md:flex-row" id="acumuladas">
+
+                    <!-- campos não aparecem para técnico -->
+
+                </div>
                 
                 <div class="flex gap-6 flex-col sm:flex-row">
                     <div class="flex flex-col gap-2 w-full">
@@ -289,6 +295,29 @@
     </footer>
 
 
+    <!-- renderizando campos para todos menos técnicos -->
+
+    <script>
+
+        if ((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')){
+
+            const acumuladas = document.getElementById('acumuladas');
+            
+            acumuladas.innerHTML += `<div class="flex flex-col gap-2 w-full">
+                <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
+                <input type="text" id="horasPessoaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+            </div>
+            
+            <div class="flex flex-col gap-2 w-full">
+                <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
+                <input type="text" id="horasMaquinaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+            </div>`;
+
+        }
+
+    </script>
+
+
     <!-- renderizando lançamento de horas apenas para técnicos -->
 
     <script>
@@ -318,34 +347,35 @@
                     <input type="text" id="horasPessoaAcomuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                 </div>
 
-            </div>
+            </div>`;
+
+            if (localStorage.getItem('maquina') != 'Nenhuma'){
+                `<div class="flex flex-col mb-8">
+                    <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
+                    <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Informe apenas se houve uso da máquina.</strong></h3>
+                </div>
+         
+                <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
     
-            
-            <div class="flex flex-col mb-8">
-                <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
-                <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Informe apenas se houve uso da máquina.</strong></h3>
-            </div>
-     
-            <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
-
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TOTAIS</label>
-                    <input type="text" id="horasMaquina" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
-                </div>
-
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TRABALHADAS</label>
-                    <input type="number" id="horaMaquinaDiaria" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full disabled:bg-primary/10 disabled:text-color-text/60 maquina">
-                </div>
-
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
-                    <input type="text" id="horasMaquinaAcomuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
-                </div>
-
-            </div>
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TOTAIS</label>
+                        <input type="text" id="horasMaquina" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                    </div>
     
-            <div>
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TRABALHADAS</label>
+                        <input type="number" id="horaMaquinaDiaria" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full disabled:bg-primary/10 disabled:text-color-text/60 maquina">
+                    </div>
+    
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
+                        <input type="text" id="horasMaquinaAcomuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                    </div>
+    
+                </div>`;
+            }
+    
+            divHoras.innerHTML += `<div>
                 <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md">SALVAR</button>
             </div>`;
         }
