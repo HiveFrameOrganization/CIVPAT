@@ -80,6 +80,7 @@ window.addEventListener('load', async function (){
     if(dadosProduto['fk_idMaquina'] == 1){
         tempo.setAttribute('disabled', 'true')
         // tempo.classList.add()
+        localStorage.setItem('maquina', 'Nenhuma')
     }
 
 
