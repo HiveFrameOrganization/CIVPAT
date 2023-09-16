@@ -3,15 +3,14 @@ import resetarSenhaUsuario from './resetarSenhaFuncionarios.js';
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
-
     // Quando aparecer o formulário será feita uma requisição para retornar os dados
     dadosParaEditar(nif);
 
     toggleModal();
 
     // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
-    resetSenhaContainer.innerHTML = '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
-
+    resetSenhaContainer.innerHTML = 
+    '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
     /*
     --------------------------------------------------------------------------------------- 
                             RESETAR A SENHA DO USUÁRIO 
@@ -20,19 +19,16 @@ async function FormularioEditarUsuario(nif) {
 
     // Quando o usuário clicar a senha será resetada
     resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
-
         const nif = localStorage.getItem('nif');
 
         // Função para resetar a senha
         resetarSenhaUsuario(nif);
-
     });
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
 async function dadosParaEditar(nif) {
     try {
-
         // Requisição ao servidor
         const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
 
@@ -46,7 +42,6 @@ async function dadosParaEditar(nif) {
 
         // Função para retornar os dados para editar
         exibirDadosParaEditar(resposta.usuarios);
-
     } catch (erro) {
         console.error(erro);
     }
@@ -54,7 +49,6 @@ async function dadosParaEditar(nif) {
 
 // Colocando os valores no formulário
 function exibirDadosParaEditar(dados) {
-
     // Pegando os elementos para editar
     const editarNome = document.querySelector('#editarNome');
     const editarSobrenome = document.querySelector('#editarSobrenome');
@@ -67,18 +61,15 @@ function exibirDadosParaEditar(dados) {
         editarEmail.value = usuario.Email
         editarCargo.value = usuario.TipoUser;
     }
-
 }
 
 const toggleModal = () => {
-
     [modalEdit, modalFade].forEach((el) => {
 
         el.classList.toggle('hide');
 
         resetSenhaContainer.innerHTML = '';
     });
-
 };
 
 const resetSenhaContainer = document.querySelector('#reset-container');

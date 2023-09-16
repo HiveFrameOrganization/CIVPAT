@@ -11,8 +11,7 @@ function botoesPaginacao(filtro) {
     </a>
     <a id="proxPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
-    </a>
-    `
+    </a>`
 
     // Criando o primeiro botão
     const priBotao = document.createElement('a');
@@ -58,7 +57,6 @@ function botoesPaginacao(filtro) {
     })
 
     const paginaAtual = sessionStorage.getItem('paginaProposta');
-    console.log(qtdBotoes)
     if (paginaAtual > 4 && qtdBotoes > 4) {
         const divisor = document.createElement('span');
         divisor.textContent = '...'
@@ -68,7 +66,7 @@ function botoesPaginacao(filtro) {
     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
-        if (i > 1 && i < qtdBotoes  ) {
+        if (i > 1 && i < qtdBotoes) {
             const a = document.createElement('a');
     
             if (sessionStorage.getItem('paginaProposta') == i) {
@@ -92,7 +90,7 @@ function botoesPaginacao(filtro) {
         }
     }
 
-    if (paginaAtual < 4  && qtdBotoes > 4) {
+    if (paginaAtual < 4 && qtdBotoes > 4) {
         const divisor2 = document.createElement('span');
         divisor2.textContent = '...'
         containerPaginacao.insertBefore(divisor2, setaProxPagina);
@@ -131,7 +129,6 @@ function colocarPagina(num) {
 
 function mudarAba(filtro) {
     colocarPagina(1);
-    sessionStorage.removeItem('paginaProposta');
     localStorage.setItem('filtroPadrao', filtro);
     pegarTodasAsPropostas(filtro);
     botoesPaginacao(filtro);

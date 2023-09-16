@@ -3,6 +3,7 @@ import { esconderTudo } from './renderizarTelaFuncionarios.js';
 import retornaFuncionarios from './pegarFuncionarios.js';
 import editarFuncionarios from './editarFuncionarios.js';
 import botoesPaginacao from './paginacao.js';
+import { mudarAba } from './paginacao.js';
 import alertas from '../../feedback.js';
 
 /*
@@ -71,33 +72,21 @@ pesquisarUsuario.addEventListener('keyup', () => {
 /*------------------------------- Filtro: TODOS -----------------------------------*/
 const botaoTodos = document.querySelector('#botaoTodos');
 botaoTodos.addEventListener('click', () => {
-    localStorage.setItem('filtroPadraoFuncionario', '');
-
-    // Função para renderizar a lista de usuários
-    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-    botoesPaginacao();
+    mudarAba('');
 });
 
 
 /*------------------------------- Filtro: ATIVO -----------------------------------*/
 const botaoAtivos = document.querySelector('#botaoAtivos');
 botaoAtivos.addEventListener('click', () => {
-    localStorage.setItem('filtroPadraoFuncionario', 'Ativo');
-
-    // Função para renderizar a lista de usuários
-    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-    botoesPaginacao();
+    mudarAba('Ativo');
 });
 
 
 /*------------------------------- Filtro: DESATIVO -----------------------------------*/
 const botaoDesativos = document.querySelector('#botaoDesativos');
 botaoDesativos.addEventListener('click', () => {
-    localStorage.setItem('filtroPadraoFuncionario', 'Inativo');
-
-    // Função para renderizar a lista de usuários
-    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-    botoesPaginacao();
+    mudarAba('Inativo');
 });
 
 // Enviar o formulário para editar

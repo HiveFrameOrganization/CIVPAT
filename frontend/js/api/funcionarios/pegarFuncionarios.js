@@ -12,10 +12,10 @@ async function retornaFuncionarios(filtro) {
     // Variável criar para otimização, evitar requisições desnecessárias
     // recalculando a quantidade de botões
     let declaradoqtdBotoesFun
-    if (sessionStorage.getItem('qtdBotoesFun') == null) {
+    if (sessionStorage.getItem(`qtdBotoesFun${filtro}`) == null) {
         declaradoqtdBotoesFun = -1;
     } else {
-        declaradoqtdBotoesFun = sessionStorage.getItem('qtdBotoesFun');
+        declaradoqtdBotoesFun = sessionStorage.getItem(`qtdBotoesFun${filtro}`);
     }
     // Lembrando que essa variável é destruida no cadastro do usuário
     // pois altera a quantidade de funcionarios e possivelmente
@@ -36,7 +36,7 @@ async function retornaFuncionarios(filtro) {
         exibir(dados.usuarios);
         // Seta a quantidade de botões
         // necessário desetar no cadastro de usuário
-        sessionStorage.setItem('qtdBotoesFun', dados.qtdBotoes);
+        sessionStorage.setItem(`qtdBotoesFun${filtro}`, dados.qtdBotoes);
 
     } catch (erro) {
         console.error(erro)

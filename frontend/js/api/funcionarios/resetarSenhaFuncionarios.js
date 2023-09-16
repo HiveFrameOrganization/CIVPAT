@@ -11,7 +11,6 @@ async function resetarSenhaUsuario(nif) {
     if (confirmarReset === true) {
 
         try {
-
             const requisicao = await fetch(back + `/funcionarios/resetarSenha.php`, {
                 method: 'PUT',
                 headers: {
@@ -30,8 +29,8 @@ async function resetarSenhaUsuario(nif) {
             // Atualizando a lista em tempo real
             retornaFuncionarios();
     
-            resetSenhaContainer.innerHTML = '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
-    
+            resetSenhaContainer.innerHTML = 
+            '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
         } catch (erro) {
             console.error(erro);
             resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">${erro}</span>`;

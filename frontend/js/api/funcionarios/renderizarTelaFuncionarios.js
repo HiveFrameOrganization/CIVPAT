@@ -3,18 +3,17 @@ import desativarUsuario from './desativarFuncionarios.js';
 
 function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
-
     const exibe = document.querySelector('#exibicao');
 
     // Removendo um possível elemento na div de exibição
     exibe.innerHTML = '';
 
     for (let funcionario of dados) {
-
         // Criando os elementos
         const div = document.createElement('div');
 
-        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
+        div.classList = 'row-item flex flex-nowrap bg-component rounded-md' +
+        'border-2 border-[transparent] hover:border-primary transition-colors';
 
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
@@ -24,12 +23,10 @@ function exibir(dados) {
         let mostrarBotao
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
-
             mostrarBotao = true
             cor = 'primary';
             imgOpcao = '../../img/icon/more-vertical.svg';
         } else {
-            
             mostrarBotao = false
             cor = 'color-red';
             imgOpcao = '../../img/icon/more-vertical-red.svg';
@@ -113,7 +110,6 @@ function exibir(dados) {
 
 // Recuperar os botões das linhas da tabela
 function reloadBotoesLinhas() {
-
     const inativarButtons = document.querySelectorAll('.inativar');
     const editarrButtons = document.querySelectorAll('.editar');
 
@@ -122,7 +118,6 @@ function reloadBotoesLinhas() {
 
 // Aplicando os eventos aos botões das linhas da tabela
 function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
-
     inativarButtons.forEach((btn) => {
 
         btn.addEventListener('click', function() {
@@ -143,14 +138,12 @@ function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
 }
 
 function recarregarLinhas() {
-
     const btnAcionadores = document.querySelectorAll('.btn-trigger');
 
     btnAcionadores.forEach((btn) => {
 
         // Abrir o menu específico do botão clicado, na linha
         btn.addEventListener('click', () => {
-            
             esconderTudo();
 
             let linhaMenu = btn.querySelector('.option-dropdown'),
@@ -164,7 +157,6 @@ function recarregarLinhas() {
 
 // Função para fechar todos os dropdown
 function esconderTudo() {
-
     if (document.querySelector('.option-dropdown')) {
         
         document.querySelectorAll('.option-dropdown').forEach((el) => {
@@ -196,7 +188,6 @@ function exibirErro(erro) {
     titulo.style.color = 'red';
 
     exibicao.appendChild(titulo);
-
 }
 
 export default exibir

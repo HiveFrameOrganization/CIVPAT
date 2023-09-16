@@ -43,7 +43,7 @@ function retornaFuncionarios($conn)
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
     if ($_GET['qtdBotes'] == -1) {
-        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela);
+        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro);
     } else {
         $qtdBotoes = $_GET['qtdBotes'];
     }
@@ -62,10 +62,12 @@ function retornaFuncionarios($conn)
 }
 
 // Retorna a quantidade de funcionários
-function qtdBotoes($conn, $qtdFuncionariosTela) {
+function qtdBotoes($conn, $qtdFuncionariosTela, $filtro) {
     // preparando a query
-    $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios");
+    $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios WHERE Status LIKE ?");
 
+    $filtro = '%' . $filtro . '%';
+    $stmt->bind_param('s', $filtro);
     // Excutando a query
     $stmt->execute();
 
