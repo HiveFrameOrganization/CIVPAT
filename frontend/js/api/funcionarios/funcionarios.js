@@ -1,5 +1,9 @@
+import pesquisarFuncionario from './pesquisaFuncionarios.js';
+import { esconderTudo } from './renderizarTelaFuncionarios.js';
+import retornaFuncionarios from './pegarFuncionarios.js';
+import editarFuncionarios from './editarFuncionarios.js';
+import botoesPaginacao from './paginacao.js';
 import alertas from '../../feedback.js';
-import { back } from '../Rotas/rotas.js'
 
 /*
 ----------------------------------------------------------------------------------
@@ -7,7 +11,6 @@ import { back } from '../Rotas/rotas.js'
 ----------------------------------------------------------------------------------
 */
 window.addEventListener('load', async () => {
-
     localStorage.setItem('filtroPadraoFuncionario', '');
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadraoFuncionario');
 
@@ -15,340 +18,14 @@ window.addEventListener('load', async () => {
 
     // Função para renderizar a lista de usuários
     await retornaFuncionarios(filtroAoCarregarPagina);
+    
     // Chama a função que cria os botões da página
     botoesPaginacao();
-
 });
-
-// Funão para retornar uma lisat de funcionários
-async function retornaFuncionarios(filtro) {
-    // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
-    if (sessionStorage.getItem('paginaFun') == null) {
-        sessionStorage.setItem('paginaFun', 1)
-    }
-    const paginaFun = sessionStorage.getItem('paginaFun');
-
-    // Variável criar para otimização, evitar requisições desnecessárias
-    // recalculando a quantidade de botões
-    let declaradoqtdBotoesFun
-    if (sessionStorage.getItem('qtdBotoesFun') == null) {
-        declaradoqtdBotoesFun = -1;
-    } else {
-        declaradoqtdBotoesFun = sessionStorage.getItem('qtdBotoesFun');
-    }
-    // Lembrando que essa variável é destruida no cadastro do usuário
-    // pois altera a quantidade de funcionarios e possivelmente
-    // a quantidade de botões
-
-    try {
-        // Fazendo a requisição para buscar os dados
-        const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}`);
-
-        const dados = await resposta.json();
-
-        // Caso retorne algum erro previsto no back-end
-        if (dados.status === 'erro') throw new Error(dados.mensagem);
-
-
-        // Função específica para exibir o funcionário
-        exibir(dados.usuarios);
-        // Seta a quantidade de botões
-        // necessário desetar no cadastro de usuário
-        sessionStorage.setItem('qtdBotoesFun', dados.qtdBotoes);
-
-    } catch (erro) {
-        console.error(erro)
-    }
-}
-
-// Criar os botões de paginação e adiciona a função que muda a página
-function botoesPaginacao() {
-    // Puxa a quantidade de botões do sessionStorage
-    const qtdBotoesFun = sessionStorage.getItem('qtdBotoesFun');
-    // Puxa o elemento que irá receber os botoes
-    const containerPaginacao = document.getElementById('paginacao');
-
-    containerPaginacao.innerHTML = `
-    <a id="antPagina" href="#" class="w-4 h-4">
-        <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
-    </a>
-    <a id="proxPagina" href="#" class="w-4 h-4">
-        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
-    </a>
-    
-    `
-
-     // Criando o primeiro botão
-     const priBotao = document.createElement('a');
-
-     if (sessionStorage.getItem('paginaFun') == 1) {
-         // pagina selecionado
-         priBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-     } else {
-         // outros botoes
-         priBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-     }
- 
-     priBotao.href = ''
-     priBotao.textContent = 1
-     priBotao.id = `pesquisa${1}`
-     priBotao.onclick = () => {
-         colocarPagina(1)
-     }
- 
-     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
-     // impedir que botoes apareçam em determinados casos
-     if(sessionStorage.getItem('qtdBotoesFun') == sessionStorage.getItem('paginaFun')){
-         setaProxPagina.classList.add('hidden')
-     }
-     if(sessionStorage.getItem('paginaFun') == 1){
-         document.querySelector('#antPagina').classList.add('hidden')
-     }
-     containerPaginacao.insertBefore(priBotao, setaProxPagina);
-     // Final Primeiro Botão
- 
-     // adcionar funçoes no botao de ir e voltar
-     setaProxPagina.addEventListener('click', ()=>{
-         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) + 1)
-         setaProxPagina.href = ''
-     })
-     document.querySelector('#antPagina').addEventListener('click', ()=>{
-         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) - 1)
-         document.querySelector('#antPagina').href = ''
-     })
- 
-     const paginaAtual = sessionStorage.getItem('paginaFun');
-     if (paginaAtual > 4) {
-         const divisor = document.createElement('span');
-         divisor.textContent = '...'
-         containerPaginacao.insertBefore(divisor, setaProxPagina);
-     }
- 
-     // Seta a quantidade de botões, caso não exista, evitando requisições extras ao banco
-     // necessário desetar no cadastro de usuário !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     for (let i = paginaAtual - 2; i <= parseInt(paginaAtual) + 2; i++) {
-         if (i > 1 && i < qtdBotoesFun  ) {
-             const a = document.createElement('a');
-     
-             if (sessionStorage.getItem('paginaFun') == i) {
-                 // pagina selecionado
-                 a.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-             } else {
-                 // outros botoes
-                 a.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-             }
-     
-             a.href = ''
-             a.textContent = i
-             a.id = `pesquisa${i}`
-             a.onclick = () => {
-                 colocarPagina(i)
-             }
-     
-             containerPaginacao.insertBefore(a, setaProxPagina);
-         }
-     }
- 
-     if (paginaAtual < 4 && qtdBotoesFun > 4) {
-         const divisor2 = document.createElement('span');
-         divisor2.textContent = '...'
-         containerPaginacao.insertBefore(divisor2, setaProxPagina);
-     }
-     // Criando o ultimo botão
-     const ultBotao = document.createElement('a');
- 
-     if (sessionStorage.getItem('paginaFun') == qtdBotoesFun) {
-         // pagina selecionado
-         ultBotao.classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md'
-     } else {
-         // outros botoes
-         ultBotao.classList = 'bg-body text-color-text text-sm px-3 py-1 rounded-md'
-     }
- 
-     ultBotao.href = ''
-     ultBotao.textContent = qtdBotoesFun
-     ultBotao.id = `pesquisa${qtdBotoesFun}`
-     ultBotao.onclick = () => {
-         colocarPagina(qtdBotoesFun)
-     }
- 
-     containerPaginacao.insertBefore(ultBotao, setaProxPagina);
-     // Final Ultimo Botão
- 
-}
-
-// Seta o número da página no sessionStorage
-function colocarPagina(num) {
-    sessionStorage.setItem('paginaFun', num);
-}
-
-function exibir(dados) {
-    //Selecionando a div que vai ter os funcionário
-
-    const exibe = document.querySelector('#exibicao');
-
-    // Removendo um possível elemento na div de exibição
-    exibe.innerHTML = '';
-
-    for (let funcionario of dados) {
-
-        // Criando os elementos
-        const div = document.createElement('div');
-
-        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
-
-        let fotoDePerfil = funcionario['FotoDePerfil'];
-
-        let cargo;
-        let cor;
-        let imgOpcao;
-        let mostrarBotao
-
-        if (funcionario['Status'].toLowerCase() == 'ativo') {
-
-            mostrarBotao = true
-            cor = 'primary';
-            imgOpcao = '../../img/icon/more-vertical.svg';
-        } else {
-            
-            mostrarBotao = false
-            cor = 'color-red';
-            imgOpcao = '../../img/icon/more-vertical-red.svg';
-        }
-
-        if (funcionario['TipoUser'] == 'tec') {
-
-            cargo = 'Técnico';
-        } else if (funcionario['TipoUser'] == 'adm') {
-
-            cargo = 'Administrador';
-        } else if (funcionario['TipoUser'] == 'ger') {
-            
-            cargo = 'Gerente';
-        } else {
-
-            cargo = 'Coordenador'
-        }
-
-        div.innerHTML = `
-        <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
-            <div class="flex items-center gap-8 lg:w-full">
-                <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
-                    <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
-                        <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
-                        <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                            <span class="text-xs text-color-text-secundary capitalize">${cargo}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <div class="flex flex-col gap-1 font-semibold">
-                        <span class="text-lg leading-4 whitespace-nowrap">NIF</span>
-                        <span class="text-xs text-color-text-secundary">${funcionario['NIF'] ? funcionario['NIF'] : 'N/A'}</span>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="flex flex-col gap-1 font-semibold">
-                        <span class="text-lg leading-4 whitespace-nowrap">Email</span>
-                        <span class="text-xs text-color-text-secundary">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
-                    </div>
-                </div>
-                <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>
-            </div>
-        </div>
-        <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${cor}/20 rounded-md relative">
-                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
-                <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
-                    ${
-                        mostrarBotao ? `
-                            <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                                <div class="flex items-center gap-2">
-                                <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
-                                    <a>
-                                        Editar
-                                    </a>
-                                </div>
-                            </div>
-                            <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                                <div class="flex items-center gap-2">
-                                    <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
-                                    <a>
-                                        Inativar
-                                    </a>
-                                </div>
-                            </div>
-                        ` : ''
-                    }
-                </div>
-            </button>
-        </div>`;
-
-        exibe.appendChild(div);
-    }
-
-    reloadBotoesLinhas();
-    recarregarLinhas();
-};
-
-
-// Reaplicar as funções referentes a linhas da tabela
-function recarregarLinhas() {
-
-    const btnAcionadores = document.querySelectorAll('.btn-trigger');
-
-    btnAcionadores.forEach((btn) => {
-
-        // Abrir o menu específico do botão clicado, na linha
-        btn.addEventListener('click', () => {
-            
-            esconderTudo();
-
-            let linhaMenu = btn.querySelector('.option-dropdown'),
-                linha = btn.parentElement.parentElement;
-            
-            linhaMenu.classList.toggle('hidden');
-            linha.classList.toggle('selected-row');
-        });
-    });
-}
-
 
 // Fechar todos ao clicar fora do botão
 window.addEventListener('click', (event) => {
-
     if (!event.target.matches('.option-dropdown-trigger')) {
-
-        esconderTudo();
-    } 
-});
-
-
-// Função para fechar todos os dropdown
-function esconderTudo() {
-
-    if (document.querySelector('.option-dropdown')) {
-        
-        document.querySelectorAll('.option-dropdown').forEach((el) => {
-            
-            if (!el.classList.contains('hidden')) {
-
-                let row = el.parentElement.parentElement.parentElement;
-
-                el.classList.add('hidden');
-                row.classList.remove('selected-row');
-            }   
-        });
-    }
-}
-
-// Fechar todos ao clicar fora do botão
-window.addEventListener('click', (event) => {
-
-    if (!event.target.matches('.option-dropdown-trigger')) {
-
         esconderTudo();
     }
 });
@@ -363,13 +40,11 @@ window.addEventListener('click', (event) => {
 
 // Capturando o evento de pesquisa
 const botaoPesquisar = document.querySelector('#botaoPesquisar');
-
 // Selecionando o input
 const pesquisarUsuario = document.querySelector('#pesquisarUsuario');
 
 // Pegando o evento de click para realizar a pesquisa
 botaoPesquisar.addEventListener('click', () => {
-
     if (pesquisarUsuario.value === '') return;
 
     const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
@@ -385,56 +60,7 @@ pesquisarUsuario.addEventListener('keyup', () => {
 
     pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
     botoesPaginacao();
-
 });
-
-// Função específica para realizar a pesquisa do funcionário
-async function pesquisarFuncionario(valor, filtro) {
-    const numPagina = sessionStorage.getItem('paginaFun');
-
-    sessionStorage.setItem('paginaFun', 0);
-
-    try {
-
-        // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}&pag=${numPagina}&filtros=${filtro}`);
-
-        // Convertendo a resposta em json
-        const resposta = await requisicao.json();
-
-
-
-        // Receber erros personalizados do back-end
-        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-
-        
-        exibir(resposta.usuarios);
-
-    } catch (erro) {
-        console.error(erro);
-        exibirErro(erro);
-    }
-
-}
-
-function exibirErro(erro) {
-    //Selecionando a div que vai ter os funcionário
-    const exibicao = document.querySelector('#exibicao');
-
-    // Removendo um possível elemento na div de exibição
-    exibicao.innerHTML = '';
-
-    // Criando um elemnto para mostrar o erro na tela
-    const titulo = document.createElement('h1');
-
-    // Adicionando texto e estilo
-    titulo.classList = 'w-full text-center'
-    titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
-    titulo.style.color = 'red';
-
-    exibicao.appendChild(titulo);
-
-}
 
 /*
 --------------------------------------------------------------------------------------- 
@@ -445,429 +71,41 @@ function exibirErro(erro) {
 /*------------------------------- Filtro: TODOS -----------------------------------*/
 const botaoTodos = document.querySelector('#botaoTodos');
 botaoTodos.addEventListener('click', () => {
-
     localStorage.setItem('filtroPadraoFuncionario', '');
-
 
     // Função para renderizar a lista de usuários
     retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-
+    botoesPaginacao();
 });
 
 
 /*------------------------------- Filtro: ATIVO -----------------------------------*/
 const botaoAtivos = document.querySelector('#botaoAtivos');
 botaoAtivos.addEventListener('click', () => {
-
     localStorage.setItem('filtroPadraoFuncionario', 'Ativo');
-
 
     // Função para renderizar a lista de usuários
     retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-    // Função para renderizar a lista de usuários
-    usuariosFiltrados(botaoAtivos.value);
-
+    botoesPaginacao();
 });
 
 
 /*------------------------------- Filtro: DESATIVO -----------------------------------*/
 const botaoDesativos = document.querySelector('#botaoDesativos');
 botaoDesativos.addEventListener('click', () => {
-
     localStorage.setItem('filtroPadraoFuncionario', 'Inativo');
 
     // Função para renderizar a lista de usuários
-    usuariosFiltrados(localStorage.getItem('filtroPadraoFuncionario'));
-
+    retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
+    botoesPaginacao();
 });
-
-async function usuariosFiltrados(valor) {
-    try {
-
-        const numPagina = sessionStorage.getItem('paginaFun');
-        // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisaFiltro.php?valor=${valor}&pag=${numPagina}`);
-
-        // Convertendo a resposta em json
-        const resposta = await requisicao.json();
-
-        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-
-        exibir(resposta.usuarios);
-
-    } catch (erro) {
-        console.error(erro);
-        exibirErro(erro);
-    }
-}
-/*
---------------------------------------------------------------------------------------- 
-                        PROCESSO DE EDITAR OU INATIVAR O USUÁRIO 
----------------------------------------------------------------------------------------
-*/
-
-// Recuperar os botões das linhas da tabela
-function reloadBotoesLinhas() {
-
-    const inativarButtons = document.querySelectorAll('.inativar');
-    const editarrButtons = document.querySelectorAll('.editar');
-
-    addEventoLinhasBotoes(inativarButtons, editarrButtons);
-}
-
-// Aplicando os eventos aos botões das linhas da tabela
-function addEventoLinhasBotoes(inativarButtons, editarrButtons) {
-
-    inativarButtons.forEach((btn) => {
-
-        btn.addEventListener('click', function() {
-
-            desativarUsuario(this.getAttribute('itemid'));
-        });
-    });
-
-    editarrButtons.forEach((btn) => {
-
-        btn.addEventListener('click', function() {
-
-            localStorage.setItem('nif', this.getAttribute('itemid'));
-
-            FormularioEditarUsuario(this.getAttribute('itemid'));
-        });
-    });
-}
-
-const resetSenhaContainer = document.querySelector('#reset-container');
-
-// Abertura e Fechamento da Modal
-let modalEdit = document.querySelector('#modal');
-let modalFade = document.querySelector('#modal-fade');
-let fecharModal = document.querySelector('#close-modal');
-
-const toggleModal = () => {
-
-    [modalEdit, modalFade].forEach((el) => {
-
-        el.classList.toggle('hide');
-
-        resetSenhaContainer.innerHTML = '';
-    });
-
-};
-
-[fecharModal, modalFade].forEach((el) => el.addEventListener('click', toggleModal));
-
-
-// Função para mostrar a tela de edição do usuário
-async function FormularioEditarUsuario(nif) {
-
-    // Quando aparecer o formulário será feita uma requisição para retornar os dados
-    dadosParaEditar(nif);
-
-    toggleModal();
-
-    // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
-    resetSenhaContainer.innerHTML = '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
-
-    /*
-    --------------------------------------------------------------------------------------- 
-                            RESETAR A SENHA DO USUÁRIO 
-    ---------------------------------------------------------------------------------------
-    */
-
-    // Quando o usuário clicar a senha será resetada
-    resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
-
-        const nif = localStorage.getItem('nif');
-
-        // Função para resetar a senha
-        resetarSenhaUsuario(nif);
-
-    });
-}
-
-// Função para fazer a requisição para editar nome, email, cargo e resetar a senha
-async function dadosParaEditar(nif) {
-    try {
-
-        // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
-
-        // Convertendo a resposta em json
-        const resposta = await requisicao.json();
-
-        // Receber erros personalizados do back-end
-        if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-
-        console.log(resposta)
-
-        // Função para retornar os dados para editar
-        exibirDadosParaEditar(resposta.usuarios);
-
-    } catch (erro) {
-        console.error(erro);
-    }
-}
-
-// Colocando os valores no formulário
-function exibirDadosParaEditar(dados) {
-
-    // Pegando os elementos para editar
-    const editarNome = document.querySelector('#editarNome');
-    const editarSobrenome = document.querySelector('#editarSobrenome');
-    const editarEmail = document.querySelector('#editarEmail');
-    const editarCargo = document.querySelector('#editarCargo');
-
-    for (let usuario of dados) {
-        editarNome.value = usuario.Nome;
-        editarSobrenome.value = usuario.Sobrenome;
-        editarEmail.value = usuario.Email
-        editarCargo.value = usuario.TipoUser;
-    }
-
-}
 
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-formularioEditarUsuario.addEventListener('submit', async () => {
-
-    // Pegando os valores do formulário
-    const nome = document.querySelector('#editarNome').value;
-    const sobrenome = document.querySelector('#editarSobrenome').value;
-    const email = document.querySelector('#editarEmail').value.replace('@sp.senai.br', '');
-    const cargo = document.querySelector('#editarCargo').value;
-
-    try {
-
-        // Pegando o nif armazenado no localStorage
-        const nif = localStorage.getItem('nif');
-
-        // // Verificando se o nome e sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o email possui pelo menos uma letra:
-        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
-
-        if (!contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
-            localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
-
-            alertas();
-        } else {
-
-            const dadosEditados = {
-                nif: nif,
-                nome: nome,
-                sobrenome: sobrenome,
-                email: email + '@sp.senai.br',
-                cargo: cargo
-            }
-    
-
-            // Função para editar os funcionários
-            const resp = await requisicaoEditar(dadosEditados);
-
-            console.log(resp);
-
-            localStorage.setItem('status', resp.status);
-            localStorage.setItem('mensagem', resp.mensagem);
-    
-            location.reload();
-
-        }
-
-
-    } catch (erro) {
-        console.error(erro);
-    }
-
-});
-
-// Função para mandar os dados para editar
-async function requisicaoEditar(dados) {
-
-    console.log(dados)
-
-    // Requisição PUT para editar
-    const requisicao = await fetch(back + `/funcionarios/editarFuncionario.php`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
-    });
-
-    // Pegando a resposta retornado pelo servidor
-    const resposta = await requisicao.json();
-
-
-    // tratamento caso haja algum erro previsto no back-end
-    if (resposta.status === 'error') throw new Error(resposta.mensagem);
-
-    return resposta;
-
-}
-
-// Função para renderizar a modal de confirmar inativação do funcionário
-function renderizarModalConfirmar() {
-
-    const div = document.createElement('div');
-
-    div.setAttribute('id', 'modal-confirmar');
-    div.classList = 'hide bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8';
-
-    const templateModalConfirmar = `
-    <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
-        <div>
-            <h2 class="text-2xl font-bold text-red">INATIVAR FUNCIONÁRIO</h2>
-            <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
-        </div>
-        <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
-    </div>
-    <div class="modal-body">
-        <div class="px-4 sm:px-8 flex justify-between">
-            <button id="btn-confirmar" value="yes"  type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
-            <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
-        </div>
-    </div>
-    `;
-
-    div.innerHTML = templateModalConfirmar;
-
-    document.body.appendChild(div);
-}
-
-let modalConfirmar;
-let fecharModalConfirmar;
-
-const toggleModalConfirmar = () => {
-
-    [modalConfirmar, modalFade].forEach((el) => el.classList.toggle('hide'));
-
-};
-
-// Função para desativar o usuário
-async function desativarUsuario(nif) {
-
-    renderizarModalConfirmar();
-
-    modalConfirmar = document.querySelector('#modal-confirmar');
-    fecharModalConfirmar = document.querySelector('#close-modal-confirmar');
-
-    [fecharModalConfirmar, modalFade].forEach((el) => el.addEventListener('click', toggleModalConfirmar));
-
-    let btnCancelar = document.querySelector('#btn-cancelar');
-    let btnConfirmar = document.querySelector('#btn-confirmar');
-
-    toggleModalConfirmar();
-
-    let confirmarInativar;
-
-    btnConfirmar.addEventListener('click', async () => {
-
-        confirmarInativar = true;
-
-        if (confirmarInativar === true && nif) {
-
-            try {
-    
-                const requisicao = await fetch(back + `/funcionarios/demitirFuncionarios.php`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ nif: nif })
-                });
-    
-                // Convertendo a requisição em um objeto JS
-                const resposta = await requisicao.json();
-    
-                // Caso a resposta do servidor sej algum erro já previsto...
-                if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-    
-                localStorage.setItem('status', resposta.status);
-                localStorage.setItem('mensagem', resposta.mensagem);
-    
-                alertas();
-    
-                // Atualizando a lista em tempo real
-                retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
-    
-            } catch (erro) {
-                console.error(erro);
-            }
-
-            toggleModalConfirmar();
-        }
-
-        document.body.removeChild(document.querySelector('#modal-confirmar'));
-
-        window.location.reload();
-    })
-    
-    btnCancelar.addEventListener('click', () => {
-    
-        confirmarInativar = false;
-        toggleModalConfirmar();
-
-        document.body.removeChild(document.querySelector('#modal-confirmar'));
-    })
-}
-
-
-// Função para desativar o usuário
-async function resetarSenhaUsuario(nif) {
-
-    const confirmarReset = confirm('Confirmar reset de senha?');
-
-    if (confirmarReset === true) {
-
-        try {
-
-            const requisicao = await fetch(back + `/funcionarios/resetarSenha.php`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nif: nif })
-            });
-    
-            // Convertendo a requisição em um objeto JS
-            const resposta = await requisicao.json();
-    
-            // Caso a resposta do servidor sej algum erro já previsto...
-            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
-    
-    
-            // Atualizando a lista em tempo real
-            retornaFuncionarios();
-    
-            resetSenhaContainer.innerHTML = '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
-    
-        } catch (erro) {
-            console.error(erro);
-            resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">${erro}</span>`;
-        }
-    }
-}
-
-
+formularioEditarUsuario.addEventListener('submit', async () => { editarFuncionarios() });
 
 /*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS --------------------------------------------------------------*/
 
 function contemApenasNumeros(string) {
     return /^\d+$/.test(string);
-}
-
-function contemPeloMenosUmaLetra(string) {
-    const regex = /[a-zA-Z]/;
-    return regex.test(string);
-}
-
-function contemApenasLetrasEspacos(string) {
-    const regex = /^[a-zA-ZÉéÇçãÃõÕit\s]+$/;
-    return regex.test(string);
 }

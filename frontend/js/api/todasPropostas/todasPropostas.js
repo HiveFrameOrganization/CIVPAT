@@ -5,8 +5,8 @@ import pegarTodasAsPropostas from './pegarPropostas.js';
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
 
-const table = document.querySelector('#table');
-const paginacao = document.querySelector('#paginacao');
+// const table = document.querySelector('#table');
+// const paginacao = document.querySelector('#paginacao');
 const inputPesquisa = document.getElementById('hidden-input');
 //Perguntar pro Michael sobre esta variavel
 
