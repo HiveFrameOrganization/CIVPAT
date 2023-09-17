@@ -169,7 +169,7 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
                                     <circle cx="12" cy="13" r="3"/>
                                 </svg>
-                                <input class="hidden" type="file" id="image-input" name="image-input" accept="image/*">
+                                <input class="hidden" type="file" id="image-input" name="image-input" accept="image/jpeg">
                             </div>
                         </div>
                         <div class="flex flex-col items-center sm:items-start capitalize">
@@ -218,6 +218,8 @@
                     </div>
                 </div>
             </div>
+
+            <button type="button" id="salvarImagem">Salvar imagem</button>
         </section>
     </main>
 
@@ -238,9 +240,11 @@
         </div>
     </footer>
     
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
+    <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
+    <script type="module" src="../../js/api/perfil/imagemPerfil.js"></script>
     <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/perfil/buscarPerfil.js"></script>
     <script type="module" src="../../js/api/perfil/produtos.js"></script>

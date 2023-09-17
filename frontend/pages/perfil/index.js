@@ -1,5 +1,5 @@
 // Funções para controlar os botões
-import alertas from "../../js/feedback";
+import alertas from "../../js/feedback.js";
 window.addEventListener('load', ()=>{
     alertas()
 })
