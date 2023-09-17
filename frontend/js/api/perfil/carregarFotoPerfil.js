@@ -14,6 +14,7 @@ async function carregarFotoPerfil () {
     const imagemElement = document.getElementById('perfil-image');
     const imageUrl = URL.createObjectURL(resposta);
     imagemElement.src = imageUrl;
+    document.querySelector('#profile-trigger').src = imageUrl;
 
     console.log(resposta);
 }

@@ -5,19 +5,43 @@ window.addEventListener('load', () => {
     alertas();
 })
 
-const botaoSalvarImagem = document.getElementById('salvarImagem');
+// Controlar o Upload de images
 
-botaoSalvarImagem.addEventListener('click', () => {
+const uploadImageBtn = document.querySelector('#upload-image');
+const imageInput = document.querySelector('#image-input');
+
+uploadImageBtn.addEventListener('click', function() {
+
+    imageInput.click();
+});
+
+imageInput.addEventListener('change', (event) => {
+
+    if (imageInput.files.length <= 0) {
+
+        return;
+    }
+    
+    let leitor = new FileReader();
+
+    leitor.onload = () => {
+
+        uploadImageBtn.parentElement.querySelector('#perfil-image').src = leitor.result;
+
+        document.querySelector('#profile-trigger').src = leitor.result;
+    }
+
+    leitor.readAsDataURL(imageInput.files[0]);
+
     salvarFotoPerfil();
-})
+});
 
 async function salvarFotoPerfil () {
-    const inputImagem = document.getElementById('image-input');
     const nif = localStorage.getItem('nifPerfil');
 
-    const file = inputImagem.files[0];
+    const file = imageInput.files[0];
 
-    const nomeImagem = inputImagem.files[0]['name'];
+    const nomeImagem = imageInput.files[0]['name'];
 
     console.log(file);
     const formData = new FormData();
@@ -38,7 +62,4 @@ async function salvarFotoPerfil () {
     } else {
         window.location.href = '../../pages/perfil/index.html';
     }
-    
-
-    
 }
