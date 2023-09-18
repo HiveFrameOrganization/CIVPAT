@@ -13,6 +13,7 @@ formulario.addEventListener('submit', async evento => {
 
 });
 
+
 // Função para fazer o login
 async function login(email, senha) {
     try {
@@ -40,6 +41,7 @@ async function login(email, senha) {
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
         localStorage.setItem('cargo', resposta.cargo);
+        localStorage.setItem('nifPerfil', resposta.nif);
 
 
         // // Verificando se o login for true
@@ -51,6 +53,7 @@ async function login(email, senha) {
 
         if (resposta.status == 'success') {
             localStorage.setItem('filtroPadrao', '');
+            
         }
 
 
@@ -63,11 +66,12 @@ async function login(email, senha) {
             window.location.replace(frontPages + '/perfil/index.html');
 
         } else {
-
+            
             if (resposta.login) window.location.replace(frontPages + '/Home/index.html');
 
         }
 
+        
         // Deu certo, armazenando o token no localStorage
         localStorage.setItem('token', resposta.token);
 

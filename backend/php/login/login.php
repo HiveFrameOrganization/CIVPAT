@@ -31,6 +31,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'login' => true,
             'token' => $_SESSION['token'],
             'cargo' => $dadosBanco['TipoUser'],
+            'nif' => $dadosBanco['NIF'],
             'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
             'status' => 'success'
         ];

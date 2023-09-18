@@ -1,5 +1,6 @@
 // Controlar a Modal de cadastrar propostas
 
+
 const openModalButton = document.querySelector('#open-modal-btn');
 const closeModalButton = document.querySelector('#close-modal');
 const modal = document.querySelector('#modal');
