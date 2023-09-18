@@ -16,7 +16,7 @@ window.addEventListener('load', () => {
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('change', () => {
+botaoSalvarPdf.addEventListener('click', () => {
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 
@@ -216,7 +216,7 @@ async function verificarBancoProposta(id) {
     }
 }
 
-async function verificarPdfExistente(idProposta) {
+async function  verificarPdfExistente(idProposta) {
 
     try {
         // Cria a requisição 
@@ -249,17 +249,17 @@ async function verificarPdfExistente(idProposta) {
     }
 
     // sumir o botão se nao ouver pdf no banco
-    if (document.querySelector('#botaoOrcamento').disabled) {
-        document.querySelector('.sumirOrcamento').classList.add('hidden')
+    if (document.querySelector('#botaoOrcamento').disabled == false) {
+        document.querySelector('.sumirOrcamento').classList.remove('hidden')
     }
-    if (document.querySelector('#botaoPropostaAssinada').disabled) {
-        document.querySelector('.sumirPropostaAssinada').classList.add('hidden')
+    if (document.querySelector('#botaoPropostaAssinada').disabled == false) {
+        document.querySelector('.sumirPropostaAssinada').classList.remove('hidden')
     }
-    if (document.querySelector('#botaoRelatorioFinal').disabled) {
-        document.querySelector('.sumirRelatorioFinal').classList.add('hidden')
+    if (document.querySelector('#botaoRelatorioFinal').disabled == false) {
+        document.querySelector('.sumirRelatorioFinal').classList.remove('hidden')
     }
-    if (document.querySelector('#botaoPesquisaDeSatisfacao').disabled) {
-        document.querySelector('.sumirPesquisaDeSatisfacao').classList.add('hidden')
+    if (document.querySelector('#botaoPesquisaDeSatisfacao').disabled == false) {
+        document.querySelector('.sumirPesquisaDeSatisfacao').classList.remove('hidden')
     }
 }
 

@@ -11,10 +11,19 @@ async function carregarFotoPerfil () {
 
     const resposta = await requisicao.blob();
 
-    const imagemElement = document.getElementById('perfil-image');
-    const imageUrl = URL.createObjectURL(resposta);
-    imagemElement.src = imageUrl;
-    document.querySelector('#profile-trigger').src = imageUrl;
+    if (resposta.size > 0) {
+        const imagemElement = document.getElementById('profile-trigger');
+        const imageUrl = URL.createObjectURL(resposta);
+        imagemElement.src = imageUrl;
+        document.querySelector('#profile-trigger').src = imageUrl;
 
-    console.log(resposta);
+        if (document.getElementById('perfil-image')) {
+            const fotoTelaPerfil = document.getElementById('perfil-image');
+            fotoTelaPerfil.src = imageUrl;
+
+        }
+    
+        console.log(resposta);
+    }
+
 }

@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
 // Função assícrona responsável por fazer a requisição para o back-end e buscar os dados
 async function buscarUsuarioLogado() {
 
-    // Tratamento para possíevl erro...
+    // Tratamento para possível erro...
     try {
 
 
