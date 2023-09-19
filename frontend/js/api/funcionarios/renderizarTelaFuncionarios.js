@@ -12,24 +12,23 @@ function exibir(dados) {
         // Criando os elementos
         const div = document.createElement('div');
 
-        div.classList = 'row-item flex flex-nowrap bg-component rounded-md' +
-        'border-2 border-[transparent] hover:border-primary transition-colors';
+        div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
 
         let fotoDePerfil = funcionario['FotoDePerfil'];
 
         let cargo;
         let cor;
-        let imgOpcao;
+        let imgColor;
         let mostrarBotao
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
             mostrarBotao = true
             cor = 'primary';
-            imgOpcao = '../../img/icon/more-vertical.svg';
+            imgColor = '#3976d1';
         } else {
             mostrarBotao = false
             cor = 'color-red';
-            imgOpcao = '../../img/icon/more-vertical-red.svg';
+            imgColor = '#f54a4c';
         }
 
         if (funcionario['TipoUser'] == 'tec') {
@@ -75,7 +74,7 @@ function exibir(dados) {
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
             <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${cor}/20 rounded-md relative">
-                <img src="${imgOpcao}" alt="Opções" class="option-dropdown-trigger w-full p-1">
+                <svg xmlns="http://www.w3.org/2000/svg" alt="Opções" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${imgColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-more-vertical ${mostrarBotao && 'option-dropdown-trigger'} w-full p-1"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                 <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
                     ${
                         mostrarBotao ? `
