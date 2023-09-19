@@ -342,12 +342,14 @@ async function LancamentoHoras(){
 
         if (horasRestantes == 0) {
             let option = document.createElement('option');
+            option.classList.add('bg-body');
             option.value = 0;
             option.textContent = 0;
             opcoesHoraPessoa.appendChild(option);
         } else {
             for (let i = 0; i < horasRestantes; i++) {
                 let option = document.createElement('option');
+                option.classList.add('bg-body');
                 option.value = i + 1;
                 option.textContent = i + 1;
                 opcoesHoraPessoa.appendChild(option);
@@ -356,6 +358,7 @@ async function LancamentoHoras(){
 
         if (horasRestantesMaquina == 0) {
             let option = document.createElement('option');
+            option.classList.add('bg-body');
             option.value = 0;
             option.textContent = 0;
             opcoesHoraMaquina.appendChild(option);
@@ -363,6 +366,7 @@ async function LancamentoHoras(){
             if (resposta.horasDiariasMaquina != null) {
                 for (let i = 0; i < horasRestantesMaquina; i++) {
                     let option = document.createElement('option');
+                    option.classList.add('bg-body');
                     option.value = i + 1;
                     option.textContent = i + 1;
                     opcoesHoraMaquina.appendChild(option);
@@ -377,49 +381,50 @@ async function LancamentoHoras(){
 
 }
 
-const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
-    const id = localStorage.getItem('idProduto');
-    const nifPerfil = localStorage.getItem('nifPerfil');
+if (localStorage.getItem('cargo') == 'tec'){
+    const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
+        const id = localStorage.getItem('idProduto');
+        const nifPerfil = localStorage.getItem('nifPerfil');
 
-    const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-    const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+        const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+        const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
-    const dados = {
-        nifPerfil: nifPerfil,
-        id: id,
-        horaPessoaDiaria: horaPessoaDiaria,
-        horaMaquinaDiaria: horaMaquinaDiaria
-    };
+        const dados = {
+            nifPerfil: nifPerfil,
+            id: id,
+            horaPessoaDiaria: horaPessoaDiaria,
+            horaMaquinaDiaria: horaMaquinaDiaria
+        };
 
-    console.log(dados)
+        console.log(dados)
 
-    try {
-        const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dados)
-        });
+        try {
+            const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(dados)
+            });
 
-        const resposta = await requisicao.json();
-        // Faça algo com a resposta, se necessário.
-        console.log(resposta)
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
+            const resposta = await requisicao.json();
+            // Faça algo com a resposta, se necessário.
+            console.log(resposta)
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
 
-        if (resposta.status == 'error'){
-            alertas();
-        } else {
-            window.location.href = '/frontend/pages/perfil/index.html';
+            if (resposta.status == 'error'){
+                alertas();
+            } else {
+                window.location.href = '/frontend/pages/perfil/index.html';
+            }
+        
+        
+        } catch (error) {
+            console.error(error);
+            // Trate o erro adequadamente, se necessário.
         }
-       
-      
-    } catch (error) {
-        console.error(error);
-        // Trate o erro adequadamente, se necessário.
-    }
-});
+})};
 
 
 
