@@ -19,7 +19,7 @@ function exibir(dados) {
         let cargo;
         let cor;
         let imgColor;
-        let mostrarBotao
+        let mostrarBotao;
 
         if (funcionario['Status'].toLowerCase() == 'ativo') {
             mostrarBotao = true
