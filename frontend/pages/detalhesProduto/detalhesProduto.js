@@ -324,10 +324,16 @@ async function LancamentoHoras(){
 
         console.log(resposta)
 
-        document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-        document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-        document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa']
-        document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina']
+        if (localStorage.getItem('cargo') == 'tec'){
+            document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+            document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+            document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
+            document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+        } else {
+            document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
+            document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+        }
+
 
         const horasRestantes = 10 - resposta.horasDiariasPessoas;
         const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
