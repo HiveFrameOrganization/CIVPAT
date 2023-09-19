@@ -240,7 +240,7 @@
                     </div>
                 </div>
 
-                <div class="flex gap-6 flex-col md:flex-row" id="acumuladas">
+                <div class="flex gap-6 flex-col md:flex-row -mt-6" id="acumuladas">
 
                     <!-- campos não aparecem para técnico -->
 
@@ -302,6 +302,8 @@
         if ((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')){
 
             const acumuladas = document.getElementById('acumuladas');
+
+            acumuladas.classList.remove('-mt-6');
             
             acumuladas.innerHTML += `<div class="flex flex-col gap-2 w-full">
                 <label class="text-color-text-secundary font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
