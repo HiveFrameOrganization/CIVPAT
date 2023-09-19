@@ -377,8 +377,6 @@ async function LancamentoHoras(){
 
 }
 
-if (localStorage.getItem('cargo') == 'tec'){
-
 const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
     const id = localStorage.getItem('idProduto');
     const nifPerfil = localStorage.getItem('nifPerfil');
@@ -421,7 +419,7 @@ const salvarHoras = document.getElementById('salvarHoras').addEventListener('cli
         console.error(error);
         // Trate o erro adequadamente, se necessário.
     }
-})};
+});
 
 
 
