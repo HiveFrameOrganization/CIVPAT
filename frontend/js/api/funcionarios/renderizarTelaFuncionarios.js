@@ -51,7 +51,7 @@ function exibir(dados) {
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                     <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
-                    <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
+                    <div class="w-[175px] max-w-[175px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                             <span class="text-xs text-color-text-secundary capitalize">${cargo}</span>
@@ -59,15 +59,15 @@ function exibir(dados) {
                     </div>
                 </div>
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <div class="flex flex-col gap-1 font-semibold">
+                    <div class="flex flex-col gap-1 font-semibold w-[75px] max-w-[75px] overflow-hidden text-ellipsis">
                         <span class="text-lg leading-4 whitespace-nowrap">NIF</span>
                         <span class="text-xs text-color-text-secundary">${funcionario['NIF'] ? funcionario['NIF'] : 'N/A'}</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="flex flex-col gap-1 font-semibold">
+                    <div class="flex flex-col gap-1 font-semibold w-[275px] max-w-[275px] overflow-hidden text-ellipsis">
                         <span class="text-lg leading-4 whitespace-nowrap">Email</span>
-                        <span class="text-xs text-color-text-secundary">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
+                        <span title="${funcionario['Email'] ? funcionario['Email'] : 'N/A'}" class="text-xs text-color-text-secundary">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
                 <span class="bg-${cor}/20 rounded-md text-${cor} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${funcionario['Status']}</span>

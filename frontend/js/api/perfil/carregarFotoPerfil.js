@@ -18,9 +18,7 @@ async function carregarFotoPerfil () {
         document.querySelector('#profile-trigger').src = imageUrl;
 
         if (document.getElementById('perfil-image')) {
-            const fotoTelaPerfil = document.getElementById('perfil-image');
-            fotoTelaPerfil.src = imageUrl;
-
+            document.getElementById('perfil-image').src = imageUrl;
         }
     
         console.log(resposta);
