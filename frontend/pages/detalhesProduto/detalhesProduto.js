@@ -262,40 +262,42 @@ async function atualizarProduto(dados){
     }
 }
 
-const botaoModificarProduto = document.getElementById('modificarProduto');
+if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))){
 
-botaoModificarProduto.addEventListener('click', () => {
-    const idProduto = localStorage.getItem('idProduto');
+    const botaoModificarProduto = document.getElementById('modificarProduto');
 
-    const tempoMaquina = document.getElementById('tempoMaquina').value;
-    const tempoPessoa = document.getElementById('tempoPessoa').value;
-    const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
-    const dataInicial = document.getElementById('dataInicial').value;
-    const dataFinal = document.getElementById('dataFinal').value;
-    const area = document.getElementById('area').value;
-    const servico = document.getElementById('servico').value;
-    const produto = document.getElementById('produto').value;
-    const valor = document.getElementById('valor').value;
-    const tecnico = document.getElementById('tecnicos').value;
+    botaoModificarProduto.addEventListener('click', () => {
+        const idProduto = localStorage.getItem('idProduto');
+
+        const tempoMaquina = document.getElementById('tempoMaquina').value;
+        const tempoPessoa = document.getElementById('tempoPessoa').value;
+        const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
+        const dataInicial = document.getElementById('dataInicial').value;
+        const dataFinal = document.getElementById('dataFinal').value;
+        const area = document.getElementById('area').value;
+        const servico = document.getElementById('servico').value;
+        const produto = document.getElementById('produto').value;
+        const valor = document.getElementById('valor').value;
+        const tecnico = document.getElementById('tecnicos').value;
 
 
-    const dadosParaEnviar = {
-        idProduto: idProduto,
-        tempoMaquina: tempoMaquina,
-        tempoPessoa: tempoPessoa,
-        unidadeRealizadora: unidadeRealizadora,
-        dataInicial : dataInicial ,
-        dataFinal: dataFinal,
-        area: area,
-        servico: servico,
-        produto: produto,
-        valor: valor,
-        tecnico: tecnico
-    }
-    
-    atualizarProduto(dadosParaEnviar);
+        const dadosParaEnviar = {
+            idProduto: idProduto,
+            tempoMaquina: tempoMaquina,
+            tempoPessoa: tempoPessoa,
+            unidadeRealizadora: unidadeRealizadora,
+            dataInicial : dataInicial ,
+            dataFinal: dataFinal,
+            area: area,
+            servico: servico,
+            produto: produto,
+            valor: valor,
+            tecnico: tecnico
+        }
+        
+        atualizarProduto(dadosParaEnviar);
 
-});
+})};
 
 
 
