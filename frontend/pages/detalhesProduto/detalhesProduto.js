@@ -421,7 +421,7 @@ const salvarHoras = document.getElementById('salvarHoras').addEventListener('cli
         console.error(error);
         // Trate o erro adequadamente, se necessário.
     }
-});
+})};
 
 
 
