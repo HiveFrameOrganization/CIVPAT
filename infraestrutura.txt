@@ -1,0 +1,13 @@
+usuario: hiveframe
+senha: Hiveframe@115
+
+
+link deploy: projetoisi.eastus.cloudapp.azure.com:8080
+link erros: https://rebel-azimuth-2e5.notion.site/ERROS-TCC-a13520208c064a5fa792554d8f6e3ac2
+
+
+
+
+
+
+

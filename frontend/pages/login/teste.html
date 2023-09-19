@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de permissão</title>
+</head>
+<body>
+    <h1>Teste de login</h1>
+
+    <button id="deslogar">Deslogar</button>
+
+    <script>
+        const botaoDeslogar = document.querySelector('#deslogar');
+        botaoDeslogar.addEventListener('click', async () => {
+            try {
+        
+                localStorage.clear();
+        
+                // Requisição para sair da conta
+                const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
+        
+                const resposta = await deslogar.json();
+        
+                console.log(resposta);
+
+                window.location.href = 'http://localhost:8080/';
+
+            } catch (erro) {
+                console.error(erro);
+            }
+        
+        });
+    </script>
+</body>
+</html>

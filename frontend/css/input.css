@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* DAFAULT: Dark */
+        --bg-body: 9 32 48;
+        --bg-component: 18 39 54;
+        --primary-color: 57 118 209;
+        --text-color: 255 255 255;
+        --text-secundary-color: 126 126 126;
+        --red: 245 74 76;
+        --green: 36 194 146;
+        --purple: 121 80 255;
+        --orange: 252 160 1;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --bg-body: 241 245 249;
+            --bg-component: 255 255 255;
+            --text-color: 30 41 59;
+        }
+    }
+
+    :root[data-theme="dark"] {
+        --bg-body: 9 32 48;
+        --bg-component: 18 39 54;
+        --primary-color: 57 118 209;
+        --text-color: 255 255 255;
+        --text-secundary-color: 126 126 126;
+    }   
+
+    :root[data-theme="light"] {
+        --bg-body: 241 245 249;
+        --bg-component: 255 255 255;
+        --text-color: 30 41 59;
+    }   
+}
+
+* {
+    font-family: 'Rubik', sans-serif;
+
+    /* Works on Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgb(57, 118, 209) transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(57, 118, 209);
+    border-radius: 0.375rem/* 6px */;
+}
+
+#fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 25;
+}
+
+#fade.hide {
+    opacity: 0;
+    pointer-events: none;
+}

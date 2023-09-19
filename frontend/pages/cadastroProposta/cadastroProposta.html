@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./cadastroProposta.css" />
+  </head>
+  <body>
+    <a href="../todasPropostas/todasPropostas.html">Home</a>
+    <form class="formulario">
+      <label for="">Nome da Proposta*: </label>
+      <input
+        type="text"
+        minlength="4"
+        maxlength="75"
+        id="nomeProjeto"
+        required
+      />
+
+      <label for="">Empresa*: </label>
+      <input type="text" minlength="2" maxlength="200" id="empresa" required />
+
+      <label for="">Nome do representante*: </label>
+      <input
+        type="text"
+        minlength="3"
+        maxlength="100"
+        id="nomeRepresentante"
+        required
+      />
+
+      <label for="">Email do representante*: </label>
+      <input
+        type="email"
+        minlength="4"
+        maxlength="125"
+        id="emailRepresentante"
+        required
+      />
+
+      <label for="">Número de telefone do representante*: </label>
+      <input type="text" minlength="10" maxlength="11" id="telefone" required />
+
+      <label>Resumo*:</label>
+      <textarea
+        id="textoResumo"
+        cols="30"
+        rows="10"
+        required
+        minlength="5"
+      ></textarea>
+
+      <label for="">Unidade Criadora*: </label>
+      <input
+        type="text"
+        minlength="4"
+        maxlength="100"
+        id="unidadeCriadora"
+        required
+      />
+
+      <label>Selecione o gerente:</label>
+      <select id="listaGerentes" required>
+        <!-- <option value="adm">Administrador</option>
+        <option value="coor">Coordenador</option>
+        <option value="ger">Gerente</option>
+        <option value="tec">Técnico</option> -->
+      </select>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <script
+      type="module"
+      src="../../js/api/cadastroProposta/cadastroProposta.js"
+    ></script>
+    <script src="../../js/feedback.js"></script>
+
+    <!-- Autenticação -->
+    <script type="module">
+      import { autenticacao } from "../../js/api/login/autenticacao.js";
+      autenticacao(["coor", "adm", "ger"]);
+
+      import alertas from '../../js/feedback.js';
+
+      window.addEventListener('load', () => {
+          alertas();
+      })
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
+    <title>Meu perfil - HIVEFRAME</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style type="text/tailwindcss">
+        @layer base {
+            :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+                --red: 245 74 76;
+                --green: 36 194 146;
+                --purple: 121 80 255;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
+                --bg-body: 241 245 249;
+                --bg-component: 255 255 255;
+                --text-color: 30 41 59;
+            }   
+        }
+
+        * {
+            font-family: 'Rubik', sans-serif;
+
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
+        }
+
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
+        }
+
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 25;
+        }
+
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                    'color-red': 'rgb(var(--red) / <alpha-value>)',
+                    'color-green': 'rgb(var(--green) / <alpha-value>)',
+                    'color-purple': 'rgb(var(--purple) / <alpha-value>)',
+                }
+            },
+        }
+    </script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="bg-body transition-colors">
+    <div id="fade" class="hide transition-opacity"></div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
+                    <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                    </div>
+                    <div class="mt-4 space-y-4">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/home.svg" alt="Visão geral" class="w-6 h-6">Início</a>
+                        <a href="../cadastroUsuario/cadastroUsuario.html" aria-label="Ir para a página de gerenciamento de equipe" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/users-2.svg" alt="Equipe" class="w-6 h-6">Equipe</a>
+                        <a href="#" aria-label="Ir para a página de relatórios" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/clipboard-list.svg" alt="Relatório" class="w-6 h-6">Relatórios</a>
+                        <a href="#" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"><img src="../../img/icon/calendar-clock.svg" alt="Horários" class="w-6 h-6">Banco de horas</a>
+                    </div>
+                </div>
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex items-center gap-3 z-20">
+                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
+                </div>
+                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
+                    <img src="../../img/icon/ouriço.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
+                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
+                            <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                        </div>
+                        <ul>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <script src="../../js/themeSwitch/index.js"></script>
+
+    <main class="mt-[72px] py-6 text-color-text">
+        <section class="container mx-auto px-6">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold">MEU PERFIL</h1>
+                <h2 class="text-xs font-normal">Visualize informações de perfil e produtos ao qual faz parte</h2>
+            </div>
+            <div class="flex justify-center items-center md:justify-start mt-10">
+                <div class="flex flex-wrap gap-4">
+                    <span id="spanInformacoes" role="button" class="nav-btn font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors text-primary border-b-2 border-primary">INFORMAÇÕES</span>
+                    <span id="spanProdutos" role="button" class="nav-btn font-medium text-xs md:text-lg pb-2 hover:text-primary transition-colors hidden">PRODUTOS</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-component">
+            <div class="container mx-auto px-6 py-12">
+                <div class="mb-8">
+                    <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-center">
+                        <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0 relative overflow-hidden border border-primary group animate-spin">
+                            <img id="perfil-image" src="../../img/icon/ouriço.jpg" alt="Foto de perfil" class="w-full h-full">
+                            <div id="upload-image"  class="bg-[#00000099] absolute top-1/2 bottom-0 right-0 left-0 flex items-center justify-center opacity-0 cursor-pointer group-hover:opacity-100 transition-opacity">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-camera"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                                    <circle cx="12" cy="13" r="3"/>
+                                </svg>
+                                <input class="hidden" type="file" id="image-input" name="image-input" accept="image/jpeg">
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center sm:items-start capitalize">
+                            <span id="nome" class="text-2xl font-semibold">N/A</span>
+                            <span id="cargo" class="text-base text-color-text-secundary font-normal">N/A</span>
+                        </div>
+                        <div class="flex items-center gap-8 flex-wrap justify-center">
+                            <div class="flex items-center gap-2">
+                                <img src="../../img/icon/mail.svg" alt="Email">
+                                <span id="email" class="text-base text-color-text-secundary font-normal">N/A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Area de mostragem de dados -->
+                <div id="area-dados" class="bg-body py-4 px-4 md:px-8 rounded-md">
+                    <!-- Area dos inputs -->
+                    <div id="user-info" class="flex flex-wrap gap-4">
+                        <div class="flex flex-col rounded-md px-4 py-2">
+                            <span class="font-semibold text-base">NOME</span>
+                            <span id="nome" class="text-base font-light capitalize">N/A</span>
+                        </div>
+                        <div class="flex flex-col rounded-md px-4 py-2">
+                            <span class="font-semibold text-base">E-MAIL</span>
+                            <span id="email" class="text-base font-light">N/A</span>
+                        </div>
+                    </div>
+                    <div id="user-prod" class="hidden">
+                        <!-- Exibição da tabela -->
+                        <div id="table" role="table" class="mt-8 space-y-1">
+                            <!-- Rows -->
+                        </div>
+                        <!-- FIM da tabela -->
+                    </div>
+                </div>
+                <!-- Paginação -->
+                <div id="paginacao" class="w-full mt-4 hidden">
+                    <div id="containerPaginacao" class="flex items-center gap-2 justify-end">
+                        <a href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
+                        </a>
+                        
+                        <a href="#" class="w-4 h-4">
+                            <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full bg-body text-color-text py-4">
+        <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+            </div>
+        </div>
+        <div class="text-center text-color-text-secundary text-sm mt-6">
+            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+        </div>
+    </footer>
+    
+    <script type="module" src="./index.js"></script>
+    <script src="../../js/global.js"></script>
+    <script src="../../js/logoff.js"></script>
+    <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
+    <script type="module" src="../../js/api/perfil/imagemPerfil.js"></script>
+    <script type="module" src="../../js/feedback.js"></script>
+    <script type="module" src="../../js/api/perfil/buscarPerfil.js"></script>
+    <script type="module" src="../../js/api/perfil/produtos.js"></script>
+
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+
+        window.addEventListener('load', () => {
+            alertas();
+        })
+    </script>
+</body>
+</html>

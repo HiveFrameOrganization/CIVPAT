@@ -1,0 +1,42 @@
+/* body {
+    display: grid;
+    height: 100vh;
+    align-items: center;
+    justify-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+ul {
+    list-style-type: none;
+} */
+
+/* width */
+.tabela::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+  .tabela::-webkit-scrollbar-track {
+    background: #c9c9c9;
+  }
+  
+  /* Handle */
+  .tabela::-webkit-scrollbar-thumb {
+    background: #586065;
+  }
+  
+  /* Handle on hover */
+  .tabela::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  input:disabled{
+    background-color: rgba(13, 50, 77, 0.7)!important;
+    color: #ffffffce!important;
+  }

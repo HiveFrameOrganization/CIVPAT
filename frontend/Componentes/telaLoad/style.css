@@ -1,0 +1,38 @@
+.animaLogo{
+    animation: logo 1s;
+    /* animation: logo2 1s ease-in-out infinite; */
+}
+
+.animaTexto{
+    animation: texto 1s;
+}
+
+@keyframes logo {
+    0%{
+        margin-left: 200px;
+    }
+    100%{
+        margin-left: 0px;
+    }
+}
+
+@keyframes logo2 {
+    0%{
+        rotate: 0deg;
+    }
+    50%{
+        rotate: 180deg;       
+    }
+    100%{
+        rotate: 360deg;
+    }
+}
+
+@keyframes texto {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
