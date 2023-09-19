@@ -40,10 +40,11 @@ async function editarFuncionarios() {
 
             console.log(resp);
 
-            localStorage.setItem('status', resp.status);
-            localStorage.setItem('mensagem', resp.mensagem);
+            if (resp.status == 'success') {
+                location.reload();
+
+            }
     
-            location.reload();
         }
     } catch (erro) {
         console.error(erro);
@@ -72,6 +73,9 @@ async function requisicaoEditar(dados) {
 
     // tratamento caso haja algum erro previsto no back-end
     if (resposta.status === 'error') throw new Error(resposta.mensagem);
+
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
 
     return resposta;
 

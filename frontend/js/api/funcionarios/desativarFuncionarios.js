@@ -45,8 +45,11 @@ async function desativarUsuario(nif) {
     
                 localStorage.setItem('status', resposta.status);
                 localStorage.setItem('mensagem', resposta.mensagem);
-    
-                alertas();
+                
+                if (resposta.status == 'error') {
+                    alertas();
+
+                }
     
                 // Atualizando a lista em tempo real
                 retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'));
