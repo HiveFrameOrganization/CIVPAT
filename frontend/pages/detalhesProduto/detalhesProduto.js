@@ -346,49 +346,54 @@ async function LancamentoHoras(){
         }
 
 
-        const horasRestantes = 10 - resposta.horasDiariasPessoas;
-        const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
-
-        console.log(resposta.horasDiariasPessoas);
-
-        const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
-        const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
-
-        opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
-        opcoesHoraMaquina.innerHTML = '';
-
-        if (horasRestantes == 0) {
-            let option = document.createElement('option');
-            option.classList.add('bg-body');
-            option.value = 0;
-            option.textContent = 0;
-            opcoesHoraPessoa.appendChild(option);
-            document.querySelector('#salvarHoras').disabled = true;
-        } else {
-            for (let i = 0; i < horasRestantes; i++) {
+        if(localStorage.getItem('cargo') == 'tec'){
+            const horasRestantes = 10 - resposta.horasDiariasPessoas;
+            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+    
+            console.log(resposta.horasDiariasPessoas);
+    
+            const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
+            const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
+    
+            opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
+            opcoesHoraMaquina.innerHTML = '';
+    
+            if (horasRestantes == 0) {
                 let option = document.createElement('option');
                 option.classList.add('bg-body');
-                option.value = i + 1;
-                option.textContent = i + 1;
+                option.value = 0;
+                option.textContent = 0;
                 opcoesHoraPessoa.appendChild(option);
-            }
-        }
-
-        if (horasRestantesMaquina == 0) {
-            let option = document.createElement('option');
-            option.classList.add('bg-body');
-            option.value = 0;
-            option.textContent = 0;
-            opcoesHoraMaquina.appendChild(option);
-        } else {
-            if (resposta.horasDiariasMaquina != null) {
-                for (let i = 0; i < horasRestantesMaquina; i++) {
+            } else {
+                for (let i = 0; i < horasRestantes; i++) {
                     let option = document.createElement('option');
                     option.classList.add('bg-body');
                     option.value = i + 1;
                     option.textContent = i + 1;
-                    opcoesHoraMaquina.appendChild(option);
+                    opcoesHoraPessoa.appendChild(option);
                 }
+            }
+    
+            if (horasRestantesMaquina == 0) {
+                let option = document.createElement('option');
+                option.classList.add('bg-body');
+                option.value = 0;
+                option.textContent = 0;
+                opcoesHoraMaquina.appendChild(option);
+            } else {
+                if (resposta.horasDiariasMaquina != null) {
+                    for (let i = 0; i < horasRestantesMaquina; i++) {
+                        let option = document.createElement('option');
+                        option.classList.add('bg-body');
+                        option.value = i + 1;
+                        option.textContent = i + 1;
+                        opcoesHoraMaquina.appendChild(option);
+                    }
+                }
+            }
+
+            if (horasRestantes == 0 && horasRestantesMaquina == 0){
+                document.querySelector('#salvarHoras').disabled = true;
             }
         }
 
