@@ -108,28 +108,6 @@ function exibirPropostas(propostas){
     }
 };
 
-// Reaplicar as funções referentes a linhas da tabela
-function reloadLinhas() {
-
-    const btnAcionadores = document.querySelectorAll('.btn-trigger');
-
-    btnAcionadores.forEach((btn) => {
-
-        // Abrir o menu específico do botão clicado, na linha
-        btn.addEventListener('click', () => {
-            esconderTudo();
-
-            let linhaMenu = btn.querySelector('.option-dropdown'),
-                linha = btn.parentElement.parentElement;
-
-            linhaMenu.classList.toggle('hidden');
-            linha.classList.toggle('selected-row');
-        });
-    });
-
-    getTodosBotoes();
-}
-
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getTodosBotoes() {
 
@@ -153,7 +131,7 @@ function esconderTudo() {
                 let row = el.parentElement.parentElement.parentElement;
 
                 el.classList.add('hidden');
-                row.classList.remove('selected-row');
+                row.classList.remove('selected-row');  
             }   
         });
     }
@@ -164,6 +142,28 @@ function verDetalhesDaProposta(element) {
     localStorage.setItem('idProposta', element.getAttribute('itemid'));
             
     window.location.href = '../detalhesProposta/detalhesProposta.html';
+}
+
+// Reaplicar as funções referentes a linhas da tabela
+function reloadLinhas() {
+
+    const btnAcionadores = document.querySelectorAll('.btn-trigger');
+
+    btnAcionadores.forEach((btn) => {
+
+        // Abrir o menu específico do botão clicado, na linha
+        btn.addEventListener('click', () => {
+            esconderTudo();
+
+            let linhaMenu = btn.querySelector('.option-dropdown'),
+                linha = btn.parentElement.parentElement;
+
+            linhaMenu.classList.toggle('hidden');
+            linha.classList.toggle('selected-row');
+        });
+    });
+
+    getTodosBotoes();
 }
 
 function selecionarAba(filtroAoCarregarPagina) {
