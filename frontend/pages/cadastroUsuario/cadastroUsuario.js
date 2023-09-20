@@ -58,7 +58,7 @@ searchButton.addEventListener('click', () => {
 
 const modalCadastrar = document.querySelector('#modal-cadastrar');
 const fecharModalCadastrar = document.querySelector('#close-modal-cad');
-const modalCadFade = document.querySelector('#modal-fade');
+const modalCadFade = document.querySelector('#modal-fade-cad');
 
 const openAndCloseModal = () => {
 
