@@ -11,6 +11,13 @@ import { back } from "../Rotas/rotas.js";
     O terceiro valor da função esta colocando por padrão um valor vazio caso esteja recebendo um valor 
     indefinido. Importante para a lógica do back-end
 */
+
+// teste
+window.addEventListener('load', ()=>{
+    buscarRelatorio(9, 2023, 1234560)
+})
+// fim teste
+
 async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
@@ -22,6 +29,7 @@ async function buscarRelatorio(mes, ano, valor = false) {
         const resposta = await requisicao.json();
 
         console.log(resposta);
+        exibirRelatorio(resposta)
 
     } catch (error) {
         console.error(error);
@@ -94,3 +102,33 @@ formularioRelatorio.addEventListener('submit', async evento => {
     await buscarRelatorio(mes, ano, valor);
 
 });
+
+// FUNÇÃO DE EXIBIR RELATORIO NA TELA
+async function exibirRelatorio(res){
+    let exibir = document.querySelector('#exibir')
+
+    console.log(res.dados[0].NomeProduto)
+
+    for (let i = 0; i < res.dados.length; i++) {
+        // console.log(i);
+        
+        exibir.innerHTML += `
+            <div>
+                <p class='text-color-text'>${res.dados[i].Nome} ${res.dados[i].Sobrenome}</p>
+                <p class='text-color-text'>${res.dados[i].NIF}</p>
+                <p class='text-color-text'>${res.dados[i].TituloProposta}</p>
+                <p class='text-color-text'>${res.dados[i].NomeProduto}</p>
+                <p class='text-color-text'>${res.dados[i].Datas}</p>
+                <p class='text-color-text'>${res.dados[i].HorasPessoa}</p>
+
+                ${
+                    res.dados[i].Maquina != 'Nenhum' ? 
+                        `<p class='text-color-text'>${res.dados[i].Maquina}</p>
+                        <p class='text-color-text'>${res.dados[i].HorasMaquina}</p>`:
+                        `<p class='text-color-text'>Nenhuma maquina sendo usada</p>`   
+                }
+            </div>
+            <hr>
+        `
+    }
+}
