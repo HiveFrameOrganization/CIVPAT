@@ -91,7 +91,11 @@ botaoDesativos.addEventListener('click', () => {
 
 // Enviar o formulário para editar
 const formularioEditarUsuario = document.querySelector('#formularioEditarUsuario');
-formularioEditarUsuario.addEventListener('submit', async () => { editarFuncionarios() });
+formularioEditarUsuario.addEventListener('submit', async (evento) =>  {
+    evento.preventDefault();
+    await editarFuncionarios()
+    
+});
 
 /*------------------------------------------- FUNÇÕES PARA VALIDAR ALGUMAS COISAS --------------------------------------------------------------*/
 
