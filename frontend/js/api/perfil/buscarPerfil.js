@@ -38,7 +38,6 @@ async function buscarUsuarioLogado() {
 
 // Função para exibir os dados do usuário na tela
 function exibir(dados) {
-
     // Caso o usuário seja técnico, será habilitado a visualização dos produtos...
     if (dados.cargo === 'tec') {
         
@@ -59,14 +58,16 @@ function exibir(dados) {
     const cargo = document.querySelector('#cargo');
     const emails = document.querySelectorAll('#email');
 
+    document.querySelector('#nif').textContent = dados.nif ? dados.nif : 'N/A';
+
     nomes.forEach((nome) => {
 
-        nome.textContent = `${dados.nome} ${dados.sobrenome}`
+        nome.textContent = dados.nome ? `${dados.nome} ${dados.sobrenome}` : 'N/A'
     });
 
     emails.forEach((email) => {
 
-        email.textContent = dados.email;
+        email.textContent = dados.email ? dados.email : 'N/A';
     });
 
     const cargos = {
