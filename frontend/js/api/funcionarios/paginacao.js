@@ -12,8 +12,12 @@ function botoesPaginacao(filtro) {
         <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
     </a>
     <a id="proxPagina" href="#df" class="w-4 h-4">
-        <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
+    <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
     </a>`
+
+    if (qtdBotoesFun <= 1 && sessionStorage.getItem('paginaFun') >= qtdBotoesFun) {
+        document.getElementById('proxPagina').hidden = true;
+    }
 
     // Criando o primeiro botão
     const priBotao = document.createElement('a');
@@ -129,10 +133,10 @@ function colocarPagina(num) {
     sessionStorage.setItem('paginaFun', num);
 }
 
-function mudarAba(filtro) {
+async function mudarAba(filtro) {
     colocarPagina(1);
     localStorage.setItem('filtroPadraoFuncionario', filtro);
-    retornaFuncionarios(filtro);
+    await retornaFuncionarios(filtro);
     botoesPaginacao(filtro);
 }
 

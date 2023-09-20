@@ -127,10 +127,10 @@ function colocarPagina(num) {
     sessionStorage.setItem('paginaProposta', num);
 }
 
-function mudarAba(filtro) {
+async function mudarAba(filtro) {
     colocarPagina(1);
     localStorage.setItem('filtroPadrao', filtro);
-    pegarTodasAsPropostas(filtro);
+    await pegarTodasAsPropostas(filtro);
     botoesPaginacao(filtro);
 }
 

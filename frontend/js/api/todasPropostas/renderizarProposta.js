@@ -144,7 +144,6 @@ function getTodosBotoes() {
 
 // Função para fechar todos menus das linhas
 function esconderTudo() {
-    console.log('teste')
     if (document.querySelector('.option-dropdown')) {
         
         document.querySelectorAll('.option-dropdown').forEach((el) => {

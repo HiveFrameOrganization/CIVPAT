@@ -1,7 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 
 async function pegarUnidadesCriadoras() {
-    console.log('teste')
     const unidadesSelect = document.getElementById('unidadeCriadora');
 
     const requisicao = await fetch (back + '/todasPropostas/pegarUnidadesCriadoras.php');

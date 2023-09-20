@@ -21,7 +21,7 @@ window.addEventListener('load', async () => {
     await retornaFuncionarios(filtroAoCarregarPagina);
     
     // Chama a função que cria os botões da página
-    botoesPaginacao();
+    botoesPaginacao('');
 });
 
 // Fechar todos ao clicar fora do botão
