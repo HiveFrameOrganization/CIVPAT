@@ -332,8 +332,17 @@ async function LancamentoHoras(){
             document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
             document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
         } else {
-            document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
-            document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+            if (resposta['horasAcumuladasPessoa'] == undefined){
+                document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
+            }
+
+            if (resposta['horasAcumuladasMaquina'] == undefined){
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+            }
         }
 
 
