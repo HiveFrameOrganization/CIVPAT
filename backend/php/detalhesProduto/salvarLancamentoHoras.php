@@ -26,12 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
         $resposta = [
-            'mensagem' => 'Lancameto de horas feita com sucesso',
+            'mensagem' => 'Lançamento de horas feito com sucesso',
             'status' => 'success'
         ];
     } else {
         $resposta = [
-            'mensagem' => 'Erro ao lançar hora',
+            'mensagem' => 'Erro ao lançar horas',
             'status' => 'error'
         ];
     }

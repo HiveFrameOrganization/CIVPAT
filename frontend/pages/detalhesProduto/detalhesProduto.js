@@ -363,6 +363,7 @@ async function LancamentoHoras(){
             option.value = 0;
             option.textContent = 0;
             opcoesHoraPessoa.appendChild(option);
+            document.querySelector('#salvarHoras').classList.add('disabled');
         } else {
             for (let i = 0; i < horasRestantes; i++) {
                 let option = document.createElement('option');
@@ -405,6 +406,8 @@ if (localStorage.getItem('cargo') == 'tec'){
 
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
         const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+
+        console.log(horaMaquinaDiaria + ' horas')
 
         const dados = {
             nifPerfil: nifPerfil,
