@@ -1,4 +1,8 @@
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
+
+// Quando recarregar a página o alerta será chamado
+window.addEventListener('load', () => {alertas()})
 
 async function editarFuncionarios() {
 
@@ -34,17 +38,28 @@ async function editarFuncionarios() {
                 email: email + '@sp.senai.br',
                 cargo: cargo
             }
-    
+
             // Função para editar os funcionários
             const resp = await requisicaoEditar(dadosEditados);
 
             console.log(resp);
 
             if (resp.status == 'success') {
-                location.reload();
 
+                localStorage.setItem('status', 'success');
+                localStorage.setItem('mensagem', 'Usuário editado com sucesso');
+                
+                location.reload();
+                
+            } else if (resp.status == 'error') {
+
+                localStorage.setItem('status', 'error');
+                localStorage.setItem('mensagem', 'Erro ao editar o usuário');
+                
+                location.reload();
+                
             }
-    
+            
         }
     } catch (erro) {
         console.error(erro);
@@ -72,7 +87,7 @@ async function requisicaoEditar(dados) {
 
 
     // tratamento caso haja algum erro previsto no back-end
-    if (resposta.status === 'error') throw new Error(resposta.mensagem);
+    // if (resposta.status === 'error') throw new Error(resposta.mensagem);
 
     localStorage.setItem('status', resposta.status);
     localStorage.setItem('mensagem', resposta.mensagem);

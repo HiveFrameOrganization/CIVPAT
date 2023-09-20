@@ -24,13 +24,13 @@ select {
 
 /* Modal */
 
-#modal-fade, #modal, #modal-cadastrar, #modal-confirmar, #modal-fade-confirmar {
+#modal-fade, #modal, #modal-cadastrar, #modal-confirmar, #modal-fade-confirmar, #modal-fade-cad {
   transition: 0.5s;
   opacity: 1;
   pointer-events: all;
 }
 
-#modal-fade, #modal-fade-confirmar {
+#modal-fade, #modal-fade-confirmar, #modal-fade-cad {
   position: fixed;
   top: 0;
   left: 0;
@@ -48,7 +48,7 @@ select {
   transform: translate(-50%, -50%);
 }
 
-#modal-fade.hide, #modal.hide, #modal-cadastrar.hide, #modal-confirmar.hide, #modal-fade-confirmar.hide {
+#modal-fade.hide, #modal.hide, #modal-cadastrar.hide, #modal-confirmar.hide, #modal-fade-confirmar.hide, #modal-fade-cad.hide {
   opacity: 0;
   pointer-events: none;
 }

@@ -27,13 +27,13 @@ async function resetarSenhaUsuario(nif) {
     
     
             // Atualizando a lista em tempo real
-            retornaFuncionarios();
+            // retornaFuncionarios();
     
             resetSenhaContainer.innerHTML = 
             '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
         } catch (erro) {
             console.error(erro);
-            resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">${erro}</span>`;
+            resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">${String(erro).replace('Error: ', '')}</span>`;
         }
     }
 }
