@@ -332,8 +332,17 @@ async function LancamentoHoras(){
             document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
             document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
         } else {
-            document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
-            document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+            if (resposta['horasAcumuladasPessoa'] == undefined){
+                document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
+            }
+
+            if (resposta['horasAcumuladasMaquina'] == undefined){
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+            }
         }
 
 
@@ -354,6 +363,7 @@ async function LancamentoHoras(){
             option.value = 0;
             option.textContent = 0;
             opcoesHoraPessoa.appendChild(option);
+            document.querySelector('#salvarHoras').disabled = true;
         } else {
             for (let i = 0; i < horasRestantes; i++) {
                 let option = document.createElement('option');
@@ -397,6 +407,8 @@ if (localStorage.getItem('cargo') == 'tec'){
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
         const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
+        console.log(horaMaquinaDiaria + ' horas')
+
         const dados = {
             nifPerfil: nifPerfil,
             id: id,
@@ -404,7 +416,7 @@ if (localStorage.getItem('cargo') == 'tec'){
             horaMaquinaDiaria: horaMaquinaDiaria
         };
 
-        console.log(dados)
+        console.log(dados);
 
         try {
             const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
