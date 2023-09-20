@@ -93,8 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    if ($_GET['qtdBotes'] == -1) {
-        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela);
+    if ($_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim') {
+        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtroPagina, $filtro);
     } else {
         $qtdBotoes = $_GET['qtdBotes'];
     }
@@ -107,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Aceito' => $quantidadeDePropostasPorStatus['somaAceito'],
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
-        'qtdBotoes' => $qtdBotoes
+        'qtdBotoes' => $qtdBotoes,
+        'test' => $_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim',
     ];
 
     $retorno  = json_encode($resposta);
@@ -117,9 +118,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Retorna a quantidade de Propostas
-function qtdBotoes($conn, $qtdPropostasTela) {
+function qtdBotoes($conn, $qtdPropostasTela, $filtroPagina, $filtro) {
     // preparando a query
-    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas");
+    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas
+    WHERE Status LIKE ? AND TituloProposta LIKE ?");
+
+    $filtroPagina = '%' . $filtroPagina . '%';
+    $stmt->bind_param('ss', $filtroPagina, $filtro);
 
     // Excutando a query
     $stmt->execute();

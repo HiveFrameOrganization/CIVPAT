@@ -3,6 +3,7 @@ import pegarTodasAsPropostas from './pegarPropostas.js';
 // Criar os botões de paginação e adiciona a função que muda a página
 function botoesPaginacao(filtro) {
     const qtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
+    const pesquisado = sessionStorage.getItem('pesquisado')
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
     containerPaginacao.innerHTML = `
@@ -12,6 +13,10 @@ function botoesPaginacao(filtro) {
     <a id="proxPagina" href="#Proposta" class="w-4 h-4">
         <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
     </a>`
+
+    if (qtdBotoes <= 1 && sessionStorage.getItem('paginaProposta') >= qtdBotoes) {
+        document.getElementById('proxPagina').hidden = true;
+    }
 
     // Criando o primeiro botão
     const priBotao = document.createElement('a');
@@ -29,7 +34,7 @@ function botoesPaginacao(filtro) {
     priBotao.id = `pesquisa${1}`
     priBotao.onclick = () => {
         colocarPagina(1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadrao'));
     }
 
@@ -47,12 +52,12 @@ function botoesPaginacao(filtro) {
     // adcionar funçoes no botao de ir e voltar
     setaProxPagina.addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) + 1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadrao'));
     })
     document.querySelector('#antPagina').addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaProposta')) - 1)
-        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+        pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadrao'));
     })
 
@@ -82,7 +87,7 @@ function botoesPaginacao(filtro) {
             a.id = `pesquisa${i}`
             a.onclick = () => {
                 colocarPagina(i)
-                pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+                pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'), pesquisado)
                 botoesPaginacao(localStorage.getItem('filtroPadrao'));
             }
     
@@ -113,7 +118,7 @@ function botoesPaginacao(filtro) {
         ultBotao.id = `pesquisa${qtdBotoes}`
         ultBotao.onclick = () => {
             colocarPagina(qtdBotoes)
-            pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'))
+            pegarTodasAsPropostas(localStorage.getItem('filtroPadrao'), pesquisado)
             botoesPaginacao(localStorage.getItem('filtroPadrao'));
         }
     
@@ -130,7 +135,7 @@ function colocarPagina(num) {
 async function mudarAba(filtro) {
     colocarPagina(1);
     localStorage.setItem('filtroPadrao', filtro);
-    await pegarTodasAsPropostas(filtro);
+    await pegarTodasAsPropostas(filtro, sessionStorage.getItem('pesquisado'));
     botoesPaginacao(filtro);
 }
 
