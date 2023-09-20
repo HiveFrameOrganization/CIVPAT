@@ -5,20 +5,7 @@ select {
     text-overflow: ''!important;
 }
 
-/* input:disabled{
-    background-color: #092030!important;
-    font-weight: bold;
-    color: #ffffff!important;
-    padding-left: 0px!important;
-    text-transform: uppercase;
-} */
-
 select:disabled{
-    /* background-color: #092030!important;
-    font-weight: bold;
-    color: #ffffff!important;
-    padding-left: 0px!important;
-    text-transform: uppercase; */
     opacity: 100%;
 }
 
