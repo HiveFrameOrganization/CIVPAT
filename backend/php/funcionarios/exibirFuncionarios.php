@@ -10,23 +10,25 @@ require_once '../../../database/conn.php';
 function retornaFuncionarios($conn)
 {
     //
-    $filtro = $_GET['filtros'];
+    $filtro = $_GET['filtros'] . '%';
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 5;
     $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
+    $valor = $_GET['pesq'];
+    
+    // if ($filtro == ''){
+    // preparando a query
+    $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios
+    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?) LIMIT ?, ?");
+    // Limita os resultados a 10 funcionarios
+    $stmt->bind_param('ssssii', $filtro, $valor, $valor, $valor, $inicioFun, $qtdFuncionariosTela);
 
-    if ($filtro == ''){
-        // preparando a query
-        $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios LIMIT ?, ?");
-        // Limita os resultados a 10 funcionarios
-        $stmt->bind_param('ii', $inicioFun, $qtdFuncionariosTela);
-
-    } else {
-        // preparando a query
-        $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE Status = ? LIMIT ?, ?");
-        // Limita os resultados a 10 funcionarios
-        $stmt->bind_param('sii', $filtro, $inicioFun, $qtdFuncionariosTela);
-    }
+    // } else {
+    //     // preparando a query
+    //     $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios WHERE Status = ? LIMIT ?, ?");
+    //     // Limita os resultados a 10 funcionarios
+    //     $stmt->bind_param('sii', $filtro, $inicioFun, $qtdFuncionariosTela);
+    // }
 
     // Excutando a query
     $stmt->execute();
@@ -42,7 +44,7 @@ function retornaFuncionarios($conn)
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    if ($_GET['qtdBotes'] == -1) {
+    if ($_GET['qtdBotes'] == -1 ) {
         $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro);
     } else {
         $qtdBotoes = $_GET['qtdBotes'];

@@ -1,9 +1,7 @@
-import pesquisarFuncionario from './pesquisaFuncionarios.js';
 import { esconderTudo } from './renderizarTelaFuncionarios.js';
+import botoesPaginacao, { mudarAba } from './paginacao.js';
 import retornaFuncionarios from './pegarFuncionarios.js';
 import editarFuncionarios from './editarFuncionarios.js';
-import botoesPaginacao from './paginacao.js';
-import { mudarAba } from './paginacao.js';
 import alertas from '../../feedback.js';
 
 /*
@@ -50,7 +48,7 @@ botaoPesquisar.addEventListener('click', () => {
 
     const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
 
-    pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+    retornaFuncionarios(filtroAtual);
     botoesPaginacao();
 });
 
@@ -59,7 +57,7 @@ botaoPesquisar.addEventListener('click', () => {
 pesquisarUsuario.addEventListener('keyup', () => {
     const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
 
-    pesquisarFuncionario(pesquisarUsuario.value, filtroAtual);
+    retornaFuncionarios(filtroAtual);
     botoesPaginacao();
 });
 

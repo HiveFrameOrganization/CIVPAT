@@ -107,8 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Aceito' => $quantidadeDePropostasPorStatus['somaAceito'],
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
-        'qtdBotoes' => $qtdBotoes,
-        'test' => $_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim',
+        'qtdBotoes' => $qtdBotoes
     ];
 
     $retorno  = json_encode($resposta);

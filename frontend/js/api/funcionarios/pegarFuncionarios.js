@@ -3,6 +3,7 @@ import exibir from './renderizarTelaFuncionarios.js';
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios(filtro) {
+    const pesquisa = '%' + document.querySelector('#pesquisarUsuario').value + '%';
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
         sessionStorage.setItem('paginaFun', 1)
@@ -24,7 +25,7 @@ async function retornaFuncionarios(filtro) {
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}`);
+        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}&pesq=${pesquisa}`);
 
         const dados = await resposta.json();
 

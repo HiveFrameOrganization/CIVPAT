@@ -9,7 +9,8 @@ async function pesquisarFuncionario(valor, filtro) {
 
     try {
         // Requisição ao servidor
-        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}&pag=${numPagina}&filtros=${filtro}`);
+        const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}
+        &pag=${numPagina}&filtros=${filtro}`);
 
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
