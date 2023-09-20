@@ -15,8 +15,9 @@ window.addEventListener('load', async () => {
 
     alertas();
 
+    sessionStorage.setItem('pesquisado', 'não')
     // Função para renderizar a lista de usuários
-    await retornaFuncionarios(filtroAoCarregarPagina);
+    await retornaFuncionarios(filtroAoCarregarPagina, 'não');
     
     // Chama a função que cria os botões da página
     botoesPaginacao('');
@@ -49,16 +50,17 @@ botaoPesquisar.addEventListener('click', () => {
     const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
 
     retornaFuncionarios(filtroAtual);
-    botoesPaginacao();
+    botoesPaginacao(filtroAtual);
 });
 
 // Para melhorar a experiência do usuário, quando apertar o enter no input também será realizada a pesquisa
 
-pesquisarUsuario.addEventListener('keyup', () => {
+pesquisarUsuario.addEventListener('keyup', async () => {
     const filtroAtual = localStorage.getItem('filtroPadraoFuncionario');
 
-    retornaFuncionarios(filtroAtual);
-    botoesPaginacao();
+    await retornaFuncionarios(filtroAtual);
+    botoesPaginacao(filtroAtual);
+    sessionStorage.setItem('pesquisado', 'sim')
 });
 
 /*

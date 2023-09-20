@@ -44,18 +44,19 @@ function retornaFuncionarios($conn)
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    if ($_GET['qtdBotes'] == -1 ) {
-        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro);
-    } else {
-        $qtdBotoes = $_GET['qtdBotes'];
-    }
+    // if ($_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim') {
+        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor);
+    // } else {
+    //     $qtdBotoes = $_GET['qtdBotes'];
+    // }
 
     // Enviando a resposta do servidor
     $resposta = [
         'status' => 'success',
         'mensagem' => 'Usuários retornados com sucesso',
         'usuarios' => $usuarios,
-        'qtdBotoes' => $qtdBotoes
+        'qtdBotoes' => $qtdBotoes,
+        'teste' => $_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim'
     ];
 
 
@@ -64,12 +65,13 @@ function retornaFuncionarios($conn)
 }
 
 // Retorna a quantidade de funcionários
-function qtdBotoes($conn, $qtdFuncionariosTela, $filtro) {
+function qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor) {
     // preparando a query
-    $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios WHERE Status LIKE ?");
+    $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios
+    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?)");
 
     $filtro = '%' . $filtro . '%';
-    $stmt->bind_param('s', $filtro);
+    $stmt->bind_param('ssss', $filtro, $valor, $valor, $valor);
     // Excutando a query
     $stmt->execute();
 

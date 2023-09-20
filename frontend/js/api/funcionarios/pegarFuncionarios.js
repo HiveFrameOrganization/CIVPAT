@@ -2,7 +2,7 @@ import { back } from '../Rotas/rotas.js'
 import exibir from './renderizarTelaFuncionarios.js';
 
 // Funão para retornar uma lisat de funcionários
-async function retornaFuncionarios(filtro) {
+async function retornaFuncionarios(filtro, pesquisado) {
     const pesquisa = '%' + document.querySelector('#pesquisarUsuario').value + '%';
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
@@ -25,14 +25,15 @@ async function retornaFuncionarios(filtro) {
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
-        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}&pesq=${pesquisa}`);
+        &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}&pesq=${pesquisa}&pesquisado=${pesquisado}`);
 
         const dados = await resposta.json();
 
         // Caso retorne algum erro previsto no back-end
         if (dados.status === 'erro') throw new Error(dados.mensagem);
 
-
+        console.log(pesquisado)
+        console.log(dados)
         // Função específica para exibir o funcionário
         exibir(dados.usuarios);
         // Seta a quantidade de botões

@@ -6,6 +6,7 @@ function botoesPaginacao(filtro) {
     const qtdBotoesFun = sessionStorage.getItem(`qtdBotoesFun${filtro}`);
     // Puxa o elemento que irá receber os botoes
     const containerPaginacao = document.getElementById('paginacao');
+    const pesquisado = sessionStorage.getItem('pesquisado')
 
     containerPaginacao.innerHTML = `
     <a id="antPagina" href="#df" class="w-4 h-4">
@@ -35,7 +36,7 @@ function botoesPaginacao(filtro) {
     priBotao.id = `pesquisa${1}`
     priBotao.onclick = () => {
         colocarPagina(1)
-        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'))
+        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadraoFuncionario'));
     }
 
@@ -53,12 +54,12 @@ function botoesPaginacao(filtro) {
     // adcionar funçoes no botao de ir e voltar
     setaProxPagina.addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) + 1)
-        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'))
+        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadraoFuncionario'));
     })
     document.querySelector('#antPagina').addEventListener('click', ()=>{
         colocarPagina(parseInt(sessionStorage.getItem('paginaFun')) - 1)
-        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'))
+        retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'), pesquisado)
         botoesPaginacao(localStorage.getItem('filtroPadraoFuncionario'));
     })
 
@@ -88,7 +89,7 @@ function botoesPaginacao(filtro) {
             a.id = `pesquisa${i}`
             a.onclick = () => {
                 colocarPagina(i)
-                retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'))
+                retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'), pesquisado)
                 botoesPaginacao(localStorage.getItem('filtroPadraoFuncionario'));
             }
     
@@ -119,7 +120,7 @@ function botoesPaginacao(filtro) {
         ultBotao.id = `pesquisa${qtdBotoesFun}`
         ultBotao.onclick = () => {
             colocarPagina(qtdBotoesFun)
-            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'))
+            retornaFuncionarios(localStorage.getItem('filtroPadraoFuncionario'), pesquisado)
             botoesPaginacao(localStorage.getItem('filtroPadraoFuncionario'));
         }
 
@@ -136,7 +137,7 @@ function colocarPagina(num) {
 async function mudarAba(filtro) {
     colocarPagina(1);
     localStorage.setItem('filtroPadraoFuncionario', filtro);
-    await retornaFuncionarios(filtro);
+    await retornaFuncionarios(filtro, pesquisado);
     botoesPaginacao(filtro);
 }
 

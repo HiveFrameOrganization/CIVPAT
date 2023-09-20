@@ -32,9 +32,9 @@ window.addEventListener('click', (event) => {
 
 inputPesquisa.addEventListener('keyup', async () => {
     const filtroAoCarreparPagina = localStorage.getItem('filtroPadrao');
+    sessionStorage.setItem('pesquisado', 'sim')
     await pegarTodasAsPropostas(filtroAoCarreparPagina);
     botoesPaginacao(localStorage.getItem('filtroPadrao'))
-    sessionStorage.setItem('pesquisado', 'sim')
 })
 
 document.getElementById('todasPropostas').addEventListener('click', () => {
