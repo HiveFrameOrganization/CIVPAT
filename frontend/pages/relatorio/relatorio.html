@@ -63,6 +63,7 @@
         /* Works on Chrome, Edge, and Safari */
         ::-webkit-scrollbar {
             width: 6px;
+            height: 4px;
         }
 
         ::-webkit-scrollbar-thumb {
@@ -105,7 +106,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body class="bg-body transition-colors">
+<body class="bg-component transition-colors min-h-screen flex flex-col justify-between">
 
     <div id="fade" class="hide transition-opacity"></div>
     <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation">
@@ -178,43 +179,50 @@
 
     <script src="../../js/themeSwitch/index.js"></script>
 
-    <section class="mt-[72px] pt-6 px-6 text-color-text container mx-auto">
-        <h1 class="text-color-text font-bold text-2xl">RELATÓRIOS</h1>
-        <h2 class="text-color-text text-xs pt-2">Visualize os dados dos relatórios fornecidos pelos técnicos.</h2>
-    </section>
+    <div>
 
-    <!--  SECTION PADRONIZANDO E CENTRALIZANDO -->
-    <section class="mt-6 pt-6 px-6 text-color-text container mx-auto">
+        <section class="mt-[72px] pt-6 px-6 text-color-text container mx-auto">
+            <h1 class="text-color-text font-bold text-2xl">RELATÓRIOS</h1>
+            <h2 class="text-color-text text-xs pt-2">Visualize os dados dos relatórios fornecidos pelos técnicos.</h2>
+        </section>
 
-        <!-- FORMULÁRIO PARA GERAR RELÁTÓRIO -->
-        <form class="flex p-6 bg-component justify-between flex-wrap gap-4 rounded-lg"  id="formularioRelatorio">
+        <!--  SECTION PADRONIZANDO E CENTRALIZANDO -->
+        <section class="mt-6 pt-6 px-6 text-color-text container mx-auto">
 
-            <!--  BOX COM OS DOIS INPUTS -->
-            <div class="flex flex-wrap gap-4 w-full lg:w-auto">
-                <!-- BOX INPUT MÊS E ANO  -->
-                <div class="flex flex-col w-full lg:w-80 gap-2">
-                    <label for="mesAno" class="font-semibold text-base uppercase">Informe o mês e o ano: </label>
-                    <input type="text" id="dataMesAno" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"  onfocus="this.type='month'" placeholder="Janeiro de 2023"    >
+            <!-- FORMULÁRIO PARA GERAR RELÁTÓRIO -->
+            <form class="flex p-6 bg-body justify-between flex-wrap gap-4 rounded-lg"  id="formularioRelatorio" autocomplete="off">
+
+                <!--  BOX COM OS DOIS INPUTS -->
+                <div class="flex flex-wrap gap-4 w-full lg:w-auto">
+                    <!-- BOX INPUT MÊS E ANO  -->
+                    <div class="flex flex-col w-full lg:w-80 gap-2">
+                        <label for="mesAno" class="font-semibold text-base uppercase">Informe o mês e o ano: </label>
+                        <input type="text" id="dataMesAno" required class="px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"  onfocus="this.type='month'" placeholder="Janeiro de 2023"    >
+                    </div>
+
+                    <!-- BOX INPUT PESQUISAR FUNCIONÁRIO -->
+                    <div class="flex flex-col w-full lg:w-80 gap-2">
+                        <label for="pesquisaFuncionario" class="font-semibold text-base uppercase">Informe o NIF do funcionário: </label>
+                        <input type="text" id="pesquisaFuncionario" required minlength="5" maxlength="7" class="px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" placeholder="Informe o NIF do funcionário: ">
+                    </div>
                 </div>
+                
 
-                <!-- BOX INPUT PESQUISAR FUNCIONÁRIO -->
-                <div class="flex flex-col w-full lg:w-80 gap-2">
-                    <label for="pesquisaFuncionario" class="font-semibold text-base uppercase">Informe o NIF do funcionário: </label>
-                    <input type="text" id="pesquisaFuncionario" required minlength="5" maxlength="7" class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" placeholder="Informe o NIF do funcionário: ">
+                <div class="flex w-full lg:w-52 items-end">
+
+                    <!-- BOTÃO -->
+                    <button id="botaoPesquisarFuncionario" type="submit" class="flex bg-component gap-5 w-full justify-center text-primary px-4 py-2 rounded-lg hover:brightness-90 transition-all">
+                        Gerar Relatório
+                        <img src="../../img/icon/library_books.svg" alt="ícone de relatório">
+                    </button>
                 </div>
-            </div>
-            
-
-            <div class="flex w-full lg:w-52 items-end">
-
-                <!-- BOTÃO -->
-                <button id="botaoPesquisarFuncionario" type="submit" class="flex bg-body gap-5 w-full justify-center text-primary px-4 py-2 rounded-lg hover:brightness-90 transition-all">
-                    Gerar Relatório
-                    <img src="../../img/icon/library_books.svg" alt="ícone de relatório">
-                </button>
-            </div>
-            </form>
-    </section>
+                </form>
+                
+                <main id="exibir" class="bg-body rounded-xl my-8 p-8 flex flex-col gap-4">
+                
+                </main>
+        </section>
+    </div>
 
 
     <!-- 
@@ -223,9 +231,22 @@
         <button id="botaoPesquisarFuncionario" type="submit" >Pesquisar</button>
      -->
 
-     <main id="exibir">
-        
-     </main>
+     <footer class="w-full bg-body text-color-text py-4">
+        <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+            </div>
+        </div>
+        <div class="text-center text-color-text-secundary text-sm mt-6">
+            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+        </div>
+    </footer>
 
 
     <script src="../../js/global.js"></script>
