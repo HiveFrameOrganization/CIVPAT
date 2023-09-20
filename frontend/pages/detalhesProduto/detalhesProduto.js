@@ -363,7 +363,7 @@ async function LancamentoHoras(){
             option.value = 0;
             option.textContent = 0;
             opcoesHoraPessoa.appendChild(option);
-            document.querySelector('#salvarHoras').classList.add('disabled');
+            document.querySelector('#salvarHoras').disabled = true;
         } else {
             for (let i = 0; i < horasRestantes; i++) {
                 let option = document.createElement('option');
