@@ -413,7 +413,7 @@ if (localStorage.getItem('cargo') == 'tec'){
             horaMaquinaDiaria: horaMaquinaDiaria
         };
 
-        console.log(dados)
+        console.log(dados);
 
         try {
             const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {

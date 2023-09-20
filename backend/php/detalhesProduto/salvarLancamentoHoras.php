@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $horaMaquinaDiaria= $dados['horaMaquinaDiaria'];
     $dataHoje = date('Y-m-d');
 
-    $stmt = $conn ->prepare("INSERT INTO CargaHoraria ( idCargaHoraria,fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUE (default,?,?,?,?,?)");
+    $stmt = $conn ->prepare("INSERT INTO CargaHoraria ( idCargaHoraria,fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (default,?,?,?,?,?)");
     $stmt-> bind_param('sssss',  $idProduto, $nifPerfil,$horaPessoaDiaria, $horaMaquinaDiaria, $dataHoje);
 
 
