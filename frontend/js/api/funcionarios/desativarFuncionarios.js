@@ -3,7 +3,7 @@ import alertas from '../../feedback.js';
 
 let modalConfirmar;
 let fecharModalConfirmar;
-let modalFade = document.querySelector('#modal-fade');
+let modalFade = document.querySelector('#modal-fade-confirmar');
 
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
@@ -17,7 +17,7 @@ async function desativarUsuario(nif) {
     let btnCancelar = document.querySelector('#btn-cancelar');
     let btnConfirmar = document.querySelector('#btn-confirmar');
 
-    toggleModalConfirmar();
+    toggleModalConfirmar(false);
 
     let confirmarInativar;
 
@@ -58,19 +58,15 @@ async function desativarUsuario(nif) {
                 console.error(erro);
             }
 
-            toggleModalConfirmar();
+            toggleModalConfirmar(true);
         }
-
-        document.body.removeChild(document.querySelector('#modal-confirmar'));
 
         window.location.reload();
     })
     
     btnCancelar.addEventListener('click', () => {
         confirmarInativar = false;
-        toggleModalConfirmar();
-
-        document.body.removeChild(document.querySelector('#modal-confirmar'));
+        toggleModalConfirmar(true);
     })
 }
 
@@ -104,9 +100,14 @@ function renderizarModalConfirmar() {
 }
 
 
-const toggleModalConfirmar = () => {
+const toggleModalConfirmar = (removerModal=true) => {
 
     [modalConfirmar, modalFade].forEach((el) => el.classList.toggle('hide'));
+
+    if (removerModal && document.querySelector('#modal-confirmar')) {
+
+        document.body.removeChild(document.querySelector('#modal-confirmar'));
+    }
 
 };
 
