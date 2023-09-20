@@ -103,6 +103,12 @@
             },
         }
     </script>
+    <!-- autenticação -->
+
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor'])
+    </script>
 </head>
 <body class="bg-body transition-colors relative text-color-text">
 
@@ -138,7 +144,7 @@
                         <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
                     </div>
                     <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
-                        <img src="../../img/icon/perfil.png" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                        <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
                         <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                             <div class="text-color-text-secundary px-4 py-2 space-y-2">
                                 <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
@@ -377,11 +383,6 @@
 
     <script type="module" src="../../js/api/cadastroUsuario/cadastroUsuario.js"></script>
 
-    <!-- autenticação -->
-
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js'
-        autenticacao(['coor'])
-    </script>
+    <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 </html>
 
