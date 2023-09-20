@@ -137,7 +137,7 @@ function colocarPagina(num) {
 async function mudarAba(filtro) {
     colocarPagina(1);
     localStorage.setItem('filtroPadraoFuncionario', filtro);
-    await retornaFuncionarios(filtro, pesquisado);
+    await retornaFuncionarios(filtro, sessionStorage.getItem('pesquisado'));
     botoesPaginacao(filtro);
 }
 
