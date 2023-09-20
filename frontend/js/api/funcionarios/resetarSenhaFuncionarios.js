@@ -27,7 +27,7 @@ async function resetarSenhaUsuario(nif) {
     
     
             // Atualizando a lista em tempo real
-            retornaFuncionarios();
+            // retornaFuncionarios();
     
             resetSenhaContainer.innerHTML = 
             '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
