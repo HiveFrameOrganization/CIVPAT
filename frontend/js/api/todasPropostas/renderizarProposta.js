@@ -4,6 +4,8 @@
 
 function exibirPropostas(propostas){
 
+    console.log(propostas)
+
     paginacao.classList.add('hidden');
 
     if (propostas) {

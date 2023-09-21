@@ -67,8 +67,6 @@ window.addEventListener('load', async function (){
 
     const dadosProduto = await carregarDetalhesProduto();  
 
-    console.log(dadosProduto);
-
     document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
     localStorage.setItem('tempoMaquina', dadosProduto['HoraMaquina']);
     document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
@@ -102,9 +100,9 @@ window.addEventListener('load', async function (){
     const idServicoCategoria = dadosProduto.fk_idServicoCategoria; 
 
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
-    for (var j = 0; j < servicoCategoriaSelect.options.length; j++) {
-        if (servicoCategoriaSelect.options[j].value == dadosProduto.fk_idServicoCategoria) {
-            servicoCategoriaSelect.options[j].selected = true;
+    for (var i = 0; i < servicoCategoriaSelect.options.length; i++) {
+        if (servicoCategoriaSelect.options[i].value == dadosProduto.fk_idServicoCategoria) {
+            servicoCategoriaSelect.options[i].selected = true;
             break; // Saia do loop após encontrar a opção desejada
         }
     }
@@ -321,10 +319,7 @@ document.getElementById('valor').addEventListener('keydown', () => {
 // });
 
 async function LancamentoHoras(){
-
-    // Pega o id do produto 
     const id = localStorage.getItem('idProduto');
-    console.log(id)
 
     try{
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
@@ -334,38 +329,37 @@ async function LancamentoHoras(){
         console.log(resposta)
 
         if (localStorage.getItem('cargo') == 'tec'){
- // PESSOAS
 
- if (resposta['horaTotalPessoa'] == undefined){
-    document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
-} else {
-    document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-}
+            // PESSOAS
 
-// verificando se existem horas acumuladas
-if (resposta['horasAcumuladasPessoa'] == undefined){
-    document.querySelector("#horasPessoaAcumuladas").value = 0;
-} else {
-    document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
-}
+            if (resposta['horaTotalPessoa'] == undefined){
+                document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
+            } else {
+                document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+            }
 
-// MAQUINAS
+            // verificando se existem horas acumuladas
+            if (resposta['horasAcumuladasPessoa'] == undefined){
+                document.querySelector("#horasPessoaAcumuladas").value = 0;
+            } else {
+                document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
+            }
 
-if (localStorage.getItem('tempoMaquina') != 0){
-    if (resposta['horaTotalMaquina'] == undefined){
-        document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
-    } else {
-        document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-    }
+            // MAQUINAS
 
-    if(resposta['horasAcumuladasMaquina'] == undefined){
-        document.querySelector("#horasMaquinaAcumuladas").value = 0;
-    } else {
-        document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
-    }
-}
+            if (localStorage.getItem('tempoMaquina') != 0){
+                if (resposta['horaTotalMaquina'] == undefined){
+                    document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+                } else {
+                    document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+                }
 
-
+                if(resposta['horasAcumuladasMaquina'] == undefined){
+                    document.querySelector("#horasMaquinaAcumuladas").value = 0;
+                } else {
+                    document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+                }
+            }
 
 
 
@@ -385,8 +379,17 @@ if (localStorage.getItem('tempoMaquina') != 0){
 
 
         if(localStorage.getItem('cargo') == 'tec'){
-            const horasRestantes = 10 - resposta.horasDiariasPessoas;
-            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+            if (resposta.horasDiariasPessoas == undefined){
+                var horasRestantes = 10 - 0;
+            } else {
+                var horasRestantes = 10 - (resposta.horasDiariasPessoas);
+            }
+
+            if (resposta.horasDiariasMaquina == undefined){
+                var horasRestantesMaquina = 10 - 0;
+            } else {
+                var horasRestantesMaquina = 10 - (resposta.horasDiariasMaquina);
+            }
     
             console.log(resposta.horasDiariasPessoas);
     
@@ -423,32 +426,21 @@ if (localStorage.getItem('tempoMaquina') != 0){
                     opcoesHoraMaquina.appendChild(option);
                 } else {
                     for (let i = -1; i < horasRestantesMaquina; i++) {
-
-            if (horasRestantesMaquina == 0) {
-                let option = document.createElement('option');
-                option.classList.add('bg-body');
-                option.value = 0;
-                option.textContent = 0;
-                opcoesHoraMaquina.appendChild(option);
-            
-
-            } else {
-               
-                    for (let i = 0; i < horasRestantesMaquina; i++) {
                         let option = document.createElement('option');
                         option.classList.add('bg-body');
                         option.value = i + 1;
                         option.textContent = i + 1;
                         opcoesHoraMaquina.appendChild(option);
-                    
+                    }
                 }
-                console.log(horasRestantesMaquina)
             }
 
             if (horasRestantes == 0){
                 document.querySelector('#salvarHoras').disabled = true;
             }
         }
+
+
     }catch (error) {
         console.error(error)
     }
@@ -461,6 +453,7 @@ if (localStorage.getItem('cargo') == 'tec'){
         const nifPerfil = localStorage.getItem('nifPerfil');
 
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+        
         if(localStorage.getItem('tempoMaquina') != 0){
             var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
         } else {
@@ -468,7 +461,6 @@ if (localStorage.getItem('cargo') == 'tec'){
         }
 
         console.log(horaMaquinaDiaria + ' horas')
-        console.log(horaPessoaDiaria + ' horas')
 
         const dados = {
             nifPerfil: nifPerfil,
@@ -512,5 +504,3 @@ if (localStorage.getItem('cargo') == 'tec'){
 
 
 /////////////////////////////
-
-
