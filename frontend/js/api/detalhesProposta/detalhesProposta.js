@@ -28,10 +28,10 @@ botaoSalvarPdf.addEventListener('click', () => {
 
     if (pdfOrcamento != null && pdfOrcamento != undefined) {
 
-        document.getElementById('inputFileUp').placeholder =  pdfOrcamento.name;
+        document.getElementById('inputFileUpOrcamento').placeholder =  pdfOrcamento.name;
     } 
     if (pdfPropostaAssinada != null && pdfPropostaAssinada != undefined) {
-        document.getElementById('inputOrcamentoo').placeholder = pdfPropostaAssinada.name;
+        document.getElementById('inputFileUpPropostaAssinada').placeholder = pdfPropostaAssinada.name;
     }
     if (pdfRelatorioFinal != null && pdfRelatorioFinal != undefined) {
         document.getElementById('inputRelatorioFinal').placeholder = pdfRelatorioFinal.name;
@@ -671,24 +671,17 @@ async function salvarMudancasNaProposta() {
 function aceitarProposta() {
     //código original michael
 
-    // const pdfOrcamento = document.getElementById('orcamento').value;
-    // const pdfPropostaAssinada = document.getElementById('propostaAssinada').value;
-    // const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
-    // const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
+    const pdfOrcamento = document.getElementById('orcamento').value;
+    const pdfPropostaAssinada = document.getElementById('propostaAssinada').value;
+    const baixarPdfOrcamento = document.getElementById('baixarOrcamento');
+    const baixarPdfPropostaAssinada = document.getElementById('baixarPropostaAssinada');
 
 
     //tentativa de conserto Robert (só mudei essa parte até "Còdigo original michael" E corrigi também no arquivo detalhesProposta.html o nome "inputFileUP de propostaAssinada e orcamento para inputFileUpPropostaAssinada, inputFileUpOrcamento").
     //para voce se lembrar michael, voce tinha colocado lá no arquivo detalhesProposta.html "inputOrcamentoo" porém, no lugar do input do propostaAssinada, ficou confuso então corrigi para os nomes no comentário acima.
    // essa tentativa de conserto não deu certo. A proposta continua sendo aceita MESMO sem os pdfs lá e o alert só aparece se voce regarregar a página manualmente.
    //observação: Verificar se os pdfs estão sendo salvos normalmente. 
-    const pdfOrcamento = document.getElementById('orcamento');
-    const pdfPropostaAssinada = document.getElementById('propostaAssinada');
-
-    if (pdfOrcamento.getAttribute("disabled") !== null || pdfPropostaAssinada.getAttribute("disabled") !== null){
-        localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'PDFs obragatórios não preenchidos');
-        alertas();
-    }
+    
 
 
 
@@ -697,16 +690,16 @@ function aceitarProposta() {
 
     //Código original michael
 
-    // if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
-    //     localStorage.setItem('status', 'error');
-    //     localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
-    //     alertas();
+    if (baixarPdfOrcamento.getAttribute("disabled") !== null || baixarPdfPropostaAssinada.getAttribute("disabled") !== null) {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
+        alertas();
 
-    // } else {
+    } else {
 
-    //     // aceitarPropostaBanco();
+        // aceitarPropostaBanco();
 
-    // }
+    }
  
  }
 
