@@ -70,7 +70,9 @@ window.addEventListener('load', async function (){
     console.log(dadosProduto);
 
     document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
+    localStorage.setItem('tempoMaquina', dadosProduto['HoraMaquina']);
     document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+    localStorage.setItem('tempoPessoa', dadosProduto['HoraPessoa']);
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
@@ -332,11 +334,41 @@ async function LancamentoHoras(){
         console.log(resposta)
 
         if (localStorage.getItem('cargo') == 'tec'){
-            // Pegar o valor do banco para mostrar no front end
-            document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-            document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-            document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
-            document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+ // PESSOAS
+
+ if (resposta['horaTotalPessoa'] == undefined){
+    document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
+} else {
+    document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+}
+
+// verificando se existem horas acumuladas
+if (resposta['horasAcumuladasPessoa'] == undefined){
+    document.querySelector("#horasPessoaAcumuladas").value = 0;
+} else {
+    document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
+}
+
+// MAQUINAS
+
+if (localStorage.getItem('tempoMaquina') != 0){
+    if (resposta['horaTotalMaquina'] == undefined){
+        document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+    } else {
+        document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+    }
+
+    if(resposta['horasAcumuladasMaquina'] == undefined){
+        document.querySelector("#horasMaquinaAcumuladas").value = 0;
+    } else {
+        document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+    }
+}
+
+
+
+
+
         } else {
             if (resposta['horasAcumuladasPessoa'] == undefined){
                 document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
@@ -353,22 +385,18 @@ async function LancamentoHoras(){
 
 
         if(localStorage.getItem('cargo') == 'tec'){
-
-            console.log(resposta)
-
-            // Para poder calcular as horas restantes no banco de horas diarias maquina/pessoa
-            const horasRestantes = 10 - Number(resposta.horasDiariasPessoas) ;
-            const horasRestantesMaquina = 10 - Number(resposta.horasDiariasMaquina);
+            const horasRestantes = 10 - resposta.horasDiariasPessoas;
+            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
     
-            console.log(resposta.horasRestantes);
-            console.log(resposta.horasRestantesMaquina);
-            
-            
+            console.log(resposta.horasDiariasPessoas);
+    
             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
     
             opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
-            opcoesHoraMaquina.innerHTML = '';
+            if (localStorage.getItem('tempoMaquina') != 0){
+                opcoesHoraMaquina.innerHTML = '';
+            }
     
             if (horasRestantes == 0) {
                 let option = document.createElement('option');
@@ -377,7 +405,7 @@ async function LancamentoHoras(){
                 option.textContent = 0;
                 opcoesHoraPessoa.appendChild(option);
             } else {
-                for (let i = 0; i < horasRestantes; i++) {
+                for (let i = -1; i < horasRestantes; i++) {
                     let option = document.createElement('option');
                     option.classList.add('bg-body');
                     option.value = i + 1;
@@ -386,6 +414,15 @@ async function LancamentoHoras(){
                 }
             }
     
+            if (localStorage.getItem('tempoMaquina') != 0){
+                if (horasRestantesMaquina == 0) {
+                    let option = document.createElement('option');
+                    option.classList.add('bg-body');
+                    option.value = 0;
+                    option.textContent = 0;
+                    opcoesHoraMaquina.appendChild(option);
+                } else {
+                    for (let i = -1; i < horasRestantesMaquina; i++) {
 
             if (horasRestantesMaquina == 0) {
                 let option = document.createElement('option');
@@ -408,7 +445,7 @@ async function LancamentoHoras(){
                 console.log(horasRestantesMaquina)
             }
 
-            if (horasRestantes == 0 && horasRestantesMaquina == 0){
+            if (horasRestantes == 0){
                 document.querySelector('#salvarHoras').disabled = true;
             }
         }
@@ -424,7 +461,11 @@ if (localStorage.getItem('cargo') == 'tec'){
         const nifPerfil = localStorage.getItem('nifPerfil');
 
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-        const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+        if(localStorage.getItem('tempoMaquina') != 0){
+            var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+        } else {
+            var horaMaquinaDiaria = 0;
+        }
 
         console.log(horaMaquinaDiaria + ' horas')
         console.log(horaPessoaDiaria + ' horas')

@@ -10,7 +10,7 @@ async function FormularioEditarUsuario(nif) {
 
     // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
     resetSenhaContainer.innerHTML = 
-    '<span id="resetarSenha" role="button" class="font-semibold text-base cursor-pointer">Resetar senha</span>';
+    '<button type="button" id="resetarSenha" role="button" class="bg-[transparent] py-2 px-6 text-color-red rounded-md text-xs font-semibold border border-color-red hover:bg-color-red hover:text-[#fff] transition-colors">Resetar senha</button>';
     /*
     --------------------------------------------------------------------------------------- 
                             RESETAR A SENHA DO USUÁRIO 
