@@ -354,7 +354,8 @@
 
             </div>`;
 
-            if (localStorage.getItem('tempoMaquina') != 0){
+            if (localStorage.getItem('tempoMaquina') != 0){ 
+
                 divHoras.innerHTML += `           
                 <div class="flex flex-col mb-8">
                     <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
@@ -380,6 +381,8 @@
                     </div>
     
                 </div>`;
+            } else {
+                divHoras.innerHTML += ``;
             }
              
             divHoras.innerHTML += `
