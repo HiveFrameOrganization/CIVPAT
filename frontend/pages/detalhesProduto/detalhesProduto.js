@@ -67,6 +67,8 @@ window.addEventListener('load', async function (){
 
     const dadosProduto = await carregarDetalhesProduto();  
 
+    console.log(dadosProduto);
+
     document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
     document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
@@ -98,9 +100,9 @@ window.addEventListener('load', async function (){
     const idServicoCategoria = dadosProduto.fk_idServicoCategoria; 
 
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
-    for (var i = 0; i < servicoCategoriaSelect.options.length; i++) {
-        if (servicoCategoriaSelect.options[i].value == dadosProduto.fk_idServicoCategoria) {
-            servicoCategoriaSelect.options[i].selected = true;
+    for (var j = 0; j < servicoCategoriaSelect.options.length; j++) {
+        if (servicoCategoriaSelect.options[j].value == dadosProduto.fk_idServicoCategoria) {
+            servicoCategoriaSelect.options[j].selected = true;
             break; // Saia do loop após encontrar a opção desejada
         }
     }
@@ -317,7 +319,10 @@ document.getElementById('valor').addEventListener('keydown', () => {
 // });
 
 async function LancamentoHoras(){
+
+    // Pega o id do produto 
     const id = localStorage.getItem('idProduto');
+    console.log(id)
 
     try{
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
@@ -327,6 +332,7 @@ async function LancamentoHoras(){
         console.log(resposta)
 
         if (localStorage.getItem('cargo') == 'tec'){
+            // Pegar o valor do banco para mostrar no front end
             document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
             document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
             document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
@@ -347,11 +353,17 @@ async function LancamentoHoras(){
 
 
         if(localStorage.getItem('cargo') == 'tec'){
-            const horasRestantes = 10 - resposta.horasDiariasPessoas;
-            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+
+            console.log(resposta)
+
+            // Para poder calcular as horas restantes no banco de horas diarias maquina/pessoa
+            const horasRestantes = 10 - Number(resposta.horasDiariasPessoas) ;
+            const horasRestantesMaquina = 10 - Number(resposta.horasDiariasMaquina);
     
-            console.log(resposta.horasDiariasPessoas);
-    
+            console.log(resposta.horasRestantes);
+            console.log(resposta.horasRestantesMaquina);
+            
+            
             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
     
@@ -374,30 +386,32 @@ async function LancamentoHoras(){
                 }
             }
     
+
             if (horasRestantesMaquina == 0) {
                 let option = document.createElement('option');
                 option.classList.add('bg-body');
                 option.value = 0;
                 option.textContent = 0;
                 opcoesHoraMaquina.appendChild(option);
+            
+
             } else {
-                if (resposta.horasDiariasMaquina != null) {
+               
                     for (let i = 0; i < horasRestantesMaquina; i++) {
                         let option = document.createElement('option');
                         option.classList.add('bg-body');
                         option.value = i + 1;
                         option.textContent = i + 1;
                         opcoesHoraMaquina.appendChild(option);
-                    }
+                    
                 }
+                console.log(horasRestantesMaquina)
             }
 
             if (horasRestantes == 0 && horasRestantesMaquina == 0){
                 document.querySelector('#salvarHoras').disabled = true;
             }
         }
-
-
     }catch (error) {
         console.error(error)
     }
@@ -413,6 +427,7 @@ if (localStorage.getItem('cargo') == 'tec'){
         const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
         console.log(horaMaquinaDiaria + ' horas')
+        console.log(horaPessoaDiaria + ' horas')
 
         const dados = {
             nifPerfil: nifPerfil,
