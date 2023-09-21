@@ -453,6 +453,7 @@ if (localStorage.getItem('cargo') == 'tec'){
         const nifPerfil = localStorage.getItem('nifPerfil');
 
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+        
         if(localStorage.getItem('tempoMaquina') != 0){
             var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
         } else {
@@ -503,5 +504,3 @@ if (localStorage.getItem('cargo') == 'tec'){
 
 
 /////////////////////////////
-
-
