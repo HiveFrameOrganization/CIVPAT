@@ -143,13 +143,17 @@ function recarregarLinhas() {
 
         // Abrir o menu específico do botão clicado, na linha
         btn.addEventListener('click', () => {
-            esconderTudo();
-
-            let linhaMenu = btn.querySelector('.option-dropdown'),
-                linha = btn.parentElement.parentElement;
             
-            linhaMenu.classList.toggle('hidden');
-            linha.classList.toggle('selected-row');
+            if (btn.querySelector('.option-dropdown').classList.contains('hidden')) {
+                // Se tiver a classe hidden, significa que o usuário quer mostrar o menu
+                esconderTudo();
+
+                btn.querySelector('.option-dropdown').classList.toggle('hidden');
+                btn.parentElement.parentElement.classList.toggle('selected-row');
+            } else {
+                // Se não tiver a classe hidden, significa que o usuário quer esconder o menu    
+                esconderTudo();
+            }
         });
     });
 }
