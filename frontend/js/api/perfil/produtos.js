@@ -188,7 +188,7 @@ function exibirProdutos(produtos) {
                     <div class="flex items-center gap-3">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap">Data final</span>
-                            <span title="${produto['DataFinal'] ? produto['DataFinal'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['DataFinal'] ? produto['DataFinal'] : 'N/A'}</span>
+                            <span title="${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}</span>
                         </div>
                     </div>
                     <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">N/A</span>
