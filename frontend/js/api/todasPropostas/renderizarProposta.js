@@ -4,6 +4,8 @@
 
 function exibirPropostas(propostas){
 
+    console.log(propostas)
+
     paginacao.classList.add('hidden');
 
     if (propostas) {
@@ -30,27 +32,27 @@ function exibirPropostas(propostas){
             if (status == 'em análise') {
                 
                 statusDescricao = 'análise';
-                statusIMG = '../../img/icon/inventory-orange.svg';
-                optionIMG = '../../img/icon/more-vertical-orange.svg';
+                optionIMG = '#fca001';
                 color = 'color-orange';
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list w-10 h-10 p-2 bg-${color}/20 rounded-md"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>`;
             } else if (status == 'declinado') {
                 
                 statusDescricao = 'declinado';
-                statusIMG = '../../img/icon/alert-circle-red.svg';
-                optionIMG = '../../img/icon/more-vertical-red.svg';
+                optionIMG = '#f54a4c';
                 color = 'color-red';
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alert-circle w-10 h-10 p-2 bg-${color}/20 rounded-md"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>`;
             } else if (status == 'aceito') {
                 
                 statusDescricao = 'aceito';
-                statusIMG = '../../img/icon/settings-green.svg';
-                optionIMG = '../../img/icon/more-vertical-green.svg';
+                optionIMG = '#24c292';
                 color = 'color-green'
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`;
             } else if (status == 'concluido') {
 
                 statusDescricao = 'concluido';
-                statusIMG = '../../img/icon/check-circle.svg';
-                optionIMG = '../../img/icon/more-vertical.svg';
+                optionIMG = '#3976d1';
                 color = 'primary'
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
             }
     
             // Inserindo o Template na linha
@@ -58,7 +60,7 @@ function exibirPropostas(propostas){
             <div class="area-left cursor-pointer flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="${statusIMG}" alt="${status}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        ${statusIMG}
                         <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -79,11 +81,11 @@ function exibirPropostas(propostas){
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
                 <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${color}/20 rounded-md relative">
-                    <img src="${optionIMG}" alt="Opções" class="option-dropdown-trigger w-full p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" alt="Opções" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-more-vertical option-dropdown-trigger w-full p-1"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                     <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                         <div itemid="${proposta['idProposta']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                             <div class="flex items-center gap-2">
-                            <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
+                            <svg xmlns="http://www.w3.org/2000/svg" alt="Visualizar" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-5 h-5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <a>
                                     Visualizar
                                 </a>

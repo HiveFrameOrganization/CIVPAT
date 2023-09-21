@@ -172,24 +172,18 @@
                     <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
                 </div>
 
-                <div class="relative w-8 h-8 rounded-full bg-component border-[1px] border-primary">
-                    <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger"
-                        class="w-full rounded-full cursor-pointer" role="button">
-
-                    <div id="profile-dropdown"
-                        class="hidden absolute z-10 top-10 right-0 w-[10rem] h-auto bg-component rounded-md border-component">
+                <div class="relative">
+                    <div class="border border-primary rounded-full bg-component w-8 h-8">
+                        <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
+                    </div>
+                    <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                            <h5 class="text-base text-color-text">Doge do Meme</h5>
-                            <a href="../perfil/index.html"
-                                class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver
-                                meu perfil</a>
+                            <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
+                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
-                            <li id="deslogar" onclick="deslogar()"
-                                class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer">
-                                <img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair
-                            </li>
+                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
@@ -451,7 +445,7 @@
                             class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
                             type="button" value="Aceitar" id="aceitarProposta">
                         <input
-                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md"
+                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md "
                             type="button" value="Editar" id="editarProposta">
                     </div>
                     <input

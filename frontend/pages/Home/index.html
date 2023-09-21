@@ -133,8 +133,10 @@
                     <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
                     <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
                 </div>
-                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
-                    <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                <div class="relative">
+                    <div class="border border-primary rounded-full bg-component w-8 h-8 overflow-hidden">
+                        <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
+                    </div>
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
@@ -161,7 +163,7 @@
             <div class="flex gap-6 flex-wrap justify-center">
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/inventory.svg" alt="Propostas em análise" class="w-8 h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas em análise" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas em análise</h5>
@@ -170,7 +172,7 @@
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/settings.svg" alt="Propostas em desenvolvimento" class="w-8 h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas aceitas" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas aceitas</h5>
@@ -179,7 +181,7 @@
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/alert-circle.svg" alt="Propostas declinadas" class="w-8 h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas declinadas" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alert-circle"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas declinadas</h5>
@@ -188,7 +190,7 @@
                 </div>
                 <div class="flex flex-grow sm:max-w-[304px] rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <img src="../../img/icon/check-circle.svg" alt="Propostas concluídas" class="w-8 h-8">
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas concluídas" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary">Propostas concluídas</h5>
