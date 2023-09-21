@@ -45,15 +45,15 @@ function verificarHoras($idProduto, $conn) {
         
 
         $dataHoje = date('Y-m-d');
-        $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ?");
-        $stmt -> bind_param('s', $dataHoje);
+        $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ? and fk_idProduto = ?");
+        $stmt -> bind_param('ss', $dataHoje, $idProduto);
         $stmt -> execute();
         $somaHoras = $stmt -> get_result();
         $somaHoras = mysqli_fetch_assoc($somaHoras);
 
         $dataHoje = date('Y-m-d');
-        $stmt = $conn -> prepare("SELECT SUM(HorasMaquina) AS somaHorasMaquina from CargaHoraria WHERE Datas = ?");
-        $stmt -> bind_param('s', $dataHoje);
+        $stmt = $conn -> prepare("SELECT SUM(HorasMaquina) AS somaHorasMaquina from CargaHoraria WHERE Datas = ? AND fk_idProduto = ?");
+        $stmt -> bind_param('ss', $dataHoje, $idProduto);
         $stmt -> execute();
         $somaHorasMaquinas = $stmt -> get_result();
         $somaHorasMaquina = mysqli_fetch_assoc($somaHorasMaquinas);
