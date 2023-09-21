@@ -21,6 +21,23 @@ imageInput.addEventListener('change', (event) => {
 
         return;
     }
+
+    console.log(imageInput.files[0].size);
+    console.log(imageInput.files[0].type);
+
+    if (imageInput.files[0].size > 1000000) {
+
+        alert('A imagem deve ser menor ou igual a 1MB!');
+
+        return;
+    }
+
+    if (imageInput.files[0].type != 'image/jpeg') {
+
+        alert('A imagem deve ser no formato JPG/JPEG');
+
+        return;
+    }
     
     let leitor = new FileReader();
 
