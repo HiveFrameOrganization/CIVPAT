@@ -10,8 +10,7 @@ window.addEventListener('load', () => {
     verificarPdfExistente(idProposta);
     carregarProdutos(idProposta);
     pegarUnidadesCriadoras();
-    alertas();
-
+    alertas();    
 })
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
@@ -114,6 +113,7 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
 
+    
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');
     const gerentes = [gerente1, gerente2]
@@ -210,6 +210,8 @@ async function verificarBancoProposta(id) {
         }
 
         localStorage.setItem('statusProposta', resposta['statusProposta']);
+        
+        desativaBotoes()
 
     } catch (error) {
         console.error(error)
@@ -350,6 +352,7 @@ function validarCNPJ(cnpj) {
 const editandoProposta = document.querySelector('#editarProposta');
 editandoProposta.addEventListener('click', () => {
 
+    
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
     if (editandoProposta.value == 'Editar') {
@@ -363,6 +366,7 @@ editandoProposta.addEventListener('click', () => {
         
         editandoProposta.value = 'Editar'
 
+        // DESATIVA OU ATIVA OS INPUTS PARA EDIÇÃO DA PROPOSTA
         for (let i = 0; i < estadoInput.length; i++) {
             estadoInput[i].setAttribute('disabled', 'true')
         }
@@ -857,3 +861,20 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
         abaResumo.classList.remove('h-0')
     }
 })
+
+// DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
+function desativaBotoes(){
+    if(localStorage.getItem('statusProposta') != 'Em Análise'){
+        editandoProposta.setAttribute('disabled', 'true')
+        editandoProposta.classList.add('disabled:opacity-20')
+        editandoProposta.classList.remove('hover:bg-btn-blue/40')
+        editandoProposta.classList.remove('cursor-pointer')
+    
+        let btnNovoProduto = document.querySelector('#btnNovoProduto')
+        btnNovoProduto.setAttribute('disabled', 'true')
+        btnNovoProduto.classList.remove('hover:outline')
+        btnNovoProduto.classList.remove('hover:text-primary')
+        btnNovoProduto.classList.remove('hover:bg-[transparent]')
+        btnNovoProduto.classList.add('disabled:opacity-20')
+    }
+}
