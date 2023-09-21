@@ -13,8 +13,8 @@ import { back } from "../Rotas/rotas.js";
 */
 
 window.addEventListener('load', ()=>{
-    buscarRelatorio(9,2023,1234560)
-    // exibirRelatorio(null)
+    // buscarRelatorio(9,2023,1234560)
+    exibirRelatorio(null)
 })
 
 
