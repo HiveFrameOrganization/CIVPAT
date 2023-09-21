@@ -26,9 +26,11 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
+    console.log(pdfOrcamento);
+
     if (pdfOrcamento != null && pdfOrcamento != undefined) {
 
-        document.getElementById('inputFileUp').placeholder =  pdfOrcamento.name;
+        document.getElementById('inputFileUpOrcamento').placeholder =  pdfOrcamento.name;
     } 
     if (pdfPropostaAssinada != null && pdfPropostaAssinada != undefined) {
         document.getElementById('inputOrcamentoo').placeholder = pdfPropostaAssinada.name;
