@@ -24,6 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $area = $data["area"];
     $nifTecnico = $data["nifTecnico"];
     $idMaquina = $data['maquina'];
+
+    $dataInicialFormatada = date("Y-m-d", strtotime($dataInicial));
+    $dataFinalFormatada = date("Y-m-d", strtotime($dataFinal));
     
 
     $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
@@ -31,6 +34,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt2->bind_param('sssssssssssi', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal, $idMaquina);
     // Executa a declaração preparada
     if ($stmt2->execute()) {
+        $stmt3 = $conn->prepare('SELECT Inicio, Fim FROM Propostas WHERE idProposta = ?');
+
+        $stmt3->bind_param('s', $idProposta);
+
+        $stmt3->execute();
+
+        $resultado = $stmt3-> get_result();
+
+        $dados = $resultado->fetch_assoc();
+
+        if ($dados['Inicio'] == null || $dataInicialFormatada < $dados['Inicio']){
+            $stmt4 = $conn->prepare('UPDATE Propostas SET Inicio = ? WHERE idProposta = ?');
+
+            $stmt4->bind_param('ss', $dataInicial, $idProposta);
+
+            $stmt4->execute();
+        }
+
+        if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
+            $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
+
+            $stmt5->bind_param('ss', $dataFinal, $idProduto);
+
+            $stmt5->execute();
+        }
+
+
 
         // Resposta a ser retronada para o servidor
         $resposta = [

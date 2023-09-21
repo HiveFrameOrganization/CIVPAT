@@ -25,6 +25,8 @@ botaoSalvarPdf.addEventListener('click', () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
+    console.log(pdfOrcamento);
+
     if (pdfOrcamento != null && pdfOrcamento != undefined) {
 
         document.getElementById('inputFileUpOrcamento').placeholder =  pdfOrcamento.name;
