@@ -11,21 +11,22 @@ require_once '../../../database/conn.php';
 
 function verificarHoras($idProduto, $conn) {
     
+
+    //Seleciona tudo que esta na tabela CargaHoraria, junto do NIF do usuario responsável pelo produto
     $stmt = $conn -> prepare ("SELECT CargaHoraria.*, `Usuarios`.`NIF`, `Produtos`.*
     FROM CargaHoraria
     INNER JOIN Usuarios ON `Usuarios`.`NIF` = `CargaHoraria`.`fk_nifTecnico`
     INNER JOIN Produtos ON `Produtos`.`idProduto` = `CargaHoraria`.`fk_idProduto`
     WHERE  fk_idProduto = ?");
-
     $stmt -> bind_param('s', $idProduto);
     $stmt -> execute();
     $resultado = $stmt -> get_result();
 
-    $datas = date('y-m-d');
-
+   
     if ($resultado -> num_rows > 0){
         $dados = mysqli_fetch_assoc($resultado);
 
+        //Somar as horas acomuladas da pessoa 
         $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasAcumuladasPessoa 
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
@@ -34,7 +35,7 @@ function verificarHoras($idProduto, $conn) {
         $horasTotalPessoa = $stmt -> get_result();
         $horasAcumuladasPessoa = mysqli_fetch_assoc($horasTotalPessoa);
         
-
+        //Somar a horas acomuladas da máquina
         $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS horasAcumuladasMaquina
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
@@ -44,6 +45,7 @@ function verificarHoras($idProduto, $conn) {
         $horasAcumuladasMaquina = mysqli_fetch_assoc($horasTotalMaquina);
         
 
+        //Somar as horas diarias do tecnico para não ultrapassar de 10 horas
         $dataHoje = date('Y-m-d');
         $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ? and fk_idProduto = ?");
         $stmt -> bind_param('ss', $dataHoje, $idProduto);
@@ -51,6 +53,7 @@ function verificarHoras($idProduto, $conn) {
         $somaHoras = $stmt -> get_result();
         $somaHoras = mysqli_fetch_assoc($somaHoras);
 
+        //Somar as horas diarias da máquina
         $dataHoje = date('Y-m-d');
         $stmt = $conn -> prepare("SELECT SUM(HorasMaquina) AS somaHorasMaquina from CargaHoraria WHERE Datas = ? AND fk_idProduto = ?");
         $stmt -> bind_param('ss', $dataHoje, $idProduto);
@@ -59,6 +62,8 @@ function verificarHoras($idProduto, $conn) {
         $somaHorasMaquina = mysqli_fetch_assoc($somaHorasMaquinas);
 
 
+
+        //Passar as informações como objeto para o front
         $resposta = [
             "horaTotalPessoa" => $dados['HoraPessoa'],
             "horaTotalMaquina" => $dados['HoraMaquina'],

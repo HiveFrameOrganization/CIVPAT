@@ -14,12 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Tranformar o Corpo JSON em um objeto PHP
     $dados = json_decode($json, true);
 
+    //Pega as infromações para serem passadas para o banco
     $nifPerfil = $dados['nifPerfil'];
     $idProduto = $dados['id'] ;
     $horaPessoaDiaria= $dados['horaPessoaDiaria'] ;
     $horaMaquinaDiaria= $dados['horaMaquinaDiaria'];
     $dataHoje = date('Y-m-d');
 
+
+    
     $stmt = $conn ->prepare("INSERT INTO CargaHoraria ( idCargaHoraria,fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (default,?,?,?,?,?)");
     $stmt-> bind_param('sssss',  $idProduto, $nifPerfil,$horaPessoaDiaria, $horaMaquinaDiaria, $dataHoje);
 
