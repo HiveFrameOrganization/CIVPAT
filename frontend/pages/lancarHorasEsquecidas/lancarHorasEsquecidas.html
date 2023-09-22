@@ -170,27 +170,43 @@
         <section class="container mx-auto px-6">
             <div class="mb-8">
                 <h1 class="text-2xl font-bold">LANÇAR HORAS ESQUECIDAS</h1>
-                <h2 class="text-xs font-normal">Registre horas para técnicos</h2>
+                <h2 class="text-xs font-normal">Registre horas de produtos para técnicos</h2>
             </div>
         </section>
         <section class="bg-component">
             <div class="container mx-auto px-6 py-12">
-                <div class="bg-body py-4 px-4 md:px-8 rounded-md">
+                <div class="bg-body py-4 px-4 md:px-8 md:py-8 rounded-md">
                     <div id="search-bar" class="space-y-2">
                         <label for="pesquisaNif" class="font-semibold text-base">INFORME O NIF DO FUNCIONÁRIO</label>
                         <div class="flex">
-                            <input type="text" id="pesquisaNif" name="pesquisaNif" placeholder="Informe o NIF do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-l-md outline-none text-base font-normal focus:border-primary transition-all">
+                            <input type="text" id="pesquisaNif" name="pesquisaNif" placeholder="Informe o NIF do funcionário" required class="w-full sm:max-w-[245px] px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-l-md outline-none text-base font-normal focus:border-primary valid:bg-primary/20 transition-all">
                             <div id="pesquisar" class="p-2 bg-component rounded-r-md border cursor-pointer border-[transparent] hover:border-primary transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" alt="Pesquisar"  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                             </div>
                         </div>
                     </div>
-                    <div id="produtosDoTecnico">
-                    </div>
                 </div>
-            </div>
+                <div id="produtosDoTecnico" role="table" class="bg-body mt-8 py-4 px-4 md:px-8 md:py-8 rounded-md space-y-1 min-h-[40vh] flex flex-col justify-center">
+                </div>
         </section>
     </main>
+
+    <footer class="w-full bg-body text-color-text py-4">
+        <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            </div>
+            <div class="flex flex-col items-center gap-3">
+                <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
+                <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">
+                <img src="../../img/icon/isi.png" alt="Logo do Instituto Senai de Inovação" class="w-32 h-8">
+            </div>
+        </div>
+        <div class="text-center text-color-text-secundary text-sm mt-6">
+            <span>&copy; COPYRIGHT 2023  MADE BY HIVEFRAME</span>
+        </div>
+    </footer>
 
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
