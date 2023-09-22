@@ -885,43 +885,64 @@ function desativaBotoes(){
 
 function avisoData(res){
     
-    let alertaData = document.querySelector('#alertaData')
-    let date = new Date()
-    date = date.toLocaleDateString()
-    
-    // SALVANDO DATAS EM OBEJETOS PARA SEREM CONSUMIDAS E SAPARADAS FUTURAMENTE
-    const dataAtual={
-        dia: date[0].toString() + date[1].toString(),
-        mes: date[3].toString() + date[4].toString(),
-        ano: date[8].toString() + date[9].toString()
-    }
-    const dataFinal={
-        dia: res[8].toString() + res[9].toString(),
-        mes: res[5].toString() + res[6].toString(),
-        ano: res[2].toString() + res[3].toString()
-    }
-    
-    if(dataAtual.ano == dataFinal.ano || dataAtual.mes == dataFinal.mes){
+    if(res == null){
+        console.log('nenhum produto cadastrado!')
+    }else{
 
-        let mesAtual = new Date(dataAtual.ano, dataAtual.mes, 0)
-        mesAtual = mesAtual.getDate()
-
-        // dias que faltam para o final do mes
-        console.log(mesAtual - dataAtual.dia)
-        // let diasRestantes = mesAtual - dataAtual.dia
+        let alertaData = document.querySelector('#alertaData')
+        let date = new Date()
+        date = date.toLocaleDateString()
         
-        // console.log(diasRestantes)
-
-        // if(mesAtual - dataAtual.dia > 10){
-            
-        // }
-
+        // SALVANDO DATAS EM OBEJETOS PARA SEREM CONSUMIDAS E SAPARADAS FUTURAMENTE
+        const dataAtual={
+            dia: date[0].toString() + date[1].toString(),
+            mes: date[3].toString() + date[4].toString(),
+            ano: date[8].toString() + date[9].toString()
+        }
+        const dataFinal={
+            dia: res[8].toString() + res[9].toString(),
+            mes: res[5].toString() + res[6].toString(),
+            ano: res[2].toString() + res[3].toString()
+        }
+        
+        // VERIFICA SE ESTA NO MESMO ANO
+        if(dataAtual.ano == dataFinal.ano){
+    
+            // VERIFICA SE ESTA NO MESMO MES
+            if(dataAtual.mes == dataFinal.mes){
+                
+                // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
+                if(dataAtual.dia - dataFinal.dia <= 10){
+                    // AVISO QUE ESTA PROXIMO HA DATA FINAL
+                    alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dias para o final da proposta'
+                    alertaData.classList.add('text-color-orange')
+                    alertaData.classList.add('bg-color-orange/20')
+                }else{
+                    alertaData.innerHTML ='proposta atrasada em '+ (dataFinal.dia - dataAtual.dia) +' dias'
+                    alertaData.classList.add('text-color-red')
+                    alertaData.classList.add('bg-color-red/20')
+                }
+            }else{
+                
+                // SALVA QUANTIDADE DE DIAS DO MES
+                let mesAtual = new Date(dataAtual.ano, dataAtual.mes, 0)
+                mesAtual = mesAtual.getDate()
+                
+                // calcula dias que faltam para o final do mes com base no dia atual
+                let diasRestantesMes = mesAtual - dataAtual.dia
+                
+                if(diasRestantesMes < 10){
+                    console.log('MENOS de 10 dias para o fim do mes!')
+                    
+                    // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
+                    if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){
+                        alertaData.innerHTML ='faltam '+ (diasRestantesMes + parseInt(dataFinal.dia)) +' dias para o final da proposta'
+                        alertaData.classList.add('text-color-orange')
+                        alertaData.classList.add('bg-color-orange/20')
+                    }
+                }
+            }
+        
+        }
     }
-
-    // alertaData.innerHTML = `${res[8]} ${res[9]}`
-    // alertaData.innerHTML = res
-
-    // console.log(res)
-    // console.log('dataAtual: '+ dataFinal.ano)
-
 }

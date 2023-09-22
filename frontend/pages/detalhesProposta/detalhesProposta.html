@@ -29,6 +29,7 @@
                 --btn-green: 36 194 146;
                 --btn-blue: 57 118 209;
                 --btn-red: 245 74 76;
+                --orange: 252 160 1;
             }
 
             @media (prefers-color-scheme: light) {
@@ -110,6 +111,7 @@
                     'btn-green': 'rgb(var(--btn-green) / <alpha-value>)',
                     'btn-blue': 'rgb(var(--btn-blue) / <alpha-value>)',
                     'btn-red': 'rgb(var(--btn-red) / <alpha-value>)',
+                    'color-orange': 'rgb(var(--orange) / <alpha-value>)'
                 }
             },
         }
@@ -228,7 +230,7 @@
         <div id="detalhesProposta" class="bg-component pb-12">
 
             <div class="container mx-auto px-6">
-                <h2 class="nomeAba uppercase text-2xl font-bold py-8 mx-auto flex items-center">detalhes da proposta <span id="alertaData" class="text-base ml-4 bg-primary/20 px-4"></span></h2>
+                <h2 class="nomeAba uppercase text-2xl font-bold py-8 mx-auto flex items-center">detalhes da proposta <span id="alertaData" class="text-xs ml-4 px-4 py-1 rounded-lg"></span></h2>
 
                 <!-- Campos que ficaram as informaçoes -->
                 <div class="abaInfo bg-body px-6 pt-7 rounded-xl flex flex-col gap-10 container mx-auto">
