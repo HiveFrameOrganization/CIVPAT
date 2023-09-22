@@ -379,6 +379,8 @@ async function LancamentoHoras(){
 
 
         if(localStorage.getItem('cargo') == 'tec'){
+
+            //Condicionais para gerar os botões com as opções de lançamento de horas dependendo da hora trabalhada
             if (resposta.horasDiariasPessoas == undefined){
                 var horasRestantes = 10 - 0;
             } else {
@@ -448,6 +450,8 @@ async function LancamentoHoras(){
 }
 
 if (localStorage.getItem('cargo') == 'tec'){
+
+    //Ao clicar no botão, sera acionada a função para salvar os dados no back
     const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
         const id = localStorage.getItem('idProduto');
         const nifPerfil = localStorage.getItem('nifPerfil');
@@ -459,8 +463,6 @@ if (localStorage.getItem('cargo') == 'tec'){
         } else {
             var horaMaquinaDiaria = 0;
         }
-
-        console.log(horaMaquinaDiaria + ' horas')
 
         const dados = {
             nifPerfil: nifPerfil,
@@ -481,7 +483,8 @@ if (localStorage.getItem('cargo') == 'tec'){
             });
 
             const resposta = await requisicao.json();
-            // Faça algo com a resposta, se necessário.
+        
+        
             console.log(resposta)
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
@@ -495,12 +498,8 @@ if (localStorage.getItem('cargo') == 'tec'){
         
         } catch (error) {
             console.error(error);
-            // Trate o erro adequadamente, se necessário.
+          
         }
 })};
-
-
-
-
 
 /////////////////////////////
