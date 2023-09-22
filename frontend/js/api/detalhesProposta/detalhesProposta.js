@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
     verificarPdfExistente(idProposta);
     carregarProdutos(idProposta);
     pegarUnidadesCriadoras();
-    alertas();    
+    alertas();
 })
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
@@ -170,7 +170,7 @@ async function verificarBancoProposta(id) {
         sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
 
         console.log(resposta['Gerentes']);
-
+        avisoData(resposta.dataUltimoProduto);
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
@@ -879,4 +879,49 @@ function desativaBotoes(){
         btnNovoProduto.classList.remove('hover:bg-[transparent]')
         btnNovoProduto.classList.add('disabled:opacity-20')
     }
+}
+
+// EXIBIR ALERTA SE ESTA PERTO DA DATA FINAL
+
+function avisoData(res){
+    
+    let alertaData = document.querySelector('#alertaData')
+    let date = new Date()
+    date = date.toLocaleDateString()
+    
+    // SALVANDO DATAS EM OBEJETOS PARA SEREM CONSUMIDAS E SAPARADAS FUTURAMENTE
+    const dataAtual={
+        dia: date[0].toString() + date[1].toString(),
+        mes: date[3].toString() + date[4].toString(),
+        ano: date[8].toString() + date[9].toString()
+    }
+    const dataFinal={
+        dia: res[8].toString() + res[9].toString(),
+        mes: res[5].toString() + res[6].toString(),
+        ano: res[2].toString() + res[3].toString()
+    }
+    
+    if(dataAtual.ano == dataFinal.ano || dataAtual.mes == dataFinal.mes){
+
+        let mesAtual = new Date(dataAtual.ano, dataAtual.mes, 0)
+        mesAtual = mesAtual.getDate()
+
+        // dias que faltam para o final do mes
+        console.log(mesAtual - dataAtual.dia)
+        // let diasRestantes = mesAtual - dataAtual.dia
+        
+        // console.log(diasRestantes)
+
+        // if(mesAtual - dataAtual.dia > 10){
+            
+        // }
+
+    }
+
+    // alertaData.innerHTML = `${res[8]} ${res[9]}`
+    // alertaData.innerHTML = res
+
+    // console.log(res)
+    // console.log('dataAtual: '+ dataFinal.ano)
+
 }

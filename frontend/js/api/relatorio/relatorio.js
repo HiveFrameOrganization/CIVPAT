@@ -17,6 +17,7 @@ window.addEventListener('load', ()=>{
     exibirRelatorio(null)
 })
 
+let exibir = document.querySelector('#exibir')
 
 async function buscarRelatorio(mes, ano, valor = false) {
 
@@ -31,8 +32,20 @@ async function buscarRelatorio(mes, ano, valor = false) {
         console.log(resposta);
         exibirRelatorio(resposta)
 
+        // VERIFICA SE NIF DIGITADO É VALIDO
+        if(resposta.status == 'error'){
+            exibir.innerHTML = `
+            <div class='flex flex-col justify-center items-center gap-4'>
+            <img src="../../img/icon/emergency.svg" alt="emergencia">
+            <h2 class='font-bold'>NIF INVÁLIDO</h2>
+            <p>Informe o NIF pertencente a um técnico do isi!</p>
+            </div>
+            `
+        }
+
     } catch (error) {
         console.error(error);
+
     }
 
 }
@@ -93,7 +106,15 @@ formularioRelatorio.addEventListener('submit', async evento => {
     // Conferindo a data mínima
     if (dataMaxima(mes, ano)) {
 
-        console.log(`Data Incorreta`);
+        // console.log(`Data Incorreta`);
+
+        exibir.innerHTML = `
+        <div class='flex flex-col justify-center items-center gap-4'>
+        <img src="../../img/icon/emergency.svg" alt="emergencia">
+        <h2 class='font-bold'>DATA INVÁLIDA</h2>
+        <p>Informe datas anteriores ao mês atual!</p>
+        </div>
+        `
 
         return;
     }
@@ -105,7 +126,6 @@ formularioRelatorio.addEventListener('submit', async evento => {
 
 // FUNÇÃO DE EXIBIR RELATORIO NA TELA
 async function exibirRelatorio(res){
-    let exibir = document.querySelector('#exibir')
     
     exibir.innerHTML = ''
 
@@ -166,7 +186,7 @@ async function exibirRelatorio(res){
 
                     <div class='border-[gray] px-8 flex flex-col gap-2'>
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
-                    <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de hotas no mês</p>
+                    <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
                     `
 
