@@ -1,9 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
 
-window.addEventListener('load', () => {
-    alertas();
-})
 
 // Controlar o Upload de images
 
@@ -24,9 +21,7 @@ imageInput.addEventListener('change', (event) => {
 
     if (imageInput.files[0].size > 1000000) {
 
-        // alert('A imagem deve ser menor ou igual a 1MB!');
-
-        localStorage.setItem('status', 'warning');
+        localStorage.setItem('status', 'info');
         localStorage.setItem('mensagem', 'A imagem deve ser menor ou igual a 1MB!');
         alertas();
 
@@ -35,7 +30,9 @@ imageInput.addEventListener('change', (event) => {
 
     if (imageInput.files[0].type != 'image/jpeg') {
 
-        alert('A imagem deve ser no formato JPG/JPEG');
+        localStorage.setItem('status', 'info');
+        localStorage.setItem('mensagem', 'A imagem deve ser no formato JPG/JPEG!');
+        alertas();
 
         return;
     }
@@ -75,9 +72,5 @@ async function salvarFotoPerfil () {
     localStorage.setItem('status', resposta.status);
     localStorage.setItem('mensagem', resposta.mensagem);
 
-    if (resposta.status == 'error') {
-        alertas();
-    } else {
-        window.location.href = '../../pages/perfil/index.html';
-    }
+    alertas();
 }
