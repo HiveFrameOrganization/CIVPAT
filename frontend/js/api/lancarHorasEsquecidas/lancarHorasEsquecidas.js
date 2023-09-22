@@ -1,48 +1,8 @@
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
-const botaoPesquisar = document.getElementById('pesquisar');
 
-botaoPesquisar.addEventListener('click', () => {
-    puxarProdutosDoTecnico();
-    
-})
-
-async function puxarProdutosDoTecnico () {
-    const nif = document.getElementById('pesquisaNif').value;
-
-    const requisicao = await fetch (back + `/lancarHorasEsquecidas/carregarProdutosDoTecnico.php?nif=${nif}`);
-
-    const resposta = await requisicao.json();
-
-    console.log(resposta);
-
-    const divProdutos = document.getElementById('produtosDoTecnico');
-    // Loop pela lista
-    for (var i = 0; i < resposta.length; i++) {
-        // Cria um elemento de botão
-        var botao = document.createElement("button");
-
-        // Define o texto do botão como o valor atual da lista
-        botao.textContent = resposta[i]['idProduto'];
-        botao.value = resposta[i]['idProduto'];
-        botao.setAttribute('id', 'produto');   
-
-        // Adiciona o evento de clique ao botão
-        botao.addEventListener("click", function() {
-            // Quando o botão é clicado, exibe o valor no console.log
-            localStorage.setItem('idProduto', this.value);
-
-            window.location.href = '../detalhesProdutoParaLancarHora/DetalhesProdutoParaLancarHora.html';
-        });
-        
-
-        // Adiciona o botão à div
-        divProdutos.appendChild(botao);
-    }
-
-}
-
-const botaoLancarHora = document.getElementById('lancarhora');
+const botaoLancarHora = document.getElementById('lancarHoras');
 
 botaoLancarHora.addEventListener('click', () => {
     lancarHoraParaOTecnico();
@@ -52,26 +12,44 @@ botaoLancarHora.addEventListener('click', () => {
 async function lancarHoraParaOTecnico () {
     const horaPessoa = document.getElementById('horaPessoaInput').value;
     const horaMaquina = document.getElementById('horaMaquinaInput').value;
-    // const nifTecnico = 
+    const nifTecnico = document.getElementById('tecnicos').value;
+    const idProduto = localStorage.getItem('idProduto');
     
     const dataLancamento = document.getElementById('dataDoLancamento').value;
 
-    const dadosEnviados = {
-        horaPessoa: (horaPessoa == null) ? 0 : horaPessoa ,
-        horaMaquina: (horaMaquina == null) ? 0 : horaMaquina,
-        dataLancamento: dataLancamento,
+    if (horaPessoa == 0 && horaMaquina == 0){
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Não pode lançar horas zeradas para os 2 campos');
 
+        alertas();
+    } else {
+        const dadosEnviados = {
+            horaPessoa: (horaPessoa == null) ? 0 : horaPessoa ,
+            horaMaquina: (horaMaquina == null) ? 0 : horaMaquina,
+            dataLancamento: dataLancamento,
+            nifTecnico : nifTecnico,
+            idProduto: idProduto
+        }
+    
+        const requisicao = await fetch (back + '/lancarHorasEsquecidas/lancarHorasEsquecidas.php', {
+            method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dadosEnviados)
+        });
+    
+        const resposta = await requisicao.json();
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+    
+        if (resposta.status == 'success'){
+            window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
+        } else {
+            alertas();
+        }
 
     }
 
-    const requisicao = await fetch (back + '/lancarHorasEsquecidas/lancarHorasEsquecidas.php', {
-        method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dadosEnviados)
-    });
-
-    const dados = await resposta.json();
 
 }
