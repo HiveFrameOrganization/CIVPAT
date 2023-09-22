@@ -321,15 +321,41 @@
 
     </script>
 
+    <script>
+        setTimeout(teste, 200);
+
+        function teste(){
+            console.log(localStorage.getItem('tempoMaquina') + 'vtnc')
+            
+            if (localStorage.getItem('tempoMaquina') == 0){
+                document.getElementById('divMaquina').style.display = 'none';
+            } else if (localStorage.getItem('tempoMaquina') != 0) {
+                document.getElementById('divMaquina').style.display = 'block';
+            }
+        }
+    </script>
+
+    <script>
+        window.onunload = () => {
+            localStorage.removeItem('tempoMaquina');
+            divHoras.innerHTML = '';
+        }
+    </script>
 
     <!-- renderizando lançamento de horas apenas para técnicos -->
 
-    <script>
 
+
+    <script>
+        
         if ((localStorage.getItem('cargo') == 'tec')){
             const divHoras = document.getElementById('lancamentoHoras');
 
-            divHoras.innerHTML += `<div class="flex flex-col mb-8">
+            divHoras.innerHTML = '';
+
+            const divPessoa = document.createElement('div');
+
+            divPessoa.innerHTML += `<div class="flex flex-col mb-8">
                 <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS TRABALHADAS</h2>
                 <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Preenchimento obrigatório*.</strong></h3>
             </div>
@@ -353,10 +379,22 @@
                 </div>
 
             </div>`;
+             
+            const divBotao = document.createElement('div');
+
+            divBotao.innerHTML += `
+            <div>
+                <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-btn-blue/40 disabled:cursor-default">SALVAR</button>
+            </div>`;
+
+            divHoras.appendChild(divPessoa);
 
             if (localStorage.getItem('tempoMaquina') != 0){ 
 
-                divHoras.innerHTML += `           
+                const divMaquina = document.createElement('div');
+                divMaquina.id = "divMaquina";
+
+                divMaquina.innerHTML += `           
                 <div class="flex flex-col mb-8">
                     <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
                     <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Informe apenas se houve uso da máquina.</strong></h3>
@@ -381,14 +419,12 @@
                     </div>
     
                 </div>`;
-            } else {
-                divHoras.innerHTML += ``;
-            }
-             
-            divHoras.innerHTML += `
-            <div>
-                <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-btn-blue/40 disabled:cursor-default">SALVAR</button>
-            </div>`;
+
+                divHoras.appendChild(divMaquina);
+            } 
+
+            divHoras.appendChild(divBotao);
+
         }
 
     </script>
