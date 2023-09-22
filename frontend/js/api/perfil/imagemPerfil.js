@@ -22,12 +22,13 @@ imageInput.addEventListener('change', (event) => {
         return;
     }
 
-    console.log(imageInput.files[0].size);
-    console.log(imageInput.files[0].type);
-
     if (imageInput.files[0].size > 1000000) {
 
-        alert('A imagem deve ser menor ou igual a 1MB!');
+        // alert('A imagem deve ser menor ou igual a 1MB!');
+
+        localStorage.setItem('status', 'warning');
+        localStorage.setItem('mensagem', 'A imagem deve ser menor ou igual a 1MB!');
+        alertas();
 
         return;
     }
