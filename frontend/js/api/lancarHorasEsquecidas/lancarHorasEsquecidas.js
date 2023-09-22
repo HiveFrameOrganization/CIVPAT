@@ -10,7 +10,7 @@ botaoPesquisar.addEventListener('click', () => {
 async function puxarProdutosDoTecnico () {
     const nif = document.getElementById('pesquisaNif').value;
 
-    const requisicao = await fetch (back + `/lancarHorasEsquecidas/lancarHorasEsquecidas.php?nif=${nif}`);
+    const requisicao = await fetch (back + `/lancarHorasEsquecidas/carregarProdutosDoTecnico.php?nif=${nif}`);
 
     const resposta = await requisicao.json();
 
@@ -39,5 +39,39 @@ async function puxarProdutosDoTecnico () {
         // Adiciona o botão à div
         divProdutos.appendChild(botao);
     }
+
+}
+
+const botaoLancarHora = document.getElementById('lancarhora');
+
+botaoLancarHora.addEventListener('click', () => {
+    lancarHoraParaOTecnico();
+})
+
+
+async function lancarHoraParaOTecnico () {
+    const horaPessoa = document.getElementById('horaPessoaInput').value;
+    const horaMaquina = document.getElementById('horaMaquinaInput').value;
+    // const nifTecnico = 
+    
+    const dataLancamento = document.getElementById('dataDoLancamento').value;
+
+    const dadosEnviados = {
+        horaPessoa: (horaPessoa == null) ? 0 : horaPessoa ,
+        horaMaquina: (horaMaquina == null) ? 0 : horaMaquina,
+        dataLancamento: dataLancamento,
+
+
+    }
+
+    const requisicao = await fetch (back + '/lancarHorasEsquecidas/lancarHorasEsquecidas.php', {
+        method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dadosEnviados)
+    });
+
+    const dados = await resposta.json();
 
 }
