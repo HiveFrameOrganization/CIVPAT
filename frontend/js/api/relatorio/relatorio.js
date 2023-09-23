@@ -38,7 +38,7 @@ async function buscarRelatorio(mes, ano, valor = false) {
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
             <h2 class='font-bold'>NIF INVÁLIDO</h2>
-            <p>Informe o NIF pertencente a um técnico do isi!</p>
+            <p>Informe o NIF pertencente a um técnico do ISI!</p>
             </div>
             `
         }

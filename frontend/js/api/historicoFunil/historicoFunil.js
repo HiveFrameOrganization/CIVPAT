@@ -13,28 +13,57 @@ fetch(back + `/historico/pegarHistoricoFunil.php?idProposta=${idProposta}`, {met
 .then(data => {
     // Loop para criar os ps
     data.forEach((historico) => {
-        const statusAtualP = document.createElement('p');
-        const statusAnteriorP = document.createElement('p');
-        const dataInicialP = document.createElement('p');
-        const dataFinalP = document.createElement('p');
-        const dataDiferencaP = document.createElement('p');
 
         let dataInicial = new Date(historico[2]);
         let dataFinal = new Date(historico[3]);
         // Calcule a diferença em dias
         let diferencaEmDias = (dataFinal - dataInicial) / (1000 * 60 * 60 * 24);
 
-        statusAtualP.textContent = "Status Atual: " + historico[0];
-        statusAnteriorP.textContent = "Status Anterior: " + historico[1];
-        dataInicialP.textContent = "Data Inicial: " + historico[2];
-        dataFinalP.textContent = "Data Final: " + historico[3]; // Adiciona o texto do p (Para poder ser visto na tela)
-        dataDiferencaP.textContent = "Diferença de Datas: " + diferencaEmDias + " dias";
+        // criando os cards
 
-        div.appendChild(statusAtualP); // Adiciona o p à div
-        div.appendChild(statusAnteriorP);
-        div.appendChild(dataInicialP);
-        div.appendChild(dataFinalP);
-        div.appendChild(dataDiferencaP);
+        const card = document.createElement('div');
+
+        card.innerHTML += `
+        <div id="cardHistorico" class="rounded-lg w-60 bg-primary h-auto text-[#fff] ml-2 mt-2">
+                            
+            <div class="bg-[#285292] w-full py-3 rounded-t-lg text-center">
+                <h1 class="font-bold">INTERVALO</h1>
+                <p class="text-sm text-[#c5c5c5]">${diferencaEmDias} dias</p>
+            </div>
+
+            <div class="px-6 py-4 gap-4 flex flex-col">
+
+                <div class="flex flex-col gap-4 text-center">
+                    <div>
+                        <h3 class="text-sm font-semibold">Data inicial:</h3>
+                        <p class="text-sm text-[#c5c5c5]">${historico[2]}</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-semibold">Data final:</h3>
+                        <p class="text-sm text-[#c5c5c5]">${historico[3]}</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-4 text-center">
+                    <div>
+                        <h3 class="text-sm font-semibold">Status anterior:</h3>
+                        <p class="text-sm text-[#c5c5c5] uppercase">${historico[1]}</p>
+                    </div>
+
+                    <div class="pl-[2px]">
+                        <h3 class="text-sm font-semibold">Status atual:</h3>
+                        <p class="text-sm text-[#c5c5c5] uppercase">${historico[0]}</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>`
+
+        // adicionando o card à tabela
+
+        div.appendChild(card);
     });
 })
 .catch(error => {
