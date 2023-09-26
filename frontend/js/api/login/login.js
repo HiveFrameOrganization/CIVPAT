@@ -42,6 +42,7 @@ async function login(email, senha) {
         localStorage.setItem('mensagem', resposta.mensagem);
         localStorage.setItem('cargo', resposta.cargo);
         localStorage.setItem('nifPerfil', resposta.nif);
+        localStorage.setItem('nomeLogin', resposta.nome);
 
 
         // // Verificando se o login for true

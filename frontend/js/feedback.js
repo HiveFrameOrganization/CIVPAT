@@ -15,8 +15,7 @@ export default function alertas () {
         const status = localStorage.getItem('status');
         const mensagem = localStorage.getItem('mensagem');
 
-        localStorage.removeItem('status');
-        localStorage.removeItem('mensagem');
+        setTimeout(removerLocalStorage, 1000);
         
         Toast.fire({
             icon: status,
@@ -27,3 +26,11 @@ export default function alertas () {
       }
     
 } 
+
+
+
+function removerLocalStorage(){
+  
+  localStorage.removeItem('status');
+  localStorage.removeItem('mensagem');
+}

@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Produtos` (
   `HoraMaquina` INT NOT NULL,
   `DataInicial` DATE NOT NULL,
   `DataFinal` DATE NOT NULL,
+  `Situacao` ENUM("Em andamento", "Concluido"),
   PRIMARY KEY (`idProduto`),
   INDEX `fk_Produtos_ServicoCategoria1_idx` (`fk_idServicoCategoria` ASC) VISIBLE,
   INDEX `fk_Produtos_NomeProduto1_idx` (`fk_idNomeProduto` ASC) VISIBLE,

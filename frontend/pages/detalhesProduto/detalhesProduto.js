@@ -15,6 +15,10 @@ if (dia < 10) {
     dia = '0' + dia;
 };
 
+window.addEventListener('load', () => {
+    alertas();
+})
+
 // Não permitir que marque uma data depois de hoje.
 const dataMaxima = `${ano}-${mes}-${dia}`;
 document.getElementById('dataInicial').setAttribute('min', dataMaxima);
@@ -43,6 +47,7 @@ async function carregarTecnicos () {
 
     const resposta = await requisicao.json();
 
+
     const opcoesTecnicos = document.getElementById('tecnicos');
 
     for (var i = 0; i < resposta.length; i++) {
@@ -56,6 +61,7 @@ async function carregarTecnicos () {
     }
 
 }
+
 window.addEventListener('load', async function (){
     carregarTecnicos();
     pegarUnidadesCriadoras();
@@ -67,6 +73,15 @@ window.addEventListener('load', async function (){
 
     const dadosProduto = await carregarDetalhesProduto();  
 
+    const opcoesTecnicos = document.getElementById('tecnicos');
+    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+    for (var j = 0; j < opcoesTecnicos.options.length; j++) {
+        if (opcoesTecnicos.options[j].value == dadosProduto['fk_nifTecnico']) {
+            opcoesTecnicos.options[j].selected = true;
+            break; // Saia do loop após encontrar a opção desejada
+        }
+    }
+
     document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
     localStorage.setItem('tempoMaquina', dadosProduto['HoraMaquina']);
     document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
@@ -74,6 +89,7 @@ window.addEventListener('load', async function (){
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
+    document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
 
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
@@ -86,8 +102,6 @@ window.addEventListener('load', async function (){
         localStorage.setItem('maquina', 'Nenhuma')
     }
 
-
-    console.log(dadosProduto);
 
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
     for (var i = 0; i < unidadeCriadoraSelect.options.length; i++) {
@@ -152,6 +166,8 @@ document.getElementById("servico").addEventListener("change", async function() {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await requisicao.json();
 
+
+
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -187,6 +203,8 @@ async function carregarDetalhesProduto() {
 
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
+
+    console.log(dados);
 
 
     return dados[0];
@@ -306,7 +324,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
 document.getElementById('valor').addEventListener('keydown', () => {
 
     const valorInserido = document.getElementById('valor').value;
-    console.log('oi')
+    
     if (valorInserido > 99999999.99){
         alert('Valor Máximo digitado');
         const inputValor = document.getElementById('valor').value = '';
@@ -325,8 +343,6 @@ async function LancamentoHoras(){
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
         const resposta = await exibirHoras.json();
-
-        console.log(resposta)
 
         if (localStorage.getItem('cargo') == 'tec'){
 
@@ -393,8 +409,7 @@ async function LancamentoHoras(){
                 var horasRestantesMaquina = 10 - (resposta.horasDiariasMaquina);
             }
     
-            console.log(resposta.horasDiariasPessoas);
-    
+ 
             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
     
@@ -471,7 +486,7 @@ if (localStorage.getItem('cargo') == 'tec'){
             horaMaquinaDiaria: horaMaquinaDiaria
         };
 
-        console.log(dados);
+  
 
         try {
             const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
@@ -485,7 +500,7 @@ if (localStorage.getItem('cargo') == 'tec'){
             const resposta = await requisicao.json();
         
         
-            console.log(resposta)
+
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
 
@@ -501,5 +516,27 @@ if (localStorage.getItem('cargo') == 'tec'){
           
         }
 })};
+
+const botaoFinalizarProduto = document.getElementById('concluirProduto');
+
+botaoFinalizarProduto.addEventListener('click', () => {
+    concluirProduto();
+})
+
+async function concluirProduto() {
+
+    const idProduto = localStorage.getItem('idProduto');
+
+    const requisicao = await fetch(back + `/detalhesProduto/concluirProduto.php?id=${idProduto}`, {
+        method: 'PUT'
+    });
+
+    const resposta = await requisicao.json();
+
+    localStorage.setItem('status', resposta.status);
+    localStorage.setItem('mensagem', resposta.mensagem);
+
+
+}
 
 /////////////////////////////

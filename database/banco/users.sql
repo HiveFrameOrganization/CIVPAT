@@ -63,7 +63,7 @@ CREATE USER 'tec'@'172.20.0.3' IDENTIFIED BY '3HY1O9%g5YrcAVu4cVR#';
 GRANT SELECT ON `isihiveframe`.`Propostas` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`ServicoCategoria` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`NomeProduto` TO 'tec'@'172.20.0.3';
-GRANT SELECT ON `isihiveframe`.`Produtos` TO 'tec'@'172.20.0.3';
+GRANT SELECT, UPDATE ON `isihiveframe`.`Produtos` TO 'tec'@'172.20.0.3';
 GRANT SELECT, UPDATE ON `isihiveframe`.`Usuarios` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
 -- e só poderá inserir ou alterar na tabela Carga Horária

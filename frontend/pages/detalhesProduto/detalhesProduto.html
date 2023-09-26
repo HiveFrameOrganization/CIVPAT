@@ -76,6 +76,7 @@
             },
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -126,7 +127,7 @@
                     <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
                 </div>
                 <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
-                    <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full rounded-full cursor-pointer" role="button">
+                    <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 class="text-base text-color-text whitespace-nowrap">Doge do Meme</h5>
@@ -272,11 +273,19 @@
                         <label class="text-color-text-secundary font-semibold">DATA DE TÉRMINO</label>
                         <input type="date" id="dataFinal" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer" required>
                     </div>
+
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="text-color-text-secundary font-semibold">SITUAÇÂO</label>
+                        <input type="text" id="situacaoProduto" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " disabled>
+                    </div>
                 </div>
                 
-                <div class="flex flex-col sm:flex-row mt-2">
+                <div class="flex flex-col sm:flex-row mt-2 justify-between">
                     <div class="flex gap-5 flex-col sm:flex-row" id="botaoSalvar">
                         
+                    </div>
+                 
+                        <button id="concluirProduto" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-btn-blue/40 disabled:cursor-default">FINALIZAR</button>
                     </div>
                 </div>
                 
