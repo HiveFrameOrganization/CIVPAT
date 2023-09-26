@@ -173,6 +173,7 @@ async function verificarBancoProposta(id) {
         console.log(resposta['Gerentes']);
         // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR SE PROPOSTA ESTA PERTO DA DATA DE ACABAR OU ATRASADA
         avisoData(resposta.dataUltimoProduto);
+        console.log(resposta)
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
         // na hora do update
