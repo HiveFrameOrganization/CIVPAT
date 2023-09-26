@@ -170,6 +170,7 @@ async function verificarBancoProposta(id) {
         sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
 
         console.log(resposta['Gerentes']);
+        // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR SE PROPOSTA ESTA PERTO DA DATA DE ACABAR OU ATRASADA
         avisoData(resposta.dataUltimoProduto);
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
@@ -395,6 +396,8 @@ async function carregarProdutos(idProposta) {
        
         // console.log(resposta.produtos)
         exibirProdutos(resposta.produtos);
+        // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR QUANTOS PRODUTOS ESTÃO CADASTRADOS
+        contadorProdutos(resposta.produtos)
 
     
     } catch (error) {
@@ -946,5 +949,14 @@ function avisoData(res){
         }
     }else{
         console.log('Proposta concluida ou declinada')
+    }
+}
+
+// RETORNA QUANTOS PRODUTOS ESTAO CADASTRADOS NA PROPOSTA E QUANTOS ESTÃO CONCLUIDOS
+// FUNCIONALIDADE DE CONCLUIR PROPOSTA AINDA NAO FUNCIONAL
+function contadorProdutos(e){
+    if(e.length > 0){
+        document.querySelector('#quantProduto').innerHTML = `0/${e.length} produtos concluidos`
+
     }
 }
