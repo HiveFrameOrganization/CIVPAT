@@ -170,6 +170,7 @@ async function verificarBancoProposta(id) {
         sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
 
         console.log(resposta['Gerentes']);
+        // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR SE PROPOSTA ESTA PERTO DA DATA DE ACABAR OU ATRASADA
         avisoData(resposta.dataUltimoProduto);
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
@@ -395,6 +396,8 @@ async function carregarProdutos(idProposta) {
        
         // console.log(resposta.produtos)
         exibirProdutos(resposta.produtos);
+        // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR QUANTOS PRODUTOS ESTÃO CADASTRADOS
+        contadorProdutos(resposta.produtos)
 
     
     } catch (error) {
@@ -887,7 +890,7 @@ function avisoData(res){
     
     if(res == null){
         console.log('nenhum produto cadastrado!')
-    }else{
+    }else if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Aceito'){
 
         let alertaData = document.querySelector('#alertaData')
         let date = new Date()
@@ -912,15 +915,15 @@ function avisoData(res){
             if(dataAtual.mes == dataFinal.mes){
                 
                 // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
-                if(dataAtual.dia - dataFinal.dia <= 10){
+                if(dataFinal.dia - dataAtual.dia <= 10 && Math.sign(dataFinal.dia - dataAtual.dia) != -1){
                     // AVISO QUE ESTA PROXIMO HA DATA FINAL
                     alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dias para o final da proposta'
                     alertaData.classList.add('text-color-orange')
                     alertaData.classList.add('bg-color-orange/20')
                 }else{
-                    alertaData.innerHTML ='proposta atrasada em '+ (dataFinal.dia - dataAtual.dia) +' dias'
-                    alertaData.classList.add('text-color-red')
-                    alertaData.classList.add('bg-color-red/20')
+                    alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dias'
+                    alertaData.classList.add('text-btn-red')
+                    alertaData.classList.add('bg-btn-red/20')
                 }
             }else{
                 
@@ -944,5 +947,16 @@ function avisoData(res){
             }
         
         }
+    }else{
+        console.log('Proposta concluida ou declinada')
+    }
+}
+
+// RETORNA QUANTOS PRODUTOS ESTAO CADASTRADOS NA PROPOSTA E QUANTOS ESTÃO CONCLUIDOS
+// FUNCIONALIDADE DE CONCLUIR PROPOSTA AINDA NAO FUNCIONAL
+function contadorProdutos(e){
+    if(e.length > 0){
+        document.querySelector('#quantProduto').innerHTML = `0/${e.length} produtos concluidos`
+
     }
 }
