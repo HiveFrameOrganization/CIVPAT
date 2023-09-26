@@ -14,7 +14,7 @@ function retornaFuncionarios($conn)
     $numPagina = $_GET['pag'];
     $qtdFuncionariosTela = 5;
     $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
-    $valor = $_GET['pesq'];
+    $valor = '%' . $_GET['pesq'] . '%';
     
     // if ($filtro == ''){
     // preparando a query
@@ -55,8 +55,7 @@ function retornaFuncionarios($conn)
         'status' => 'success',
         'mensagem' => 'Usuários retornados com sucesso',
         'usuarios' => $usuarios,
-        'qtdBotoes' => $qtdBotoes,
-        'teste' => $_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim'
+        'qtdBotoes' => $qtdBotoes
     ];
 
 

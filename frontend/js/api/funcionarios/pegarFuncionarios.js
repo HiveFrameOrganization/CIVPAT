@@ -3,7 +3,7 @@ import exibir from './renderizarTelaFuncionarios.js';
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios(filtro, pesquisado) {
-    const pesquisa = '%' + document.querySelector('#pesquisarUsuario').value + '%';
+    const pesquisa = document.querySelector('#pesquisarUsuario').value;
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
         sessionStorage.setItem('paginaFun', 1)
