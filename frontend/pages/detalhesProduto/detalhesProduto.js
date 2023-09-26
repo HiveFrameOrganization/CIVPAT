@@ -536,6 +536,9 @@ async function concluirProduto() {
     localStorage.setItem('status', resposta.status);
     localStorage.setItem('mensagem', resposta.mensagem);
 
+    if (resposta.status == 'success'){
+        window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
+    }
 
 }
 

@@ -114,6 +114,7 @@ async function selecionarGerente(id) {
 
 
     const resposta = await requisicao.json();
+    console.log(resposta);
 
     
     const gerente1 = document.querySelector('#primeiroGerente');

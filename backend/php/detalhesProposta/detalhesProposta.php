@@ -58,6 +58,13 @@ function verificarDetalhes($idProposta, $conn) {
             $resultadoValorTotal = $stmt-> get_result();
             $dadosValorTotal = mysqli_fetch_assoc($resultadoValorTotal);
 
+            $situacao = 'Concluido';
+            $stmt = $conn->prepare('SELECT COUNT(idProduto) AS Concluidos FROM Produtos WHERE fk_idProposta = ? AND Situacao = ?');
+            $stmt->bind_param('ss', $idProposta, $situacao);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+            $dadosProdutosConcluidos = $resultado->fetch_assoc();
+
             //Buscando os valores dos responsáveis por cadastrar a proposta
             $stmt = $conn->prepare("SELECT GerenteResponsavel.*, `Usuarios`.`Nome`, `Usuarios`.`NIF`
             FROM GerenteResponsavel
@@ -93,7 +100,8 @@ function verificarDetalhes($idProposta, $conn) {
                 "emailContato" => $dados['EmailRepresentante'],
                 "numeroContato" => $dados['TelefoneRepresentante'],
                 "resumo" => $dados['Resumo'],
-                "idRepresentante" => $dados['idRepresentante']
+                "idRepresentante" => $dados['idRepresentante'],
+                "produtosConcluidos" => $dadosProdutosConcluidos['Concluidos']
 
             ];
 
