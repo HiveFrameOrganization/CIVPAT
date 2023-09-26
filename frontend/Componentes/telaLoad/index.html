@@ -99,12 +99,8 @@
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js';
-        autenticacao(['coor', 'adm', 'ger', 'tec']);
-    </script>
 </head>
-<body class="bg-body transition-colors">
+<body class="bg-body transition-colors" onload="someCarregamento()">
     <div id="fade" class="hide transition-opacity"></div>
     <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
@@ -148,14 +144,20 @@
         </div>
     </header>
 
-    <script src="../../js/themeSwitch/index.js"></script>
 
     <main class="mt-[72px] py-6 text-color-text">
-        <aside class="fixed w-full h-screen top-0 z-50 bg-component flex justify-center items-center">
-            <div class="animaLogo">
-                <img src="../../img/icon/logo.svg" alt="logo" class="w-40 animate-spin">
+        <aside id="carregamento" class="fixed w-full h-screen top-0 z-50 bg-component flex justify-center items-center">
+            <div class="animaLogo animate-spin block sm:hidden"> 
+                <img src="../../img/icon/logo.svg" alt="logo" class="w-40">
             </div>
-            <a href="#" class="animaTexto text-primary font-semibold text-6xl" >HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            <div class="animaLogo hidden sm:block"> 
+                <img src="../../img/icon/logo.svg" alt="logo" class="w-40">
+            </div>
+
+            <div class=" flex flex-col items-center relative">
+                <a href="#" class="animaTexto text-primary font-semibold text-6xl" >HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                <p class="animaCarregando fixed sm:absolute top-[65vh] sm:top-20 w-full text-center left-0">Carregando</p>
+            </div>
         </aside>
     </main>
 
@@ -176,19 +178,9 @@
         </div>
     </footer>
 
+    <script src="../../js/themeSwitch/index.js"></script>
     <script src="script.js"></script>
-    <script src="./index.js"></script>
     <script src="../../js/global.js"></script>
     <script src="../../js/logoff.js"></script>
-    <script type="module" src="../../js/feedback.js"></script>
-    <script type="module" src="../../js/api/cadastroProposta/cadastroProposta.js"></script>
-    <script type="module" src="../../js/api/todasPropostas/todasPropostas.js"></script>
-    <script type="module">
-        import alertas from '../../js/feedback.js';
-
-        window.addEventListener('load', () => {
-            alertas();
-        })
-    </script>
 </body>
 </html>
