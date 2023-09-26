@@ -958,6 +958,6 @@ function avisoData(res){
 function contadorProdutos(e){
     if(e.length > 0){
         document.querySelector('#quantProduto').innerHTML = `0/${e.length} produtos concluidos`
-
+        console.log(e)
     }
 }

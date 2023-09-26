@@ -1,35 +1,81 @@
-.animaLogo{
-    animation: logo 1s;
-    /* animation: logo2 1s ease-in-out infinite; */
+.animaTexto{
+    display: none;
 }
 
-.animaTexto{
-    animation: texto 1s;
+.animaCarregando{
+    animation: apareceCarregamento 3s;
+}
+
+.animaCarregando::after{
+    content: '';
+    animation: carregamento 1s ease infinite;
+}
+
+@media (min-width: 640px){
+    .animaLogo{
+        position: absolute;
+        animation: logo 1s ease reverse;
+        margin-right: 500px;
+        /* animation: logo2 1s ease-in-out reverse; */
+    }
+    .animaTexto{
+        display: block;
+        animation: texto 1.5s;
+    }
+}
+
+@keyframes apareceCarregamento {
+    0%{
+        opacity: 0;
+    }
+    10%{
+        opacity: 0;
+    } 
+    20%{
+        opacity: 0;
+    }
+    30%{
+        opacity: 0;
+    }
+    40%{
+        opacity: 0;
+    }  
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes carregamento {
+    0%{
+        content: "";
+    }
+    30%{
+        content: ".";
+    }
+    60%{
+        content: "..";
+    }
+    100%{
+        content: "...";
+    }
 }
 
 @keyframes logo {
     0%{
-        margin-left: 200px;
-    }
-    100%{
-        margin-left: 0px;
-    }
-}
-
-@keyframes logo2 {
-    0%{
+        margin-right: 500px;
         rotate: 0deg;
     }
-    50%{
-        rotate: 180deg;       
-    }
     100%{
-        rotate: 360deg;
+        margin-right: 0px;
+        rotate: 180deg;
     }
 }
 
 @keyframes texto {
     0%{
+        opacity: 0;
+    }
+    50%{
         opacity: 0;
     }
     100%{
