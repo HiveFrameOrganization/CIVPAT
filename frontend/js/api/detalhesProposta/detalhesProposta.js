@@ -887,7 +887,7 @@ function avisoData(res){
     
     if(res == null){
         console.log('nenhum produto cadastrado!')
-    }else{
+    }else if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Aceito'){
 
         let alertaData = document.querySelector('#alertaData')
         let date = new Date()
@@ -912,15 +912,15 @@ function avisoData(res){
             if(dataAtual.mes == dataFinal.mes){
                 
                 // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
-                if(dataAtual.dia - dataFinal.dia <= 10){
+                if(dataFinal.dia - dataAtual.dia <= 10 && Math.sign(dataFinal.dia - dataAtual.dia) != -1){
                     // AVISO QUE ESTA PROXIMO HA DATA FINAL
                     alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dias para o final da proposta'
                     alertaData.classList.add('text-color-orange')
                     alertaData.classList.add('bg-color-orange/20')
                 }else{
-                    alertaData.innerHTML ='proposta atrasada em '+ (dataFinal.dia - dataAtual.dia) +' dias'
-                    alertaData.classList.add('text-color-red')
-                    alertaData.classList.add('bg-color-red/20')
+                    alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dias'
+                    alertaData.classList.add('text-btn-red')
+                    alertaData.classList.add('bg-btn-red/20')
                 }
             }else{
                 
@@ -944,5 +944,7 @@ function avisoData(res){
             }
         
         }
+    }else{
+        console.log('Proposta concluida ou declinada')
     }
 }
