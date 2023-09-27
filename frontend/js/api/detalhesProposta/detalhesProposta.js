@@ -174,7 +174,7 @@ async function verificarBancoProposta(id) {
 
         console.log(resposta['Gerentes']);
         // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR SE PROPOSTA ESTA PERTO DA DATA DE ACABAR OU ATRASADA
-        avisoData(resposta.dataUltimoProduto);
+        avisoData(resposta);
         console.log(resposta)
 
         // loop para criar variáveis no localstorage que guardam os nifs dos gerentes para a comparação
@@ -413,12 +413,12 @@ async function carregarProdutos(idProposta) {
 async function exibirProdutos(produtos) {
     // selecionando a div dos botões
     const botoes = document.getElementById('propostas');
-
     // limpando os possíveis elementos que possam estar na div
     // propostas.innerHTML = '';
-
+    
     for (let produto of produtos) {
-
+        console.log(produto['Situacao'])
+        
         const divRow = document.createElement('div');
         
         divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors cursor-pointer';
@@ -494,6 +494,8 @@ async function exibirProdutos(produtos) {
                             </div>
                         </div>
                     </div>
+
+                    <span class="${produto['Situacao'] == 'Concluido' ? 'bg-primary/20 text-primary' : 'bg-color-orange/20 text-color-orange'} rounded-md font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${produto['Situacao']}</span>
             </div>`
           
 
@@ -888,12 +890,11 @@ function desativaBotoes(){
 }
 
 // EXIBIR ALERTA SE ESTA PERTO DA DATA FINAL
-
 function avisoData(res){
     
-    if(res == null){
+    if(res.dataUltimoProduto == null){
         console.log('nenhum produto cadastrado!')
-    }else if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Aceito'){
+    }else if(res.statusProposta == 'Em Análise' || res.statusProposta == 'Aceito'){
 
         let alertaData = document.querySelector('#alertaData')
         let date = new Date()
@@ -906,9 +907,9 @@ function avisoData(res){
             ano: date[8].toString() + date[9].toString()
         }
         const dataFinal={
-            dia: res[8].toString() + res[9].toString(),
-            mes: res[5].toString() + res[6].toString(),
-            ano: res[2].toString() + res[3].toString()
+            dia: res.dataUltimoProduto[8].toString() + res.dataUltimoProduto[9].toString(),
+            mes: res.dataUltimoProduto[5].toString() + res.dataUltimoProduto[6].toString(),
+            ano: res.dataUltimoProduto[2].toString() + res.dataUltimoProduto[3].toString()
         }
         
         // VERIFICA SE ESTA NO MESMO ANO
@@ -942,7 +943,7 @@ function avisoData(res){
                     
                     // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
                     if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){
-                        alertaData.innerHTML ='faltam '+ (diasRestantesMes + parseInt(dataFinal.dia)) +' dias para o final da proposta'
+                        alertaData.innerHTML ='faltam '+ (diasRestantesMes + parseInt(dataFinal.dia)) +' dia(s) para o final da proposta'
                         alertaData.classList.add('text-color-orange')
                         alertaData.classList.add('bg-color-orange/20')
                     }
