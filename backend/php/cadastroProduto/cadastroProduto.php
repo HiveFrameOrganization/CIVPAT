@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dataFinal = $data["dataFinal"];
     $idProposta = intval($data["idProposta"]);
     $servico = intval($data["servico"]);
-    $idProduto = $data["produto"];
+    $idProduto = intval($data["produto"]) ;
     $valor = floatval($data["valor"]);
     $area = $data["area"];
     $nifTecnico = $data["nifTecnico"];
@@ -35,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt2->bind_param('sssssssssssis', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal, $idMaquina, $situacao);
     // Executa a declaração preparada
     if ($stmt2->execute()) {
+        $idNovoProduto = $conn->insert_id;
         $stmt3 = $conn->prepare('SELECT Inicio, Fim FROM Propostas WHERE idProposta = ?');
 
         $stmt3->bind_param('s', $idProposta);
@@ -56,10 +57,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
             $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
 
-            $stmt5->bind_param('ss', $dataFinal, $idProduto);
+            $stmt5->bind_param('ss', $dataFinal, $idProposta);
 
             $stmt5->execute();
         }
+
+        $horaPessoa = 0;
+        $horaMaquina = 0;
+        $dataDeHoje = date("Y-m-d");
+        
+
+        $stmt6 = $conn->prepare('INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (?, ?, ?, ?, ?)');
+        $stmt6->bind_param('isiis', $idNovoProduto, $nifTecnico, $horaPessoa, $horaMaquina, $dataDeHoje);
+        $stmt6->execute();
 
 
 
