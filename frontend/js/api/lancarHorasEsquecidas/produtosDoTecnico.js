@@ -51,6 +51,17 @@ async function puxarProdutosDoTecnico () {
             
             console.log(resposta[i]);
 
+            let statusIMG;
+            let color;
+            let optionIMG;
+    
+            if (resposta[i]['situacao'].toLowerCase() == 'em andamento') {
+                
+                optionIMG = '#24c292';
+                color = 'color-green';
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${resposta[i]['situacao']}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>`;
+            } 
+            
             let div = document.createElement('div');
 
             div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
@@ -59,7 +70,7 @@ async function puxarProdutosDoTecnico () {
             <div class="area-left flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto cursor-pointer">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="../../img/icon/inventory.svg" alt="Em análise" class="w-10 h-10 p-2 bg-primary/20 rounded-md">
+                        ${statusIMG}
                         <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
                             <span title="${resposta[i]['NomeProduto'] ? resposta[i]['NomeProduto'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${resposta[i]['NomeProduto'] ? resposta[i]['NomeProduto'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
@@ -76,7 +87,7 @@ async function puxarProdutosDoTecnico () {
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Área</span>
-                            <span title="${resposta[i]['Area'] ? resposta[i]['Area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${resposta[i]['Area'] ? resposta[i]['Area'] : 'N/A'}</span>
+                            <span title="${resposta[i]['area'] ? resposta[i]['area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${resposta[i]['area'] ? resposta[i]['area'] : 'N/A'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
@@ -85,12 +96,12 @@ async function puxarProdutosDoTecnico () {
                             <span title="${resposta[i]['DataFinal'] ? resposta[i]['DataFinal'].split('-').reverse().join('/') : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${resposta[i]['DataFinal'] ? resposta[i]['DataFinal'].split('-').reverse().join('/') : 'N/A'}</span>
                         </div>
                     </div>
-                    <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">N/A</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">${resposta[i]['situacao'] ? resposta[i]['situacao'] : 'N/A'}</span>
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-6 p-1 bg-primary/20 rounded-md relative">
-                    <img src="../../img/icon/more-vertical.svg" alt="Opções" class="option-dropdown-trigger w-full">
+                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${color}/20 rounded-md relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" alt="Opções" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-more-vertical option-dropdown-trigger w-full p-1"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                     <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h-auto bg-component border border-body rounded-md shadow-md">
                         <div itemid="${resposta[i]['idProduto']}" class="view-btn space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
                             <div class="flex items-center gap-2">
@@ -111,25 +122,6 @@ async function puxarProdutosDoTecnico () {
             })
 
             tabela.appendChild(div);
-
-            // var botao = document.createElement("button");
-    
-            // // Define o texto do botão como o valor atual da lista
-            // botao.textContent = resposta[i]['idProduto'];
-            // botao.value = resposta[i]['idProduto'];
-            // botao.setAttribute('id', 'produto');   
-    
-            // // Adiciona o evento de clique ao botão
-            // botao.addEventListener("click", function() {
-            //     // Quando o botão é clicado, exibe o valor no console.log
-            //     localStorage.setItem('idProduto', this.value);
-    
-            //     window.location.href = '../detalhesProdutoParaLancarHora/DetalhesProdutoParaLancarHora.html';
-            // });
-            
-    
-            // // Adiciona o botão à div
-            // divProdutos.appendChild(botao);
         }
 
         reloadLinhas();
@@ -198,6 +190,15 @@ function reloadLinhas() {
 
     getTodosBotoes();
 }
+
+// Fechar todos os menus de opções das linhas, ao clicar fora do botão
+window.addEventListener('click', (event) => {
+
+    if (!event.target.matches('.option-dropdown-trigger')) {
+
+        esconderTudo();
+    }
+});
 
 exibirAlerta(
     `
