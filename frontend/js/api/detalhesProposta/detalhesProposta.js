@@ -603,7 +603,7 @@ async function salvarMudancasNaProposta() {
     const nomeProposta = document.querySelector('#tituloProposta').value;
     const statusProposta = document.querySelector('#statusProposta').value;
     const criadorProposta = document.querySelector('#criadorProposta').value;
-    const cnpj = document.querySelector('#cnpj').value;
+    const cnpj = document.querySelector('#cnpj').value.replace(/\D/g, '');
     const cnpjString = cnpj.toString();
     const empresa = document.querySelector('#empresa').value;
     const uniCriadora = document.querySelector('#uniCriadora').value;
@@ -613,14 +613,13 @@ async function salvarMudancasNaProposta() {
     const funil = document.querySelector('#funil').value;
     const primeiroGerente = document.querySelector('#primeiroGerente').value;
     const segundoGerente = document.querySelector('#segundoGerente').value;
-    const numeroSGSET = document.querySelector('#numeroSGSET').value;
+    const numeroSGSET = document.querySelector('#numeroSGSET').value.replace(/\D/g, '');
     const nomeContato = document.querySelector('#nomeContato').value;
     const emailContato = document.querySelector('#emailContato').value;
     const numeroContato = document.querySelector('#numeroContato').value;
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
-    
     if (verificacaoDoCnpj == false) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'CNPJ inválido');

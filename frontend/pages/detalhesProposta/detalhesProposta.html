@@ -295,7 +295,7 @@
                             </label>
                             <input
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                                type="text" id="cnpj" placeholder="00.000.000/0000-00" disabled>
+                                type="text" id="cnpj" placeholder="00.000.000/0000-00" onkeypress="cpfMask()" minlength="18" maxlength="18" disabled>
                         </div>
 
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
@@ -409,7 +409,7 @@
                             </label>
                             <input
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                                type="text" id="numeroSGSET" placeholder="000-00/0000" disabled>
+                                type="text" id="numeroSGSET" placeholder="000-00/0000" onkeypress="sgsetMask()" minlength="11" maxlength="11" disabled>
                         </div>
 
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
