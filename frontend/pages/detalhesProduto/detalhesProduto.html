@@ -174,8 +174,8 @@
                     <h3 class="text-xs text-color-text pt-2">Visualize, edite ou exclua dados do produto.</h3>
                 </div>
 
-                <a href="#" onclick="window.location.replace('../detalhesProposta/detalhesProposta.html')">
-                    <button class="flex bg-primary text-[#fff] font-bold px-4 rounded-lg py-[10px] hover:outline hover:outline-1 hover:outline-primary hover:bg-component hover:text-primary">
+                <a>
+                    <button id="retornar" class="flex bg-primary text-[#fff] font-bold px-4 rounded-lg py-[10px] hover:outline hover:outline-1 hover:outline-primary hover:bg-component hover:text-primary">
                         <span class="material-symbols-outlined pr-[10px]">
                             keyboard_return
                         </span>
@@ -322,6 +322,7 @@
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 
     <script>
+        
         const botaoVoltar = document.getElementById('retornar');
 
         botaoVoltar.addEventListener('click', () => {
@@ -331,6 +332,7 @@
                 history.back();
             }
         })
+        
     </script>
 
     <script>
