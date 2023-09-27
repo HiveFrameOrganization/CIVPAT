@@ -26,9 +26,9 @@
                 --primary-color: 57 118 209;
                 --text-color: 255 255 255;
                 --text-secundary-color: 126 126 126;
-                --btn-green: 36 194 146;
-                --btn-blue: 57 118 209;
-                --btn-red: 245 74 76;
+                --red: 245 74 76;
+                --green: 36 194 146;
+                --purple: 121 80 255;
                 --orange: 252 160 1;
             }
 
@@ -63,7 +63,6 @@
             scrollbar-color: rgb(57, 118, 209) transparent;
         }
 
-
         /* Works on Chrome, Edge, and Safari */
         ::-webkit-scrollbar {
             width: 6px;
@@ -74,7 +73,7 @@
             background-color: rgb(57, 118, 209);
             border-radius: 0.375rem/* 6px */;
         }
-        
+
         #fade {
             position: fixed;
             top: 0;
@@ -82,13 +81,14 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            z-index: 25;
         }
 
         #fade.hide {
             opacity: 0;
             pointer-events: none;
         }
+
         .naoSelecionavel {
             -webkit-touch-callout: none;  /* iPhone OS, Safari */
             -webkit-user-select: none;    /* Chrome, Safari 3 */
@@ -98,6 +98,7 @@
             user-select: none;            /* Possível implementação no futuro */
             /* cursor: default; */
         }
+
     </style>
     <script>
         tailwind.config = {
@@ -108,9 +109,9 @@
                     'primary': 'rgb(var(--primary-color) / <alpha-value>)',
                     'color-text': 'rgb(var(--text-color) / <alpha-value>)',
                     'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
-                    'btn-green': 'rgb(var(--btn-green) / <alpha-value>)',
-                    'btn-blue': 'rgb(var(--btn-blue) / <alpha-value>)',
-                    'btn-red': 'rgb(var(--btn-red) / <alpha-value>)',
+                    'color-red': 'rgb(var(--red) / <alpha-value>)',
+                    'color-green': 'rgb(var(--green) / <alpha-value>)',
+                    'color-purple': 'rgb(var(--purple) / <alpha-value>)',
                     'color-orange': 'rgb(var(--orange) / <alpha-value>)'
                 }
             },
@@ -452,14 +453,14 @@
                 <div class="flex justify-between flex-col sm:flex-row mb-4">
                     <div class="flex gap-5 flex-col sm:flex-row mb-5">
                         <input
-                            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md"
+                            class="text-color-green bg-color-green/20 hover:bg-color-green/40 cursor-pointer px-12 py-2 rounded-md"
                             type="button" value="Aceitar" id="aceitarProposta">
                         <input
-                            class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md "
+                            class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md "
                             type="button" value="Editar" id="editarProposta">
                     </div>
                     <input
-                        class="text-btn-red bg-btn-red/20 hover:bg-btn-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
+                        class="text-color-red bg-color-red/20 hover:bg-color-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
                         type="button" value="Declinar" id="declinarProposta" declinarProposta()>
                 </div>
             </div>
@@ -622,7 +623,7 @@
 
 
                     <button type="button" id="botaoSalvarPdf"
-                        class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
+                        class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
                         PDF</button>
 
                 </div>
@@ -942,7 +943,7 @@
                     </select>
                     
                     <div class="flex justify-between w-full">
-                        <button class="rounded-lg text-[#fff] hover:text-primary bg-btn-red w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="paraPrimeiroModal">Voltar</button>
+                        <button class="rounded-lg text-[#fff] hover:text-primary bg-color-red w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="paraPrimeiroModal">Voltar</button>
                         <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="salvarProduto">Salvar</button>
                     </div>
                 </div>
