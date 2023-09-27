@@ -362,8 +362,8 @@ editandoProposta.addEventListener('click', () => {
     
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
-    if (editandoProposta.value == 'Editar') {
-        editandoProposta.value = 'Salvar'
+    if (editandoProposta.value == 'EDITAR') {
+        editandoProposta.value = 'SALVAR'
 
         for (let i = 0; i < estadoInput.length; i++) {
             estadoInput[i].removeAttribute('disabled')
@@ -371,7 +371,7 @@ editandoProposta.addEventListener('click', () => {
     } else {
         salvarMudancasNaProposta();
         
-        editandoProposta.value = 'Editar'
+        editandoProposta.value = 'EDITAR'
 
         // DESATIVA OU ATIVA OS INPUTS PARA EDIÇÃO DA PROPOSTA
         for (let i = 0; i < estadoInput.length; i++) {
