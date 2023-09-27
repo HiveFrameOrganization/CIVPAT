@@ -45,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
         `Usuarios`.`FotoDePerfil` FROM Propostas
         INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+        ORDER BY `Propostas`.`idProposta` DESC
         LIMIT ?, ?');
 
         $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
         `Usuarios`.`FotoDePerfil` FROM Propostas
         INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-        WHERE `Propostas`.`Status` = ?
+        WHERE `Propostas`.`Status` = ? ORDER BY `Propostas`.`idProposta` DESC
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
         $stmt->bind_param('sii', $filtros, $inicioProposta, $qtdPropostasTela);

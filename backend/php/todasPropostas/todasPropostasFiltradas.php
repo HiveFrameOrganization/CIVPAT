@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         `Usuarios`.`FotoDePerfil` FROM Propostas
         INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
         WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+        ORDER BY `Propostas`.`idProposta` DESC
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
         $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             `Usuarios`.`FotoDePerfil` FROM Propostas
             INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
             WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+            ORDER BY `Propostas`.`idProposta` DESC
             LIMIT ?, ?');
             // Limita os resultados a 10 propostas por página
             $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
@@ -70,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             `Usuarios`.`FotoDePerfil` FROM Propostas
             INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
             WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+            ORDER BY `Propostas`.`idProposta` DESC
             LIMIT ?, ?');
             // Limita os resultados a 10 propostas por página
             $stmt->bind_param('ssii', $filtroPagina, $filtro, $inicioProposta, $qtdPropostasTela);
