@@ -521,29 +521,34 @@ if (localStorage.getItem('cargo') == 'tec'){
         }
 })};
 
-const botaoFinalizarProduto = document.getElementById('concluirProduto');
+if (localStorage.getItem('cargo') == 'tec'){
 
-botaoFinalizarProduto.addEventListener('click', () => {
-    concluirProduto();
-})
-
-async function concluirProduto() {
-
-    const idProduto = localStorage.getItem('idProduto');
-
-    const requisicao = await fetch(back + `/detalhesProduto/concluirProduto.php?id=${idProduto}`, {
-        method: 'PUT'
-    });
-
-    const resposta = await requisicao.json();
-
-    localStorage.setItem('status', resposta.status);
-    localStorage.setItem('mensagem', resposta.mensagem);
-
-    if (resposta.status == 'success'){
-        window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
+    const botaoFinalizarProduto = document.getElementById('concluirProduto');
+    
+    botaoFinalizarProduto.addEventListener('click', () => {
+        concluirProduto();
+    })
+    
+    async function concluirProduto() {
+    
+        const idProduto = localStorage.getItem('idProduto');
+    
+        const requisicao = await fetch(back + `/detalhesProduto/concluirProduto.php?id=${idProduto}`, {
+            method: 'PUT'
+        });
+    
+        const resposta = await requisicao.json();
+    
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+    
+        if (localStorage.getItem('cargo') == 'tec'){
+            window.location.href = frontPages + '/perfil/index.html';
+        } else {
+            window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
+        }
+    
     }
-
 }
 
 /////////////////////////////

@@ -173,13 +173,10 @@ function reloadLinhas() {
 }
 
 function selecionarAba(filtroAoCarregarPagina) {
-    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary')
-    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-b-2')
-    document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('border-primary')
+    
+    filtroAoCarregarPagina && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
 
-    document.getElementById(`todasPropostas`).classList.remove('text-primary')
-    document.getElementById(`todasPropostas`).classList.remove('border-b-2')
-    document.getElementById(`todasPropostas`).classList.remove('border-primary')
+    document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
 }
 
 export default exibirPropostas
