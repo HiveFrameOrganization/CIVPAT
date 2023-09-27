@@ -30,12 +30,14 @@ function exibirPropostas(propostas){
             let statusDescricao;
             let data
             let corData
+            let fim = proposta['Fim']
 
             // VERIFICAR DATA DO FIM DA PROPOSTA
-            if(proposta['Fim'] == null){
+            if(fim == null || fim == undefined){
                 data = ''
-            }else if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Aceito'){
-        
+                console.log(fim)
+            }else if(proposta['Status'] == 'Em Análise' || proposta['Status'] == 'Aceito'){
+                console.log(fim)
                 let date = new Date()
                 date = date.toLocaleDateString()
                 
@@ -46,9 +48,9 @@ function exibirPropostas(propostas){
                     ano: date[8].toString() + date[9].toString()
                 }
                 const dataFinal={
-                    dia: proposta['Fim'][8].toString() + proposta['Fim'][9].toString(),
-                    mes: proposta['Fim'][5].toString() + proposta['Fim'][6].toString(),
-                    ano: proposta['Fim'][2].toString() + proposta['Fim'][3].toString()
+                    dia: fim[8].toString() + fim[9].toString(),
+                    mes: fim[5].toString() + fim[6].toString(),
+                    ano: fim[2].toString() + fim[3].toString()
                 }
                 
                 // VERIFICA SE ESTA NO MESMO ANO
@@ -88,7 +90,8 @@ function exibirPropostas(propostas){
                 
                 }
             }else{
-                console.log('Proposta concluida ou declinada')
+                // QUANDO NAO HOUVER NENHUM PRODUTO NA PROPOSTA
+                data = ''
             }
             // FIM DA VERIFICAÇAO DO FIM DA PROPOSTA
     
