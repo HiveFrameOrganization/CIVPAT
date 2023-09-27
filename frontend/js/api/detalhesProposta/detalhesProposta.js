@@ -115,6 +115,8 @@ async function selecionarGerente(id) {
 
     const resposta = await requisicao.json();
     console.log(resposta);
+    // MOSTRA QUANTIDADE DE PRODUTOS CONCLUIDOS
+    document.querySelector('#produtoConcluido').innerHTML = resposta.produtosConcluidos
 
     
     const gerente1 = document.querySelector('#primeiroGerente');
@@ -398,9 +400,9 @@ async function carregarProdutos(idProposta) {
        
         // console.log(resposta.produtos)
         exibirProdutos(resposta.produtos);
-        // ENVIANDO DADOS DA PROPOSTA PARA VERIFICAR QUANTOS PRODUTOS ESTÃO CADASTRADOS
+        // MOSTRADNDO QUANTOS PRODUTOS ESTAO CADASTRADOS NO TOTAL
+        document.querySelector('#produtoTotal').innerHTML = resposta.produtos.length
         contadorProdutos(resposta.produtos)
-
     
     } catch (error) {
         console.error(error)
@@ -919,11 +921,11 @@ function avisoData(res){
                 // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
                 if(dataFinal.dia - dataAtual.dia <= 10 && Math.sign(dataFinal.dia - dataAtual.dia) != -1){
                     // AVISO QUE ESTA PROXIMO HA DATA FINAL
-                    alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dias para o final da proposta'
+                    alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dia(s) para o final da proposta'
                     alertaData.classList.add('text-color-orange')
                     alertaData.classList.add('bg-color-orange/20')
                 }else{
-                    alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dias'
+                    alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
                     alertaData.classList.add('text-btn-red')
                     alertaData.classList.add('bg-btn-red/20')
                 }
@@ -937,7 +939,7 @@ function avisoData(res){
                 let diasRestantesMes = mesAtual - dataAtual.dia
                 
                 if(diasRestantesMes < 10){
-                    console.log('MENOS de 10 dias para o fim do mes!')
+                    console.log('MENOS de 10 dia(s) para o fim do mes!')
                     
                     // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
                     if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){
@@ -955,10 +957,16 @@ function avisoData(res){
 }
 
 // RETORNA QUANTOS PRODUTOS ESTAO CADASTRADOS NA PROPOSTA E QUANTOS ESTÃO CONCLUIDOS
-// FUNCIONALIDADE DE CONCLUIR PROPOSTA AINDA NAO FUNCIONAL
 function contadorProdutos(e){
+
+    // SE TIVER ALGUM PRODUTO CADASTRADO SERA MOSTRADO A QUANTIDADE DO TOTAL E DOS CONCLUIDOS
     if(e.length > 0){
-        document.querySelector('#quantProduto').innerHTML = `0/${e.length} produtos concluidos`
-        console.log(e)
+        document.querySelector('#contadorProdutos').classList.remove('hidden')
+        document.querySelector('#contadorProdutos').classList.add('flex')
+        document.querySelector('#quantProduto').classList.add('hidden')
+    }else{
+        document.querySelector('#contadorProdutos').classList.add('hidden')
+        document.querySelector('#contadorProdutos').classList.remove('flex')
+        document.querySelector('#quantProduto').classList.remove('hidden')
     }
 }
