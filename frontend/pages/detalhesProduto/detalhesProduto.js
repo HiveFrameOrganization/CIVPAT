@@ -429,7 +429,7 @@ async function LancamentoHoras(){
                 option.textContent = 0;
                 opcoesHoraPessoa.appendChild(option);
             } else {
-                for (let i = -1; i < horasRestantes; i++) {
+                for (let i = 0; i < horasRestantes; i++) {
                     let option = document.createElement('option');
                     option.classList.add('bg-body');
                     option.value = i + 1;
