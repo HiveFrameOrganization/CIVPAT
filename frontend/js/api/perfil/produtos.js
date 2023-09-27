@@ -22,15 +22,16 @@ const paginacao = document.querySelector('#paginacao');
 
 const table = document.querySelector('#table');
 
+if (spanProdutos) {
 
-spanProdutos.addEventListener('click', async () => {
+    spanProdutos.addEventListener('click', async () => {
     
-    sessionStorage.setItem('aba', 'produto');
-
-    location.reload();
-
-});
-
+        sessionStorage.setItem('aba', 'produto');
+    
+        location.reload();
+    
+    });
+}
 
 spanInformacoes.addEventListener('click', () => {
 
@@ -145,8 +146,7 @@ function colocarPagina(num) {
 
 function exibirProdutos(produtos) {
 
-    if (produtos) {
-
+    if (produtos.length > 0) {
 
         // Limpando a tabela
         table.innerHTML = '';
@@ -155,13 +155,11 @@ function exibirProdutos(produtos) {
 
         for (let produto of produtos) {
 
-            console.log(produto)
-
             let statusIMG;
             let color;
             let optionIMG;
     
-            if (produto['situacao'].toLowerCase() == 'em andamento') {
+            if (produto['Situacao'].toLowerCase() == 'em andamento') {
                 
                 optionIMG = '#24c292';
                 color = 'color-green';
@@ -202,7 +200,7 @@ function exibirProdutos(produtos) {
                             <span title="${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}</span>
                         </div>
                     </div>
-                    <span class="bg-primary/20 rounded-md text-primary font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">${produto['situacao'] ? produto['situacao'] : 'N/A'}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">${produto['Situacao'] ? produto['Situacao'] : 'N/A'}</span>
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
