@@ -2,6 +2,6 @@
 function someCarregamento(){
     console.log('carregou')
     setTimeout(()=> document.querySelector('#carregamento').classList.add('hidden'),
-        2000
+        1500
     )
 }

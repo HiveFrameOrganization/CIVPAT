@@ -61,10 +61,12 @@ let abaInfo = document.querySelector('.abaInfo')
 let abaPdf = document.querySelector('.abaPdf')
 let abaProdutos = document.querySelector('.abaProdutos')
 let abaFollowUp = document.querySelector('.abaFollowUp')
+let alertaData = document.querySelector('#alertaData')
 
 function funMudarAba(pag){
     // renderiza e esconde elementos dependendo de qual é clicado
     if(pag == 0){
+        alertaData.classList.remove('hidden')
         abaInfo.classList.remove('hidden')
         abaPdf.classList.add('hidden')
         abaProdutos.classList.add('hidden')
@@ -72,6 +74,7 @@ function funMudarAba(pag){
 
         nomeAba.innerHTML = 'detalhes da proposta'
     }else if(pag == 1){
+        alertaData.classList.add('hidden')
         abaPdf.classList.remove('hidden')
         abaInfo.classList.add('hidden')
         abaProdutos.classList.add('hidden')
@@ -79,6 +82,7 @@ function funMudarAba(pag){
 
         nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
     }else if(pag == 2){
+        alertaData.classList.add('hidden')
         abaFollowUp.classList.remove('hidden')
         abaPdf.classList.add('hidden')
         abaInfo.classList.add('hidden')
@@ -86,6 +90,7 @@ function funMudarAba(pag){
 
         nomeAba.innerHTML = 'TODOS OS FOLLOW-UPS'
     }else{
+        alertaData.classList.add('hidden')
         abaProdutos.classList.remove('hidden')
         abaPdf.classList.add('hidden')
         abaInfo.classList.add('hidden')

@@ -889,7 +889,6 @@ function desativaBotoes(){
 }
 
 // EXIBIR ALERTA SE ESTA PERTO DA DATA FINAL
-
 function avisoData(res){
     
     if(res == null){
@@ -943,7 +942,7 @@ function avisoData(res){
                     
                     // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
                     if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){
-                        alertaData.innerHTML ='faltam '+ (diasRestantesMes + parseInt(dataFinal.dia)) +' dias para o final da proposta'
+                        alertaData.innerHTML ='faltam '+ (diasRestantesMes + parseInt(dataFinal.dia)) +' dia(s) para o final da proposta'
                         alertaData.classList.add('text-color-orange')
                         alertaData.classList.add('bg-color-orange/20')
                     }
