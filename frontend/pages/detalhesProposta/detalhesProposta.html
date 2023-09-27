@@ -453,15 +453,17 @@
                 <div class="flex justify-between flex-col sm:flex-row mb-4">
                     <div class="flex gap-5 flex-col sm:flex-row mb-5">
                         <input
-                            class="text-color-green font-semibold bg-color-green/20 hover:bg-color-green/40 cursor-pointer px-12 py-2 rounded-md"
+                            class="bg-color-green py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors cursor-pointer"
                             type="button" value="ACEITAR" id="aceitarProposta">
                         <input
-                            class="text-primary font-semibold bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md "
+                            class="bg-primary py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors cursor-pointer"
                             type="button" value="EDITAR" id="editarProposta">
                     </div>
-                    <input
-                        class="text-color-red font-semibold bg-color-red/20 hover:bg-color-red/40 cursor-pointer px-12 py-2 h-min rounded-md"
-                        type="button" value="DECLINAR" id="declinarProposta" declinarProposta()>
+                    <div>         
+                        <input
+                            class="bg-color-red py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer"
+                            type="button" value="DECLINAR" id="declinarProposta" declinarProposta()>
+                    </div>
                 </div>
             </div>
 
