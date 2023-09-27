@@ -33,20 +33,12 @@ function verificarHoras($idProduto, $conn) {
         $horasDiarias = $stmt -> get_result();
         $totalHorasPessoaDiarias = mysqli_fetch_assoc($horasDiarias);
 
-        if($totalHorasPessoaDiarias == null){
-            $totalHorasPessoaDiarias = 0;
-        }
-
         $dataHoje = date('Y-m-d');
          $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS totalHorasMaquinaDiarias FROM CargaHoraria WHERE datas = ? and fk_nifTecnico = ?");
         $stmt -> bind_param('ss', $dataHoje, $dados['NIF']);
         $stmt -> execute();
         $horasDiarias = $stmt -> get_result();
         $totalHorasMaquinaDiarias = mysqli_fetch_assoc($horasDiarias);
-
-        if($totalHorasMaquinaDiarias == null){
-            $totalHorasMaquinaDiarias = 0;
-        }
 
 
         //Somar as horas acomuladas da pessoa 
