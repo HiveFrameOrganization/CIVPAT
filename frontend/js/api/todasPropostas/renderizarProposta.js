@@ -35,9 +35,7 @@ function exibirPropostas(propostas){
             // VERIFICAR DATA DO FIM DA PROPOSTA
             if(fim == null || fim == undefined){
                 data = ''
-                console.log(fim)
             }else if(proposta['Status'] == 'Em Análise' || proposta['Status'] == 'Aceito'){
-                console.log(fim)
                 let date = new Date()
                 date = date.toLocaleDateString()
                 
