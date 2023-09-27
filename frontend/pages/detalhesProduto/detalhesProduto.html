@@ -25,10 +25,14 @@
                 --primary-color: 57 118 209;
                 --text-color: 255 255 255;
                 --text-secundary-color: 126 126 126;
+                --btn-green: 36 194 146;
+                --btn-blue: 57 118 209;
+                --btn-red: 245 74 76;
                 --red: 245 74 76;
                 --green: 36 194 146;
                 --purple: 121 80 255;
                 --orange: 252 160 1;
+                
             }
 
             @media (prefers-color-scheme: light) {
@@ -101,7 +105,8 @@
                     'color-red': 'rgb(var(--red) / <alpha-value>)',
                     'color-green': 'rgb(var(--green) / <alpha-value>)',
                     'color-purple': 'rgb(var(--purple) / <alpha-value>)',
-                    'color-orange': 'rgb(var(--orange) / <alpha-value>)'
+                    'color-orange': 'rgb(var(--orange) / <alpha-value>)',
+                        
                 }
             },
         }
@@ -126,7 +131,7 @@
                         <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div class="mt-4 space-y-4">
-                        <a href="./index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
                             <svg xmlns="http://www.w3.org/2000/svg" alt="Visão geral" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                             Início
                         </a>
@@ -204,8 +209,8 @@
                     <h3 class="text-xs text-color-text pt-2">Visualize, edite ou exclua dados do produto.</h3>
                 </div>
 
-                <a href="#" onclick="history.back()">
-                    <button class="flex bg-primary text-[#fff] font-bold px-4 rounded-lg py-[10px] hover:outline hover:outline-1 hover:outline-primary hover:bg-component hover:text-primary">
+                <a>
+                    <button id="retornar" class="flex bg-primary text-[#fff] font-bold px-4 rounded-lg py-[10px] hover:outline hover:outline-1 hover:outline-primary hover:bg-component hover:text-primary">
                         <span class="material-symbols-outlined pr-[10px]">
                             keyboard_return
                         </span>
@@ -305,7 +310,7 @@
                     </div>
 
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text-secundary font-semibold">SITUAÇÂO</label>
+                        <label class="text-color-text-secundary font-semibold">SITUAÇÃO</label>
                         <input type="text" id="situacaoProduto" class="bg-component placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " disabled>
                     </div>
                 </div>
@@ -314,8 +319,10 @@
                     <div class="flex gap-5 flex-col sm:flex-row" id="botaoSalvar">
                         
                     </div>
+
+                    <div id="conclusao">
                  
-                        <button id="concluirProduto" class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-primary/40 disabled:cursor-default">FINALIZAR</button>
+                    
                     </div>
                 </div>
                 
@@ -351,6 +358,38 @@
 
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 
+    <!-- botao de voltar -->
+
+    <script>
+
+        const botaoVoltar = document.getElementById('retornar');
+
+        botaoVoltar.addEventListener('click', () => {
+            if (localStorage.getItem('cargo') == 'tec'){
+                window.location.href = '../perfil/index.html'
+            } else {
+                history.back();
+            }
+        })
+
+    </script>
+
+    <script>
+        if (localStorage.getItem('cargo') == 'tec'){
+            const divBotaoFinalizar = document.getElementById('conclusao');
+
+            divBotaoFinalizar.innerHTML = '';
+
+            const botaoFinalizar = document.createElement('div');
+
+            botaoFinalizar.innerHTML += `<button id="concluirProduto" class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-primary/40 disabled:cursor-default">FINALIZAR</button>`;
+
+            divBotaoFinalizar.appendChild(botaoFinalizar);
+
+            console.log('ok')
+        }
+    </script>
+
 
     <!-- renderizando campos para todos menos técnicos -->
 
@@ -377,10 +416,9 @@
     </script>
 
     <script>
-        setTimeout(teste, 200);
+        setTimeout(renderizaHoras, 300);
 
-        function teste(){
-            console.log(localStorage.getItem('tempoMaquina') + 'vtnc')
+        function renderizaHoras(){
             
             if (localStorage.getItem('tempoMaquina') == 0){
                 document.getElementById('divMaquina').style.display = 'none';
@@ -402,9 +440,12 @@
 
 
     <script>
+        setTimeout(renderizarPonto, 0)
         
-        if ((localStorage.getItem('cargo') == 'tec')){
-            const divHoras = document.getElementById('lancamentoHoras');
+        function renderizarPonto(){
+
+            if ((localStorage.getItem('cargo') == 'tec')){
+                const divHoras = document.getElementById('lancamentoHoras');
 
             divHoras.innerHTML = '';
 
@@ -412,74 +453,75 @@
 
             divPessoa.innerHTML += `<div class="flex flex-col mb-8">
                 <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS TRABALHADAS</h2>
-                <h3 class="text-xs text-color-text pt-2"><strong class="text-[color-red]">Preenchimento obrigatório*.</strong></h3>
-            </div>
-
-            <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
-                
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA TOTAIS</label>
-                    <input type="text" id="horasPessoa" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Preenchimento obrigatório*.</strong></h3>
                 </div>
-
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS TRABALHADAS*</label>
-                    <select type="number" id="horaPessoaDiaria" min="1" max="10" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
-                    </select>
-                </div>
-
-                <div class="flex flex-col gap-2 w-full">
-                    <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
-                    <input type="text" id="horasPessoaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
-                </div>
-
-            </div>`;
-             
-            const divBotao = document.createElement('div');
-
-            divBotao.innerHTML += `
-            <div>
-                <button id="salvarHoras" class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-primary/40 disabled:cursor-default">SALVAR</button>
-            </div>`;
-
-            divHoras.appendChild(divPessoa);
-
-            if (localStorage.getItem('tempoMaquina') != 0){ 
-
-                const divMaquina = document.createElement('div');
-                divMaquina.id = "divMaquina";
-
-                divMaquina.innerHTML += `           
-                <div class="flex flex-col mb-8">
-                    <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
-                    <h3 class="text-xs text-color-text pt-2"><strong class="text-[color-red]">Informe apenas se houve uso da máquina.</strong></h3>
-                </div>
-            
-                <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
     
+                <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
+                    
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TOTAIS</label>
-                        <input type="text" id="horasMaquina" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA TOTAIS</label>
+                        <input type="text" id="horasPessoa" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                     </div>
     
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TRABALHADAS</label>
-                        <select type="number" id="horaMaquinaDiaria" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full disabled:bg-primary/10 disabled:text-color-text/60 maquina">
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS TRABALHADAS*</label>
+                        <select type="number" id="horaPessoaDiaria" min="1" max="10" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" required>
                         </select>
                     </div>
     
                     <div class="flex flex-col gap-2 w-full">
-                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
-                        <input type="text" id="horasMaquinaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                        <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
+                        <input type="text" id="horasPessoaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
                     </div>
     
                 </div>`;
+                 
+                const divBotao = document.createElement('div');
 
-                divHoras.appendChild(divMaquina);
-            } 
+                divBotao.innerHTML += `
+                <div>
+                    <button id="salvarHoras" class="text-btn-blue bg-btn-blue/20 hover:bg-btn-blue/40 cursor-pointer px-12 py-2 rounded-md disabled:bg-btn-blue/40 disabled:cursor-default">SALVAR</button>
+                </div>`;
 
-            divHoras.appendChild(divBotao);
+                divHoras.appendChild(divPessoa);
 
+                if (localStorage.getItem('tempoMaquina') != 0){ 
+
+                    const divMaquina = document.createElement('div');
+                    divMaquina.id = "divMaquina";
+
+                    divMaquina.innerHTML += `           
+                    <div class="flex flex-col mb-8">
+                        <h2 class="text-2xl font-bold text-color-text">LANÇAMENTO DE HORAS-MÁQUINA TRABALHADAS</h2>
+                        <h3 class="text-xs text-color-text pt-2"><strong class="text-[red]">Informe apenas se houve uso da máquina.</strong></h3>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row gap-4 lg:gap-12 mb-12">
+
+                        <div class="flex flex-col gap-2 w-full">
+                            <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TOTAIS</label>
+                            <input type="text" id="horasMaquina" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                        </div>
+
+                        <div class="flex flex-col gap-2 w-full">
+                            <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA TRABALHADAS</label>
+                            <select type="number" id="horaMaquinaDiaria" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full disabled:bg-primary/10 disabled:text-color-text/60 maquina">
+                            </select>
+                        </div>
+
+                        <div class="flex flex-col gap-2 w-full">
+                            <label class="text-color-text font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
+                            <input type="text" id="horasMaquinaAcumuladas" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                        </div>
+
+                    </div>`;
+
+                    divHoras.appendChild(divMaquina);
+                } 
+
+                divHoras.appendChild(divBotao);
+
+                }
         }
 
     </script>
@@ -508,7 +550,7 @@
             const divBotao = document.getElementById('botaoSalvar');
             
             divBotao.innerHTML += `<input 
-            class="text-color-green bg-color-green/20 hover:bg-color-green/40 cursor-pointer px-12 py-2 rounded-md" 
+            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md" 
             type="button" id="modificarProduto" value="SALVAR">`;
         }
 
