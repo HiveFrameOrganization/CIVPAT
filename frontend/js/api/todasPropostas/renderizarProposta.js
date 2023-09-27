@@ -28,6 +28,69 @@ function exibirPropostas(propostas){
             let color;
             let optionIMG;
             let statusDescricao;
+            let data
+            let corData
+
+            // VERIFICAR DATA DO FIM DA PROPOSTA
+            if(proposta['Fim'] == null){
+                data = ''
+            }else if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Aceito'){
+        
+                let date = new Date()
+                date = date.toLocaleDateString()
+                
+                // SALVANDO DATAS EM OBEJETOS PARA SEREM CONSUMIDAS E SAPARADAS FUTURAMENTE
+                const dataAtual={
+                    dia: date[0].toString() + date[1].toString(),
+                    mes: date[3].toString() + date[4].toString(),
+                    ano: date[8].toString() + date[9].toString()
+                }
+                const dataFinal={
+                    dia: proposta['Fim'][8].toString() + proposta['Fim'][9].toString(),
+                    mes: proposta['Fim'][5].toString() + proposta['Fim'][6].toString(),
+                    ano: proposta['Fim'][2].toString() + proposta['Fim'][3].toString()
+                }
+                
+                // VERIFICA SE ESTA NO MESMO ANO
+                if(dataAtual.ano == dataFinal.ano){
+            
+                    // VERIFICA SE ESTA NO MESMO MES
+                    if(dataAtual.mes == dataFinal.mes){
+                        
+                        // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
+                        if(dataFinal.dia - dataAtual.dia <= 10 && Math.sign(dataFinal.dia - dataAtual.dia) != -1){
+                            // AVISO QUE ESTA PROXIMO HA DATA FINAL
+                            data = 'Faltam '+(dataFinal.dia - dataAtual.dia) +' dia(s)'
+                            corData = 'bg-color-orange/20 text-color-orange'
+                        }else{
+                            data =' Atrasada '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
+                            corData = 'bg-color-red/20 text-color-red'
+                        }
+                    }else{
+                        
+                        // SALVA QUANTIDADE DE DIAS DO MES
+                        let mesAtual = new Date(dataAtual.ano, dataAtual.mes, 0)
+                        mesAtual = mesAtual.getDate()
+                        
+                        // calcula dias que faltam para o final do mes com base no dia atual
+                        let diasRestantesMes = mesAtual - dataAtual.dia
+                        
+                        if(diasRestantesMes < 10){
+                            console.log('MENOS de 10 dia(s) para o fim do mes!')
+                            
+                            // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
+                            if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){
+                                data = (diasRestantesMes + parseInt(dataFinal.dia)) +' dia(s)'
+                                corData = 'bg-color-orange/20 text-color-orange'
+                            }
+                        }
+                    }
+                
+                }
+            }else{
+                console.log('Proposta concluida ou declinada')
+            }
+            // FIM DA VERIFICAÇAO DO FIM DA PROPOSTA
     
             if (status == 'em análise') {
                 
@@ -76,6 +139,9 @@ function exibirPropostas(propostas){
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
                         </div>
                     </div>
+                    
+                    <span class="rounded-md font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap ${corData}">${data}</span>
+                    
                     <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
                 </div>
             </div>
