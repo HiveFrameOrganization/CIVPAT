@@ -343,11 +343,14 @@ async function LancamentoHoras(){
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
         const resposta = await exibirHoras.json();
+      
 
         if (localStorage.getItem('cargo') == 'tec'){
 
             // PESSOAS
 
+            console.log(resposta)
+            
             if (resposta['horaTotalPessoa'] == undefined){
                 document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
             } else {
@@ -395,18 +398,19 @@ async function LancamentoHoras(){
 
 
         if(localStorage.getItem('cargo') == 'tec'){
+            
 
             //Condicionais para gerar os botões com as opções de lançamento de horas dependendo da hora trabalhada
-            if (resposta.horasDiariasPessoas == undefined){
+            if (resposta.totalHorasPessoaDiarias == undefined){
                 var horasRestantes = 10 - 0;
             } else {
-                var horasRestantes = 10 - (resposta.horasDiariasPessoas);
+                var horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
             }
 
-            if (resposta.horasDiariasMaquina == undefined){
+            if (resposta.totalHorasMaquinaDiarias == undefined){
                 var horasRestantesMaquina = 10 - 0;
             } else {
-                var horasRestantesMaquina = 10 - (resposta.horasDiariasMaquina);
+                var horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
             }
     
  
@@ -425,7 +429,7 @@ async function LancamentoHoras(){
                 option.textContent = 0;
                 opcoesHoraPessoa.appendChild(option);
             } else {
-                for (let i = -1; i < horasRestantes; i++) {
+                for (let i = 0; i < horasRestantes; i++) {
                     let option = document.createElement('option');
                     option.classList.add('bg-body');
                     option.value = i + 1;

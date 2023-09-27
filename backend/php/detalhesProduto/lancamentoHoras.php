@@ -26,6 +26,29 @@ function verificarHoras($idProduto, $conn) {
     if ($resultado -> num_rows > 0){
         $dados = mysqli_fetch_assoc($resultado);
 
+        $dataHoje = date('Y-m-d');
+         $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS totalHorasPessoaDiarias FROM CargaHoraria WHERE datas = ? and fk_nifTecnico = ?");
+        $stmt -> bind_param('ss', $dataHoje, $dados['NIF']);
+        $stmt -> execute();
+        $horasDiarias = $stmt -> get_result();
+        $totalHorasPessoaDiarias = mysqli_fetch_assoc($horasDiarias);
+
+        if($totalHorasPessoaDiarias == null){
+            $totalHorasPessoaDiarias = 0;
+        }
+
+        $dataHoje = date('Y-m-d');
+         $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS totalHorasMaquinaDiarias FROM CargaHoraria WHERE datas = ? and fk_nifTecnico = ?");
+        $stmt -> bind_param('ss', $dataHoje, $dados['NIF']);
+        $stmt -> execute();
+        $horasDiarias = $stmt -> get_result();
+        $totalHorasMaquinaDiarias = mysqli_fetch_assoc($horasDiarias);
+
+        if($totalHorasMaquinaDiarias == null){
+            $totalHorasMaquinaDiarias = 0;
+        }
+
+
         //Somar as horas acomuladas da pessoa 
         $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasAcumuladasPessoa 
             FROM CargaHoraria WHERE fk_idProduto =?
@@ -72,7 +95,9 @@ function verificarHoras($idProduto, $conn) {
             "horasAcumuladasMaquina" => $horasAcumuladasMaquina['horasAcumuladasMaquina'],
             "horasDiariasPessoas" => $somaHoras['somaHoras'],
             "horasDiariasMaquina" => $somaHorasMaquina['somaHorasMaquina'],
-            
+            "totalHorasPessoaDiarias" => $totalHorasPessoaDiarias['totalHorasPessoaDiarias'],
+            "totalHorasMaquinaDiarias" => $totalHorasMaquinaDiarias['totalHorasMaquinaDiarias'],
+             
         ];
         //Passando ele em formato json para o front
         echo json_encode($resposta);
