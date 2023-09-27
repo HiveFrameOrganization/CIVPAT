@@ -11,7 +11,7 @@ function carregarProdutos($conn) {
 
     $idProposta = $_GET['id'];
 
-    $stmt = $conn->prepare("SELECT `Produtos`.`idProduto`, `NomeProduto`.`NomeProduto`,
+    $stmt = $conn->prepare("SELECT `Produtos`.`idProduto`, `Produtos`.`Situacao`, `NomeProduto`.`NomeProduto`,
     `ServicoCategoria`.`ServicoCategoria`, `Usuarios`.`Nome`, `Produtos`.`Valor`, `Produtos`.`DataFinal`
     FROM Produtos
 
