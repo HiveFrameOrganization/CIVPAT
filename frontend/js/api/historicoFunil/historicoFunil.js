@@ -64,6 +64,7 @@ fetch(back + `/historico/pegarHistoricoFunil.php?idProposta=${idProposta}`, {met
         // adicionando o card à tabela
 
         div.appendChild(card);
+
     });
 })
 .catch(error => {
