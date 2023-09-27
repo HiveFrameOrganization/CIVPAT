@@ -32,7 +32,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'token' => $_SESSION['token'],
             'cargo' => $dadosBanco['TipoUser'],
             'nif' => $dadosBanco['NIF'],
-            'nome' => $dadosBanco['Nome'],
+            'nome' => "$dadosBanco[Nome] $dadosBanco[Sobrenome]",
             'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
             'status' => 'success'
         ];
