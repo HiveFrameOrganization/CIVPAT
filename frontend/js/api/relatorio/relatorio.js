@@ -13,8 +13,8 @@ import { back } from "../Rotas/rotas.js";
 */
 
 window.addEventListener('load', ()=>{
-    // buscarRelatorio(9,2023,1234560)
-    exibirRelatorio(null)
+    buscarRelatorio(9,2023,1234560)
+    // exibirRelatorio(null)
 })
 
 let exibir = document.querySelector('#exibir')
@@ -128,6 +128,7 @@ formularioRelatorio.addEventListener('submit', async evento => {
 async function exibirRelatorio(res){
     
     exibir.innerHTML = ''
+    // exibir.classList = 'h-60'
 
     // console.log(res.dados[0].NomeProduto)
 
@@ -144,9 +145,26 @@ async function exibirRelatorio(res){
 
         // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
         let cabeçalho = document.createElement('div')
-        cabeçalho.classList = 'flex bg-body rounded-t-xl py-8'
+        cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
         let horas = document.createElement('div')
         horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+        let all = document.createElement('div')
+        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8'
+        all.addEventListener('click', ()=>{
+            if(all.classList.contains('h-24')){
+                all.classList.remove('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.add('rotate-180')
+                cabeçalho.classList.add('bg-body')
+                cabeçalho.classList.remove('bg-component')
+            }else{
+                all.classList.add('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.remove('rotate-180')
+                cabeçalho.classList.remove('bg-body')
+                cabeçalho.classList.add('bg-component')
+            }
+        })
 
         for (let i = 0; i < res.dados.length; i++) {
             
@@ -188,6 +206,8 @@ async function exibirRelatorio(res){
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
+
+                    <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
                     `
 
             }
@@ -221,8 +241,9 @@ async function exibirRelatorio(res){
                     </div>
                     `
 
-                    exibir.appendChild(cabeçalho)
-                    exibir.appendChild(horas)
+                    all.appendChild(cabeçalho)
+                    all.appendChild(horas)
+                    exibir.appendChild(all)
                 }
             }
         }
