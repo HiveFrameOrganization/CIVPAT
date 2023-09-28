@@ -12,9 +12,9 @@ import { back } from "../Rotas/rotas.js";
     indefinido. Importante para a lógica do back-end
 */
 
-window.addEventListener('load', ()=>{
-    // buscarRelatorio(9,2023,1234560)
-    exibirRelatorio(null)
+window.addEventListener('load', () => {
+    buscarRelatorio(9, 2023, 1234560)
+    // exibirRelatorio(null)
 })
 
 let exibir = document.querySelector('#exibir')
@@ -22,7 +22,7 @@ let exibir = document.querySelector('#exibir')
 async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
-        
+
         if (!valor) throw new Error(`Digite o NIF do funcionário para pesquisar`);
 
         const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
@@ -33,7 +33,7 @@ async function buscarRelatorio(mes, ano, valor = false) {
         exibirRelatorio(resposta)
 
         // VERIFICA SE NIF DIGITADO É VALIDO
-        if(resposta.status == 'error'){
+        if (resposta.status == 'error') {
             exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
@@ -88,8 +88,8 @@ const formularioRelatorio = document.querySelector('#formularioRelatorio');
 formularioRelatorio.addEventListener('submit', async evento => {
 
     evento.preventDefault();
-    
-    
+
+
     // Pegando o valor digitado
     const valor = document.querySelector('#pesquisaFuncionario').value;
 
@@ -125,14 +125,14 @@ formularioRelatorio.addEventListener('submit', async evento => {
 });
 
 // FUNÇÃO DE EXIBIR RELATORIO NA TELA
-async function exibirRelatorio(res){
-    
+async function exibirRelatorio(res) {
+
     exibir.innerHTML = ''
 
     // console.log(res.dados[0].NomeProduto)
 
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
-    if(res == null){
+    if (res == null) {
 
         exibir.innerHTML = `
             <h1 class='text-color-text font-semibold text-lg leading-4 uppercase text-center'>
@@ -140,16 +140,33 @@ async function exibirRelatorio(res){
             </h1>
         `
 
-    }else{
+    } else {
 
         // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
         let cabeçalho = document.createElement('div')
-        cabeçalho.classList = 'flex bg-body rounded-t-xl py-8'
+        cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
         let horas = document.createElement('div')
         horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+        let all = document.createElement('div')
+        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8'
+        all.addEventListener('click', () => {
+            if (all.classList.contains('h-24')) {
+                all.classList.remove('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.add('rotate-180')
+                cabeçalho.classList.add('bg-body')
+                cabeçalho.classList.remove('bg-component')
+            } else {
+                all.classList.add('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.remove('rotate-180')
+                cabeçalho.classList.remove('bg-body')
+                cabeçalho.classList.add('bg-component')
+            }
+        })
 
         for (let i = 0; i < res.dados.length; i++) {
-            
+
             let nif
             let proposta
             let produto
@@ -161,14 +178,14 @@ async function exibirRelatorio(res){
             }
 
             // VERIFICAR SE AS HORAS CADASTRADAS PERTENCEM AO MESMO TECNICO
-            if(nif == null){
+            if (nif == null) {
                 nif = res.dados[i].NIF
-                
-                if(proposta == null && produto == null || proposta != res.dados[i].TituloProposta && res.dados[i].NomeProduto)
-                    proposta = res.dados[i].TituloProposta
-                    produto = res.dados[i].NomeProduto
 
-                    cabeçalho.innerHTML = `
+                if (proposta == null && produto == null || proposta != res.dados[i].TituloProposta && res.dados[i].NomeProduto)
+                    proposta = res.dados[i].TituloProposta
+                produto = res.dados[i].NomeProduto
+
+                cabeçalho.innerHTML = `
                     <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2'>
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${res.dados[i].Nome} ${res.dados[i].Sobrenome}</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>${res.dados[i].NIF}</p>
@@ -188,6 +205,8 @@ async function exibirRelatorio(res){
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
+
+                    <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
                     `
 
             }
@@ -205,24 +224,24 @@ async function exibirRelatorio(res){
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap'>Horas lançadas</p>
                     </div>
 
-                    ${
-                        res.dados[i].Maquina != 'Nenhum' ? 
-                        `
+                    ${res.dados[i].Maquina != 'Nenhum' ?
+                    `
                         <div class='px-8 flex flex-col gap-2 bg-body'>
                         <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].Maquina}</p>
                         <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].HorasMaquina}  Horas</p>
                         </div>`
-                        :
-                        `<div class='px-8 flex flex-col gap-2 bg-body'>
+                    :
+                    `<div class='px-8 flex flex-col gap-2 bg-body'>
                         <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>Não há máquinas</p>
                         <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap'>Nome da máquina utilizada</p>
-                        </did>`   
-                    }
+                        </did>`
+                }
                     </div>
                     `
 
-                    exibir.appendChild(cabeçalho)
-                    exibir.appendChild(horas)
-                }
-            }
+            all.appendChild(cabeçalho)
+            all.appendChild(horas)
+            exibir.appendChild(all)
         }
+    }
+}

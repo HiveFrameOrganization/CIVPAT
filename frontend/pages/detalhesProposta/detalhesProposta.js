@@ -49,6 +49,8 @@ function sgsetMask(){
 window.addEventListener('load', () => {
   setTimeout(exibeCpf, 100)
   setTimeout(exibeSgset, 100)
+  setTimeout(exibeValor, 200)
+  
 })
 
 function exibeCpf(){
@@ -72,3 +74,13 @@ function exibeSgset(){
     document.getElementById('numeroSGSET').value = sgset;
   }
 }
+
+function exibeValor(){
+  var valor = document.querySelector('#valorTotalProdutos').value;
+
+  valor = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(valor);
+
+  document.querySelector('#valorTotalProdutos').value = valor;
+}
+
+
