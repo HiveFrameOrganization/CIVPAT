@@ -140,7 +140,7 @@
                             aria-label="Ir para página principal">HIVE<span
                                 class="text-color-text transition-colors">FRAME</span></a>
                     </div>
-                    <div id="sidebar-links" class="mt-4 space-y-4">
+                    <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
                         <script>
                             let cargo = localStorage.getItem('cargo');
 
@@ -186,7 +186,7 @@
 
                 <div id="fade" class="hide transition-opacity"></div>
 
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../Home/index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
 
                 <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
                     aria-label="Ir para página principal">HIVE<span
@@ -258,9 +258,8 @@
                 <li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba"
                     onclick="funMudarAba(3)">
                     produtos</li>
-                <a href="../historicoFunil/historicoFunilVenda.html"><li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
+                <a href="../historicoFunil/historicoFunilVenda.html" aria-label="Ir para o funil de vendas"><li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
                     histórico</li></a>
-
             </ul>
         </div>
 
@@ -278,10 +277,11 @@
 
                     <div class="flex flex-col md:flex-row justify-between gap-10 md:gap-1 w-full">
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
-                            <label for="nomeProposta" class="text-xs uppercase text-color-text-secundary font-bold">Nome
+                            <label for="tituloProposta" class="text-xs uppercase text-color-text-secundary font-bold">Nome
                                 da
                                 proposta: </label>
                             <input
+                                placeholder="Nome da proposta"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="tituloProposta" maxlength="75" disabled>
                         </div>
@@ -291,16 +291,18 @@
                             <label for="statusProposta"
                                 class="text-xs uppercase text-color-text-secundary font-bold">Status: </label>
                             <input
+                                placeholder="Status da proposta"
                                 class="p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="statusProposta" disabled>
                         </div>
 
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
 
-                            <label for="gerenteProposta"
+                            <label for="criadorProposta"
                                 class="text-xs uppercase text-color-text-secundary font-bold">Criador da proposta:
                             </label>
                             <input
+                                placeholder="Criador da proposta"
                                 class="p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="criadorProposta" disabled>
                         </div>
@@ -322,6 +324,7 @@
                             <label for="empresa" class="text-xs uppercase text-color-text-secundary font-bold">Empresa:
                             </label>
                             <input
+                                placeholder="Nome da empresa"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="empresa" maxlength="200" minlength="4" disabled>
                         </div>
@@ -335,7 +338,7 @@
                                 class="estadoInput px-2 py-[0.64rem] text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="uniCriadora" maxlength="100" minlength="4" disabled>
 
-                                <option value="" disabled selected>Escolha uma Unidade Criadora</option>
+                                <option value="" class="bg-body" disabled selected>Escolha uma Unidade Criadora</option>
                             </select>
                         </div>
 
@@ -354,6 +357,7 @@
                                 </abbr>
                             </label>
                             <input
+                                placeholder="Data de início do primeiro produto"
                                 class="p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="date" id="dataPrimeiroProduto" disabled>
                         </div>
@@ -366,6 +370,7 @@
                                 produto:
                             </label>
                             <input
+                                placeholder="Data final do último produto"
                                 class="p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="date" id="dataUltimoProduto" disabled>
                         </div>
@@ -374,6 +379,7 @@
                             <label for="valorTotalProdutos"
                                 class="text-xs uppercase text-color-text-secundary font-bold">Valor total: </label>
                             <input
+                                placeholder="Valor total"
                                 class="p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="valorTotalProdutos" disabled>
                         </div>
@@ -387,11 +393,11 @@
                             <select id="funil"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
-                                <option value="1">1° Contato</option>
-                                <option value="2">Em Prospecção</option>
-                                <option value="3">Em Orçamento</option>
-                                <option value="4">Em Análise do Cliente</option>
-                                <option value="5">Vendido</option>
+                                <option class="bg-body" value="1">1° Contato</option>
+                                <option class="bg-body" value="2">Em Prospecção</option>
+                                <option class="bg-body" value="3">Em Orçamento</option>
+                                <option class="bg-body" value="4">Em Análise do Cliente</option>
+                                <option class="bg-body" value="5">Vendido</option>
                             </select>
                         </div>
 
@@ -402,7 +408,7 @@
                                 class="estadoInput px-2 py-[0.64rem] text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
 
-                                <option value="" disabled selected>Selecione um Gerente</option>
+                                <option class="bg-body" value="" disabled selected>Selecione um Gerente</option>
 
                             </select>
                         </div>
@@ -413,7 +419,7 @@
                             <select type="text" id="segundoGerente"
                                 class="estadoInput px-2 py-[0.64rem] text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
-                                <option value="" disabled selected>Selecione um Gerente</option>
+                                <option class="bg-body" value="" disabled selected>Selecione um Gerente</option>
                             </select>
                         </div>
 
@@ -435,6 +441,7 @@
                             <label for=" " class="text-xs uppercase text-color-text-secundary font-bold">Nome de
                                 Contato:</label>
                             <input type="text" id="nomeContato"
+                                placeholder="Nome para contato"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
                         </div>
@@ -444,6 +451,7 @@
                                 class="text-xs uppercase text-color-text-secundary font-bold">Email de
                                 Contato:</label>
                             <input type="email" id="emailContato"
+                                placeholder="E-mail para contato"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
                         </div>
@@ -461,6 +469,7 @@
                                 class="text-xs uppercase text-color-text-secundary font-bold">Número
                                 de contato:</label>
                             <input type="number" id="numeroContato"
+                                placeholder="Número para contato"
                                 class="estadoInput p-2 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
                         </div>
@@ -491,14 +500,17 @@
                 <div class="flex justify-between flex-col sm:flex-row mb-4">
                     <div class="flex gap-5 flex-col sm:flex-row mb-5">
                         <input
+                            aria-label="Aceitar proposta"
                             class="bg-color-green py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors cursor-pointer"
                             type="button" value="ACEITAR" id="aceitarProposta">
                         <input
+                            aria-label="Editar proposta"
                             class="bg-primary py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors cursor-pointer"
                             type="button" value="EDITAR" id="editarProposta">
                     </div>
                     <div>         
                         <input
+                            aria-label="Declinar proposta"
                             class="bg-color-red py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer"
                             type="button" value="DECLINAR" id="declinarProposta" declinarProposta()>
                     </div>
@@ -640,7 +652,7 @@
                                         placeholder="Upload de arquivos"
                                         readonly
                                         onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
-                                    <input type="file" accept=".pdf" onchange="" id="pesquisaDeSatisfacao" class="hidden">
+                                    <input type="file" accept=".pdf" onchange="" aria-label="Pesquisa de satisfação" id="pesquisaDeSatisfacao" class="hidden">
                                 </div>
 
                                 <!-- input download -->
@@ -676,7 +688,7 @@
                     <div class="flex gap-2">
 
                         <div>
-                            <button type="button" id="adicionar"
+                            <button type="button" id="adicionar" aria-label="Novo follow-up"
                                 class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors"
                                 onclick="abreModal()">+ NOVO FOLLOW-UP</button>
                         </div>
@@ -740,7 +752,7 @@
                                 <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
                             </div>
                             <div class="flex justify-end absolute top-4 right-4 sm:relative sm:top-0 sm:right-0">
-                                <button class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal(); limpaInput()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                                <button aria-label="Fechar a modal" class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal(); limpaInput()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
                             </div>
         
                         </div>
@@ -752,21 +764,21 @@
                             <!-- DATA DO FOLLOW-UP -->
 
                             <div>
-                                <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
+                                <label for="dataFollowUp" class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUp" id="dataFollowUp"
                                     class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 cursor-pointer"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
                             <div>
-                                <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
+                                <label for="comentario" class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
                                 <textarea name="comentario" id="comentario" rows="5"
                                     class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
                             <div>
-                                <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
+                                <label for="dataFollowUpProx" class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProx" id="dataFollowUpProx"
                                     class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
@@ -775,7 +787,7 @@
                             <!-- botão -->
 
                             <div class="pt-6">
-                                <button type="submit"
+                                <button type="submit" aria-label="Adicionar follow-up"
                                     class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Adicionar
                                     follow-up</button>
                             </div>
@@ -804,7 +816,7 @@
                                 <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
                             </div>
                             <div class="flex justify-end absolute top-4 right-4 sm:relative sm:top-0 sm:right-0">
-                                <button class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                                <button aria-label="Fechar modal" class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
                             </div>
         
                         </div>
@@ -817,21 +829,21 @@
 
                             <p hidden id="idFollowUpModal"></p>
                             <div>
-                                <label class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
+                                <label for="dataFollowUpEdit" class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpEdit" id="dataFollowUpEdit"
                                     class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
                             <div>
-                                <label class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
+                                <label for="comentarioEdit" class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
                                 <textarea name="comentarioEdit" id="comentarioEdit" rows="5"
                                     class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
                             <div>
-                                <label class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
+                                <label for="dataFollowUpProxEdit" class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProxEdit" id="dataFollowUpProxEdit"
                                     class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
@@ -840,7 +852,7 @@
                             <!-- botão -->
 
                             <div class="pt-6">
-                                <button type="submit"
+                                <button type="submit" aria-label="Editar follow-up"
                                     class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Editar
                                     follow-up</button>
                             </div>
@@ -859,7 +871,7 @@
                 <div class="abaProdutos bg-body px-4 md:px-8 py-6 rounded-xl flex flex-col hidden w-full gap-5">
     
                     <div class="flex flex-col sm:flex-row gap-8 items-center justify-between">
-                        <button type="button" id="btnNovoProduto"
+                        <button type="button" id="btnNovoProduto" aria-label="Novo produto"
                         class="rounded-lg text-[#fff] hover:text-primary bg-primary w-max text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors uppercase">
                         + Novo Produto</button>
 
@@ -903,7 +915,7 @@
 
                     <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="servico" id="servico" required>
-                        <option value="" disabled selected class="text-color-text-secundary">Selecione a categoria...</option>
+                        <option value="" disabled selected class="text-color-text-secundary bg-body">Selecione a categoria...</option>
                         <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
                         <option value="2" class="bg-body">Assessoria Tecnológica - Empreendedorismo</option>
                         <option value="3" class="bg-body">Assessoria Tecnológica - Gestão</option>
@@ -922,12 +934,12 @@
                         <option value="16" class="bg-body">Serviços Metrológicos - Ensaios - Labor. Em Implantes</option>
                     </select>
 
-                    <label class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
+                    <label  class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="produto" id="produto" required>
                         <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
                     </select>
 
-                    <label class="text-color-text font-bold block mb-2">Valor:</label>
+                    <label for="valor" class="text-color-text font-bold block mb-2">Valor:</label>
                     <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="number" name="valor" id="valor" step="0.01"
                         max="99999999.99" required>
 
@@ -939,7 +951,7 @@
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2">Máquina utilizada</label>
+                            <label for="maquinas" class="text-color-text font-bold block mb-2">Máquina utilizada</label>
                             <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" id="maquinas" required>   
                             </select>
                         </div>
@@ -956,12 +968,12 @@
                 <div id="segundoCadastroProduto" class="hidden">
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
+                            <label for="tempoMaquina" class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
+                            <label for="tempoPessoa" class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
                         </div>
                     </div>
@@ -969,17 +981,17 @@
                     
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2">Data Inicial: </label>
+                            <label for="dataInicial" class="text-color-text font-bold block mb-2">Data Inicial: </label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataInicial" required>
                         </div>
 
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2">Data Final: </label>
+                            <label for="dataFinal" class="text-color-text font-bold block mb-2">Data Final: </label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataFinal" required>
                         </div>
                     </div>
                     
-                    <label class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
+                    <label for="unidadeCriadora" class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" id="unidadeCriadora" required>
                         <option value="" disabled selected>Selecione a unidade Criadora</option>
                     </select>
@@ -999,7 +1011,7 @@
     <footer class="w-full bg-body text-color-text py-4">
         <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
             <div class="flex items-center gap-3">
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
                 <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex flex-col items-center gap-3">
