@@ -609,7 +609,7 @@ async function salvarMudancasNaProposta() {
     const uniCriadora = document.querySelector('#uniCriadora').value;
     const dataInicio = document.querySelector('#dataPrimeiroProduto').value;
     const dataFim = document.querySelector('#dataUltimoProduto').value;
-    const valor = document.querySelector('#valorTotalProdutos').value.replace(/\D/g, '');
+    const valor = parseFloat(document.querySelector('#valorTotalProdutos').value.replace(/\R/g, '').replace(/\$/g, '').replace(/\./g, '').replace(/\s/g, ''));
     const funil = document.querySelector('#funil').value;
     const primeiroGerente = document.querySelector('#primeiroGerente').value;
     const segundoGerente = document.querySelector('#segundoGerente').value;
