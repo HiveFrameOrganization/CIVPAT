@@ -62,7 +62,7 @@ function exibir(dados) {
 
     nomes.forEach((nome) => {
 
-        nome.textContent = dados.nome ? dados.nome : 'N/A'
+        nome.textContent = dados.nome ? `${dados.nome} ${dados.sobrenome}` : 'N/A'
     });
 
     emails.forEach((email) => {
