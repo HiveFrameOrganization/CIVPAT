@@ -49,7 +49,7 @@ function sgsetMask(){
 window.addEventListener('load', () => {
   setTimeout(exibeCpf, 100)
   setTimeout(exibeSgset, 100)
-  setTimeout(exibeValor, 100)
+  setTimeout(exibeValor, 200)
   
 })
 
@@ -82,3 +82,5 @@ function exibeValor(){
 
   document.querySelector('#valorTotalProdutos').value = valor;
 }
+
+
