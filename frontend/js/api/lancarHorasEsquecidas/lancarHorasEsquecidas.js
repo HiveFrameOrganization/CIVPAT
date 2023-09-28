@@ -10,8 +10,8 @@ botaoLancarHora.addEventListener('click', () => {
 
 
 async function lancarHoraParaOTecnico () {
-    const horaPessoa = document.getElementById('horaPessoaInput').value;
-    const horaMaquina = document.getElementById('horaMaquinaInput').value;
+    const horaPessoa = document.getElementById('horaPessoaParaLancar').value;
+    const horaMaquina = document.getElementById('horaMaquinaParaLancar').value;
     const nifTecnico = document.getElementById('tecnicos').value;
     const idProduto = localStorage.getItem('idProduto');
     

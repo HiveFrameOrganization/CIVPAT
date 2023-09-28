@@ -1,7 +1,27 @@
+import { back } from '../Rotas/rotas.js';
+
 import FormularioEditarUsuario from './renderizarModalFuncionarios.js';
 import desativarUsuario from './desativarFuncionarios.js';
 
-function exibir(dados) {
+async function getFotoFuncionario(nif) {
+
+    if (nif) {
+
+        const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)
+
+        const resposta = await requisicao.blob();
+
+        if (resposta.size > 0) {
+
+            return URL.createObjectURL(resposta);
+        }
+
+        return false;
+    }
+    return false;
+} 
+
+async function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
     const exibe = document.querySelector('#exibicao');
 
@@ -14,7 +34,7 @@ function exibir(dados) {
 
         div.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
 
-        let fotoDePerfil = funcionario['FotoDePerfil'];
+        let fotoDePerfil = await getFotoFuncionario(funcionario['NIF']);
 
         let cargo;
         let cor;
@@ -49,7 +69,7 @@ function exibir(dados) {
         <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full">
+                    <img src="${fotoDePerfil ? fotoDePerfil : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full overflow-hidden">
                     <div class="w-[175px] max-w-[175px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
