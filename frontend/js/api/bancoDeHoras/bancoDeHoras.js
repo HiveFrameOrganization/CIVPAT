@@ -1,5 +1,10 @@
 import { back } from "../Rotas/rotas.js";
 
+window.addEventListener('load', ()=>{
+    // RETORNANDO NADA AO CARREGAR A PAGINA PARA MOSTRAR MENSAGEM NA TELA
+    exibirBancoHoras(null)
+})
+
 const formularioBancoHoras = document.querySelector('#formularioBancoHoras');
 formularioBancoHoras.addEventListener('submit', async evento => {
 
@@ -92,13 +97,25 @@ async function exibirBancoHoras(res) {
     // console.log(res.dados[0].NomeProduto)
 
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
-    if (res == null) {
+    if(res == null){
+        
+        exibir.innerHTML = `
+        <div class='flex flex-col justify-center items-center gap-4'>
+        <img src="../../img/icon/emergency.svg" alt="emergencia">
+        <h2 class='font-bold'>INFORME O MÊS E O ANO PARA GERAR O BANCO DE HORAS TRABALHAS NOS RESPECTIVOS MESES!</h2>
+        <p>informe um mês onde você tenha lançado horas em algum produto.</p>
+        </div>
+        `
+
+    }else if (res.status == 'error') {
 
         exibir.innerHTML = `
-            <h1 class='text-color-text font-semibold text-lg leading-4 uppercase text-center'>
-                Insira mês e ano da pesquisa e NIF do funcionario desejado!
-            </h1>
-        `
+            <div class='flex flex-col justify-center items-center gap-4'>
+            <img src="../../img/icon/emergency.svg" alt="emergencia">
+            <h2 class='font-bold'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <p>informe um mês onde você tenha lançado horas em algum produto.</p>
+            </div>
+            `
 
     } else {
 
