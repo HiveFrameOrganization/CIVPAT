@@ -13,8 +13,8 @@ import { back } from "../Rotas/rotas.js";
 */
 
 window.addEventListener('load', () => {
-    buscarRelatorio(9, 2023, 1234560)
-    // exibirRelatorio(null)
+    // buscarRelatorio(9, 2023, 1234560)
+    exibirRelatorio(null)
 })
 
 let exibir = document.querySelector('#exibir')
@@ -32,20 +32,8 @@ async function buscarRelatorio(mes, ano, valor = false) {
         console.log(resposta);
         exibirRelatorio(resposta)
 
-        // VERIFICA SE NIF DIGITADO É VALIDO
-        if (resposta.status == 'error') {
-            exibir.innerHTML = `
-            <div class='flex flex-col justify-center items-center gap-4'>
-            <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold'>NIF INVÁLIDO</h2>
-            <p>Informe o NIF pertencente a um técnico do ISI!</p>
-            </div>
-            `
-        }
-
     } catch (error) {
         console.error(error);
-
     }
 
 }
@@ -129,18 +117,28 @@ async function exibirRelatorio(res) {
 
     exibir.innerHTML = ''
 
-    // console.log(res.dados[0].NomeProduto)
-
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
     if (res == null) {
 
         exibir.innerHTML = `
-            <h1 class='text-color-text font-semibold text-lg leading-4 uppercase text-center'>
-                Insira mês e ano da pesquisa e NIF do funcionario desejado!
-            </h1>
-        `
+            <div class='flex flex-col justify-center items-center gap-4'>
+            <img src="../../img/icon/emergency.svg" alt="emergencia">
+            <h2 class='font-bold'>PARA GERAR RELATÓRIOS</h2>
+            <p>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
+            </div>
+            `
 
-    } else {
+    } else if(res.status == 'error'){
+        exibir.innerHTML = `
+            <div class='flex flex-col justify-center items-center gap-4'>
+            <img src="../../img/icon/emergency.svg" alt="emergencia">
+            <h2 class='font-bold'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <p>Informe um data onde o NIF correspondente tenha trabalho.</p>
+            </div>
+            `
+    }else {
+
+        exibir.innerHTML = ''
 
         // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
         let cabeçalho = document.createElement('div')

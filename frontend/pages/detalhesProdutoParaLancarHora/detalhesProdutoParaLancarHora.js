@@ -59,16 +59,18 @@ async function carregarTecnicos () {
 window.addEventListener('load', async function (){
     carregarTecnicos();
     pegarUnidadesCriadoras();
-    LancamentoHoras();
+    lancamentoHoras();
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
     const unidadeCriadoraSelect = document.getElementById('unidadeRealizadora');
 
-    const dadosProduto = await carregarDetalhesProduto();  
+    const dadosProduto = await carregarDetalhesProduto(); 
+    
 
-    document.getElementById('tempoMaquina').value = dadosProduto['HoraMaquina'];
-    document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+    document.getElementById('produto').value = dadosProduto['NomeProduto'];
+    document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
+    document.getElementById('horaPessoaInput').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
@@ -150,6 +152,8 @@ document.getElementById("servico").addEventListener("change", async function() {
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await requisicao.json();
 
+        console.log(dados);
+
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -178,14 +182,13 @@ document.getElementById("servico").addEventListener("change", async function() {
 async function carregarDetalhesProduto() {
     const idProduto = localStorage.getItem('idProduto');
 
-    const requisicao = await fetch(back + `/detalhesProduto/detalhesProduto.php?id=${idProduto}`);
+    const requisicao = await fetch(back + `/lancarHorasEsquecidas/detalhesProduto.php?id=${idProduto}`);
 
     // dados do produto recebido (resposta da api)
     const dados = await requisicao.json();
 
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
-
 
     return dados[0];
 
@@ -232,99 +235,14 @@ async function pegarUnidadesCriadoras() {
 
 }
 
-async function atualizarProduto(dados){
 
-    try{
-        const requisicao = await fetch(back + '/detalhesProduto/salvarProdutoModificado.php',{
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dados)
-
-        })
-
-        // Verificando se deu erro ao fazer a requisição
-        if (!requisicao.ok) {
-            throw new Error('Erro na requisição');
-        }
-
-        const resposta = await requisicao.json();
-
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
-
-        window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
-
-        
-    }catch(error){
-        console.error(error)
-    }
-}
-
-if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))){
-
-    const botaoModificarProduto = document.getElementById('modificarProduto');
-
-    botaoModificarProduto.addEventListener('click', () => {
-        const idProduto = localStorage.getItem('idProduto');
-
-        const tempoMaquina = document.getElementById('tempoMaquina').value;
-        const tempoPessoa = document.getElementById('tempoPessoa').value;
-        const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
-        const dataInicial = document.getElementById('dataInicial').value;
-        const dataFinal = document.getElementById('dataFinal').value;
-        const area = document.getElementById('area').value;
-        const servico = document.getElementById('servico').value;
-        const produto = document.getElementById('produto').value;
-        const valor = document.getElementById('valor').value;
-        const tecnico = document.getElementById('tecnicos').value;
-
-
-        const dadosParaEnviar = {
-            idProduto: idProduto,
-            tempoMaquina: tempoMaquina,
-            tempoPessoa: tempoPessoa,
-            unidadeRealizadora: unidadeRealizadora,
-            dataInicial : dataInicial ,
-            dataFinal: dataFinal,
-            area: area,
-            servico: servico,
-            produto: produto,
-            valor: valor,
-            tecnico: tecnico
-        }
-        
-        atualizarProduto(dadosParaEnviar);
-
-})};
-
-
-
-document.getElementById('valor').addEventListener('keydown', () => {
-
-    const valorInserido = document.getElementById('valor').value;
-    console.log('oi')
-    if (valorInserido > 99999999.99){
-        alert('Valor Máximo digitado');
-        const inputValor = document.getElementById('valor').value = '';
-    }
-
-
-});
-
-
-// });
-
-async function LancamentoHoras(){
+async function lancamentoHoras(){
     const id = localStorage.getItem('idProduto');
 
     try{
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
         const resposta = await exibirHoras.json();
-
-        console.log(resposta)
 
         if (localStorage.getItem('cargo') == 'tec'){
             document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
@@ -405,50 +323,50 @@ async function LancamentoHoras(){
 }
 
 if (localStorage.getItem('cargo') == 'tec'){
-    const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
-        const id = localStorage.getItem('idProduto');
-        const nifPerfil = localStorage.getItem('nifPerfil');
+        document.getElementById('lancarHoras').addEventListener('click', async () => {
+            const id = localStorage.getItem('idProduto');
+            const nifPerfil = localStorage.getItem('nifPerfil');
 
-        const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-        const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+            const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+            const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
-        console.log(horaMaquinaDiaria + ' horas')
+            console.log(horaMaquinaDiaria + ' horas')
 
-        const dados = {
-            nifPerfil: nifPerfil,
-            id: id,
-            horaPessoaDiaria: horaPessoaDiaria,
-            horaMaquinaDiaria: horaMaquinaDiaria
-        };
+            const dados = {
+                nifPerfil: nifPerfil,
+                id: id,
+                horaPessoaDiaria: horaPessoaDiaria,
+                horaMaquinaDiaria: horaMaquinaDiaria
+            };
 
-        console.log(dados);
+            console.log(dados);
 
-        try {
-            const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dados)
-            });
+            try {
+                const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados)
+                });
 
-            const resposta = await requisicao.json();
-            // Faça algo com a resposta, se necessário.
-            console.log(resposta)
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
+                const resposta = await requisicao.json();
+                // Faça algo com a resposta, se necessário.
+                console.log(resposta)
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
 
-            if (resposta.status == 'error'){
-                alertas();
-            } else {
-                window.location.href = '/frontend/pages/perfil/index.html';
+                if (resposta.status == 'error'){
+                    alertas();
+                } else {
+                    window.location.href = '/frontend/pages/perfil/index.html';
+                }
+            
+            
+            } catch (error) {
+                console.error(error);
+                // Trate o erro adequadamente, se necessário.
             }
-        
-        
-        } catch (error) {
-            console.error(error);
-            // Trate o erro adequadamente, se necessário.
-        }
 })};
 
 
