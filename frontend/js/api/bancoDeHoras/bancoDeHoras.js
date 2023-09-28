@@ -47,7 +47,7 @@ async function buscarHoras(mes, ano, nif, cargo) {
         const resposta = await requisicao.json();
 
         console.log(resposta);
-        exibirRelatorio(resposta)
+        exibirBancoHoras(resposta)
 
     } catch (error) {
         console.error(error);
@@ -85,7 +85,7 @@ function dataMaxima(mes, ano) {
 
 
 // FUNÇÃO DE EXIBIR RELATORIO NA TELA
-async function exibirRelatorio(res) {
+async function exibirBancoHoras(res) {
 
     exibir.innerHTML = ''
 
@@ -104,9 +104,26 @@ async function exibirRelatorio(res) {
 
         // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
         let cabeçalho = document.createElement('div')
-        cabeçalho.classList = 'flex bg-body rounded-t-xl py-8'
+        cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
         let horas = document.createElement('div')
         horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+        let all = document.createElement('div')
+        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8'
+        all.addEventListener('click', () => {
+            if (all.classList.contains('h-24')) {
+                all.classList.remove('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.add('rotate-180')
+                cabeçalho.classList.add('bg-body')
+                cabeçalho.classList.remove('bg-component')
+            } else {
+                all.classList.add('h-24')
+                all.classList.toggle('bg-component')
+                document.querySelector('#setaDropdown').classList.remove('rotate-180')
+                cabeçalho.classList.remove('bg-body')
+                cabeçalho.classList.add('bg-component')
+            }
+        })
 
         for (let i = 0; i < res.dados.length; i++) {
 
@@ -148,6 +165,8 @@ async function exibirRelatorio(res) {
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
+
+                    <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
                     `
 
             }
@@ -160,17 +179,17 @@ async function exibirRelatorio(res) {
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap'>Data de lançamento</p>
                     </div>
                     
-                    <div class=' border-[gray] px-8 flex flex-col gap-2 bg-body'>
+                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 bg-body'>
                     <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].HorasPessoa}  Horas</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap'>Horas lançadas</p>
                     </div>
 
-                    
                     </div>
                     `
 
-            exibir.appendChild(cabeçalho)
-            exibir.appendChild(horas)
+            all.appendChild(cabeçalho)
+            all.appendChild(horas)
+            exibir.appendChild(all)
         }
     }
 }
