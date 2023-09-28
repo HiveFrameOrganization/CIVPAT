@@ -119,7 +119,7 @@
                         <a href="./index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
                         <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
-                    <div id="sidebar-links" class="mt-4 space-y-4">
+                    <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
                         <script>
                             let cargo = localStorage.getItem('cargo');
 
@@ -161,8 +161,8 @@
                         </script>
                     </div>
                 </div>
-                <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-                <a href="./index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                <a href="./index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="./index.html" aria-label="ir para a página inicial" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
                 <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
@@ -176,7 +176,7 @@
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2 min-w-[150px]">
                             <h5 id="user-name" class="text-base text-color-text whitespace-nowrap capitalize"><script> document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário' </script></h5>
-                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
@@ -200,7 +200,7 @@
         </div>
 
         <div class=" flex flex-col items-center relative">
-            <a href="#" class="animaTexto text-primary font-semibold text-6xl" >HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            <a href="#" aria-label="Ir para a página inicial" class="animaTexto text-primary font-semibold text-6xl" >HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             <p class="animaCarregando fixed sm:absolute top-[65vh] sm:top-20 w-full text-center left-0 text-color-text">Carregando</p>
         </div>
     </aside>
@@ -317,7 +317,7 @@
                                         </select>
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
-                                        <label for="listaGerentes" class="font-semibold text-base">RESUMO*</label>
+                                        <label for="textoResumo" class="font-semibold text-base">RESUMO*</label>
                                         <textarea placeholder="Resumo da proposta" class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" id="textoResumo" rows="3" maxlength="500" required></textarea>
                                         <span class="text-xs"><span id="tamanho-atual">0</span> / <span id="tamanho-maximo">500</span></span>
                                     </div>
@@ -358,7 +358,7 @@
     <footer class="w-full bg-body text-color-text py-4">
         <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
             <div class="flex items-center gap-3">
-                <a href="./index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="./index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
                 <a href="./index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex flex-col items-center gap-3">

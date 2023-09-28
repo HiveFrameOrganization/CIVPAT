@@ -112,7 +112,7 @@
                         <a href="../../pages/Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
                         <a href="../../pages/Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
-                    <div id="sidebar-links" class="mt-4 space-y-4">
+                    <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
                         <script>
                             let sidebarLinks = document.getElementById('sidebar-links');
 
@@ -166,7 +166,7 @@
                         </script>
                     </div>
                 </div>
-                <a href="../../pages/Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../../pages/Home/index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
                 <a href="../../pages/Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
@@ -181,7 +181,7 @@
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 id="user-name" class="text-base text-color-text whitespace-nowrap capitalize"><script> document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário' </script></h5>
-                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
+                            <a href="../perfil/index.html" aria-label="Ir para a página inicial do usuário" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>
                         <ul>
@@ -271,11 +271,11 @@
                 <!-- Paginação -->
                 <div id="paginacao" class="w-full mt-4 hidden">
                     <div id="containerPaginacao" class="flex items-center gap-2 justify-end">
-                        <a href="#" class="w-4 h-4">
+                        <a href="#" aria-label="voltar uma página na tabela" class="w-4 h-4">
                             <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
                         </a>
                         
-                        <a href="#" class="w-4 h-4">
+                        <a href="#" aria-label="avançar uma página na tabela" class="w-4 h-4">
                             <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
                         </a>
                     </div>
@@ -287,7 +287,7 @@
     <footer class="w-full bg-body text-color-text py-4">
         <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
             <div class="flex items-center gap-3">
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo do hiveframe" class="w-10 h-10"></a>
                 <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex flex-col items-center gap-3">
