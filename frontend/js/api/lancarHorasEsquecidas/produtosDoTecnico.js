@@ -160,7 +160,8 @@ function esconderTudo() {
 
 function verDetalhesProduto(element) {
 
-    localStorage.setItem('idProposta', element.getAttribute('itemid'));
+
+    localStorage.setItem('idProduto', element.getAttribute('itemid'));
             
     window.location.href = '../detalhesProdutoParaLancarHora/DetalhesProdutoParaLancarHora.html';
 }
