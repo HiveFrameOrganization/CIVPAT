@@ -45,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         
         $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
         `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-        `Usuarios`.`FotoDePerfil` FROM Propostas
+        `Usuarios`.`FotoDePerfil`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
         INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+        INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
         WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
         ORDER BY `Propostas`.`idProposta` DESC
         LIMIT ?, ?');
@@ -58,8 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if ($filtroPagina == ''){
             $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
             `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-            `Usuarios`.`FotoDePerfil` FROM Propostas
+            `Usuarios`.`FotoDePerfil`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
             INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+            INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
             WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
             ORDER BY `Propostas`.`idProposta` DESC
             LIMIT ?, ?');
@@ -69,8 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         } else {
             $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
             `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-            `Usuarios`.`FotoDePerfil` FROM Propostas
+            `Usuarios`.`FotoDePerfil`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
             INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+            INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
             WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
             ORDER BY `Propostas`.`idProposta` DESC
             LIMIT ?, ?');
