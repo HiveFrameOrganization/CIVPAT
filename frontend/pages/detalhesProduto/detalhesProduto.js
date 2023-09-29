@@ -297,7 +297,8 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         const area = document.getElementById('area').value;
         const servico = document.getElementById('servico').value;
         const produto = document.getElementById('produto').value;
-        const valor = document.getElementById('valor').value;
+        var valor = document.getElementById('valor').value.replace(/\.+/g, '');
+        valor = valor.replace(',', '.');
         const tecnico = document.getElementById('tecnicos').value;
 
 
@@ -314,6 +315,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             valor: valor,
             tecnico: tecnico
         }
+
         
         atualizarProduto(dadosParaEnviar);
 

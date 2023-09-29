@@ -47,9 +47,9 @@ function sgsetMask(){
 }
 
 window.addEventListener('load', () => {
-  setTimeout(exibeCpf, 100)
-  setTimeout(exibeSgset, 100)
-  setTimeout(exibeValor, 200)
+  setTimeout(exibeCpf, 1000)
+  setTimeout(exibeSgset, 1000)
+  setTimeout(exibeValor, 1000)
   
 })
 
