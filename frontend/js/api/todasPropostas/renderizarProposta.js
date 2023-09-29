@@ -1,8 +1,28 @@
 // Arquivo responsável por Gerar os cards 
 // e fazer alterações visuais na tela de proposota
 
+import { back } from '../Rotas/rotas.js';
 
-function exibirPropostas(propostas){
+async function getFotoFuncionario(nif) {
+
+    if (nif) {
+
+        const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)
+
+        const resposta = await requisicao.blob();
+
+        if (resposta.size > 0) {
+
+            return URL.createObjectURL(resposta);
+        }
+
+        return false;
+    }
+    return false;
+} 
+
+
+async function exibirPropostas(propostas){
 
     console.log(propostas)
 
@@ -20,7 +40,7 @@ function exibirPropostas(propostas){
     
             divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
             
-            const fotoDePerfil = proposta['FotoDePerfil'];
+            let fotoDePerfil = await getFotoFuncionario(proposta['fk_nifGerente']);
     
             let status = proposta['Status'].toLowerCase();
     
