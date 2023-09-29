@@ -418,6 +418,8 @@ async function exibirProdutos(produtos) {
     
     for (let produto of produtos) {
         console.log(produto['Situacao'])
+
+        console.log(produto['Valor'] + 'é esse aqui ó')
         
         const divRow = document.createElement('div');
         
@@ -478,7 +480,7 @@ async function exibirProdutos(produtos) {
 
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="w-[120px] max-w-[120px] overflow-hidden text-ellipsis">
-                            <span title="Valor do produto" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['Valor']}</span>
+                            <span title="${'R$ ' + produto['Valor']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['Valor']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Valor">Valor</span>
                             </div>
@@ -504,6 +506,8 @@ async function exibirProdutos(produtos) {
             localStorage.setItem('idProduto', produto['idProduto']);
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
+
+            console.log(produto['Valor'])
         }
 
         botoes.append(divRow)

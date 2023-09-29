@@ -58,7 +58,9 @@ async function salvarProduto () {
     const area = 'metalmecanica';
     const servico = document.getElementById('servico').value;
     const produto = document.getElementById('produto').value;
-    const valor = document.getElementById('valor').value;
+    var valor = document.getElementById('valor').value.replace(/\.+/g, '');
+    valor = valor.replace(',', '.');
+    valor = parseFloat(valor);
     const nifTecnico = document.getElementById('tecnicos').value;
     const maquina = document.getElementById('maquinas').value;
 

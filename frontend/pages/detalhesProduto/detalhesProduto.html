@@ -328,10 +328,67 @@
                         <label class="text-color-text-secundary font-semibold">VALOR</label>
                         <div class="relative">
                             <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
-                            <input type="number" name="valor" id="valor" class="bg-component placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
+                            <input type="text" name="valor" minlength="1" onblur="blurValor()" placeholder="0,00" onfocus="this.value = ''" id="valor" class="bg-component placeholder-color-text text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
                         </div>
                     </div>
                 </div>
+
+                <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
+
+                <script>
+                    const valor = document.getElementById('valor');
+
+                    valor.onkeydown = function(event) {
+                        
+                        if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key != ',') {
+                          event.preventDefault();
+                        }
+                    };
+
+                    // exibe a função de mascara do valor após meio segundo
+
+                    setTimeout(exibeValor, 500);
+
+                    function exibeValor(){
+                        var valor = document.getElementById('valor').value;
+
+                        if (valor > 0){
+                            valor = parseFloat(valor);
+                            console.log(valor + ' teste 1exibe');
+    
+                            valor = valor.toLocaleString();
+                            console.log(valor + ' teste 2exibe');
+    
+                            valor = valor.toString();
+                            console.log(valor + ' teste 3exibe');
+    
+                            document.getElementById('valor').value = valor;
+                        }
+
+                    }
+
+                    // função que adiciona a máscara ao valor após o desfoque do input
+
+                    function blurValor(){
+                        var valor = document.getElementById('valor').value.replace('.', '');
+
+                        if (valor > 0){
+                            valor = valor.replace(',', '.');
+    
+                            valor = parseFloat(valor);
+                            console.log(valor + ' teste 1');
+    
+                            valor = valor.toLocaleString();
+                            console.log(valor + ' teste 2');
+    
+                            valor = valor.toString();
+                            console.log(valor + ' teste 3');
+    
+                            document.getElementById('valor').value = valor;
+                        }
+                    }
+
+                </script>
 
                 <div class="flex gap-6 flex-col md:flex-row -mt-6" id="acumuladas">
 
@@ -656,7 +713,10 @@
 
     <!-- <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script> -->
     <script type="module" src="detalhesProduto.js" defer></script>
-    <script src="../../js/feedback.js"></script>
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+        alertas();
+    </script>
     
     <!-- Autenticação -->
     <script type="module">

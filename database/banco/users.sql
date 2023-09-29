@@ -47,6 +47,7 @@ CREATE USER 'ger'@'172.20.0.3' IDENTIFIED BY 'OqxWqi!erb9a&F9Ar750';
 GRANT role1 TO 'ger'@'172.20.0.3';
 -- Concede ao ger a habilidade de inserir e alterar as tabelas abaixo
 GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'ger'@'172.20.0.3';
+GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'ger'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
@@ -54,6 +55,8 @@ FLUSH PRIVILEGES;
 CREATE USER 'adm'@'172.20.0.3' IDENTIFIED BY 'GPbhjBMD2T9%k&91FND5';
 -- Concede o role1 ao usuário adm 
 GRANT role1 TO 'adm'@'172.20.0.3';
+
+GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'adm'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
