@@ -333,6 +333,8 @@
                     </div>
                 </div>
 
+                <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
+
                 <script>
                     const valor = document.getElementById('valor');
 
@@ -342,6 +344,8 @@
                           event.preventDefault();
                         }
                     };
+
+                    // exibe a função de mascara do valor após meio segundo
 
                     setTimeout(exibeValor, 500);
 
@@ -362,6 +366,8 @@
                         }
 
                     }
+
+                    // função que adiciona a máscara ao valor após o desfoque do input
 
                     function blurValor(){
                         var valor = document.getElementById('valor').value.replace('.', '');
@@ -707,7 +713,10 @@
 
     <!-- <script type="module" src="../../js/api/cadastroProduto/cadastroProdutoAPI.js"></script> -->
     <script type="module" src="detalhesProduto.js" defer></script>
-    <script src="../../js/feedback.js"></script>
+    <script type="module">
+        import alertas from '../../js/feedback.js';
+        alertas();
+    </script>
     
     <!-- Autenticação -->
     <script type="module">

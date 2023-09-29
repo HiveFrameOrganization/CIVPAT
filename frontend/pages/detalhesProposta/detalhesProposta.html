@@ -949,8 +949,45 @@
                     </select>
 
                     <label for="valor" class="text-color-text font-bold block mb-2">Valor:</label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="number" name="valor" id="valor" step="0.01"
-                        max="99999999.99" required>
+                    <div class="relative">
+                        <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
+                        <input onblur="blurValor()" minlength="1" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
+                    </div>
+
+                    <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
+
+                    <script>
+                        const valor = document.getElementById('valor');
+
+                        valor.onkeydown = function(event) {
+                            
+                            if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key != ',') {
+                            event.preventDefault();
+                            }
+                        };
+
+                        // função que adiciona a máscara ao valor após o desfoque do input
+
+                        function blurValor(){
+                            var valor = document.getElementById('valor').value.replace('.', '');
+
+                            if (valor > 0){
+                                valor = valor.replace(',', '.');
+        
+                                valor = parseFloat(valor);
+                                console.log(valor + ' teste 1');
+        
+                                valor = valor.toLocaleString();
+                                console.log(valor + ' teste 2');
+        
+                                valor = valor.toString();
+                                console.log(valor + ' teste 3');
+        
+                                document.getElementById('valor').value = valor;
+                            }
+                        }
+
+                    </script>
 
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
