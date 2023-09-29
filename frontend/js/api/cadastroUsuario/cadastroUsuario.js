@@ -1,45 +1,5 @@
 import { back } from '../Rotas/rotas.js'
 import alertas from '../../feedback.js'
-/*------------------------------------ Fazendo aparecer o formulário -------------------------------------------------------------------------*/
-
-// const cadastrar = document.querySelector('#cadastrar');
-
-// cadastrar.addEventListener('click', () => {
-//     // Fazendo a lista de funcionários desaparecer
-//     const exibicao = document.querySelector('#exibicao');
-
-//     // Selecionando o formulário
-//     const formulario = document.querySelector('#formulario');
-
-//     // Renderizando de acordo o evento
-//     if (formulario.style.display === 'flex') {
-
-//         // Escondendo o formulário
-//         formulario.style.display = 'none';
-
-//         // Exibindo a lista
-//         exibicao.style.display = 'block';
-
-//         // Alterando o nome do botão
-//         cadastrar.textContent = 'Cadastrar';
-//         console.log(cadastrar.value);
-
-//     } else {
-
-//         // Exibindo o formulário
-//         formulario.style.display = 'flex';
-
-//         // Escondendo a lista de funcionários
-//         exibicao.style.display = 'none';
-
-//         // Alterando o nome do botão
-//         cadastrar.textContent = 'Voltar';
-
-//         console.log(cadastrar.value);
-
-
-//     }
-// });
 
 
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
@@ -64,18 +24,6 @@ formulario.addEventListener('submit', async evento => {
     // Código para validação, colocar dentro de um try
     try {
 
-        // // Verificando se o campo NIF possui letras ou simbolos
-        // if (!contemApenasNumeros(nif)) throw new Error('O NIF SÓ PODE RECEBER NÚMEROS!!!!');
-
-        // // Verificando se o nome e sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o email possui pelo menos uma letra:
-        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
-
         if (!contemApenasNumeros(nif) || !contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
@@ -92,20 +40,15 @@ formulario.addEventListener('submit', async evento => {
                 cargo: cargo
             }
     
-           
-    
             await mandarDadosParaBackend(dadosDoCadastro);
     
             sessionStorage.removeItem('qtdBotoesFun');
             location.reload();
         }
 
-
     } catch (erro) {
         console.error(erro)
     }
-
-
 });
 
 // Função para fazer a requisição
