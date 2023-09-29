@@ -181,6 +181,10 @@
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-2">
                             <h5 id="user-name" class="text-base text-color-text whitespace-nowrap capitalize"><script> document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário' </script></h5>
+                            <div class="flex gap-2 items-center">
+                                <img src="../../img/icon/perfilNavbar.svg" alt="Icones de perfil">
+                                <p id="user-cargo" class="text-sm text-color-text whitespace-nowrap capitalize">Cargo</p>
+                            </div>
                             <a href="../perfil/index.html" aria-label="Ir para a página inicial do usuário" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
                             <div class="h-[1px] w-full bg-color-text-secundary"></div>
                         </div>

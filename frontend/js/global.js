@@ -111,3 +111,22 @@ function funMudarAba(pag){
         }
     }
 }
+
+// ADICONAR CARGO DO FUNCIONARIO NO MENU DE PERFIL
+window.addEventListener('load', ()=>{
+
+    let cargo = localStorage.getItem('cargo')
+    let userCargo = document.querySelector('#user-cargo')
+    
+    if(cargo == 'coor'){
+        userCargo.innerHTML = 'Coordenador'
+    }else if(cargo == 'tec'){
+        userCargo.innerHTML = 'Técnico'
+    }else if(cargo == 'ger'){
+        userCargo.innerHTML = 'Gerente'
+    }else if(cargo == 'adm'){
+        userCargo.innerHTML = 'Administrador'
+    }else{
+        userCargo.innerHTML = ''
+    }
+}) 
