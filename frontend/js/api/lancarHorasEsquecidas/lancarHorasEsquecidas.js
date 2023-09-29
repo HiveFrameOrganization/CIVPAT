@@ -22,6 +22,11 @@ async function lancarHoraParaOTecnico () {
         localStorage.setItem('mensagem', 'Não pode lançar horas zeradas para os 2 campos');
 
         alertas();
+    } else if (dataLancamento == '') {
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Informe uma data para o lançamento da data');
+
+        alertas();
     } else {
         const dadosEnviados = {
             horaPessoa: (horaPessoa == null) ? 0 : horaPessoa ,
