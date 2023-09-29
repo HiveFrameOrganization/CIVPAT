@@ -20,5 +20,4 @@ async function carregarFotoPerfil () {
             document.getElementById('perfil-image').src = imageUrl;
         }
     }
-
 }

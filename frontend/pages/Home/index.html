@@ -107,7 +107,7 @@
         autenticacao(['coor', 'adm', 'ger']);
     </script>
 </head>
-<body class="bg-body transition-colors">
+<body class="bg-body transition-colors" onload="someCarregamento()">
     <div id="fade" class="hide transition-opacity"></div>
     <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
@@ -174,10 +174,17 @@
                         <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
                     </div>
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
-                        <div class="text-color-text-secundary px-4 py-2 space-y-2 min-w-[150px]">
-                            <h5 id="user-name" class="text-base text-color-text whitespace-nowrap capitalize"><script> document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário' </script></h5>
-                            <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
-                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                        <div class="text-color-text-secundary px-4 py-2 space-y-3 min-w-[150px] max-w-[200px]">
+                            <div class="">
+                                <h5 id="user-name" class="text-base text-color-text whitespace-nowrap overflow-hidden text-ellipsis capitalize leading-5">
+                                    <script> 
+                                        document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário';  
+                                        document.getElementById('user-name').setAttribute('title', localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário')
+                                    </script>
+                                </h5>
+                                <p id="user-cargo" class="text-xs text-primary font-medium whitespace-nowrap capitalize"></p>
+                            </div>
+                            <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="inline-block w-full text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors border-b border-color-text-secundary pb-2">Ver meu perfil</a>
                         </div>
                         <ul>
                             <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
@@ -191,7 +198,7 @@
     <script src="../../js/themeSwitch/index.js"></script>
 
     <!-- TELA DE CARREGAMENTO -->
-    <aside id="carregamento" class="fixed w-full h-screen top-0 z-50 bg-component flex justify-center items-center hidden">
+    <aside id="carregamento" class="fixed w-full h-screen top-0 z-50 bg-component flex justify-center items-center">
         <div class="animaLogo animate-spin block sm:hidden"> 
             <img src="../../img/icon/logo.svg" alt="logo" class="w-40">
         </div>
@@ -259,7 +266,7 @@
                 </div>
             </div>
         </section>
-        <section class="bg-component">
+        <section class="bg-component py-4">
             <div id="Propostas" class="container mx-auto px-6 py-12">
                 <div class="mb-3">
                     <h2 class="font-bold text-2xl">PROPOSTAS</h2>

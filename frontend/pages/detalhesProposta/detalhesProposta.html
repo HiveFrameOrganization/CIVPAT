@@ -206,10 +206,17 @@
                         <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
                     </div>
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
-                        <div class="text-color-text-secundary px-4 py-2 space-y-2">
-                            <h5 id="user-name" class="text-base text-color-text whitespace-nowrap capitalize"><script> document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário' </script></h5>
-                            <a href="../perfil/index.html" class="text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors">Ver meu perfil</a>
-                            <div class="h-[1px] w-full bg-color-text-secundary"></div>
+                        <div class="text-color-text-secundary px-4 py-2 space-y-3 min-w-[150px] max-w-[200px]">
+                            <div class="">
+                                <h5 id="user-name" class="text-base text-color-text whitespace-nowrap overflow-hidden text-ellipsis capitalize leading-5">
+                                    <script> 
+                                        document.getElementById('user-name').textContent = localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário';  
+                                        document.getElementById('user-name').setAttribute('title', localStorage.getItem('nomeLogin') ? localStorage.getItem('nomeLogin') : 'Usuário')
+                                    </script>
+                                </h5>
+                                <p id="user-cargo" class="text-xs text-primary font-medium whitespace-nowrap capitalize"></p>
+                            </div>
+                            <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="inline-block w-full text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors border-b border-color-text-secundary pb-2">Ver meu perfil</a>
                         </div>
                         <ul>
                             <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
@@ -258,8 +265,10 @@
                 <li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba"
                     onclick="funMudarAba(3)">
                     produtos</li>
-                <a href="../historicoFunil/historicoFunilVenda.html" aria-label="Ir para o funil de vendas"><li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary mudarAba">
-                    histórico</li></a>
+                <a href="../historicoFunil/historicoFunilVenda.html" aria-label="Ir para o funil de vendas">
+                    <li class="cursor-pointer uppercase text-xs md:text-lg font-semibold  border-primary py-3 w-max hover:text-primary flex gap-1 mudarAba">
+                    histórico <img src="../../img/icon/linkagem.png" alt="Link para outra página" class="object-contain w-4"></li>
+                </a>
             </ul>
         </div>
 
@@ -521,7 +530,7 @@
                 <!-- campos que ficaram em PDFs -->
                 <div class="abaPdf bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
-                    <h2 class="uppercase text text-2xl opacity-20 font-semibold">obrigatorio</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatorio</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 
@@ -598,7 +607,7 @@
                     </div>
 
 
-                    <h2 class="uppercase text text-2xl opacity-20 font-semibold">opcional</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">opcional</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 
@@ -674,8 +683,8 @@
                     </div>
 
 
-                    <button type="button" id="botaoSalvarPdf"
-                        class="text-primary bg-primary/20 hover:bg-primary/40 cursor-pointer px-12 py-2 rounded-md w-full md:w-1/3 mb-6">Salvar
+                    <button type="button" id="botaoSalvarPdf" 
+                        class="self-center bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors uppercase w-full md:w-1/3 mb-6">Salvar
                         PDF</button>
 
                 </div>
@@ -689,7 +698,7 @@
 
                         <div>
                             <button type="button" id="adicionar" aria-label="Novo follow-up"
-                                class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors"
+                                class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors"
                                 onclick="abreModal()">+ NOVO FOLLOW-UP</button>
                         </div>
 
@@ -872,7 +881,7 @@
     
                     <div class="flex flex-col sm:flex-row gap-8 items-center justify-between">
                         <button type="button" id="btnNovoProduto" aria-label="Novo produto"
-                        class="rounded-lg text-[#fff] hover:text-primary bg-primary w-max text-center font-semibold text-xs px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors uppercase">
+                        class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs uppercase font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">
                         + Novo Produto</button>
 
                         <span id="quantProduto">Nenhum produto cadastrado!</span>
