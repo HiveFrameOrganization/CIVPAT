@@ -33,7 +33,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'cargo' => $dadosBanco['TipoUser'],
             'nif' => $dadosBanco['NIF'],
             'nome' => "$dadosBanco[Nome] $dadosBanco[Sobrenome]",
-            'mensagem' => 'Bem vindo ' . $dadosBanco['Nome'],
+            'mensagem' => 'Bem vindo ' . ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['sobrenome']),
             'status' => 'success'
         ];
 
