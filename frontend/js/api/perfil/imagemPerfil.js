@@ -12,6 +12,22 @@ uploadImageBtn.addEventListener('click', function() {
     imageInput.click();
 });
 
+// Exibe uma prévia da foto de perfil, para a página não ter que ser recarregada
+function previaFoto() {
+
+    let leitor = new FileReader();
+
+    leitor.onload = () => {
+
+        uploadImageBtn.parentElement.querySelector('#perfil-image').src = leitor.result;
+
+        document.querySelector('#profile-trigger').src = leitor.result;
+    }
+
+    leitor.readAsDataURL(imageInput.files[0]);
+}
+
+
 imageInput.addEventListener('change', (event) => {
 
     if (imageInput.files.length <= 0) {
@@ -37,17 +53,6 @@ imageInput.addEventListener('change', (event) => {
         return;
     }
     
-    let leitor = new FileReader();
-
-    leitor.onload = () => {
-
-        uploadImageBtn.parentElement.querySelector('#perfil-image').src = leitor.result;
-
-        document.querySelector('#profile-trigger').src = leitor.result;
-    }
-
-    leitor.readAsDataURL(imageInput.files[0]);
-
     salvarFotoPerfil();
 });
 
@@ -62,15 +67,24 @@ async function salvarFotoPerfil () {
     const formData = new FormData();
     formData.append('imagem', file);
 
-    const requisicao = await fetch(back + `/perfil/salvarFotoPerfil.php?nif=${nif}&nomeImagem=${nomeImagem}`, {
-        method: 'POST',
-        body: formData
-    });
+    try {
 
-    const resposta = await requisicao.json();
+        const requisicao = await fetch(back + `/perfil/salvarFotoPerfil.php?nif=${nif}&nomeImagem=${nomeImagem}`, {
+            method: 'POST',
+            body: formData
+        });
+    
+        const resposta = await requisicao.json();
 
-    localStorage.setItem('status', resposta.status);
-    localStorage.setItem('mensagem', resposta.mensagem);
+        previaFoto();
+    
+        localStorage.setItem('status', resposta.status);
+        localStorage.setItem('mensagem', resposta.mensagem);
+    } catch (error) {
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Erro ao salvar a foto!');
+    }
 
     alertas();
 }
