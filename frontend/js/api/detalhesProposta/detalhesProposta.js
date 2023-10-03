@@ -75,7 +75,7 @@ botaoSalvarPdf.addEventListener('click', () => {
         //   });
     
         // Enviar o formulário como uma solicitação POST usando fetch
-        fetch(back + `/pdf/salvarPdf.php?id=${identificador}`, {
+        fetch(back + `/PDF/salvarPdf.php?id=${identificador}`, {
             method: 'POST',
             body: formData
         })
@@ -159,22 +159,6 @@ aceitarPropostaButton.addEventListener('click', () => {
 declinarPropostaButton.addEventListener('click', () => {
     try {
         declinarPropostaBanco()
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-orcamentoInput.addEventListener('change', () => {
-    try {
-        aceitarProposta()
-    } catch (error) {
-        console.log(error)
-    }
-})
-
-propostaAssinadaInput.addEventListener('change', () => {
-    try {
-        aceitarProposta()
     } catch (error) {
         console.log(error)
     }

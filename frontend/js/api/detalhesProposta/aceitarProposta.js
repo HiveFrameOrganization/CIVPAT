@@ -5,21 +5,36 @@ export default async function aceitarProposta() {
 
     const baixarPdfOrcamento = document.getElementsByClassName('sumirOrcamento')[0];
     const baixarPdfPropostaAssinada = document.getElementsByClassName('sumirPropostaAssinada')[0];
+    let aceitar = true;
+    let pdfObrigatorio = !baixarPdfOrcamento.classList.contains('hidden') 
+    && !baixarPdfPropostaAssinada.classList.contains("hidden")
 
-    for (let i = 0; i < document.getElementsByClassName('p-2 text-lg').length; i++) {
-        console.log(document.getElementsByClassName('p-2 text-lg')[i].value + document.getElementsByClassName('p-2 text-lg')[i].value == "")
+    if (aceitar) {
+        for (let i = 0; i < document.getElementsByClassName('p-2 text-lg').length; i++) {
+            if (i != 5 && i != 6) {
+                const result = document.getElementsByClassName('p-2 text-lg')[i].value != ""
+                if(!result) {
+                    aceitar = result
+                    break
+                }
+            }
+        }
     }
 
-    for (let i = 0; i < document.getElementsByClassName('px-2').length; i++) {
-        console.log(document.getElementsByClassName('px-2')[i].value + document.getElementsByClassName('px-2')[i].value == "")
+    if (aceitar) {
+        for (let i = 0; i < document.getElementsByClassName('px-2').length; i++) {
+            if (i != 2) {
+                const result = document.getElementsByClassName('px-2')[i].value != ""
+                if(!result) {
+                    aceitar = result
+                    break
+                }
+            }
+        }
     }
 
-    if (baixarPdfOrcamento.classList.contains('hidden') || baixarPdfPropostaAssinada.classList.contains("hidden")) {
-        localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
-        alertas();
-
-    } else {
+    console.log(pdfObrigatorio)
+    if (aceitar && pdfObrigatorio) {
         const idProposta = localStorage.getItem('idProposta');
 
         // criando uma variável para enviar a lista para o php, transformando o string em objeto json
@@ -35,7 +50,23 @@ export default async function aceitarProposta() {
         } else {
             window.location.href = '/frontend/pages/Home/index.html';
         }
+    } else {
+        let espera = 0
 
+        if(!pdfObrigatorio) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'PDFs obrigatórios não preenchidos');
+            alertas();
+            espera = 2000
+        }
+
+        setTimeout(() => {
+            if(!aceitar) {
+                localStorage.setItem('status', 'error');
+                localStorage.setItem('mensagem', 'Campos obrigatórios não preenchidos');
+                alertas();
+            }
+        }, espera)
     }
  
 }
