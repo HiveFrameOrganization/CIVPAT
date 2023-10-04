@@ -32,8 +32,8 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'token' => $_SESSION['token'],
             'cargo' => $dadosBanco['TipoUser'],
             'nif' => $dadosBanco['NIF'],
-            'nome' => "$dadosBanco[Nome] $dadosBanco[Sobrenome]",
-            'mensagem' => 'Bem vindo ' . ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['sobrenome']),
+            'nome' => ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
+            'mensagem' => 'Bem vindo ' . ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
             'status' => 'success'
         ];
 
