@@ -144,6 +144,15 @@ async function exibirPropostas(propostas){
                 color = '[#737373]';
                 statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-question w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`;
             }
+
+            if (proposta['nSGSET']){
+
+                var sgset = proposta['nSGSET'];
+                if (sgset != ''){
+                    sgset = [sgset.slice(0, 3), '-', sgset.slice(3)].join('');
+                    sgset = [sgset.slice(0, 6), '/', sgset.slice(6)].join('');
+                }
+            }
     
             // Inserindo o Template na linha
             divRow.innerHTML = `
@@ -154,7 +163,7 @@ async function exibirPropostas(propostas){
                         <div class="w-[200px] max-w-[200px] overflow-hidden text-ellipsis">
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span title="Número do SGSET">${proposta['nSGSET'] ? proposta['nSGSET'] : 'N/A'}</span>
+                                <span title="Número do SGSET">${proposta['nSGSET'] ? sgset : 'N/A'}</span>
                                 <span title="Data de início e fim">${proposta['Inicio'] && proposta['Fim'] ? proposta['Inicio']+' - '+proposta['Fim'] : 'N/A'}</span>
                             </div>
                         </div>
