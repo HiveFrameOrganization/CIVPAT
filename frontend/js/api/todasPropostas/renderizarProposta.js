@@ -169,7 +169,7 @@ async function exibirPropostas(propostas){
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <img src="${fotoDePerfil ? '' : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
+                        <img src="${fotoDePerfil ? fotoDePerfil : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-primary rounded-full">
                         <div class="flex flex-col gap-1 font-semibold">
                             <span class="text-lg leading-4 whitespace-nowrap capitalize">${proposta['Nome']}</span>
                             <span class="text-xs text-color-text-secundary capitalize">Gerente</span>
