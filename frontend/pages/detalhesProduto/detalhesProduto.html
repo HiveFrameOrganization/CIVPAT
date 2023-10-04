@@ -354,13 +354,10 @@
 
                         if (valor > 0){
                             valor = parseFloat(valor);
-                            console.log(valor + ' teste 1exibe');
     
                             valor = valor.toLocaleString();
-                            console.log(valor + ' teste 2exibe');
     
                             valor = valor.toString();
-                            console.log(valor + ' teste 3exibe');
     
                             document.getElementById('valor').value = valor;
                         }
@@ -376,13 +373,10 @@
                             valor = valor.replace(',', '.');
     
                             valor = parseFloat(valor);
-                            console.log(valor + ' teste 1');
     
                             valor = valor.toLocaleString();
-                            console.log(valor + ' teste 2');
     
                             valor = valor.toString();
-                            console.log(valor + ' teste 3');
     
                             document.getElementById('valor').value = valor;
                         }
@@ -419,7 +413,8 @@
                     </div>
 
                     <div id="conclusao">
-                 
+
+                        <!-- botao de finalizar produto é renderizado em caso de usuario ser tecnico -->
                     
                     </div>
                 </div>
@@ -430,7 +425,7 @@
 
         <section class="container mx-auto px-6" id="lancamentoHoras">
 
-            
+            <!-- seção de lançamento de horas é renderizada para tecnicos -->
 
         </section>
 
@@ -472,6 +467,8 @@
 
     </script>
 
+    <!-- botão de finalizar produto -->
+
     <script>
         if (localStorage.getItem('cargo') == 'tec'){
             const divBotaoFinalizar = document.getElementById('conclusao');
@@ -489,7 +486,7 @@
     </script>
 
 
-    <!-- renderizando campos para todos menos técnicos -->
+    <!-- renderizando campos de horas acumuladas para todos menos técnicos -->
 
     <script>
 
@@ -513,6 +510,8 @@
 
     </script>
 
+    <!-- renderizando lançamento de horas-máquina caso tenha uso de máquina -->
+
     <script>
         if(localStorage.getItem('cargo') == 'tec'){
             setTimeout(renderizaHoras, 300);
@@ -528,6 +527,8 @@
         }
     </script>
 
+    <!-- removendo tempo máquina do local storage quando a página for fechada -->
+
     <script>
         window.onunload = () => {
             localStorage.removeItem('tempoMaquina');
@@ -536,8 +537,6 @@
     </script>
 
     <!-- renderizando lançamento de horas apenas para técnicos -->
-
-
 
     <script>
         setTimeout(renderizarPonto, 0)
@@ -643,7 +642,6 @@
         }
 
     </script>
-
 
     <script>
 
