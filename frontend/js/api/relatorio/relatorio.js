@@ -13,7 +13,7 @@ import { back } from "../Rotas/rotas.js";
 */
 
 window.addEventListener('load', () => {
-    // buscarRelatorio(9, 2023, 1234560)
+    // buscarRelatorio(10, 2023, 1234560)
     exibirRelatorio(null)
 })
 
@@ -146,7 +146,7 @@ async function exibirRelatorio(res) {
         let horas = document.createElement('div')
         horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
         let all = document.createElement('div')
-        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8'
+        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
         all.addEventListener('click', () => {
             if (all.classList.contains('h-24')) {
                 all.classList.remove('h-24')
@@ -189,8 +189,8 @@ async function exibirRelatorio(res) {
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>${res.dados[i].NIF}</p>
                     </div>
                     
-                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2'>
-                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${res.dados[i].NomeProduto}</p>
+                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 w-1/4'>
+                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize text-ellipsis overflow-hidden' title='${res.dados[i].NomeProduto}'>${res.dados[i].NomeProduto}</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Produto</p>
                     </div>
                     
@@ -204,7 +204,7 @@ async function exibirRelatorio(res) {
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
 
-                    <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
+                    <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8 hidden lg:block' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
                     `
 
             }
