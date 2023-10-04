@@ -1,0 +1,8 @@
+- Docker: O Docker é uma plataforma de virtualização de contêineres que permite empacotar, distribuir e executar aplicativos e suas dependências de maneira isolada facilitando assim o desenvolvimento da aplicação.
+
+- Azure: Plataoforma de computação em nuvem da Microsoft utilizada para a hospedar a aplicação com os seguintes serviços: 
+	- Container Apps: PaaS (Plataforma como serviço) baseado em Kubernetes que permite a orquestração de contêineres facilitando assim a execução da aplicativos conteinerizados na Azure.
+	- Servidores flexíveis do Banco de Dados do Azure para MySQL:  Os Servidores flexíveis do Banco de Dados do Azure para MySQL são uma opção de implantação para o Banco de Dados do Azure para MySQL que fornece melhor controle e flexibilidade dos parâmetros do servidor de banco de dados, mais opções para a alta disponibilidade e controles de otimização de custo.
+
+- Git: Sistema de controle de versão distribuída facilitando o controle do versionamento do código fonte da aplicação. 
+- GitHub: Serviço de hospedagem em nuvem de repositórios Git e ambiente colaborativo entre a equipe de desenvolvimento.  

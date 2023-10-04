@@ -48,12 +48,12 @@ async function exibirPropostas(propostas){
             let color;
             let optionIMG;
             let statusDescricao;
-            let data
+            let data = ''
             let corData
             let fim = proposta['Fim']
 
             // VERIFICAR DATA DO FIM DA PROPOSTA
-            if(fim == null || fim == undefined){
+            if(fim === null || fim === undefined){
                 data = ''
             }else if(proposta['Status'] == 'Em Análise' || proposta['Status'] == 'Aceito'){
                 let date = new Date()
@@ -82,9 +82,11 @@ async function exibirPropostas(propostas){
                             // AVISO QUE ESTA PROXIMO HA DATA FINAL
                             data = 'Faltam '+(dataFinal.dia - dataAtual.dia) +' dia(s)'
                             corData = 'bg-color-orange/20 text-color-orange'
-                        }else{
-                            data =' Atrasada '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
+                        }else if(dataFinal.dia - dataAtual.dia > 10){
+                            data = 'Atrasada '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
                             corData = 'bg-color-red/20 text-color-red'
+                        }else{
+                            data = ''
                         }
                     }else{
                         
