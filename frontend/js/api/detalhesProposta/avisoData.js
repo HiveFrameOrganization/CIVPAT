@@ -1,4 +1,4 @@
-// EXIBIR ALERTA SE ESTA PERTO DA DATA FINAL
+// EXIBIR ALERTA SE A PROPOSTA ESTA PERTO DA DATA FINAL
 export default function avisoData(res){
     
     if(res.dataUltimoProduto == null){
@@ -33,10 +33,12 @@ export default function avisoData(res){
                     alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dia(s) para o final da proposta'
                     alertaData.classList.add('text-color-orange')
                     alertaData.classList.add('bg-color-orange/20')
-                }else{
+                }else if(dataFinal.ida - dataAtual.dia > 10){
                     alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
                     alertaData.classList.add('text-btn-red')
                     alertaData.classList.add('bg-btn-red/20')
+                }else{
+                    alertaData.innerHTML =''
                 }
             }else{
                 
