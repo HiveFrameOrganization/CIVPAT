@@ -12,7 +12,7 @@ async function getFotoFuncionario(nif) {
         const resposta = await requisicao.blob();
 
         if (resposta.size > 0) {
-
+            
             return URL.createObjectURL(resposta);
         }
 

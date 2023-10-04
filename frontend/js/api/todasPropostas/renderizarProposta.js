@@ -11,6 +11,8 @@ async function getFotoFuncionario(nif) {
 
         const resposta = await requisicao.blob();
 
+        console.log(resposta);
+
         if (resposta.size > 0) {
 
             return URL.createObjectURL(resposta);
@@ -23,8 +25,6 @@ async function getFotoFuncionario(nif) {
 
 
 async function exibirPropostas(propostas){
-
-    console.log(propostas)
 
     paginacao.classList.add('hidden');
 
@@ -39,7 +39,7 @@ async function exibirPropostas(propostas){
             let divRow = document.createElement('div');
     
             divRow.classList = 'row-item flex flex-nowrap bg-component rounded-md border-2 border-[transparent] hover:border-primary transition-colors';
-            
+
             let fotoDePerfil = await getFotoFuncionario(proposta['fk_nifGerente']);
     
             let status = proposta['Status'].toLowerCase();
