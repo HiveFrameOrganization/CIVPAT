@@ -6,8 +6,6 @@ export default async function exibirProdutos(produtos) {
     
     for (let produto of produtos) {
         console.log(produto['Situacao'])
-
-        console.log(produto['Valor'] + 'é esse aqui ó')
         
         const divRow = document.createElement('div');
         
@@ -17,6 +15,10 @@ export default async function exibirProdutos(produtos) {
         let statusDescricao
         let statusIMG;
         let color;
+
+        let valor = produto['Valor'];
+
+        valor = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(valor);
     
         let status = 'em análise'
 
@@ -68,7 +70,7 @@ export default async function exibirProdutos(produtos) {
 
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="w-[120px] max-w-[120px] overflow-hidden text-ellipsis">
-                            <span title="${'R$ ' + produto['Valor']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">R$ ${produto['Valor']}</span>
+                            <span title="${valor}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${valor}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Valor">Valor</span>
                             </div>
