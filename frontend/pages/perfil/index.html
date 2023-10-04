@@ -109,8 +109,8 @@
                 <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../../pages/Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../../pages/Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                        <a href="../../pages/Home/index.html" class="main-link" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../../pages/Home/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
                         <script>
@@ -146,7 +146,7 @@
                                     Relatórios
                                 </a>
                                 `;
-                            } else if (cargo === 'coor' || cargo === 'ger') {
+                            } else if (cargo === 'coor') {
 
                                 sidebarLinks.innerHTML = `
                                 <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
@@ -162,12 +162,24 @@
                                     Lançar horas
                                 </a>    
                                 `;
+                            } else if (cargo === 'ger') {
+
+                                sidebarLinks.innerHTML = `
+                                <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
+                                    <svg xmlns="http://www.w3.org/2000/svg" alt="Visão geral" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    Início
+                                </a>
+                                <a href="../lancarHorasEsquecidas/lancarHorasEsquecidas.html" aria-label="Ir para a página de lançamento de horas esquecidas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-clock"><path d="M16 22h2c.5 0 1-.2 1.4-.6.4-.4.6-.9.6-1.4V7.5L14.5 2H6c-.5 0-1 .2-1.4.6C4.2 3 4 3.5 4 4v3"/><polyline points="14 2 14 8 20 8"/><circle cx="8" cy="16" r="6"/><path d="M9.5 17.5 8 16.25V14"/></svg>
+                                    Lançar horas
+                                </a>    
+                                `;
                             }
                         </script>
                     </div>
                 </div>
-                <a href="../../pages/Home/index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-                <a href="../../pages/Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                <a href="../../pages/Home/index.html" class="main-link" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../../pages/Home/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
                 <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
@@ -189,7 +201,7 @@
                                 </h5>
                                 <p id="user-cargo" class="text-xs text-primary font-medium whitespace-nowrap capitalize"></p>
                             </div>
-                            <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="inline-block w-full text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors border-b border-color-text-secundary pb-2">Ver meu perfil</a>
+                            <a href="./index.html" aria-label="Ir para a página de perfil do usuário" class="inline-block w-full text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors border-b border-color-text-secundary pb-2">Ver meu perfil</a>
                         </div>
                         <ul>
                             <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
@@ -293,9 +305,20 @@
 
     <footer class="w-full bg-body text-color-text py-4">
         <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
-            <div class="flex items-center gap-3">
-                <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo do hiveframe" class="w-10 h-10"></a>
-                <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+            <div id="logo-link" class="flex items-center gap-3">
+                <script>
+                    let allMainLinks = document.getElementsByClassName('main-link');
+
+                    Array.from(allMainLinks).forEach(link => {
+                        
+                        localStorage.getItem('cargo') == 'tec' ? link.setAttribute('href', './index.html') : link.setAttribute('href', '../Home/index.html')
+                    });
+
+                    document.getElementById('logo-link').innerHTML = `
+                    <a href="${localStorage.getItem('cargo') == 'tec' ? './index.html' : '../Home/index.htm'}" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo do hiveframe" class="w-10 h-10"></a>
+                    <a href="${localStorage.getItem('cargo') == 'tec' ? './index.html' : '../Home/index.htm'}" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                    `;
+                </script>
             </div>
             <div class="flex flex-col items-center gap-3">
                 <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
