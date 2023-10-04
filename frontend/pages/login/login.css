@@ -42,3 +42,45 @@ button{
 #formularioNovaSenha{
     display: none;
 }
+
+@media(min-width: 300px){
+    #formulario{
+        padding-left: 28px!important;
+        padding-right: 28px!important;
+    }
+}
+
+@media(min-width: 370px){
+    #formulario{
+        padding-left: 40px!important;
+        padding-right: 40px!important;
+    }
+}
+
+@media(min-width: 455px){
+    #formulario{
+        padding-left: 80px!important;
+        padding-right: 80px!important;
+    }
+}
+
+@media(min-width: 640px) and (max-width: 767px){
+    #formulario{
+        padding-left: 150px!important;
+        padding-right: 150px!important;
+    }
+}
+
+@media(min-width: 768px){
+    #formulario{
+        padding-left: 60px!important;
+        padding-right: 60px!important;
+    }
+}
+
+@media(min-width: 880px){
+    #formulario{
+        padding-left: 80px!important;
+        padding-right: 80px!important;
+    }
+}
