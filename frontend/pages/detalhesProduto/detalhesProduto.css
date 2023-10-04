@@ -33,3 +33,17 @@ input[type="date"]{
 #modificarProduto:disabled{
     display: none;
 }
+
+.vencendo{
+    background-color: rgba(252, 160, 1, 0.2)!important;
+    color: #FCA001!important;
+    border: 2px #FCA001 solid!important;
+    
+}
+
+.vencido{
+    background-color: rgba(275, 74, 76, 0.2)!important;
+    color: #EE4444!important;
+    border: 2px #EE4444 solid!important;
+    
+}

@@ -382,9 +382,21 @@ async function LancamentoHoras(){
                 }
             }
 
+            // adiciona cor diferente se as horas acumuladas estiverem perto de ultrapassar o total
 
+            if (resposta['horasAcumuladasPessoa'] >= ((resposta['horaTotalPessoa'] * 75)/100)){
+                document.querySelector('#horasPessoaAcumuladas').classList.add('vencendo');
+            } 
+
+            // adiciona cor diferente se as horas acumuladas ultrapassarem o total
+
+            if (resposta['horasAcumuladasPessoa'] > resposta['horaTotalPessoa']){
+                document.querySelector('#horasPessoaAcumuladas').classList.add('vencido');
+            } 
 
         } else {
+            // inputs do coordenador
+
             if (resposta['horasAcumuladasPessoa'] == undefined){
                 document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
             } else {
@@ -458,6 +470,8 @@ async function LancamentoHoras(){
                 }
             }
 
+            // desabilita o botao de salvar horas se o tecnico ja tiver terminado suas horas
+
             if (horasRestantes == 0){
                 document.querySelector('#salvarHoras').disabled = true;
             }
@@ -522,6 +536,8 @@ if (localStorage.getItem('cargo') == 'tec'){
           
         }
 })};
+
+// função de finalizar produto
 
 if (localStorage.getItem('cargo') == 'tec'){
 
