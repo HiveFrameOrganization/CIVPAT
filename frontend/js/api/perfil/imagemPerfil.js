@@ -28,9 +28,11 @@ function previaFoto() {
 }
 
 
-imageInput.addEventListener('change', (event) => {
+imageInput.addEventListener('change', () => {
 
     if (imageInput.files.length <= 0) {
+
+        imageInput.value = '';
 
         return;
     }
@@ -41,6 +43,8 @@ imageInput.addEventListener('change', (event) => {
         localStorage.setItem('mensagem', 'A imagem deve ser menor ou igual a 1MB!');
         alertas();
 
+        imageInput.value = '';
+
         return;
     }
 
@@ -49,6 +53,8 @@ imageInput.addEventListener('change', (event) => {
         localStorage.setItem('status', 'info');
         localStorage.setItem('mensagem', 'A imagem deve ser no formato JPG/JPEG!');
         alertas();
+
+        imageInput.value = '';
 
         return;
     }
