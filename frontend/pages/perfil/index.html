@@ -227,7 +227,7 @@
 
         <section class="bg-component">
             <div class="container mx-auto px-6 py-12">
-                <div class="mb-8">
+                <div class="mb-8 overflow-hidden">
                     <div class="flex flex-col sm:flex-row gap-6 sm:gap-12 items-center">
                         <div class="w-[150px] h-[150px] rounded-full mx-auto sm:m-0 relative overflow-hidden border border-primary group">
                             <img id="perfil-image" src="../../img/icon/no-image.jpg" alt="Foto de perfil" class="w-full h-full">
@@ -245,7 +245,7 @@
                         <div class="flex items-center gap-8 flex-wrap justify-center">
                             <div class="flex items-center gap-2">
                                 <img src="../../img/icon/mail.svg" alt="Email">
-                                <span id="email" class="text-base text-color-text-secundary font-normal">N/A</span>
+                                <span id="email" class="text-base text-color-text-secundary font-normal whitespace-nowrap">N/A</span>
                             </div>
                         </div>
                     </div>
@@ -262,9 +262,9 @@
                             <span class="font-semibold text-base">NOME</span>
                             <span id="nome" class="text-base font-light capitalize">N/A</span>
                         </div>
-                        <div class="flex flex-col rounded-md px-4 py-2">
+                        <div class="flex flex-col rounded-md px-4 py-2 overflow-hidden text-ellipsis">
                             <span class="font-semibold text-base">E-MAIL</span>
-                            <span id="email" class="text-base font-light">N/A</span>
+                            <span id="email" class="text-base font-light whitespace-nowrap">N/A</span>
                         </div>
                     </div>
                     <div id="user-prod" class="hidden">
