@@ -56,14 +56,15 @@ spanInformacoes.addEventListener('click', () => {
 async function buscarProdutos() {
 
     if (localStorage.getItem('nifPerfil') && !userProd.classList.contains('hidden')) {
-        try {
 
-            document.getElementById('table').innerHTML = `
-            <div class='flex flex-col justify-center items-center gap-4'>
-                <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
-                <h2 class='font-bold text-color-text'>CARREGANDO...</h2>
-            </div>
-            `;
+        document.getElementById('table').innerHTML = `
+        <div class='flex flex-col justify-center items-center gap-4'>
+            <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
+            <h2 class='font-bold text-color-text'>CARREGANDO...</h2>
+        </div>
+        `;
+
+        try {
 
             // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
             if (sessionStorage.getItem('paginaProduto') == null) {

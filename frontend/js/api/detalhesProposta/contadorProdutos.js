@@ -5,10 +5,8 @@ export default function contadorProdutos(e){
     if(e.length > 0){
         document.querySelector('#contadorProdutos').classList.remove('hidden')
         document.querySelector('#contadorProdutos').classList.add('flex')
-        document.querySelector('#quantProduto').classList.add('hidden')
     }else{
         document.querySelector('#contadorProdutos').classList.add('hidden')
         document.querySelector('#contadorProdutos').classList.remove('flex')
-        document.querySelector('#quantProduto').classList.remove('hidden')
     }
 }

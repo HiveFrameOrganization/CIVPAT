@@ -2,7 +2,7 @@ export default async function exibirProdutos(produtos) {
     // selecionando a div dos botões
     const botoes = document.getElementById('propostas');
     // limpando os possíveis elementos que possam estar na div
-    // propostas.innerHTML = '';
+    document.getElementById('propostas').innerHTML = '';
     
     for (let produto of produtos) {
         console.log(produto['Situacao'])
