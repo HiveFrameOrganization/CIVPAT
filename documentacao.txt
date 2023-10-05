@@ -13,3 +13,20 @@ As tecnologias que usamos para construção do nosso projeto do TCC foram o Java
 	Já o PHP nos permite ter uma melhor conectividade com banco de dados, por isso nos serviu como uma "API", pois com ele temos melhor facilidade na manipulação de dados, com comandos SQL's.
 
 
+Tecnologias FrontEnd {
+	
+	Html: Linguagem de marcação para criação de elementos web simples, como textos, imagens, áudios e etc...
+
+	Css: Tecnologia usada para definir a estilização de elementos web, como tamanho, cores e posicionamentos.
+
+	Javascript: Linguagem de programação muito utilizada para o consumo das APIs, tratamentos de erros e tornar a página dinâmica e com uma boa experiencia para o usuário.
+
+	Tailwind: Uma biblioteca de estilização CSS utilizada para agilizar a estilização das diferentes paginas web com classes.
+
+	Google-fonts: Api do Google utilizada para importar fonts personalizadas. 
+
+	SweetAlert: Api utilizada para criar Pop-ups personalizados na tela, como alertas, mensagens de erro, mensagens de sucesso e etc…
+
+}
+	
+
