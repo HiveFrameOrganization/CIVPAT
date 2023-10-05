@@ -6,3 +6,5 @@
 
 - Git: Sistema de controle de versão distribuída facilitando o controle do versionamento do código fonte da aplicação. 
 - GitHub: Serviço de hospedagem em nuvem de repositórios Git e ambiente colaborativo entre a equipe de desenvolvimento.  
+
+=================================================================================================================================
