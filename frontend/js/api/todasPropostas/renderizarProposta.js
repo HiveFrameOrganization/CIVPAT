@@ -80,7 +80,7 @@ async function exibirPropostas(propostas){
                             // AVISO QUE ESTA PROXIMO HA DATA FINAL
                             data = 'Faltam '+(dataFinal.dia - dataAtual.dia) +' dia(s)'
                             corData = 'bg-color-orange/20 text-color-orange'
-                        }else if(dataFinal.dia - dataAtual.dia > 10){
+                        }else if(dataAtual.dia - dataFinal.dia > 10){
                             data = 'Atrasada '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
                             corData = 'bg-color-red/20 text-color-red'
                         }else{
