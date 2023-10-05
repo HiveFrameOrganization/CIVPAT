@@ -33,10 +33,10 @@ export default function avisoData(res){
                     alertaData.innerHTML ='faltam '+ (dataFinal.dia - dataAtual.dia) +' dia(s) para o final da proposta'
                     alertaData.classList.add('text-color-orange')
                     alertaData.classList.add('bg-color-orange/20')
-                }else if(dataFinal.dia - dataAtual.dia > 10){
+                }else if(dataAtual.dia - dataFinal.dia > 10){
                     alertaData.innerHTML ='proposta atrasada em '+ (dataAtual.dia - dataFinal.dia) +' dia(s)'
-                    alertaData.classList.add('text-btn-red')
-                    alertaData.classList.add('bg-btn-red/20')
+                    alertaData.classList.add('text-color-red')
+                    alertaData.classList.add('bg-color-red/20')
                 }else{
                     alertaData.innerHTML =''
                 }

@@ -90,6 +90,7 @@ window.addEventListener('load', async function (){
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
     document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
+    localStorage.setItem('situacaoProduto', dadosProduto['Situacao']);
 
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
     // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
@@ -203,8 +204,6 @@ async function carregarDetalhesProduto() {
 
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
-
-    console.log(dados);
 
 
     return dados[0];
@@ -350,8 +349,6 @@ async function LancamentoHoras(){
         if (localStorage.getItem('cargo') == 'tec'){
 
             // PESSOAS
-
-            console.log(resposta)
             
             if (resposta['horaTotalPessoa'] == undefined){
                 document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
