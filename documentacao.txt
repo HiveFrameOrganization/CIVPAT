@@ -8,3 +8,8 @@
 - GitHub: Serviço de hospedagem em nuvem de repositórios Git e ambiente colaborativo entre a equipe de desenvolvimento.  
 
 =================================================================================================================================
+As tecnologias que usamos para construção do nosso projeto do TCC foram o JavaScript e PHP.
+	Escolhemos JavaScript, pois essa linguagem de programação desempenha um papel fundamental na melhoria da experiência do usuário em nossa aplicação. Com essa tecnologia podemos criar funções que serão acionadas após as requisições do usuário, facilitando a comunicação do front-end com o back-end, realizando requisições assíncronas, tornando assim nosso projeto mais dinâmico.
+	Já o PHP nos permite ter uma melhor conectividade com banco de dados, por isso nos serviu como uma "API", pois com ele temos melhor facilidade na manipulação de dados, com comandos SQL's.
+
+
