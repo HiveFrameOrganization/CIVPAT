@@ -17,6 +17,19 @@ modalEdit.addEventListener('click', function(e) {
   if (e.target == this) fechaModalEdit();
 });
 
+const botaoAceitar = document.getElementById('aceitarProposta');
+const botaoDeclinar =  document.getElementById('declinarProposta');
+
+window.addEventListener('load', () => {
+  const cargo = localStorage.getItem('cargo');
+
+  if (cargo == 'ger'){
+    botaoAceitar.value = 'SOLICITAR ACEITE';
+    botaoDeclinar.value = 'SOLICITAR DECLINIO';
+  }
+
+});
+
 function fechaModalEdit(){
     let modal = document.querySelector('.editar');
 

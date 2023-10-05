@@ -15,21 +15,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $dados = json_decode(file_get_contents("php://input"));
 
     $idProposta = $_GET['id'];
+    $tipoDeclinio = $_GET['tipoDeclinio'];
 
-    $stmt = $conn->prepare('UPDATE Propostas SET `Status` = "Declinado" where idProposta = ?');
+    $stmt = $conn->prepare('UPDATE Propostas SET `Status` = ? where idProposta = ?');
 
-    $stmt->bind_param("s", $idProposta);
+    $stmt->bind_param("ss", $tipoDeclinio, $idProposta);
 
     if($stmt->execute()){
-        $resposta = [
-            "status"=> "success",
-            "mensagem"=>"Proposta declinada com sucesso!"
-        ];
+        if ($tipoDeclinio == 'Declinado') {
+            $resposta = [
+                "status"=> "success",
+                "mensagem"=>"Proposta declinada com sucesso!"
+            ];
+
+        } else {
+            $resposta = [
+                "status"=> "success",
+                "mensagem"=>"Solicitação de declinio feita com sucesso!"
+            ];
+        }
     }else{
-        $resposta =[
-            "status"=>"error",
-            "mensagem"=>"Erro ao declinar proposta!"
-        ];
+        if ($tipoDeclinio == 'Declinado') {
+            $resposta =[
+                "status"=>"error",
+                "mensagem"=>"Erro ao declinar proposta!"
+            ];
+        } else {
+            $resposta =[
+                "status"=>"error",
+                "mensagem"=>"Erro ao solicitar declinio!"
+            ];
+        }
+        
     }
 
     $envio = json_encode($resposta);

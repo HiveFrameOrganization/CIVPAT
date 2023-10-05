@@ -35,10 +35,12 @@ export default async function aceitarProposta() {
 
     console.log(pdfObrigatorio)
     if (aceitar && pdfObrigatorio) {
+        const botaoAceitar = document.getElementById('aceitarProposta');
         const idProposta = localStorage.getItem('idProposta');
+        const tipoAceite = (botaoAceitar.value == 'ACEITAR') ? 'Aceito' : 'Solicitação de Aceite';
 
         // criando uma variável para enviar a lista para o php, transformando o string em objeto json
-        const requisicao = await fetch(back + `/detalhesProposta/aceitarProposta.php?id=${idProposta}`);
+        const requisicao = await fetch(back + `/detalhesProposta/aceitarProposta.php?id=${idProposta}&tipoAceite=${tipoAceite}`);
 
         const resposta = await requisicao.json();
 

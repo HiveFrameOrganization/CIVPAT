@@ -23,6 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $area = $data["area"];
     $nifTecnico = $data["tecnico"];
     $idNomeProduto = $data["produto"];
+    $idProposta = intval($data["idProposta"]);
+
+    $dataInicialFormatada = date("Y-m-d", strtotime($dataInicial));
+    $dataFinalFormatada = date("Y-m-d", strtotime($dataFinal));
     
     $stmt = $conn->prepare('UPDATE Produtos SET fk_nifTecnico = ?,
     fk_idNomeProduto = ?,
@@ -39,6 +43,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("sssssssssss", $nifTecnico, $idNomeProduto, $servico, $unidade, $area, $valor, $tempoPessoa, $tempoMaquina, $dataInicial, $dataFinal, $idProduto);
 
     if ($stmt->execute()){
+
+        $stmt3 = $conn->prepare('SELECT Inicio, Fim FROM Propostas WHERE idProposta = ?');
+
+        $stmt3->bind_param('i', $idProposta);
+
+        $stmt3->execute();
+
+        $resultado = $stmt3-> get_result();
+
+        $dados = $resultado->fetch_assoc();
+
+        if ($dados['Inicio'] == null || $dataInicialFormatada < $dados['Inicio']){
+            $stmt4 = $conn->prepare('UPDATE Propostas SET Inicio = ? WHERE idProposta = ?');
+
+            $stmt4->bind_param('si', $dataInicial, $idProposta);
+
+            $stmt4->execute();
+        }
+
+        if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
+            $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
+
+            $stmt5->bind_param('si', $dataFinal, $idProposta);
+
+            $stmt5->execute();
+        }
         $resposta = [
             'status' => 'success',
             'mensagem' => 'Produto atualizado com sucesso'

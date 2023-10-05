@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import salvarMudancasNaProposta from '../detalhesProposta/salvarMudancasNaProposta.js';
 
 const corpoDaPagina = document.querySelector('body');
 
@@ -154,7 +155,10 @@ async function salvarProduto () {
             if (dados['status'] == 'success'){
                 localStorage.setItem('status', dados['status']);
                 localStorage.setItem('mensagem', dados['mensagem']);
+                
             }
+            
+            setTimeout(salvarMudancasNaProposta, 5000);
     
             window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
         

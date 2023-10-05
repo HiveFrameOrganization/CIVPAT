@@ -26,7 +26,7 @@ export default async function pegarTodasAsPropostas (filt, pesquisado) {
     } else {
         declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
     }
-
+    console.log(declaradoQtdBotoes)
     try{
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}

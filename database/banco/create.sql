@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `isihiveframe`.`Propostas` (
   `Resumo` TEXT NOT NULL,
   `fk_idUnidadeCriadora` INT UNSIGNED NOT NULL,
   `Empresa` VARCHAR(200) NOT NULL,
-  `Status` ENUM('Em Análise', 'Aceito', 'Declinado', 'Concluido') NOT NULL,
+  `Status` ENUM('Em Análise', 'Aceito', 'Declinado', 'Concluido', 'Solicitação de Declinio', 'Solicitação de Aceite') NOT NULL,
   `nSGSET` VARCHAR(50) NULL,
   `CNPJ` VARCHAR(14) NULL,
   `Inicio` DATE NULL,

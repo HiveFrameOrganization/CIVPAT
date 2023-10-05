@@ -90,3 +90,9 @@ document.getElementById('propostasConcluidas').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
     mudarAba('Concluido')
 });
+
+document.getElementById('solicitacoes').addEventListener('click', () => {
+    // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
+    mudarAba('solicitacoes')
+});
+

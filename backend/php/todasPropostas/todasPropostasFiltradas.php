@@ -68,17 +68,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             // Limita os resultados a 10 propostas por página
             $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
 
-        } else {
-            $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-            `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-            `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-            INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-            INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-            WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-            ORDER BY `Propostas`.`idProposta` DESC
-            LIMIT ?, ?');
-            // Limita os resultados a 10 propostas por página
-            $stmt->bind_param('ssii', $filtroPagina, $filtro, $inicioProposta, $qtdPropostasTela);
+        } else {    
+            if ($filtroPagina == 'situacao') {
+                $declinio = 'Solicitação de Declinio';
+                $aceito = 'Solicitação de Aceite';
+
+                $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+                `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+                `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
+                INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+                INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
+                WHERE `Propostas`.`Status` in (?, ?) AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+                ORDER BY `Propostas`.`idProposta` DESC
+                LIMIT ?, ?');
+                // Limita os resultados a 10 propostas por página
+                $stmt->bind_param('ssii', $aceito, $declinio, $filtro, $inicioProposta, $qtdPropostasTela);
+            } else {
+
+                $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+                `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+                `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
+                INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+                INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
+                WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
+                ORDER BY `Propostas`.`idProposta` DESC
+                LIMIT ?, ?');
+                // Limita os resultados a 10 propostas por página
+                $stmt->bind_param('ssii', $filtroPagina, $filtro, $inicioProposta, $qtdPropostasTela);
+            }
 
         }
 
@@ -114,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
         'qtdBotoes' => $qtdBotoes,
-        'atest' => $_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim'
+        'atest' => $_GET['qtdBotes'] == -1
     ];
 
     $retorno  = json_encode($resposta);

@@ -72,6 +72,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt6->execute();
 
 
+        $stmt7 = $conn->prepare('SELECT Valor FROM Propostas WHERE idProposta = ?');
+        $stmt7->bind_param('i', $idProposta);
+        $stmt7->execute(); 
+
+        $resultado = $stmt7->get_result();
+        $val = $resultado->fetch_assoc();
+
+        if ($val['Valor'] == null) {
+            $val = 0;
+        }
+
+        echo $valorSomado;
+
+
+        // $valorSomado = intval($val) + $valor;
+
+        // $stmt8 = $conn->prepare('UPDATE Propostas SET Valor = ? WHERE idProposta = ?');
+        // $stmt8->bind_param('si', $valorSomado, $idProposta);
+        // $stmt8->execute(); 
 
         // Resposta a ser retronada para o servidor
         $resposta = [
