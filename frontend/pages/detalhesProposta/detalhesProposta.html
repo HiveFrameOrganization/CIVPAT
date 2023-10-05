@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./detalhesProposta.css">
-    <title>Detalhes da Proposta</title>
+    <title>Detalhes da Proposta - HIVEFRAME</title>
     <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -446,6 +446,19 @@
                                 type="text" id="numeroSGSET" placeholder="000-00/0000" onkeypress="sgsetMask()" minlength="11" maxlength="11" disabled>
                         </div>
 
+                        <!-- proibindo digitar algo além de letras -->
+
+                        <script>
+                            const nsgset = document.getElementById('numeroSGSET');
+
+                            nsgset.onkeydown = function(event) {
+                            
+                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39) {
+                                    event.preventDefault();
+                                }
+                            };
+                        </script>
+
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
                             <label for=" " class="text-xs uppercase text-color-text-secundary font-bold">Nome de
                                 Contato:</label>
@@ -520,7 +533,7 @@
                     <div>         
                         <input
                             aria-label="Declinar proposta"
-                            class="bg-color-red py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer"
+                            class="bg-color-red w-full py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer"
                             type="button" value="DECLINAR" id="declinarProposta" declinarProposta()>
                     </div>
                 </div>
@@ -884,13 +897,12 @@
                         class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs uppercase font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">
                         + Novo Produto</button>
 
-                        <span id="quantProduto">Nenhum produto cadastrado!</span>
                         <span id="contadorProdutos" class="hidden"><p id="produtoConcluido">0 </p> /  <p id="produtoTotal" class="mr-2">0</p> produto(s) concluidos</span>
                         
                     </div>
     
                     <div role="table" id="propostas"
-                        class="tabela space-y-1 overflow-y-auto min-h-[450px] max-h-[450px]">
+                        class="tabela space-y-1 overflow-y-auto min-h-[40vh] max-h-[50vh]">
     
                     </div>
                 </div>
@@ -1092,7 +1104,7 @@
     <script type="module" src="../../js/api/followUp/adicionarFollowUp.js"></script>
     <script type="module" src="../../js/api/followUp/editarFollowUp.js"></script>
     <script type="module" src="../../js/api/followUp/telaFollowUp.js"></script>
-    <script type="module" src="../../js/feedbacdk.js"></script>
+    <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 
     <!-- Autenticação -->
