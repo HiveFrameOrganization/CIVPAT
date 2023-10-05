@@ -1,0 +1,26 @@
+name: Atualizando imagem no Docker Hub
+
+on:
+  push:
+    branches:
+      - devOps-container
+
+jobs:
+  push-to-docker-hub:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Código (Garantindo que a branch está atualizada)
+        uses: actions/checkout@v2
+
+      - name: Login no Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+
+      - name: Push da Imagem para o Docker Hub
+        run:  docker push luizbrito6/aplicacao:v1.0
+        
+
+
+  
+        
