@@ -467,7 +467,7 @@
 
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 
-    <!-- desabilitando inputs caso produto esteja concluido -->
+    <!-- desabilitando inputs e escondendo botao de salvar caso produto esteja concluido -->
 
     <script>
         setTimeout(desabilitaInputs, 1000);
@@ -483,6 +483,8 @@
                 document.getElementById('valor').disabled = true;
                 document.getElementById('dataInicial').disabled = true;
                 document.getElementById('dataFinal').disabled = true;
+                
+                document.getElementById('botaoSalvar').style.display = 'none';
             }
         }
     </script>
