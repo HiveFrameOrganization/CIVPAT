@@ -467,6 +467,26 @@
 
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
 
+    <!-- desabilitando inputs caso produto esteja concluido -->
+
+    <script>
+        setTimeout(desabilitaInputs, 1000);
+
+        function desabilitaInputs(){
+            if (localStorage.getItem('situacaoProduto') == 'Concluido'){
+                document.getElementById('produto').disabled = true;
+                document.getElementById('tecnicos').disabled = true;
+                document.getElementById('servico').disabled = true;
+                document.getElementById('unidadeRealizadora').disabled = true;
+                document.getElementById('tempoPessoa').disabled = true;
+                document.getElementById('tempoMaquina').disabled = true;
+                document.getElementById('valor').disabled = true;
+                document.getElementById('dataInicial').disabled = true;
+                document.getElementById('dataFinal').disabled = true;
+            }
+        }
+    </script>
+
     <!-- sumindo com o botão de finalizar produto caso já esteja concluído -->
 
     <script>
@@ -525,12 +545,12 @@
             
             acumuladas.innerHTML += `<div class="flex flex-col gap-2 w-full">
                 <label class="text-color-text-secundary font-semibold text-sm lg:text-base">HORAS-PESSOA ACUMULADAS</label>
-                <input type="text" id="horasPessoaAcumuladasCoor" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                <input type="text" id="horasPessoaAcumuladasCoor" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer" disabled>
             </div>
             
             <div class="flex flex-col gap-2 w-full">
                 <label class="text-color-text-secundary font-semibold text-sm lg:text-base">HORAS-MÁQUINA ACUMULADAS</label>
-                <input type="text" id="horasMaquinaAcumuladasCoor" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60" disabled>
+                <input type="text" id="horasMaquinaAcumuladasCoor" class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/40 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer" disabled>
             </div>`;
 
         }
