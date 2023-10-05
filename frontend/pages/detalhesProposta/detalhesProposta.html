@@ -446,6 +446,19 @@
                                 type="text" id="numeroSGSET" placeholder="000-00/0000" onkeypress="sgsetMask()" minlength="11" maxlength="11" disabled>
                         </div>
 
+                        <!-- proibindo digitar algo além de letras -->
+
+                        <script>
+                            const nsgset = document.getElementById('numeroSGSET');
+
+                            nsgset.onkeydown = function(event) {
+                            
+                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39) {
+                                    event.preventDefault();
+                                }
+                            };
+                        </script>
+
                         <div class="flex flex-col w-full md:w-1/3 px-5 gap-2">
                             <label for=" " class="text-xs uppercase text-color-text-secundary font-bold">Nome de
                                 Contato:</label>
