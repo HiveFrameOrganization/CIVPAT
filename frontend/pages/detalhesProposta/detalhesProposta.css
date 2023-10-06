@@ -14,6 +14,7 @@ input[type="month"]::-webkit-calendar-picker-indicator {
 
 input[type="date"]{
     height: 3rem!important;
+    /* color: #fca00280; */
 }
 
 /* Chrome, Safari, Edge, Opera */
