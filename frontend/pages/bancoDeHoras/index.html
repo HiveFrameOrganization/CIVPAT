@@ -80,6 +80,11 @@
         pointer-events: none;
     }
 
+    input[type="month"]::-webkit-inner-spin-button,
+    input[type="month"]::-webkit-calendar-picker-indicator {
+        filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
+    }
+
 </style>
 <script>
     tailwind.config = {

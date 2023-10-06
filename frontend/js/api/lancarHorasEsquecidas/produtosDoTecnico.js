@@ -214,7 +214,7 @@ window.addEventListener('click', (event) => {
 exibirAlerta(
     `
     <h1 class='text-color-text font-semibold text-lg leading-4 uppercase text-center'>
-        Insira o NIF do funcionario desejado!
+        Insira o NIF do funcionário desejado!
     </h1>
     `
 );
