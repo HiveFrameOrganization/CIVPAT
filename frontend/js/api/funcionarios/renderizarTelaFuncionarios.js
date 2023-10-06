@@ -85,7 +85,7 @@ async function exibir(dados) {
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="flex flex-col gap-1 font-semibold w-[275px] max-w-[275px] overflow-hidden text-ellipsis">
-                        <span class="text-lg leading-4 whitespace-nowrap">Email</span>
+                        <span class="text-lg leading-4 whitespace-nowrap">E-mail</span>
                         <span title="${funcionario['Email'] ? funcionario['Email'] : 'N/A'}" class="text-xs text-color-text-secundary">${funcionario['Email'] ? funcionario['Email'] : 'N/A'}</span>
                     </div>
                 </div>
