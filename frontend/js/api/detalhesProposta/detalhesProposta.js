@@ -201,7 +201,7 @@ paraSegundoModal.addEventListener('click', ()=>{
     segundoCadastroProduto.classList.remove('hidden')
 
     console.log(tempo.value)
-    if(tempo.value == ''){
+    if(tempo.value == '' || 'Nenhuma maquina selecionada'){
         tempo.setAttribute('type', 'text')
         tempo.value = 'Nenhuma maquina selecionada'
         tempo.classList.add('text-[90%]')
