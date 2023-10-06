@@ -39,6 +39,18 @@
     }   
 }
 
+@font-face {
+    src: url('../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
+    font-family: 'Rubik';    
+    font-style: normal;
+} 
+
+@font-face {
+    src: url('../../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
+    font-family: 'Rubik';    
+    font-style: italic;
+} 
+
 * {
     font-family: 'Rubik', sans-serif;
 

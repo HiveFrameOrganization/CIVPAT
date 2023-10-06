@@ -3,100 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
     <title>Banco de horas - HIVEFRAME</title>
-    <link
-    href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<style type="text/tailwindcss">
-    @layer base {
-        :root {
-            /* DAFAULT: Dark */
-            --bg-body: 9 32 48;
-            --bg-component: 18 39 54;
-            --primary-color: 57 118 209;
-            --text-color: 255 255 255;
-            --text-secundary-color: 126 126 126;
-            --red: 245 74 76;
-            --green: 36 194 146;
-            --purple: 121 80 255;
-        }
-
-        @media (prefers-color-scheme: light) {
+    <!-- Autenticação -->
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['tec'])
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style type="text/tailwindcss">
+        @layer base {
             :root {
+                /* DAFAULT: Dark */
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+                --red: 245 74 76;
+                --green: 36 194 146;
+                --purple: 121 80 255;
+            }
+
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --bg-body: 241 245 249;
+                    --bg-component: 255 255 255;
+                    --text-color: 30 41 59;
+                }
+            }
+
+            :root[data-theme="dark"] {
+                --bg-body: 9 32 48;
+                --bg-component: 18 39 54;
+                --primary-color: 57 118 209;
+                --text-color: 255 255 255;
+                --text-secundary-color: 126 126 126;
+            }   
+
+            :root[data-theme="light"] {
                 --bg-body: 241 245 249;
                 --bg-component: 255 255 255;
                 --text-color: 30 41 59;
-            }
+            }   
         }
 
-        :root[data-theme="dark"] {
-            --bg-body: 9 32 48;
-            --bg-component: 18 39 54;
-            --primary-color: 57 118 209;
-            --text-color: 255 255 255;
-            --text-secundary-color: 126 126 126;
-        }   
+        @font-face {
+            src: url('../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
+            font-family: 'Rubik';    
+            font-style: normal;
+        } 
 
-        :root[data-theme="light"] {
-            --bg-body: 241 245 249;
-            --bg-component: 255 255 255;
-            --text-color: 30 41 59;
-        }   
-    }
+        @font-face {
+            src: url('../../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
+            font-family: 'Rubik';    
+            font-style: italic;
+        } 
 
-    * {
-        font-family: 'Rubik', sans-serif;
+        * {
+            font-family: 'Rubik', sans-serif;
 
-        /* Works on Firefox */
-        scrollbar-width: thin;
-        scrollbar-color: rgb(57, 118, 209) transparent;
-    }
+            /* Works on Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: rgb(57, 118, 209) transparent;
+        }
 
-    /* Works on Chrome, Edge, and Safari */
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 4px;
-    }
+        /* Works on Chrome, Edge, and Safari */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 4px;
+        }
 
-    ::-webkit-scrollbar-thumb {
-        background-color: rgb(57, 118, 209);
-        border-radius: 0.375rem/* 6px */;
-    }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(57, 118, 209);
+            border-radius: 0.375rem/* 6px */;
+        }
 
-    #fade {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        z-index: 25;
-    }
+        #fade {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 25;
+        }
 
-    #fade.hide {
-        opacity: 0;
-        pointer-events: none;
-    }
+        #fade.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-</style>
-<script>
-    tailwind.config = {
-        theme: {
-            colors: {
-                'body': 'rgb(var(--bg-body) / <alpha-value>)',
-                'component': 'rgb(var(--bg-component) / <alpha-value>)',
-                'primary': 'rgb(var(--primary-color) / <alpha-value>)',
-                'color-text': 'rgb(var(--text-color) / <alpha-value>)',
-                'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
-                'color-red': 'rgb(var(--red) / <alpha-value>)',
-                'color-green': 'rgb(var(--green) / <alpha-value>)',
-                'color-purple': 'rgb(var(--purple) / <alpha-value>)',
-            }
-        },
-    }
-</script>
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                colors: {
+                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
+                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
+                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
+                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
+                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
+                    'color-red': 'rgb(var(--red) / <alpha-value>)',
+                    'color-green': 'rgb(var(--green) / <alpha-value>)',
+                    'color-purple': 'rgb(var(--purple) / <alpha-value>)',
+                }
+            },
+        }
+    </script>
 </head>
 <body class="bg-component transition-colors">
     <div id="fade" class="hide transition-opacity"></div>
@@ -237,13 +252,5 @@
     <script src="../../js/logoff.js"></script>
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
     <script type="module" src="../../js/feedback.js"></script>
-
-    <!-- Autenticação -->
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js'
-        autenticacao(['tec'])
-
-    </script>
-
 </body>
 </html>

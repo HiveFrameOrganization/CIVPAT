@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./detalhesProposta.css">
     <title>Detalhes da Proposta - HIVEFRAME</title>
     <link rel="shortcut icon" href="../../img/icon/favicon.ico" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <!-- Autenticação -->
+    <script type="module">
+        import { autenticacao } from '../../js/api/login/autenticacao.js'
+        autenticacao(['coor', 'ger', 'adm'])
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -55,6 +54,18 @@
                 --text-color: 30 41 59;
             }   
         }
+
+        @font-face {
+            src: url('../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
+            font-family: 'Rubik';    
+            font-style: normal;
+        } 
+
+        @font-face {
+            src: url('../../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
+            font-family: 'Rubik';    
+            font-style: italic;
+        } 
 
         * {
             font-family: 'Rubik', sans-serif;
@@ -1106,14 +1117,6 @@
     <script type="module" src="../../js/api/followUp/telaFollowUp.js"></script>
     <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
-
-    <!-- Autenticação -->
-    <script type="module">
-        import { autenticacao } from '../../js/api/login/autenticacao.js'
-
-        autenticacao(['coor', 'ger', 'adm'])
-
-    </script>
 
     <script type="module">
         import alertas from '../../js/feedback.js';
