@@ -2,7 +2,7 @@
 module.exports = {
     content: [
         './frontend/pages/**/*',
-        './frontend/Componentes/**/*'
+        './frontend/js/**/*'
     ],
     theme: {
         colors: {
