@@ -25,7 +25,7 @@ async function buscarUsuarioLogado() {
         const resposta = await requisicao.json();
 
 
-
+        console.log(resposta);
         // Exibir os dados retornados na tela...
         exibir(resposta.dados)
 

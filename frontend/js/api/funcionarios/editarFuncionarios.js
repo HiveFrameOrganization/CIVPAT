@@ -45,6 +45,9 @@ async function editarFuncionarios() {
             console.log(resp);
 
             if (resp.status == 'success') {
+                
+                localStorage.setItem('nomeLogin', `${nome.charAt(0).toUpperCase() + nome.slice(1)} ${sobrenome.charAt(0).toUpperCase() + sobrenome.slice(1)}`);
+                localStorage.setItem('cargo', `${cargo.toLowerCase()}`);
 
                 localStorage.setItem('status', 'success');
                 localStorage.setItem('mensagem', 'Usuário editado com sucesso');
