@@ -32,3 +32,7 @@ select {
     -moz-appearance: none!important;
     -webkit-appearance: none!important;
   }
+
+select:disabled{
+  opacity: 100%;
+}
