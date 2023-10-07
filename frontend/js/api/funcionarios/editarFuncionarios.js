@@ -45,9 +45,12 @@ async function editarFuncionarios() {
             console.log(resp);
 
             if (resp.status == 'success') {
-                
-                localStorage.setItem('nomeLogin', `${nome.charAt(0).toUpperCase() + nome.slice(1)} ${sobrenome.charAt(0).toUpperCase() + sobrenome.slice(1)}`);
-                localStorage.setItem('cargo', `${cargo.toLowerCase()}`);
+                // Verifica se o funcionário editado, é a própria pessoa que está se editando
+                // Assim, setando no LocalStorage as novas informações
+                if (localStorage.getItem('nif') == nif) {
+                    localStorage.setItem('nomeLogin', `${nome.charAt(0).toUpperCase() + nome.slice(1)} ${sobrenome.charAt(0).toUpperCase() + sobrenome.slice(1)}`);
+                    localStorage.setItem('cargo', `${cargo.toLowerCase()}`);
+                };
 
                 localStorage.setItem('status', 'success');
                 localStorage.setItem('mensagem', 'Usuário editado com sucesso');
