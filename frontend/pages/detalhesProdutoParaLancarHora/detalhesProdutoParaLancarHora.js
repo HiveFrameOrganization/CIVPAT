@@ -20,6 +20,9 @@ const dataMaxima = `${ano}-${mes}-${dia}`;
 document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
+// Seta a data de lançamento para não ser depois de ontem
+let diaLancamento = dia > 10 ? `${dia-1}` : `0${dia-1}`
+document.getElementById('dataDoLancamento').setAttribute('max', `${ano}-${mes}-${diaLancamento}`);
 ////////////////////////////////////////////////
 
 const dataInicial = document.getElementById('dataInicial');
