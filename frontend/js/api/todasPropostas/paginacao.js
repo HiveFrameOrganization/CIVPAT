@@ -1,8 +1,8 @@
 import pegarTodasAsPropostas from './pegarPropostas.js';
 
 // Criar os botões de paginação e adiciona a função que muda a página
-function botoesPaginacao(filtro) {
-    const qtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
+function botoesPaginacao(aba) {
+    const qtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${aba}`);
     const pesquisado = sessionStorage.getItem('pesquisado')
     const containerPaginacao = document.getElementById('inserirPaginacao');
 
@@ -40,7 +40,7 @@ function botoesPaginacao(filtro) {
 
     const setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
     // impedir que botoes apareçam em determinados casos
-    if(sessionStorage.getItem(`qtdBotoesProposta${filtro}`) == sessionStorage.getItem('paginaProposta')){
+    if(sessionStorage.getItem(`qtdBotoesProposta${aba}`) == sessionStorage.getItem('paginaProposta')){
         setaProxPagina.classList.add('hidden')
     }
     if(sessionStorage.getItem('paginaProposta') == 1){
@@ -132,11 +132,11 @@ function colocarPagina(num) {
     sessionStorage.setItem('paginaProposta', num);
 }
 
-async function mudarAba(filtro) {
+async function mudarAba(aba) {
     colocarPagina(1);
-    localStorage.setItem('filtroPadrao', filtro);
-    await pegarTodasAsPropostas(filtro, sessionStorage.getItem('pesquisado'));
-    botoesPaginacao(filtro);
+    localStorage.setItem('filtroPadrao', aba);
+    await pegarTodasAsPropostas(aba, sessionStorage.getItem('pesquisado'));
+    botoesPaginacao(aba);
 }
 
 export default botoesPaginacao

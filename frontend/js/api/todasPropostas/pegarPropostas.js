@@ -3,7 +3,7 @@
 import { back } from '../Rotas/rotas.js';
 import exibirPropostas from './renderizarProposta.js';
 
-export default async function pegarTodasAsPropostas (filt, pesquisado) {
+export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
 
     document.getElementById('table').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>
@@ -12,7 +12,7 @@ export default async function pegarTodasAsPropostas (filt, pesquisado) {
     </div>
     `;
 
-    const filtro = '%' + document.getElementById('hidden-input').value + '%';
+    const pesquisaAtual = '%' + document.getElementById('hidden-input').value + '%';
 
     if (sessionStorage.getItem('paginaProposta') == null) {
         sessionStorage.setItem('paginaProposta', 1)
@@ -21,16 +21,16 @@ export default async function pegarTodasAsPropostas (filt, pesquisado) {
 
 
     let declaradoQtdBotoes
-    if (sessionStorage.getItem(`qtdBotoesProposta${filtro}`) == null) {
+    if (sessionStorage.getItem(`qtdBotoesProposta${aba}`) == null) {
         declaradoQtdBotoes = -1;
     } else {
-        declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${filtro}`);
+        declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${aba}`);
     }
-    console.log(declaradoQtdBotoes)
+    
     try{
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}
-        &qtdBotes=${declaradoQtdBotoes}&filtro=${filtro}&filtroPagina=${filt}&pesquisado=${pesquisado}`);
+        &qtdBotes=${declaradoQtdBotoes}&pesquisaAtual=${pesquisaAtual}&aba=${aba}&pesquisaAnterior=${pesquisaAnterior}`);
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
@@ -42,7 +42,7 @@ export default async function pegarTodasAsPropostas (filt, pesquisado) {
             if (dados.propostas.length > 0) {
 
                 exibirPropostas(dados.propostas);
-                sessionStorage.setItem(`qtdBotoesProposta${filt}`, dados.qtdBotoes);
+                sessionStorage.setItem(`qtdBotoesProposta${aba}`, dados.qtdBotoes);
                 
                 // Adicionando a quaqntidade de propostas de acordo com os seus status
                 document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';

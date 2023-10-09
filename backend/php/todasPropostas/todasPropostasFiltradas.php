@@ -35,14 +35,15 @@ function quantidadeDePropostasPeloStatus ($conn) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
-    $filtroPagina = $_GET['filtroPagina'];
-    $filtro = $_GET['filtro'];
+    $aba = $_GET['aba'];
+    $pesquisaAtual = $_GET['pesquisaAtual'];
     $numPagina = $_GET['pag'];
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
+    $test = '';
 
-    if ($filtro == ''){
-        
+    if ($pesquisaAtual == ''){
+        $test = '1';
         $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
         `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
         `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
@@ -52,11 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         ORDER BY `Propostas`.`idProposta` DESC
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
-        $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
+        $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
 
     } else {
 
-        if ($filtroPagina == ''){
+        if ($aba == ''){
+            $test = '2';
             $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
             `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
             `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
@@ -66,10 +68,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             ORDER BY `Propostas`.`idProposta` DESC
             LIMIT ?, ?');
             // Limita os resultados a 10 propostas por página
-            $stmt->bind_param('sii', $filtro, $inicioProposta, $qtdPropostasTela);
+            $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
 
         } else {    
-            if ($filtroPagina == 'situacao') {
+            if ($aba == 'solicitacoes') {
+
                 $declinio = 'Solicitação de Declinio';
                 $aceito = 'Solicitação de Aceite';
 
@@ -82,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 ORDER BY `Propostas`.`idProposta` DESC
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
-                $stmt->bind_param('ssii', $aceito, $declinio, $filtro, $inicioProposta, $qtdPropostasTela);
+                $stmt->bind_param('sssii', $aceito, $declinio, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
             } else {
 
                 $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
@@ -94,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 ORDER BY `Propostas`.`idProposta` DESC
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
-                $stmt->bind_param('ssii', $filtroPagina, $filtro, $inicioProposta, $qtdPropostasTela);
+                $stmt->bind_param('ssii', $aba, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
             }
 
         }
@@ -117,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
     if ($_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim') {
-        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtroPagina, $filtro);
+        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual);
     } else {
         $qtdBotoes = $_GET['qtdBotes'];
     }
@@ -131,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
         'qtdBotoes' => $qtdBotoes,
-        'atest' => $_GET['qtdBotes'] == -1
+        'atest' => $test
     ];
 
     $retorno  = json_encode($resposta);
@@ -141,13 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Retorna a quantidade de Propostas
-function qtdBotoes($conn, $qtdPropostasTela, $filtroPagina, $filtro) {
+function qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual) {
     // preparando a query
     $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas
     WHERE Status LIKE ? AND TituloProposta LIKE ?");
 
-    $filtroPagina = '%' . $filtroPagina . '%';
-    $stmt->bind_param('ss', $filtroPagina, $filtro);
+    $aba = '%' . $aba . '%';
+    $stmt->bind_param('ss', $aba, $pesquisaAtual);
 
     // Excutando a query
     $stmt->execute();
@@ -158,6 +161,3 @@ function qtdBotoes($conn, $qtdPropostasTela, $filtroPagina, $filtro) {
 
     return ceil($qtdPropostas / $qtdPropostasTela);
 }
-
-
-?>
