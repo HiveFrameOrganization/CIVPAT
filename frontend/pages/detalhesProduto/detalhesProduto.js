@@ -30,7 +30,7 @@ const dataInicial = document.getElementById('dataInicial');
 
 dataInicial.addEventListener('change', () => validacaoDataFinal());
 
-async function validacaoDataFinal () {
+async function validacaoDataFinal() {
     // Validação para o input da data final nunca receber uma data antes da data inicial
     const dataInicial = document.getElementById('dataInicial').value;
 
@@ -40,9 +40,9 @@ async function validacaoDataFinal () {
 
 // window.addEventListener('load', () => pegarUnidadesCriadoras());
 
-async function carregarTecnicos () {
+async function carregarTecnicos() {
     const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
-        methods : 'GET'
+        methods: 'GET'
     });
 
     const resposta = await requisicao.json();
@@ -62,7 +62,7 @@ async function carregarTecnicos () {
 
 }
 
-window.addEventListener('load', async function (){
+window.addEventListener('load', async function () {
     carregarTecnicos();
     pegarUnidadesCriadoras();
     LancamentoHoras();
@@ -71,7 +71,7 @@ window.addEventListener('load', async function (){
     const servicoCategoriaSelect = document.getElementById('servico');
     const unidadeCriadoraSelect = document.getElementById('unidadeRealizadora');
 
-    const dadosProduto = await carregarDetalhesProduto();  
+    const dadosProduto = await carregarDetalhesProduto();
 
     const opcoesTecnicos = document.getElementById('tecnicos');
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
@@ -97,7 +97,7 @@ window.addEventListener('load', async function (){
 
     // inativar horas maquina se nao houver maquina selecionada
     let tempo = document.getElementById('tempoMaquina')
-    if(dadosProduto['fk_idMaquina'] == 1){
+    if (dadosProduto['fk_idMaquina'] == 1) {
         tempo.setAttribute('disabled', 'true')
         // tempo.classList.add()
         localStorage.setItem('maquina', 'Nenhuma')
@@ -112,7 +112,7 @@ window.addEventListener('load', async function (){
         }
     }
 
-    const idServicoCategoria = dadosProduto.fk_idServicoCategoria; 
+    const idServicoCategoria = dadosProduto.fk_idServicoCategoria;
 
     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
     for (var i = 0; i < servicoCategoriaSelect.options.length; i++) {
@@ -121,10 +121,10 @@ window.addEventListener('load', async function (){
             break; // Saia do loop após encontrar a opção desejada
         }
     }
-    
+
     // Excluir as options anteriores
     produtoSelect.innerHTML = "";
-    
+
     try {
         const requisicao = await fetch(back + `/cadastroProduto/carregarProdutos.php?id=${idServicoCategoria}`);
 
@@ -135,7 +135,7 @@ window.addEventListener('load', async function (){
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
         // Loop pelos resultados e crie as options
-        dados.forEach(function(dado) {
+        dados.forEach(function (dado) {
             var option = document.createElement('option');
             option.classList.add('bg-body');
             option.value = dado.idNomeProduto;
@@ -144,23 +144,23 @@ window.addEventListener('load', async function (){
         });
 
         selecionarProduto(dadosProduto);
-        
+
     } catch {
         console.log('Error');
     }
 
-    
+
 })
 
 // Quando for selecionado executar 
-document.getElementById("servico").addEventListener("change", async function() {
+document.getElementById("servico").addEventListener("change", async function () {
     const idServicoCategoria = document.getElementById('servico').value;
     const produtoSelect = document.getElementById("produto");
 
-    
+
     // Excluir as options anteriores
     produtoSelect.innerHTML = "";
-    
+
     try {
         const requisicao = await fetch(back + `/cadastroProduto/carregarProdutos.php?id=${idServicoCategoria}`);
 
@@ -173,7 +173,7 @@ document.getElementById("servico").addEventListener("change", async function() {
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
         // Loop pelos resultados e crie as options
-        dados.forEach(function(dado) {
+        dados.forEach(function (dado) {
             var option = document.createElement('option');
             option.classList.add('bg-body');
             option.value = dado.idNomeProduto;
@@ -183,14 +183,14 @@ document.getElementById("servico").addEventListener("change", async function() {
     } catch {
         console.log('Error');
     }
-// Adicionar o Select2
-// $(document).ready(function() { 
-//     $("#servico").select2();
-// });
+    // Adicionar o Select2
+    // $(document).ready(function() { 
+    //     $("#servico").select2();
+    // });
 
-// $(document).ready(function() { 
-//         $("#produto").select2();
-//     });
+    // $(document).ready(function() { 
+    //         $("#produto").select2();
+    //     });
 });
 
 
@@ -232,11 +232,11 @@ async function selecionarProduto(dadosProduto) {
 async function pegarUnidadesCriadoras() {
     const unidadesSelect = document.getElementById('unidadeRealizadora');
 
-    const requisicao = await fetch (back + '/todasPropostas/pegarUnidadesCriadoras.php');
+    const requisicao = await fetch(back + '/todasPropostas/pegarUnidadesCriadoras.php');
 
     // dados de todas as propostar recebidas (resposta da api)
     const dados = await requisicao.json();
-    
+
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -251,10 +251,10 @@ async function pegarUnidadesCriadoras() {
 
 }
 
-async function atualizarProduto(dados){
+async function atualizarProduto(dados) {
 
-    try{
-        const requisicao = await fetch(back + '/detalhesProduto/salvarProdutoModificado.php',{
+    try {
+        const requisicao = await fetch(back + '/detalhesProduto/salvarProdutoModificado.php', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -275,13 +275,13 @@ async function atualizarProduto(dados){
 
         window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
 
-        
-    }catch(error){
+
+    } catch (error) {
         console.error(error)
     }
 }
 
-if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))){
+if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))) {
 
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
@@ -307,7 +307,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             tempoMaquina: tempoMaquina,
             tempoPessoa: tempoPessoa,
             unidadeRealizadora: unidadeRealizadora,
-            dataInicial : dataInicial ,
+            dataInicial: dataInicial,
             dataFinal: dataFinal,
             area: area,
             servico: servico,
@@ -317,18 +317,19 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             idProduto: idProduto
         }
 
-        
+
         atualizarProduto(dadosParaEnviar);
 
-})};
+    })
+};
 
 
 
 document.getElementById('valor').addEventListener('keydown', () => {
 
     const valorInserido = document.getElementById('valor').value;
-    
-    if (valorInserido > 99999999.99){
+
+    if (valorInserido > 99999999.99) {
         alert('Valor Máximo digitado');
         const inputValor = document.getElementById('valor').value = '';
     }
@@ -339,27 +340,27 @@ document.getElementById('valor').addEventListener('keydown', () => {
 
 // });
 
-async function LancamentoHoras(){
+async function LancamentoHoras() {
     const id = localStorage.getItem('idProduto');
 
-    try{
+    try {
         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
         const resposta = await exibirHoras.json();
-      
 
-        if (localStorage.getItem('cargo') == 'tec'){
+
+        if (localStorage.getItem('cargo') == 'tec') {
 
             // PESSOAS
-            
-            if (resposta['horaTotalPessoa'] == undefined){
+
+            if (resposta['horaTotalPessoa'] == undefined) {
                 document.querySelector('#horasPessoa').value = localStorage.getItem('tempoPessoa');
             } else {
                 document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
             }
 
             // verificando se existem horas acumuladas
-            if (resposta['horasAcumuladasPessoa'] == undefined){
+            if (resposta['horasAcumuladasPessoa'] == undefined) {
                 document.querySelector("#horasPessoaAcumuladas").value = 0;
             } else {
                 document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
@@ -367,14 +368,14 @@ async function LancamentoHoras(){
 
             // MAQUINAS
 
-            if (localStorage.getItem('tempoMaquina') != 0){
-                if (resposta['horaTotalMaquina'] == undefined){
+            if (localStorage.getItem('tempoMaquina') != 0) {
+                if (resposta['horaTotalMaquina'] == undefined) {
                     document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
                 } else {
                     document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
                 }
 
-                if(resposta['horasAcumuladasMaquina'] == undefined){
+                if (resposta['horasAcumuladasMaquina'] == undefined) {
                     document.querySelector("#horasMaquinaAcumuladas").value = 0;
                 } else {
                     document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
@@ -383,26 +384,26 @@ async function LancamentoHoras(){
 
             // adiciona cor diferente se as horas acumuladas estiverem perto de ultrapassar o total
 
-            if (resposta['horasAcumuladasPessoa'] >= ((resposta['horaTotalPessoa'] * 75)/100)){
+            if (resposta['horasAcumuladasPessoa'] >= ((resposta['horaTotalPessoa'] * 75) / 100)) {
                 document.querySelector('#horasPessoaAcumuladas').classList.add('vencendo');
-            } 
+            }
 
             // adiciona cor diferente se as horas acumuladas ultrapassarem o total
 
-            if (resposta['horasAcumuladasPessoa'] > resposta['horaTotalPessoa']){
+            if (resposta['horasAcumuladasPessoa'] > resposta['horaTotalPessoa']) {
                 document.querySelector('#horasPessoaAcumuladas').classList.add('vencido');
-            } 
+            }
 
         } else {
             // inputs do coordenador
 
-            if (resposta['horasAcumuladasPessoa'] == undefined){
+            if (resposta['horasAcumuladasPessoa'] == undefined) {
                 document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
             } else {
                 document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
             }
 
-            if (resposta['horasAcumuladasMaquina'] == undefined){
+            if (resposta['horasAcumuladasMaquina'] == undefined) {
                 document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
             } else {
                 document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
@@ -410,31 +411,31 @@ async function LancamentoHoras(){
         }
 
 
-        if(localStorage.getItem('cargo') == 'tec'){
-            
+        if (localStorage.getItem('cargo') == 'tec') {
+
 
             //Condicionais para gerar os botões com as opções de lançamento de horas dependendo da hora trabalhada
-            if (resposta.totalHorasPessoaDiarias == undefined){
+            if (resposta.totalHorasPessoaDiarias == undefined) {
                 var horasRestantes = 10 - 0;
             } else {
                 var horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
             }
 
-            if (resposta.totalHorasMaquinaDiarias == undefined){
+            if (resposta.totalHorasMaquinaDiarias == undefined) {
                 var horasRestantesMaquina = 10 - 0;
             } else {
                 var horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
             }
-    
- 
+
+
             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
-    
+
             opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
-            if (localStorage.getItem('tempoMaquina') != 0){
+            if (localStorage.getItem('tempoMaquina') != 0) {
                 opcoesHoraMaquina.innerHTML = '';
             }
-    
+
             if (horasRestantes == 0) {
                 let option = document.createElement('option');
                 option.classList.add('bg-body');
@@ -450,8 +451,8 @@ async function LancamentoHoras(){
                     opcoesHoraPessoa.appendChild(option);
                 }
             }
-    
-            if (localStorage.getItem('tempoMaquina') != 0){
+
+            if (localStorage.getItem('tempoMaquina') != 0) {
                 if (horasRestantesMaquina == 0) {
                     let option = document.createElement('option');
                     option.classList.add('bg-body');
@@ -471,19 +472,20 @@ async function LancamentoHoras(){
 
             // desabilita o botao de salvar horas se o tecnico ja tiver terminado suas horas
 
-            if (horasRestantes == 0){
+            if (horasRestantes == 0) {
                 document.querySelector('#salvarHoras').disabled = true;
             }
         }
 
 
-    }catch (error) {
+    } catch (error) {
         console.error(error)
     }
 
 }
 
-if (localStorage.getItem('cargo') == 'tec'){
+
+if (localStorage.getItem('cargo') == 'tec') {
 
     //Ao clicar no botão, sera acionada a função para salvar os dados no back
     const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
@@ -491,8 +493,8 @@ if (localStorage.getItem('cargo') == 'tec'){
         const nifPerfil = localStorage.getItem('nifPerfil');
 
         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-        
-        if(localStorage.getItem('tempoMaquina') != 0){
+
+        if (localStorage.getItem('tempoMaquina') != 0) {
             var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
         } else {
             var horaMaquinaDiaria = 0;
@@ -505,7 +507,7 @@ if (localStorage.getItem('cargo') == 'tec'){
             horaMaquinaDiaria: horaMaquinaDiaria
         };
 
-  
+
 
         try {
             const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
@@ -517,55 +519,108 @@ if (localStorage.getItem('cargo') == 'tec'){
             });
 
             const resposta = await requisicao.json();
-        
-        
+
+
 
             localStorage.setItem('status', resposta.status);
             localStorage.setItem('mensagem', resposta.mensagem);
 
-            if (resposta.status == 'error'){
+            if (resposta.status == 'error') {
                 alertas();
             } else {
                 window.location.href = '/frontend/pages/perfil/index.html';
             }
-        
-        
+
+
         } catch (error) {
             console.error(error);
-          
+
         }
-})};
+    })
+};
 
 // função de finalizar produto
 
-if (localStorage.getItem('cargo') == 'tec'){
+if (localStorage.getItem('cargo') == 'tec') {
 
     const botaoFinalizarProduto = document.getElementById('concluirProduto');
-    
+
     botaoFinalizarProduto.addEventListener('click', () => {
         concluirProduto();
+        // modalConfirmar()
     })
-    
+
     async function concluirProduto() {
-    
+
         const idProduto = localStorage.getItem('idProduto');
-    
+
         const requisicao = await fetch(back + `/detalhesProduto/concluirProduto.php?id=${idProduto}`, {
             method: 'PUT'
         });
-    
+
         const resposta = await requisicao.json();
-    
+
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
-    
-        if (localStorage.getItem('cargo') == 'tec'){
+
+        if (localStorage.getItem('cargo') == 'tec') {
             window.location.href = frontPages + '/perfil/index.html';
         } else {
             window.location.href = frontPages + '/detalhesProposta/detalhesProposta.html';
         }
-    
+
     }
 }
 
 /////////////////////////////
+
+// MODAL DE CONFIRMAÇÃO PARA FINALIZAR PRODUTO
+function modalConfirmar(fun) {
+
+    const div = document.createElement('div');
+    const aside = document.createElement('aside');
+
+    div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
+    aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+
+    const templateModalConfirmar = `
+    <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+        <div>
+            <h2 class="text-2xl font-bold text-red">DESEJA FINALIZAR O PRODUTO?}</h2>
+            <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
+        </div>
+        <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+    </div>
+    <div class="modal-body">
+        <div class="px-4 sm:px-8 flex justify-between">
+            <button id="btn-confirmar" value="yes" type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
+            <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
+        </div>
+    </div>
+    `;
+
+
+    div.innerHTML = templateModalConfirmar;
+
+    document.body.appendChild(div);
+    document.body.appendChild(aside)
+
+    // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
+    document.querySelector('#btn-confirmar').addEventListener('click', () => {
+        concluirProduto()
+
+        // APAGAR ELEMENTOS DE MODAL
+        aside.addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#btn-cancelar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+    })
+}
