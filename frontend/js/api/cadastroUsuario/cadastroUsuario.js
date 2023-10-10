@@ -7,6 +7,15 @@ import alertas from '../../feedback.js'
 window.addEventListener('load', () => {
     alertas();
 })
+
+
+function verificaZeros(numero) {
+    // Converter o número para uma string
+    const numeroString = numero.toString();
+  
+    return /^[0]+$/.test(numeroString);
+}
+
 // Pegando o eveto do formulário
 const formulario = document.querySelector('#form-cadastrar');
 // Função para selecionar o evento do formulário, essa função lida com operações assincronas...
@@ -21,12 +30,19 @@ formulario.addEventListener('submit', async evento => {
     const email = document.querySelector('#cad-email').value;
     const cargo = document.querySelector('#cad-cargo').value;
 
+    const nifValido = verificaZeros(nif);
+
     // Código para validação, colocar dentro de um try
     try {
 
         if (!contemApenasNumeros(nif) || !contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
+
+            alertas();
+        } else if (nifValido) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'NIF inválido');
 
             alertas();
         } else {
