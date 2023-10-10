@@ -56,6 +56,8 @@ async function puxarProdutosDoTecnico () {
         );
     } else {
 
+        exibirAlerta('');
+
         // Loop pela lista
         for (var i = 0; i < resposta.length; i++) {
             // Cria um elemento de botão
