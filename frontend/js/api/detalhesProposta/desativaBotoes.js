@@ -21,4 +21,14 @@ export default function desativaBotoes(){
         declinarProposta.classList.remove('hover:bg-color-red/40')
         declinarProposta.classList.remove('cursor-pointer')
     }
+
+    if(localStorage.getItem('statusProposta') == 'Aceito' || localStorage.getItem('statusProposta') == 'Declinado' || localStorage.getItem('statusProposta') == 'Concluido'){
+        let botaoAceitar = document.querySelector('#aceitarProposta');
+        botaoAceitar.setAttribute('disabled', 'true');
+        botaoAceitar.classList.add('disabled:opacity-20');
+        botaoAceitar.classList.remove('hover:bg-btn-blue/40');
+        botaoAceitar.classList.remove('cursor-pointer');
+    }
+
+    
 }
