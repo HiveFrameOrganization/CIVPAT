@@ -52,12 +52,6 @@ async function verificaEmail(email) {
         // Veririfcando o retorno do servidor e verificando se é novo usuário
         if (retornoServidor.novoUsuario === true) novoUsuario();
 
-        if (retornoServidor.status == 'error'){
-            localStorage.setItem('status', retornoServidor.status);
-            localStorage.setItem('mensagem', retornoServidor.mensagem);
-
-            alertas();
-        }
 
     } catch (erro) {
         console.error(erro);
