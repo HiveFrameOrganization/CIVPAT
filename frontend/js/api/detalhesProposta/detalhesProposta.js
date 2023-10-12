@@ -35,6 +35,34 @@ window.addEventListener('load', async () => {
     alertas();
 })
 
+document.getElementById('orcamento').addEventListener('change', () => {
+    nomeDoArquivoPdfNoInput('orcamento', 'inputFileUpOrcamento');
+});
+
+document.getElementById('propostaAssinada').addEventListener('change', () => {
+    nomeDoArquivoPdfNoInput('propostaAssinada', 'inputFileUpPropostaAssinada');
+});
+
+document.getElementById('relatorioFinal').addEventListener('change', () => {
+    nomeDoArquivoPdfNoInput('relatorioFinal', 'inputRelatorioFinal');
+});
+
+document.getElementById('pesquisaDeSatisfacao').addEventListener('change', () => {
+    nomeDoArquivoPdfNoInput('pesquisaDeSatisfacao','inputPesquisaDeSaisfacao');
+});
+
+
+function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlaceholder) { 
+    const pegandoInput = document.getElementById(inputAondeSobreOArquivo);
+    const campoComPlaceholder = document.getElementById(inputAondeTemOPlaceholder);
+    const arquivoEstaNoInput = pegandoInput.files[0];
+
+    if (arquivoEstaNoInput) {
+        campoComPlaceholder.setAttribute('placeholder', arquivoEstaNoInput.name);
+        console.log(arquivoEstaNoInput.name);
+    }
+}
+
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
 botaoSalvarPdf.addEventListener('click', () => {
