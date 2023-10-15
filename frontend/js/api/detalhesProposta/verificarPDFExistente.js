@@ -2,7 +2,6 @@ import { back } from '../Rotas/rotas.js';
 
 document.getElementById('testess').addEventListener('click', () => {
     const baixarPdfOrcamento = document.getElementById('orcamento').files[0];
-    console.log(baixarPdfOrcamento);
 })
 
 export default async function  verificarPdfExistente(idProposta) {
@@ -18,7 +17,6 @@ export default async function  verificarPdfExistente(idProposta) {
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
 
-        console.log(resposta);
 
         // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {

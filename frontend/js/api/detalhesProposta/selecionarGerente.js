@@ -7,7 +7,6 @@ export default async function selecionarGerente(id) {
 
 
     const resposta = await requisicao.json();
-    console.log(resposta);
     // MOSTRA QUANTIDADE DE PRODUTOS CONCLUIDOS
     document.querySelector('#produtoConcluido').innerHTML = resposta.produtosConcluidos
 

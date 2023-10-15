@@ -96,4 +96,34 @@ function exibeValor(){
   document.querySelector('#valorTotalProdutos').value = valor;
 }
 
+var selectServicos = document.querySelector('#servico');
+var selectTecnicos = document.querySelector('#tecnicos');
+var selectMaquinas = document.querySelector('#maquinas');
 
+selectServicos.addEventListener('change', () => {
+  setTimeout(continuaModal, 200);
+})
+
+selectTecnicos.addEventListener('change', () => {
+  setTimeout(continuaModal, 200);
+})
+
+selectMaquinas.addEventListener('change', () => {
+  setTimeout(continuaModal, 200);
+})
+
+function continuaModal(){
+
+  var inputServicos = document.querySelector('#servico').checkValidity();
+  var inputProduto = document.querySelector('#produto').checkValidity();
+  var inputValor = document.querySelector('#valor').checkValidity();
+  var inputTecnicos = document.querySelector('#tecnicos').checkValidity();
+  var inputMaquinas = document.querySelector('#maquinas').checkValidity();
+  var botaoContinuar = document.getElementById('paraSegundoModal');
+  
+  if (inputServicos == true && inputProduto == true && inputValor == true && inputTecnicos == true && inputMaquinas == true){
+    botaoContinuar.disabled = false;
+  } else {
+    botaoContinuar.setAttribute('disabled', 'true');
+  }
+}

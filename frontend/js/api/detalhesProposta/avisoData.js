@@ -2,7 +2,7 @@
 export default function avisoData(res){
     
     if(res.dataUltimoProduto == null){
-        console.log('nenhum produto cadastrado!')
+
     }else if(res.statusProposta == 'Em Análise' || res.statusProposta == 'Aceito'){
 
         let alertaData = document.querySelector('#alertaData')

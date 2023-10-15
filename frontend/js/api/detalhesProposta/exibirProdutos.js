@@ -5,7 +5,6 @@ export default async function exibirProdutos(produtos) {
     document.getElementById('propostas').innerHTML = '';
     
     for (let produto of produtos) {
-        console.log(produto['Situacao'])
         
         const divRow = document.createElement('div');
         
@@ -97,7 +96,6 @@ export default async function exibirProdutos(produtos) {
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
 
-            console.log(produto['Valor'])
         }
 
         botoes.append(divRow)

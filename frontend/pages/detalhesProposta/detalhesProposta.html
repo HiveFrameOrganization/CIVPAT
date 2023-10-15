@@ -954,7 +954,7 @@
                 <!-- Primeira metade do modal de cadastro de produto -->
                 <div id="primerioCadastroProduto">
                     <label class="text-color-text font-bold block mb-2">Área: </label>
-                    <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
+                    <input class="bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
 
                     <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="servico" id="servico" required>
@@ -985,7 +985,7 @@
                     <label for="valor" class="text-color-text font-bold block mb-2">Valor:</label>
                     <div class="relative">
                         <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
-                        <input onblur="blurValor()" minlength="1" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
+                        <input autocomplete="off" onblur="blurValor()" onkeyup="continuaModal()" minlength="1" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
                     </div>
 
                     <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
@@ -1009,13 +1009,10 @@
                                 valor = valor.replace(',', '.');
         
                                 valor = parseFloat(valor);
-                                console.log(valor + ' teste 1');
         
                                 valor = valor.toLocaleString();
-                                console.log(valor + ' teste 2');
         
                                 valor = valor.toString();
-                                console.log(valor + ' teste 3');
         
                                 document.getElementById('valor').value = valor;
                             }
@@ -1040,7 +1037,7 @@
 
                     <!-- botão para continuar para o resto do modal -->
                     <div class="flex justify-end w-full">
-                        <button id="paraSegundoModal" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 font-semibold text-base py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button">Continuar</button>
+                        <button id="paraSegundoModal" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 font-semibold text-base py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors disabled:opacity-20" type="button" disabled>Continuar</button>
                     </div>
                 </div>
 
