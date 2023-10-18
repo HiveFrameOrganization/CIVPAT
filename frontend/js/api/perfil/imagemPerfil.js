@@ -69,7 +69,6 @@ async function salvarFotoPerfil () {
 
     const nomeImagem = imageInput.files[0]['name'];
 
-    console.log(file);
     const formData = new FormData();
     formData.append('imagem', file);
 
