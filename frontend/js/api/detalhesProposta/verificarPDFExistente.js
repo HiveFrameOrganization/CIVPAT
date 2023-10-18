@@ -1,9 +1,5 @@
 import { back } from '../Rotas/rotas.js';
 
-document.getElementById('testess').addEventListener('click', () => {
-    const baixarPdfOrcamento = document.getElementById('orcamento').files[0];
-})
-
 export default async function  verificarPdfExistente(idProposta) {
     try {
         // Cria a requisição 

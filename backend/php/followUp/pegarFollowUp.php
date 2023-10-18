@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt = $conn->prepare("SELECT `idFollowUp`,`Usuarios`.Nome, `Usuarios`.Sobrenome, `Data`, `Comentario`, `DataProxFollowUp`
     FROM FollowUp
     INNER JOIN Usuarios ON `FollowUp`.`fk_nifUsuario` = `Usuarios`.`NIF`
-    WHERE fk_idProposta = ? ORDER BY `Data`");
+    WHERE fk_idProposta = ? ORDER BY `Data` DESC");
     $stmt->bind_param("s", $_GET['idProposta']);
     $stmt->execute();
     // Pega o resultado da query
