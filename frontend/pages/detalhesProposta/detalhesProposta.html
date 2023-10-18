@@ -111,6 +111,10 @@
             /* cursor: default; */
         }
 
+        option {
+            background-color: rgb(var(--bg-body));
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -739,39 +743,10 @@
 
                     </div>
 
-                    <div class="tabela space-y-1 overflow-auto -we min-h-[450px] max-h-[450px]">
+                    <div class="tabela min-h-[40vh]">
 
                         <div id="tabelaFollow"
-                            class="flex flex-wrap gap-8 w-full md:items-start md:justify-normal pb-7 overflow-y-auto">
-
-                            <!-- <div class="card">
-
-                            <div class="bg-[#1A3661] w-64 h-[248px] rounded-lg z-10 relative">
-                            
-                                <div class="bg-primary w-64 h-60 rounded-lg z-20 relative ml-2">
-        
-                                    <div class="rounded-t-lg w-full bg-[#285292] px-3 py-2 flex justify-between">
-                                        <p class="text-color-text">01/01/2023</p>
-                                        <i class="fas fa-edit text-color-text pt-[2px] cursor-pointer"></i>
-                                    </div>
-        
-                                    <div class="flex flex-col px-3 py-2">
-                                        <p class="pt-4 text-xs text-color-text">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.
-                                        </p>
-                                    </div>
-        
-        
-                                    <div class="flex py-4 px-4 justify-end">
-                                        <h4 class="text-color-text text-xs">Próximo follow-up: 10/02/2024</h4>
-                                    </div>
-        
-                                </div>
-
-                            </div>
-
-                        </div>  -->
-
+                            class="flex flex-wrap gap-8 pb-7">
                         </div>
                     </div>
                 </div>
@@ -940,7 +915,7 @@
 
             <div onclick="fechaModal()" class="z-0 absolute w-screen h-screen"></div>
 
-            <form class="formulario z-10 flex flex-col gap-5 w-full md:w-1/2 max-h-[80%] bg-component p-8 overflow-y-auto mx-auto rounded-xl">
+            <form class="formulario z-10 flex flex-col gap-5 w-full md:w-1/2 max-h-[80%] bg-component p-8 overflow-y-auto mx-auto rounded-xl" autocomplete="off">
 
                 <div class="flex justify-between items-start">
                     <div class="flex flex-col gap-0">
@@ -1047,12 +1022,12 @@
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
                             <label for="tempoMaquina" class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
+                            <input placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
                             <label for="tempoPessoa" class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
+                            <input placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
                         </div>
                     </div>
 

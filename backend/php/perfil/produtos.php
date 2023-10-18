@@ -24,7 +24,16 @@ function retornaProdutos($nif, $pagina, $conn)
     $inicioProdutos = $pagina * $quantidadeDeProdutos;
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT Produtos.idProduto, Produtos.Area, Produtos.Valor, Produtos.HoraPessoa, Produtos.Situacao, Produtos.HoraMaquina, Produtos.DataInicial, Produtos.DataFinal, Maquinas.Maquina, Maquinas.idMaquina, Usuarios.NIF, Usuarios.Nome, Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto FROM Usuarios INNER JOIN Produtos ON Usuarios.NIF = Produtos.fk_nifTecnico INNER JOIN ServicoCategoria ON Produtos.fk_idServicoCategoria = ServicoCategoria.idServicoCategoria INNER JOIN NomeProduto ON Produtos.fk_idNomeProduto = NomeProduto.idNomeProduto INNER JOIN Maquinas ON Produtos.fk_idMaquina = Maquinas.idMaquina WHERE Usuarios.NIF = ?  LIMIT ?, ?");
+    $stmt = $conn->prepare("SELECT Produtos.idProduto, Produtos.Area, Produtos.Valor, Produtos.HoraPessoa, Produtos.Situacao, Produtos.HoraMaquina,
+    Produtos.DataInicial, Produtos.DataFinal, Maquinas.Maquina, Maquinas.idMaquina, Usuarios.NIF, Usuarios.Nome, Usuarios.TipoUser,
+    ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, Propostas.TituloProposta, Propostas.nSGSET FROM Usuarios
+    INNER JOIN Produtos ON Usuarios.NIF = Produtos.fk_nifTecnico
+    INNER JOIN ServicoCategoria ON Produtos.fk_idServicoCategoria = ServicoCategoria.idServicoCategoria
+    INNER JOIN NomeProduto ON Produtos.fk_idNomeProduto = NomeProduto.idNomeProduto
+    INNER JOIN Maquinas ON Produtos.fk_idMaquina = Maquinas.idMaquina
+    INNER JOIN Propostas ON Produtos.fk_idProposta = Propostas.idProposta
+    WHERE Usuarios.NIF = ?  LIMIT ?, ?");
+
     $stmt->bind_param("sii", $nif, $inicioProdutos, $quantidadeDeProdutos); // "i" indica um valor inteiro
 
     $stmt->execute();

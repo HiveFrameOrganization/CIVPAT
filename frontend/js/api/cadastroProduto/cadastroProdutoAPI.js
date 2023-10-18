@@ -78,14 +78,16 @@ async function salvarProduto () {
     } else if(maquina != 1){
         // verifica se existe maquina selecionada
         // se estiver, precisa de ter horas maquina
+
         if(!tempoMaquina){
             localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'Preencha todos os campos(Horas maquina)');
+            localStorage.setItem('mensagem', 'Preencha todos os campos (horas-máquina)');
 
             alertas();
         }
     } else if (tempoPessoa < 1 || valor < 1){
         var mensagem = 'Proibido valores menores que 1'
+
         if (tempoPessoa < 1){
             document.getElementById('tempoPessoa').classList.add('border-btn-red');
             mensagem = mensagem + ' (tempo pessoa) ';
@@ -94,6 +96,7 @@ async function salvarProduto () {
         if (valor < 1) {
             document.getElementById('valor').classList.add('border-btn-red');
             mensagem = mensagem + ' (valor) ';
+
         }
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', mensagem);
@@ -137,7 +140,6 @@ async function salvarProduto () {
             maquina: Number(maquina)
         }
     
-    
         try {
     
             const resposta = await fetch(back + '/cadastroProduto/cadastroProduto.php', {
@@ -146,6 +148,7 @@ async function salvarProduto () {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(dadosEnviados)
+
             });
     
             const dados = await resposta.json();

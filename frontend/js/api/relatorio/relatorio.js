@@ -23,6 +23,13 @@ async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
 
+        exibir.innerHTML = `
+        <div class='flex flex-col justify-center items-center gap-4'>
+            <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
+            <h2 class='font-bold text-color-text'>CARREGANDO...</h2>
+        </div>
+        `;
+
         if (!valor) throw new Error(`Digite o NIF do funcionário para pesquisar`);
 
         const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
@@ -99,8 +106,8 @@ formularioRelatorio.addEventListener('submit', async evento => {
         exibir.innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
         <img src="../../img/icon/emergency.svg" alt="emergencia">
-        <h2 class='font-bold'>DATA INVÁLIDA</h2>
-        <p>Informe datas anteriores ao mês atual!</p>
+        <h2 class='font-bold text-center'>DATA INVÁLIDA</h2>
+        <p class='text-center'>Informe datas anteriores ao mês atual!</p>
         </div>
         `
 
@@ -123,8 +130,8 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold'>PARA GERAR RELATÓRIOS</h2>
-            <p>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
+            <h2 class='font-bold text-center'>PARA GERAR RELATÓRIOS</h2>
+            <p class='text-center'>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
             </div>
             `
 
@@ -132,39 +139,40 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold'>NENHUM RESGISTRO ENCONTRADO!</h2>
-            <p>Informe um data onde o NIF correspondente tenha trabalho.</p>
+            <h2 class='font-bold text-center'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <p class='text-center'>Informe uma data onde o NIF correspondente tenha trabalho.</p>
             </div>
             `
     }else {
 
         exibir.innerHTML = ''
 
-        // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
-        let cabeçalho = document.createElement('div')
-        cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
-        let horas = document.createElement('div')
-        horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
-        let all = document.createElement('div')
-        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
-        all.addEventListener('click', () => {
-            if (all.classList.contains('h-24')) {
-                all.classList.remove('h-24')
-                all.classList.toggle('bg-component')
-                document.querySelector('#setaDropdown').classList.add('rotate-180')
-                cabeçalho.classList.add('bg-body')
-                cabeçalho.classList.remove('bg-component')
-            } else {
-                all.classList.add('h-24')
-                all.classList.toggle('bg-component')
-                document.querySelector('#setaDropdown').classList.remove('rotate-180')
-                cabeçalho.classList.remove('bg-body')
-                cabeçalho.classList.add('bg-component')
-            }
-        })
-
+        
         for (let i = 0; i < res.dados.length; i++) {
-
+            
+            // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
+            let cabeçalho = document.createElement('div')
+            cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
+            let horas = document.createElement('div')
+            horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+            let all = document.createElement('div')
+            all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
+            all.addEventListener('click', () => {
+                if (all.classList.contains('h-24')) {
+                    all.classList.remove('h-24')
+                    all.classList.toggle('bg-component')
+                    document.querySelector('#setaDropdown').classList.add('rotate-180')
+                    cabeçalho.classList.add('bg-body')
+                    cabeçalho.classList.remove('bg-component')
+                } else {
+                    all.classList.add('h-24')
+                    all.classList.toggle('bg-component')
+                    document.querySelector('#setaDropdown').classList.remove('rotate-180')
+                    cabeçalho.classList.remove('bg-body')
+                    cabeçalho.classList.add('bg-component')
+                }
+            })
+            
             let nif
             let proposta
             let produto
