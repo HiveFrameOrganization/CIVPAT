@@ -84,6 +84,6 @@ SET DEFAULT ROLE ALL TO
 
 
 -- Criar um usuário para ser utilizado durante os testes
-CREATE USER 'teste'@'localhost' IDENTIFIED BY 'P4ssword';
-GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'localhost';
+CREATE USER 'teste'@'172.20.0.1' IDENTIFIED BY 'P4ssword';
+GRANT ALL PRIVILEGES ON isihiveframe.* TO 'teste'@'172.20.0.1';
 FLUSH PRIVILEGES;
