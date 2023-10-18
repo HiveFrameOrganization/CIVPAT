@@ -38,17 +38,18 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
         console.log(dados)
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
+
+            // Adicionando a quaqntidade de propostas de acordo com os seus status
+            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
+            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
+            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
+            document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
             
             if (dados.propostas.length > 0) {
 
                 exibirPropostas(dados.propostas);
                 sessionStorage.setItem(`qtdBotoesProposta${aba}`, dados.qtdBotoes);
                 
-                // Adicionando a quaqntidade de propostas de acordo com os seus status
-                document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : '# N/A';
-                document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : '# N/A';
-                document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : '# N/A';
-                document.getElementById('concluidos').textContent = dados['Declinado'] ? `# ${dados['Concluido']}` : '# N/A';
             } else {
 
                 document.getElementById('table').innerHTML = `
