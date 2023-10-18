@@ -99,6 +99,7 @@ function exibeValor(){
 var selectServicos = document.querySelector('#servico');
 var selectTecnicos = document.querySelector('#tecnicos');
 var selectMaquinas = document.querySelector('#maquinas');
+var selectProdutos = document.querySelector('#produto');
 
 selectServicos.addEventListener('change', () => {
   setTimeout(continuaModal, 200);
@@ -112,16 +113,21 @@ selectMaquinas.addEventListener('change', () => {
   setTimeout(continuaModal, 200);
 })
 
+selectProdutos.addEventListener('change', () => {
+  setTimeout(continuaModal, 200);
+})
+
 function continuaModal(){
 
   var inputServicos = document.querySelector('#servico').checkValidity();
+  var valorProduto = document.querySelector('#produto').value
   var inputProduto = document.querySelector('#produto').checkValidity();
   var inputValor = document.querySelector('#valor').checkValidity();
   var inputTecnicos = document.querySelector('#tecnicos').checkValidity();
   var inputMaquinas = document.querySelector('#maquinas').checkValidity();
   var botaoContinuar = document.getElementById('paraSegundoModal');
   
-  if (inputServicos == true && inputProduto == true && inputValor == true && inputTecnicos == true && inputMaquinas == true){
+  if (inputServicos == true && inputProduto == true && inputValor == true && inputTecnicos == true && inputMaquinas == true && valorProduto != 'null'){
     botaoContinuar.disabled = false;
   } else {
     botaoContinuar.setAttribute('disabled', 'true');

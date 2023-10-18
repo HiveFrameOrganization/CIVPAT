@@ -40,6 +40,11 @@ document.getElementById("servico").addEventListener("change",async function() {
     const idServicoCategoria = document.getElementById('servico').value;
     const produtoSelect = document.getElementById("produto");
     
+    // remove estilização anterior
+    produtoSelect.classList.remove('outline')
+    produtoSelect.classList.remove('outline-1')
+    produtoSelect.classList.remove('outline-[red]')
+    
     // Excluir as options anteriores
     produtoSelect.innerHTML = "";
     
@@ -53,13 +58,25 @@ document.getElementById("servico").addEventListener("change",async function() {
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
         // Loop pelos resultados e crie as options
-        dados.forEach(function(dado) {
+        console.log(dados.length)
+        if (dados.length == 0){
             var option = document.createElement('option');
-            option.value = dado.idNomeProduto;
-            option.text = dado.NomeProduto;
+            option.value = 'null';
+            option.text = 'Nenhum produto pertencente a esse serviço categoria!';
             option.classList.add('bg-body')
+            produtoSelect.classList.add('outline')
+            produtoSelect.classList.add('outline-1')
+            produtoSelect.classList.add('outline-[red]')
             produtoSelect.appendChild(option);
-        });
+        }else{
+            dados.forEach(function(dado) {
+                var option = document.createElement('option');
+                option.value = dado.idNomeProduto;
+                option.text = dado.NomeProduto;
+                option.classList.add('bg-body')
+                produtoSelect.appendChild(option);
+            });
+        }
     } catch {
         console.log('Error');
     }
