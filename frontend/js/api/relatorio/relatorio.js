@@ -23,6 +23,13 @@ async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
 
+        exibir.innerHTML = `
+        <div class='flex flex-col justify-center items-center gap-4'>
+            <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
+            <h2 class='font-bold text-color-text'>CARREGANDO...</h2>
+        </div>
+        `;
+
         if (!valor) throw new Error(`Digite o NIF do funcionário para pesquisar`);
 
         const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
@@ -133,7 +140,7 @@ async function exibirRelatorio(res) {
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
             <h2 class='font-bold'>NENHUM RESGISTRO ENCONTRADO!</h2>
-            <p>Informe um data onde o NIF correspondente tenha trabalho.</p>
+            <p>Informe uma data onde o NIF correspondente tenha trabalho.</p>
             </div>
             `
     }else {
