@@ -259,7 +259,7 @@ async function exibirPropostas(propostas){
         document.getElementById('table').innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="atenção">
-            <h2 class='font-bold'>NENHUMA PROPOSTA ENCONTRADA</h2>
+            <h2 class='font-bold text-center'>NENHUMA PROPOSTA ENCONTRADA</h2>
         </div>
         `;
     }
