@@ -227,23 +227,25 @@ let paraSegundoModal = document.querySelector('#paraSegundoModal')
 let tempo = document.getElementById('tempoMaquina')
 
 paraSegundoModal.addEventListener('click', ()=>{
+    localStorage.setItem('maquina', document.getElementById('maquinas').value);
+
+    let maquina = localStorage.getItem('maquina');
+
     primerioCadastroProduto.classList.add('hidden')
     segundoCadastroProduto.classList.remove('hidden')
 
-    console.log(tempo.value)
-    if(tempo.value == '' || 'Nenhuma maquina selecionada'){
+    if(maquina == 1){
         tempo.setAttribute('type', 'text')
-        tempo.value = 'Nenhuma maquina selecionada'
+        tempo.value = 'Nenhuma máquina selecionada'
         tempo.classList.add('text-[90%]')
         tempo.setAttribute('readonly', 'true')
         tempo.classList.add('bg-component')
         tempo.classList.add('cursor-default')
         tempo.classList.remove('focus:outline-primary')
     }else{
-        tempo.value = ''
         tempo.setAttribute('type', 'number')
         tempo.classList.remove('text-[90%]')
-        tempo.setAttribute('readonly', 'false')
+        tempo.removeAttribute('readonly')
         tempo.classList.remove('bg-component')
         tempo.classList.remove('cursor-default')
         tempo.classList.add('focus:outline-primary')
