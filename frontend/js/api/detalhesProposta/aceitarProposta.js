@@ -70,5 +70,5 @@ export default async function aceitarProposta() {
             }
         }, espera)
     }
- 
+    
 }
