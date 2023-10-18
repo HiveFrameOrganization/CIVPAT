@@ -106,8 +106,8 @@ formularioRelatorio.addEventListener('submit', async evento => {
         exibir.innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
         <img src="../../img/icon/emergency.svg" alt="emergencia">
-        <h2 class='font-bold'>DATA INVÁLIDA</h2>
-        <p>Informe datas anteriores ao mês atual!</p>
+        <h2 class='font-bold text-center'>DATA INVÁLIDA</h2>
+        <p class='text-center'>Informe datas anteriores ao mês atual!</p>
         </div>
         `
 
@@ -130,8 +130,8 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold'>PARA GERAR RELATÓRIOS</h2>
-            <p>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
+            <h2 class='font-bold text-center'>PARA GERAR RELATÓRIOS</h2>
+            <p class='text-center'>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
             </div>
             `
 
@@ -139,8 +139,8 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold'>NENHUM RESGISTRO ENCONTRADO!</h2>
-            <p>Informe uma data onde o NIF correspondente tenha trabalho.</p>
+            <h2 class='font-bold text-center'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <p class='text-center'>Informe uma data onde o NIF correspondente tenha trabalho.</p>
             </div>
             `
     }else {

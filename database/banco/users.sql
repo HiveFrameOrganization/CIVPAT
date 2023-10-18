@@ -38,6 +38,7 @@ GRANT INSERT, UPDATE ON `isihiveframe`.`NomeProduto` TO 'coor'@'172.20.0.3';
 GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'coor'@'172.20.0.3';
 GRANT INSERT, UPDATE ON `isihiveframe`.`Maquinas` TO 'coor'@'172.20.0.3';
 GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'coor'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`PDF` TO 'coor'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
@@ -48,6 +49,7 @@ GRANT role1 TO 'ger'@'172.20.0.3';
 -- Concede ao ger a habilidade de inserir e alterar as tabelas abaixo
 GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'ger'@'172.20.0.3';
 GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'ger'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`PDF` TO 'ger'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
@@ -57,6 +59,7 @@ CREATE USER 'adm'@'172.20.0.3' IDENTIFIED BY 'GPbhjBMD2T9%k&91FND5';
 GRANT role1 TO 'adm'@'172.20.0.3';
 
 GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'adm'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`PDF` TO 'adm'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 

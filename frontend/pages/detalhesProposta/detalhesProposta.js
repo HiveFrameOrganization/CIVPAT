@@ -138,4 +138,5 @@ function continuaModal(){
 // esconde a opção de segundo gerente quando a propostra estiver diferente de Em analise
 if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
   document.querySelector('#segundoGerente').classList.add('hidden')
+  document.getElementById('semGerente').innerText = "Nenhum gerente selecionado"
 }
