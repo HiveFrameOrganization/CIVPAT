@@ -117,6 +117,7 @@ selectProdutos.addEventListener('change', () => {
   setTimeout(continuaModal, 200);
 })
 
+// habilita botão para continuar o cadastro de um produto
 function continuaModal(){
 
   var inputServicos = document.querySelector('#servico').checkValidity();
@@ -132,4 +133,9 @@ function continuaModal(){
   } else {
     botaoContinuar.setAttribute('disabled', 'true');
   }
+}
+
+// esconde a opção de segundo gerente quando a propostra estiver diferente de Em analise
+if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
+  document.querySelector('#segundoGerente').classList.add('hidden')
 }
