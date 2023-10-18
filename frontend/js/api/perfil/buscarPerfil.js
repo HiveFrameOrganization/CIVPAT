@@ -1,4 +1,5 @@
-import { back } from '../Rotas/rotas.js'
+import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
 const spanProdutos = document.querySelector('#spanProdutos');
 
@@ -21,17 +22,28 @@ async function buscarUsuarioLogado() {
         // Requisição
         const requisicao = await fetch(back + '/perfil/perfil.php');
 
+        if (!requisicao.ok) {
+
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao buscar os dados do usuário!");
+
+            alertas();
+
+            return;
+        }
+
         // Resposta que veio do servidor
         const resposta = await requisicao.json();
 
-
-        console.log(resposta);
         // Exibir os dados retornados na tela...
         exibir(resposta.dados)
 
     } catch (erro) {
         // Exibe algum possível erro...
-        console.error(erro);
+        localStorage.setItem("status", "error");
+        localStorage.setItem("mensagem", "Erro ao buscar a foto de perfil!");
+
+        alertas();
     }
 
 }

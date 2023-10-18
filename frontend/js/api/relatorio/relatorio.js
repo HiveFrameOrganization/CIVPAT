@@ -23,6 +23,14 @@ async function buscarRelatorio(mes, ano, valor = false) {
 
     try {
 
+        if (!valor) {
+
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Digite o NIF do funcionário para pesquisar');
+
+            return;
+        }
+
         exibir.innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
             <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
@@ -30,17 +38,15 @@ async function buscarRelatorio(mes, ano, valor = false) {
         </div>
         `;
 
-        if (!valor) throw new Error(`Digite o NIF do funcionário para pesquisar`);
-
-        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
+        const requisicao = await fetch(`${back}/relatorio/puxRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
 
         const resposta = await requisicao.json();
 
-        console.log(resposta);
         exibirRelatorio(resposta)
 
     } catch (error) {
-        console.error(error);
+        
+        
     }
 
 }
@@ -129,7 +135,7 @@ async function exibirRelatorio(res) {
 
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
-            <img src="../../img/icon/emergency.svg" alt="emergencia">
+            <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
             <h2 class='font-bold text-center'>PARA GERAR RELATÓRIOS</h2>
             <p class='text-center'>Informe o mês, ano e NIF do técnico para gerar os relatórios.</p>
             </div>

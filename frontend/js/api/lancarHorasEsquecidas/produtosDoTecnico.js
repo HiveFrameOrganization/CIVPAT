@@ -226,8 +226,10 @@ window.addEventListener('click', (event) => {
 
 exibirAlerta(
     `
-    <h1 class='text-color-text font-semibold text-lg leading-4 uppercase text-center'>
-        Insira o NIF do funcionário desejado!
-    </h1>
+    <div class='flex flex-col justify-center items-center gap-4'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <h2 class='font-bold text-center'>PARA LANÇAR HORAS</h2>
+    <p class='text-center'>Informe o NIF do técnico desejado</p>
+    </div>
     `
 );
