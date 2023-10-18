@@ -134,6 +134,10 @@ window.addEventListener('load', ()=>{
         userCargo.innerHTML = ''
     }
 
-    funMudarAba(sessionStorage.getItem('abaDetalhes'))
+    if(sessionStorage.getItem('abaDetalhes')){
+        funMudarAba(sessionStorage.getItem('abaDetalhes'))
+    }else{
+        funMudarAba(0)
+    }
 }) 
 

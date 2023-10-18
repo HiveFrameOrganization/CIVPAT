@@ -272,56 +272,118 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
 // MODAL DE CONFIRMAÇÃO PARA DECLINIO E ACEITAÇÃO DE PROPOSTA
 function modalConfirmar(fun){
 
-    const div = document.createElement('div');
-    const aside = document.createElement('aside');
+    let cnpj = document.querySelector('#cnpj').value
+    let data = document.querySelector('#dataPrimeiroProduto').value
+    let sgset = document.querySelector('#numeroSGSET').value
 
-    div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
-    aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+    console.log(cnpj)
+    console.log(data)
+    console.log(sgset)
 
-    const templateModalConfirmar = `
-    <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
-        <div>
-            <h2 class="text-2xl font-bold text-red">${fun ? 'DESEJA ACEITAR A PROPOSTA?' : 'DESEJA DECLINAR A PROPOSTA?'}</h2>
-            <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
-        </div>
-        <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
-    </div>
-    <div class="modal-body">
-        <div class="px-4 sm:px-8 flex justify-between">
-            <button id="btn-confirmar" value="yes" type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
-            <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
-        </div>
-    </div>
-    `;
+    if(cnpj == '' || sgset == ''  && localStorage.getItem('cargo') != 'ger'){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+    
+        Toast.fire({
+            icon: 'error',
+            title: 'Preencha todos os campos obrigatorios!'
+        })
 
+        let camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
+        if(localStorage.getItem('cargo') == 'ger'){
+            camposObrigatorios[0].classList.add('bg-color-red/20')
+            camposObrigatorios[0].classList.add('outline')
+            camposObrigatorios[0].classList.add('outline-1')
+            camposObrigatorios[0].classList.add('outline-[red]')
+            camposObrigatorios[0].classList.remove('disabled:bg-body')
+        }else{
+            for (let i = 0; i < camposObrigatorios.length; i++) {
+                camposObrigatorios[i].classList.add('bg-color-red/20')
+                camposObrigatorios[i].classList.add('outline')
+                camposObrigatorios[i].classList.add('outline-1')
+                camposObrigatorios[i].classList.add('outline-[red]')
+                camposObrigatorios[i].classList.remove('disabled:bg-body')
+            }
+        }
+    }if(data == ''){
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
     
-    div.innerHTML = templateModalConfirmar;
-    
-    document.body.appendChild(div);
-    document.body.appendChild(aside)
-    
-    // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
-    if(fun){
-        document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
-            aceitarProposta()
+        Toast.fire({
+            icon: 'error',
+            title: 'Cadastre algum produto para poder aceitar!'
         })
     }else{
-        document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
-            declinarPropostaBanco()
+        const div = document.createElement('div');
+        const aside = document.createElement('aside');
+
+        div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
+        aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+
+        const templateModalConfirmar = `
+        <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+            <div>
+                <h2 class="text-2xl font-bold text-red">${fun ? 'DESEJA ACEITAR A PROPOSTA?' : 'DESEJA DECLINAR A PROPOSTA?'}</h2>
+                <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
+            </div>
+            <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+        </div>
+        <div class="modal-body">
+            <div class="px-4 sm:px-8 flex justify-between">
+                <button id="btn-confirmar" value="yes" type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
+                <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
+            </div>
+        </div>
+        `;
+
+        
+        div.innerHTML = templateModalConfirmar;
+        
+        document.body.appendChild(div);
+        document.body.appendChild(aside)
+        
+        // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
+        if(fun){
+            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
+                aceitarProposta()
+            })
+        }else{
+            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
+                declinarPropostaBanco()
+            })
+        }
+
+        // APAGAR ELEMENTOS DE MODAL
+        aside.addEventListener('click', ()=>{
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#close-modal-confirmar').addEventListener('click', ()=>{
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#btn-cancelar').addEventListener('click', ()=>{
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
         })
     }
 
-    // APAGAR ELEMENTOS DE MODAL
-    aside.addEventListener('click', ()=>{
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#close-modal-confirmar').addEventListener('click', ()=>{
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#btn-cancelar').addEventListener('click', ()=>{
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
 }
