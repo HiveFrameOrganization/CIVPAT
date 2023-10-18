@@ -2,25 +2,58 @@
 // e fazer alterações visuais na tela de proposota
 
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
 
+let inAlert = false;
+
+// Busca as fotos do gerente
 async function getFotoFuncionario(nif) {
 
     if (nif) {
 
-        const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)
+        try {
+            const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)  
 
-        const resposta = await requisicao.blob();
+            if (!requisicao.ok) {
 
-        if (resposta.size > 0) {
+                // Em caso de erro, exibir um erro apenas uma vez
+                if (inAlert === false) {
 
-            return URL.createObjectURL(resposta);
+                    inAlert = true;
+
+                    localStorage.setItem("status", "error");
+                    localStorage.setItem("mensagem", "Erro ao carregar as fotos do gerente!");
+
+                    alertas();
+                }
+
+                return false;
+            }
+
+            const resposta = await requisicao.blob();
+
+            if (resposta.size > 0) {
+
+                return URL.createObjectURL(resposta);
+            } else {
+
+                return false;
+            }
+
+
+        } catch(err) {
+
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao carregar as fotos do gerente!");
+
+            alertas();
+
+            return false;
         }
-
-        return false;
     }
+
     return false;
 } 
-
 
 async function exibirPropostas(propostas){
 
@@ -226,7 +259,7 @@ async function exibirPropostas(propostas){
         document.getElementById('table').innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="atenção">
-            <h2 class='font-bold'>NENHUMA PROPOSTA ENCONTRADA</h2>
+            <h2 class='font-bold text-center'>NENHUMA PROPOSTA ENCONTRADA</h2>
         </div>
         `;
     }

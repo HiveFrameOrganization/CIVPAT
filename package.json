@@ -1,16 +1,16 @@
 {
-  "name": "projeto_isi",
-  "version": "1.0.0",
-  "description": "Este projeto é voltado ao gerenciamento de propostas de recursos inovadores. O desenvolvimentos deste projeto está sendo realizado no SENAI Suiço-Brasileira Paulo Ernesto Tolle em colaboração com os alunos do 3° semestre de Desenvolvimento de Sistemas.",
-  "main": "index.js",
-  "scripts": {
-    "tailwind-start": "rimraf ./frontend/css/output.css && npx tailwindcss -i ./frontend/css/input.css -o ./frontend/css/output.css"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "rimraf": "^5.0.1",
-    "tailwindcss": "^3.3.3"
-  }
+    "name": "projeto_isi",
+    "version": "1.0.0",
+    "description": "Este projeto é voltado ao gerenciamento de propostas de recursos inovadores. O desenvolvimentos deste projeto está sendo realizado no SENAI Suiço-Brasileira Paulo Ernesto Tolle em colaboração com os alunos do 3° semestre de Desenvolvimento de Sistemas.",
+    "main": "index.js",
+    "scripts": {
+        "tailwind-start": "rimraf ./frontend/css/output.css && npx tailwindcss -i ./frontend/css/input.css -o ./frontend/css/output.css"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "rimraf": "^5.0.1",
+        "tailwindcss": "^3.3.3"
+    }
 }

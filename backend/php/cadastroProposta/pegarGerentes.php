@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 
 require_once '../../../database/conn.php';
 
-$query = "SELECT * FROM Usuarios WHERE TipoUser = 'ger'";
+$query = "SELECT * FROM Usuarios WHERE TipoUser = 'ger' AND Status = 'ativo' ";
 
 if ($result = mysqli_query($conn, $query)) {
 
