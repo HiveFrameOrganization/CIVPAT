@@ -18,7 +18,7 @@ export default async function pegarUnidadesCriadoras() {
         let option = document.createElement('option');
         option.value = dados[i].idUnidadeCriadora;
         option.textContent = dados[i].UnidadeCriadora;
-        option.classList.add("bg-body");
+        option.classList.add('bg-[#fff]');
         unidadesSelect.appendChild(option);
     }
 
