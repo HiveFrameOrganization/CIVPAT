@@ -44,6 +44,8 @@ document.getElementById("servico").addEventListener("change",async function() {
     produtoSelect.classList.remove('outline')
     produtoSelect.classList.remove('outline-1')
     produtoSelect.classList.remove('outline-[red]')
+    produtoSelect.classList.remove('bg-color-red/20')
+    produtoSelect.classList.add('valid:bg-primary/20')
     
     // Excluir as options anteriores
     produtoSelect.innerHTML = "";
@@ -67,6 +69,8 @@ document.getElementById("servico").addEventListener("change",async function() {
             produtoSelect.classList.add('outline')
             produtoSelect.classList.add('outline-1')
             produtoSelect.classList.add('outline-[red]')
+            produtoSelect.classList.remove('valid:bg-primary/20')
+            produtoSelect.classList.add('bg-color-red/20')
             produtoSelect.appendChild(option);
         }else{
             dados.forEach(function(dado) {
