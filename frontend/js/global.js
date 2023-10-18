@@ -64,8 +64,12 @@ let abaFollowUp = document.querySelector('.abaFollowUp')
 let alertaData = document.querySelector('#alertaData')
 
 function funMudarAba(pag){
+    sessionStorage.setItem('abaDetalhes', pag)
     // renderiza e esconde elementos dependendo de qual é clicado
-    if(pag == 0){
+
+    let pagina = sessionStorage.getItem('abaDetalhes')
+
+    if(pagina == 0){
         alertaData.classList.remove('hidden')
         abaInfo.classList.remove('hidden')
         abaPdf.classList.add('hidden')
@@ -73,7 +77,7 @@ function funMudarAba(pag){
         abaFollowUp.classList.add('hidden')
 
         nomeAba.innerHTML = 'detalhes da proposta'
-    }else if(pag == 1){
+    }else if(pagina == 1){
         alertaData.classList.add('hidden')
         abaPdf.classList.remove('hidden')
         abaInfo.classList.add('hidden')
@@ -81,7 +85,7 @@ function funMudarAba(pag){
         abaFollowUp.classList.add('hidden')
 
         nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
-    }else if(pag == 2){
+    }else if(pagina == 2){
         alertaData.classList.add('hidden')
         abaFollowUp.classList.remove('hidden')
         abaPdf.classList.add('hidden')
@@ -100,8 +104,8 @@ function funMudarAba(pag){
     }
 
     // adiciona estilizaçao no elemento selecionado
-    mudarAba[pag].classList.add('text-primary')
-    mudarAba[pag].classList.add('border-b-2')
+    mudarAba[pagina].classList.add('text-primary')
+    mudarAba[pagina].classList.add('border-b-2')
 
     // remove as estilizaçoes de selecionado
     for (let i = 0; i < mudarAba.length; i++) {
@@ -115,7 +119,7 @@ function funMudarAba(pag){
 // ADICONAR CARGO DO FUNCIONARIO NO MENU DE PERFIL
 window.addEventListener('load', ()=>{
 
-    let cargo = localStorage.getItem('cargo')
+    let cargo = sessionStorage.getItem('cargo')
     let userCargo = document.querySelector('#user-cargo')
     
     if(cargo == 'coor'){
@@ -129,5 +133,7 @@ window.addEventListener('load', ()=>{
     }else{
         userCargo.innerHTML = ''
     }
+
+    funMudarAba(sessionStorage.getItem('abaDetalhes'))
 }) 
 

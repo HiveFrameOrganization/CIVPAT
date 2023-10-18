@@ -69,7 +69,6 @@ async function salvarFotoPerfil () {
 
     const nomeImagem = imageInput.files[0]['name'];
 
-    console.log(file);
     const formData = new FormData();
     formData.append('imagem', file);
 
@@ -82,6 +81,7 @@ async function salvarFotoPerfil () {
     
         const resposta = await requisicao.json();
 
+
         previaFoto();
     
         localStorage.setItem('status', resposta.status);
@@ -91,6 +91,8 @@ async function salvarFotoPerfil () {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Erro ao salvar a foto!');
     }
+
+    imageInput.value = "";
 
     alertas();
 }
