@@ -208,6 +208,9 @@ function exibirMaquinas(vetor) {
         // Colocando o nome da máquina
         option.textContent = maquina.Maquina;
 
+        // Colocando cor de fundo mais visível nas opções
+        option.classList.add('bg-body');
+
         // Jogando dentro do dropdown
         maquinas.appendChild(option);
 
