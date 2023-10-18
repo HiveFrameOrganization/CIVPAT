@@ -147,31 +147,32 @@ async function exibirRelatorio(res) {
 
         exibir.innerHTML = ''
 
-        // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
-        let cabeçalho = document.createElement('div')
-        cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
-        let horas = document.createElement('div')
-        horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
-        let all = document.createElement('div')
-        all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
-        all.addEventListener('click', () => {
-            if (all.classList.contains('h-24')) {
-                all.classList.remove('h-24')
-                all.classList.toggle('bg-component')
-                document.querySelector('#setaDropdown').classList.add('rotate-180')
-                cabeçalho.classList.add('bg-body')
-                cabeçalho.classList.remove('bg-component')
-            } else {
-                all.classList.add('h-24')
-                all.classList.toggle('bg-component')
-                document.querySelector('#setaDropdown').classList.remove('rotate-180')
-                cabeçalho.classList.remove('bg-body')
-                cabeçalho.classList.add('bg-component')
-            }
-        })
-
+        
         for (let i = 0; i < res.dados.length; i++) {
-
+            
+            // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
+            let cabeçalho = document.createElement('div')
+            cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
+            let horas = document.createElement('div')
+            horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+            let all = document.createElement('div')
+            all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
+            all.addEventListener('click', () => {
+                if (all.classList.contains('h-24')) {
+                    all.classList.remove('h-24')
+                    all.classList.toggle('bg-component')
+                    document.querySelector('#setaDropdown').classList.add('rotate-180')
+                    cabeçalho.classList.add('bg-body')
+                    cabeçalho.classList.remove('bg-component')
+                } else {
+                    all.classList.add('h-24')
+                    all.classList.toggle('bg-component')
+                    document.querySelector('#setaDropdown').classList.remove('rotate-180')
+                    cabeçalho.classList.remove('bg-body')
+                    cabeçalho.classList.add('bg-component')
+                }
+            })
+            
             let nif
             let proposta
             let produto

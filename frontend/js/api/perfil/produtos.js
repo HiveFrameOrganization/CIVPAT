@@ -219,7 +219,7 @@ function exibirProdutos(produtos) {
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Área</span>
-                            <span title="${produto['area'] ? produto['area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['area'] ? produto['area'] : 'N/A'}</span>
+                            <span title="${produto['Area'] ? produto['Area'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['Area'] ? produto['Area'] : 'N/A'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3">
