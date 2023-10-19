@@ -1,8 +1,29 @@
 import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
+
+async function gerarHora(){
+   
+    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    try {
+        const resultado = await resposta.json();
+
+        const dataApi = resultado['datetime'];
+
+        const dataFormatada = dataApi.substring(0, 10);
+
+        return dataFormatada.replace(/T/i, " ");
+   
+
+    } catch (error) {
+        console.log('Sistema de horas apresentou um erro');
+
+        const data = Date()
+    }
+}
+
 // formatar a data
-const hoje = new Date();
+const hoje = await gerarHora();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -340,6 +361,9 @@ document.getElementById('valor').addEventListener('keydown', () => {
 
 // });
 
+var horasRestantes;
+var horasRestantesMaquina;
+
 async function LancamentoHoras() {
     const id = localStorage.getItem('idProduto');
 
@@ -416,15 +440,15 @@ async function LancamentoHoras() {
 
             //Condicionais para gerar os botões com as opções de lançamento de horas dependendo da hora trabalhada
             if (resposta.totalHorasPessoaDiarias == undefined) {
-                var horasRestantes = 10 - 0;
+                horasRestantes = 10 - 0;
             } else {
-                var horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
+                horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
             }
 
             if (resposta.totalHorasMaquinaDiarias == undefined) {
-                var horasRestantesMaquina = 10 - 0;
+                horasRestantesMaquina = 10 - 0;
             } else {
-                var horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
+                horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
             }
 
 
@@ -510,27 +534,35 @@ if (localStorage.getItem('cargo') == 'tec') {
 
 
         try {
-            const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dados)
-            });
+            if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
+                
+                localStorage.setItem('status', 'error');
+                localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
-            const resposta = await requisicao.json();
-
-
-
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
-
-            if (resposta.status == 'error') {
                 alertas();
-            } else {
-                window.location.href = '/frontend/pages/perfil/index.html';
             }
+            else{
+                const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados)
+                });
 
+                const resposta = await requisicao.json();
+
+
+
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
+
+                if (resposta.status == 'error') {
+                    alertas();
+                } else {
+                    window.location.href = '/frontend/pages/perfil/index.html';
+                }
+            }
 
         } catch (error) {
             console.error(error);
