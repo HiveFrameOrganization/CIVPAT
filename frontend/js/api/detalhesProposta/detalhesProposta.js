@@ -59,7 +59,7 @@ function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlacehol
 
     if (arquivoEstaNoInput) {
         campoComPlaceholder.setAttribute('placeholder', arquivoEstaNoInput.name);
-        console.log(arquivoEstaNoInput.name);
+        console.log(arquivoEstaNoInput);
     }
 }
 
@@ -111,6 +111,8 @@ botaoSalvarPdf.addEventListener('click', () => {
         formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
         formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
         formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
+        
+        console.log(formData);
     
         // formData.forEach((valor, chave) => {
         //     console.log(`${chave}: ${valor}`);
@@ -126,7 +128,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
