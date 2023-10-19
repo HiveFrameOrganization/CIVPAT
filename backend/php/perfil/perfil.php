@@ -1,5 +1,4 @@
 <?php 
-session_start();
 // Específica qual URL pode acessar
 header('Access-Control-Allow-Origin: http://localhost:8080');
 

@@ -50,7 +50,7 @@ FROM Usuarios
 CREATE VIEW vw_produtos AS
 SELECT Produtos.idProduto, Produtos.Area, Produtos.Valor, Produtos.HoraPessoa, Produtos.Situacao, Produtos.HoraMaquina,
 Produtos.DataInicial, Produtos.DataFinal, Maquinas.Maquina, Maquinas.idMaquina, Usuarios.NIF, Usuarios.Nome,
-Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, Propostas.nSGSET 
+Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, Propostas.TituloProposta, Propostas.nSGSET, Propostas.Status
     FROM Usuarios INNER JOIN Produtos ON Usuarios.NIF = Produtos.fk_nifTecnico 
     INNER JOIN Propostas ON Produtos.fk_idProposta = Propostas.idProposta
     INNER JOIN ServicoCategoria ON Produtos.fk_idServicoCategoria = ServicoCategoria.idServicoCategoria 
