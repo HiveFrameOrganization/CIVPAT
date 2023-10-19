@@ -29,7 +29,7 @@ FROM Usuarios
     INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
     INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta
-    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto;
+    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF;
 
 CREATE VIEW vw_relatorioComMaquina AS
 SELECT NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, 

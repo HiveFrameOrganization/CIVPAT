@@ -23,7 +23,6 @@ GRANT SELECT ON `isihiveframe`.`Usuarios` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_home` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_kpi` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_relatorioComMaquina` TO role1;
-GRANT SELECT ON `isihiveframe`.`vw_relatorioSemMaquina` TO role1;
 GRANT SELECT ON `isihiveframe`.`CargaHoraria` TO role1;
 GRANT SELECT ON `isihiveframe`.`Maquinas` TO role1;
 GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO role1;
@@ -79,6 +78,7 @@ GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
 -- e só poderá inserir ou alterar na tabela Carga Horária
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_relatorioSemMaquina` TO 'tec'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
