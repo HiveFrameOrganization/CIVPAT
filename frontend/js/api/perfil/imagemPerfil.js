@@ -78,14 +78,23 @@ async function salvarFotoPerfil () {
             method: 'POST',
             body: formData
         });
-    
-        const resposta = await requisicao.json();
 
+        if (!requisicao.ok) {
 
-        previaFoto();
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Erro ao salvar a foto!');
+
+        } else {
+
+            const resposta = await requisicao.json();
+
+            previaFoto();
+        
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
+
+        }
     
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
     } catch (error) {
         
         localStorage.setItem('status', 'error');

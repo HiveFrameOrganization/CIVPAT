@@ -3,7 +3,9 @@ import { editandoProposta } from "./detalhesProposta.js"
 // DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
 export default function desativaBotoes(){
     let declinarProposta = document.querySelector('#declinarProposta')
-    if(localStorage.getItem('statusProposta') != 'Em Análise'){
+    if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Aceite'){
+        console.log('em analise ou solicitada')
+    }else{
         editandoProposta.setAttribute('disabled', 'true')
         editandoProposta.classList.add('disabled:opacity-20')
         editandoProposta.classList.remove('hover:bg-btn-blue/40')

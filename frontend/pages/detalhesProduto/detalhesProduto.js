@@ -1,8 +1,29 @@
 import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
+
+async function gerarHora(){
+   
+    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    try {
+        const resultado = await resposta.json();
+
+        const dataApi = resultado['datetime'];
+
+        const dataFormatada = dataApi.substring(0, 10);
+
+        return dataFormatada.replace(/T/i, " ");
+   
+
+    } catch (error) {
+        console.log('Sistema de horas apresentou um erro');
+
+        const data = Date()
+    }
+}
+
 // formatar a data
-const hoje = new Date();
+const hoje = await gerarHora();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -299,7 +320,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         var valor = document.getElementById('valor').value.replace(/\.+/g, '');
         valor = valor.replace(',', '.');
         const tecnico = document.getElementById('tecnicos').value;
-        const idProposta = localStorage.getItem('idProduto');
+        const idProposta = localStorage.getItem('idProposta');
 
 
         const dadosParaEnviar = {
@@ -314,7 +335,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             produto: produto,
             valor: valor,
             tecnico: tecnico,
-            idProduto: idProduto
+            idProposta: idProposta
         }
 
 
@@ -339,6 +360,9 @@ document.getElementById('valor').addEventListener('keydown', () => {
 
 
 // });
+
+var horasRestantes;
+var horasRestantesMaquina;
 
 async function LancamentoHoras() {
     const id = localStorage.getItem('idProduto');
@@ -416,15 +440,15 @@ async function LancamentoHoras() {
 
             //Condicionais para gerar os botões com as opções de lançamento de horas dependendo da hora trabalhada
             if (resposta.totalHorasPessoaDiarias == undefined) {
-                var horasRestantes = 10 - 0;
+                horasRestantes = 10 - 0;
             } else {
-                var horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
+                horasRestantes = 10 - (resposta.totalHorasPessoaDiarias);
             }
 
             if (resposta.totalHorasMaquinaDiarias == undefined) {
-                var horasRestantesMaquina = 10 - 0;
+                horasRestantesMaquina = 10 - 0;
             } else {
-                var horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
+                horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
             }
 
 
@@ -510,27 +534,35 @@ if (localStorage.getItem('cargo') == 'tec') {
 
 
         try {
-            const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dados)
-            });
+            if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
+                
+                localStorage.setItem('status', 'error');
+                localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
-            const resposta = await requisicao.json();
-
-
-
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
-
-            if (resposta.status == 'error') {
                 alertas();
-            } else {
-                window.location.href = '/frontend/pages/perfil/index.html';
             }
+            else{
+                const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados)
+                });
 
+                const resposta = await requisicao.json();
+
+
+
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
+
+                if (resposta.status == 'error') {
+                    alertas();
+                } else {
+                    window.location.href = '/frontend/pages/perfil/index.html';
+                }
+            }
 
         } catch (error) {
             console.error(error);
@@ -546,8 +578,8 @@ if (localStorage.getItem('cargo') == 'tec') {
     const botaoFinalizarProduto = document.getElementById('concluirProduto');
 
     botaoFinalizarProduto.addEventListener('click', () => {
-        concluirProduto();
-        // modalConfirmar()
+        // concluirProduto();
+        modalConfirmar()
     })
 
     async function concluirProduto() {
@@ -570,7 +602,6 @@ if (localStorage.getItem('cargo') == 'tec') {
         }
 
     }
-}
 
 /////////////////////////////
 
@@ -586,7 +617,7 @@ function modalConfirmar(fun) {
     const templateModalConfirmar = `
     <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
         <div>
-            <h2 class="text-2xl font-bold text-red">DESEJA FINALIZAR O PRODUTO?}</h2>
+            <h2 class="text-2xl font-bold text-color-text">DESEJA FINALIZAR O PRODUTO?</h2>
             <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
         </div>
         <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
@@ -608,19 +639,20 @@ function modalConfirmar(fun) {
     // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
     document.querySelector('#btn-confirmar').addEventListener('click', () => {
         concluirProduto()
-
-        // APAGAR ELEMENTOS DE MODAL
-        aside.addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
-        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
-        document.querySelector('#btn-cancelar').addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
     })
+
+    // APAGAR ELEMENTOS DE MODAL
+    aside.addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+    document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+    document.querySelector('#btn-cancelar').addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+}
 }
