@@ -75,16 +75,14 @@ async function salvarProduto () {
 
         alertas();
         
-    } else if(maquina != 1){
+    } else if(maquina != 1 && !tempoMaquina){
         // verifica se existe maquina selecionada
         // se estiver, precisa de ter horas maquina
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Preencha todos os campos (horas-máquina)');
 
-        if(!tempoMaquina){
-            localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'Preencha todos os campos (horas-máquina)');
-
-            alertas();
-        }
+        alertas();
     } else if (tempoPessoa < 1 || valor < 1){
         var mensagem = 'Proibido valores menores que 1'
 
