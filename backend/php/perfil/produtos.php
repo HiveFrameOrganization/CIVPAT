@@ -30,7 +30,7 @@ function retornaProdutos($nif, $pagina, $conn)
     INNER JOIN ServicoCategoria ON Produtos.fk_idServicoCategoria = ServicoCategoria.idServicoCategoria 
     INNER JOIN NomeProduto ON Produtos.fk_idNomeProduto = NomeProduto.idNomeProduto 
     INNER JOIN Maquinas ON Produtos.fk_idMaquina = Maquinas.idMaquina 
-    WHERE Usuarios.NIF = ? AND Propostas.Status = 'Aceito' LIMIT ?, ?");
+    WHERE Usuarios.NIF = ? AND (Propostas.Status = 'Aceito' OR Propostas.Status = 'Em Análise')  LIMIT ?, ?");
     $stmt->bind_param("sii", $nif, $inicioProdutos, $quantidadeDeProdutos); // "i" indica um valor inteiro
 
     $stmt->execute();
