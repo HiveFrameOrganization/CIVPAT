@@ -8,7 +8,9 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProduto, $conn) {
-    $stmt = $conn->prepare("SELECT `NomeProduto`.`NomeProduto`, `Produtos`.`Valor`, `Produtos`.`fk_nifTecnico`, `Produtos`.`Area`, `Produtos`.`fk_idServicoCategoria`, `Produtos`.`fk_idUnidadeRealizadora`, `Produtos`.`HoraPessoa`, `Produtos`.`HoraMaquina`, `Produtos`.`DataInicial`, `Produtos`.`DataFinal`, `Produtos`.`Situacao` FROM Produtos
+    $stmt = $conn->prepare("SELECT `NomeProduto`.`NomeProduto`, `Produtos`.`Valor`, `Produtos`.`fk_nifTecnico`, `Produtos`.`Area`, 
+    `Produtos`.`fk_idServicoCategoria`, `Produtos`.`fk_idUnidadeRealizadora`, `Produtos`.`HoraPessoa`, `Produtos`.`HoraMaquina`, 
+    `Produtos`.`DataInicial`, `Produtos`.`DataFinal`, `Produtos`.`Situacao` FROM Produtos
     INNER JOIN NomeProduto ON `NomeProduto`.`idNomeProduto` = `Produtos`.`fk_idNomeProduto` 
     WHERE idProduto = ?");
     // $stmt = $conn->prepare("SELECT * FROM Propostas WHERE idProposta = ?");

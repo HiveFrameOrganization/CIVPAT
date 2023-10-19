@@ -57,3 +57,13 @@ Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, P
     INNER JOIN NomeProduto ON Produtos.fk_idNomeProduto = NomeProduto.idNomeProduto 
     INNER JOIN Maquinas ON Produtos.fk_idMaquina = Maquinas.idMaquina;
 /*----------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------- LANÇAR HORAS -------------------------------------------------*/
+CREATE VIEW vw_produtosDoTecnico AS
+SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal, Maquinas.Maquina, NomeProduto.NomeProduto, 
+    ServicoCategoria.ServicoCategoria, Produtos.fk_nifTecnico FROM Produtos
+    INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina
+    INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
+    INNER JOIN ServicoCategoria ON ServicoCategoria.idServicoCategoria = Produtos.fk_idServicoCategoria
+/*----------------------------------------------------------------------------------------------------*/

@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $nif = $_GET['nif'];
 
-    $stmt = $conn->prepare('SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal, Maquinas.Maquina, NomeProduto.NomeProduto, ServicoCategoria.ServicoCategoria FROM Produtos INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto INNER JOIN ServicoCategoria ON ServicoCategoria.idServicoCategoria = Produtos.fk_idServicoCategoria WHERE fk_nifTecnico = ?');
+    $stmt = $conn->prepare('SELECT * FROM vw_produtosDoTecnico WHERE fk_nifTecnico = ?');
 
     $stmt->bind_param('s', $nif);
 
