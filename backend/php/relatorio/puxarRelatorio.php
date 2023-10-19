@@ -17,17 +17,17 @@ function puxarRelatorio($conn)
     $mes = $_GET['mes'];
     $ano = $_GET['ano'];
     $valor = $_GET['valor'];
-    $cargo = $_GET['cargo'];
+    $cargo = $_SESSION['cargo'];
 
     if ($cargo === "tec") {
 
         $stmt = $conn->prepare("SELECT * FROM vw_relatorioSemMaquina
-        WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? AND Usuarios.NIF = ?");
+        WHERE MONTH(Datas) = ? AND YEAR(Datas) = ? AND NIF = ?");
 
     } else {
 
         $stmt = $conn->prepare("SELECT * FROM vw_relatorioComMaquina 
-        WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? AND Usuarios.NIF = ?");
+        WHERE MONTH(Datas) = ? AND YEAR(Datas) = ? AND NIF = ?");
     }
 
     $stmt->bind_param('sss', $mes, $ano, $valor);

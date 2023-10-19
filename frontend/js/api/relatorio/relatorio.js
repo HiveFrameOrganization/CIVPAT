@@ -38,7 +38,7 @@ async function buscarRelatorio(mes, ano, valor = false) {
         </div>
         `;
 
-        const requisicao = await fetch(`${back}/relatorio/puxRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
+        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${valor}`);
 
         const resposta = await requisicao.json();
 
