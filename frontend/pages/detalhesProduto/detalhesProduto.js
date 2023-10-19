@@ -299,7 +299,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         var valor = document.getElementById('valor').value.replace(/\.+/g, '');
         valor = valor.replace(',', '.');
         const tecnico = document.getElementById('tecnicos').value;
-        const idProposta = localStorage.getItem('idProduto');
+        const idProposta = localStorage.getItem('idProposta');
 
 
         const dadosParaEnviar = {
@@ -314,7 +314,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             produto: produto,
             valor: valor,
             tecnico: tecnico,
-            idProduto: idProduto
+            idProposta: idProposta
         }
 
 
