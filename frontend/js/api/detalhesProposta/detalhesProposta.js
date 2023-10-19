@@ -59,7 +59,7 @@ function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlacehol
 
     if (arquivoEstaNoInput) {
         campoComPlaceholder.setAttribute('placeholder', arquivoEstaNoInput.name);
-        console.log(arquivoEstaNoInput.name);
+        console.log(arquivoEstaNoInput);
     }
 }
 
@@ -111,6 +111,8 @@ botaoSalvarPdf.addEventListener('click', () => {
         formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
         formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
         formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
+        
+        console.log(formData);
     
         // formData.forEach((valor, chave) => {
         //     console.log(`${chave}: ${valor}`);
@@ -126,7 +128,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
@@ -270,6 +272,17 @@ document.querySelector('#btnResumo').addEventListener('click', ()=>{
 })
 
 // MODAL DE CONFIRMAÇÃO PARA DECLINIO E ACEITAÇÃO DE PROPOSTA
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top',
+    showConfirmButton: false,
+    timer: 1500,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
 function modalConfirmar(fun){
 
     let cnpj = document.querySelector('#cnpj').value
@@ -277,59 +290,50 @@ function modalConfirmar(fun){
     let sgset = document.querySelector('#numeroSGSET').value
 
     console.log(cnpj)
-    console.log(data)
+    console.log(localStorage.getItem('cargo') == 'ger' ? 'gerente' : 'nao é gerente')
     console.log(sgset)
+    const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(cnpj == '' || sgset == ''  && localStorage.getItem('cargo') != 'ger'){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
+    if(localStorage.getItem('cargo') != 'ger' && cnpj && sgset == '' ){
     
         Toast.fire({
             icon: 'error',
-            title: 'Preencha todos os campos obrigatorios!'
+            title: 'Preencha todos os campos obrigatorios em vermelho!'
         })
 
-        let camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
-        if(localStorage.getItem('cargo') == 'ger'){
+        if(cnpj == ''){
             camposObrigatorios[0].classList.add('bg-color-red/20')
             camposObrigatorios[0].classList.add('outline')
             camposObrigatorios[0].classList.add('outline-1')
             camposObrigatorios[0].classList.add('outline-[red]')
             camposObrigatorios[0].classList.remove('disabled:bg-body')
-        }else{
-            for (let i = 0; i < camposObrigatorios.length; i++) {
-                camposObrigatorios[i].classList.add('bg-color-red/20')
-                camposObrigatorios[i].classList.add('outline')
-                camposObrigatorios[i].classList.add('outline-1')
-                camposObrigatorios[i].classList.add('outline-[red]')
-                camposObrigatorios[i].classList.remove('disabled:bg-body')
-            }
         }
-    }if(data == ''){
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
+        if(sgset == ''){
+            camposObrigatorios[1].classList.add('bg-color-red/20')
+            camposObrigatorios[1].classList.add('outline')
+            camposObrigatorios[1].classList.add('outline-1')
+            camposObrigatorios[1].classList.add('outline-[red]')
+            camposObrigatorios[1].classList.remove('disabled:bg-body')
+        }
+
+    }else if(localStorage.getItem('cargo') == 'ger' && cnpj == ''){
     
         Toast.fire({
             icon: 'error',
-            title: 'Cadastre algum produto para poder aceitar!'
+            title: 'Preencha todos os campos obrigatorios em vermelho!'
+        })
+
+        camposObrigatorios[0].classList.add('bg-color-red/20')
+        camposObrigatorios[0].classList.add('outline')
+        camposObrigatorios[0].classList.add('outline-1')
+        camposObrigatorios[0].classList.add('outline-[red]')
+        camposObrigatorios[0].classList.remove('disabled:bg-body')
+        
+    }else if(data == ''){
+    
+        Toast.fire({
+            icon: 'error',
+            title: 'Cadastre algum produto para poder aceitar a proposta!'
         })
     }else{
         const div = document.createElement('div');
