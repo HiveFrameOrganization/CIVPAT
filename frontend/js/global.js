@@ -119,7 +119,7 @@ function funMudarAba(pag){
 // ADICONAR CARGO DO FUNCIONARIO NO MENU DE PERFIL
 window.addEventListener('load', ()=>{
 
-    let cargo = sessionStorage.getItem('cargo')
+    let cargo = localStorage.getItem('cargo')
     let userCargo = document.querySelector('#user-cargo')
     
     if(cargo == 'coor'){
