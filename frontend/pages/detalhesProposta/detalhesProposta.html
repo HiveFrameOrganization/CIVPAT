@@ -919,7 +919,7 @@
                 <div class="flex justify-between items-start">
                     <div class="flex flex-col gap-0">
                         <h2 class="font-bold text-2xl">CADASTRO DE PRODUTO</h2>
-                        <h3 class="text-sm pt-2">Adicione produtos na plataforma preenchendo o formulário</h3>
+                        <h3 class="text-sm pt-2">Adicione produtos na plataforma preenchendo o formulário - <strong class="text-[#ef4444]">Obrigatório*</strong></h3>
                     </div>
 
                     <button id="close-modal-cad" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
@@ -927,10 +927,10 @@
 
                 <!-- Primeira metade do modal de cadastro de produto -->
                 <div id="primerioCadastroProduto" class="max-h-[50vh]">
-                    <label class="text-color-text font-bold block mb-2">Área: </label>
+                    <label class="text-color-text font-bold block mb-2">ÁREA*</label>
                     <input class="bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
 
-                    <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
+                    <label class="text-color-text font-bold block mb-2" for="servico">SERVIÇO CATEGORIA*</label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="servico" id="servico" required>
                         <option value="" disabled selected class="text-color-text-secundary bg-body">Selecione a categoria...</option>
                         <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
@@ -951,12 +951,12 @@
                         <option value="16" class="bg-body">Serviços Metrológicos - Ensaios - Labor. Em Implantes</option>
                     </select>
 
-                    <label  class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
+                    <label  class="text-color-text font-bold block mb-2" for="produtos">PRODUTO*</label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="produto" id="produto" required>
                         <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
                     </select>
 
-                    <label for="valor" class="text-color-text font-bold block mb-2">Valor:</label>
+                    <label for="valor" class="text-color-text font-bold block mb-2">VALOR*</label>
                     <div class="relative">
                         <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
                         <input autocomplete="off" onblur="blurValor()" onkeyup="continuaModal()" minlength="1" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
@@ -996,14 +996,14 @@
 
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
+                            <label class="text-color-text font-bold block mb-2" for="tecnicos">TÉCNICO RESPONSÁVEL*</label>
                             <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer capitalize" name="tecnicos" id="tecnicos" required>
                                 <option value="" disabled selected class="text-color-text-secundary bg-body">Selecione um técnico...</option>
                             </select>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label for="maquinas" class="text-color-text font-bold block mb-2">Máquina utilizada</label>
+                            <label for="maquinas" class="text-color-text font-bold block mb-2">MÁQUINA UTILIZADA</label>
                             <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" id="maquinas" required>   
                             </select>
                         </div>
@@ -1020,12 +1020,12 @@
                 <div id="segundoCadastroProduto" class="hidden max-h-[50vh]">
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoMaquina" class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
+                            <label for="tempoMaquina" class="text-color-text font-bold block mb-2">TEMPO (MÁQUINA)</label>
                             <input placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoPessoa" class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
+                            <label for="tempoPessoa" class="text-color-text font-bold block mb-2">TEMPO (PESSOA)*</label>
                             <input placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
                         </div>
                     </div>
@@ -1033,17 +1033,17 @@
                     
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label for="dataInicial" class="text-color-text font-bold block mb-2">Data Inicial: </label>
+                            <label for="dataInicial" class="text-color-text font-bold block mb-2">DATA INICIAL*</label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataInicial" required>
                         </div>
 
                         <div class="w-full lg:w-1/2">
-                            <label for="dataFinal" class="text-color-text font-bold block mb-2">Data Final: </label>
+                            <label for="dataFinal" class="text-color-text font-bold block mb-2">DATA FINAL*</label>
                             <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataFinal" required>
                         </div>
                     </div>
                     
-                    <label for="unidadeCriadora" class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
+                    <label for="unidadeCriadora" class="text-color-text font-bold block mb-2">UNIDADE REALIZADORA*</label>
                     <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" id="unidadeCriadora" required>
                         <option value="" disabled selected>Selecione a unidade Criadora</option>
                     </select>
