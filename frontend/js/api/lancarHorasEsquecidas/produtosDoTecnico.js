@@ -5,7 +5,7 @@ const botaoPesquisar = document.getElementById('pesquisar');
 let tabela = document.querySelector('#produtosDoTecnico');
 
 botaoPesquisar.addEventListener('click', () => {
-    puxarProdutosDoTecnico();
+    exibirProdutosDoTecnico();
     
 })
 
@@ -15,7 +15,27 @@ function exibirAlerta(template) {
     tabela.innerHTML = template;
 }
 
-async function puxarProdutosDoTecnico () {
+async function pegarDados(nif) {
+
+    try {
+        const requisicao = await fetch (back + `/lancarHorasEsquecidas/carregarProdutosDoTecnico.php?nif=${nif}`);
+
+        if (!requisicao.ok) {
+
+            return false;
+        }
+
+        const resposta = await requisicao.json();
+
+        return resposta;
+
+    } catch(err) {
+
+        return false;
+    }
+}
+
+async function exibirProdutosDoTecnico () {
 
     exibirAlerta(
         `
@@ -28,11 +48,9 @@ async function puxarProdutosDoTecnico () {
 
     const nif = document.getElementById('pesquisaNif').value;
 
-    const requisicao = await fetch (back + `/lancarHorasEsquecidas/carregarProdutosDoTecnico.php?nif=${nif}`);
+    const resposta = await pegarDados(nif);
 
-    const resposta = await requisicao.json();
-
-    if (resposta.status && resposta.status === 'error') {
+    if (resposta === false || (resposta.status && resposta.status === 'error')) {
 
         exibirAlerta(`
         <div class='flex flex-col justify-center items-center gap-4'>
