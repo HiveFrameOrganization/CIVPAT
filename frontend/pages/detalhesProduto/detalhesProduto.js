@@ -546,8 +546,8 @@ if (localStorage.getItem('cargo') == 'tec') {
     const botaoFinalizarProduto = document.getElementById('concluirProduto');
 
     botaoFinalizarProduto.addEventListener('click', () => {
-        concluirProduto();
-        // modalConfirmar()
+        // concluirProduto();
+        modalConfirmar()
     })
 
     async function concluirProduto() {
@@ -570,7 +570,6 @@ if (localStorage.getItem('cargo') == 'tec') {
         }
 
     }
-}
 
 /////////////////////////////
 
@@ -586,7 +585,7 @@ function modalConfirmar(fun) {
     const templateModalConfirmar = `
     <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
         <div>
-            <h2 class="text-2xl font-bold text-red">DESEJA FINALIZAR O PRODUTO?}</h2>
+            <h2 class="text-2xl font-bold text-color-text">DESEJA FINALIZAR O PRODUTO?</h2>
             <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
         </div>
         <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
@@ -608,19 +607,20 @@ function modalConfirmar(fun) {
     // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
     document.querySelector('#btn-confirmar').addEventListener('click', () => {
         concluirProduto()
-
-        // APAGAR ELEMENTOS DE MODAL
-        aside.addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
-        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
-        document.querySelector('#btn-cancelar').addEventListener('click', () => {
-            document.body.removeChild(div)
-            document.body.removeChild(aside)
-        })
     })
+
+    // APAGAR ELEMENTOS DE MODAL
+    aside.addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+    document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+    document.querySelector('#btn-cancelar').addEventListener('click', () => {
+        document.body.removeChild(div)
+        document.body.removeChild(aside)
+    })
+}
 }
