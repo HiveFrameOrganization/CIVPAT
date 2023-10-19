@@ -39,6 +39,16 @@ async function verificaEmail(email) {
             body: JSON.stringify({ email: email })
         });
 
+        if (!resposta.ok) {
+
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Um erro ocorreu, tente novamente!');
+
+            alertas();
+            
+            return;
+        }
+
         const retornoServidor = await resposta.json();
 
         if (retornoServidor.novoUsuario == true){
@@ -95,21 +105,6 @@ formularioNovaSenha.addEventListener('submit', async evento => {
 
     try {
 
-        // // Veririficando se a senha possui alguma letra maiúscula
-        // if (!letraMaiuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MAIÚSCULA!!!!`);
-
-        // // Veririficando se a senha possui alguma letra minuscula
-        // if (!letraMinuscula(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR LETRA MINÚSCULA!!!!`);
-
-        // // Veririficando se a senha possui algum número
-        // if (!possuiNumero(novaSenha)) throw new Error(`A SENHA DEVE POSSUIR ALGUM NÚMERO!!!!`);
-
-        // // Verificando se ela tem o tamanho mínimo de 8 caracteres
-        // if (!tamanhoMinimo(novaSenha)) throw new Error(`A SENHA DEVE TER PELO MENOS 8 CARACTERES!!!!`);
-
-        // // Verificando se as senhas digitadas são iguais
-        // if (!senhasIguais(novaSenha, repitaSenha)) throw new Error(`AS SENHAS NÃO CONFEREM!!!!`);
-
         if (!letraMaiuscula(novaSenha) ||!letraMinuscula(novaSenha) || !possuiNumero(novaSenha) || !tamanhoMinimo(novaSenha)) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Requisitos não atendidos nas senhas');
@@ -164,19 +159,27 @@ async function salvandoSenha(email, senha) {
             body: JSON.stringify(dados)
         });
 
-        // Pegando a resposta do servidor
-        const resposta = await enviaBackend.json();
+        if (!enviaBackend.ok) {
 
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Um erro ocorreu, tente novamente!');
 
-        alertas();
+        } else {
 
-        // console.log(resposta);
+            // Pegando a resposta do servidor
+            const resposta = await enviaBackend.json();
+
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
+        }
 
     } catch (erro) {
-        console.error(erro);
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Um erro ocorreu, tente novamente!');
     }
+
+    alertas();
 
 }
 

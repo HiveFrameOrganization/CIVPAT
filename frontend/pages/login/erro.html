@@ -98,8 +98,10 @@
         function retornar() {
             if (localStorage.getItem('cargo') == 'tec'){
                 window.location.pathname = '/frontend/pages/perfil/index.html';
-            } else {
+            } else if (localStorage.getItem('cargo') && localStorage.getItem('cargo') != 'tec') {
                 window.location.pathname = '/frontend/pages/Home/index.html';
+            } else {
+                window.location.pathname = '/index.html';
             }
         }
     </script>

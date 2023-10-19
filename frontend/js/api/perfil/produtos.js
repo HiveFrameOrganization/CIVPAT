@@ -90,9 +90,12 @@ async function buscarProdutos() {
 
             const requisicao = await fetch(back + `/perfil/produtos.php?nif=${nif}&pagina=${paginaProduto}&qtdBotoes=${declaradoqtdBotoesProduto}`);
 
-            const resposta = await requisicao.json();
+            if (!requisicao.ok) {
 
-            console.log(resposta);
+                return false;
+            }
+
+            const resposta = await requisicao.json();
 
             if (resposta.status == 'success') {
 
