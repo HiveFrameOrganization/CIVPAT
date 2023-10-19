@@ -742,7 +742,7 @@
 
                     </div>
 
-                    <div class="tabela min-h-[40vh]">
+                    <div class="tabela min-h-[40vh] overflow-x-auto">
 
                         <div id="tabelaFollow"
                             class="flex flex-wrap gap-8 pb-7">
@@ -755,128 +755,122 @@
                 <!-- centralização -->
 
                 <div
-                    class="caixa min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6]">
+                    class="caixa z-50 h-screen w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6] flex items-center hidden">
 
                     <!-- conteúdo do modal -->
 
-                    <div
-                        class="bg-component px-8 py-16 sm:pt-8 sm:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto sm:max-h-[75vh]">
+                    <form class="z-10 flex flex-col gap-0 w-[600px] max-w-[90%] bg-component p-4 sm:p-8 overflow-y-auto mx-auto rounded-md"  id="formulario" autocomplete="off">
 
                         <!-- título e subtítulo -->
 
-                        <div class="flex flex-col sm:flex-row justify-between">
-                            <div class="text-center sm:text-justify text-color-text w-full">
-                                <h1 class="font-bold text-2xl">ADICIONAR FOLLOW-UP</h1>
-                                <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
-                            </div>
-                            <div class="flex justify-end absolute top-4 right-4 sm:relative sm:top-0 sm:right-0">
-                                <button aria-label="Fechar a modal" class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModal(); limpaInput()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col gap-0">
+                                <h2 class="font-bold text-2xl">ADICIONAR FOLLOW-UP</h2>
+                                <h3 class="text-xs">Preencha os campos com os dados do follow-up - <strong class="text-[#ef4444]">Obrigatório*</strong></h3>
                             </div>
         
+                            <button type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
                         </div>
 
                         <!-- inputs -->
 
-                        <form class="flex flex-col gap-6 pt-8" id="formulario" autocomplete="off">
+                        <div class="flex flex-col gap-6 pt-8 max-h-[50vh]">
 
                             <!-- DATA DO FOLLOW-UP -->
 
-                            <div>
-                                <label for="dataFollowUp" class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="dataFollowUp" class="text-color-text font-semibold block">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUp" id="dataFollowUp"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 cursor-pointer"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
-                            <div>
-                                <label for="comentario" class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="comentario" class="text-color-text font-semibold block">COMENTÁRIO *</label>
                                 <textarea name="comentario" id="comentario" rows="5"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
-                            <div>
-                                <label for="dataFollowUpProx" class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="dataFollowUpProx" class="text-color-text font-semibold block">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProx" id="dataFollowUpProx"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                             </div>
 
                             <!-- botão -->
 
-                            <div class="pt-6">
+                            <div class="pb-4 sm:pb-8">
                                 <button type="submit" aria-label="Adicionar follow-up"
-                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Adicionar
-                                    follow-up</button>
+                                    class="rounded-md transition-colors text-[#fff] bg-primary w-full text-center font-bold text-xs py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">ADICIONAR
+                                    FOLLOW-UP</button>
                             </div>
 
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
 
                 <!------------------------------ MODAL DE EDIÇÃO DE FOLLOW-UP ------------------------------>
 
                 <!-- centralização -->
 
-                <div
-                    class="editar min-h-screen z-50 hidden h-full w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6]">
+                <div class="editar z-50 h-screen w-screen fixed left-0 top-0 bg-[#000] bg-opacity-[0.6] flex items-center hidden">
 
                     <!-- conteúdo do modal -->
 
-                    <div
-                        class="bg-component px-8 py-16 sm:pt-8 sm:pb-8 w-full sm:w-[600px] min-h-screen sm:min-h-0 sm:h-auto sm:mx-auto sm:my-auto sm:rounded-xl overflow-y-auto sm:max-h-[75vh]">
+                    <form class="z-10 flex flex-col gap-0 w-[600px] max-w-[90%] bg-component p-4 sm:p-8 overflow-y-auto mx-auto rounded-md" id="formularioeditar" autocomplete="off">
 
                         <!-- título e subtítulo -->
 
-                        <div class="flex flex-col sm:flex-row justify-between">
-                            <div class="text-center sm:text-justify text-color-text w-full">
-                                <h1 class="font-bold text-2xl">EDITAR FOLLOW-UP</h1>
-                                <h2 class="text-xs pt-2"><strong class="text-[#ef4444]">O preenchimento dos campos é obrigatório*</strong></h2>
-                            </div>
-                            <div class="flex justify-end absolute top-4 right-4 sm:relative sm:top-0 sm:right-0">
-                                <button aria-label="Fechar modal" class="hover:bg-primary/20 transition-colors rounded-full w-10 h-10 p-2" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Ícone de fechar modal"></button>
+                        <div class="flex justify-between items-start">
+                            <div class="flex flex-col gap-0">
+                                <h2 class="font-bold text-2xl">EDITAR FOLLOW-UP</h2>
+                                <h3 class="text-xs">Edite os dados do follow-up - <strong class="text-[#ef4444]">Obrigatório*</strong></h3>
                             </div>
         
+                            <button type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10" onclick="fechaModalEdit()"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
                         </div>
 
                         <!-- inputs -->
 
-                        <form class="flex flex-col gap-6 pt-8" id="formularioeditar" autocomplete="off">
+                        <div class="flex flex-col gap-6 pt-8 max-h-[50vh]">
+
+                            <p hidden id="idFollowUpModal"></p>
 
                             <!-- DATA DO FOLLOW-UP -->
 
-                            <p hidden id="idFollowUpModal"></p>
-                            <div>
-                                <label for="dataFollowUpEdit" class="text-color-text font-bold block mb-3">DATA DO FOLLOW-UP *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="dataFollowUpEdit" class="text-color-text font-semibold">DATA DO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpEdit" id="dataFollowUpEdit"
-                                    class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do follow-up" required>
                             </div>
 
-                            <div>
-                                <label for="comentarioEdit" class="text-color-text font-bold block mb-3">COMENTÁRIO *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="comentarioEdit" class="text-color-text font-semibold">COMENTÁRIO *</label>
                                 <textarea name="comentarioEdit" id="comentarioEdit" rows="5"
-                                    class="bg-body placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
                             </div>
 
-                            <div>
-                                <label for="dataFollowUpProxEdit" class="text-color-text font-bold block mb-3">DATA DO PRÓXIMO FOLLOW-UP *</label>
+                            <div class="flex flex-col gap-2 w-full">
+                                <label for="dataFollowUpProxEdit" class="text-color-text font-semibold">DATA DO PRÓXIMO FOLLOW-UP *</label>
                                 <input type="text" name="dataFollowUpProxEdit" id="dataFollowUpProxEdit"
-                                    class="placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full bg-primary/20"
+                                    class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
                                     onfocus="this.type='date'" placeholder="Data do próximo follow-up" required>
                             </div>
 
                             <!-- botão -->
 
-                            <div class="pt-6">
+                            <div class="pb-4 sm:pb-8">
                                 <button type="submit" aria-label="Editar follow-up"
-                                    class="rounded-lg text-[#fff] bg-primary w-full text-center font-bold text-base py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">Editar
-                                    follow-up</button>
+                                        class="rounded-md text-[#fff] bg-primary transition-colors w-full text-center font-bold text-xs py-2 hover:text-primary hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary">EDITAR
+                                        FOLLOW-UP</button>
                             </div>
 
-                        </form>
-                    </div>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -914,24 +908,24 @@
 
             <div onclick="fechaModal()" class="z-0 absolute w-screen h-screen"></div>
 
-            <form class="formulario z-10 flex flex-col gap-5 w-full md:w-1/2 max-h-[80%] bg-component p-8 overflow-y-auto mx-auto rounded-xl" autocomplete="off">
+            <form class="formulario z-10 flex flex-col gap-8 w-[600px] max-w-[90%] bg-component p-4 sm:p-8 overflow-y-auto mx-auto rounded-md" autocomplete="off">
 
                 <div class="flex justify-between items-start">
                     <div class="flex flex-col gap-0">
                         <h2 class="font-bold text-2xl">CADASTRO DE PRODUTO</h2>
-                        <h3 class="text-sm pt-2">Adicione produtos na plataforma preenchendo o formulário</h3>
+                        <h3 class="text-xs">Adicione produtos na plataforma preenchendo o formulário - <strong class="text-[#ef4444]">Obrigatório*</strong></h3>
                     </div>
 
-                    <img src="../../img/icon/close.png" class="cursor-pointer" alt="Ícone de fechar modal" onclick="fechaModal()">
+                    <button id="close-modal-cad" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10" onclick="fechaModal()"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
                 </div>
 
                 <!-- Primeira metade do modal de cadastro de produto -->
-                <div id="primerioCadastroProduto">
-                    <label class="text-color-text font-bold block mb-2">Área: </label>
-                    <input class="bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" id="area" disabled value="Metal Mecânica">
+                <div id="primerioCadastroProduto" class="max-h-[50vh]">
+                    <label class="text-color-text font-semibold block mb-2">ÁREA*</label>
+                    <input class="bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6 border border-component transition-all" type="text" id="area" disabled value="Metal Mecânica">
 
-                    <label class="text-color-text font-bold block mb-2" for="servico">Serviço Categoria: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="servico" id="servico" required>
+                    <label class="text-color-text font-semibold block mb-2" for="servico">SERVIÇO CATEGORIA*</label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6 cursor-pointer border border-component transition-all" name="servico" id="servico" required>
                         <option value="" disabled selected class="text-color-text-secundary bg-body">Selecione a categoria...</option>
                         <option value="1" class="bg-body">Assessoria Tecnológica - Aprimoramento de Produtos e Processos</option>
                         <option value="2" class="bg-body">Assessoria Tecnológica - Empreendedorismo</option>
@@ -951,15 +945,15 @@
                         <option value="16" class="bg-body">Serviços Metrológicos - Ensaios - Labor. Em Implantes</option>
                     </select>
 
-                    <label  class="text-color-text font-bold block mb-2" for="produtos">Produtos: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" name="produto" id="produto" required>
+                    <label  class="text-color-text font-semibold block mb-2" for="produtos">PRODUTO*</label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6 cursor-pointer border border-component transition-all" name="produto" id="produto" required>
                         <!-- opções serão adicionadas aqui quando o primeiro select for usado. -->
                     </select>
 
-                    <label for="valor" class="text-color-text font-bold block mb-2">Valor:</label>
+                    <label for="valor" class="text-color-text font-semibold block mb-2">VALOR*</label>
                     <div class="relative">
-                        <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
-                        <input autocomplete="off" onblur="blurValor()" onkeyup="continuaModal()" minlength="1" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
+                        <p class="absolute top-2 left-3 font-bold text-color-text">R$</p>
+                        <input autocomplete="off" onblur="blurValor()" onkeyup="continuaModal()" minlength="1" class="border border-component bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-2 pl-10 pr-4 transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
                     </div>
 
                     <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
@@ -996,61 +990,61 @@
 
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label class="text-color-text font-bold block mb-2" for="tecnicos">Técnico Responsável</label>
-                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer capitalize" name="tecnicos" id="tecnicos" required>
+                            <label class="text-color-text font-semibold block mb-2" for="tecnicos">TÉCNICO RESPONSÁVEL*</label>
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 border border-component transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6 cursor-pointer capitalize" name="tecnicos" id="tecnicos" required>
                                 <option value="" disabled selected class="text-color-text-secundary bg-body">Selecione um técnico...</option>
                             </select>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label for="maquinas" class="text-color-text font-bold block mb-2">Máquina utilizada</label>
-                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-6 cursor-pointer" id="maquinas" required>   
+                            <label for="maquinas" class="text-color-text font-semibold block mb-2">MÁQUINA UTILIZADA</label>
+                            <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 border border-component transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6 cursor-pointer" id="maquinas" required>   
                             </select>
                         </div>
 
                     </div>
 
                     <!-- botão para continuar para o resto do modal -->
-                    <div class="flex justify-end w-full">
-                        <button id="paraSegundoModal" class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 font-semibold text-base py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors disabled:opacity-20" type="button" disabled>Continuar</button>
+                    <div class="flex justify-end w-full pb-4 sm:pb-8">
+                        <button id="paraSegundoModal" class="w-full bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary transition-all hover:bg-[transparent] hover:text-primary disabled:opacity-20" type="button" disabled>CONTINUAR</button>
                     </div>
                 </div>
 
                 <!-- Segunda metade do modal de cadastro de produto -->
-                <div id="segundoCadastroProduto" class="hidden">
+                <div id="segundoCadastroProduto" class="hidden max-h-[50vh]">
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoMaquina" class="text-color-text font-bold block mb-2">Tempo (Máquina): </label>
-                            <input placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
+                            <label for="tempoMaquina" class="text-color-text font-semibold block mb-2">TEMPO (MÁQUINA)</label>
+                            <input placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoPessoa" class="text-color-text font-bold block mb-2">Tempo (Pessoa): </label>
-                            <input placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
+                            <label for="tempoPessoa" class="text-color-text font-semibold block mb-2">TEMPO (PESSOA)*</label>
+                            <input placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
                         </div>
                     </div>
 
                     
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label for="dataInicial" class="text-color-text font-bold block mb-2">Data Inicial: </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataInicial" required>
+                            <label for="dataInicial" class="text-color-text font-semibold block mb-2">DATA INICIAL*</label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text border border-component px-4 py-2 rounded-md outline-none transition-all focus:border-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataInicial" required>
                         </div>
 
                         <div class="w-full lg:w-1/2">
-                            <label for="dataFinal" class="text-color-text font-bold block mb-2">Data Final: </label>
-                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataFinal" required>
+                            <label for="dataFinal" class="text-color-text font-semibold block mb-2">DATA FINAL*</label>
+                            <input class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text border border-component px-4 py-2 rounded-md outline-none transition-all focus:border-primary focus:placeholder-primary w-full mb-8 cursor-pointer" type="date" id="dataFinal" required>
                         </div>
                     </div>
                     
-                    <label for="unidadeCriadora" class="text-color-text font-bold block mb-2">Unidade Realizadora: </label>
-                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full mb-8 cursor-pointer" id="unidadeCriadora" required>
+                    <label for="unidadeCriadora" class="text-color-text font-semibold block mb-2">UNIDADE REALIZADORA*</label>
+                    <select class="bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text px-4 py-2 border border-component rounded-md outline-none transition-all focus:border-primary focus:placeholder-primary w-full mb-8 cursor-pointer" id="unidadeCriadora" required>
                         <option value="" disabled selected>Selecione a unidade Criadora</option>
                     </select>
                     
-                    <div class="flex justify-between w-full">
-                        <button class="rounded-lg text-[#fff] hover:text-primary bg-color-red w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="paraPrimeiroModal">Voltar</button>
-                        <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-1/3 text-center font-semibold text-base px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors" type="button" id="salvarProduto">Salvar</button>
+                    <div class="flex justify-between w-full pb-4 sm:pb-8 gap-2">
+                        <button class="rounded-lg text-[#fff] hover:text-color-red bg-color-red w-full text-center font-semibold px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-color-red transition-colors text-xs" type="button" id="paraPrimeiroModal">VOLTAR</button>
+                        <button class="rounded-lg text-[#fff] hover:text-primary bg-primary w-full text-center font-semibold px-6 py-2 hover:bg-[transparent] hover:outline hover:outline-1 hover:outline-primary transition-colors text-xs" type="button" id="salvarProduto">SALVAR</button>
                     </div>
                 </div>
 

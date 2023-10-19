@@ -8,6 +8,32 @@ botaoLancarHora.addEventListener('click', () => {
     lancarHoraParaOTecnico();
 })
 
+async function setarData(dadosEnviados) {
+
+    try {
+
+        const requisicao = await fetch (back + '/lancarHorasEsquecidas/lancarHorasEsquecidas.php', {
+            method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dadosEnviados)
+        });
+    
+        if (!requisicao.ok) {
+    
+            return false;
+        }
+    
+        const resposta = await requisicao.json();
+
+        return resposta;
+
+    } catch(err) {
+
+        return false;
+    }
+}
 
 async function lancarHoraParaOTecnico () {
     const horaPessoa = document.getElementById('horaPessoaParaLancar').value;
@@ -35,16 +61,19 @@ async function lancarHoraParaOTecnico () {
             nifTecnico : nifTecnico,
             idProduto: idProduto
         }
+
+        const resposta = await setarData(dadosEnviados);
+
+        if (resposta === false) {
+
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao lançar as horas, tente novamente!");
     
-        const requisicao = await fetch (back + '/lancarHorasEsquecidas/lancarHorasEsquecidas.php', {
-            method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(dadosEnviados)
-        });
-    
-        const resposta = await requisicao.json();
+            alertas();
+
+            return;
+        }
+
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
     

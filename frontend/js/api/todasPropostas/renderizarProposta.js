@@ -329,7 +329,7 @@ function reloadLinhas() {
 
 function selecionarAba(filtroAoCarregarPagina) {
     
-    filtroAoCarregarPagina != null || filtroAoCarregarPagina != undefined && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
+    filtroAoCarregarPagina && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
 
     document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
 }
