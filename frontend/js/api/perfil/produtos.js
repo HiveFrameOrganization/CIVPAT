@@ -167,6 +167,26 @@ function colocarPagina(num) {
     sessionStorage.setItem('paginaProduto', num);
 }
 
+// mascara do sgset em cada produto retornado
+function sgsetMask(sgset){
+
+    let mask = sgset.split('')
+    let text = "";
+
+    for (let i = 0; i < mask.length; i++) {
+        if(i == 2){
+            text += mask[i] + '/'
+        }else if(i == 4){
+            text += mask[i] + '-'
+        }else{
+            text += mask[i]
+        }
+    }
+    
+    return text
+
+  }
+
 function exibirProdutos(produtos) {
 
     if (produtos.length > 0) {
@@ -216,7 +236,7 @@ function exibirProdutos(produtos) {
                         <div class="w-[150px] overflow-hidden text-ellipsis">
                             <span title="${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span class="capitalize whitespace-nowrap" title="${produto['nSGSET'] ? produto['nSGSET'] : 'N/A'}">${produto['nSGSET'] ? produto['nSGSET'] : 'N/A'}</span>
+                                <span class="capitalize whitespace-nowrap" title="${sgsetMask(produto['nSGSET']) ? sgsetMask(produto['nSGSET']) : 'N/A'}">${sgsetMask(produto['nSGSET']) ? sgsetMask(produto['nSGSET']) : 'N/A'}</span>
                             </div>
                         </div>
                     </div>
