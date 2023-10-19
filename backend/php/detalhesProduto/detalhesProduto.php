@@ -8,7 +8,10 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarDetalhes($idProduto, $conn) {
-    $stmt = $conn->prepare("SELECT * FROM Produtos WHERE idProduto = ?");
+    $stmt = $conn->prepare("SELECT `Produtos`.*, `Maquinas`.`Maquina` FROM Produtos 
+    INNER JOIN Maquinas ON `Produtos`.`fk_idMaquina` = `Maquinas`.`idMaquina`
+    WHERE idProduto = ?");
+    
     // $stmt = $conn->prepare("SELECT * FROM Propostas WHERE idProposta = ?");
     
     $stmt->bind_param('s', $idProduto);
