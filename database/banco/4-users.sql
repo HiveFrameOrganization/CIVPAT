@@ -79,6 +79,7 @@ GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`vw_relatorioSemMaquina` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_produtos` TO 'tec'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 

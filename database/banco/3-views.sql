@@ -44,3 +44,16 @@ FROM Usuarios
     GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF, Maquinas.Maquina;
 /*----------------------------------------------------------------------------------------------------*/
 
+
+
+/*--------------------------------------- PRODUTOS ---------------------------------------------------*/
+CREATE VIEW vw_produtos AS
+SELECT Produtos.idProduto, Produtos.Area, Produtos.Valor, Produtos.HoraPessoa, Produtos.Situacao, Produtos.HoraMaquina,
+Produtos.DataInicial, Produtos.DataFinal, Maquinas.Maquina, Maquinas.idMaquina, Usuarios.NIF, Usuarios.Nome,
+Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, Propostas.nSGSET 
+    FROM Usuarios INNER JOIN Produtos ON Usuarios.NIF = Produtos.fk_nifTecnico 
+    INNER JOIN Propostas ON Produtos.fk_idProposta = Propostas.idProposta
+    INNER JOIN ServicoCategoria ON Produtos.fk_idServicoCategoria = ServicoCategoria.idServicoCategoria 
+    INNER JOIN NomeProduto ON Produtos.fk_idNomeProduto = NomeProduto.idNomeProduto 
+    INNER JOIN Maquinas ON Produtos.fk_idMaquina = Maquinas.idMaquina;
+/*----------------------------------------------------------------------------------------------------*/
