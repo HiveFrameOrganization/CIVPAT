@@ -54,7 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $dados = $resultado->fetch_assoc();
 
-        if ($dados['Inicio'] == null || $dataInicialFormatada < $dados['Inicio']){
+
+        if ($dataInicialFormatada < $dados['Inicio']){
             $stmt4 = $conn->prepare('UPDATE Propostas SET Inicio = ? WHERE idProposta = ?');
 
             $stmt4->bind_param('si', $dataInicial, $idProposta);
@@ -62,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt4->execute();
         }
 
-        if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
+        if ($dataFinalFormatada > $dados['Fim']) {
             $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
 
             $stmt5->bind_param('si', $dataFinal, $idProposta);
@@ -71,7 +72,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
         $resposta = [
             'status' => 'success',
-            'mensagem' => 'Produto atualizado com sucesso'
+            'mensagem' => 'Produto atualizado com sucesso',
+            'retorno' => $dados
         ];
 
         $retorno = json_encode($resposta);
