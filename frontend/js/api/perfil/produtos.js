@@ -101,6 +101,7 @@ async function buscarProdutos() {
 
                 if (resposta.produtos.length > 0) {
 
+                    console.log(resposta.produtos)
                     exibirProdutos(resposta.produtos);
                     sessionStorage.setItem('qtdBotoesProduto', resposta.qtdBotoes);
                 } else {
@@ -166,7 +167,6 @@ function colocarPagina(num) {
     sessionStorage.setItem('paginaProduto', num);
 }
 
-
 function exibirProdutos(produtos) {
 
     if (produtos.length > 0) {
@@ -181,6 +181,13 @@ function exibirProdutos(produtos) {
             let statusIMG;
             let color;
             let optionIMG;
+            // var sgset = produto['nSGSET'];
+
+            // if (sgset.value.length == 3){
+            // sgset.value += '-'
+            // } else if (sgset.value.length == 6){
+            // sgset.value += '/'
+            // }
     
             if (produto['Situacao'].toLowerCase() == 'em andamento') {
                 
@@ -206,11 +213,17 @@ function exibirProdutos(produtos) {
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         ${statusIMG}
-                        <div class="w-[150px] max-w-[150px] overflow-hidden text-ellipsis">
-                            <span title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
+                        <div class="w-[150px] overflow-hidden text-ellipsis">
+                            <span title="${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
-                                <span class="capitalize whitespace-nowrap" title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
+                                <span class="capitalize whitespace-nowrap" title="${produto['nSGSET'] ? produto['nSGSET'] : 'N/A'}">${produto['nSGSET'] ? produto['nSGSET'] : 'N/A'}</span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                        <div class="flex flex-col gap-1 font-semibold w-[150px] max-w-[150px]">
+                            <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize" title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
+                            <span title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
