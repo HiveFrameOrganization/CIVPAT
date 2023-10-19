@@ -18,11 +18,7 @@ require_once '../../../database/conn.php';
 
 
 function quantidadeDePropostasPeloStatus ($conn) {
-    $stmt = $conn->prepare('SELECT SUM(CASE WHEN Status = "Em Análise" THEN 1 ELSE 0 END) AS somaAnalise,
-    SUM(CASE WHEN Status = "Aceito" THEN 1 ELSE 0 END) AS somaAceito,
-    SUM(CASE WHEN Status = "Declinado" THEN 1 ELSE 0 END) AS somaDeclinado,
-    SUM(CASE WHEN Status = "Concluido" THEN 1 ELSE 0 END) AS somaConcluido
-    FROM Propostas');
+    $stmt = $conn->prepare('SELECT * FROM vw_kpi');
 
     $stmt->execute();
 
@@ -41,22 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
     
     if ($filtros == ''){
-        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-        `Usuarios`.`FotoDePerfil`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-        INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-        ORDER BY `Propostas`.`idProposta` DESC
+        $stmt = $conn->prepare('SELECT * FROM vw_home
         LIMIT ?, ?');
 
         $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
     } else {
-        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-        `Usuarios`.`FotoDePerfil`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-        INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-        WHERE `Propostas`.`Status` = ? ORDER BY `Propostas`.`idProposta` DESC
+        $stmt = $conn->prepare('SELECT * FROM vw_home
+        WHERE Status = ?
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
         $stmt->bind_param('sii', $filtros, $inicioProposta, $qtdPropostasTela);

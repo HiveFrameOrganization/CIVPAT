@@ -21,25 +21,13 @@ function puxarRelatorio($conn)
 
     if ($cargo === "tec") {
 
-        $stmt = $conn->prepare("SELECT  NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, CargaHoraria.Datas FROM Usuarios 
-        INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
-        INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
-        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
-        INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-        AND Usuarios.NIF = ?
-        GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
+        $stmt = $conn->prepare("SELECT * FROM vw_relatorioSemMaquina
+        WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? AND Usuarios.NIF = ?");
 
     } else {
 
-        $stmt = $conn->prepare("SELECT Usuarios.Nome, Usuarios.NIF, Usuarios.Sobrenome, NomeProduto.NomeProduto, Propostas.TituloProposta, Maquinas.Maquina, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`, CargaHoraria.Datas FROM Usuarios 
-        INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
-        INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
-        INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
-        INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina 
-        INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? 
-        AND Usuarios.NIF = ?
-        GROUP BY Datas, Usuarios.NIF, Maquinas.Maquina, Propostas.TituloProposta, NomeProduto.NomeProduto LIMIT 0, 100");
-
+        $stmt = $conn->prepare("SELECT * FROM vw_relatorioComMaquina 
+        WHERE MONTH(CargaHoraria.Datas) = ? AND YEAR(CargaHoraria.Datas) = ? AND Usuarios.NIF = ?");
     }
 
     $stmt->bind_param('sss', $mes, $ano, $valor);

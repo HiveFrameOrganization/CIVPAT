@@ -51,15 +51,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 } else {
     http_response_code(405); // Method Not Allowed
 }
-
-
-
-
-
-
-
-
-
-
-
 ?>

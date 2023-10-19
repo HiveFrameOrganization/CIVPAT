@@ -18,11 +18,7 @@ require_once '../../../database/conn.php';
 
 
 function quantidadeDePropostasPeloStatus ($conn) {
-    $stmt = $conn->prepare('SELECT SUM(CASE WHEN Status = "Em Análise" THEN 1 ELSE 0 END) AS somaAnalise,
-    SUM(CASE WHEN Status = "Aceito" THEN 1 ELSE 0 END) AS somaAceito,
-    SUM(CASE WHEN Status = "Declinado" THEN 1 ELSE 0 END) AS somaDeclinado,
-    SUM(CASE WHEN Status = "Concluido" THEN 1 ELSE 0 END) AS somaConcluido
-    FROM Propostas');
+    $stmt = $conn->prepare('SELECT * FROM vw_kpi');
 
     $stmt->execute();
 
@@ -44,13 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     if ($pesquisaAtual == ''){
         $test = '1';
-        $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-        `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-        INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-        INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-        WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-        ORDER BY `Propostas`.`idProposta` DESC
+        $stmt = $conn->prepare('SELECT * FROM vw_home
+        WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
         $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
@@ -59,13 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         if ($aba == ''){
             $test = '2';
-            $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-            `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-            `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-            INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-            INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-            WHERE `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-            ORDER BY `Propostas`.`idProposta` DESC
+            $stmt = $conn->prepare('SELECT * FROM vw_home
+            WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
             LIMIT ?, ?');
             // Limita os resultados a 10 propostas por página
             $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
@@ -76,25 +62,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 $declinio = 'Solicitação de Declinio';
                 $aceito = 'Solicitação de Aceite';
 
-                $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-                `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-                `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-                INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-                INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-                WHERE `Propostas`.`Status` in (?, ?) AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-                ORDER BY `Propostas`.`idProposta` DESC
+                $stmt = $conn->prepare('SELECT * FROM vw_home
+                WHERE Status in (?, ?) AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
                 $stmt->bind_param('sssii', $aceito, $declinio, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
             } else {
 
-                $stmt = $conn->prepare('SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-                `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-                `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-                INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
-                INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-                WHERE `Propostas`.`Status` = ? AND `Propostas`.`TituloProposta` COLLATE utf8mb4_unicode_ci LIKE ?
-                ORDER BY `Propostas`.`idProposta` DESC
+                $stmt = $conn->prepare('SELECT * FROM vw_home
+                WHERE Status = ? AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
                 $stmt->bind_param('ssii', $aba, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
