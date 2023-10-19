@@ -31,11 +31,16 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}
         &qtdBotes=${declaradoQtdBotoes}&pesquisaAtual=${pesquisaAtual}&aba=${aba}&pesquisaAnterior=${pesquisaAnterior}`);
+
+        if (!resposta.ok) {
+
+            return false;
+        }
+
         
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
-        console.log(dados)
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
 

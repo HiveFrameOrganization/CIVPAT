@@ -1,3 +1,4 @@
+import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js'
 /*
 ------------------------- PROCESSO DE AUTENTICAÇÃO E NÍVEL DE ACESSO DO USUÁRIO ------------------------------
@@ -23,6 +24,16 @@ export async function autenticacao(cargo) {
             body: JSON.stringify(dados)
         });
 
+        if (!verificacao.ok) {
+
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
+
+            alertas();
+
+            return;
+        }
+
         const resposta = await verificacao.json();
 
         if (resposta.status === 'erro') {
@@ -31,7 +42,13 @@ export async function autenticacao(cargo) {
 
 
     } catch (erro) {
-        console.error(erro);
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
+
+        alertas();
+
+        return;
     }
 
 }
