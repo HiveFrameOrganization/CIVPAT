@@ -128,7 +128,7 @@ botaoSalvarPdf.addEventListener('click', () => {
     
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
-                // window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
+                window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
                 
                 verificarPdfExistente(identificador);
             })
