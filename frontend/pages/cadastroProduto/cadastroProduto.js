@@ -22,7 +22,7 @@ async function gerarHora(){
 }
 
 // formatar a data
-const hoje = await gerarHora();
+const hoje = new Date(await gerarHora());
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -52,10 +52,10 @@ async function validacaoDataFinal () {
 
     document.getElementById('dataFinal').setAttribute('min', dataInicial);
 
-}
+}   
 
 // Quando for selecionado executar 
-document.getElementById("servico").addEventListener("change",async function() {
+document.getElementById("servico").addEventListener("change", async function() {
     const idServicoCategoria = document.getElementById('servico').value;
     const produtoSelect = document.getElementById("produto");
     
