@@ -6,7 +6,21 @@ const resetSenhaContainer = document.querySelector('#reset-container');
 // Função para desativar o usuário
 async function resetarSenhaUsuario(nif) {
 
-    const confirmarReset = confirm('Confirmar reset de senha?');
+    const confirmarReset = await Swal.fire({
+        title: 'Você tem certeza?',
+        text: "A senha será retornada ao padrão",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, resetar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+            if (result.isConfirmed) {
+            
+                return true;
+            }
+      })
 
     if (confirmarReset === true) {
 
@@ -31,13 +45,24 @@ async function resetarSenhaUsuario(nif) {
             
             // Convertendo a requisição em um objeto JS
             const resposta = await requisicao.json();
+
+            Swal.fire(
+                'Sucesso!',
+                'A senha foi resetada com sucesso!',
+                'success'
+              )
     
             resetSenhaContainer.innerHTML = 
             '<span class="font-semibold text-base text-color-green">Senha resetada!</span>';
 
         } catch (erro) {
 
-            resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">${String(erro).replace('Error: ', '')}</span>`;
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao alterar a senha!");
+
+            alertas();
+
+            resetSenhaContainer.innerHTML = `<span class="font-semibold text-base text-color-red">A senha foi não foi resetada!</span>`;
         }
     }
 }
