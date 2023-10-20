@@ -23,7 +23,7 @@ async function gerarHora(){
 }
 
 // formatar a data
-const hoje = await gerarHora();
+const hoje = new Date(await gerarHora());
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
