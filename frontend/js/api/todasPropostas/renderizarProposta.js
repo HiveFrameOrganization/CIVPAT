@@ -328,10 +328,13 @@ function reloadLinhas() {
 }
 
 function selecionarAba(filtroAoCarregarPagina) {
-    
-    filtroAoCarregarPagina && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
 
-    document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
+    if (filtroAoCarregarPagina != '') {
+
+        document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
+        document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
+    } 
+
 }
 
 export default exibirPropostas
