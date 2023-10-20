@@ -52,9 +52,7 @@ function cpfMask(){
 function sgsetMask(){
   var sgset = document.querySelector('#numeroSGSET');
 
-  if (sgset.value.length == 3){
-    sgset.value += '-'
-  } else if (sgset.value.length == 6){
+  if (sgset.value.length == 5){
     sgset.value += '/'
   }
 }
@@ -81,8 +79,7 @@ function exibeCpf(){
 function exibeSgset(){
   var sgset = document.querySelector('#numeroSGSET').value;
   if (sgset != ''){
-    sgset = [sgset.slice(0, 3), '-', sgset.slice(3)].join('');
-    sgset = [sgset.slice(0, 6), '/', sgset.slice(6)].join('');
+    sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
 
     document.getElementById('numeroSGSET').value = sgset;
   }
