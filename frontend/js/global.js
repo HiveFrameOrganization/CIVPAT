@@ -69,49 +69,54 @@ function funMudarAba(pag){
 
     let pagina = sessionStorage.getItem('abaDetalhes')
 
-    if(pagina == 0){
-        alertaData.classList.remove('hidden')
-        abaInfo.classList.remove('hidden')
-        abaPdf.classList.add('hidden')
-        abaProdutos.classList.add('hidden')
-        abaFollowUp.classList.add('hidden')
+    if (alertaData && abaInfo && abaPdf && abaProdutos && abaFollowUp && nomeAba) {
 
-        nomeAba.innerHTML = 'detalhes da proposta'
-    }else if(pagina == 1){
-        alertaData.classList.add('hidden')
-        abaPdf.classList.remove('hidden')
-        abaInfo.classList.add('hidden')
-        abaProdutos.classList.add('hidden')
-        abaFollowUp.classList.add('hidden')
 
-        nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
-    }else if(pagina == 2){
-        alertaData.classList.add('hidden')
-        abaFollowUp.classList.remove('hidden')
-        abaPdf.classList.add('hidden')
-        abaInfo.classList.add('hidden')
-        abaProdutos.classList.add('hidden')
+        if(pagina == 0){
 
-        nomeAba.innerHTML = 'TODOS OS FOLLOW-UPS'
-    }else{
-        alertaData.classList.add('hidden')
-        abaProdutos.classList.remove('hidden')
-        abaPdf.classList.add('hidden')
-        abaInfo.classList.add('hidden')
-        abaFollowUp.classList.add('hidden')
+            alertaData.classList.remove('hidden')
+            abaInfo.classList.remove('hidden')
+            abaPdf.classList.add('hidden')
+            abaProdutos.classList.add('hidden')
+            abaFollowUp.classList.add('hidden')
 
-        nomeAba.innerHTML = 'todos os produtos'
-    }
+            nomeAba.innerHTML = 'detalhes da proposta'
+        }else if(pagina == 1){
+            alertaData.classList.add('hidden')
+            abaPdf.classList.remove('hidden')
+            abaInfo.classList.add('hidden')
+            abaProdutos.classList.add('hidden')
+            abaFollowUp.classList.add('hidden')
 
-    // adiciona estilizaçao no elemento selecionado
-    mudarAba[pagina].classList.add('text-primary')
-    mudarAba[pagina].classList.add('border-b-2')
+            nomeAba.innerHTML = 'pdf(s) obrigatórios e opcionais'
+        }else if(pagina == 2){
+            alertaData.classList.add('hidden')
+            abaFollowUp.classList.remove('hidden')
+            abaPdf.classList.add('hidden')
+            abaInfo.classList.add('hidden')
+            abaProdutos.classList.add('hidden')
 
-    // remove as estilizaçoes de selecionado
-    for (let i = 0; i < mudarAba.length; i++) {
-        if (i != pag) {
-            mudarAba[i].classList.remove('text-primary')
-            mudarAba[i].classList.remove('border-b-2')
+            nomeAba.innerHTML = 'TODOS OS FOLLOW-UPS'
+        }else{
+            alertaData.classList.add('hidden')
+            abaProdutos.classList.remove('hidden')
+            abaPdf.classList.add('hidden')
+            abaInfo.classList.add('hidden')
+            abaFollowUp.classList.add('hidden')
+
+            nomeAba.innerHTML = 'todos os produtos'
+        }
+
+        // adiciona estilizaçao no elemento selecionado
+        mudarAba[pagina].classList.add('text-primary')
+        mudarAba[pagina].classList.add('border-b-2')
+
+        // remove as estilizaçoes de selecionado
+        for (let i = 0; i < mudarAba.length; i++) {
+            if (i != pag) {
+                mudarAba[i].classList.remove('text-primary')
+                mudarAba[i].classList.remove('border-b-2')
+            }
         }
     }
 }
