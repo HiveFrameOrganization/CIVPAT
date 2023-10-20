@@ -40,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     DataFinal = ?
     WHERE idProduto = ?;');
 
-    $stmt->bind_param("sssssssssss", $nifTecnico, $idNomeProduto, $servico, $unidade, $area, $valor, $tempoPessoa, $tempoMaquina, $dataInicial, $dataFinal, $idProduto);
+    $stmt->bind_param("sssssssssss", $nifTecnico, $idNomeProduto, $servico, $unidade, $area, $valor, $tempoPessoa,
+    $tempoMaquina, $dataInicial, $dataFinal, $idProduto);
 
     if ($stmt->execute()){
 

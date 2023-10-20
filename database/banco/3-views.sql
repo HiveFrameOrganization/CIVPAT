@@ -65,5 +65,24 @@ SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal,
     ServicoCategoria.ServicoCategoria, Produtos.fk_nifTecnico FROM Produtos
     INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
-    INNER JOIN ServicoCategoria ON ServicoCategoria.idServicoCategoria = Produtos.fk_idServicoCategoria
+    INNER JOIN ServicoCategoria ON ServicoCategoria.idServicoCategoria = Produtos.fk_idServicoCategoria;
+/*----------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------- HISTORICO FUNIL ---------------------------------------------*/
+CREATE VIEW vw_historicoFunil AS
+SELECT
+    SF_atual.StatusFunil as SF_atual, SF_anterior.StatusFunil as SF_anterior, DataInicial, DataFinal, fk_idProposta
+    FROM Historico as H
+    JOIN StatusFunil as SF_atual ON H.fk_idStatusAtual = SF_atual.idStatusFunil
+    JOIN StatusFunil as SF_anterior ON H.fk_idStatusAnterior = SF_anterior.idStatusFunil;
+/*----------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------- FOLLOW UP ------------------------------------------------*/
+CREATE VIEW vw_followUp AS
+SELECT `idFollowUp`,`Usuarios`.Nome, `Usuarios`.Sobrenome, `Data`, `Comentario`, `DataProxFollowUp`, fk_idProposta
+    FROM FollowUp
+    INNER JOIN Usuarios ON `FollowUp`.`fk_nifUsuario` = `Usuarios`.`NIF`
+    ORDER BY `Data` DESC
 /*----------------------------------------------------------------------------------------------------*/

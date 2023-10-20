@@ -148,7 +148,8 @@ function cadastrarProposta($dados, $idRepresentante, $conn) {
     $status = 'Em Análise';
 
     // Preparando a inserção
-    $stmt = $conn->prepare("INSERT INTO Propostas (fk_idRepresentante, fk_nifUsuarioCriador, TituloProposta, Resumo, fk_idUnidadeCriadora, Empresa, `Status`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Propostas (fk_idRepresentante, fk_nifUsuarioCriador, TituloProposta, Resumo, fk_idUnidadeCriadora, Empresa, `Status`) 
+    VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     // Passando os valores como parâmetro
     $stmt->bind_param('issssss', $idRepresentante, $nif, $nomeProjeto, $resumo, $unidadeCriadora, $empresa, $status);

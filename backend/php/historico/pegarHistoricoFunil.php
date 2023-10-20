@@ -10,12 +10,7 @@ require_once '../../../database/conn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Pega os status de funil da tabela StatusFunil
     $stmt =
-    $conn->prepare("SELECT
-    SF_atual.StatusFunil as SF_atual, SF_anterior.StatusFunil as SF_anterior, DataInicial, DataFinal
-    FROM Historico as H
-    JOIN StatusFunil as SF_atual ON H.fk_idStatusAtual = SF_atual.idStatusFunil
-    JOIN StatusFunil as SF_anterior ON H.fk_idStatusAnterior = SF_anterior.idStatusFunil
-    WHERE fk_idProposta = ?");
+    $conn->prepare("SELECT * FROM vw_historicoFunil WHERE fk_idProposta = ?");
 
     $stmt->bind_param("s", $_GET['idProposta']);
     $stmt->execute();

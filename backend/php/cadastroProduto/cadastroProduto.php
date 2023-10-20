@@ -30,9 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dataFinalFormatada = date("Y-m-d", strtotime($dataFinal));
     
 
-    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor, HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor,
+    HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
 
-    $stmt2->bind_param('sssssssssssis', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,  $unidade, $dataInicial, $dataFinal, $idMaquina, $situacao);
+    $stmt2->bind_param('sssssssssssis', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,
+    $unidade, $dataInicial, $dataFinal, $idMaquina, $situacao);
     // Executa a declaração preparada
     if ($stmt2->execute()) {
         $idNovoProduto = $conn->insert_id;
