@@ -400,7 +400,11 @@ async function LancamentoHoras() {
 
             if (localStorage.getItem('tempoMaquina') != 0) {
                 if (resposta['horaTotalMaquina'] == undefined) {
-                    document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+                    setTimeout(renderizaHoraMaquina, 1000)
+
+                    function renderizaHoraMaquina(){
+                        document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+                    }
                 } else {
                     document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
                 }
