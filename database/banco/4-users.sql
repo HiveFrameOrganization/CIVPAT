@@ -27,8 +27,12 @@ GRANT SELECT ON `isihiveframe`.`vw_kpi` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_home` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_followUp` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_historicoFunil` TO role1;
+GRANT SELECT ON `isihiveframe`.`vw_lancamentoHoras` TO role1;
+GRANT SELECT ON `isihiveframe`.`vw_carregarProdutos` TO role1;
+GRANT SELECT ON `isihiveframe`.`vw_detalhesPropostas` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_produtosDoTecnico` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_relatorioComMaquina` TO role1;
+GRANT SELECT ON `isihiveframe`.`vw_gerentesResponsaveis` TO role1;
 
 
 

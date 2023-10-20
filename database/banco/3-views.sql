@@ -46,7 +46,7 @@ FROM Usuarios
 
 
 
-/*--------------------------------------- PRODUTOS ---------------------------------------------------*/
+/*------------------------------------------ PRODUTOS ------------------------------------------------*/
 CREATE VIEW vw_produtos AS
 SELECT Produtos.idProduto, Produtos.Area, Produtos.Valor, Produtos.HoraPessoa, Produtos.Situacao, Produtos.HoraMaquina,
 Produtos.DataInicial, Produtos.DataFinal, Maquinas.Maquina, Maquinas.idMaquina, Usuarios.NIF, Usuarios.Nome,
@@ -59,7 +59,7 @@ Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, P
 /*----------------------------------------------------------------------------------------------------*/
 
 
-/*------------------------------------- LANÇAR HORAS -------------------------------------------------*/
+/*--------------------------------------- LANÇAR HORAS -----------------------------------------------*/
 CREATE VIEW vw_produtosDoTecnico AS
 SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal, Maquinas.Maquina, NomeProduto.NomeProduto, 
     ServicoCategoria.ServicoCategoria, Produtos.fk_nifTecnico FROM Produtos
@@ -69,7 +69,7 @@ SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal,
 /*----------------------------------------------------------------------------------------------------*/
 
 
-/*-------------------------------------- HISTORICO FUNIL ---------------------------------------------*/
+/*--------------------------------------- HISTORICO FUNIL --------------------------------------------*/
 CREATE VIEW vw_historicoFunil AS
 SELECT
     SF_atual.StatusFunil as SF_atual, SF_anterior.StatusFunil as SF_anterior, DataInicial, DataFinal, fk_idProposta
@@ -84,5 +84,49 @@ CREATE VIEW vw_followUp AS
 SELECT `idFollowUp`,`Usuarios`.Nome, `Usuarios`.Sobrenome, `Data`, `Comentario`, `DataProxFollowUp`, fk_idProposta
     FROM FollowUp
     INNER JOIN Usuarios ON `FollowUp`.`fk_nifUsuario` = `Usuarios`.`NIF`
-    ORDER BY `Data` DESC
+    ORDER BY `Data` DESC;
+/*----------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------- CARREGAR PRODUTOS ------------------------------------------*/
+CREATE VIEW vw_carregarProdutos AS
+SELECT `Produtos`.`idProduto`, `Produtos`.`Situacao`, `NomeProduto`.`NomeProduto`, fk_idProposta,
+    `ServicoCategoria`.`ServicoCategoria`, `Usuarios`.`Nome`, `Produtos`.`Valor`, `Produtos`.`DataFinal`
+    FROM Produtos
+
+    INNER JOIN NomeProduto ON `NomeProduto`.`idNomeProduto` = `Produtos`.`fk_idNomeProduto`
+    INNER JOIN ServicoCategoria ON `ServicoCategoria`.`idServicoCategoria` = `Produtos`.`fk_idServicoCategoria`
+    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Produtos`.`fk_nifTecnico`;
+/*----------------------------------------------------------------------------------------------------*/
+
+
+/*-------------------------------------- DETALHES PROPOSTAS ------------------------------------------*/
+CREATE VIEW vw_detalhesPropostas AS
+SELECT Propostas.*, `Usuarios`.`Nome`, `Representantes`.*, H.`fk_idStatusAtual` AS `StatusFunil`
+    FROM Propostas
+    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `Propostas`.`fk_nifUsuarioCriador`
+    INNER JOIN Representantes ON `Representantes`.`idRepresentante` = `Propostas`.`fk_idRepresentante`
+    LEFT JOIN (
+        SELECT fk_idProposta, MAX(`idHistorico`) AS MaxIdHistorico
+        FROM Historico
+        GROUP BY fk_idProposta
+    ) AS MaxHistorico ON `Propostas`.`idProposta` = MaxHistorico.fk_idProposta
+    LEFT JOIN Historico AS H ON MaxHistorico.fk_idProposta = H.fk_idProposta AND MaxHistorico.MaxIdHistorico = H.`idHistorico`;
+/*----------------------------------------------------------------------------------------------------*/
+    
+
+/*------------------------------------- GERENTES RESPONSAVEIS ----------------------------------------*/
+CREATE VIEW vw_gerentesResponsaveis AS
+SELECT GerenteResponsavel.*, `Usuarios`.`Nome`, `Usuarios`.`NIF`
+            FROM GerenteResponsavel
+            INNER JOIN Usuarios ON `Usuarios`.`NIF` = `GerenteResponsavel`.`fk_nifGerente`;
+/*----------------------------------------------------------------------------------------------------*/
+
+
+/*--------------------------------------- LANÇAMENTO HORAS -------------------------------------------*/
+CREATE VIEW vw_lancamentoHoras AS
+SELECT CargaHoraria.`HorasPessoa`, `CargaHoraria`.`HorasMaquina`, `Usuarios`.`NIF`
+    FROM CargaHoraria
+    INNER JOIN Usuarios ON `CargaHoraria`.`fk_nifTecnico` = `Usuarios`.`NIF` 
+    INNER JOIN Produtos ON `CargaHoraria`.`fk_idProduto` = `Produtos`.`idProduto`
 /*----------------------------------------------------------------------------------------------------*/

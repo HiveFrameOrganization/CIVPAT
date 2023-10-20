@@ -11,13 +11,8 @@ require_once '../../../database/conn.php';
 
 function verificarHoras($idProduto, $conn) {
     
-
     //Seleciona tudo que esta na tabela CargaHoraria, junto do NIF do usuario responsável pelo produto
-    $stmt = $conn -> prepare ("SELECT CargaHoraria.*, `Usuarios`.`NIF`, `Produtos`.*
-    FROM CargaHoraria
-    INNER JOIN Usuarios ON `Usuarios`.`NIF` = `CargaHoraria`.`fk_nifTecnico`
-    INNER JOIN Produtos ON `Produtos`.`idProduto` = `CargaHoraria`.`fk_idProduto`
-    WHERE  fk_idProduto = ?");
+    $stmt = $conn -> prepare ("SELECT * FROM vw_lancamentoHoras WHERE  fk_idProduto = ?");
     $stmt -> bind_param('s', $idProduto);
     $stmt -> execute();
     $resultado = $stmt -> get_result();
