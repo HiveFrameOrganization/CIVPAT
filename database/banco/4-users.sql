@@ -27,7 +27,6 @@ GRANT SELECT ON `isihiveframe`.`vw_kpi` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_home` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_followUp` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_historicoFunil` TO role1;
-GRANT SELECT ON `isihiveframe`.`vw_lancamentoHoras` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_carregarProdutos` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_detalhesPropostas` TO role1;
 GRANT SELECT ON `isihiveframe`.`vw_produtosDoTecnico` TO role1;
@@ -85,8 +84,10 @@ GRANT SELECT ON `isihiveframe`.`Maquinas` TO 'tec'@'172.20.0.3';
 -- e só poderá inserir ou alterar na tabela Carga Horária
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`CargaHoraria` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`UnidadeCriadora` TO 'tec'@'172.20.0.3';
-GRANT SELECT ON `isihiveframe`.`vw_relatorioSemMaquina` TO 'tec'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`vw_produtos` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_lancamentoHoras` TO 'tec'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_relatorioSemMaquina` TO 'tec'@'172.20.0.3';
+
 FLUSH PRIVILEGES;
 
 

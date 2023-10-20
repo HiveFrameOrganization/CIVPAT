@@ -125,7 +125,7 @@ SELECT GerenteResponsavel.*, `Usuarios`.`Nome`, `Usuarios`.`NIF`
 
 /*--------------------------------------- LANÇAMENTO HORAS -------------------------------------------*/
 CREATE VIEW vw_lancamentoHoras AS
-SELECT CargaHoraria.`HorasPessoa`, `CargaHoraria`.`HorasMaquina`, `Usuarios`.`NIF`
+SELECT `CargaHoraria`.`fk_idProduto`, CargaHoraria.`HorasPessoa`, `CargaHoraria`.`HorasMaquina`, `Usuarios`.`NIF`
     FROM CargaHoraria
     INNER JOIN Usuarios ON `CargaHoraria`.`fk_nifTecnico` = `Usuarios`.`NIF` 
     INNER JOIN Produtos ON `CargaHoraria`.`fk_idProduto` = `Produtos`.`idProduto`
