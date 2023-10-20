@@ -16,20 +16,13 @@ async function editarFuncionarios() {
         // Pegando o nif armazenado no localStorage
         const nif = localStorage.getItem('nif');
 
-        // // Verificando se o nome e sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(nome)) throw new Error(`o CAMPO "Nome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o sobrenome possuem símbolos ou números
-        // if (!contemApenasLetrasEspacos(sobrenome)) throw new Error(`o CAMPO "Sobrenome" PRECISA POSSUIR SOMENTE LETRAS...`);
-
-        // // Verificando se o email possui pelo menos uma letra:
-        // if (!contemPeloMenosUmaLetra(email)) throw new Error(`o CAMPO "Email" PRECISA POSSUIR LETRAS...`);
-
         if (!contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
+            
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
 
             alertas();
+
         } else {
             const dadosEditados = {
                 nif: nif,
@@ -42,7 +35,15 @@ async function editarFuncionarios() {
             // Função para editar os funcionários
             const resp = await requisicaoEditar(dadosEditados);
 
-            console.log(resp);
+            if (resp === false) {
+
+                localStorage.setItem('status', 'error');
+                localStorage.setItem('mensagem', 'Erro ao tentar editar o usuário! Tente novamente');
+
+                alertas();
+
+                return;
+            }
 
             if (resp.status == 'success') {
                 // Verifica se o funcionário editado, é a própria pessoa que está se editando
@@ -53,22 +54,25 @@ async function editarFuncionarios() {
                 };
 
                 localStorage.setItem('status', 'success');
-                localStorage.setItem('mensagem', 'Usuário editado com sucesso');
+                localStorage.setItem('mensagem', 'Usuário editado com sucesso!');
                 
                 location.reload();
                 
             } else if (resp.status == 'error') {
 
                 localStorage.setItem('status', 'error');
-                localStorage.setItem('mensagem', 'Erro ao editar o usuário');
+                localStorage.setItem('mensagem', 'Erro ao tentar editar o usuário!  Tente novamente');
                 
-                location.reload();
-                
+                alertas();
             }
             
         }
     } catch (erro) {
-        console.error(erro);
+        
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Erro ao tentar editar o usuário! Tente novamente');
+
+        alertas();
     }
 
 }
@@ -77,29 +81,31 @@ async function editarFuncionarios() {
 // Função para mandar os dados para editar
 async function requisicaoEditar(dados) {
 
-    console.log(dados)
+    try {
 
-    // Requisição PUT para editar
-    const requisicao = await fetch(back + `/funcionarios/editarFuncionario.php`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dados)
-    });
+        // Requisição PUT para editar
+        const requisicao = await fetch(back + `/funcionarios/editarFuncionario.php`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
 
-    // Pegando a resposta retornado pelo servidor
-    const resposta = await requisicao.json();
+        if (!requisicao.ok) {
 
+            return false;
+        }
 
-    // tratamento caso haja algum erro previsto no back-end
-    // if (resposta.status === 'error') throw new Error(resposta.mensagem);
+        // Pegando a resposta retornado pelo servidor
+        const resposta = await requisicao.json();
 
-    localStorage.setItem('status', resposta.status);
-    localStorage.setItem('mensagem', resposta.mensagem);
+        return resposta;
 
-    return resposta;
+    } catch(err) {
 
+        return false;
+    }
 }
 
 function contemPeloMenosUmaLetra(string) {
