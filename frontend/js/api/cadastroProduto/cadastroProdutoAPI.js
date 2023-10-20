@@ -2,6 +2,25 @@ import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
 import salvarMudancasNaProposta from '../detalhesProposta/salvarMudancasNaProposta.js';
 
+async function gerarHora(){
+   
+    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    try {
+        const resultado = await resposta.json();
+
+        const dataApi = resultado['datetime'];
+
+        const dataFormatada = dataApi.substring(0, 10);
+
+        return dataFormatada.replace(/T/i, " ");  
+
+    } catch (error) {
+        console.log('Sistema de horas apresentou um erro');
+
+        const data = Date()  
+    }
+}
+
 const corpoDaPagina = document.querySelector('body');
 
 const botaoSalvarProduto = document.getElementById('salvarProduto');
@@ -46,7 +65,7 @@ async function salvarProduto () {
     const idProposta = localStorage.getItem('idProposta');
 
      // Obter a data atual
-    var dataAtual = new Date();
+    var dataAtual = new Date(await gerarHora());
     var dataLimite = new Date('9999-12-31');
 
     
@@ -110,7 +129,7 @@ async function salvarProduto () {
         localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
 
         alertas();
-    }   else if (dataInicialInserida > dataLimite) {
+    } else if (dataInicialInserida > dataLimite) {
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Data inicial fora do limite');
 
@@ -160,6 +179,9 @@ async function salvarProduto () {
             }
             
             setTimeout(salvarMudancasNaProposta, 5000);
+
+            console.log(dataInicialInserida);
+            console.log(dataAtual);
     
             window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
         

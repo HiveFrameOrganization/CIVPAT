@@ -310,6 +310,9 @@ async function atualizarProduto(dados) {
 
 if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))) {
 
+    const dataAtual = new Date(await gerarHora());
+    var dataLimite = new Date('9999-12-31');
+
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
     botaoModificarProduto.addEventListener('click', () => {
@@ -328,24 +331,51 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         const tecnico = document.getElementById('tecnicos').value;
         const idProposta = localStorage.getItem('idProposta');
 
+        // Obter a data inserida pelo usuário
+        var dataInicialInserida = new Date(dataInicial);
+        var dataFinalInserida = new Date(dataFinal);
 
-        const dadosParaEnviar = {
-            idProduto: idProduto,
-            tempoMaquina: tempoMaquina,
-            tempoPessoa: tempoPessoa,
-            unidadeRealizadora: unidadeRealizadora,
-            dataInicial: dataInicial,
-            dataFinal: dataFinal,
-            area: area,
-            servico: servico,
-            produto: produto,
-            valor: valor,
-            tecnico: tecnico,
-            idProposta: idProposta
+        if (dataInicialInserida < dataAtual) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
+
+            alertas();
+        } else if (dataFinalInserida < dataInicialInserida){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
+    
+            alertas();
+        } else if (dataInicialInserida > dataLimite) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data inicial fora do limite');
+    
+            alertas();
+        } else if (dataFinalInserida > dataLimite) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data final fora do limite');
+    
+            alertas();
+        } else {
+
+            const dadosParaEnviar = {
+                idProduto: idProduto,
+                tempoMaquina: tempoMaquina,
+                tempoPessoa: tempoPessoa,
+                unidadeRealizadora: unidadeRealizadora,
+                dataInicial: dataInicial,
+                dataFinal: dataFinal,
+                area: area,
+                servico: servico,
+                produto: produto,
+                valor: valor,
+                tecnico: tecnico,
+                idProposta: idProposta
+            }
+    
+    
+            atualizarProduto(dadosParaEnviar);
         }
 
-
-        atualizarProduto(dadosParaEnviar);
 
     })
 };
