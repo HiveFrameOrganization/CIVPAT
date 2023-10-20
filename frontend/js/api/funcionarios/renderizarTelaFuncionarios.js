@@ -2,23 +2,55 @@ import { back } from '../Rotas/rotas.js';
 
 import FormularioEditarUsuario from './renderizarModalFuncionarios.js';
 import desativarUsuario from './desativarFuncionarios.js';
+import alertas from '../../feedback.js';
 
 async function getFotoFuncionario(nif) {
 
     if (nif) {
 
-        const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)
+        try {
+            const requisicao = await fetch(back + `/perfil/carregarFotoPerfil.php?nif=${nif}`)  
 
-        const resposta = await requisicao.blob();
+            if (!requisicao.ok) {
 
-        if (resposta.size > 0) {
+                // Em caso de erro, exibir um erro apenas uma vez
+                if (inAlert === false) {
 
-            return URL.createObjectURL(resposta);
+                    inAlert = true;
+
+                    localStorage.setItem("status", "error");
+                    localStorage.setItem("mensagem", "Erro ao carregar as fotos dos Funcionários!");
+
+                    alertas();
+                }
+
+                return false;
+            }
+
+            const resposta = await requisicao.blob();
+
+            if (resposta.size > 0) {
+
+                return URL.createObjectURL(resposta);
+            } else {
+
+                return false;
+            }
+
+
+        } catch(err) {
+
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao carregar as fotos dos Funcionários!");
+
+            alertas();
+
+            return false;
         }
-
-        return false;
     }
+
     return false;
+    
 } 
 
 async function exibir(dados) {
@@ -195,23 +227,23 @@ function esconderTudo() {
     }
 }
 
-function exibirErro(erro) {
-    //Selecionando a div que vai ter os funcionário
-    const exibicao = document.querySelector('#exibicao');
+// function exibirErro(erro) {
+//     //Selecionando a div que vai ter os funcionário
+//     const exibicao = document.querySelector('#exibicao');
 
-    // Removendo um possível elemento na div de exibição
-    exibicao.innerHTML = '';
+//     // Removendo um possível elemento na div de exibição
+//     exibicao.innerHTML = '';
 
-    // Criando um elemnto para mostrar o erro na tela
-    const titulo = document.createElement('h1');
+//     // Criando um elemnto para mostrar o erro na tela
+//     const titulo = document.createElement('h1');
 
-    // Adicionando texto e estilo
-    titulo.classList = 'w-full text-center'
-    titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
-    titulo.style.color = 'red';
+//     // Adicionando texto e estilo
+//     titulo.classList = 'w-full text-center'
+//     titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
+//     titulo.style.color = 'red';
 
-    exibicao.appendChild(titulo);
-}
+//     exibicao.appendChild(titulo);
+// }
 
 export default exibir
-export { esconderTudo, exibirErro }
+export { esconderTudo }

@@ -1,4 +1,4 @@
-import exibir, { exibirErro } from "./renderizarTelaFuncionarios.js";
+import exibir from "./renderizarTelaFuncionarios.js";
 import { back } from "../Rotas/rotas.js";
 
 // Função específica para realizar a pesquisa do funcionário
@@ -8,6 +8,7 @@ async function pesquisarFuncionario(valor, filtro) {
     sessionStorage.setItem('paginaFun', 0);
 
     try {
+
         // Requisição ao servidor
         const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${valor}
         &pag=${numPagina}&filtros=${filtro}`);
@@ -21,7 +22,6 @@ async function pesquisarFuncionario(valor, filtro) {
         exibir(resposta.usuarios);
     } catch (erro) {
         console.error(erro);
-        exibirErro(erro);
     }
 
 }

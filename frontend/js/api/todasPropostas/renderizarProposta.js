@@ -194,8 +194,7 @@ async function exibirPropostas(propostas){
 
                 var sgset = proposta['nSGSET'];
                 if (sgset != ''){
-                    sgset = [sgset.slice(0, 3), '-', sgset.slice(3)].join('');
-                    sgset = [sgset.slice(0, 6), '/', sgset.slice(6)].join('');
+                    sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
                 }
             }
     

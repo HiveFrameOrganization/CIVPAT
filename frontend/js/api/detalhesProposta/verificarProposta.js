@@ -56,8 +56,7 @@ export default async function verificarBancoProposta(id) {
         if(resposta['numeroSGSET']) {
             let sgset
             if (resposta['numeroSGSET'] != ''){
-                sgset = [resposta['numeroSGSET'].slice(0, 3), '-', resposta['numeroSGSET'].slice(3)].join('');
-                sgset = [sgset.slice(0, 6), '/', sgset.slice(6)].join('');
+                sgset = [resposta['numeroSGSET'].slice(0, 5), '/', resposta['numeroSGSET'].slice(5)].join('');
             }
             document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] + ' | ' + sgset
         }else{
@@ -72,3 +71,22 @@ export default async function verificarBancoProposta(id) {
         console.error(error)
     }
 }
+
+
+// mascara do numero de celular
+// function maskCelular(cel){
+//     let mask = cel.split('')
+//     let ret = '('
+  
+//     for (let i = 0; i < mask.length; i++) {
+      
+//       if(i == 1){
+//         ret += mask[i] + ')'
+//       }else{
+//         ret += mask[i]
+//       }    
+//     }
+
+//     console.log(ret)
+//     return ret
+//   }
