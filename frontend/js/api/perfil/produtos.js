@@ -170,20 +170,28 @@ function colocarPagina(num) {
 // mascara do sgset em cada produto retornado
 function sgsetMask(sgset){
 
-    let mask = sgset.split('')
-    let text = "";
+    if(sgset){
+        let mask = sgset.split('').reverse()
+        let text = "";
 
-    for (let i = 0; i < mask.length; i++) {
-        if(i == 2){
-            text += mask[i] + '/'
-        }else if(i == 4){
-            text += mask[i] + '-'
-        }else{
-            text += mask[i]
+        for (let i = 0; i < mask.length; i++) {
+            if(i == 3){
+                text += mask[i] + '/'
+            }else{
+                text += mask[i]
+            }
         }
+        
+        text = text.split('').reverse()
+        mask = ''
+
+
+        for (let x = 0; x < text.length; x++) {
+            mask += text[x]
+        }
+
+        return mask
     }
-    
-    return text
 
   }
 

@@ -56,8 +56,7 @@ export default async function verificarBancoProposta(id) {
         if(resposta['numeroSGSET']) {
             let sgset
             if (resposta['numeroSGSET'] != ''){
-                sgset = [resposta['numeroSGSET'].slice(0, 3), '-', resposta['numeroSGSET'].slice(3)].join('');
-                sgset = [sgset.slice(0, 6), '/', sgset.slice(6)].join('');
+                sgset = [resposta['numeroSGSET'].slice(0, 5), '/', resposta['numeroSGSET'].slice(5)].join('');
             }
             document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] + ' | ' + sgset
         }else{
