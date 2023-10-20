@@ -24,15 +24,17 @@ export async function autenticacao(cargo) {
             body: JSON.stringify(dados)
         });
 
-        if (!verificacao.ok) {
+        console.log(verificacao);
 
-            localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
+        // if (!verificacao.ok) {
 
-            alertas();
+        //     localStorage.setItem('status', 'error');
+        //     localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
 
-            return;
-        }
+        //     alertas();
+
+        //     return;
+        // }
 
         const resposta = await verificacao.json();
 
@@ -42,11 +44,11 @@ export async function autenticacao(cargo) {
 
 
     } catch (erro) {
-        
-        localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
+        console.log(erro)
+        // localStorage.setItem('status', 'error');
+        // localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
 
-        alertas();
+        // alertas();
 
         return;
     }
