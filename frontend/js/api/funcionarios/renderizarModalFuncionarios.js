@@ -1,29 +1,33 @@
 import { back } from '../Rotas/rotas.js'
 import resetarSenhaUsuario from './resetarSenhaFuncionarios.js';
+import alertas from '../../feedback.js';
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
     // Quando aparecer o formulário será feita uma requisição para retornar os dados
-    dadosParaEditar(nif);
+    let mostrar = await dadosParaEditar(nif);
 
-    toggleModal();
+    if (mostrar) {
+        toggleModal();
 
-    // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
-    resetSenhaContainer.innerHTML = 
-    '<button type="button" id="resetarSenha" role="button" class="bg-[transparent] py-2 px-6 text-color-red rounded-md text-xs font-semibold border border-color-red hover:bg-color-red hover:text-[#fff] transition-colors">Resetar senha</button>';
-    /*
-    --------------------------------------------------------------------------------------- 
-                            RESETAR A SENHA DO USUÁRIO 
-    ---------------------------------------------------------------------------------------
-    */
+        // Renderizar o botão de resetar senha, somente quando aparecer a modal de editar funcionario
+        resetSenhaContainer.innerHTML =
+            '<button type="button" id="resetarSenha" role="button" class="bg-[transparent] py-2 px-6 text-color-red rounded-md text-xs font-semibold border border-color-red hover:bg-color-red hover:text-[#fff] transition-colors">Resetar senha</button>';
+        /*
+        --------------------------------------------------------------------------------------- 
+                                RESETAR A SENHA DO USUÁRIO 
+        ---------------------------------------------------------------------------------------
+        */
 
-    // Quando o usuário clicar a senha será resetada
-    resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
-        const nif = localStorage.getItem('nif');
+        // Quando o usuário clicar a senha será resetada
+        resetSenhaContainer.querySelector('#resetarSenha').addEventListener('click', () => {
+            const nif = localStorage.getItem('nif');
 
-        // Função para resetar a senha
-        resetarSenhaUsuario(nif);
-    });
+            // Função para resetar a senha
+            resetarSenhaUsuario(nif);
+        });
+    }
+
 }
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
@@ -32,18 +36,38 @@ async function dadosParaEditar(nif) {
         // Requisição ao servidor
         const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${nif}`);
 
+        if (!requisicao.ok) {
+
+            // Em caso de erro, exibir um erro apenas uma vez
+
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Erro ao carregar as informações do Funcionário!");
+
+            alertas();
+
+            return false;
+        }
+
         // Convertendo a resposta em json
         const resposta = await requisicao.json();
 
         // Receber erros personalizados do back-end
         if (resposta.status === 'erro') throw new Error(resposta.mensagem);
 
-        console.log(resposta)
 
         // Função para retornar os dados para editar
         exibirDadosParaEditar(resposta.usuarios);
+
+        return true;
+
+
     } catch (erro) {
-        console.error(erro);
+
+        localStorage.setItem("status", "error");
+        localStorage.setItem("mensagem", "Erro ao carregar as informações do Funcionário!");
+
+        alertas();
+        return false;
     }
 }
 
