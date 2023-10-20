@@ -72,3 +72,22 @@ export default async function verificarBancoProposta(id) {
         console.error(error)
     }
 }
+
+
+// mascara do numero de celular
+// function maskCelular(cel){
+//     let mask = cel.split('')
+//     let ret = '('
+  
+//     for (let i = 0; i < mask.length; i++) {
+      
+//       if(i == 1){
+//         ret += mask[i] + ')'
+//       }else{
+//         ret += mask[i]
+//       }    
+//     }
+
+//     console.log(ret)
+//     return ret
+//   }
