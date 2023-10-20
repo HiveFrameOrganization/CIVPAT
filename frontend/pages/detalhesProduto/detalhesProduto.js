@@ -1,89 +1,8 @@
 import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
-
-async function gerarHora(){
-   
-    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    try {
-        const resultado = await resposta.json();
-
-        const dataApi = resultado['datetime'];
-
-        const dataFormatada = dataApi.substring(0, 10);
-
-        return dataFormatada.replace(/T/i, " ");
-   
-
-    } catch (error) {
-        console.log('Sistema de horas apresentou um erro');
-
-        const data = Date()
-    }
-}
-
-// formatar a data
-const hoje = new Date(await gerarHora());
-const ano = hoje.getFullYear();
-let mes = hoje.getMonth() + 1;
-let dia = hoje.getDate();
-
-// Garantir que vai ter um 0 em meses que não tem dois números
-if (mes < 10) {
-    mes = '0' + mes;
-};
-if (dia < 10) {
-    dia = '0' + dia;
-};
-
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     alertas();
-})
-
-// Não permitir que marque uma data depois de hoje.
-const dataMaxima = `${ano}-${mes}-${dia}`;
-document.getElementById('dataInicial').setAttribute('min', dataMaxima);
-// document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
-
-////////////////////////////////////////////////
-
-const dataInicial = document.getElementById('dataInicial');
-
-dataInicial.addEventListener('change', () => validacaoDataFinal());
-
-async function validacaoDataFinal() {
-    // Validação para o input da data final nunca receber uma data antes da data inicial
-    const dataInicial = document.getElementById('dataInicial').value;
-
-    document.getElementById('dataFinal').setAttribute('min', dataInicial);
-
-}
-
-// window.addEventListener('load', () => pegarUnidadesCriadoras());
-
-async function carregarTecnicos() {
-    const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
-        methods: 'GET'
-    });
-
-    const resposta = await requisicao.json();
-
-
-    const opcoesTecnicos = document.getElementById('tecnicos');
-
-    for (var i = 0; i < resposta.length; i++) {
-        var optionElement = document.createElement("option");
-        optionElement.classList.add('bg-body');
-        optionElement.value = resposta[i + 1];
-        optionElement.textContent = resposta[i];
-        opcoesTecnicos.appendChild(optionElement);
-
-        i += 1;
-    }
-
-}
-
-window.addEventListener('load', async function () {
     carregarTecnicos();
     pegarUnidadesCriadoras();
     LancamentoHoras();
@@ -173,6 +92,92 @@ window.addEventListener('load', async function () {
 
 })
 
+async function gerarHora(){
+   
+    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    try {
+        const resultado = await resposta.json();
+
+        const dataApi = resultado['datetime'];
+
+        const dataFormatada = dataApi.substring(0, 10);
+
+        return dataFormatada.replace(/T/i, " ");
+   
+
+    } catch (error) {
+        console.log('Sistema de horas apresentou um erro');
+
+        const data = Date()
+    }
+}
+
+
+// formatar a data
+const hoje = new Date(await gerarHora());
+const ano = hoje.getFullYear();
+let mes = hoje.getMonth() + 1;
+let dia = hoje.getDate();
+
+// Garantir que vai ter um 0 em meses que não tem dois números
+if (mes < 10) {
+    mes = '0' + mes;
+};
+if (dia < 10) {
+    dia = '0' + dia;
+};
+
+// Não permitir que marque uma data depois de hoje.
+const dataMaxima = `${ano}-${mes}-${dia}`;
+document.getElementById('dataInicial').setAttribute('min', dataMaxima);
+// document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
+
+////////////////////////////////////////////////
+
+const dataInicial = document.getElementById('dataInicial');
+
+dataInicial.addEventListener('change', () => validacaoDataFinal());
+
+async function validacaoDataFinal() {
+    // Validação para o input da data final nunca receber uma data antes da data inicial
+    const dataInicial = document.getElementById('dataInicial').value;
+
+    document.getElementById('dataFinal').setAttribute('min', dataInicial);
+
+}
+
+// window.addEventListener('load', () => pegarUnidadesCriadoras());
+
+async function carregarTecnicos() {
+    const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
+        methods: 'GET'
+    });
+
+    const resposta = await requisicao.json();
+
+
+    const opcoesTecnicos = document.getElementById('tecnicos');
+
+    for (var i = 0; i < resposta.length; i++) {
+        var optionElement = document.createElement("option");
+        optionElement.classList.add('bg-body');
+        optionElement.value = resposta[i + 1];
+        optionElement.textContent = resposta[i];
+        opcoesTecnicos.appendChild(optionElement);
+
+        i += 1;
+    }
+
+}
+
+
+
+
+// window.addEventListener('load', async function () {
+    
+// })
+
+
 // Quando for selecionado executar 
 document.getElementById("servico").addEventListener("change", async function () {
     const idServicoCategoria = document.getElementById('servico').value;
@@ -223,12 +228,13 @@ async function carregarDetalhesProduto() {
     // dados do produto recebido (resposta da api)
     const dados = await requisicao.json();
 
+    console.log(dados);
+
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
 
     return dados[0];
-
 
 }
 
@@ -304,6 +310,9 @@ async function atualizarProduto(dados) {
 
 if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))) {
 
+    const dataAtual = new Date(await gerarHora());
+    var dataLimite = new Date('9999-12-31');
+
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
     botaoModificarProduto.addEventListener('click', () => {
@@ -322,24 +331,51 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         const tecnico = document.getElementById('tecnicos').value;
         const idProposta = localStorage.getItem('idProposta');
 
+        // Obter a data inserida pelo usuário
+        var dataInicialInserida = new Date(dataInicial);
+        var dataFinalInserida = new Date(dataFinal);
 
-        const dadosParaEnviar = {
-            idProduto: idProduto,
-            tempoMaquina: tempoMaquina,
-            tempoPessoa: tempoPessoa,
-            unidadeRealizadora: unidadeRealizadora,
-            dataInicial: dataInicial,
-            dataFinal: dataFinal,
-            area: area,
-            servico: servico,
-            produto: produto,
-            valor: valor,
-            tecnico: tecnico,
-            idProposta: idProposta
+        if (dataInicialInserida < dataAtual) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
+
+            alertas();
+        } else if (dataFinalInserida < dataInicialInserida){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
+    
+            alertas();
+        } else if (dataInicialInserida > dataLimite) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data inicial fora do limite');
+    
+            alertas();
+        } else if (dataFinalInserida > dataLimite) {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data final fora do limite');
+    
+            alertas();
+        } else {
+
+            const dadosParaEnviar = {
+                idProduto: idProduto,
+                tempoMaquina: tempoMaquina,
+                tempoPessoa: tempoPessoa,
+                unidadeRealizadora: unidadeRealizadora,
+                dataInicial: dataInicial,
+                dataFinal: dataFinal,
+                area: area,
+                servico: servico,
+                produto: produto,
+                valor: valor,
+                tecnico: tecnico,
+                idProposta: idProposta
+            }
+    
+    
+            atualizarProduto(dadosParaEnviar);
         }
 
-
-        atualizarProduto(dadosParaEnviar);
 
     })
 };
@@ -394,7 +430,11 @@ async function LancamentoHoras() {
 
             if (localStorage.getItem('tempoMaquina') != 0) {
                 if (resposta['horaTotalMaquina'] == undefined) {
-                    document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+                    setTimeout(renderizaHoraMaquina, 1000)
+
+                    function renderizaHoraMaquina(){
+                        document.querySelector('#horasMaquina').value = localStorage.getItem('tempoMaquina');
+                    }
                 } else {
                     document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
                 }

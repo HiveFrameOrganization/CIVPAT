@@ -1,5 +1,5 @@
 import { back } from "../Rotas/rotas.js";
-import retornaFuncionarios from "./pegarFuncionarios.js";
+import alertas from "../../feedback.js"
 
 const resetSenhaContainer = document.querySelector('#reset-container');
 
@@ -18,12 +18,24 @@ async function resetarSenhaUsuario(nif) {
                 },
                 body: JSON.stringify({ nif: nif })
             });
-    
+
+            if(!requisicao.ok){
+
+                
+                localStorage.setItem("status", "error");
+                localStorage.setItem("mensagem", "Erro ao alterar a senha!");
+
+                alertas();
+                return;
+
+
+            }
+            
             // Convertendo a requisição em um objeto JS
             const resposta = await requisicao.json();
-    
+            
             // Caso a resposta do servidor sej algum erro já previsto...
-            if (resposta.status === 'erro') throw new Error(resposta.mensagem);
+            // if (resposta.status === 'erro') throw new Error(resposta.mensagem);
     
     
             // Atualizando a lista em tempo real
