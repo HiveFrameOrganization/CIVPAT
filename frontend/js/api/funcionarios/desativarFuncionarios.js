@@ -54,14 +54,14 @@ async function desativarUsuario(nif) {
             }
         })
 
-    if (response) {
+    if (response === true) {
 
         Swal.fire(
             'Inativado!',
             'O funcionário foi inativado!',
             'success'
         );
-    } else {
+    } else if (response === false) {
 
         Swal.fire(
             'Erro ao inativar funcionário!',

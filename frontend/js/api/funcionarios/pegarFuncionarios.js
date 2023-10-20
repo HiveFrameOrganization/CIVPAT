@@ -30,11 +30,16 @@ async function retornaFuncionarios(filtro, pesquisado) {
     // Lembrando que essa variável é destruida no cadastro do usuário
     // pois altera a quantidade de funcionarios e possivelmente
     // a quantidade de botões
-
+    
     try {
         // Fazendo a requisição para buscar os dados
         const resposta = await fetch(back + `/funcionarios/exibirFuncionarios.php?pag=${paginaFun}
         &qtdBotes=${declaradoqtdBotoesFun}&filtros=${filtro}&pesq=${pesquisa}&pesquisado=${pesquisado}`);
+
+        if (!resposta.ok) {
+
+            return false;
+        }
 
         const dados = await resposta.json();
             // Caso retorne algum erro previsto no back-end
