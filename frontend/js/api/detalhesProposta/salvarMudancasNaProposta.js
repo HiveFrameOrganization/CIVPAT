@@ -26,6 +26,8 @@ export default async function salvarMudancasNaProposta() {
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
 
     if (verificacaoDoCnpj == false) {
+        location.reload();
+
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'CNPJ inválido');
 
