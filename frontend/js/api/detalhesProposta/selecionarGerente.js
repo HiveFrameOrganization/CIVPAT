@@ -5,11 +5,10 @@ export default async function selecionarGerente(id) {
     // Requisição com parâmetro para buscar a proposta pelo id
     const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
 
-
     const resposta = await requisicao.json();
+
     // MOSTRA QUANTIDADE DE PRODUTOS CONCLUIDOS
     document.querySelector('#produtoConcluido').innerHTML = resposta.produtosConcluidos
-
     
     const gerente1 = document.querySelector('#primeiroGerente');
     const gerente2 = document.querySelector('#segundoGerente');

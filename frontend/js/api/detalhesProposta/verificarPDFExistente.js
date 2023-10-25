@@ -2,17 +2,21 @@ import { back } from '../Rotas/rotas.js';
 
 export default async function  verificarPdfExistente(idProposta) {
     try {
+
         // Cria a requisição 
         const requisicao = await fetch(back + `/PDF/verificarPdfExistente.php?id=${idProposta}`)
 
         // Verificando se deu erro ao fazer a requisição
         if (!requisicao.ok) {
-            throw new Error('Erro na requisição');
+            
+            localStorage.setItem('status', 'error');
+            localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
+
+            return;
         }
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
-
 
         // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {
@@ -28,6 +32,11 @@ export default async function  verificarPdfExistente(idProposta) {
         }
     } catch (error) {
         console.error(error)
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
+
+        return;
     }
 
     // sumir o botão se nao ouver pdf no banco
