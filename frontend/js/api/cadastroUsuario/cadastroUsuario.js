@@ -24,10 +24,10 @@ formulario.addEventListener('submit', async evento => {
     evento.preventDefault();
 
     // Pegando os valores do formulário
-    const nome = document.querySelector('#cad-nome').value;
-    const sobrenome = document.querySelector('#cad-sobrenome').value;
+    const nome = document.querySelector('#cad-nome').value.trim();
+    const sobrenome = document.querySelector('#cad-sobrenome').value.trim();
     const nif = document.querySelector('#cad-nif').value;
-    const email = document.querySelector('#cad-email').value;
+    const email = document.querySelector('#cad-email').value.trim();
     const cargo = document.querySelector('#cad-cargo').value;
 
     const nifValido = verificaZeros(nif);
@@ -43,6 +43,11 @@ formulario.addEventListener('submit', async evento => {
         } else if (nifValido) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'NIF inválido');
+
+            alertas();
+        } else if (nome == '' || sobrenome == '' || email == ''){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Campos não podem conter só espaços');
 
             alertas();
         } else {

@@ -1,4 +1,6 @@
 import { back } from '../Rotas/rotas.js';
+import alertas from '../../feedback.js';
+
 const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');
 
@@ -30,51 +32,63 @@ formularioProposta.addEventListener('submit', async evento => {
     evento.preventDefault();
 
     // Pegando os valores do formulário
-    const nomeProjeto = document.querySelector('#nomeProjeto').value;
-    const nomeRepresentante = document.querySelector('#nomeRepresentante').value;
+    const nomeProjeto = document.querySelector('#nomeProjeto').value.trim();
+    const nomeRepresentante = document.querySelector('#nomeRepresentante').value.trim();
     const emailRepresentante = document.querySelector('#emailRepresentante').value;
     const telefoneRepresentante = document.querySelector('#telefone').value;
     const unidadeCriadora = document.querySelector('#unidadeCriadora').value;
-    const empresa = document.querySelector('#empresa').value;
-    const textoResumo = document.querySelector('#textoResumo').value;
+    const empresa = document.querySelector('#empresa').value.trim();
+    const textoResumo = document.querySelector('#textoResumo').value.trim();
     const gerente = document.querySelector('#listaGerentes').value;
 
     try {
         // Algumas validações...
         // Verificando se o número de telefone possui algum caractere além de números...
-        if (!contemApenasNumeros(telefoneRepresentante)) throw new Error('O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS...');
+        if (!contemApenasNumeros(telefoneRepresentante)){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS');
 
-        const dadosProposta = {
-            nomeProjeto: nomeProjeto,
-            representante: nomeRepresentante,
-            emailRepresentante: emailRepresentante,
-            telefoneRepresentante: telefoneRepresentante,
-            resumo: textoResumo,
-            unidadeCriadora: unidadeCriadora,
-            empresa: empresa,
-            gerente: gerente
-        };
+            alertas();
+        } else if (nomeProjeto == '' || nomeRepresentante == '' || empresa == '' || textoResumo == '') {
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Campos não podem conter só espaços');
 
-
-
-        // Retorna a resposta do back, e se for sucesso, significa que cadastrou
-        let resposta = await enviaBackEnd(dadosProposta);
-
-        if (resposta.status === 'success') {
-            localStorage.setItem('status', resposta.status);
-            localStorage.setItem('mensagem', resposta.mensagem);
-            localStorage.setItem('historico', resposta.historico);
-            sessionStorage.removeItem('qtdBotoesProposta');
-            window.location.href = '';
+            alertas();
         } else {
-            if (resposta.mensagem === 'registro existe') {
-                console.log('Proposta não cadastrada. (Nome da proposta já existe)');
+            const dadosProposta = {
+                nomeProjeto: nomeProjeto,
+                representante: nomeRepresentante,
+                emailRepresentante: emailRepresentante,
+                telefoneRepresentante: telefoneRepresentante,
+                resumo: textoResumo,
+                unidadeCriadora: unidadeCriadora,
+                empresa: empresa,
+                gerente: gerente
+            };
+    
+    
+    
+            // Retorna a resposta do back, e se for sucesso, significa que cadastrou
+            let resposta = await enviaBackEnd(dadosProposta);
+    
+            if (resposta.status === 'success') {
+                localStorage.setItem('status', resposta.status);
+                localStorage.setItem('mensagem', resposta.mensagem);
+                localStorage.setItem('historico', resposta.historico);
+                sessionStorage.removeItem('qtdBotoesProposta');
+                window.location.href = '';
+            } else {
+                if (resposta.mensagem === 'registro existe') {
+                    console.log('Proposta não cadastrada. (Nome da proposta já existe)');
+                }
             }
+
         }
 
     } catch (erro) {
         console.error(erro);
     }
+
 
 });
 
