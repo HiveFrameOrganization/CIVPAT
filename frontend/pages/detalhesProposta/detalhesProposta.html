@@ -16,6 +16,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="stylesheet" href="../../css/output.css"> -->
     <link rel="stylesheet" href="../../Componentes/telaLoad/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
         @layer base {
@@ -271,7 +272,17 @@
 
         <!-- aba de links -->
         <div class="container mx-auto px-6">
-            <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
+            <div class="flex flex-col">
+                <a href="#" onclick="history.back()" class="mb-4 w-20">
+                    <button class="flex items-center py-[5px]">
+                        <span class="material-symbols-outlined pr-[6px]">
+                            arrow_back
+                        </span>
+                        Voltar
+                    </button>
+                </a>
+                <h1 id="nomeProposta" class="mb-6 text-3xl font-bold uppercase">Nome da proposta</h1>
+            </div>
 
             <ul class="flex gap-8 w-full overflow-x-auto">
                 <!-- 'border-b-2' e 'text-primary' quando esta selecionado -->
@@ -477,7 +488,7 @@
 
                             nsgset.onkeydown = function(event) {
                             
-                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39) {
+                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key !== '/') {
                                     event.preventDefault();
                                 }
                             };
@@ -567,7 +578,7 @@
                 <!-- campos que ficaram em PDFs -->
                 <div class="abaPdf bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
-                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório para aceitar</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 
@@ -645,7 +656,7 @@
                     </div>
 
 
-                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">opcional</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório para concluir</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 

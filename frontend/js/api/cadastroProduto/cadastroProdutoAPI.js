@@ -4,7 +4,7 @@ import salvarMudancasNaProposta from '../detalhesProposta/salvarMudancasNaPropos
 
 async function gerarHora(){
    
-    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
     try {
         const resultado = await resposta.json();
 

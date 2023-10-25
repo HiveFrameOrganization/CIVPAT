@@ -208,7 +208,7 @@ async function exibirPropostas(propostas){
                             <span title="${proposta['TituloProposta']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${proposta['TituloProposta']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
                                 <span title="Número do SGSET">${proposta['nSGSET'] ? sgset : 'N/A'}</span>
-                                <span title="Data de início e fim">${proposta['Inicio'] && proposta['Fim'] ? proposta['Inicio']+' - '+proposta['Fim'] : 'N/A'}</span>
+                                <span title="Data de início e fim">${proposta['Inicio'] && proposta['Fim'] ? proposta['Inicio'].split('-').reverse().join('/')+' - '+proposta['Fim'].split('-').reverse().join('/') : 'N/A'}</span>
                             </div>
                         </div>
                     </div>
@@ -330,7 +330,7 @@ function selecionarAba(filtroAoCarregarPagina) {
 
     if (filtroAoCarregarPagina != '') {
 
-        document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
+        document.getElementById(`propostas${filtroAoCarregarPagina}`) && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
         document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
     } 
 
