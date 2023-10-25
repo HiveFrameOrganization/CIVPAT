@@ -98,6 +98,13 @@ var selectTecnicos = document.querySelector('#tecnicos');
 var selectMaquinas = document.querySelector('#maquinas');
 var selectProdutos = document.querySelector('#produto');
 
+var selectTempoMaquina = document.querySelector('#tempoMaquina');
+var selectTempoPessoa = document.querySelector('#tempoPessoa');
+var selectDataInicial = document.querySelector('#dataInicial');
+var selectDataFinal = document.querySelector('#dataFinal');
+var selectUnidade = document.querySelector('#unidadeCriadora');
+
+
 selectServicos.addEventListener('change', () => {
   setTimeout(continuaModal, 200);
 })
@@ -112,6 +119,26 @@ selectMaquinas.addEventListener('change', () => {
 
 selectProdutos.addEventListener('change', () => {
   setTimeout(continuaModal, 200);
+})
+
+selectTempoMaquina.addEventListener('change', () => {
+  setTimeout(salvarModal, 200);
+})
+
+selectTempoPessoa.addEventListener('change', () => {
+  setTimeout(salvarModal, 200);
+})
+
+selectDataFinal.addEventListener('change', () => {
+  setTimeout(salvarModal, 200);
+})
+
+selectDataInicial.addEventListener('change', () => {
+  setTimeout(salvarModal, 200);
+})
+
+selectUnidade.addEventListener('change', () => {
+  setTimeout(salvarModal, 200);
 })
 
 // habilita botão para continuar o cadastro de um produto
@@ -129,6 +156,22 @@ function continuaModal(){
     botaoContinuar.disabled = false;
   } else {
     botaoContinuar.setAttribute('disabled', 'true');
+  }
+}
+
+// Desabilitar botao de salvar produto quando todos campos nao estiverem salvos
+function salvarModal(){
+
+  if(selectTempoPessoa.checkValidity() == false || selectDataFinal.value == '' || selectDataInicial.value == '' || selectUnidade.checkValidity() == false){
+    document.querySelector('#salvarProduto').setAttribute('disabled', true)
+  }else{
+    // console.log('todos os campos preenchidos')
+    if(selectMaquinas.value != 1 && selectTempoMaquina.value <= 0){
+      console.log('sem horas maquina')
+      document.querySelector('#salvarProduto').setAttribute('disabled', true)
+    }else{
+      document.querySelector('#salvarProduto').removeAttribute('disabled')
+    }
   }
 }
 
