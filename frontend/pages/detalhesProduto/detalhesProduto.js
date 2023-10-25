@@ -312,6 +312,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
 
     const dataAtual = new Date(await gerarHora());
     var dataLimite = new Date('9999-12-31');
+    var dataInserida = new Date(document.getElementById('dataInicial').value);
 
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
@@ -335,7 +336,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         var dataInicialInserida = new Date(dataInicial);
         var dataFinalInserida = new Date(dataFinal);
 
-        if (dataInicialInserida < dataAtual) {
+        if (dataInicialInserida < dataAtual || dataInicialInserida < dataInserida) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
 
