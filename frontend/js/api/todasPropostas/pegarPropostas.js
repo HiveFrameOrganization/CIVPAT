@@ -51,6 +51,8 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
+
+            console.log(dados);
     
             // Adicionando a quaqntidade de propostas de acordo com os seus status
             document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : 'N/A';
@@ -58,7 +60,7 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : 'N/A';
             document.getElementById('concluidos').textContent = dados['Concluido'] ? `# ${dados['Concluido']}` : 'N/A';
             document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] ? `# ${dados['SolicitacaoDeAceite']}` : 'N/A';
-            document.getElementById('soli-declinio').textContent = dados['SolitacaoDeDeclinio'] ? `# ${dados['SolitacaoDeDeclinio']}` : 'N/A';
+            document.getElementById('soli-declinio').textContent = dados['SolicitacaoDeDeclinio'] ? `# ${dados['SolicitacaoDeDeclinio']}` : 'N/A';
             
             if (dados.propostas.length > 0) {
 
