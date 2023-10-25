@@ -550,67 +550,67 @@ var horasRestantesMaquina;
 // }
 
 
-if (localStorage.getItem('cargo') == 'tec') {
+// if (localStorage.getItem('cargo') == 'tec') {
 
-    //Ao clicar no botão, sera acionada a função para salvar os dados no back
-    const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
-        const id = localStorage.getItem('idProduto');
-        const nifPerfil = localStorage.getItem('nifPerfil');
+//     //Ao clicar no botão, sera acionada a função para salvar os dados no back
+//     const salvarHoras = document.getElementById('salvarHoras').addEventListener('click', async () => {
+//         const id = localStorage.getItem('idProduto');
+//         const nifPerfil = localStorage.getItem('nifPerfil');
 
-        const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+//         const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
 
-        if (localStorage.getItem('tempoMaquina') != 0) {
-            var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
-        } else {
-            var horaMaquinaDiaria = 0;
-        }
+//         if (localStorage.getItem('tempoMaquina') != 0) {
+//             var horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+//         } else {
+//             var horaMaquinaDiaria = 0;
+//         }
 
-        const dados = {
-            nifPerfil: nifPerfil,
-            id: id,
-            horaPessoaDiaria: horaPessoaDiaria,
-            horaMaquinaDiaria: horaMaquinaDiaria
-        };
+//         const dados = {
+//             nifPerfil: nifPerfil,
+//             id: id,
+//             horaPessoaDiaria: horaPessoaDiaria,
+//             horaMaquinaDiaria: horaMaquinaDiaria
+//         };
 
 
 
-        try {
-            if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
+//         try {
+//             if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
                 
-                localStorage.setItem('status', 'error');
-                localStorage.setItem('mensagem', 'Horas informadas invalidas');
+//                 localStorage.setItem('status', 'error');
+//                 localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
-                alertas();
-            }
-            else{
-                const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dados)
-                });
+//                 alertas();
+//             }
+//             else{
+//                 const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+//                     method: 'POST',
+//                     headers: {
+//                         'Content-Type': 'application/json',
+//                     },
+//                     body: JSON.stringify(dados)
+//                 });
 
-                const resposta = await requisicao.json();
+//                 const resposta = await requisicao.json();
 
 
 
-                localStorage.setItem('status', resposta.status);
-                localStorage.setItem('mensagem', resposta.mensagem);
+//                 localStorage.setItem('status', resposta.status);
+//                 localStorage.setItem('mensagem', resposta.mensagem);
 
-                if (resposta.status == 'error') {
-                    alertas();
-                } else {
-                    window.location.href = '/frontend/pages/perfil/index.html';
-                }
-            }
+//                 if (resposta.status == 'error') {
+//                     alertas();
+//                 } else {
+//                     window.location.href = '/frontend/pages/perfil/index.html';
+//                 }
+//             }
 
-        } catch (error) {
-            console.error(error);
+//         } catch (error) {
+//             console.error(error);
 
-        }
-    })
-};
+//         }
+//     })
+// };
 
 // função de finalizar produto
 

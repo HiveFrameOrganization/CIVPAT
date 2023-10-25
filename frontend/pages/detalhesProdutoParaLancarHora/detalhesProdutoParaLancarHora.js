@@ -62,7 +62,7 @@ async function carregarTecnicos () {
 window.addEventListener('load', async function (){
     carregarTecnicos();
     pegarUnidadesCriadoras();
-    lancamentoHoras();
+    // lancamentoHoras();
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
@@ -239,147 +239,147 @@ async function pegarUnidadesCriadoras() {
 }
 
 
-async function lancamentoHoras(){
-    const id = localStorage.getItem('idProduto');
+// async function lancamentoHoras(){
+//     const id = localStorage.getItem('idProduto');
 
-    try{
-        const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
+//     try{
+//         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
-        const resposta = await exibirHoras.json();
+//         const resposta = await exibirHoras.json();
 
-        if (localStorage.getItem('cargo') == 'tec'){
-            document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-            document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-            document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
-            document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
-        } else {
-            if (resposta['horasAcumuladasPessoa'] == undefined){
-                document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
-            } else {
-                document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
-            }
+//         if (localStorage.getItem('cargo') == 'tec'){
+//             document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+//             document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+//             document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
+//             document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+//         } else {
+//             if (resposta['horasAcumuladasPessoa'] == undefined){
+//                 document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
+//             } else {
+//                 document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
+//             }
 
-            if (resposta['horasAcumuladasMaquina'] == undefined){
-                document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
-            } else {
-                document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
-            }
-        }
+//             if (resposta['horasAcumuladasMaquina'] == undefined){
+//                 document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
+//             } else {
+//                 document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+//             }
+//         }
 
 
-        if(localStorage.getItem('cargo') == 'tec'){
-            const horasRestantes = 10 - resposta.horasDiariasPessoas;
-            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+//         if(localStorage.getItem('cargo') == 'tec'){
+//             const horasRestantes = 10 - resposta.horasDiariasPessoas;
+//             const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
     
-            console.log(resposta.horasDiariasPessoas);
+//             console.log(resposta.horasDiariasPessoas);
     
-            const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
-            const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
+//             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
+//             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
     
            
-                opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
-                opcoesHoraMaquina.innerHTML = '';
+//                 opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
+//                 opcoesHoraMaquina.innerHTML = '';
         
-                if (horasRestantes == 0) {
-                    let option = document.createElement('option');
-                    option.classList.add('bg-body');
-                    option.value = 0;
-                    option.textContent = 0;
-                    opcoesHoraPessoa.appendChild(option);
-                } else {
-                    for (let i = 0; i < horasRestantes; i++) {
-                        let option = document.createElement('option');
-                        option.classList.add('bg-body');
-                        option.value = i + 1;
-                        option.textContent = i + 1;
-                        opcoesHoraPessoa.appendChild(option);
-                    }
-                }
+//                 if (horasRestantes == 0) {
+//                     let option = document.createElement('option');
+//                     option.classList.add('bg-body');
+//                     option.value = 0;
+//                     option.textContent = 0;
+//                     opcoesHoraPessoa.appendChild(option);
+//                 } else {
+//                     for (let i = 0; i < horasRestantes; i++) {
+//                         let option = document.createElement('option');
+//                         option.classList.add('bg-body');
+//                         option.value = i + 1;
+//                         option.textContent = i + 1;
+//                         opcoesHoraPessoa.appendChild(option);
+//                     }
+//                 }
         
-                if (horasRestantesMaquina == 0) {
-                    let option = document.createElement('option');
-                    option.classList.add('bg-body');
-                    option.value = 0;
-                    option.textContent = 0;
-                    opcoesHoraMaquina.appendChild(option);
-                } else {
-                    if (resposta.horasDiariasMaquina != null) {
-                        for (let i = 0; i < horasRestantesMaquina; i++) {
-                            let option = document.createElement('option');
-                            option.classList.add('bg-body');
-                            option.value = i + 1;
-                            option.textContent = i + 1;
-                            opcoesHoraMaquina.appendChild(option);
-                        }
-                    }
-                }
+//                 if (horasRestantesMaquina == 0) {
+//                     let option = document.createElement('option');
+//                     option.classList.add('bg-body');
+//                     option.value = 0;
+//                     option.textContent = 0;
+//                     opcoesHoraMaquina.appendChild(option);
+//                 } else {
+//                     if (resposta.horasDiariasMaquina != null) {
+//                         for (let i = 0; i < horasRestantesMaquina; i++) {
+//                             let option = document.createElement('option');
+//                             option.classList.add('bg-body');
+//                             option.value = i + 1;
+//                             option.textContent = i + 1;
+//                             opcoesHoraMaquina.appendChild(option);
+//                         }
+//                     }
+//                 }
 
-                if (horasRestantes == 0 && horasRestantesMaquina == 0){
-                    document.querySelector('#salvarHoras').disabled = true;
-                }
+//                 if (horasRestantes == 0 && horasRestantesMaquina == 0){
+//                     document.querySelector('#salvarHoras').disabled = true;
+//                 }
             
-        }
+//         }
 
 
-    }catch (error) {
-        console.error(error)
-    }
+//     }catch (error) {
+//         console.error(error)
+//     }
 
-}
+// }
 
-if (localStorage.getItem('cargo') == 'tec'){
-        document.getElementById('lancarHoras').addEventListener('click', async () => {
-            const id = localStorage.getItem('idProduto');
-            const nifPerfil = localStorage.getItem('nifPerfil');
+// if (localStorage.getItem('cargo') == 'tec'){
+//         document.getElementById('lancarHoras').addEventListener('click', async () => {
+//             const id = localStorage.getItem('idProduto');
+//             const nifPerfil = localStorage.getItem('nifPerfil');
 
-            const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-            const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+//             const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+//             const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
 
 
-            console.log(horaMaquinaDiaria + ' horas')
+//             console.log(horaMaquinaDiaria + ' horas')
 
-            const dados = {
-                nifPerfil: nifPerfil,
-                id: id,
-                horaPessoaDiaria: horaPessoaDiaria,
-                horaMaquinaDiaria: horaMaquinaDiaria
-            };
+//             const dados = {
+//                 nifPerfil: nifPerfil,
+//                 id: id,
+//                 horaPessoaDiaria: horaPessoaDiaria,
+//                 horaMaquinaDiaria: horaMaquinaDiaria
+//             };
 
-            console.log(dados);
+//             console.log(dados);
 
-            try {
+//             try {
                  
-                if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-                    console.log('Horas informadas invalidas')
-                }
-                else{
-                    const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(dados)
-                    });
+//                 if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
+//                     console.log('Horas informadas invalidas')
+//                 }
+//                 else{
+//                     const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+//                         method: 'POST',
+//                         headers: {
+//                             'Content-Type': 'application/json',
+//                         },
+//                         body: JSON.stringify(dados)
+//                     });
 
-                    const resposta = await requisicao.json();
-                    // Faça algo com a resposta, se necessário.
-                    console.log(resposta)
-                    localStorage.setItem('status', resposta.status);
-                    localStorage.setItem('mensagem', resposta.mensagem);
+//                     const resposta = await requisicao.json();
+//                     // Faça algo com a resposta, se necessário.
+//                     console.log(resposta)
+//                     localStorage.setItem('status', resposta.status);
+//                     localStorage.setItem('mensagem', resposta.mensagem);
 
-                    if (resposta.status == 'error'){
-                        alertas();
-                    } else {
-                        window.location.href = '/frontend/pages/perfil/index.html';
-                    }
-                }
+//                     if (resposta.status == 'error'){
+//                         alertas();
+//                     } else {
+//                         window.location.href = '/frontend/pages/perfil/index.html';
+//                     }
+//                 }
             
-            } catch (error) {
-                console.error(error);
-                // Trate o erro adequadamente, se necessário.
-            }
-})};
+//             } catch (error) {
+//                 console.error(error);
+//                 // Trate o erro adequadamente, se necessário.
+//             }
+// })};
 
 
 
