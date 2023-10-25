@@ -48,6 +48,7 @@ GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'coor'@'172.20.0.3';
 GRANT INSERT, UPDATE ON `isihiveframe`.`Maquinas` TO 'coor'@'172.20.0.3';
 GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'coor'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`PDF` TO 'coor'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_lancamentoHoras` TO 'coor'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
@@ -59,6 +60,7 @@ GRANT role1 TO 'ger'@'172.20.0.3';
 GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'ger'@'172.20.0.3';
 GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'ger'@'172.20.0.3';
 GRANT SELECT ON `isihiveframe`.`PDF` TO 'ger'@'172.20.0.3';
+GRANT SELECT ON `isihiveframe`.`vw_lancamentoHoras` TO 'ger'@'172.20.0.3';
 FLUSH PRIVILEGES;
 
 
