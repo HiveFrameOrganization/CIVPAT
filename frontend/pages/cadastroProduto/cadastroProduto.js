@@ -25,7 +25,7 @@ async function gerarHora(){
 const hoje = new Date(await gerarHora());
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
-let dia = hoje.getDate();
+let dia = hoje.getDate() + 1;
 
 // Garantir que vai ter um 0 em meses que não tem dois números
 if (mes < 10) {
@@ -35,6 +35,7 @@ if (dia < 10) {
     dia = '0' + dia;
 };
 
+console.log(ano, mes, dia)
 // Não permitir que marque uma data depois de hoje.
 const dataMaxima = `${ano}-${mes}-${dia}`;
 document.getElementById('dataInicial').setAttribute('min', dataMaxima);

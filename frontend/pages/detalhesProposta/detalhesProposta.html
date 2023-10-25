@@ -488,7 +488,7 @@
 
                             nsgset.onkeydown = function(event) {
                             
-                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39) {
+                                if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key !== '/') {
                                     event.preventDefault();
                                 }
                             };
@@ -578,7 +578,7 @@
                 <!-- campos que ficaram em PDFs -->
                 <div class="abaPdf bg-body px-7 pt-7 rounded-xl flex flex-col gap-5 container mx-auto hidden">
 
-                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório para aceitar</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 
@@ -656,7 +656,7 @@
                     </div>
 
 
-                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">opcional</h2>
+                    <h2 class="uppercase text-color-text-secundary text-2xl font-semibold">obrigatório para concluir</h2>
 
                     <p class="py-1 w-full bg-component"></p>
 
