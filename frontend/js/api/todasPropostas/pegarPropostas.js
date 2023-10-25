@@ -51,8 +51,6 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
-
-            console.log(dados);
     
             // Adicionando a quaqntidade de propostas de acordo com os seus status
             document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : 'N/A';

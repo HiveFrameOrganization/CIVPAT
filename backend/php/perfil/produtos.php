@@ -59,7 +59,7 @@ function retornaProdutos($nif, $pagina, $conn)
     } else {
 
         $resposta = [
-            'status' => 'error',
+            'status' => 'success',
             'mensagem' => 'Nenhum produto encontrado'
         ];
 

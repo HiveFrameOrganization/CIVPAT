@@ -95,6 +95,11 @@
             pointer-events: none;
         }
 
+        input[type="month"]::-webkit-inner-spin-button,
+        input[type="month"]::-webkit-calendar-picker-indicator {
+            filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
+        }
+
     </style>
     <script>
         tailwind.config = {
@@ -181,15 +186,6 @@
         </div>
     </header>
 
-    <!-- <main class="container mx-auto min-h-screen pt-28">
-        <form id="formularioBancoHoras">
-            <label>Mês e ano</label>
-            <input type="month" id="dataMesAno" required>
-            
-            <button type="submit">Pesquisar</button>
-        </form>
-    </main> -->
-
     <div>
 
         <section class="mt-[72px] pt-6 px-6 text-color-text container mx-auto">
@@ -208,7 +204,7 @@
                     <!-- BOX INPUT MÊS E ANO  -->
                     <div class="flex flex-col w-full lg:w-80 gap-2">
                         <label for="mesAno" class="font-semibold text-base uppercase">Informe o mês e o ano: </label>
-                        <input type="text" id="dataMesAno" required class="px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"  onfocus="this.type='month'" placeholder="Janeiro de 2023"    >
+                        <input type="month" id="dataMesAno" required class="px-4 py-2 placeholder:text-color-text-secundary bg-component border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
                     </div>
                 </div>
                 

@@ -99,7 +99,7 @@ async function buscarProdutos() {
 
             if (resposta.status == 'success') {
 
-                if (resposta.produtos.length > 0) {
+                if (resposta.produtos && resposta.produtos.length > 0) {
 
                     console.log(resposta.produtos)
                     exibirProdutos(resposta.produtos);
