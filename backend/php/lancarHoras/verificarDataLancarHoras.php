@@ -8,7 +8,7 @@ header("Content-Type: application/json");
 require_once '../../../database/conn.php';
 
 function verificarHora($idProduto, $dataLancaHora, $conn){
-    $stmt = $conn->prepare('SELECT  ')
+    $stmt = $conn->prepare('SELECT  ');
 }
 
 
