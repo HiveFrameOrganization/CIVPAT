@@ -14,7 +14,7 @@ export default async function verificarBancoProposta(id) {
 
         if(!requisicao.ok){
             localStorage.setItem("status", "error");
-            localStorage.setItem("mensagem", "Ocorreu um error ao Verificar Proposta!")
+            localStorage.setItem("mensagem", "Ocorreu um erro ao Verificar Proposta!")
             return;
         }
         const resposta = await requisicao.json();
@@ -93,18 +93,12 @@ export default async function verificarBancoProposta(id) {
 //     for (let i = 0; i < mask.length; i++) {
       
 //       if(i == 1){
-//         ret += mask[i] + ') '
-//       }else if(i == 2){
-//         ret += mask[i] + ' '
-//       }else if(i == 6){
-//         ret += mask[i] + '-'
+//         ret += mask[i] + ')'
 //       }else{
 //         ret += mask[i]
-//       }
+//       }    
 //     }
 
 //     console.log(ret)
-
-//     document.querySelector('#numeroContato').setAttribute('type', 'text')
 //     return ret
 //   }
