@@ -109,6 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Aceito' => $quantidadeDePropostasPorStatus['somaAceito'],
         'Declinado' => $quantidadeDePropostasPorStatus['somaDeclinado'],
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
+        'SolicitacaoDeAceite' => $quantidadeDePropostasPorStatus['somaSolicitacaoDeAceite'],
+        'SolicitacaoDeDeclinio' => $quantidadeDePropostasPorStatus['somaSolicitacaoDeDeclinio'],
         'qtdBotoes' => $qtdBotoes,
         'atest' => $test
     ];

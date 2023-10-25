@@ -15,7 +15,10 @@ SELECT
     SUM(CASE WHEN Status = "Em Análise" THEN 1 ELSE 0 END) AS somaAnalise,
     SUM(CASE WHEN Status = "Aceito"     THEN 1 ELSE 0 END) AS somaAceito,
     SUM(CASE WHEN Status = "Declinado"  THEN 1 ELSE 0 END) AS somaDeclinado,
-    SUM(CASE WHEN Status = "Concluido"  THEN 1 ELSE 0 END) AS somaConcluido
+    SUM(CASE WHEN Status = "Concluido"  THEN 1 ELSE 0 END) AS somaConcluido,
+    SUM(CASE WHEN Status = "Solicitação de Declinio"  THEN 1 ELSE 0 END) AS somaSolicitacaoDeDeclinio,
+    SUM(CASE WHEN Status = "Solicitação de Aceite"  THEN 1 ELSE 0 END) AS somaSolicitacaoDeAceite
+    
     FROM Propostas;
 /*----------------------------------------------------------------------------------------------------*/
 
