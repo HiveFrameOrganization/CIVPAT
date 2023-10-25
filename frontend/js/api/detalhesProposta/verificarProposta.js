@@ -12,8 +12,20 @@ export default async function verificarBancoProposta(id) {
         // Requisição com parâmetro para buscar a proposta pelo id
         const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)
 
-
+        if(!requisicao.ok){
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", "Ocorreu um erro ao Verificar Proposta!")
+            return;
+        }
         const resposta = await requisicao.json();
+        
+        if(resposta.status === 'error'){
+            localStorage.setItem("status", "error");
+            localStorage.setItem("mensagem", `${resposta.mensagem}`);
+            window.location.href = `${window.location.origin}/frontend/pages/Home/`;
+            return;
+            
+        }
 
         sessionStorage.setItem('idRepresentante', resposta.idRepresentante);
 
@@ -81,18 +93,12 @@ export default async function verificarBancoProposta(id) {
 //     for (let i = 0; i < mask.length; i++) {
       
 //       if(i == 1){
-//         ret += mask[i] + ') '
-//       }else if(i == 2){
-//         ret += mask[i] + ' '
-//       }else if(i == 6){
-//         ret += mask[i] + '-'
+//         ret += mask[i] + ')'
 //       }else{
 //         ret += mask[i]
-//       }
+//       }    
 //     }
 
 //     console.log(ret)
-
-//     document.querySelector('#numeroContato').setAttribute('type', 'text')
 //     return ret
 //   }
