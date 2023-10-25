@@ -81,12 +81,18 @@ export default async function verificarBancoProposta(id) {
 //     for (let i = 0; i < mask.length; i++) {
       
 //       if(i == 1){
-//         ret += mask[i] + ')'
+//         ret += mask[i] + ') '
+//       }else if(i == 2){
+//         ret += mask[i] + ' '
+//       }else if(i == 6){
+//         ret += mask[i] + '-'
 //       }else{
 //         ret += mask[i]
-//       }    
+//       }
 //     }
 
 //     console.log(ret)
+
+//     document.querySelector('#numeroContato').setAttribute('type', 'text')
 //     return ret
 //   }

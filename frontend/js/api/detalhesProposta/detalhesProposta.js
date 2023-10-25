@@ -160,9 +160,11 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
 });
 
 export const editandoProposta = document.querySelector('#editarProposta');
+var antigoContato = document.querySelector('#numeroContato').innerHTML
 editandoProposta.addEventListener('click', () => {
-
+    console.log(antigoContato)
     
+    // document.querySelector('#numeroContato').setAttribute('type', 'number')
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
     if (editandoProposta.value == 'EDITAR') {
