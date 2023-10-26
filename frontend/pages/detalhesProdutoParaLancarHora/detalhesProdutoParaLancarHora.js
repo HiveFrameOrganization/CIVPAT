@@ -70,6 +70,7 @@ window.addEventListener('load', async function (){
 
     const dadosProduto = await carregarDetalhesProduto(); 
     
+    console.log(dadosProduto);
 
     document.getElementById('produto').value = dadosProduto['NomeProduto'];
     document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
@@ -78,8 +79,8 @@ window.addEventListener('load', async function (){
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
 
-    // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
-    // document.getElementById('tempoPessoa').value = dadosProduto['HoraPessoa'];
+    document.getElementById('horasPessoaAcumuladasCoor').value = dadosProduto['HorasPessoa'];
+    document.getElementById('horasMaquinaAcumuladasCoor').value = dadosProduto['HorasMaquina'];
 
     // inativar horas maquina se nao houver maquina selecionada
     let tempo = document.getElementById('tempoMaquina')
