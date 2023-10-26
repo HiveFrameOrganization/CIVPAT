@@ -49,10 +49,10 @@ async function lancarHoraParaOTecnico () {
         
         
         const exibirHoras = await fetch(back + `/lancarHorasEsquecidas/verificarDataLancarHoras.php?nifTecnico=${nifTecnico}&dataDoLancamento=${dataLancamento}`);
-            const resposta = await exibirHoras.json();
+        const resposta = await exibirHoras.json();
 
-            console.log(resposta)
-            console.log(nifTecnico)
+        console.log(resposta)
+        console.log(nifTecnico)
             
 
         
@@ -108,7 +108,7 @@ async function lancarHoraParaOTecnico () {
                 localStorage.setItem('mensagem', resposta.mensagem);
             
                 if (resposta.status == 'success'){
-                    window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
+                    // window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
                 } else {
                     alertas();
                 }

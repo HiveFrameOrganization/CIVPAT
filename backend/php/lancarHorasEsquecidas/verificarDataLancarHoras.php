@@ -33,7 +33,7 @@ function verificarHora($nifTecnico, $dataLancaHora, $conn){
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $nifTecnico = $_GET['nifTecnico'];
     $dataLancaHora = $_GET['dataDoLancamento'];
-    verificarHora($idProduto, $dataLancaHora, $conn);
+    verificarHora($nifTecnico, $dataLancaHora, $conn);
 } else {
     $resposta = [
         'mensagem' => 'Algo deu errado',
