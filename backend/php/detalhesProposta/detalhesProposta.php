@@ -42,7 +42,7 @@ function verificarDetalhes($idProposta, $conn) {
             $dadosDataFinal = mysqli_fetch_assoc($resultadoDataFinal);
             
             //A função abaixo faz uma query de todos os preços dos produtos da proposta selecionada, enquanto ao mesmo tempo ela soma eles.
-            $stmt = $conn->prepare(" SELECT SUM(Valor) AS ValorTotal FROM Produtos  WHERE fk_idProposta = ?");
+            $stmt = $conn->prepare(" SELECT SUM(Valor) AS ValorTotal FROM Produtos WHERE fk_idProposta = ?");
             $stmt->bind_param('s', $idProposta);
             $stmt->execute();
             $resultadoValorTotal = $stmt-> get_result();

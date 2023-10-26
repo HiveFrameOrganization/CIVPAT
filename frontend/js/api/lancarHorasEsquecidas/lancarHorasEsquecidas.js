@@ -36,7 +36,7 @@ async function setarData(dadosEnviados) {
 }
 
 async function lancarHoraParaOTecnico () {
-    const id = localStorage.getItem('idProduto');
+    // const nifTec = localStorage.getItem('nifPerfil');
     try{
         
     
@@ -48,16 +48,21 @@ async function lancarHoraParaOTecnico () {
         const dataLancamento = document.getElementById('dataDoLancamento').value;
         
         
-        
-        const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}&Data=${dataLancamento}`);
+        const exibirHoras = await fetch(back + `/lancarHorasEsquecidas/verificarDataLancarHoras.php?nifTecnico=${nifTecnico}&dataDoLancamento=${dataLancamento}`);
             const resposta = await exibirHoras.json();
 
+            console.log(resposta)
+            console.log(nifTecnico)
+            
 
-        console.log(resposta)
-        const horasRestantes = 10 - resposta.horasDiariasPessoas;
-        const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+        
+        const horasRestantes = 10 
+        // - resposta.horaPessoas;
+        const horasRestantesMaquina = 10 
+        // - resposta.horaMaquina;
 
-
+        console.log(horasRestantes)
+        console.log(horasRestantesMaquina)
 
         if (horaPessoa > horasRestantes || horaMaquina > horasRestantesMaquina) {
             localStorage.setItem('status', 'error');
