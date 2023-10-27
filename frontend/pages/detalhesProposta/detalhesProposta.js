@@ -49,12 +49,37 @@ function cpfMask(){
   } 
 }
 
-function sgsetMask(){
-  var sgset = document.querySelector('#numeroSGSET');
+// mascara sgset
 
-  if (sgset.value.length == 5){
-    sgset.value += '/'
-  }
+const numeroSGSET = document.getElementById('numeroSGSET');
+
+numeroSGSET.addEventListener('input', function () {
+    const valorDeEntrada = numeroSGSET.value;
+    const valorSanitizado = valorDeEntrada.replace(/[^0-9]/g, ''); // Remove todos os caracteres não numéricos
+    const valorFormatado = formatarNumeroSGSET(valorSanitizado);
+    numeroSGSET.value = valorFormatado;
+
+    if (isValidoNumeroSGSET(valorSanitizado)) {
+        localStorage.setItem('sgsetValido', 'válido')
+    } else {
+      localStorage.setItem('sgsetValido', 'inválido')
+    }
+});
+
+function isValidoNumeroSGSET(value) {
+    // Verifica se o valor tem pelo menos 5 dígitos, incluindo pelo menos 1 número antes da barra.
+    return value.length >= 5 && /^\d+\/\d{4}$/.test(value);
+}
+
+function formatarNumeroSGSET(value) {
+    if (value.length <= 1) {
+        return value;
+    }
+
+    // Insere a barra (/) antes dos últimos 4 dígitos
+    const antesDaBarra = value.slice(0, -4);
+    const depoisDaBarra = value.slice(-4);
+    return antesDaBarra + '/' + depoisDaBarra;
 }
 
 window.addEventListener('load', () => {
@@ -78,11 +103,28 @@ function exibeCpf(){
 
 function exibeSgset(){
   var sgset = document.querySelector('#numeroSGSET').value;
-  if (sgset != ''){
-    sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
+  
+    if(sgset != ''){
+      let mask = sgset.split('').reverse()
+      let text = "";
 
-    document.getElementById('numeroSGSET').value = sgset;
-  }
+      for (let i = 0; i < mask.length; i++) {
+          if(i == 3){
+              text += mask[i] + '/'
+          }else{
+              text += mask[i]
+          }
+      }
+      
+      text = text.split('').reverse()
+      mask = ''
+
+      for (let x = 0; x < text.length; x++) {
+          mask += text[x]
+      }
+
+      document.getElementById('numeroSGSET').value = mask;
+    }
 }
 
 function exibeValor(){

@@ -65,10 +65,31 @@ export default async function verificarBancoProposta(id) {
 
         // verifica se existe numeroSGSET cadastrado para ser mostrado no titulo da pagina
         let TelaNomeProposta = ''
+        
         if(resposta['numeroSGSET']) {
             let sgset
             if (resposta['numeroSGSET'] != ''){
-                sgset = [resposta['numeroSGSET'].slice(0, 5), '/', resposta['numeroSGSET'].slice(5)].join('');
+                sgset = resposta['numeroSGSET'];
+
+                let mask = sgset.split('').reverse()
+                let text = "";
+
+                for (let i = 0; i < mask.length; i++) {
+                    if(i == 3){
+                        text += mask[i] + '/'
+                    }else{
+                        text += mask[i]
+                    }
+                }
+                
+                text = text.split('').reverse()
+                mask = ''
+
+                for (let x = 0; x < text.length; x++) {
+                    mask += text[x]
+                }
+
+                sgset = mask;
             }
             document.querySelector('#nomeProposta').innerHTML = resposta['TituloProposta'] + ' | ' + sgset
         }else{
