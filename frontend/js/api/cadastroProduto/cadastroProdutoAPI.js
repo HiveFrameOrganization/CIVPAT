@@ -4,21 +4,29 @@ import salvarMudancasNaProposta from '../detalhesProposta/salvarMudancasNaPropos
 
 async function gerarHora(){
    
-    const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    try {
-        const resultado = await resposta.json();
+    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    // try {
+    //     const resultado = await resposta.json();
 
-        const dataApi = resultado['datetime'];
+    //     const dataApi = resultado['datetime'];
 
-        const dataFormatada = dataApi.substring(0, 10);
+    //     const dataFormatada = dataApi.substring(0, 10);
 
-        return dataFormatada.replace(/T/i, " ");  
+    //     return dataFormatada.replace(/T/i, " ");  
 
-    } catch (error) {
-        console.log('Sistema de horas apresentou um erro');
+    // } catch (error) {
+    //     console.log('Sistema de horas apresentou um erro');
 
-        const data = Date()  
-    }
+    //     const data = Date()  
+    // }
+
+    // Obtém a data atual
+    const dataAtual = new Date();
+
+    // Obtém a data atual em um formato legível
+    const dataAtualFormatada = dataAtual.toLocaleDateString();
+
+    return dataAtualFormatada;
 }
 
 const corpoDaPagina = document.querySelector('body');
@@ -65,7 +73,7 @@ async function salvarProduto () {
     const idProposta = localStorage.getItem('idProposta');
 
      // Obter a data atual
-    var dataAtual = new Date(await gerarHora());
+    var dataAtual = gerarHora();
     var dataLimite = new Date('9999-12-31');
 
     

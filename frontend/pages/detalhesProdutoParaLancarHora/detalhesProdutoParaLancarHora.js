@@ -1,8 +1,36 @@
 import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
+
+async function gerarHora(){
+   
+    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+    // try {
+    //     const resultado = await resposta.json();
+
+    //     const dataApi = resultado['datetime'];
+
+    //     const dataFormatada = dataApi.substring(0, 10);
+
+    //     return dataFormatada.replace(/T/i, " ");  
+
+    // } catch (error) {
+    //     console.log('Sistema de horas apresentou um erro');
+
+    //     const data = Date()  
+    // }
+
+    // Obtém a data atual
+    const dataAtual = new Date();
+
+    // Obtém a data atual em um formato legível
+    const dataAtualFormatada = dataAtual.toLocaleDateString();
+
+    return dataAtualFormatada;
+}
+
 // formatar a data
-const hoje = new Date();
+const hoje = new Date(gerarHora());
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
