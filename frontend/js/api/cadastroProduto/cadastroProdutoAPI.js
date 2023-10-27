@@ -248,3 +248,6 @@ function exibirMaquinas(vetor) {
     }
 
 }
+
+
+export default gerarHora;

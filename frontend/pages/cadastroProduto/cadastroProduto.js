@@ -1,28 +1,12 @@
 import { back } from '../../js/api/Rotas/rotas.js';
+import gerarHora from '../../js/api/cadastroProduto/cadastroProdutoAPI.js';
 
 window.addEventListener('load', () =>  pegarUnidadesCriadoras());
    
-async function gerarHora(){
-   
-    const resposta = await fetch("http://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    try {
-        const resultado = await resposta.json();
-
-        const dataApi = resultado['datetime'];
-
-        const dataFormatada = dataApi.substring(0, 10);
-
-        return dataFormatada.replace(/T/i, " ");  
-
-    } catch (error) {
-        console.log('Sistema de horas apresentou um erro');
-
-        const data = Date()  
-    }
-}
 
 // formatar a data
-const hoje = new Date(await gerarHora());
+const hoje = new Date();
+console.log(hoje);
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate() + 1;
