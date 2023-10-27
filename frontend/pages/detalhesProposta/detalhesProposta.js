@@ -52,9 +52,7 @@ function cpfMask(){
 function sgsetMask(){
   var sgset = document.querySelector('#numeroSGSET');
 
-  if (sgset.value.length == 5){
-    sgset.value += '/'
-  }
+  
 }
 
 window.addEventListener('load', () => {
@@ -78,11 +76,28 @@ function exibeCpf(){
 
 function exibeSgset(){
   var sgset = document.querySelector('#numeroSGSET').value;
-  if (sgset != ''){
-    sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
+  
+    if(sgset != ''){
+      let mask = sgset.split('').reverse()
+      let text = "";
 
-    document.getElementById('numeroSGSET').value = sgset;
-  }
+      for (let i = 0; i < mask.length; i++) {
+          if(i == 3){
+              text += mask[i] + '/'
+          }else{
+              text += mask[i]
+          }
+      }
+      
+      text = text.split('').reverse()
+      mask = ''
+
+      for (let x = 0; x < text.length; x++) {
+          mask += text[x]
+      }
+
+      document.getElementById('numeroSGSET').value = mask;
+    }
 }
 
 function exibeValor(){
