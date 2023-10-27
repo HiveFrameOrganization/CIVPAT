@@ -49,10 +49,37 @@ function cpfMask(){
   } 
 }
 
-function sgsetMask(){
-  var sgset = document.querySelector('#numeroSGSET');
+// mascara sgset
 
-  
+const numeroSGSET = document.getElementById('numeroSGSET');
+
+numeroSGSET.addEventListener('input', function () {
+    const valorDeEntrada = numeroSGSET.value;
+    const valorSanitizado = valorDeEntrada.replace(/[^0-9]/g, ''); // Remove todos os caracteres não numéricos
+    const valorFormatado = formatarNumeroSGSET(valorSanitizado);
+    numeroSGSET.value = valorFormatado;
+
+    if (isValidoNumeroSGSET(valorSanitizado)) {
+        localStorage.setItem('sgsetValido', 'válido')
+    } else {
+      localStorage.setItem('sgsetValido', 'inválido')
+    }
+});
+
+function isValidoNumeroSGSET(value) {
+    // Verifica se o valor tem pelo menos 5 dígitos, incluindo pelo menos 1 número antes da barra.
+    return value.length >= 5 && /^\d+\/\d{4}$/.test(value);
+}
+
+function formatarNumeroSGSET(value) {
+    if (value.length <= 1) {
+        return value;
+    }
+
+    // Insere a barra (/) antes dos últimos 4 dígitos
+    const antesDaBarra = value.slice(0, -4);
+    const depoisDaBarra = value.slice(-4);
+    return antesDaBarra + '/' + depoisDaBarra;
 }
 
 window.addEventListener('load', () => {
