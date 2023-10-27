@@ -1,4 +1,5 @@
 import validarCNPJ from './validarCNPJ.js';
+import validarSGSET from './validarSGSET.js';
 import { back } from '../Rotas/rotas.js';
 
 export default async function salvarMudancasNaProposta() {
@@ -24,6 +25,7 @@ export default async function salvarMudancasNaProposta() {
     const numeroContato = document.querySelector('#numeroContato').value;
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
+    var verificacaoDoSGSET = validarSGSET(numeroSGSET);
 
     if (verificacaoDoCnpj == false) {
         location.reload();
@@ -33,6 +35,13 @@ export default async function salvarMudancasNaProposta() {
 
         alertas();
 
+    } else if (verificacaoDoSGSET == false) {
+        location.reload();
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'SGSET inválido');
+
+        alertas();
     } else if (primeiroGerente == segundoGerente){
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
