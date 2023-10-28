@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Específica qual URL pode acessar
 header('Access-Control-Allow-Origin: http://localhost:8080');
 
@@ -17,23 +17,49 @@ require_once '../../../database/conn.php';
 // Verificando a requisição
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    // Envindo a resposta para o front-end
-    $resposta = [
-        'status' => 'success',
-        'dados' => [
-            'nif' => $_SESSION['nif'],
-            'cargo' => $_SESSION['cargo'],
-            'email' => $_SESSION['email'],
-            'nome' => $_SESSION['nome'],
-            'sobrenome' => $_SESSION['sobrenome'],
-        ],
-        'mensagem' => 'Bem vindo ' . $_SESSION['nome']
-    ];
+    $nif = $_SESSION['nif'];
+
+    $stmt = $conn->prepare("SELECT NIF, TipoUser, Nome, Sobrenome, Email FROM Usuarios WHERE NIF = ?");
+    $stmt->bind_param("s", $nif);
+
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows > 0) {
+        $usuario = $resultado->fetch_assoc();
+
+
+        $nif = $usuario['NIF'];
+        $cargo = $usuario['TipoUser'];
+        $nome = $usuario['Nome'];
+        $sobrenome = $usuario['Sobrenome'];
+        $email = $usuario['Email'];
+
+        // Envindo a resposta para o front-end
+        $resposta = [
+            'status' => 'success',
+            'dados' => [
+                'nif' => $nif,
+                'cargo' => $cargo,
+                'email' => $email,
+                'nome' => $nome,
+                'sobrenome' => $sobrenome,
+            ],
+            'mensagem' => 'Bem vindo ' . $nome
+        ];
+
+
+    } else {
+        $resposta = [
+            'status' => 'error',
+            'mensagem' => 'Nenhum usuário encontrado.'
+        ];
+    }
 
     echo json_encode($resposta);
 
 } else {
-    
+
     // Envindo a resposta para o front-end
     $resposta = [
         'status' => 'error',

@@ -11,6 +11,25 @@ export async function autenticacao(cargo) {
         // Pegando o token para enviar na requisição
         const token = localStorage.getItem('token');
 
+        if (!token) {
+
+            // Limpando residuos
+            localStorage.clear();
+            sessionStorage.clear();
+
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'É necessário realizar um novo login.');
+
+            // Requisição para sair da conta
+            const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
+
+            const resposta = await deslogar.json();
+
+            console.log(resposta);
+
+            window.location.href = 'http://localhost:8080/';
+        }
+
         const dados = {
             token: token,
             cargo: cargo
@@ -26,16 +45,6 @@ export async function autenticacao(cargo) {
 
         console.log(verificacao);
 
-        // if (!verificacao.ok) {
-
-        //     localStorage.setItem('status', 'error');
-        //     localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
-
-        //     alertas();
-
-        //     return;
-        // }
-
         const resposta = await verificacao.json();
 
         if (resposta.status === 'erro') {
@@ -44,18 +53,8 @@ export async function autenticacao(cargo) {
 
 
     } catch (erro) {
-        console.log(erro)
-        // localStorage.setItem('status', 'error');
-        // localStorage.setItem('mensagem', 'Falha de autenticação, deslogue e faça login novamente!');
-
-        // alertas();
-
+        console.error(erro)
         return;
     }
 
 }
-
-/*
------------------------------------ PROCESSO DE DESLOGAR O FUNCIONÁRIO ----------------------------------------
-*/
-

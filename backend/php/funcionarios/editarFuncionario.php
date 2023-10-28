@@ -27,10 +27,6 @@ function editarUsuario($dados, $conn)
             'mensagem' => 'Usuário alterado com sucesso!'
         ];
 
-        $_SESSION['nome'] = $dados['nome'];
-        $_SESSION['sobrenome'] = $dados['sobrenome'];
-        $_SESSION['email'] = $dados['email'];
-        $_SESSION['cargo'] = $dados['cargo'];
 
         echo json_encode($resposta);
 
