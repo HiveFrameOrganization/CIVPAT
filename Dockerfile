@@ -20,9 +20,13 @@ RUN apt-get clean && \
 # Set the working directory to /var/www/html
 COPY frontend/ /var/www/html/frontend
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/
 COPY php/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY backend/ /var/www/html/backend
 COPY ./index.html /var/www/html
+
+RUN mkdir /var/www/html/database
+COPY database/ /var/www/html/database
 
 # Expose ports
 EXPOSE 80
