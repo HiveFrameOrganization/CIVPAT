@@ -4,7 +4,7 @@ services:
         container_name: database
         build: 
             context: .
-            dockerfile: dockerfileData
+            dockerfile: ./data/dockerfileData
         ports:
             - "3307:3306"
         security_opt:
