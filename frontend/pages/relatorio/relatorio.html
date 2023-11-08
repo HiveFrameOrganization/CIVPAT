@@ -188,7 +188,7 @@
                             <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="inline-block w-full text-sm text-color-text-secundary hover:text-color-text-secundary/50 transition-colors border-b border-color-text-secundary pb-2">Ver meu perfil</a>
                         </div>
                         <ul>
-                            <li onclick="deslogar()" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
+                            <li id="botaoSair" class="flex items-center gap-2 text-color-text-secundary hover:bg-color-text-secundary/20 transition-colors px-4 py-1 rounded-b-md text-base cursor-pointer"><img src="../../img/icon/log-out.svg" alt="Sair" class="w-4 h-4">Sair</li>
                         </ul>
                     </div>
                 </div>
@@ -268,7 +268,12 @@
     </footer>
 
     <script src="../../js/global.js"></script>
-    <script src="../../js/logoff.js"></script>
+        <script type="module">
+        import deslogar from '../../js/logoff.js'
+        window.addEventListener('load', () => {
+            document.getElementById('botaoSair').onclick = () => { deslogar() }
+        })
+    </script>
     <script type="module" src="../../js/api/perfil/carregarFotoPerfil.js"></script>
     <script type="module" src="../../js/feedback.js"></script>
     <script type="module" src="../../js/api/relatorio/relatorio.js"></script>
