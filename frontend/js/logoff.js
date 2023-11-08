@@ -1,4 +1,6 @@
-async function deslogar () { {
+import { back, raiz } from './api/Rotas/rotas.js';
+
+export default async function deslogar() {
     try {
 
         // Recuperando o Tema escolhido do usuário, caso exista
@@ -12,17 +14,15 @@ async function deslogar () { {
         tema && localStorage.setItem('theme', tema);
 
         // Requisição para sair da conta
-        const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
-
+        const deslogar = await fetch(back + `/login/sair.php`);
 
         const resposta = await deslogar.json();
 
         console.log(resposta);
 
-        window.location.href = 'http://localhost:8080/';
+        window.location.href = raiz;
 
     } catch (erro) {
         console.log(erro);
     }
 };
-}

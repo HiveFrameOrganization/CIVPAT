@@ -204,7 +204,7 @@ function verDetalhesProduto(element) {
 
     localStorage.setItem('idProduto', element.getAttribute('itemid'));
             
-    window.location.href = '../detalhesProdutoParaLancarHora/DetalhesProdutoParaLancarHora.html';
+    window.location.href = '../detalhesProdutoParaLancarHora/detalhesProdutoParaLancarHora.html';
 }
 
 // Reaplicar as funções referentes a linhas da tabela
