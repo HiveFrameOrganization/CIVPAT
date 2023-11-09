@@ -56,10 +56,9 @@ async function getFotoFuncionario(nif) {
 async function exibir(dados) {
     //Selecionando a div que vai ter os funcionário
     const exibe = document.querySelector('#exibicao');
-
     // Removendo um possível elemento na div de exibição
     exibe.innerHTML = '';
-
+    
     for (let funcionario of dados) {
         // Criando os elementos
         const div = document.createElement('div');
@@ -125,31 +124,29 @@ async function exibir(dados) {
             </div>
         </div>
         <div class="area-right text-color-text bg-component rounded-md px-3 md:px-4 flex items-center justify-center">
-            <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${cor}/20 rounded-md relative">
-                <svg xmlns="http://www.w3.org/2000/svg" alt="Opções" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${imgColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-more-vertical ${mostrarBotao && 'option-dropdown-trigger'} w-full p-1"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
-                <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
-                    ${
-                        mostrarBotao ? `
-                            <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                                <div class="flex items-center gap-2">
-                                <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
-                                    <a>
-                                        Editar
-                                    </a>
-                                </div>
+            ${ mostrarBotao ? `
+                <button type="button" class="option-dropdown-trigger btn-trigger w-6 h-max bg-${cor}/20 rounded-md relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" alt="Opções" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${imgColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-more-vertical ${mostrarBotao && 'option-dropdown-trigger'} w-full p-1"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                    <div class="option-dropdown hidden absolute min-w-[150px] z-10 bottom-0 right-[125%] h- first-letter: bg-component border border-body rounded-md shadow-md">
+                        <div itemid="${funcionario['NIF']}" class="editar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                            <div class="flex items-center gap-2">
+                            <img src="../../img/icon/eye.svg" alt="Visualizar" class="w-5 h-5" />
+                                <a>
+                                    Editar
+                                </a>
                             </div>
-                            <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
-                                <div class="flex items-center gap-2">
-                                    <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
-                                    <a>
-                                        Inativar
-                                    </a>
-                                </div>
+                        </div>
+                        <div itemid="${funcionario['NIF']}" class="inativar space-y-2 p-2 rounded-md text-sm hover:bg-primary/20 transition-colors">
+                            <div class="flex items-center gap-2">
+                                <img src="../../img/icon/user-minus.svg" alt="Inativar" class="w-5 h-5" />
+                                <a>
+                                    Inativar
+                                </a>
                             </div>
-                        ` : ''
-                    }
-                </div>
-            </button>
+                        </div>
+                    </div>
+                </button>
+            ` : '' }
         </div>`;
 
         exibe.appendChild(div);

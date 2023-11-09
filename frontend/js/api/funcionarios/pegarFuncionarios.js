@@ -49,6 +49,7 @@ async function retornaFuncionarios(filtro, pesquisado) {
 
                 // Função específica para exibir o funcionário
                 exibir(dados.usuarios);
+                // console.log(dados.usuarios)
                 // Seta a quantidade de botões
                 // necessário desetar no cadastro de usuário
                 sessionStorage.setItem(`qtdBotoesFun${filtro}`, dados.qtdBotoes);
