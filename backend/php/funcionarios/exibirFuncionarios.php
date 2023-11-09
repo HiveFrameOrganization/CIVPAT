@@ -69,7 +69,6 @@ function qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor) {
     $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios
     WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?)");
 
-    $filtro = '%' . $filtro . '%';
     $stmt->bind_param('ssss', $filtro, $valor, $valor, $valor);
     // Excutando a query
     $stmt->execute();
