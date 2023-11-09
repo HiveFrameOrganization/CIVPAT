@@ -64,11 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    if ($_GET['qtdBotes'] == -1) {
-        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtros);
-    } else {
-        $qtdBotoes = $_GET['qtdBotes'];
-    }
+    $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtros);
 
     $resposta = [
         'status' => 'success',

@@ -42,11 +42,7 @@ function retornaProdutos($nif, $pagina, $conn)
 
         // Caso a quantidade de botoes já tenha sido calculada anteriormente
         // ele evitará de fazer uma busca ao banco desnecessária
-        if ($_GET['qtdBotoes'] == -1) {
-            $qtdBotoes = qtdBotoes($conn, $quantidadeDeProdutos, $nif);
-        } else {
-            $qtdBotoes = $_GET['qtdBotoes'];
-        }
+        $qtdBotoes = qtdBotoes($conn, $quantidadeDeProdutos, $nif);
 
         // Enviando a resposta do servidor
         $resposta = [
