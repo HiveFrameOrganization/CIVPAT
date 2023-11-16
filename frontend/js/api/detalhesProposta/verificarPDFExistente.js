@@ -6,17 +6,19 @@ export default async function  verificarPdfExistente(idProposta) {
         // Cria a requisição 
         const requisicao = await fetch(back + `/PDF/verificarPdfExistente.php?id=${idProposta}`)
 
-        // Verificando se deu erro ao fazer a requisição
-        if (!requisicao.ok) {
+        // // Verificando se deu erro ao fazer a requisição
+        // if (requisicao.ok == false) {
             
-            localStorage.setItem('status', 'error');
-            localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
+        //     localStorage.setItem('status', 'error');
+        //     localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
 
-            return;
-        }
+        //     return;
+        // }
 
         // recebe a resposta do servidor
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         // Loop para verificar para cada tipo de PDF se a proposta possui aquele tipo de PDF ja salvo
         for (const chave in resposta) {
