@@ -14,6 +14,14 @@ formulario.addEventListener('submit', async evento => {
 
 });
 
+document.querySelector('#esquecer-senha-btn').addEventListener('click', () => {
+
+    localStorage.setItem('status', 'info')
+    localStorage.setItem('mensagem', 'Entre em contato com um coordenador')
+
+    alertas()
+})
+
 
 // Função para fazer o login
 async function login(email, senha) {
