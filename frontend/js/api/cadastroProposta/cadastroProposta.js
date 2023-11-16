@@ -78,8 +78,12 @@ formularioProposta.addEventListener('submit', async evento => {
                 sessionStorage.removeItem('qtdBotoesProposta');
                 window.location.href = '';
             } else {
-                if (resposta.mensagem === 'registro existe') {
-                    console.log('Proposta não cadastrada. (Nome da proposta já existe)');
+
+                if (resposta.mensagem == 'Registro existe') {
+
+                    localStorage.setItem('status', resposta.status);
+                    localStorage.setItem('mensagem', 'O título da proposta já existe!');
+                    alertas()
                 }
             }
 
@@ -109,8 +113,7 @@ async function enviaBackEnd(dadosEnviados) {
         }
 
         let dados = await resposta.json();
-
-        console.log(dados);
+        
         // Retorna 'sucesso' ou 'erro'
         return dados;
 

@@ -100,7 +100,7 @@ async function exibir(dados) {
         <div class="area-left text-color-text flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
             <div class="flex items-center gap-8 lg:w-full">
                 <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                    <img src="${fotoDePerfil ? fotoDePerfil : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full overflow-hidden">
+                    <img src="${fotoDePerfil ? fotoDePerfil : '../../img/icon/no-image.jpg'}" alt="Responsável" class="w-8 h-8 border border-${cor} rounded-full ">
                     <div class="w-[175px] max-w-[175px] overflow-hidden text-ellipsis">
                         <span title="${funcionario['Nome']+' '+funcionario['Sobrenome']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${funcionario['Nome']+' '+funcionario['Sobrenome']}</span>
                         <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1">
