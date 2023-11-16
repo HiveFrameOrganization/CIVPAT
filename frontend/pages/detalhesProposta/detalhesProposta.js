@@ -222,3 +222,19 @@ if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
   document.querySelector('#segundoGerente').classList.add('hidden')
   document.getElementById('semGerente').innerText = "Nenhum gerente selecionado"
 }
+
+var horaPes = document.getElementById('tempoPessoa')
+
+horaPes.addEventListener('input', () => {
+  if (horaPes.value.length > horaPes.maxLength){
+    horaPes.value = horaPes.value.slice(0, horaPes.maxLength);
+  }
+})
+
+var horaMaq = document.getElementById('tempoMaquina')
+
+horaMaq.addEventListener('input', () => {
+  if (horaMaq.value.length > horaMaq.maxLength){
+    horaMaq.value = horaMaq.value.slice(0, horaMaq.maxLength);
+  }
+})
