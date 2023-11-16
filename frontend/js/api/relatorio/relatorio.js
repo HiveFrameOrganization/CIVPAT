@@ -165,7 +165,6 @@ async function exibirRelatorio(res) {
     }else {
 
         exibir.innerHTML = ''
-
         
         for (let i = 0; i < res.dados.length; i++) {
             
