@@ -3,7 +3,7 @@ import { editandoProposta } from "./detalhesProposta.js"
 // DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
 export default function desativaBotoes(){
     let declinarProposta = document.querySelector('#declinarProposta')
-    if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Aceite' || localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
+    if(localStorage.getItem('statusProposta') == 'Em Análise'){
         console.log('em analise ou solicitada')
     }else{
         editandoProposta.setAttribute('disabled', 'true')
@@ -60,5 +60,30 @@ export default function desativaBotoes(){
         botaoFollowUp.classList.remove('cursor-pointer');
     }
 
+    if (localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
+        let botaoDeclinar = document.querySelector('#declinarProposta');
+        botaoDeclinar.setAttribute('disabled', 'true');
+        editandoProposta.removeAttribute('disabled')
+        editandoProposta.classList.add('cursor-pointer')
+
+    } 
+
+    if (localStorage.getItem('statusProposta') == 'Solicitação de Aceite'){
+        let botaoAceitar = document.querySelector('#aceitarProposta');
+        botaoAceitar.setAttribute('disabled', 'true');
+        botaoAceitar.classList.add('disabled:opacity-20');
+        botaoAceitar.classList.remove('hover:bg-btn-blue/40');
+        botaoAceitar.classList.remove('cursor-pointer');
+        botaoAceitar.classList.remove('hover:bg-[transparent]');
+        botaoAceitar.classList.remove('hover:text-color-green')
+        botaoDeclinar.removeAttribute('disabled');
+        editandoProposta.removeAttribute('disabled')
+        editandoProposta.classList.add('hover:bg-btn-blue/40')
+        editandoProposta.classList.add('cursor-pointer')
+        botaoDeclinar.classList.add('cursor-pointer')
+        botaoDeclinar.classList.add('hover:bg-[transparent]')
+        botaoDeclinar.classList.add('hover:text-color-red')
+
+    }
     
 }
