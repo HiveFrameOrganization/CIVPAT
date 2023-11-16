@@ -9,7 +9,7 @@ async function editarFuncionarios() {
     // Pegando os valores do formulário
     const nome = document.querySelector('#editarNome').value;
     const sobrenome = document.querySelector('#editarSobrenome').value;
-    const email = document.querySelector('#editarEmail').value.replace('@sp.senai.br', '');
+    const email = document.querySelector('#editarEmail').value
     const cargo = document.querySelector('#editarCargo').value;
 
     try {
@@ -28,7 +28,7 @@ async function editarFuncionarios() {
                 nif: nif,
                 nome: nome,
                 sobrenome: sobrenome,
-                email: email + '@sp.senai.br',
+                email: email + "@sp.senai.br",
                 cargo: cargo
             }
 
