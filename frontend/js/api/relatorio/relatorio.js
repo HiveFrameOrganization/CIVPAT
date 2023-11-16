@@ -158,7 +158,7 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold text-center'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <h2 class='font-bold text-center'>NENHUM REGISTRO ENCONTRADO!</h2>
             <p class='text-center'>Informe uma data onde o NIF correspondente tenha trabalho.</p>
             </div>
             `
