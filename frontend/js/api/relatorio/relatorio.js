@@ -142,6 +142,7 @@ formularioRelatorio.addEventListener('submit', async evento => {
 async function exibirRelatorio(res) {
 
     exibir.innerHTML = ''
+    console.log(res)
 
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
     if (res == null) {

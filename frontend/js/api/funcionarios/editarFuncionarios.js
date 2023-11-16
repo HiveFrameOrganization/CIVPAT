@@ -2,7 +2,7 @@ import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
 
 // Quando recarregar a página o alerta será chamado
-window.addEventListener('load', () => {alertas()})
+window.addEventListener('load', () => { alertas() })
 
 async function editarFuncionarios() {
 
@@ -17,7 +17,7 @@ async function editarFuncionarios() {
         const nif = localStorage.getItem('nif');
 
         if (!contemApenasLetrasEspacos(nome) || !contemApenasLetrasEspacos(sobrenome) || !contemPeloMenosUmaLetra(email)) {
-            
+
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Campos preenchidos incorretamente');
 
@@ -55,20 +55,21 @@ async function editarFuncionarios() {
 
                 localStorage.setItem('status', 'success');
                 localStorage.setItem('mensagem', 'Usuário editado com sucesso!');
-                
+
                 location.reload();
-                
+
             } else if (resp.status == 'error') {
 
                 localStorage.setItem('status', 'error');
-                localStorage.setItem('mensagem', 'Erro ao tentar editar o usuário!  Tente novamente');
-                
+                localStorage.setItem('mensagem', resp.mensagem);
+
+
                 alertas();
             }
-            
+
         }
     } catch (erro) {
-        
+
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Erro ao tentar editar o usuário! Tente novamente');
 
@@ -100,9 +101,10 @@ async function requisicaoEditar(dados) {
         // Pegando a resposta retornado pelo servidor
         const resposta = await requisicao.json();
 
+
         return resposta;
 
-    } catch(err) {
+    } catch (err) {
 
         return false;
     }
