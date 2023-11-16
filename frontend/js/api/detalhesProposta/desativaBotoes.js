@@ -3,7 +3,7 @@ import { editandoProposta } from "./detalhesProposta.js"
 // DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
 export default function desativaBotoes(){
     let declinarProposta = document.querySelector('#declinarProposta')
-    if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Aceite'){
+    if(localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Aceite' || localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
         console.log('em analise ou solicitada')
     }else{
         editandoProposta.setAttribute('disabled', 'true')
