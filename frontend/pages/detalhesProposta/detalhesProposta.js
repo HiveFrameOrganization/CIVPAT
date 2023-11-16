@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
   setTimeout(exibeCpf, 1000)
   setTimeout(exibeSgset, 1000)
   setTimeout(exibeValor, 1000)
-  
+  setTimeout(titles, 1000)
 })
 
 function exibeCpf(){
@@ -238,3 +238,16 @@ horaMaq.addEventListener('input', () => {
     horaMaq.value = horaMaq.value.slice(0, horaMaq.maxLength);
   }
 })
+
+function titles(){
+  const inputs = document.querySelectorAll(".inputProposta");
+  const arrayInputs = [];
+  
+  for (const input of inputs) {
+    arrayInputs.push(input);
+  }
+  
+  for (const input of arrayInputs) {
+    input.title = input.value;
+  }
+}
