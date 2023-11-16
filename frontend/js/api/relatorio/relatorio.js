@@ -227,7 +227,7 @@ async function exibirRelatorio(res) {
 
                     <div class='border-[gray] px-8 flex flex-col gap-2'>
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${res.dados[i].HorasPessoa} Horas</p>
-                    <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
+                    <p class='text-color-text-secundary font-semibold text-xs flex whitespace-nowrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
 
                     <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8 hidden lg:block' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
