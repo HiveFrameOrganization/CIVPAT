@@ -11,19 +11,25 @@ function verificarHora($nifTecnico, $dataLancaHora, $conn){
     $stmt = $conn->prepare('SELECT SUM(HorasPessoa) AS HorasPessoa FROM CargaHoraria WHERE fk_nifTecnico = ? and Datas = ? ');
     $stmt->bind_param('ss', $nifTecnico, $dataLancaHora);
     $stmt->execute();
-    $horasPessoa = $stmt-> get_result();
+    $horasPessoas = $stmt-> get_result();
     
     $stmt = $conn->prepare('SELECT SUM(HorasMaquina) AS HorasMaquina FROM CargaHoraria WHERE fk_nifTecnico = ? and Datas = ? ');
     $stmt->bind_param('ss', $nifTecnico, $dataLancaHora);
     $stmt->execute();
-    $horasMaquina = $stmt-> get_result();
+    $horasMaquinas = $stmt-> get_result();
+
+    $rowPessoa = $horasPessoas->fetch_assoc();
+    $rowMaquina = $horasMaquinas->fetch_assoc();
+
+    $horasPessoa = $rowPessoa['HorasPessoa'];
+    $horasMaquina = $rowMaquina['HorasMaquina'];
 
 
     $resposta = [
         'tec' => $nifTecnico,
         'Data' => $dataLancaHora,
-        'horaPessoas'=> $horasPessoa,
-        'horaMaquina'=> $horasMaquina,
+        'horaPessoaTrabalhadas'=> $horasPessoa,
+        'horaMaquinaTrabalhadas'=> $horasMaquina,
     ];
     echo json_encode($resposta);
     
