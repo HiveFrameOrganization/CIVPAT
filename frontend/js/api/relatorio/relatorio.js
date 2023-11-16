@@ -227,7 +227,7 @@ async function exibirRelatorio(res) {
                     </div>
 
                     <div class='border-[gray] px-8 flex flex-col gap-2'>
-                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
+                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${Number(res.dados[i].HorasMaquina) + Number(res.dados[i].HorasPessoa)} Horas</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
 
