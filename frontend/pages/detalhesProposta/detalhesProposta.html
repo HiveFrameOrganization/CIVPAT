@@ -977,8 +977,13 @@
                         valor.onkeydown = function(event) {
                             
                             if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key != ',') {
-                            event.preventDefault();
+                                event.preventDefault();
                             }
+
+                            if (event.key === " ") {
+                                event.preventDefault();
+                              }
+                            
                         };
 
                         // função que adiciona a máscara ao valor após o desfoque do input
