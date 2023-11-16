@@ -191,10 +191,20 @@ const aceitarPropostaButton = document.getElementById('aceitarProposta');
 const declinarPropostaButton = document.getElementById('declinarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
+const cnpj = document.getElementById('cnpj');
+const nSGSET = document.getElementById('numeroSGSET');
 
 // Executando a função 'aceitarProposta'.
 
 aceitarPropostaButton.addEventListener('click', () => {
+    // if(localStorage.getItem('ger')){
+    //     if(cnpj.value == ''){
+
+    //     }
+    // }else if(cnpj.value == '' && nSGSET.value == ''){
+        
+    // }
+        
     try {
         modalConfirmar(true)
         // aceitarProposta()
@@ -296,7 +306,7 @@ function modalConfirmar(fun){
     console.log(sgset)
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger' && cnpj && sgset == '' ){
+    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' || sgset == '' ){
     
         Toast.fire({
             icon: 'error',
