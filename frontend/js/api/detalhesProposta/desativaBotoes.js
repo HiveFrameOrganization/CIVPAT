@@ -70,7 +70,7 @@ export default function desativaBotoes(){
 
     if (localStorage.getItem('statusProposta') == 'Solicitação de Aceite'){
         let botaoAceitar = document.querySelector('#aceitarProposta');
-        botaoAceitar.setAttribute('disabled', 'true');
+        botaoAceitar.removeAttribute('disabled');
         botaoAceitar.classList.add('disabled:opacity-20');
         botaoAceitar.classList.remove('hover:bg-btn-blue/40');
         botaoAceitar.classList.remove('cursor-pointer');

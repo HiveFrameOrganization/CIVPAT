@@ -306,7 +306,7 @@ function modalConfirmar(fun){
     console.log(sgset)
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger'){
+    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == ''){
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
