@@ -158,33 +158,32 @@ async function exibirRelatorio(res) {
         exibir.innerHTML = `
             <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
-            <h2 class='font-bold text-center'>NENHUM RESGISTRO ENCONTRADO!</h2>
+            <h2 class='font-bold text-center'>NENHUM REGISTRO ENCONTRADO!</h2>
             <p class='text-center'>Informe uma data onde o NIF correspondente tenha trabalho.</p>
             </div>
             `
     }else {
 
         exibir.innerHTML = ''
-
         
         for (let i = 0; i < res.dados.length; i++) {
             
             // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
             let cabeçalho = document.createElement('div')
-            cabeçalho.classList = 'flex bg-component rounded-t-xl py-8 relative'
+            cabeçalho.classList = 'flex overflow-x-auto bg-component rounded-t-xl py-8 relative'
             let horas = document.createElement('div')
-            horas.classList = 'rounded-b-xl bg-component flex flex-col overflow-y-hidden pb-4 transition-height mb-8'
+            horas.classList = 'rounded-b-xl hidden bg-component flex flex-col pb-4 transition-all mb-8'
             let all = document.createElement('div')
-            all.classList = 'overflow-y-hidden cursor-pointer h-24 mb-8 bg-component'
+            all.classList = 'cursor-pointer mb-8 bg-component'
             all.addEventListener('click', () => {
-                if (all.classList.contains('h-24')) {
-                    all.classList.remove('h-24')
+                if (horas.classList.contains('hidden')) {
+                    horas.classList.remove('hidden')
                     all.classList.toggle('bg-component')
                     document.querySelector('#setaDropdown').classList.add('rotate-180')
                     cabeçalho.classList.add('bg-body')
                     cabeçalho.classList.remove('bg-component')
                 } else {
-                    all.classList.add('h-24')
+                    horas.classList.add('hidden')
                     all.classList.toggle('bg-component')
                     document.querySelector('#setaDropdown').classList.remove('rotate-180')
                     cabeçalho.classList.remove('bg-body')
@@ -216,19 +215,19 @@ async function exibirRelatorio(res) {
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>${res.dados[i].NIF}</p>
                     </div>
                     
-                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 w-1/4'>
+                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 max-w-[200px]'>
                     <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize text-ellipsis overflow-hidden' title='${res.dados[i].NomeProduto}'>${res.dados[i].NomeProduto}</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Produto</p>
                     </div>
                     
-                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2'>
-                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${res.dados[i].TituloProposta}</p>
+                    <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 max-w-[200px]'>
+                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize text-ellipsis overflow-hidden' title='${res.dados[i].TituloProposta}'>${res.dados[i].TituloProposta}</p>
                     <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Proposta</p>
                     </div>
 
                     <div class='border-[gray] px-8 flex flex-col gap-2'>
-                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${horaTotal} Horas</p>
-                    <p class='text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1'>Total de horas no mês</p>
+                    <p class='text-color-text whitespace-nowrap font-semibold text-lg leading-4 capitalize'>${res.dados[i].HorasPessoa} Horas</p>
+                    <p class='text-color-text-secundary font-semibold text-xs flex whitespace-nowrap justify-between gap-1'>Total de horas no mês</p>
                     </div>
 
                     <img id='setaDropdown' class='object-contain self-center absolute right-0 transition-all px-8 hidden lg:block' src="../../img/icon/arrow_back_ios.png" alt="seta para baixo">
@@ -237,7 +236,7 @@ async function exibirRelatorio(res) {
             }
 
             horas.innerHTML += `
-            <div class='bg-body p-4 mx-4 mt-4 flex overflow-x-scroll w-[98,5%] rounded-xl min-h-[4rem]'>
+            <div class='bg-body p-4 mx-4 mt-4 flex overflow-x-auto rounded-xl min-h-[4rem]'>
             
                     <div class='border-r-2 border-[gray] px-8 flex flex-col gap-2 bg-body'>
                     <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].Datas}</p>
@@ -252,7 +251,7 @@ async function exibirRelatorio(res) {
                     ${res.dados[i].Maquina != 'Nenhum' ?
                     `
                         <div class='px-8 flex flex-col gap-2 bg-body'>
-                        <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].Maquina}</p>
+                        <p class='text-color-text font-semibold text-lg leading-4 capitalize whitespace-nowrap text-ellipsis overflow-hidden' title='${res.dados[i].Maquina}'>${res.dados[i].Maquina}</p>
                         <p class='text-color-text font-semibold text-lg leading-4 capitalize'>${res.dados[i].HorasMaquina}  Horas</p>
                         </div>`
                     :

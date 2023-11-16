@@ -252,7 +252,6 @@ paraSegundoModal.addEventListener('click', ()=>{
         tempo.removeAttribute('readonly')
         tempo.classList.remove('bg-component')
         tempo.classList.remove('cursor-default')
-        tempo.classList.add('focus:outline-primary')
     }
 
 })
@@ -301,7 +300,7 @@ function modalConfirmar(fun){
     
         Toast.fire({
             icon: 'error',
-            title: 'Preencha todos os campos obrigatorios em vermelho!'
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
         if(cnpj == ''){
@@ -323,7 +322,7 @@ function modalConfirmar(fun){
     
         Toast.fire({
             icon: 'error',
-            title: 'Preencha todos os campos obrigatorios em vermelho!'
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
         camposObrigatorios[0].classList.add('bg-color-red/20')

@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
   setTimeout(exibeCpf, 1000)
   setTimeout(exibeSgset, 1000)
   setTimeout(exibeValor, 1000)
-  
+  setTimeout(titles, 1000)
 })
 
 function exibeCpf(){
@@ -221,4 +221,33 @@ function salvarModal(){
 if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
   document.querySelector('#segundoGerente').classList.add('hidden')
   document.getElementById('semGerente').innerText = "Nenhum gerente selecionado"
+}
+
+var horaPes = document.getElementById('tempoPessoa')
+
+horaPes.addEventListener('input', () => {
+  if (horaPes.value.length > horaPes.maxLength){
+    horaPes.value = horaPes.value.slice(0, horaPes.maxLength);
+  }
+})
+
+var horaMaq = document.getElementById('tempoMaquina')
+
+horaMaq.addEventListener('input', () => {
+  if (horaMaq.value.length > horaMaq.maxLength){
+    horaMaq.value = horaMaq.value.slice(0, horaMaq.maxLength);
+  }
+})
+
+function titles(){
+  const inputs = document.querySelectorAll(".inputProposta");
+  const arrayInputs = [];
+  
+  for (const input of inputs) {
+    arrayInputs.push(input);
+  }
+  
+  for (const input of arrayInputs) {
+    input.title = input.value;
+  }
 }

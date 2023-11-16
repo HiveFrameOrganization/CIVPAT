@@ -88,13 +88,13 @@ async function exibirPropostas(propostas){
                 data = ''
             }else if(proposta['Status'] == 'Em Análise' || proposta['Status'] == 'Aceito'){
                 let date = new Date()
-                date = date.toLocaleDateString()
+                // date = date.toLocaleDateString()
                 
                 // SALVANDO DATAS EM OBEJETOS PARA SEREM CONSUMIDAS E SAPARADAS FUTURAMENTE
                 const dataAtual={
-                    dia: date[0].toString() + date[1].toString(),
-                    mes: date[3].toString() + date[4].toString(),
-                    ano: date[8].toString() + date[9].toString()
+                    dia: date.getDate().toString(),
+                    mes: date.getMonth().toString(),
+                    ano: date.getFullYear().toString().slice(-2)
                 }
                 const dataFinal={
                     dia: fim[8].toString() + fim[9].toString(),
@@ -193,9 +193,29 @@ async function exibirPropostas(propostas){
             if (proposta['nSGSET']){
 
                 var sgset = proposta['nSGSET'];
-                if (sgset != ''){
-                    sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
+                // if (sgset != ''){
+                //     sgset = [sgset.slice(0, 5), '/', sgset.slice(5)].join('');
+                // }
+
+                let mask = sgset.split('').reverse()
+                let text = "";
+
+                for (let i = 0; i < mask.length; i++) {
+                    if(i == 3){
+                        text += mask[i] + '/'
+                    }else{
+                        text += mask[i]
+                    }
                 }
+                
+                text = text.split('').reverse()
+                mask = ''
+
+                for (let x = 0; x < text.length; x++) {
+                    mask += text[x]
+                }
+
+                sgset = mask;
             }
     
             // Inserindo o Template na linha
