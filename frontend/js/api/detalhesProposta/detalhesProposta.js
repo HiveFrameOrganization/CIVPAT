@@ -252,7 +252,6 @@ paraSegundoModal.addEventListener('click', ()=>{
         tempo.removeAttribute('readonly')
         tempo.classList.remove('bg-component')
         tempo.classList.remove('cursor-default')
-        tempo.classList.add('focus:outline-primary')
     }
 
 })
