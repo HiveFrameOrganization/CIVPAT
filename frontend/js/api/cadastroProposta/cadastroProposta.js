@@ -46,7 +46,7 @@ formularioProposta.addEventListener('submit', async evento => {
         // Verificando se o número de telefone possui algum caractere além de números...
         if (!contemApenasNumeros(telefoneRepresentante)){
             localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'O NÚMERO DE TELEFONE NÃO PODE RECEBERE ALGO ALÉM DE NÚMEROS');
+            localStorage.setItem('mensagem', 'O número de telefone não pode receber algo além de números.');
 
             alertas();
         } else if (nomeProjeto == '' || nomeRepresentante == '' || empresa == '' || textoResumo == '') {
