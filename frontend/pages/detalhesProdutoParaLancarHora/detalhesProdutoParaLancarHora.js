@@ -222,8 +222,8 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-    return dados[0];
-
+    console.log(dados)
+    return dados;
 
 }
 

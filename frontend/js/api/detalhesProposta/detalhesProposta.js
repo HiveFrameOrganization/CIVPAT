@@ -191,10 +191,20 @@ const aceitarPropostaButton = document.getElementById('aceitarProposta');
 const declinarPropostaButton = document.getElementById('declinarProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
+const cnpj = document.getElementById('cnpj');
+const nSGSET = document.getElementById('numeroSGSET');
 
 // Executando a função 'aceitarProposta'.
 
 aceitarPropostaButton.addEventListener('click', () => {
+    // if(localStorage.getItem('ger')){
+    //     if(cnpj.value == ''){
+
+    //     }
+    // }else if(cnpj.value == '' && nSGSET.value == ''){
+        
+    // }
+        
     try {
         modalConfirmar(true)
         // aceitarProposta()
@@ -252,7 +262,6 @@ paraSegundoModal.addEventListener('click', ()=>{
         tempo.removeAttribute('readonly')
         tempo.classList.remove('bg-component')
         tempo.classList.remove('cursor-default')
-        tempo.classList.add('focus:outline-primary')
     }
 
 })
@@ -297,11 +306,10 @@ function modalConfirmar(fun){
     console.log(sgset)
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger' && cnpj && sgset == '' ){
-    
+    if(localStorage.getItem('cargo') != 'ger'){
         Toast.fire({
             icon: 'error',
-            title: 'Preencha todos os campos obrigatorios em vermelho!'
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
         if(cnpj == ''){
@@ -323,7 +331,7 @@ function modalConfirmar(fun){
     
         Toast.fire({
             icon: 'error',
-            title: 'Preencha todos os campos obrigatorios em vermelho!'
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
         camposObrigatorios[0].classList.add('bg-color-red/20')

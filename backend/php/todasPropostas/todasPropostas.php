@@ -35,20 +35,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $numPagina = $_GET['pag'];
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
+    $cargo = $_SESSION['cargo'];
+    $nif = $_SESSION['nif'];
+
+    if($cargo == 'ger') {
+
+        if ($filtros == ''){
+            $stmt = $conn->prepare('SELECT * FROM vw_home WHERE NIF = ?
+            LIMIT ?, ?');
     
-    if ($filtros == ''){
-        $stmt = $conn->prepare('SELECT * FROM vw_home
-        LIMIT ?, ?');
+            $stmt->bind_param('sii', $nif, $inicioProposta, $qtdPropostasTela);
+        } else {
+            $stmt = $conn->prepare('SELECT * FROM vw_home
+            WHERE Status = ? AND NIF = ?
+            LIMIT ?, ?');
+            // Limita os resultados a 10 propostas por página
+            $stmt->bind_param('ssii', $filtros, $nif, $inicioProposta, $qtdPropostasTela);
+    
+        }
 
-        $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
     } else {
-        $stmt = $conn->prepare('SELECT * FROM vw_home
-        WHERE Status = ?
-        LIMIT ?, ?');
-        // Limita os resultados a 10 propostas por página
-        $stmt->bind_param('sii', $filtros, $inicioProposta, $qtdPropostasTela);
-
+        if ($filtros == ''){
+            $stmt = $conn->prepare('SELECT * FROM vw_home
+            LIMIT ?, ?');
+    
+            $stmt->bind_param('ii', $inicioProposta, $qtdPropostasTela);
+        } else {
+            $stmt = $conn->prepare('SELECT * FROM vw_home
+            WHERE Status = ?
+            LIMIT ?, ?');
+            // Limita os resultados a 10 propostas por página
+            $stmt->bind_param('sii', $filtros, $inicioProposta, $qtdPropostasTela);
+    
+        }
     }
+    
+    
 
     $stmt->execute();
 
@@ -64,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtros);
+    $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $filtros, $nif, $cargo);
 
     $resposta = [
         'status' => 'success',
@@ -84,12 +106,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Retorna a quantidade de Propostas
-function qtdBotoes($conn, $qtdPropostasTela, $filtros) {
+function qtdBotoes($conn, $qtdPropostasTela, $filtros, $nif, $cargo) {
     // preparando a query
-    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas WHERE Status LIKE ?");
+    if ($cargo != 'ger') {
+        $nif = '%%';
+    }
+
+    $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas 
+    INNER JOIN `GerenteResponsavel` ON Propostas.`idProposta` = GerenteResponsavel.`fk_idProposta`
+    WHERE Status LIKE ? AND `fk_nifGerente` LIKE ?");
 
     $filtro = '%' . $filtros . '%';
-    $stmt->bind_param('s', $filtro);
+    $stmt->bind_param('ss', $filtro, $nif);
 
     // Excutando a query
     $stmt->execute();

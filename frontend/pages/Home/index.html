@@ -235,7 +235,7 @@
                 <h1 class="text-2xl font-bold">VISÃO GERAL</h1>
                 <h2 class="text-xs font-normal">Projetos do Instituto Senai de Inovação</h2>
             </div>
-            <div class="flex gap-6 flex-nowrap overflow-x-auto">
+            <div class="flex gap-6 flex-nowrap overflow-x-auto pb-4 2xl:pb-0">
                 <div class="flex rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas em análise" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
@@ -282,7 +282,7 @@
                 </div>
                 <div class="flex rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas concluídas" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Solicitações para aceitar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary whitespace-nowrap">Solicitações de aceite</h5>
@@ -293,7 +293,7 @@
                 </div>
                 <div class="flex rounded-lg border border-[transparent] hover:border-primary transition-all">
                     <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" alt="Propostas concluídas" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" alt="Solicitações para declinar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
                         <h5 class="font-medium text-sm text-primary whitespace-nowrap">Solicitações de declínio</h5>
@@ -373,8 +373,7 @@
                                     </div>
                                     <div class="flex flex-col gap-2 w-full">
                                         <label for="textoResumo" class="font-semibold text-base">RESUMO*</label>
-                                        <textarea placeholder="Resumo da proposta" class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" id="textoResumo" rows="3" maxlength="500" required></textarea>
-                                        <span class="text-xs"><span id="tamanho-atual">0</span> / <span id="tamanho-maximo">500</span></span>
+                                        <textarea placeholder="Resumo da proposta" class="px-4 py-2 bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20" id="textoResumo" rows="3" required></textarea>
                                     </div>
                                     <button type="submit" class="w-full bg-primary py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">CADASTRAR</button>
                                 </form>
