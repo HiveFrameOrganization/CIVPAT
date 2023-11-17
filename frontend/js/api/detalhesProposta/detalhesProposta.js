@@ -301,12 +301,13 @@ function modalConfirmar(fun){
     let data = document.querySelector('#dataPrimeiroProduto').value
     let sgset = document.querySelector('#numeroSGSET').value
 
-    console.log(cnpj)
-    console.log(localStorage.getItem('cargo') == 'ger' ? 'gerente' : 'nao é gerente')
-    console.log(sgset)
+    // console.log(cnpj)
+    // console.log(localStorage.getItem('cargo') == 'ger' ? 'gerente' : 'nao é gerente')
+    // console.log(sgset)
+    console.log(fun ? 'true' : 'false')
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == ''){
+    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true){
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
@@ -327,7 +328,7 @@ function modalConfirmar(fun){
             camposObrigatorios[1].classList.remove('disabled:bg-body')
         }
 
-    }else if(localStorage.getItem('cargo') == 'ger' && cnpj == ''){
+    }else if(localStorage.getItem('cargo') == 'ger' && cnpj == '' && fun == true){
     
         Toast.fire({
             icon: 'error',
@@ -340,7 +341,7 @@ function modalConfirmar(fun){
         camposObrigatorios[0].classList.add('outline-[red]')
         camposObrigatorios[0].classList.remove('disabled:bg-body')
         
-    }else if(data == ''){
+    }else if(data == '' && fun == true){
     
         Toast.fire({
             icon: 'error',
@@ -402,3 +403,16 @@ function modalConfirmar(fun){
     }
 
 }
+
+const botaoAceitar = document.getElementById('aceitarProposta');
+const botaoDeclinar =  document.getElementById('declinarProposta');
+
+window.addEventListener('load', () => {
+    const cargo = localStorage.getItem('cargo');
+  
+    if (cargo == 'ger'){
+      botaoAceitar.value = 'SOLICITAR ACEITE';
+      botaoDeclinar.value = 'SOLICITAR DECLINIO';
+    }
+  
+  });
