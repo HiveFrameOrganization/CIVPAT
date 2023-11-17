@@ -22,6 +22,7 @@ const botaoDeclinar =  document.getElementById('declinarProposta');
 
 window.addEventListener('load', () => {
   const cargo = localStorage.getItem('cargo');
+  console.log(cargo)
 
   if (cargo == 'ger'){
     botaoAceitar.value = 'SOLICITAR ACEITE';
@@ -127,7 +128,7 @@ function exibeSgset(){
     }
 }
 
-export default function exibeValor(){
+function exibeValor(){
   var valor = document.querySelector('#valorTotalProdutos').value;
 
   valor = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(valor);
@@ -146,21 +147,20 @@ var selectDataInicial = document.querySelector('#dataInicial');
 var selectDataFinal = document.querySelector('#dataFinal');
 var selectUnidade = document.querySelector('#unidadeCriadora');
 
-
 selectServicos.addEventListener('change', () => {
-  setTimeout(continuaModal, 200);
+  setTimeout(continuaModal(), 200);
 })
 
 selectTecnicos.addEventListener('change', () => {
-  setTimeout(continuaModal, 200);
+  setTimeout(continuaModal(), 200);
 })
 
 selectMaquinas.addEventListener('change', () => {
-  setTimeout(continuaModal, 200);
+  setTimeout(continuaModal(), 200);
 })
 
 selectProdutos.addEventListener('change', () => {
-  setTimeout(continuaModal, 200);
+  setTimeout(continuaModal(), 200);
 })
 
 selectTempoMaquina.addEventListener('change', () => {
@@ -196,8 +196,10 @@ function continuaModal(){
   
   if (inputServicos == true && inputProduto == true && inputValor == true && inputTecnicos == true && inputMaquinas == true && valorProduto != 'null'){
     botaoContinuar.disabled = false;
+    console.log('funfou')
   } else {
     botaoContinuar.setAttribute('disabled', 'true');
+    console.log('nao funfou')
   }
 }
 

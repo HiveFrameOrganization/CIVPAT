@@ -1,7 +1,7 @@
 import { back } from "../Rotas/rotas.js";
 
 export default async function declinarPropostaBanco(){
-    const botadoDeclinar = document.getElementById('declinarProposta');
+    const botaoDeclinar = document.getElementById('declinarProposta');
     const idProposta = localStorage.getItem('idProposta');
     const tipoDeclinio = (botaoDeclinar.value == 'DECLINAR') ? 'Declinado' : 'Solicitação de Declinio';
     
