@@ -127,7 +127,7 @@ function exibeSgset(){
     }
 }
 
-function exibeValor(){
+export default function exibeValor(){
   var valor = document.querySelector('#valorTotalProdutos').value;
 
   valor = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(valor);
