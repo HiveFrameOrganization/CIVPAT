@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao }  from '../login/autenticacao.js';
 
 const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');
@@ -8,6 +9,15 @@ let gerenteEncarregado;
 
 // Chamando a função quando carregar a página
 window.addEventListener('load', async () => {
+
+    if (!autenticacao(['ger', 'coor', 'adm'], false)) {
+        localStorage.clear();
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Autenticação inválida, realize o login novamente')
+
+        window.location.pathname = '';
+        return;
+    }
     let gerentes = await pegarGerentes();
 
     if (gerentes.retorno === true) {
