@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
     localStorage.setItem('tempoPessoa', dadosProduto['HoraPessoa']);
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
-    document.getElementById('valor').value = dadosProduto['Valor'];
+    document.getElementById('valor').value = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(dadosProduto['Valor']);
     document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
     localStorage.setItem('situacaoProduto', dadosProduto['Situacao']);
 

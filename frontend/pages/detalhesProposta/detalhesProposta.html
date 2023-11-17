@@ -138,25 +138,18 @@
 
 <body class="bg-body text-color-text pt-20" onload="someCarregamento()">
 
-    <header class="bg-body py-4 px-6 text-color-text fixed top-0 w-full z-10">
-
+    <div id="fade" class="hide transition-opacity"></div>
+    <header class="fixed top-0 py-4 px-6 text-color-text w-full bg-body shadow-sm z-30" role="navigation" >
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-
-                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
-                    src="../../img/icon/align-justify.svg" alt="menu lateral">
-                <div id="sidebar"
-                    class="w-full sm:w-64 fixed top-0 h-screen -left-full bg-component py-4 px-6 transition-all z-50">
+                <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/align-justify.svg" alt="menu lateral">
+                <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
-                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors"
-                            src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img
-                                src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
-                            aria-label="Ir para página principal">HIVE<span
-                                class="text-color-text transition-colors">FRAME</span></a>
+                        <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
+                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
-                    <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
+                    <div id="sidebar-links" class="mt-4 space-y-4">
                         <script>
                             let cargo = localStorage.getItem('cargo');
 
@@ -165,7 +158,7 @@
                             if (cargo === 'adm') {
 
                                 sidebarLinks.innerHTML = `
-                                <a href="../Home/index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
+                                <a href="./index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" alt="Visão geral" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                                     Início
                                 </a>
@@ -202,33 +195,32 @@
                                     Lançar horas
                                 </a>    
                                 `;
+                            } else if (cargo === 'tec') {
+                                
+                                sidebarLinks.innerHTML = `
+                                <a href="../perfil/index.html" aria-label="Ir para a página de perfil do usuário" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-2"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+                                    Perfil
+                                </a>
+                                <a href="../bancoDeHoras/index.html" aria-label="Ir para a página de registro de horas" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-clock"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h5"/><path d="M17.5 17.5 16 16.25V14"/><path d="M22 16a6 6 0 1 1-12 0 6 6 0 0 1 12 0Z"/></svg>
+                                    Banco de horas
+                                </a>
+                                `;
                             }
                         </script>
                     </div>
-
                 </div>
-
-                <div id="fade" class="hide transition-opacity"></div>
-
-                <a href="../Home/index.html" aria-label="ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-
-                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg"
-                    aria-label="Ir para página principal">HIVE<span
-                        class="text-color-text transition-colors">FRAME</span></a>
-
+                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
-
-                <div id="switch-mode"
-                    class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
-                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-full">
-                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-full">
+                <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
+                    <img src="../../img/icon/moon.svg" alt="Alterar tema do site" id="moon-icon" class="w-8 h-8 hidden">
+                    <img src="../../img/icon/sun.svg" alt="Alterar tema do site" id="sun-icon" class="w-8 h-8 hidden">
                 </div>
-
-                <div class="relative">
-                    <div class="border border-primary rounded-full bg-component w-8 h-8">
-                        <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
-                    </div>
+                <div class="relative w-8 h-8 rounded-full bg-component border border-primary">
+                    <img src="../../img/icon/no-image.jpg" alt="Foto de perfil" id="profile-trigger" class="w-full h-full rounded-full cursor-pointer" role="button">
                     <div id="profile-dropdown" class="hidden absolute z-20 top-10 right-0 h-auto bg-component rounded-md border-component shadow-sm">
                         <div class="text-color-text-secundary px-4 py-2 space-y-3 min-w-[150px] max-w-[200px]">
                             <div class="">
@@ -247,10 +239,8 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </header>
 
     <main>
@@ -325,7 +315,7 @@
                                 proposta: </label>
                             <input
                                 placeholder="Nome da proposta"
-                                class="w-full estadoInput p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="tituloProposta" maxlength="75" disabled>
                         </div>
 
@@ -335,7 +325,7 @@
                                 class="text-xs uppercase text-color-text-secundary font-bold">Status: </label>
                             <input
                                 placeholder="Status da proposta"
-                                class="w-full p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="statusProposta" disabled>
                         </div>
 
@@ -346,7 +336,7 @@
                             </label>
                             <input
                                 placeholder="Criador da proposta"
-                                class="w-full p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 text-lg disabled:text-xl disabled:px-0 disabled:uppercase disabled:font-bold text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="criadorProposta" disabled>
                         </div>
                     </div>
@@ -358,7 +348,7 @@
                             <label for="cnpj" class="text-xs uppercase text-color-text-secundary font-bold">CNPJ:
                             </label>
                             <input
-                                class="campoObrigatorio w-full estadoInput disabled:px-0 disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta campoObrigatorio w-full estadoInput disabled:px-0 disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="cnpj" placeholder="00.000.000/0000-00" onkeypress="cpfMask()" minlength="18" maxlength="18" disabled>
                         </div>
 
@@ -368,7 +358,7 @@
                             </label>
                             <input
                                 placeholder="Nome da empresa"
-                                class="w-full estadoInput p-3 disabled:px-0 disabled:uppercase disabled:font-bold text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full estadoInput p-3 disabled:px-0 disabled:uppercase disabled:font-bold text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="empresa" maxlength="200" minlength="4" disabled>
                         </div>
 
@@ -401,7 +391,7 @@
                             </label>
                             <input
                                 placeholder="Data de início do primeiro produto"
-                                class="w-full p-3 text-lg disabled:font-bold disabled:px-0 disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 text-lg disabled:font-bold disabled:px-0 disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="date" id="dataPrimeiroProduto" disabled>
                         </div>
 
@@ -414,7 +404,7 @@
                             </label>
                             <input
                                 placeholder="Data final do último produto"
-                                class="w-full p-3 disabled:px-0 disabled:font-bold text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 disabled:px-0 disabled:font-bold text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="date" id="dataUltimoProduto" disabled>
                         </div>
 
@@ -423,7 +413,7 @@
                                 class="text-xs uppercase text-color-text-secundary font-bold md:pb-[14px] lg:pb-0">Valor total: </label>
                             <input
                                 placeholder="Valor total"
-                                class="w-full p-3 text-lg disabled:font-bold disabled:px-0 disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full p-3 text-lg disabled:font-bold disabled:px-0 disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 type="text" id="valorTotalProdutos" disabled>
                         </div>
                     </div>
@@ -477,8 +467,8 @@
                                 SGSET:
                             </label>
                             <input
-                                class="campoObrigatorio w-full estadoInput disabled:font-bold disabled:px-0 p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                                type="text" id="numeroSGSET" placeholder="00000/0000" onkeypress="sgsetMask()" minlength="6" maxlength="10" disabled>
+                                class="inputProposta campoObrigatorio w-full estadoInput disabled:font-bold disabled:px-0 p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                type="text" id="numeroSGSET" placeholder="00000/0000" minlength="6" maxlength="10" disabled>
                         </div>
 
                         <!-- proibindo digitar algo além de letras -->
@@ -499,7 +489,7 @@
                                 Contato:</label>
                             <input type="text" id="nomeContato"
                                 placeholder="Nome para contato"
-                                class="w-full estadoInput disabled:px-0 disabled:uppercase disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full estadoInput disabled:px-0 disabled:uppercase disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
                         </div>
 
@@ -509,7 +499,7 @@
                                 Contato:</label>
                             <input type="email" id="emailContato"
                                 placeholder="E-mail para contato"
-                                class="w-full estadoInput disabled:px-0 disabled:uppercase disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta w-full estadoInput disabled:px-0 disabled:uppercase disabled:font-bold p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled>
                         </div>
 
@@ -527,7 +517,7 @@
                                 de contato:</label>
                             <input type="text" id="numeroContato"
                                 placeholder="Número para contato"
-                                class="estadoInput disabled:font-bold disabled:px-0 p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
+                                class="inputProposta estadoInput disabled:font-bold disabled:px-0 p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
                                 disabled  pattern="[A-Za-z]{11}">
                         </div>
 
@@ -893,10 +883,12 @@
 
                 <div class="abaProdutos bg-body px-4 md:px-8 py-6 rounded-xl flex flex-col hidden w-full gap-5">
     
-                    <div class="flex flex-col sm:flex-row gap-8 items-center justify-between">
-                        <button type="button" id="btnNovoProduto" aria-label="Novo produto"
-                        class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs uppercase font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">
-                        + Novo Produto</button>
+                    <div class="flex flex-col sm:flex-row gap-8 justify-between">
+                        <div>
+                            <button type="button" id="btnNovoProduto" aria-label="Novo produto"
+                            class="bg-primary py-2 px-6 text-[#fff] rounded-md text-xs uppercase font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors">
+                            + Novo Produto</button>
+                        </div>
 
                         <span id="contadorProdutos" class="hidden"><p id="produtoConcluido">0 </p> /  <p id="produtoTotal" class="mr-2">0</p> produto(s) concluídos</span>
                         
@@ -964,7 +956,7 @@
                     <label for="valor" class="text-color-text font-semibold block mb-2">VALOR*</label>
                     <div class="relative">
                         <p class="absolute top-2 left-3 font-bold text-color-text">R$</p>
-                        <input autocomplete="off" onblur="blurValor()" onkeyup="continuaModal()" minlength="1" class="border border-component bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-2 pl-10 pr-4 transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
+                        <input autocomplete="off" onblur="blurValor()" minlength="1" class="border border-component bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-2 pl-10 pr-4 transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
                     </div>
 
                     <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
@@ -975,8 +967,13 @@
                         valor.onkeydown = function(event) {
                             
                             if(isNaN(event.key) && event.key !== 'Backspace' && event.keyCode !== 37 && event.keyCode !== 39 && event.key != ',') {
-                            event.preventDefault();
+                                event.preventDefault();
                             }
+
+                            if (event.key === " ") {
+                                event.preventDefault();
+                              }
+                            
                         };
 
                         // função que adiciona a máscara ao valor após o desfoque do input
@@ -1025,14 +1022,15 @@
                 <div id="segundoCadastroProduto" class="hidden max-h-[50vh]">
                     <div class="flex flex-col lg:flex-row gap-2">
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoMaquina" class="text-color-text font-semibold block mb-2">TEMPO (MÁQUINA)</label>
-                            <input placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
+                            <label for="tempoMaquina" class="text-color-text font-semibold block mb-2">HORAS-MÁQUINA</label>
+                            <input maxlength="4" placeholder="Tempo de uso da máquina" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoMaquina" required>
                         </div>
                         
                         <div class="w-full lg:w-1/2">
-                            <label for="tempoPessoa" class="text-color-text font-semibold block mb-2">TEMPO (PESSOA)*</label>
-                            <input placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
+                            <label for="tempoPessoa" class="text-color-text font-semibold block mb-2">HORAS-PESSOA*</label>
+                            <input maxlength="4" placeholder="Tempo de trabalho da pessoa" class="bg-body valid:bg-primary/20 border border-component placeholder-color-text-secundary transition-all text-color-text px-4 py-2 rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-8" type="number" id="tempoPessoa" required>
                         </div>
+
                     </div>
 
                     

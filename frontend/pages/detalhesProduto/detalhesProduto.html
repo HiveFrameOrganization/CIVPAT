@@ -151,7 +151,7 @@
                             if (cargo === 'adm') {
 
                                 sidebarLinks.innerHTML = `
-                                <a href="./index.html" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
+                                <a href="../Home/" aria-label="Ir para a página inicial" class="text-color-text text-sm font-normal flex items-center gap-4 hover:bg-primary/20 transition-colors rounded p-2"> 
                                     <svg xmlns="http://www.w3.org/2000/svg" alt="Visão geral" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                                     Início
                                 </a>
@@ -367,8 +367,8 @@
                     <div class="flex flex-col gap-2 w-full">
                         <label class="text-color-text-secundary font-semibold">VALOR</label>
                         <div class="relative">
-                            <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
-                            <input type="text" name="valor" minlength="1" onblur="blurValor()" placeholder="0,00" onfocus="this.value = ''" id="valor" class="bg-component placeholder-color-text text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
+                            <!-- <p class="absolute top-3 left-3 font-bold text-color-text">R$</p> -->
+                            <input type="text" name="valor" minlength="1" onblur="blurValor()" placeholder="0,00" onfocus="this.value = ''" id="valor" class="bg-component placeholder-color-text text-color-text py-3 pl-3 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
                         </div>
                     </div>
                 </div>

@@ -37,43 +37,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $qtdPropostasTela = 5;
     $inicioProposta = $numPagina * $qtdPropostasTela - $qtdPropostasTela;
     $test = '';
+    $cargo = $_SESSION['cargo'];
+    $nif = $_SESSION['nif'];
+
+    if ($cargo != 'ger') {
+        $nif = '%%';
+    }
 
     if ($pesquisaAtual == ''){
-        $test = '1';
         $stmt = $conn->prepare('SELECT * FROM vw_home
-        WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
+        WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
         LIMIT ?, ?');
         // Limita os resultados a 10 propostas por página
-        $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
+        $stmt->bind_param('ssii', $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
 
     } else {
 
         if ($aba == ''){
-            $test = '2';
+            $test = $pesquisaAtual;
             $stmt = $conn->prepare('SELECT * FROM vw_home
-            WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
+            WHERE TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
             LIMIT ?, ?');
             // Limita os resultados a 10 propostas por página
-            $stmt->bind_param('sii', $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
+            $stmt->bind_param('ssii', $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
 
         } else {    
             if ($aba == 'solicitacoes') {
-
                 $declinio = 'Solicitação de Declinio';
                 $aceito = 'Solicitação de Aceite';
 
                 $stmt = $conn->prepare('SELECT * FROM vw_home
-                WHERE Status in (?, ?) AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
+                WHERE Status in (?, ?) AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
-                $stmt->bind_param('sssii', $aceito, $declinio, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
+                $stmt->bind_param('ssssii', $aceito, $declinio, $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
             } else {
-
                 $stmt = $conn->prepare('SELECT * FROM vw_home
-                WHERE Status = ? AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ?
+                WHERE Status = ? AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
-                $stmt->bind_param('ssii', $aba, $pesquisaAtual, $inicioProposta, $qtdPropostasTela);
+                $stmt->bind_param('sssii', $aba, $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
             }
 
         }
@@ -95,11 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
-    if ($_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim') {
-        $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual);
-    } else {
-        $qtdBotoes = $_GET['qtdBotes'];
-    }
+    $qtdBotoes = qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual, $nif, $cargo);
 
     $resposta = [
         'status' => 'success',
@@ -111,8 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'Concluido' => $quantidadeDePropostasPorStatus['somaConcluido'],
         'SolicitacaoDeAceite' => $quantidadeDePropostasPorStatus['somaSolicitacaoDeAceite'],
         'SolicitacaoDeDeclinio' => $quantidadeDePropostasPorStatus['somaSolicitacaoDeDeclinio'],
-        'qtdBotoes' => $qtdBotoes,
-        'atest' => $test
+        'qtdBotoes' => $qtdBotoes
     ];
 
     $retorno  = json_encode($resposta);
@@ -122,13 +120,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Retorna a quantidade de Propostas
-function qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual) {
+function qtdBotoes($conn, $qtdPropostasTela, $aba, $pesquisaAtual, $nif, $cargo) {
     // preparando a query
+    if ($cargo != 'ger') {
+        $nif = '%%';
+    }
+
     $stmt = $conn->prepare("SELECT COUNT(idProposta) FROM Propostas
-    WHERE Status LIKE ? AND TituloProposta LIKE ?");
+    INNER JOIN `GerenteResponsavel` ON Propostas.`idProposta` = GerenteResponsavel.`fk_idProposta`
+    WHERE Status LIKE ? AND TituloProposta LIKE ? AND `fk_nifGerente` LIKE ?");
 
     $aba = '%' . $aba . '%';
-    $stmt->bind_param('ss', $aba, $pesquisaAtual);
+    $stmt->bind_param('sss', $aba, $pesquisaAtual, $nif);
 
     // Excutando a query
     $stmt->execute();

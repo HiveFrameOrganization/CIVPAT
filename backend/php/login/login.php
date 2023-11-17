@@ -25,6 +25,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
         $_SESSION['nome'] = $dadosBanco['Nome'];
         $_SESSION['sobrenome'] = $dadosBanco['Sobrenome'];
         $_SESSION['cargo'] = $dadosBanco['TipoUser'];
+        $_SESSION['situacao'] = $dadosBanco['Situacao'];
 
         // Mandando o token para o cliente
         $resposta = [
@@ -34,7 +35,8 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'nif' => $dadosBanco['NIF'],
             'nome' => ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
             'mensagem' => 'Bem vindo ' . ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
-            'status' => 'success'
+            'status' => 'success',
+            'situacao' => $dadosBanco['Situacao']
         ];
 
         echo json_encode($resposta);

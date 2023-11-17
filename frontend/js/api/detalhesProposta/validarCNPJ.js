@@ -1,35 +1,52 @@
 export default function validarCNPJ(cnpj) {
-    if (cnpj == '') {
-        return true
-    }
     // Remover caracteres não numéricos
-    cnpj = cnpj.replace(/\D/g, '');
+    cnpj = cnpj.replace(/[^\d]/g, '');
 
-    // Verificar se o CNPJ tem 14 dígitos
+    // Verificar se todos os dígitos são iguais
+    if (/^(\d)\1+$/.test(cnpj)) {
+        return false;
+    }
+
+    // Verificar tamanho do CNPJ
     if (cnpj.length !== 14) {
         return false;
     }
 
-    // Calcular o primeiro dígito verificador
+    // Calcular os dígitos verificadores
+    let tamanho = cnpj.length - 2;
+    let numeros = cnpj.substring(0, tamanho);
+    const digitos = cnpj.substring(tamanho);
     let soma = 0;
-    let peso = 2;
-    for (let i = 11; i >= 0; i--) {
-        soma += parseInt(cnpj.charAt(i)) * peso;
-        peso = peso === 9 ? 2 : peso + 1;
-    }
-    const digito1 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    let pos = tamanho - 7;
 
-    // Calcular o segundo dígito verificador
+    for (let i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2) {
+            pos = 9;
+        }
+    }
+
+    let resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+    if (resultado != digitos.charAt(0)) {
+        return false;
+    }
+
+    tamanho = tamanho + 1;
+    numeros = cnpj.substring(0, tamanho);
     soma = 0;
-    peso = 2;
-    for (let i = 12; i >= 0; i--) {
-        soma += parseInt(cnpj.charAt(i)) * peso;
-        peso = peso === 9 ? 2 : peso + 1;
-    }
-    const digito2 = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+    pos = tamanho - 7;
 
-    // Verificar se os dígitos verificadores calculados são iguais aos dígitos reais
-    if (parseInt(cnpj.charAt(12)) !== digito1 || parseInt(cnpj.charAt(13)) !== digito2) {
+    for (let i = tamanho; i >= 1; i--) {
+        soma += numeros.charAt(tamanho - i) * pos--;
+        if (pos < 2) {
+            pos = 9;
+        }
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+
+    if (resultado != digitos.charAt(1)) {
         return false;
     }
 

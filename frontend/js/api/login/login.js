@@ -1,6 +1,10 @@
 import { back, frontPages } from '../Rotas/rotas.js'
 import alertas from '../../feedback.js';
 
+window.addEventListener('load', () => {
+    alertas();
+})
+
 // Pegando os dados do formulário
 const formulario = document.querySelector('#formulario');
 formulario.addEventListener('submit', async evento => {
@@ -13,6 +17,14 @@ formulario.addEventListener('submit', async evento => {
     await login(email, senha);
 
 });
+
+document.querySelector('#esquecer-senha-btn').addEventListener('click', () => {
+
+    localStorage.setItem('status', 'info')
+    localStorage.setItem('mensagem', 'Entre em contato com um coordenador')
+
+    alertas()
+})
 
 
 // Função para fazer o login

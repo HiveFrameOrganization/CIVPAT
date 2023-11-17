@@ -82,7 +82,7 @@ function exibirDadosParaEditar(dados) {
     for (let usuario of dados) {
         editarNome.value = usuario.Nome;
         editarSobrenome.value = usuario.Sobrenome;
-        editarEmail.value = usuario.Email
+        editarEmail.value = usuario.Email.replace('@sp.senai.br', '')
         editarCargo.value = usuario.TipoUser;
     }
 }

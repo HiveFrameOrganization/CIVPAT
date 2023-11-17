@@ -12,6 +12,7 @@ function retornaFuncionarios($conn)
     //
     $filtro = $_GET['filtros'] . '%';
     $numPagina = $_GET['pag'];
+    $nif = $_SESSION['nif'];
     $qtdFuncionariosTela = 5;
     $inicioFun = $numPagina * $qtdFuncionariosTela - $qtdFuncionariosTela;
     $valor = '%' . $_GET['pesq'] . '%';
@@ -19,9 +20,9 @@ function retornaFuncionarios($conn)
     // if ($filtro == ''){
     // preparando a query
     $stmt = $conn->prepare("SELECT NIF, Nome, Sobrenome, Email, TipoUser, Status FROM Usuarios
-    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?) LIMIT ?, ?");
+    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?) AND NIF != ? LIMIT ?, ?");
     // Limita os resultados a 10 funcionarios
-    $stmt->bind_param('ssssii', $filtro, $valor, $valor, $valor, $inicioFun, $qtdFuncionariosTela);
+    $stmt->bind_param('sssssii', $filtro, $valor, $valor, $valor, $nif, $inicioFun, $qtdFuncionariosTela);
 
     // } else {
     //     // preparando a query
@@ -45,7 +46,7 @@ function retornaFuncionarios($conn)
     // Caso a quantidade de botoes já tenha sido calculada anteriormente
     // ele evitará de fazer uma busca ao banco desnecessária
     // if ($_GET['qtdBotes'] == -1 || $_GET['pesquisado'] == 'sim') {
-        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor);
+        $qtdBotoes = qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor, $nif);
     // } else {
     //     $qtdBotoes = $_GET['qtdBotes'];
     // }
@@ -64,13 +65,12 @@ function retornaFuncionarios($conn)
 }
 
 // Retorna a quantidade de funcionários
-function qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor) {
+function qtdBotoes($conn, $qtdFuncionariosTela, $filtro, $valor, $nif) {
     // preparando a query
     $stmt = $conn->prepare("SELECT COUNT(NIF) FROM Usuarios
-    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?)");
+    WHERE Status LIKE ? AND (NIF LIKE ? OR Nome LIKE ? OR Sobrenome LIKE ?) AND NIF != ?");
 
-    $filtro = '%' . $filtro . '%';
-    $stmt->bind_param('ssss', $filtro, $valor, $valor, $valor);
+    $stmt->bind_param('sssss', $filtro, $valor, $valor, $valor, $nif);
     // Excutando a query
     $stmt->execute();
 

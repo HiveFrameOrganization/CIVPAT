@@ -3,7 +3,7 @@
 import { back } from '../Rotas/rotas.js';
 import exibirPropostas from './renderizarProposta.js';
 
-export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
+export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
 
     document.getElementById('table').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>
@@ -34,8 +34,8 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
     } else {
         declaradoQtdBotoes = sessionStorage.getItem(`qtdBotoesProposta${aba}`);
     }
-    
-    try{
+
+    try {
         // link da requisição
         const resposta = await fetch(back + `/todasPropostas/todasPropostasFiltradas.php?pag=${paginaProposta}
         &qtdBotes=${declaradoQtdBotoes}&pesquisaAtual=${pesquisaAtual}&aba=${aba}&pesquisaAnterior=${pesquisaAnterior}`);
@@ -45,13 +45,12 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
             return false;
         }
 
-        
+
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await resposta.json();
 
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
-    
             // Adicionando a quaqntidade de propostas de acordo com os seus status
             document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : 'N/A';
             document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : 'N/A';
@@ -59,12 +58,16 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
             document.getElementById('concluidos').textContent = dados['Concluido'] ? `# ${dados['Concluido']}` : 'N/A';
             document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] ? `# ${dados['SolicitacaoDeAceite']}` : 'N/A';
             document.getElementById('soli-declinio').textContent = dados['SolicitacaoDeDeclinio'] ? `# ${dados['SolicitacaoDeDeclinio']}` : 'N/A';
-            
+
+
+            console.log(dados)
             if (dados.propostas.length > 0) {
 
                 exibirPropostas(dados.propostas);
+
+
                 sessionStorage.setItem(`qtdBotoesProposta${aba}`, dados.qtdBotoes);
-                
+
             } else {
 
                 document.getElementById('table').innerHTML = `
@@ -81,7 +84,7 @@ export default async function pegarTodasAsPropostas (aba, pesquisaAnterior) {
             return false;
         }
 
-    } catch (error){
+    } catch (error) {
         console.error(error);
 
         return false;

@@ -10,10 +10,9 @@ require_once '../../../database/conn.php';
 function editarUsuario($dados, $conn)
 {
 
-
     // Preprando a query
     $stmt = $conn->prepare("UPDATE Usuarios SET Nome = ?, Sobrenome = ?, Email = ?, TipoUser = ?  WHERE NIF = ?");
-    $stmt->bind_param('sssss', $dados['nome'], $dados['sobrenome'],  $dados['email'], $dados['cargo'], $dados['nif']);
+    $stmt->bind_param('sssss', $dados['nome'], $dados['sobrenome'], $dados['email'], $dados['cargo'], $dados['nif']);
 
     // Excutando e desativando o usuário
     $stmt->execute();
@@ -43,6 +42,41 @@ function editarUsuario($dados, $conn)
     }
 }
 
+// Função para verificar se é um técnico e não deixar ele ser promovido até concluir todos os produtos;
+function verificarTecnico($dados, $conn)
+{
+
+    $stmt = $conn->prepare('SELECT Usuarios.*, Produtos.Situacao 
+    FROM Usuarios 
+    INNER JOIN Produtos ON Usuarios.NIF = Produtos.fk_nifTecnico 
+    WHERE Usuarios.NIF = ?;
+    ');
+    $stmt->bind_param('s', $dados['nif']);
+
+    $stmt->execute();
+
+    $resultado = $stmt->get_result();
+
+    while ($linha = $resultado->fetch_assoc()) {
+
+        if ($linha['TipoUser'] === 'tec' and $linha['TipoUser'] !== $dados['cargo']) {
+
+            if ($linha['Situacao'] === 'Em andamento') {
+                return true;
+            }
+
+        } else {
+            return false;
+        }
+
+
+
+    }
+
+    return false;
+
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
     // Pegando o corpo da resposta
@@ -51,8 +85,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     // Convertendo em um array associativo
     $dados = json_decode($json, true);
 
-    // Função para desativar o usuário
-    editarUsuario($dados, $conn);
+    if (verificarTecnico($dados, $conn)) {
+
+        $resposta = [
+            'status' => 'error',
+            'mensagem' => 'O Técnico só pode subir de cargo ao terminar todos os produtos.'
+        ];
+
+        echo json_encode($resposta);
+    } else {
+        // Função para desativar o usuário
+        editarUsuario($dados, $conn);
+    }
+
 
 } else {
 

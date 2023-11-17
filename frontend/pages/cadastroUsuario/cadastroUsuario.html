@@ -326,9 +326,10 @@
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <div class="flex flex-col gap-2 w-full">
+                        <div class="flex flex-col gap-2 w-full relative">
                             <label for="cad-email" class="font-semibold text-base">E-MAIL*</label>
-                            <input type="text" maxlength="63" id="cad-email" name="cad-email" placeholder="E-mail do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                            <input type="text" maxlength="63" id="cad-email" name="cad-email" placeholder="E-mail do funcionário" title="Digite apenas o inicio do email antes do @" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20 placeholder:text-xs">
+                            <p class="bg-[transparent] rounded-e-lg flex items-center pe-3 absolute right-0 top-10 text-primary">@sp.senai.br</p>
                         </div>
                         <div class="flex flex-col gap-2 w-full">
                             <label for="cad-cargo" class="font-semibold text-base">FUNÇÃO*</label>
@@ -370,9 +371,10 @@
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <div class="flex flex-col gap-2 w-full">
+                        <div class="flex flex-col gap-2 w-full relative">
                             <label for="editarEmail" class="font-semibold text-base">E-MAIL*</label>
-                            <input type="email" maxlength="63" id="editarEmail" name="editarEmail" placeholder="E-mail do funcionário" required class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                            <input type="text" maxlength="63" id="editarEmail" name="editarEmail" placeholder="E-mail do funcionário" required title="Digite apenas o inicio do email antes do @" class="px-4 py-2 placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20">
+                            <p class="bg-[transparent] rounded-e-lg flex items-center pe-3 absolute right-0 top-10 text-primary">@sp.senai.br</p>
                         </div>
                         <div class="flex flex-col gap-2 w-full">
                             <label for="editarCargo" class="font-semibold text-base">FUNÇÃO*</label>

@@ -5,7 +5,7 @@ import { back } from '../Rotas/rotas.js'
 */
 
 // Verificação ocorre a cada carregamento de página
-export async function autenticacao(cargo) {
+export async function autenticacao(cargo, load) {
 
     try {
         // Pegando o token para enviar na requisição
@@ -14,7 +14,7 @@ export async function autenticacao(cargo) {
         if (!token) {
 
             // Limpando residuos
-            localStorage.clear();
+            localStorage.clear();   
             sessionStorage.clear();
 
             localStorage.setItem('status', 'error');
@@ -47,8 +47,10 @@ export async function autenticacao(cargo) {
 
         const resposta = await verificacao.json();
 
-        if (resposta.status === 'erro') {
+        if (resposta.status === 'erro' && load ) {
             window.location.pathname = '/frontend/pages/login/erro.html';
+        } else {
+            return resposta.autenticação;
         }
 
 
