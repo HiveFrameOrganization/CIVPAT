@@ -21,8 +21,8 @@ function validacao($cargos, $conn)
     $placeholders = implode(', ', array_fill(0, count($cargos), '?'));
 
     // Preparando a query
-    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser IN ($placeholders) 
-    AND `Status` = 'Ativo'");
+    $stmt = $conn->prepare("SELECT * FROM Usuarios WHERE NIF = ? AND Email = ? AND TipoUser IN ($placeholders) AND 
+    `Status` = 'ativo'");
 
 
     // Vincular os valores do array aos placeholders
