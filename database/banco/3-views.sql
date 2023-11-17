@@ -2,11 +2,11 @@ USE `isihiveframe` ;
 
 /*------------------------------------------- HOME --------------------------------------------------*/
 CREATE VIEW vw_home AS
-SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-    `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`, 
-    `Usuarios`.`NIF`, `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-    INNER JOIN Usuarios ON `Propostas`.`fk_nifUsuarioCriador` = `Usuarios`.`NIF`
+SELECT DISTINCT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+    `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
+    `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
     INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
+    INNER JOIN Usuarios ON `GerenteResponsavel`.`fk_nifGerente` = `Usuarios`.`NIF`
     ORDER BY `Propostas`.`idProposta` DESC;
 
 

@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao }  from '../login/autenticacao.js';
 
 const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');
@@ -8,19 +9,43 @@ let gerenteEncarregado;
 
 // Chamando a função quando carregar a página
 window.addEventListener('load', async () => {
+
+    if (!autenticacao(['ger', 'coor', 'adm'], false)) {
+        localStorage.clear();
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Autenticação inválida, realize o login novamente')
+
+        window.location.pathname = '';
+        return;
+    }
     let gerentes = await pegarGerentes();
 
-    if (gerentes.retorno === true) {
+    const cargo = localStorage.getItem('cargo');
 
-        // Criação do dropdown
-        gerentes.gerentesRetornados.forEach(gerente => {
-            const option = document.createElement('option');
-            option.textContent = `${gerente.nome} ${gerente.sobrenome[0]}.`;
-            option.setAttribute('value', gerente.nif);
-            option.classList.add("bg-body");
-            listaGerentes.appendChild(option);
+    if (cargo === 'ger') {
 
-        });
+        const nomeGerente = localStorage.getItem('nomeLogin');
+        const nifGerente = localStorage.getItem('nifPerfil');
+
+        const option = document.createElement('option');
+        option.textContent = `${nomeGerente}`;
+        option.setAttribute('value', nifGerente);
+        option.classList.add("bg-body");
+        listaGerentes.appendChild(option);
+
+    } else {
+        if (gerentes.retorno === true) {
+
+            // Criação do dropdown
+            gerentes.gerentesRetornados.forEach(gerente => {
+                const option = document.createElement('option');
+                option.textContent = `${gerente.nome} ${gerente.sobrenome[0]}.`;
+                option.setAttribute('value', gerente.nif);
+                option.classList.add("bg-body");
+                listaGerentes.appendChild(option);
+
+            });
+        }
     }
 
 });
@@ -44,7 +69,7 @@ formularioProposta.addEventListener('submit', async evento => {
     try {
         // Algumas validações...
         // Verificando se o número de telefone possui algum caractere além de números...
-        if (!contemApenasNumeros(telefoneRepresentante)){
+        if (!contemApenasNumeros(telefoneRepresentante)) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'O número de telefone não pode receber algo além de números.');
 
@@ -55,6 +80,7 @@ formularioProposta.addEventListener('submit', async evento => {
 
             alertas();
         } else {
+
             const dadosProposta = {
                 nomeProjeto: nomeProjeto,
                 representante: nomeRepresentante,
@@ -65,12 +91,12 @@ formularioProposta.addEventListener('submit', async evento => {
                 empresa: empresa,
                 gerente: gerente
             };
-    
-    
-    
+
+
+
             // Retorna a resposta do back, e se for sucesso, significa que cadastrou
             let resposta = await enviaBackEnd(dadosProposta);
-    
+
             if (resposta.status === 'success') {
                 localStorage.setItem('status', resposta.status);
                 localStorage.setItem('mensagem', resposta.mensagem);
@@ -113,7 +139,7 @@ async function enviaBackEnd(dadosEnviados) {
         }
 
         let dados = await resposta.json();
-        
+
         // Retorna 'sucesso' ou 'erro'
         return dados;
 
