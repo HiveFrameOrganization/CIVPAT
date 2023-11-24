@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 // Quando recarregar a página o alerta será chamado
 window.addEventListener('load', () => { alertas() })
@@ -81,6 +82,10 @@ async function editarFuncionarios() {
 
 // Função para mandar os dados para editar
 async function requisicaoEditar(dados) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 

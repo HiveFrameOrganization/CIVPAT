@@ -1,6 +1,11 @@
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function selecionarGerente(id) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     // Requisição com parâmetro para buscar a proposta pelo id
     const requisicao = await fetch(back + `/detalhesProposta/detalhesProposta.php?id=${id}`)

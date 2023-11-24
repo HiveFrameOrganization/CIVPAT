@@ -41,8 +41,10 @@ formularioBancoHoras.addEventListener('submit', async evento => {
 
 
 async function buscarHoras(mes, ano, nif, cargo) {
-
-    autenticacao(['adm', 'tec']);
+    const autenticado = await autenticacao(['adm', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 

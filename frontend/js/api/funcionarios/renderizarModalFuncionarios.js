@@ -1,6 +1,7 @@
 import { back } from '../Rotas/rotas.js'
 import resetarSenhaUsuario from './resetarSenhaFuncionarios.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 // Função para mostrar a tela de edição do usuário
 async function FormularioEditarUsuario(nif) {
@@ -32,6 +33,11 @@ async function FormularioEditarUsuario(nif) {
 
 // Função para fazer a requisição para editar nome, email, cargo e resetar a senha
 async function dadosParaEditar(nif) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
+
     try {
         // Requisição ao servidor
         const requisicao = await fetch(back + `/funcionarios/pesquisarFuncionario.php?valor=${nif}`);

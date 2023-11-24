@@ -1,5 +1,5 @@
 import { back } from '../Rotas/rotas.js'
-
+import { autenticacao } from '../login/autenticacao.js';
 /*
 
     ------------------------------------------------------------------------------------------
@@ -52,8 +52,12 @@ spanInformacoes.addEventListener('click', () => {
 
 */
 
-// Função para bsucar todos os produtos relacionados ao técnico
+// Função para buscar todos os produtos relacionados ao técnico
 async function buscarProdutos() {
+    const autenticado = await autenticacao(['tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     if (localStorage.getItem('nifPerfil') && !userProd.classList.contains('hidden')) {
 

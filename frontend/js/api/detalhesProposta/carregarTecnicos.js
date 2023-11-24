@@ -1,7 +1,12 @@
 import { back } from '../Rotas/rotas.js';
 import selecionarGerente from './selecionarGerente.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function carregarTecnicos() {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     const gerente1Dropdown = document.getElementById('primeiroGerente');
     const gerente2Dropdown = document.getElementById('segundoGerente');

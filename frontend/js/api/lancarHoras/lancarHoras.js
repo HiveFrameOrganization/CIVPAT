@@ -1,5 +1,6 @@
 import { back } from "../Rotas/rotas.js";
 import alertas from "../../feedback.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 window.addEventListener('load', () => {
     LancamentoHoras();
@@ -9,6 +10,11 @@ var horasRestantes;
 var horasRestantesMaquina;
 
 async function LancamentoHoras() {
+    const autenticado = await autenticacao(['tec'], false)
+    if(!autenticado){
+        return;
+    }
+
     const id = localStorage.getItem('idProduto');
 
     try {
@@ -197,6 +203,11 @@ if (localStorage.getItem('cargo') == 'tec') {
                 alertas();
             }
             else{
+                const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+                if(!autenticado){
+                    return;
+                }
+
                 const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
                     method: 'POST',
                     headers: {

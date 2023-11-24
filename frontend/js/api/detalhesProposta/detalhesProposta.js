@@ -8,6 +8,7 @@ import aceitarProposta from './aceitarProposta.js';
 import  alertas  from '../../feedback.js';
 import { back } from '../Rotas/rotas.js';
 import baixarPdf from './baixarPDF.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', async () => {
@@ -65,7 +66,12 @@ function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlacehol
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('click', () => {
+botaoSalvarPdf.addEventListener('click', async () => {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 

@@ -1,11 +1,16 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 window.addEventListener('load', () => {
     carregarFotoPerfil();
 })
 
 async function carregarFotoPerfil () {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 
