@@ -25,8 +25,6 @@ export async function autenticacao(cargo, load) {
 
             const resposta = await deslogar.json();
 
-            console.log(resposta);
-
             window.location.href = 'http://localhost:8080/';
 
             return false;

@@ -52,7 +52,9 @@ export default async function salvarMudancasNaProposta() {
         localStorage.setItem('mensagem', 'SGSET inválido');
 
         alertas();
-    } else if (primeiroGerente == segundoGerente){
+    } else if (primeiroGerente.toLowerCase() == segundoGerente.toLowerCase()){
+        location.reload();
+
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
 

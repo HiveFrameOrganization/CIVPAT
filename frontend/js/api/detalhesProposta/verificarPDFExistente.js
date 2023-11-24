@@ -39,11 +39,7 @@ export default async function  verificarPdfExistente(idProposta) {
             }
         }
     } catch (error) {
-        console.error(error)
-
-        localStorage.setItem('status', 'error');
-        localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
-
+        console.error(error) 
         return;
     }
 

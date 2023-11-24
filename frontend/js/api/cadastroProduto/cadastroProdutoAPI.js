@@ -161,6 +161,8 @@ async function salvarProduto () {
     }
     
     else {
+        const token = localStorage.getItem('token');
+
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
             tempoPessoa: tempoPessoa,
@@ -173,7 +175,8 @@ async function salvarProduto () {
             valor: valor,
             idProposta: idProposta,
             nifTecnico: nifTecnico,
-            maquina: Number(maquina)
+            maquina: Number(maquina),
+            token : token
         }
     
         try {
