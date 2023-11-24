@@ -137,6 +137,7 @@ if (dia < 10) {
 
 // Não permitir que marque uma data depois de hoje.
 const dataMaxima = `${ano}-${mes}-${dia}`;
+console.log(dataMaxima)
 document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
@@ -241,7 +242,7 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-
+    document.getElementById('dataInicial').min = dados[0].DataInicial
     return dados[0];
 
 }
