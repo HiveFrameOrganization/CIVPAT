@@ -241,6 +241,14 @@ horaMaq.addEventListener('input', () => {
   }
 })
 
+var numeroContato = document.getElementById('numeroContato')
+
+numeroContato.addEventListener('input', () => {
+  if (numeroContato.value.length > numeroContato.maxLength){
+    numeroContato.value = numeroContato.value.slice(0, numeroContato.maxLength)
+  }
+})
+
 function titles(){
   const inputs = document.querySelectorAll(".inputProposta");
   const arrayInputs = [];
