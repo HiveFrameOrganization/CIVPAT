@@ -4,6 +4,7 @@ import validarEmail from './validarEmail.js';
 import { back } from '../Rotas/rotas.js';
 import validarNumero from './validarNumero.js';
 import { autenticacao } from '../login/autenticacao.js';
+import alertas from '../../feedback.js';
 
 export default async function salvarMudancasNaProposta() {
     const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
@@ -97,22 +98,28 @@ export default async function salvarMudancasNaProposta() {
             idRepresentante: sessionStorage.getItem('idRepresentante')
         }
 
-        const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': "application/json",
-            },
-            body: JSON.stringify(dados)
-        })
+        try {
 
-        const resposta = await requisicao.json();
+            const requisicao = await fetch(back + '/detalhesProposta/postDetalhesProposta.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify(dados)
+            })
+    
+            const resposta = await requisicao.json();
 
-        localStorage.setItem('status', resposta.status);
-        localStorage.setItem('mensagem', resposta.mensagem);
+            localStorage.setItem('status', resposta.status);
+            localStorage.setItem('mensagem', resposta.mensagem);
+    
+        } catch(err) {
 
-        if (resposta.status == 'success'){
-            window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
-
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Erro ao salvar!');
         }
+
+        window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
+
     }
 }
