@@ -313,10 +313,6 @@ function modalConfirmar(fun) {
     let data = document.querySelector('#dataPrimeiroProduto').value
     let sgset = document.querySelector('#numeroSGSET').value
 
-    // console.log(cnpj)
-    // console.log(localStorage.getItem('cargo') == 'ger' ? 'gerente' : 'nao é gerente')
-    // console.log(sgset)
-    console.log(fun ? 'true' : 'false')
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
     if (localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true) {
@@ -359,7 +355,7 @@ function modalConfirmar(fun) {
             icon: 'error',
             title: 'Cadastre algum produto para poder aceitar a proposta!'
         })
-    } else {
+    }else{
         const div = document.createElement('div');
         const aside = document.createElement('aside');
 
@@ -413,7 +409,6 @@ function modalConfirmar(fun) {
             document.body.removeChild(aside)
         })
     }
-
 }
 
 const botaoAceitar = document.getElementById('aceitarProposta');

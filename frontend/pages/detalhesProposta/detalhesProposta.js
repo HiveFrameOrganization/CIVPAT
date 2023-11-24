@@ -219,12 +219,6 @@ function salvarModal(){
   }
 }
 
-// esconde a opção de segundo gerente quando a propostra estiver diferente de Em analise
-if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
-  document.querySelector('#segundoGerente').classList.add('hidden')
-  document.getElementById('semGerente').innerText = "Nenhum gerente selecionado"
-}
-
 var horaPes = document.getElementById('tempoPessoa')
 
 horaPes.addEventListener('input', () => {
@@ -238,6 +232,14 @@ var horaMaq = document.getElementById('tempoMaquina')
 horaMaq.addEventListener('input', () => {
   if (horaMaq.value.length > horaMaq.maxLength){
     horaMaq.value = horaMaq.value.slice(0, horaMaq.maxLength);
+  }
+})
+
+var numeroContato = document.getElementById('numeroContato')
+
+numeroContato.addEventListener('input', () => {
+  if (numeroContato.value.length > numeroContato.maxLength){
+    numeroContato.value = numeroContato.value.slice(0, numeroContato.maxLength)
   }
 })
 

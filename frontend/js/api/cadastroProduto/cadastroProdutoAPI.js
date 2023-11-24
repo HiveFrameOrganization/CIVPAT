@@ -70,6 +70,8 @@ async function carregarTecnicos () {
 }
 
 async function salvarProduto () {
+
+    
     const idProposta = localStorage.getItem('idProposta');
 
      // Obter a data atual
