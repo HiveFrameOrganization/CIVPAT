@@ -376,7 +376,7 @@ function modalConfirmar(fun){
         
         document.body.appendChild(div);
         document.body.appendChild(aside)
-        
+         
         // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
         if(fun){
             document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
