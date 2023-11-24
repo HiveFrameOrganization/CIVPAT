@@ -7,6 +7,8 @@ header("Content-Type: application/json");
 // Chamar a variável de conexão do banco.
 require_once '../../../database/conn.php';
 
+require_once '../verificarToken.php'
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $jsonData = file_get_contents("php://input");
     
@@ -25,10 +27,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nifTecnico = $data["nifTecnico"];
     $idMaquina = $data['maquina'];
     $situacao = "Em andamento";
+    $token = $data['token'];
 
     $dataInicialFormatada = date("Y-m-d", strtotime($dataInicial));
     $dataFinalFormatada = date("Y-m-d", strtotime($dataFinal));
     
+    $verificacao = verificarToken($token);
+
+    if ($verificacao) {
+        
+    }
 
     $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor,
     HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao)
