@@ -1,5 +1,6 @@
 import validarCNPJ from './validarCNPJ.js';
 import validarSGSET from './validarSGSET.js';
+import validarEmail from './validarEmail.js';
 import { back } from '../Rotas/rotas.js';
 
 export default async function salvarMudancasNaProposta() {
@@ -26,6 +27,7 @@ export default async function salvarMudancasNaProposta() {
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
     var verificacaoDoSGSET = validarSGSET(numeroSGSET);
+    var verificacaoDoEmail = validarEmail(emailContato);
 
     if (verificacaoDoCnpj == false) {
         location.reload();
@@ -47,7 +49,14 @@ export default async function salvarMudancasNaProposta() {
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
 
         alertas();
-    } else {
+    } else if (verificacaoDoEmail == false) {
+        location.reload();
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'E-mail inválido');
+
+        alertas();
+    }else {
         const dados = {
             idProposta: idProposta,
             nomeProposta: (nomeProposta == '') ? null : nomeProposta,
