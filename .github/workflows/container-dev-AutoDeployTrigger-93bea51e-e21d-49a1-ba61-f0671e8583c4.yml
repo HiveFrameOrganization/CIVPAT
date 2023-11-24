@@ -1,14 +1,14 @@
-name: Trigger auto deployment for projeto-isi
+name: Trigger auto deployment for container-dev
 
 # When this action will be executed
 on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: 
-      [ main ]
+      [ dev-deploy ]
     paths:
     - '**'
-    - '.github/workflows/projeto-isi-AutoDeployTrigger-814a9fae-284a-4148-9bcb-6132c089d944.yml'
+    - '.github/workflows/container-dev-AutoDeployTrigger-93bea51e-e21d-49a1-ba61-f0671e8583c4.yml'
 
   # Allow manual trigger 
   workflow_dispatch:
@@ -24,19 +24,19 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.PROJETOISI_AZURE_CREDENTIALS }}
+          creds: ${{ secrets.CONTAINERDEV_AZURE_CREDENTIALS }}
 
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }} 
           registryUrl: docker.io
-          registryUsername: ${{ secrets.PROJETOISI_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.PROJETOISI_REGISTRY_PASSWORD }}
-          containerAppName: projeto-isi
-          resourceGroup: hive-frame
-          imageToBuild: luizbrito6/projeto-isi:${{ github.sha }}
-          
+          registryUsername: ${{ secrets.CONTAINERDEV_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.CONTAINERDEV_REGISTRY_PASSWORD }}
+          containerAppName: container-dev
+          resourceGroup: hiveframe
+          imageToBuild: luizbrito6/container-dev:${{ github.sha }}
+          dockerfilePath: Dockerfile
 
      
 
