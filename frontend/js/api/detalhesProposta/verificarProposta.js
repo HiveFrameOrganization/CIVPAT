@@ -3,10 +3,15 @@ import selecionarFunil from './selecionarFunil.js';
 import desativaBotoes from './desativaBotoes.js';
 import { back } from '../Rotas/rotas.js';
 import avisoData from './avisoData.js';
-
+import { autenticacao } from '../login/autenticacao.js';
 
 // Fução para fazer a requisição no back-end dos dados
 export default async function verificarBancoProposta(id) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     try {
 
         // Requisição com parâmetro para buscar a proposta pelo id

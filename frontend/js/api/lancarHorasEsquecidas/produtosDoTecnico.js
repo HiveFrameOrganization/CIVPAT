@@ -1,4 +1,5 @@
 import { back } from '../Rotas/rotas.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 const botaoPesquisar = document.getElementById('pesquisar');
 
@@ -16,7 +17,11 @@ function exibirAlerta(template) {
 }
 
 async function pegarDados(nif) {
-
+    const autenticado = await autenticacao(['coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+    
     try {
         const requisicao = await fetch (back + `/lancarHorasEsquecidas/carregarProdutosDoTecnico.php?nif=${nif}`);
 

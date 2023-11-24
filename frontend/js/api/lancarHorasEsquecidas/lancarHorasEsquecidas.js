@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 
 const botaoLancarHora = document.getElementById('lancarHoras');
@@ -9,6 +10,10 @@ botaoLancarHora.addEventListener('click', () => {
 })
 
 async function setarData(dadosEnviados) {
+    const autenticado = await autenticacao(['coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 
@@ -37,9 +42,13 @@ async function setarData(dadosEnviados) {
 
 async function lancarHoraParaOTecnico () {
     // const nifTec = localStorage.getItem('nifPerfil');
+    const autenticado = await autenticacao(['coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     try{
         
-    
         const horaPessoa = document.getElementById('horaPessoaParaLancar').value;
         const horaMaquina = document.getElementById('horaMaquinaParaLancar').value;
         const nifTecnico = document.getElementById('tecnicos').value;

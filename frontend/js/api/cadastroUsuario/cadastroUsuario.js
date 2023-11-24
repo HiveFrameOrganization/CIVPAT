@@ -1,6 +1,6 @@
 import { back } from '../Rotas/rotas.js'
 import alertas from '../../feedback.js'
-
+import { autenticacao } from '../login/autenticacao.js';
 
 /*------------------------------------------- INSERINDO OS DADOS NO BANCO -------------------------------------------------------------------------*/
 
@@ -74,6 +74,10 @@ formulario.addEventListener('submit', async evento => {
 
 // Função para fazer a requisição
 async function mandarDadosParaBackend(dados) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
 
     // tentando fazer a requisição para mandar os dados
     try {

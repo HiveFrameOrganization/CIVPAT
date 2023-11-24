@@ -1,5 +1,6 @@
 import { back } from "../Rotas/rotas.js";
 import alertas from "../../feedback.js"
+import { autenticacao } from '../login/autenticacao.js';
 
 const resetSenhaContainer = document.querySelector('#reset-container');
 
@@ -23,6 +24,10 @@ async function resetarSenhaUsuario(nif) {
       })
 
     if (confirmarReset === true) {
+        const autenticado = await autenticacao(['coor'], false)
+        if(!autenticado){
+            return;
+        }
 
         try {
             const requisicao = await fetch(back + `/funcionarios/resetarSenha.php`, {

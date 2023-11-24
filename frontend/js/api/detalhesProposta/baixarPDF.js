@@ -1,6 +1,11 @@
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from '../login/autenticacao.js';
 
-export default function baixarPdf(tipoPdf) {
+export default async function baixarPdf(tipoPdf) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     const idProposta = localStorage.getItem('idProposta');
 

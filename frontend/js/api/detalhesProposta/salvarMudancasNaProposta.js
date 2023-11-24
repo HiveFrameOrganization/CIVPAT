@@ -3,8 +3,14 @@ import validarSGSET from './validarSGSET.js';
 import validarEmail from './validarEmail.js';
 import { back } from '../Rotas/rotas.js';
 import validarNumero from './validarNumero.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function salvarMudancasNaProposta() {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
@@ -47,6 +53,8 @@ export default async function salvarMudancasNaProposta() {
 
         alertas();
     } else if (primeiroGerente.toLowerCase() == segundoGerente.toLowerCase()){
+        location.reload();
+
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
 

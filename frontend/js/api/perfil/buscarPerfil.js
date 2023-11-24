@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 const spanProdutos = document.querySelector('#spanProdutos');
 
@@ -14,6 +15,10 @@ window.addEventListener('load', () => {
 
 // Função assícrona responsável por fazer a requisição para o back-end e buscar os dados
 async function buscarUsuarioLogado() {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     // Tratamento para possível erro...
     try {

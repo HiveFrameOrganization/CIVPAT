@@ -1,10 +1,15 @@
 import { back } from '../Rotas/rotas.js'
+import { autenticacao } from '../login/autenticacao.js';
 
 import retornaFuncionarios from './pegarFuncionarios.js';
 
 
 // Função para desativar o usuário
 async function desativarUsuario(nif) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
 
     const response = await Swal.fire({
         title: 'Inativar funcionário, você tem certeza?',
