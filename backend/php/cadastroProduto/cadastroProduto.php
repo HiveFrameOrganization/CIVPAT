@@ -35,81 +35,88 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $verificacao = verificarToken($token);
 
     if ($verificacao) {
-        
-    }
 
-    $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor,
-    HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
-
-    $stmt2->bind_param('sssssssssssis', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,
-    $unidade, $dataInicial, $dataFinal, $idMaquina, $situacao);
-    // Executa a declaração preparada
-    if ($stmt2->execute()) {
-        $idNovoProduto = $conn->insert_id;
-        $stmt3 = $conn->prepare('SELECT Inicio, Fim FROM Propostas WHERE idProposta = ?');
-
-        $stmt3->bind_param('s', $idProposta);
-
-        $stmt3->execute();
-
-        $resultado = $stmt3-> get_result();
-
-        $dados = $resultado->fetch_assoc();
-
-        if ($dados['Inicio'] == null || $dataInicialFormatada < $dados['Inicio']){
-            $stmt4 = $conn->prepare('UPDATE Propostas SET Inicio = ? WHERE idProposta = ?');
-
-            $stmt4->bind_param('ss', $dataInicial, $idProposta);
-
-            $stmt4->execute();
+        $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor,
+        HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+    
+        $stmt2->bind_param('sssssssssssis', $idProposta, $nifTecnico, $idProduto, $servico, $area, $valor, $tempoPessoa, $tempoMaquina,
+        $unidade, $dataInicial, $dataFinal, $idMaquina, $situacao);
+        // Executa a declaração preparada
+        if ($stmt2->execute()) {
+            $idNovoProduto = $conn->insert_id;
+            $stmt3 = $conn->prepare('SELECT Inicio, Fim FROM Propostas WHERE idProposta = ?');
+    
+            $stmt3->bind_param('s', $idProposta);
+    
+            $stmt3->execute();
+    
+            $resultado = $stmt3-> get_result();
+    
+            $dados = $resultado->fetch_assoc();
+    
+            if ($dados['Inicio'] == null || $dataInicialFormatada < $dados['Inicio']){
+                $stmt4 = $conn->prepare('UPDATE Propostas SET Inicio = ? WHERE idProposta = ?');
+    
+                $stmt4->bind_param('ss', $dataInicial, $idProposta);
+    
+                $stmt4->execute();
+            }
+    
+            if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
+                $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
+    
+                $stmt5->bind_param('ss', $dataFinal, $idProposta);
+    
+                $stmt5->execute();
+            }
+    
+            // $horaPessoa = 0;
+            // $horaMaquina = 0;
+            // $dataDeHoje = date("Y-m-d");
+            
+    
+            // $stmt6 = $conn->prepare('INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (?, ?, ?, ?, ?)');
+            // $stmt6->bind_param('isiis', $idNovoProduto, $nifTecnico, $horaPessoa, $horaMaquina, $dataDeHoje);
+            // $stmt6->execute();
+    
+    
+            $stmt7 = $conn->prepare('SELECT Valor FROM Propostas WHERE idProposta = ?');
+            $stmt7->bind_param('i', $idProposta);
+            $stmt7->execute(); 
+    
+            $resultado = $stmt7->get_result();
+            $val = $resultado->fetch_assoc();
+    
+            if ($val['Valor'] == null) {
+                $val = 0;
+            }
+    
+            echo $valorSomado;
+    
+    
+            // $valorSomado = intval($val) + $valor;
+    
+            // $stmt8 = $conn->prepare('UPDATE Propostas SET Valor = ? WHERE idProposta = ?');
+            // $stmt8->bind_param('si', $valorSomado, $idProposta);
+            // $stmt8->execute(); 
+    
+            // Resposta a ser retronada para o servidor
+            $resposta = [
+                'mensagem' => 'Produto cadastrado com sucesso!',
+                'status' => 'success'
+            ];
+    
+            echo json_encode($resposta);
+        } else {
+            // Resposta a ser retronada para o servidor
+            $resposta = [
+                'mensagem' => 'Algo deu errado ao cadastrar o produto',
+                'status' => 'error'
+            ];
+    
+            echo json_encode($resposta);
         }
-
-        if ($dados['Fim'] == null || $dataFinalFormatada > $dados['Fim']) {
-            $stmt5 = $conn->prepare('UPDATE Propostas SET Fim = ? WHERE idProposta = ?');
-
-            $stmt5->bind_param('ss', $dataFinal, $idProposta);
-
-            $stmt5->execute();
-        }
-
-        // $horaPessoa = 0;
-        // $horaMaquina = 0;
-        // $dataDeHoje = date("Y-m-d");
-        
-
-        // $stmt6 = $conn->prepare('INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (?, ?, ?, ?, ?)');
-        // $stmt6->bind_param('isiis', $idNovoProduto, $nifTecnico, $horaPessoa, $horaMaquina, $dataDeHoje);
-        // $stmt6->execute();
-
-
-        $stmt7 = $conn->prepare('SELECT Valor FROM Propostas WHERE idProposta = ?');
-        $stmt7->bind_param('i', $idProposta);
-        $stmt7->execute(); 
-
-        $resultado = $stmt7->get_result();
-        $val = $resultado->fetch_assoc();
-
-        if ($val['Valor'] == null) {
-            $val = 0;
-        }
-
-        echo $valorSomado;
-
-
-        // $valorSomado = intval($val) + $valor;
-
-        // $stmt8 = $conn->prepare('UPDATE Propostas SET Valor = ? WHERE idProposta = ?');
-        // $stmt8->bind_param('si', $valorSomado, $idProposta);
-        // $stmt8->execute(); 
-
-        // Resposta a ser retronada para o servidor
-        $resposta = [
-            'mensagem' => 'Produto cadastrado com sucesso!',
-            'status' => 'success'
-        ];
-
-        echo json_encode($resposta);
     } else {
         // Resposta a ser retronada para o servidor
         $resposta = [
@@ -119,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         echo json_encode($resposta);
     }
+
 
 
 } else {
