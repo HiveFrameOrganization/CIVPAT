@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 // Chamar a variável de conexão do banco.
 require_once '../../../database/conn.php';
 
-require_once '../verificarToken.php'
+require_once '../verificarToken.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $jsonData = file_get_contents("php://input");
