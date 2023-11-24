@@ -147,7 +147,7 @@ window.addEventListener('load', async function (){
 
         // dados de todas as propostar recebidas (resposta da api)
         const dados = await requisicao.json();
-
+        
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.resposta === 'erro') throw new Error(dados.message);
 
@@ -214,7 +214,7 @@ document.getElementById("servico").addEventListener("change", async function() {
 async function carregarDetalhesProduto() {
     const idProduto = localStorage.getItem('idProduto');
 
-    const requisicao = await fetch(back + `/lancarHorasEsquecidas/detalhesProduto.php?id=${idProduto}`);
+    const requisicao = await fetch(back + `/lancarHorasEsquecidas/detalhesProduto.php?id=${4}`);
 
     // dados do produto recebido (resposta da api)
     const dados = await requisicao.json();
