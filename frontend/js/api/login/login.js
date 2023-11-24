@@ -63,6 +63,8 @@ async function login(email, senha) {
             } else {
     
                 const resposta = await login.json();
+
+                console.log(resposta);
     
                 // Validação do login
                 localStorage.setItem('status', resposta.status);
@@ -70,6 +72,7 @@ async function login(email, senha) {
                 localStorage.setItem('cargo', resposta.cargo);
                 localStorage.setItem('nifPerfil', resposta.nif);
                 localStorage.setItem('nomeLogin', resposta.nome);
+                localStorage.setItem('situacao', resposta.situacao);
     
     
                 // // Verificando se o login for true

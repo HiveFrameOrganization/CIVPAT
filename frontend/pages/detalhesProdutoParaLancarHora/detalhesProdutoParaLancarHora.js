@@ -100,8 +100,8 @@ window.addEventListener('load', async function (){
     
     console.log(dadosProduto);
 
-    document.getElementById('produto').value = dadosProduto['NomeProduto'];
-    document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
+    document.getElementById('produto').value = dadosProduto[0]['NomeProduto'];
+    document.getElementById('horaMaquinaInput').value = dadosProduto[0]['HoraMaquina'];
     document.getElementById('horaPessoaInput').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
@@ -222,7 +222,6 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-    console.log(dados)
     return dados;
 
 }
