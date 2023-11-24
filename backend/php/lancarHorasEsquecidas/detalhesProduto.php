@@ -11,8 +11,7 @@ function verificarDetalhes($idProduto, $conn) {
     $stmt = $conn->prepare("SELECT `NomeProduto`.`NomeProduto`, `Produtos`.`Valor`, `Produtos`.`fk_nifTecnico`, `Produtos`.`Area`, 
     `Produtos`.`fk_idServicoCategoria`, `Produtos`.`fk_idUnidadeRealizadora`, `Produtos`.`HoraPessoa`, `Produtos`.`HoraMaquina`, 
     `Produtos`.`DataInicial`, `Produtos`.`DataFinal`, `Produtos`.`Situacao`  FROM Produtos
-    INNER JOIN NomeProduto ON `NomeProduto`.`idNomeProduto` = `Produtos`.`fk_idNomeProduto` 
-    INNER JOIN CargaHoraria ON `CargaHoraria`.`fk_idProduto` = `Produtos`.`idProduto`
+    INNER JOIN NomeProduto ON `NomeProduto`.`idNomeProduto` = `Produtos`.`fk_idNomeProduto`
     WHERE idProduto = ?");
     
     

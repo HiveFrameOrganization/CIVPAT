@@ -28,6 +28,8 @@ export async function autenticacao(cargo, load) {
             console.log(resposta);
 
             window.location.href = 'http://localhost:8080/';
+
+            return;
         }
 
         const dados = {
