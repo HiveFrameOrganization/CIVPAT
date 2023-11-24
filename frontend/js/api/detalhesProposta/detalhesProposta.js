@@ -301,13 +301,27 @@ function modalConfirmar(fun){
     let data = document.querySelector('#dataPrimeiroProduto').value
     let sgset = document.querySelector('#numeroSGSET').value
 
-    // console.log(cnpj)
-    // console.log(localStorage.getItem('cargo') == 'ger' ? 'gerente' : 'nao é gerente')
-    // console.log(sgset)
-    console.log(fun ? 'true' : 'false')
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true){
+    console.log(`CNPJ: ${cnpj ? true : false}`);
+    console.log(`PRODUTO: ${data ? true : false}`);
+    console.log(`SGSET: ${sgset ? true : false}`);
+
+    if (fun && localStorage.getItem('cargo') == 'ger' && !cnpj) {
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
+        })
+
+        if(cnpj == ''){
+            camposObrigatorios[0].classList.add('bg-color-red/20')
+            camposObrigatorios[0].classList.add('outline')
+            camposObrigatorios[0].classList.add('outline-1')
+            camposObrigatorios[0].classList.add('outline-[red]')
+            camposObrigatorios[0].classList.remove('disabled:bg-body')
+        }
+    } else if (fun && localStorage.getItem('cargo') != 'ger' && (!cnpj || !sgset)) {
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
@@ -327,27 +341,14 @@ function modalConfirmar(fun){
             camposObrigatorios[1].classList.add('outline-[red]')
             camposObrigatorios[1].classList.remove('disabled:bg-body')
         }
+    } else if (fun && !data) {
 
-    }else if(localStorage.getItem('cargo') == 'ger' && cnpj == '' && fun == true){
-    
-        Toast.fire({
-            icon: 'error',
-            title: 'Preencha todos os campos obrigatórios em vermelho!'
-        })
-
-        camposObrigatorios[0].classList.add('bg-color-red/20')
-        camposObrigatorios[0].classList.add('outline')
-        camposObrigatorios[0].classList.add('outline-1')
-        camposObrigatorios[0].classList.add('outline-[red]')
-        camposObrigatorios[0].classList.remove('disabled:bg-body')
-        
-    }else if(data == '' && fun == true){
-    
         Toast.fire({
             icon: 'error',
             title: 'Cadastre algum produto para poder aceitar a proposta!'
         })
-    }else{
+    } else {
+
         const div = document.createElement('div');
         const aside = document.createElement('aside');
 
@@ -401,7 +402,6 @@ function modalConfirmar(fun){
             document.body.removeChild(aside)
         })
     }
-
 }
 
 const botaoAceitar = document.getElementById('aceitarProposta');

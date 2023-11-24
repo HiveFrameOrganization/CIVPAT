@@ -25,8 +25,6 @@ export async function autenticacao(cargo, load) {
 
             const resposta = await deslogar.json();
 
-            console.log(resposta);
-
             window.location.href = 'http://localhost:8080/';
         }
 
@@ -42,8 +40,6 @@ export async function autenticacao(cargo, load) {
             },
             body: JSON.stringify(dados)
         });
-
-        console.log(verificacao);
 
         const resposta = await verificacao.json();
 
