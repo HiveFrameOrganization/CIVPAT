@@ -3,8 +3,14 @@ import validarSGSET from './validarSGSET.js';
 import validarEmail from './validarEmail.js';
 import { back } from '../Rotas/rotas.js';
 import validarNumero from './validarNumero.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function salvarMudancasNaProposta() {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
@@ -32,7 +38,7 @@ export default async function salvarMudancasNaProposta() {
     var verificacaoNumero = validarNumero(numeroContato);
 
     if (verificacaoDoCnpj == false) {
-        // location.reload();
+        location.reload();
 
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'CNPJ inválido');
@@ -40,13 +46,15 @@ export default async function salvarMudancasNaProposta() {
         alertas();
 
     } else if (verificacaoDoSGSET == false) {
-        // location.reload();
+        location.reload();
 
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'SGSET inválido');
 
         alertas();
     } else if (primeiroGerente.toLowerCase() == segundoGerente.toLowerCase()){
+        location.reload();
+
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
 
@@ -103,7 +111,7 @@ export default async function salvarMudancasNaProposta() {
         localStorage.setItem('mensagem', resposta.mensagem);
 
         if (resposta.status == 'success'){
-            // window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
+            window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
 
         }
     }

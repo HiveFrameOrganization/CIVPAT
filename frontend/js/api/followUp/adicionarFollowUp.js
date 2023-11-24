@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js'
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 // let liSelected
 
 // Pega data de hoje em yyyy-mm-dd
@@ -78,6 +79,11 @@ form.addEventListener('submit', evento => {
 });
 
 async function enviaBackEnd(dadosEnviados) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     try {
 
         // Envia os dados do front pro Backend

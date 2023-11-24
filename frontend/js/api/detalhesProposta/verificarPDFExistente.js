@@ -1,6 +1,12 @@
 import { back } from '../Rotas/rotas.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function  verificarPdfExistente(idProposta) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     try {
 
         // Cria a requisição 

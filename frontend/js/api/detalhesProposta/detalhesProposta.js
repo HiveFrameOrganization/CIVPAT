@@ -8,6 +8,9 @@ import aceitarProposta from './aceitarProposta.js';
 import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js';
 import baixarPdf from './baixarPDF.js';
+import validarCNPJ from './validarCNPJ.js';
+import validarSGSET from './validarSGSET.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', async () => {
@@ -77,7 +80,12 @@ function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlacehol
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
 
-botaoSalvarPdf.addEventListener('click', () => {
+botaoSalvarPdf.addEventListener('click', async () => {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     // Pegar o id da proposta salvo no localstorage
     const identificador = localStorage.getItem('idProposta');
 
@@ -180,6 +188,10 @@ editandoProposta.addEventListener('click', () => {
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
     if (editandoProposta.value == 'EDITAR') {
+
+        aceitarPropostaButton.parentElement.removeChild(aceitarPropostaButton);
+        declinarPropostaButton.parentElement.removeChild(declinarPropostaButton);
+
         editandoProposta.value = 'SALVAR'
 
         for (let i = 0; i < estadoInput.length; i++) {
@@ -208,31 +220,22 @@ const nSGSET = document.getElementById('numeroSGSET');
 
 // Executando a função 'aceitarProposta'.
 
-aceitarPropostaButton.addEventListener('click', () => {
-    // if(localStorage.getItem('ger')){
-    //     if(cnpj.value == ''){
+function eventListenerExibirModal(exibir) {
 
-    //     }
-    // }else if(cnpj.value == '' && nSGSET.value == ''){
-
-    // }
+    // exibir = True || False
 
     try {
-        modalConfirmar(true)
+        modalConfirmar(exibir)
         // aceitarProposta()
     } catch (error) {
         console.log(error)
     }
-})
+}
 
-declinarPropostaButton.addEventListener('click', () => {
-    try {
-        modalConfirmar(false)
-        // declinarPropostaBanco()
-    } catch (error) {
-        console.log(error)
-    }
-})
+
+aceitarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, true))
+
+declinarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, false))
 
 // const botaoDeclinarProposta = document.getElementById('declinarProposta');
 
@@ -313,9 +316,10 @@ function modalConfirmar(fun) {
     let data = document.querySelector('#dataPrimeiroProduto').value
     let sgset = document.querySelector('#numeroSGSET').value
 
-    const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
+    const camposObrigatorios = document.querySelectorAll('.campoObrigatorio');
+    
+    if (fun && localStorage.getItem('cargo') == 'ger' && !cnpj) {
 
-    if (localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true) {
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
@@ -355,7 +359,26 @@ function modalConfirmar(fun) {
             icon: 'error',
             title: 'Cadastre algum produto para poder aceitar a proposta!'
         })
-    }else{
+    } else {
+
+        if (!validarCNPJ(cnpj)) {
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Informe um CNPJ válido!'
+            })
+    
+            return;
+        } else if (!validarSGSET(sgset)) {
+
+            Toast.fire({
+                icon: 'error',
+                title: 'Informe um SGET válido!'
+            })
+
+            return;
+        }
+    
         const div = document.createElement('div');
         const aside = document.createElement('aside');
 

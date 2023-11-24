@@ -1,5 +1,3 @@
-import { editandoProposta } from "./detalhesProposta.js"
-
 // DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
 export default function desativaBotoes(){
 
@@ -8,10 +6,7 @@ export default function desativaBotoes(){
     const btnAceitar = document.querySelector('#aceitarProposta');
     const btnEditar = document.querySelector('#editarProposta');
 
-    if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'em análise') {
-
-        //PASS
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'aceito') {
+    if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'aceito') {
 
         btnAceitar.parentElement.removeChild(btnAceitar);
         btnDeclinar.parentElement.removeChild(btnDeclinar);

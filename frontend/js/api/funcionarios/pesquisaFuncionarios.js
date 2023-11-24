@@ -1,8 +1,14 @@
 import exibir from "./renderizarTelaFuncionarios.js";
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 // Função específica para realizar a pesquisa do funcionário
 async function pesquisarFuncionario(valor, filtro) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
+
     const numPagina = sessionStorage.getItem('paginaFun');
 
     sessionStorage.setItem('paginaFun', 0);

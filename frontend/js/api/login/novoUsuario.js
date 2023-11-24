@@ -27,7 +27,6 @@ email.addEventListener('keydown', evento => {
 
 // função para verificar o email do usuário
 async function verificaEmail(email) {
-
     try {
 
         // Requisição para validação do email
@@ -141,7 +140,6 @@ formularioNovaSenha.addEventListener('submit', async evento => {
 /*-------------------------------- MANDANDO A NOVA SENHA PARA O BANCO DE DADOS ------------------------------------*/
 
 async function salvandoSenha(email, senha) {
-
     try {
 
         // Objeto a ser mandado para o back-end

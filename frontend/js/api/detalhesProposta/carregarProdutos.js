@@ -1,8 +1,13 @@
 import contadorProdutos from './contadorProdutos.js';
 import exibirProdutos from "./exibirProdutos.js";
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function carregarProdutos(idProposta) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     document.getElementById('propostas').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>

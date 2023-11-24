@@ -7,7 +7,7 @@
     <title>Meu perfil - HIVEFRAME</title>
     <script type="module">
         import { autenticacao } from '../../js/api/login/autenticacao.js';
-        autenticacao(['coor', 'adm', 'ger', 'tec']);
+        autenticacao(['coor', 'adm', 'ger', 'tec'], true);
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -122,8 +122,8 @@
                 <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../../pages/Home/index.html" class="main-link" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../../pages/Home/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                        <a href="../../pages/perfil/index.html" class="main-link" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../../pages/perfil/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div id="sidebar-links" class="mt-4 space-y-4" role="navigation">
                         <script>
@@ -299,11 +299,11 @@
                 <!-- Paginação -->
                 <div id="paginacao" class="w-full mt-4 hidden">
                     <div id="containerPaginacao" class="flex items-center gap-2 justify-end">
-                        <a href="#" aria-label="voltar uma página na tabela" class="w-4 h-4">
+                        <a href="#" aria-label="voltar uma página na tabela" class="w-4 h-4" id="voltarPagina" >
                             <img src="../../img/icon/arrow-left.svg" alt="Voltar página" class="w-full">
                         </a>
                         
-                        <a href="#" aria-label="avançar uma página na tabela" class="w-4 h-4">
+                        <a href="#" aria-label="avançar uma página na tabela" class="w-4 h-4" id="avançarPagina" >
                             <img src="../../img/icon/arrow-right.svg" alt="Avançar página" class="w-full">
                         </a>
                     </div>

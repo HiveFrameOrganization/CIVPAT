@@ -1,7 +1,12 @@
 import { back } from "../Rotas/rotas.js";
 import alertas from "../../feedback.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function aceitarProposta() {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     const baixarPdfOrcamento = document.getElementsByClassName('sumirOrcamento')[0];
     const baixarPdfPropostaAssinada = document.getElementsByClassName('sumirPropostaAssinada')[0];
