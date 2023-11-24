@@ -1,6 +1,8 @@
 import validarCNPJ from './validarCNPJ.js';
 import validarSGSET from './validarSGSET.js';
+import validarEmail from './validarEmail.js';
 import { back } from '../Rotas/rotas.js';
+import validarNumero from './validarNumero.js';
 
 export default async function salvarMudancasNaProposta() {
     const idProposta = localStorage.getItem('idProposta');
@@ -26,6 +28,8 @@ export default async function salvarMudancasNaProposta() {
 
     var verificacaoDoCnpj = validarCNPJ(cnpjString);
     var verificacaoDoSGSET = validarSGSET(numeroSGSET);
+    var verificacaoDoEmail = validarEmail(emailContato);
+    var verificacaoNumero = validarNumero(numeroContato);
 
     if (verificacaoDoCnpj == false) {
         location.reload();
@@ -45,6 +49,20 @@ export default async function salvarMudancasNaProposta() {
     } else if (primeiroGerente.toLowerCase() == segundoGerente.toLowerCase()){
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'Mesmo gerente nos dois campos');
+
+        alertas();
+    } else if (verificacaoDoEmail == false) {
+        location.reload();
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'E-mail inválido');
+
+        alertas();
+    } else if (verificacaoNumero == false){
+        location.reload();
+
+        localStorage.setItem('status', 'error');
+        localStorage.setItem('mensagem', 'Número inválido');
 
         alertas();
     } else {

@@ -36,7 +36,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
             'nome' => ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
             'mensagem' => 'Bem vindo ' . ucwords($dadosBanco['Nome']) . ' ' .  ucwords($dadosBanco['Sobrenome']),
             'status' => 'success',
-            'situacao' => $dadosBanco['Situacao']
+            'situacao' => $dadosBanco['Status']
         ];
 
         echo json_encode($resposta);

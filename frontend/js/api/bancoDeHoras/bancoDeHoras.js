@@ -1,4 +1,5 @@
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from "../login/autenticacao.js";
 
 window.addEventListener('load', ()=>{
     // RETORNANDO NADA AO CARREGAR A PAGINA PARA MOSTRAR MENSAGEM NA TELA
@@ -40,6 +41,8 @@ formularioBancoHoras.addEventListener('submit', async evento => {
 
 
 async function buscarHoras(mes, ano, nif, cargo) {
+
+    autenticacao(['adm', 'tec']);
 
     try {
 

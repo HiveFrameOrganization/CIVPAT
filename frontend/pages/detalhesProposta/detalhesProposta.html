@@ -518,7 +518,8 @@
                             <input type="text" id="numeroContato"
                                 placeholder="Número para contato"
                                 class="inputProposta estadoInput disabled:font-bold disabled:px-0 p-3 text-lg disabled:text-xl text-color-text disabled:bg-body bg-component placeholder-color-text-secundary outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary rounded text-ellipsis"
-                                disabled  pattern="[A-Za-z]{11}">
+                                maxlength="11"
+                                disabled>
                         </div>
 
                         <div class="flex-col w-full md:w-1/3 px-5 gap-2 hidden md:flex">
@@ -790,7 +791,7 @@
                                 <label for="comentario" class="text-color-text font-semibold block">COMENTÁRIO*</label>
                                 <textarea name="comentario" id="comentario" rows="5"
                                     class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
-                                    placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
+                                    placeholder="Comentário sobre o que ocorreu no follow-up" required onchange="this.value = this.value.trim()"></textarea>
                             </div>
 
                             <div class="flex flex-col gap-2 w-full">
@@ -852,7 +853,7 @@
                                 <label for="comentarioEdit" class="text-color-text font-semibold">COMENTÁRIO*</label>
                                 <textarea name="comentarioEdit" id="comentarioEdit" rows="5"
                                     class="px-4 py-2 focus:placeholder-primary placeholder:text-color-text-secundary bg-body border border-component rounded-md outline-none text-base font-normal focus:border-primary transition-all valid:bg-primary/20"
-                                    placeholder="Comentário sobre o que ocorreu no follow-up" required></textarea>
+                                    placeholder="Comentário sobre o que ocorreu no follow-up" required onchange="this.value = this.value.trim()"></textarea>
                             </div>
 
                             <div class="flex flex-col gap-2 w-full">

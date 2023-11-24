@@ -26,6 +26,8 @@ export async function autenticacao(cargo, load) {
             const resposta = await deslogar.json();
 
             window.location.href = 'http://localhost:8080/';
+
+            return;
         }
 
         const dados = {
