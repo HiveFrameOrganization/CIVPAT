@@ -325,35 +325,34 @@ function modalConfirmar(fun) {
             title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
-        if (cnpj == '') {
+        if(cnpj == ''){
             camposObrigatorios[0].classList.add('bg-color-red/20')
             camposObrigatorios[0].classList.add('outline')
             camposObrigatorios[0].classList.add('outline-1')
             camposObrigatorios[0].classList.add('outline-[red]')
             camposObrigatorios[0].classList.remove('disabled:bg-body')
         }
-        if (sgset == '') {
+    } else if (fun && localStorage.getItem('cargo') != 'ger' && (!cnpj || !sgset)) {
+        Toast.fire({
+            icon: 'error',
+            title: 'Preencha todos os campos obrigatórios em vermelho!'
+        })
+
+        if(cnpj == ''){
+            camposObrigatorios[0].classList.add('bg-color-red/20')
+            camposObrigatorios[0].classList.add('outline')
+            camposObrigatorios[0].classList.add('outline-1')
+            camposObrigatorios[0].classList.add('outline-[red]')
+            camposObrigatorios[0].classList.remove('disabled:bg-body')
+        }
+        if(sgset == ''){
             camposObrigatorios[1].classList.add('bg-color-red/20')
             camposObrigatorios[1].classList.add('outline')
             camposObrigatorios[1].classList.add('outline-1')
             camposObrigatorios[1].classList.add('outline-[red]')
             camposObrigatorios[1].classList.remove('disabled:bg-body')
         }
-
-    } else if (localStorage.getItem('cargo') == 'ger' && cnpj == '' && fun == true) {
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Preencha todos os campos obrigatórios em vermelho!'
-        })
-
-        camposObrigatorios[0].classList.add('bg-color-red/20')
-        camposObrigatorios[0].classList.add('outline')
-        camposObrigatorios[0].classList.add('outline-1')
-        camposObrigatorios[0].classList.add('outline-[red]')
-        camposObrigatorios[0].classList.remove('disabled:bg-body')
-
-    } else if (data == '' && fun == true) {
+    } else if (fun && !data) {
 
         Toast.fire({
             icon: 'error',
@@ -361,24 +360,6 @@ function modalConfirmar(fun) {
         })
     } else {
 
-        if (!validarCNPJ(cnpj)) {
-
-            Toast.fire({
-                icon: 'error',
-                title: 'Informe um CNPJ válido!'
-            })
-    
-            return;
-        } else if (!validarSGSET(sgset)) {
-
-            Toast.fire({
-                icon: 'error',
-                title: 'Informe um SGET válido!'
-            })
-
-            return;
-        }
-    
         const div = document.createElement('div');
         const aside = document.createElement('aside');
 
@@ -401,33 +382,33 @@ function modalConfirmar(fun) {
         </div>
         `;
 
-
+        
         div.innerHTML = templateModalConfirmar;
-
+        
         document.body.appendChild(div);
         document.body.appendChild(aside)
-
+         
         // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
-        if (fun) {
-            document.querySelector('#btn-confirmar').addEventListener('click', () => {
+        if(fun){
+            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
                 aceitarProposta()
             })
-        } else {
-            document.querySelector('#btn-confirmar').addEventListener('click', () => {
+        }else{
+            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
                 declinarPropostaBanco()
             })
         }
 
         // APAGAR ELEMENTOS DE MODAL
-        aside.addEventListener('click', () => {
+        aside.addEventListener('click', ()=>{
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
-        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+        document.querySelector('#close-modal-confirmar').addEventListener('click', ()=>{
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
-        document.querySelector('#btn-cancelar').addEventListener('click', () => {
+        document.querySelector('#btn-cancelar').addEventListener('click', ()=>{
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
