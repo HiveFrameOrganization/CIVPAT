@@ -28,7 +28,7 @@ export default async function salvarMudancasNaProposta() {
     var verificacaoDoSGSET = validarSGSET(numeroSGSET);
 
     if (verificacaoDoCnpj == false) {
-        location.reload();
+        // location.reload();
 
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'CNPJ inválido');
@@ -36,7 +36,7 @@ export default async function salvarMudancasNaProposta() {
         alertas();
 
     } else if (verificacaoDoSGSET == false) {
-        location.reload();
+        // location.reload();
 
         localStorage.setItem('status', 'error');
         localStorage.setItem('mensagem', 'SGSET inválido');
@@ -85,7 +85,7 @@ export default async function salvarMudancasNaProposta() {
         localStorage.setItem('mensagem', resposta.mensagem);
 
         if (resposta.status == 'success'){
-            window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
+            // window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
 
         }
     }

@@ -5,7 +5,7 @@ import declinarPropostaBanco from './declinarPropostaBanco.js';
 import verificarBancoProposta from './verificarProposta.js';
 import carregarProdutos from './carregarProdutos.js';
 import aceitarProposta from './aceitarProposta.js';
-import  alertas  from '../../feedback.js';
+import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js';
 import baixarPdf from './baixarPDF.js';
 
@@ -48,19 +48,31 @@ document.getElementById('relatorioFinal').addEventListener('change', () => {
 });
 
 document.getElementById('pesquisaDeSatisfacao').addEventListener('change', () => {
-    nomeDoArquivoPdfNoInput('pesquisaDeSatisfacao','inputPesquisaDeSaisfacao');
+    nomeDoArquivoPdfNoInput('pesquisaDeSatisfacao', 'inputPesquisaDeSaisfacao');
 });
 
 
-function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlaceholder) { 
+function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlaceholder) {
     const pegandoInput = document.getElementById(inputAondeSobreOArquivo);
     const campoComPlaceholder = document.getElementById(inputAondeTemOPlaceholder);
     const arquivoEstaNoInput = pegandoInput.files[0];
 
     if (arquivoEstaNoInput) {
         campoComPlaceholder.setAttribute('placeholder', arquivoEstaNoInput.name);
-        console.log(arquivoEstaNoInput);
+        console.log(arquivoEstaNoInput.size);
     }
+
+    const tamanho = arquivoEstaNoInput.size / 1024;
+
+    if (tamanho > 600) {
+        localStorage.setItem("mensagem", "PDF Muito grande!");
+        localStorage.setItem("status", "error");
+
+        location.reload();
+
+    }
+
+
 }
 
 const botaoSalvarPdf = document.getElementById('botaoSalvarPdf');
@@ -79,8 +91,8 @@ botaoSalvarPdf.addEventListener('click', () => {
 
     if (pdfOrcamento != null && pdfOrcamento != undefined) {
 
-        document.getElementById('inputFileUpOrcamento').placeholder =  pdfOrcamento.name;
-    } 
+        document.getElementById('inputFileUpOrcamento').placeholder = pdfOrcamento.name;
+    }
     if (pdfPropostaAssinada != null && pdfPropostaAssinada != undefined) {
         document.getElementById('inputFileUpPropostaAssinada').placeholder = pdfPropostaAssinada.name;
     }
@@ -98,26 +110,26 @@ botaoSalvarPdf.addEventListener('click', () => {
 
         alertas();
     } else {
-        
-        
+
+
         // Criar um objeto FormData e adicionar o arquivo PDF a ele
         // formdata serve para mandar dados e arquivos facilmente por via api
         // usado para enviar dados do cliente para o servidor, especialmente 
         // quando se envia um formulário HTML através de uma requisição AJAX
         var formData = new FormData();
-    
+
         //inserindo o pdf dentro do objeto formdata
         formData.append('pdfOrcamento', pdfOrcamento);
         formData.append('pdfPropostaAssinada', pdfPropostaAssinada);
         formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
         formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
-        
+
         console.log(formData);
-    
+
         // formData.forEach((valor, chave) => {
         //     console.log(`${chave}: ${valor}`);
         //   });
-    
+
         // Enviar o formulário como uma solicitação POST usando fetch
         fetch(back + `/PDF/salvarPdf.php?id=${identificador}`, {
             method: 'POST',
@@ -125,11 +137,11 @@ botaoSalvarPdf.addEventListener('click', () => {
         })
             .then(response => response.json())
             .then(json => {
-    
+
                 localStorage.setItem('status', json.status);
                 localStorage.setItem('mensagem', json.mensagem);
                 window.location.href = '../../pages/detalhesProposta/detalhesProposta.html';
-                
+
                 verificarPdfExistente(identificador);
             })
             .catch(error => {
@@ -163,7 +175,7 @@ export const editandoProposta = document.querySelector('#editarProposta');
 var antigoContato = document.querySelector('#numeroContato').innerHTML
 editandoProposta.addEventListener('click', () => {
     console.log(antigoContato)
-    
+
     // document.querySelector('#numeroContato').setAttribute('type', 'number')
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
@@ -175,7 +187,7 @@ editandoProposta.addEventListener('click', () => {
         }
     } else {
         salvarMudancasNaProposta();
-        
+
         editandoProposta.value = 'EDITAR'
 
         // DESATIVA OU ATIVA OS INPUTS PARA EDIÇÃO DA PROPOSTA
@@ -202,9 +214,9 @@ aceitarPropostaButton.addEventListener('click', () => {
 
     //     }
     // }else if(cnpj.value == '' && nSGSET.value == ''){
-        
+
     // }
-        
+
     try {
         modalConfirmar(true)
         // aceitarProposta()
@@ -229,8 +241,8 @@ declinarPropostaButton.addEventListener('click', () => {
 // })
 
 // abrir modal de cadastro de produto
-document.querySelector('#btnNovoProduto').addEventListener('click', ()=>{
-    
+document.querySelector('#btnNovoProduto').addEventListener('click', () => {
+
 })
 
 // Modal de varias etapas de cadastro de produto
@@ -240,7 +252,7 @@ let paraPrimeiroModal = document.querySelector('#paraPrimeiroModal')
 let paraSegundoModal = document.querySelector('#paraSegundoModal')
 let tempo = document.getElementById('tempoMaquina')
 
-paraSegundoModal.addEventListener('click', ()=>{
+paraSegundoModal.addEventListener('click', () => {
     localStorage.setItem('maquina', document.getElementById('maquinas').value);
 
     let maquina = localStorage.getItem('maquina');
@@ -248,7 +260,7 @@ paraSegundoModal.addEventListener('click', ()=>{
     primerioCadastroProduto.classList.add('hidden')
     segundoCadastroProduto.classList.remove('hidden')
 
-    if(maquina == 1){
+    if (maquina == 1) {
         tempo.setAttribute('type', 'text')
         tempo.value = 'Nenhuma máquina selecionada'
         tempo.classList.add('text-[90%]')
@@ -256,7 +268,7 @@ paraSegundoModal.addEventListener('click', ()=>{
         tempo.classList.add('bg-component')
         tempo.classList.add('cursor-default')
         tempo.classList.remove('focus:outline-primary')
-    }else{
+    } else {
         tempo.setAttribute('type', 'number')
         tempo.classList.remove('text-[90%]')
         tempo.removeAttribute('readonly')
@@ -266,18 +278,18 @@ paraSegundoModal.addEventListener('click', ()=>{
 
 })
 
-paraPrimeiroModal.addEventListener('click', ()=>{
+paraPrimeiroModal.addEventListener('click', () => {
     primerioCadastroProduto.classList.remove('hidden')
     segundoCadastroProduto.classList.add('hidden')
 })
 
 // abre aba para mostrar resumo
 let abaResumo = document.querySelector('#abaResumo')
-document.querySelector('#btnResumo').addEventListener('click', ()=>{
-    if(abaResumo.classList.contains('h-24')){
+document.querySelector('#btnResumo').addEventListener('click', () => {
+    if (abaResumo.classList.contains('h-24')) {
         abaResumo.classList.remove('h-24')
-        abaResumo.classList.add('h-0')        
-    }else{
+        abaResumo.classList.add('h-0')
+    } else {
         abaResumo.classList.add('h-24')
         abaResumo.classList.remove('h-0')
     }
@@ -291,11 +303,11 @@ const Toast = Swal.mixin({
     timer: 1500,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
-  })
-function modalConfirmar(fun){
+})
+function modalConfirmar(fun) {
 
     let cnpj = document.querySelector('#cnpj').value
     let data = document.querySelector('#dataPrimeiroProduto').value
@@ -307,20 +319,20 @@ function modalConfirmar(fun){
     console.log(fun ? 'true' : 'false')
     const camposObrigatorios = document.querySelectorAll('.campoObrigatorio')
 
-    if(localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true){
+    if (localStorage.getItem('cargo') != 'ger' && cnpj == '' && sgset == '' && fun == true) {
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
         })
 
-        if(cnpj == ''){
+        if (cnpj == '') {
             camposObrigatorios[0].classList.add('bg-color-red/20')
             camposObrigatorios[0].classList.add('outline')
             camposObrigatorios[0].classList.add('outline-1')
             camposObrigatorios[0].classList.add('outline-[red]')
             camposObrigatorios[0].classList.remove('disabled:bg-body')
         }
-        if(sgset == ''){
+        if (sgset == '') {
             camposObrigatorios[1].classList.add('bg-color-red/20')
             camposObrigatorios[1].classList.add('outline')
             camposObrigatorios[1].classList.add('outline-1')
@@ -328,8 +340,8 @@ function modalConfirmar(fun){
             camposObrigatorios[1].classList.remove('disabled:bg-body')
         }
 
-    }else if(localStorage.getItem('cargo') == 'ger' && cnpj == '' && fun == true){
-    
+    } else if (localStorage.getItem('cargo') == 'ger' && cnpj == '' && fun == true) {
+
         Toast.fire({
             icon: 'error',
             title: 'Preencha todos os campos obrigatórios em vermelho!'
@@ -340,14 +352,14 @@ function modalConfirmar(fun){
         camposObrigatorios[0].classList.add('outline-1')
         camposObrigatorios[0].classList.add('outline-[red]')
         camposObrigatorios[0].classList.remove('disabled:bg-body')
-        
-    }else if(data == '' && fun == true){
-    
+
+    } else if (data == '' && fun == true) {
+
         Toast.fire({
             icon: 'error',
             title: 'Cadastre algum produto para poder aceitar a proposta!'
         })
-    }else{
+    } else {
         const div = document.createElement('div');
         const aside = document.createElement('aside');
 
@@ -370,33 +382,33 @@ function modalConfirmar(fun){
         </div>
         `;
 
-        
+
         div.innerHTML = templateModalConfirmar;
-        
+
         document.body.appendChild(div);
         document.body.appendChild(aside)
-        
+
         // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
-        if(fun){
-            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
+        if (fun) {
+            document.querySelector('#btn-confirmar').addEventListener('click', () => {
                 aceitarProposta()
             })
-        }else{
-            document.querySelector('#btn-confirmar').addEventListener('click', ()=>{
+        } else {
+            document.querySelector('#btn-confirmar').addEventListener('click', () => {
                 declinarPropostaBanco()
             })
         }
 
         // APAGAR ELEMENTOS DE MODAL
-        aside.addEventListener('click', ()=>{
+        aside.addEventListener('click', () => {
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
-        document.querySelector('#close-modal-confirmar').addEventListener('click', ()=>{
+        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
-        document.querySelector('#btn-cancelar').addEventListener('click', ()=>{
+        document.querySelector('#btn-cancelar').addEventListener('click', () => {
             document.body.removeChild(div)
             document.body.removeChild(aside)
         })
@@ -405,14 +417,14 @@ function modalConfirmar(fun){
 }
 
 const botaoAceitar = document.getElementById('aceitarProposta');
-const botaoDeclinar =  document.getElementById('declinarProposta');
+const botaoDeclinar = document.getElementById('declinarProposta');
 
 window.addEventListener('load', () => {
     const cargo = localStorage.getItem('cargo');
-  
-    if (cargo == 'ger'){
-      botaoAceitar.value = 'SOLICITAR ACEITE';
-      botaoDeclinar.value = 'SOLICITAR DECLINIO';
+
+    if (cargo == 'ger') {
+        botaoAceitar.value = 'SOLICITAR ACEITE';
+        botaoDeclinar.value = 'SOLICITAR DECLINIO';
     }
-  
-  });
+
+});
