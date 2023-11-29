@@ -17,6 +17,8 @@
     <!-- <link rel="stylesheet" href="../../css/output.css"> -->
     <link rel="stylesheet" href="../../Componentes/telaLoad/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
         @layer base {
@@ -956,13 +958,17 @@
                     <label for="valor" class="text-color-text font-semibold block mb-2">VALOR*</label>
                     <div class="relative">
                         <p class="absolute top-2 left-3 font-bold text-color-text">R$</p>
-                        <input autocomplete="off" onblur="blurValor()" minlength="1" class="border border-component bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-2 pl-10 pr-4 transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
+                        <input autocomplete="off" minlength="1" maxlength="13" class="border border-component bg-body valid:bg-primary/20 placeholder-color-text-secundary text-color-text py-2 pl-10 pr-4 transition-all rounded-md outline-none focus:border-primary focus:placeholder-primary w-full mb-6" type="text" name="valor" id="valor" required>
                     </div>
 
                     <!-- função que impede a digitação de dados que não sejam numéricos ou virgula -->
 
                     <script>
                         const valor = document.getElementById('valor');
+
+                        $(function() {
+                            $("#valor").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                        })
 
                         valor.onkeydown = function(event) {
                             
@@ -978,7 +984,7 @@
 
                         // função que adiciona a máscara ao valor após o desfoque do input
 
-                        function blurValor(){
+                        /* function blurValor(){
                             var valor = document.getElementById('valor').value.replace('.', '');
 
                             if (valor > 0){
@@ -992,7 +998,7 @@
         
                                 document.getElementById('valor').value = valor;
                             }
-                        }
+                        } */
 
                     </script>
 
