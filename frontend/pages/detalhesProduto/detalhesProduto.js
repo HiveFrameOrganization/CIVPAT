@@ -93,36 +93,36 @@ window.addEventListener('load', async () => {
 })
 
 
-async function gerarHora() {
+// async function gerarHora() {
 
-    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    // try {
-    //     const resultado = await resposta.json();
+//     // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+//     // try {
+//     //     const resultado = await resposta.json();
 
-    //     const dataApi = resultado['datetime'];
+//     //     const dataApi = resultado['datetime'];
 
-    //     const dataFormatada = dataApi.substring(0, 10);
+//     //     const dataFormatada = dataApi.substring(0, 10);
 
-    //     return dataFormatada.replace(/T/i, " ");  
+//     //     return dataFormatada.replace(/T/i, " ");
 
-    // } catch (error) {
-    //     console.log('Sistema de horas apresentou um erro');
+//     // } catch (error) {
+//     //     console.log('Sistema de horas apresentou um erro');
 
-    //     const data = Date()  
-    // }
+//     //     const data = Date()
+//     // }
 
-    // Obtém a data atual
-    const dataAtual = new Date();
+//     // Obtém a data atual
+//     const dataAtual = new Date();
 
-    // Obtém a data atual em um formato legível
-    const dataAtualFormatada = dataAtual.toLocaleDateString();
+//     // Obtém a data atual em um formato legível
+//     const dataAtualFormatada = dataAtual.toLocaleDateString();
 
-    return dataAtualFormatada;
-}
+//     return dataAtualFormatada;
+// }
 
 
 // formatar a data
-const hoje = new Date(await gerarHora());
+const hoje = new Date();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -137,7 +137,6 @@ if (dia < 10) {
 
 // Não permitir que marque uma data depois de hoje.
 const dataMaxima = `${ano}-${mes}-${dia}`;
-console.log(dataMaxima)
 document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
@@ -318,7 +317,7 @@ async function atualizarProduto(dados) {
 
 if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))) {
 
-    const dataAtual = new Date(await gerarHora());
+    const dataAtual = new Date();
     var dataLimite = new Date('9999-12-31');
     var dataInserida = new Date(document.getElementById('dataInicial').value);
 
@@ -326,9 +325,9 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
 
     botaoModificarProduto.addEventListener('click', async () => {
         const dadosBanco = await carregarDetalhesProduto();
-        
+
         const idProduto = localStorage.getItem('idProduto');
-        
+
         const tempoMaquina = document.getElementById('tempoMaquina').value;
         const tempoPessoa = document.getElementById('tempoPessoa').value;
         const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
@@ -341,7 +340,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         valor = valor.replace(',', '.');
         const tecnico = document.getElementById('tecnicos').value;
         const idProposta = localStorage.getItem('idProposta');
-        
+
         // Obter a data inserida pelo usuário
         var dataInicialInserida = new Date(dataInicial);
         var dataFinalInserida = new Date(dataFinal);
@@ -364,11 +363,6 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         } else if (dataFinalInserida > dataLimite) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data final fora do limite');
-
-            alertas();
-        }else if(dataInicial < dadosBanco.DataInicial){
-            localStorage.setItem('status', 'error');
-            localStorage.setItem('mensagem', 'Data inicial não pode ser menor que a anterior.');
 
             alertas();
         } else {
@@ -591,7 +585,7 @@ var horasRestantesMaquina;
 
 //         try {
 //             if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-                
+
 //                 localStorage.setItem('status', 'error');
 //                 localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
@@ -716,7 +710,7 @@ if (localStorage.getItem('cargo') == 'tec') {
 var valor = document.getElementById('valor')
 
 valor.addEventListener('input', () => {
-  if (valor.value.length > valor.maxLength){
-    valor.value = valor.value.slice(0, valor.maxLength);
-  }
+    if (valor.value.length > valor.maxLength) {
+        valor.value = valor.value.slice(0, valor.maxLength);
+    }
 })
