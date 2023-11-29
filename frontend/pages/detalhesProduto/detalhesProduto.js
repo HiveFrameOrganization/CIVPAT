@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
     localStorage.setItem('tempoPessoa', dadosProduto['HoraPessoa']);
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
-    document.getElementById('valor').value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(dadosProduto['Valor']);
+    document.getElementById('valor').value = dadosProduto['Valor'];
     document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
     localStorage.setItem('situacaoProduto', dadosProduto['Situacao']);
 
@@ -591,7 +591,7 @@ var horasRestantesMaquina;
 
 //         try {
 //             if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-
+                
 //                 localStorage.setItem('status', 'error');
 //                 localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
@@ -712,3 +712,11 @@ if (localStorage.getItem('cargo') == 'tec') {
         })
     }
 }
+
+var valor = document.getElementById('valor')
+
+valor.addEventListener('input', () => {
+  if (valor.value.length > valor.maxLength){
+    valor.value = valor.value.slice(0, valor.maxLength);
+  }
+})

@@ -243,6 +243,14 @@ numeroContato.addEventListener('input', () => {
   }
 })
 
+var valorInput = document.getElementById('valor')
+
+valorInput.addEventListener('input', () => {
+  if (valorInput.value.length > valorInput.maxLength){
+    valorInput.value = valorInput.value.slice(0, valorInput.maxLength);
+  }
+})
+
 function titles(){
   const inputs = document.querySelectorAll(".inputProposta");
   const arrayInputs = [];

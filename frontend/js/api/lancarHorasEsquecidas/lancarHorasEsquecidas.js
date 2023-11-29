@@ -42,10 +42,6 @@ async function setarData(dadosEnviados) {
 
 async function lancarHoraParaOTecnico () {
     // const nifTec = localStorage.getItem('nifPerfil');
-    const autenticado = await autenticacao(['coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
 
     try{
         
@@ -116,7 +112,7 @@ async function lancarHoraParaOTecnico () {
                 localStorage.setItem('mensagem', resposta.mensagem);
             
                 if (resposta.status == 'success'){
-                    // window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
+                    window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
                 } else {
                     alertas();
                 }

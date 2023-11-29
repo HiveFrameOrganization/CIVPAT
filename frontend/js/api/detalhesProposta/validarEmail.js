@@ -1,6 +1,6 @@
 export default function validarEmail(email){
 
-    var regexValido = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{1,}$/;
+    var regexValido = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-](?:\.[a-zA-Z]{2,})?/;
 
     // Verificar se o E-mail é válido
     if (email.match(regexValido)) {
