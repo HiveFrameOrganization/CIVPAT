@@ -91,7 +91,7 @@ async function carregarTecnicos () {
 window.addEventListener('load', async function (){
     carregarTecnicos();
     pegarUnidadesCriadoras();
-    lancamentoHoras();
+    // lancamentoHoras();   
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
@@ -367,7 +367,9 @@ async function lancamentoHoras(){
 
 }
 
-document.querySelector("#lancarHoras").addEventListener('click', ()=> window.location.reload())
+document.querySelector("#lancarHoras").addEventListener('click', () => {
+    
+})
 
 if (localStorage.getItem('cargo') == 'tec'){
         document.getElementById('lancarHoras').addEventListener('click', async () => {
