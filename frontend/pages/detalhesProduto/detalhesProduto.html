@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="../../Componentes/telaLoad/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style type="text/tailwindcss">
         @layer base {
             :root {
@@ -367,8 +369,8 @@
                     <div class="flex flex-col gap-2 w-full">
                         <label class="text-color-text-secundary font-semibold">VALOR</label>
                         <div class="relative">
-                            <!-- <p class="absolute top-3 left-3 font-bold text-color-text">R$</p> -->
-                            <input type="text" name="valor" minlength="1" onblur="blurValor()" placeholder="0,00" onfocus="this.value = ''" id="valor" class="bg-component placeholder-color-text text-color-text py-3 pl-3 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
+                            <p class="absolute top-3 left-3 font-bold text-color-text">R$</p>
+                            <input type="text" name="valor" maxlength="13" minlength="1" placeholder="0,00" id="valor" class="bg-component placeholder-color-text text-color-text py-3 pl-10 pr-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full valid:bg-primary/20 disabled:bg-primary/10 disabled:text-color-text/60 cursor-pointer " required>
                         </div>
                     </div>
                 </div>
@@ -384,6 +386,11 @@
                           event.preventDefault();
                         }
                     };
+
+                    $(function() {
+                        $("#valor").maskMoney({allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+                    })
+                    
 
                     // exibe a função de mascara do valor após meio segundo
 
@@ -402,11 +409,11 @@
                             document.getElementById('valor').value = valor;
                         }
 
-                    }
+                     }
 
                     // função que adiciona a máscara ao valor após o desfoque do input
 
-                    function blurValor(){
+                    /* function blurValor(){
                         var valor = document.getElementById('valor').value.replace('.', '');
 
                         if (valor > 0){
@@ -420,7 +427,7 @@
     
                             document.getElementById('valor').value = valor;
                         }
-                    }
+                    }  */
 
                 </script>
 

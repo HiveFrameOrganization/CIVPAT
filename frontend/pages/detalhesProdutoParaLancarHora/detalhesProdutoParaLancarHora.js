@@ -2,35 +2,35 @@ import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
 
-async function gerarHora(){
+// async function gerarHora(){
    
-    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    // try {
-    //     const resultado = await resposta.json();
+//     // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+//     // try {
+//     //     const resultado = await resposta.json();
 
-    //     const dataApi = resultado['datetime'];
+//     //     const dataApi = resultado['datetime'];
 
-    //     const dataFormatada = dataApi.substring(0, 10);
+//     //     const dataFormatada = dataApi.substring(0, 10);
 
-    //     return dataFormatada.replace(/T/i, " ");  
+//     //     return dataFormatada.replace(/T/i, " ");  
 
-    // } catch (error) {
-    //     console.log('Sistema de horas apresentou um erro');
+//     // } catch (error) {
+//     //     console.log('Sistema de horas apresentou um erro');
 
-    //     const data = Date()  
-    // }
+//     //     const data = Date()  
+//     // }
 
-    // Obtém a data atual
-    const dataAtual = new Date();
+//     // Obtém a data atual
+//     const dataAtual = new Date();
 
-    // Obtém a data atual em um formato legível
-    const dataAtualFormatada = dataAtual.toLocaleDateString();
+//     // Obtém a data atual em um formato legível
+//     const dataAtualFormatada = dataAtual.toLocaleDateString();
 
-    return dataAtualFormatada;
-}
+//     return dataAtualFormatada;
+// }
 
 // formatar a data
-const hoje = new Date(gerarHora());
+const hoje = new Date();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -89,9 +89,9 @@ async function carregarTecnicos () {
 
 }
 window.addEventListener('load', async function (){
-    carregarTecnicos();
-    pegarUnidadesCriadoras();
-    lancamentoHoras();
+    await carregarTecnicos();
+    await pegarUnidadesCriadoras();
+    lancamentoHoras();   
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
@@ -105,6 +105,7 @@ window.addEventListener('load', async function (){
     document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
     document.getElementById('horaPessoaInput').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
+    document.getElementById('dataDoLancamento').setAttribute('min', dadosProduto['DataInicial']);
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
 
@@ -367,7 +368,9 @@ async function lancamentoHoras(){
 
 }
 
-document.querySelector("#lancarHoras").addEventListener('click', ()=> window.location.reload())
+document.querySelector("#lancarHoras").addEventListener('click', () => {
+    
+})
 
 if (localStorage.getItem('cargo') == 'tec'){
         document.getElementById('lancarHoras').addEventListener('click', async () => {

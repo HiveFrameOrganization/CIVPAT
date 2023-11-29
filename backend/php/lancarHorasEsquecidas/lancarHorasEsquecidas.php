@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $resposta = [
             'status' => 'error',
-            'mensagem' => 'Erro au lançar hora'
+            'mensagem' => 'Erro ao lançar hora'
         ];
     }
 
