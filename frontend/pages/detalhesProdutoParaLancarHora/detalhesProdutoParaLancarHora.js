@@ -34,7 +34,6 @@ const hoje = new Date();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
-
 // Garantir que vai ter um 0 em meses que não tem dois números
 if (mes < 10) {
     mes = '0' + mes;
@@ -49,7 +48,7 @@ document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
 // Seta a data de lançamento para não ser depois de ontem
-let diaLancamento = dia > 10 ? `${dia-1}` : `0${dia-1}`
+let diaLancamento = dia > 10 ? `${dia}` : `0${dia}`;
 document.getElementById('dataDoLancamento').setAttribute('max', `${ano}-${mes}-${diaLancamento}`);
 ////////////////////////////////////////////////
 
@@ -105,7 +104,7 @@ window.addEventListener('load', async function (){
     document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
     document.getElementById('horaPessoaInput').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
-    document.getElementById('dataDoLancamento').setAttribute('min', dadosProduto['DataInicial']);
+    document.getElementById('dataDoLancamento').setAttribute('min',  dadosProduto['DataInicial']);
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
 
