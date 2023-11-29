@@ -3,8 +3,8 @@ import alertas from '../../js/feedback.js';
 
 window.addEventListener('load', async () => {
     alertas();
-    carregarTecnicos();
-    pegarUnidadesCriadoras();
+    await carregarTecnicos();
+    await pegarUnidadesCriadoras();
     // LancamentoHoras();
 
     const produtoSelect = document.getElementById("produto");
@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
     localStorage.setItem('tempoPessoa', dadosProduto['HoraPessoa']);
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
-    document.getElementById('valor').value = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(dadosProduto['Valor']);
+    document.getElementById('valor').value = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(dadosProduto['Valor']);
     document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
     localStorage.setItem('situacaoProduto', dadosProduto['Situacao']);
 
@@ -93,8 +93,8 @@ window.addEventListener('load', async () => {
 })
 
 
-async function gerarHora(){
-   
+async function gerarHora() {
+
     // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
     // try {
     //     const resultado = await resposta.json();
@@ -183,7 +183,7 @@ async function carregarTecnicos() {
 
 
 // window.addEventListener('load', async function () {
-    
+
 // })
 
 
@@ -242,7 +242,6 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-    document.getElementById('dataInicial').min = dados[0].DataInicial
     return dados[0];
 
 }
@@ -325,9 +324,11 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
 
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
-    botaoModificarProduto.addEventListener('click', () => {
+    botaoModificarProduto.addEventListener('click', async () => {
+        const dadosBanco = await carregarDetalhesProduto();
+        
         const idProduto = localStorage.getItem('idProduto');
-
+        
         const tempoMaquina = document.getElementById('tempoMaquina').value;
         const tempoPessoa = document.getElementById('tempoPessoa').value;
         const unidadeRealizadora = document.getElementById('unidadeRealizadora').value;
@@ -340,7 +341,7 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
         valor = valor.replace(',', '.');
         const tecnico = document.getElementById('tecnicos').value;
         const idProposta = localStorage.getItem('idProposta');
-
+        
         // Obter a data inserida pelo usuário
         var dataInicialInserida = new Date(dataInicial);
         var dataFinalInserida = new Date(dataFinal);
@@ -350,20 +351,25 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
 
             alertas();
-        } else if (dataFinalInserida < dataInicialInserida){
+        } else if (dataFinalInserida < dataInicialInserida) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
-    
+
             alertas();
         } else if (dataInicialInserida > dataLimite) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data inicial fora do limite');
-    
+
             alertas();
         } else if (dataFinalInserida > dataLimite) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data final fora do limite');
-    
+
+            alertas();
+        }else if(dataInicial < dadosBanco.DataInicial){
+            localStorage.setItem('status', 'error');
+            localStorage.setItem('mensagem', 'Data inicial não pode ser menor que a anterior.');
+
             alertas();
         } else {
 
@@ -381,8 +387,8 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
                 tecnico: tecnico,
                 idProposta: idProposta
             }
-    
-    
+
+
             atualizarProduto(dadosParaEnviar);
         }
 
@@ -585,7 +591,7 @@ var horasRestantesMaquina;
 
 //         try {
 //             if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-                
+
 //                 localStorage.setItem('status', 'error');
 //                 localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
@@ -653,18 +659,18 @@ if (localStorage.getItem('cargo') == 'tec') {
 
     }
 
-/////////////////////////////
+    /////////////////////////////
 
-// MODAL DE CONFIRMAÇÃO PARA FINALIZAR PRODUTO
-function modalConfirmar(fun) {
+    // MODAL DE CONFIRMAÇÃO PARA FINALIZAR PRODUTO
+    function modalConfirmar(fun) {
 
-    const div = document.createElement('div');
-    const aside = document.createElement('aside');
+        const div = document.createElement('div');
+        const aside = document.createElement('aside');
 
-    div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
-    aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+        div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
+        aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
 
-    const templateModalConfirmar = `
+        const templateModalConfirmar = `
     <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
         <div>
             <h2 class="text-2xl font-bold text-color-text">DESEJA FINALIZAR O PRODUTO?</h2>
@@ -681,28 +687,28 @@ function modalConfirmar(fun) {
     `;
 
 
-    div.innerHTML = templateModalConfirmar;
+        div.innerHTML = templateModalConfirmar;
 
-    document.body.appendChild(div);
-    document.body.appendChild(aside)
+        document.body.appendChild(div);
+        document.body.appendChild(aside)
 
-    // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
-    document.querySelector('#btn-confirmar').addEventListener('click', () => {
-        concluirProduto()
-    })
+        // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
+        document.querySelector('#btn-confirmar').addEventListener('click', () => {
+            concluirProduto()
+        })
 
-    // APAGAR ELEMENTOS DE MODAL
-    aside.addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#btn-cancelar').addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-}
+        // APAGAR ELEMENTOS DE MODAL
+        aside.addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#btn-cancelar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+    }
 }
