@@ -309,7 +309,7 @@ async function lancamentoHoras(){
 
         if(localStorage.getItem('cargo') == 'tec'){
             const horasRestantes = 10 - resposta.horasDiariasPessoas;
-            const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+            const horasRestantesMaquina = 24 - resposta.horasDiariasMaquina;
     
             console.log(resposta.horasDiariasPessoas);
     
