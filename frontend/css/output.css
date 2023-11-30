@@ -1736,10 +1736,6 @@ video {
   padding-left: 2.5rem;
 }
 
-.pl-3 {
-  padding-left: 0.75rem;
-}
-
 .pl-4 {
   padding-left: 1rem;
 }
@@ -2132,6 +2128,24 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
 }
 
+/* Aplicando classes manualmente */
+
+.text-color-green-strong {
+  color: rgb(var(--strong-green));
+}
+
+.text-color-green {
+  color: rgb(var(--green));
+}
+
+.text-color-pink {
+  color: rgb(var(--pink));
+}
+
+.text-color-gray {
+  color: rgb(var(--gray));
+}
+
 .bg-color-green-strong\/20 {
   background-color: rgb(var(--strong-green) / 0.2);
 }
@@ -2140,20 +2154,12 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   background-color: rgb(var(--green) / 0.2);
 }
 
-.bg-color-orange\/20 {
-  background-color: rgb(var(--orange) / 0.2);
-}
-
 .bg-color-pink\/20 {
   background-color: rgb(var(--pink) / 0.2);
 }
 
 .bg-color-gray\/20 {
   background-color: rgb(var(--gray) / 0.2);
-}
-
-.bg-color-red\/20 {
-  background-color: rgb(var(--red) / 0.2);
 }
 
 .placeholder\:text-xs::-moz-placeholder {

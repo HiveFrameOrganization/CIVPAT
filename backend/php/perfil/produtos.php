@@ -24,7 +24,7 @@ function retornaProdutos($nif, $pagina, $conn)
 
     // Preparando a query
     $stmt = $conn->prepare("SELECT * FROM vw_produtos 
-    WHERE NIF = ? AND (Status = 'Aceito' OR Status = 'Em Análise') LIMIT ?, ?");;
+    WHERE NIF = ? AND (Situacao = 'Aceito' OR Situacao = 'Em andamento') LIMIT ?, ?");;
     $stmt->bind_param("sii", $nif, $inicioProdutos, $quantidadeDeProdutos); // "i" indica um valor inteiro
 
     $stmt->execute();

@@ -6,6 +6,9 @@ module.exports = {
         './frontend/js/**/*',
         './frontend/js*'
     ],
+    colors: {
+        'pink': '#de378d'
+    },
     theme: {
         colors: {
             'body': 'rgb(var(--bg-body) / <alpha-value>)',

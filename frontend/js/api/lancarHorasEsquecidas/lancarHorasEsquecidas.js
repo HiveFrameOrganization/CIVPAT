@@ -63,10 +63,13 @@ async function lancarHoraParaOTecnico () {
         
         const horasRestantes = 10 - resposta['horaPessoaTrabalhadas']
     
-        const horasRestantesMaquina = 10 - resposta['horaMaquinaTrabalhadas']
+        const horasRestantesMaquina = 24 - resposta['horaMaquinaTrabalhadas']
         
 
         
+        console.log(horasRestantes)
+        console.log(horasRestantesMaquina)
+            
 
         if (horaPessoa > horasRestantes || horaMaquina > horasRestantesMaquina) {
             localStorage.setItem('status', 'error');

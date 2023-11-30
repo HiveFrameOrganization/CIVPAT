@@ -10,11 +10,7 @@ var horasRestantes;
 var horasRestantesMaquina;
 
 async function LancamentoHoras() {
-    const autenticado = await autenticacao(['tec'], false)
-    if(!autenticado){
-        return;
-    }
-
+    
     const id = localStorage.getItem('idProduto');
 
     try {
@@ -107,9 +103,9 @@ async function LancamentoHoras() {
             }
 
             if (resposta.totalHorasMaquinaDiarias == undefined) {
-                horasRestantesMaquina = 10 - 0;
+                horasRestantesMaquina = 24 - 0;
             } else {
-                horasRestantesMaquina = 10 - (resposta.totalHorasMaquinaDiarias);
+                horasRestantesMaquina = 24 - (resposta.totalHorasMaquinaDiarias);
             }
 
 
@@ -203,10 +199,7 @@ if (localStorage.getItem('cargo') == 'tec') {
                 alertas();
             }
             else{
-                const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-                if(!autenticado){
-                    return;
-                }
+           
 
                 const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
                     method: 'POST',
