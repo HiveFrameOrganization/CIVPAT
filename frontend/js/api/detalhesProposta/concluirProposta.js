@@ -5,11 +5,11 @@ export default async function concluirProposta() {
 
     const baixarPdfOrcamento = document.getElementsByClassName('sumirOrcamento')[0];
     const baixarPdfPropostaAssinada = document.getElementsByClassName('sumirPropostaAssinada')[0];
+    const baixarPdfRelatorioFinal = document.getElementsByClassName('sumirRelatorioFinal')[0];
+    const baixarPdfPesquisaDeSatisfacao = document.getElementsByClassName('sumirPesquisaDeSatisfacao')[0];
     let aceitar = true;
     let pdfObrigatorio = !baixarPdfOrcamento.classList.contains('hidden') 
-    && !baixarPdfPropostaAssinada.classList.contains("hidden")
-
-    var produtosConcluidos = false;
+    && !baixarPdfPropostaAssinada.classList.contains("hidden") && !baixarPdfRelatorioFinal.classList.contains("hidden") && !baixarPdfPesquisaDeSatisfacao.classList.contains("hidden");
 
     if (aceitar) {
         for (let i = 0; i < document.getElementsByClassName('p-2 text-lg').length; i++) {
@@ -35,19 +35,23 @@ export default async function concluirProposta() {
         }
     }
 
-    
 
 
-    console.log(pdfObrigatorio)
+
+    console.log(pdfObrigatorio);
+
+
     if (aceitar && pdfObrigatorio) {
-        const botaoAceitar = document.getElementById('aceitarProposta');
+        const botaoConcluir = document.getElementById('concluirProposta');
         const idProposta = localStorage.getItem('idProposta');
-        const tipoAceite = (botaoAceitar.value == 'ACEITAR') ? 'Aceito' : 'Solicitação de Aceite';
+        const tipoConclusao = (botaoConcluir.value == 'CONCLUIR') ? 'Concluido' : 'Solicitação de conclusão';
 
         // criando uma variável para enviar a lista para o php, transformando o string em objeto json
-        const requisicao = await fetch(back + `/detalhesProposta/aceitarProposta.php?id=${idProposta}&tipoAceite=${tipoAceite}`);
+        const requisicao = await fetch(back + `/detalhesProposta/concluirProposta.php?id=${idProposta}&tipoConclusao=${tipoConclusao}`);
 
         const resposta = await requisicao.json();
+
+        console.log(resposta);
 
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
@@ -77,3 +81,9 @@ export default async function concluirProposta() {
     }
     
 }
+
+const botaoConcluir = document.getElementById('concluirProposta');
+
+botaoConcluir.addEventListener('click', () => {
+    concluirProposta();
+});

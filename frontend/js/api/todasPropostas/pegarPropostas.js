@@ -23,7 +23,7 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
     document.getElementById('declinados').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
     document.getElementById('concluidos').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
     document.getElementById('soli-aceite').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-    document.getElementById('soli-declinio').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
+
 
     const pesquisaAtual = '%' + document.getElementById('hidden-input').value + '%';
 
@@ -62,7 +62,6 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
             document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : 'N/A';
             document.getElementById('concluidos').textContent = dados['Concluido'] ? `# ${dados['Concluido']}` : 'N/A';
             document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] ? `# ${dados['SolicitacaoDeAceite']}` : 'N/A';
-            document.getElementById('soli-declinio').textContent = dados['SolicitacaoDeDeclinio'] ? `# ${dados['SolicitacaoDeDeclinio']}` : 'N/A';
 
 
             console.log(dados)
