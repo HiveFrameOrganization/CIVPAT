@@ -1,14 +1,15 @@
 import { back } from "../Rotas/rotas.js";
 import alertas from "../../feedback.js";
-import { autenticacao } from '../login/autenticacao.js';
 
-export default async function aceitarProposta() {
+export default async function concluirProposta() {
 
     const baixarPdfOrcamento = document.getElementsByClassName('sumirOrcamento')[0];
     const baixarPdfPropostaAssinada = document.getElementsByClassName('sumirPropostaAssinada')[0];
     let aceitar = true;
     let pdfObrigatorio = !baixarPdfOrcamento.classList.contains('hidden') 
     && !baixarPdfPropostaAssinada.classList.contains("hidden")
+
+    var produtosConcluidos = false;
 
     if (aceitar) {
         for (let i = 0; i < document.getElementsByClassName('p-2 text-lg').length; i++) {
@@ -18,7 +19,7 @@ export default async function aceitarProposta() {
                     aceitar = result
                     break
                 }
-            }
+            }   
         }
     }
 
@@ -34,14 +35,14 @@ export default async function aceitarProposta() {
         }
     }
 
+    
+
 
     console.log(pdfObrigatorio)
     if (aceitar && pdfObrigatorio) {
         const botaoAceitar = document.getElementById('aceitarProposta');
-        const botaoConcluir = document.getElementById('concluirProposta');
         const idProposta = localStorage.getItem('idProposta');
         const tipoAceite = (botaoAceitar.value == 'ACEITAR') ? 'Aceito' : 'Solicitação de Aceite';
-        const tipoConcluir = (botaoConcluir.value == 'CONCLUIR') ? 'Concluido' : 'Solicitação de concluir'
 
         // criando uma variável para enviar a lista para o php, transformando o string em objeto json
         const requisicao = await fetch(back + `/detalhesProposta/aceitarProposta.php?id=${idProposta}&tipoAceite=${tipoAceite}`);
