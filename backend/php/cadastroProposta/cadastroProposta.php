@@ -36,7 +36,7 @@ function cadastrarGerente($dadosProposta, $conn, $dados) {
         $resposta = [
             'status' => 'success',
             'mensagem' => 'Proposta Cadastrada',
-            'historico' => $historico['status']
+            'historico' => $historico
         ];
 
         echo json_encode($resposta);
