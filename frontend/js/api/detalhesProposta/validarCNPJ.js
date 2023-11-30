@@ -1,4 +1,8 @@
 export default function validarCNPJ(cnpj) {
+    if (cnpj == '') {
+        return true
+    }
+
     // Remover caracteres não numéricos
     cnpj = cnpj.replace(/[^\d]/g, '');
 

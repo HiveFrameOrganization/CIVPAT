@@ -257,7 +257,13 @@ function exibirProdutos(produtos) {
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize" title="${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}">${produto['NomeProduto'] ? produto['NomeProduto'] : 'N/A'}</span>
                             <span title="${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['ServicoCategoria'] ? produto['ServicoCategoria'] : 'N/A'}</span>
                         </div>
-                    </div>
+                        </div>
+                        <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
+                            <div class="flex flex-col gap-1 font-semibold w-[100px]">
+                                <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Proposta</span>
+                                <span title="${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['TituloProposta'] ? produto['TituloProposta'] : 'N/A'}</span>
+                            </div>
+                        </div>
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <div class="flex flex-col gap-1 font-semibold w-[100px]">
                             <span class="text-lg leading-4 overflow-hidden text-ellipsis whitespace-nowrap capitalize">Máquina</span>
@@ -276,7 +282,7 @@ function exibirProdutos(produtos) {
                             <span title="${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}" class="text-xs text-color-text-secundary capitalize overflow-hidden text-ellipsis whitespace-nowrap">${produto['DataFinal'] ? produto['DataFinal'].split('-').reverse().join('/') : 'N/A'}</span>
                         </div>
                     </div>
-                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase">${produto['Situacao'] ? produto['Situacao'] : 'N/A'}</span>
+                    <span class="bg-${color}/20 rounded-md text-${color} font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${produto['Situacao'] ? produto['Situacao'] : 'N/A'}</span>
                 </div>
             </div>
             <div class="area-right bg-component rounded-md px-3 md:px-4 flex items-center justify-center">

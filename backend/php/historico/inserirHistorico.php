@@ -13,10 +13,12 @@ function inserirHistorico($conn, $idFunilAtual, $idProposta, $primeiro)
         $dadosSelect = mysqli_fetch_assoc($resultadoSelect);
     } else {
         $dadosSelect = ['fk_idStatusAtual' => 1, 'DataFinal' => date('Y-m-d')];
+        $idFunilAtual += 1;
     }
 
-
+    
     if ($dadosSelect['fk_idStatusAtual'] != $idFunilAtual) {
+        if($primeiro) { $idFunilAtual -= 1; }
         // Preparando a inserção
         $stmtInsert = $conn->prepare("INSERT INTO Historico VALUES
         (default, ?, ?, ?, ?, NOW())");
