@@ -7,10 +7,7 @@ import { autenticacao } from '../login/autenticacao.js';
 import alertas from '../../feedback.js';
 
 export default async function salvarMudancasNaProposta() {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
+
 
     const idProposta = localStorage.getItem('idProposta');
 
