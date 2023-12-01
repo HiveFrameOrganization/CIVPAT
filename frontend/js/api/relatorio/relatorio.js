@@ -26,7 +26,6 @@ exibir.addEventListener('click', event => {
     if (closest){
         const produtos = closest.querySelectorAll('#produto');
         for (let produto of produtos){
-            console.log(produto)
             if (produto.classList.contains('hidden')) {
                 produto.classList.remove('hidden');
                 closest.querySelector('#setaDropdown').classList.add('rotate-180');
