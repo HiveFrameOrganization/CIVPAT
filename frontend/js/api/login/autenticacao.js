@@ -13,6 +13,7 @@ export async function autenticacao(cargo, load) {
         console.log(localStorage.getItem('token'))
         setTimeout(() => {token = localStorage.getItem('token')}, 1000)
         console.log(localStorage.getItem('token'))
+        console.log(token)
 
         if (!token) {
 
