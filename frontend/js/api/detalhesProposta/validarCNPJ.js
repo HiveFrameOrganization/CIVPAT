@@ -1,6 +1,6 @@
 export default function validarCNPJ(cnpj) {
     
-    if (localStorage.getItem('statusProposta') == 'Em Análise'){
+    if (localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
 
         if (cnpj == '') {
             return true

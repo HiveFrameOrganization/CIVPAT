@@ -122,6 +122,9 @@ export default function desativaBotoes(){
             })
             btnProduto.parentElement.removeChild(btnProduto);
 
+        } else {
+            btnAceitar.parentElement.removeChild(btnAceitar);
+            btnEditar.parentElement.removeChild(btnEditar);
         }
     }
 }
