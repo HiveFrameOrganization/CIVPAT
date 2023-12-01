@@ -16,6 +16,7 @@ Um agradecimento especial a todos os participantes:
 <br> Leonardo
 <br> Ribamar
 <br> Matheus
+<br> Renato
 
 # DEPLOY DESENVOLVIMENTO
 https://container-dev.icyflower-ac75c6b1.eastus.azurecontainerapps.io/
