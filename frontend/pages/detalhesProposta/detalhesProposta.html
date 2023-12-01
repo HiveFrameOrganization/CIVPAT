@@ -33,6 +33,7 @@
                 --green: 36 194 146;
                 --purple: 121 80 255;
                 --orange: 252 160 1;
+                --gray: 115 115 115;
             }
 
             @media (prefers-color-scheme: light) {
@@ -131,7 +132,8 @@
                     'color-red': 'rgb(var(--red) / <alpha-value>)',
                     'color-green': 'rgb(var(--green) / <alpha-value>)',
                     'color-purple': 'rgb(var(--purple) / <alpha-value>)',
-                    'color-orange': 'rgb(var(--orange) / <alpha-value>)'
+                    'color-orange': 'rgb(var(--orange) / <alpha-value>)',
+                    'color-gray': 'rgb(var(--gray) / <alpha-value>)'
                 }
             },
         }
@@ -553,11 +555,11 @@
                             class="bg-color-green py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors cursor-pointer"
                             type="button" value="ACEITAR" id="aceitarProposta">
 
-                            <button id="concluirProposta" value = 'CONCLUIR'>CONCLUIR PROPOSTA</button>
+                        <input aria-label="Concluir proposta" type="button" id="concluirProposta" class="bg-primary py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors cursor-pointer" value = 'CONCLUIR'>
 
                         <input
                             aria-label="Editar proposta"
-                            class="bg-primary py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-primary hover:bg-[transparent] hover:text-primary transition-colors cursor-pointer"
+                            class="bg-color-gray py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-gray hover:bg-[transparent] hover:text-color-gray transition-colors cursor-pointer"
                             type="button" value="EDITAR" id="editarProposta">
                     </div>
                     <div>         
@@ -595,7 +597,7 @@
                                         onclick="document.querySelector('.inputOrçamento').click()">
                                     <!-- input que sera salvo o pdf -->
                                     <input type="file" accept=".pdf" onchange="" id="orcamento"
-                                        class="inputOrçamento hidden">
+                                        class="inputOrçamento hidden pdf">
                                 </div>
 
                                 <div class="relative sumirOrcamento hidden">
@@ -628,7 +630,7 @@
                                         readonly
                                         onclick="document.querySelector('#propostaAssinada').click()">
 
-                                    <input type="file" accept=".pdf" onchange="" id="propostaAssinada" class="hidden">
+                                    <input type="file" accept=".pdf" onchange="" id="propostaAssinada" class="hidden pdf">
                                 </div>
 
                                 <!-- input download -->
@@ -672,7 +674,7 @@
                                         readonly
                                         onclick="document.querySelector('#relatorioFinal').click()">
 
-                                    <input type="file" accept=".pdf" onchange="" id="relatorioFinal" class="hidden">
+                                    <input type="file" accept=".pdf" onchange="" id="relatorioFinal" class="hidden pdf">
                                 </div>
 
                                 <!-- input download -->
@@ -705,7 +707,7 @@
                                         placeholder="Upload de arquivos"
                                         readonly
                                         onclick="document.querySelector('#pesquisaDeSatisfacao').click()">
-                                    <input type="file" accept=".pdf" onchange="" aria-label="Pesquisa de satisfação" id="pesquisaDeSatisfacao" class="hidden">
+                                    <input type="file" accept=".pdf" onchange="" aria-label="Pesquisa de satisfação" id="pesquisaDeSatisfacao" class="hidden pdf">
                                 </div>
 
                                 <!-- input download -->
