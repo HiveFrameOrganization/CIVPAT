@@ -187,6 +187,12 @@ async function exibirPropostas(propostas){
                 optionIMG = '#DE378D';
                 color = 'color-pink';
                 statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`;
+            } else if (status = 'Solicitação de conclusão'){
+
+                statusDescricao = 'Solicitação de Conclusão';
+                optionIMG = '#3976d1';
+                color = 'primary';
+                statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`;
             } else {
 
                 statusDescricao = 'N/A';
