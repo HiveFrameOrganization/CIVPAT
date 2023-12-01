@@ -103,5 +103,25 @@ export default function desativaBotoes(){
         } else {
             btnConcluir.parentElement.removeChild(btnConcluir);
         }
+    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de conclusão'){
+        
+        // REMOVENDO BOTÕES DE PROPOSTAS EM SOLICITAÇÃO DE CONCLUSÃO
+        if (localStorage.getItem('cargo').toLocaleLowerCase() == 'ger' || localStorage.getItem('cargo').toLocaleLowerCase() == 'tec') {
+
+            btnAceitar.parentElement.removeChild(btnAceitar);
+            btnDeclinar.parentElement.removeChild(btnDeclinar);
+            btnEditar.parentElement.removeChild(btnEditar);
+            btnConcluir.parentElement.removeChild(btnConcluir);
+            btnPdf.parentElement.removeChild(btnPdf);
+            btnFollowUp.parentElement.removeChild(btnFollowUp);
+            inputsPdf.forEach((input) => {
+                input.disabled = true;
+            });
+            editFollowUp.forEach((icon) => {
+                icon.parentElement.removeChild(icon);
+            })
+            btnProduto.parentElement.removeChild(btnProduto);
+
+        }
     }
 }

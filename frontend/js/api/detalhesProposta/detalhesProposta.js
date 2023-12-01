@@ -191,6 +191,7 @@ editandoProposta.addEventListener('click', () => {
 
         aceitarPropostaButton.parentElement.removeChild(aceitarPropostaButton);
         declinarPropostaButton.parentElement.removeChild(declinarPropostaButton);
+        concluirPropostaButton.parentElement.removeChild(concluirPropostaButton);
 
         editandoProposta.value = 'SALVAR'
 
@@ -213,6 +214,7 @@ editandoProposta.addEventListener('click', () => {
 
 const aceitarPropostaButton = document.getElementById('aceitarProposta');
 const declinarPropostaButton = document.getElementById('declinarProposta');
+const concluirPropostaButton = document.getElementById('concluirProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
 const cnpj = document.getElementById('cnpj');
