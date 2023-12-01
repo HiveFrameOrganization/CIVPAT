@@ -9,15 +9,6 @@ let gerenteEncarregado;
 
 // Chamando a função quando carregar a página
 window.addEventListener('load', async () => {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if (!autenticado) {
-        localStorage.clear();
-        localStorage.setItem('status', 'error');
-        localStorage.setItem('mensagem', 'Autenticação inválida, realize o login novamente')
-
-        window.location.pathname = '';
-        return;
-    }
     let gerentes = await pegarGerentes();
 
     const cargo = localStorage.getItem('cargo');

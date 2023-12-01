@@ -11,6 +11,7 @@
     <button id="deslogar">Deslogar</button>
 
     <script>
+        import { back, raiz } from "../../js/api/Rotas.js";
         const botaoDeslogar = document.querySelector('#deslogar');
         botaoDeslogar.addEventListener('click', async () => {
             try {
@@ -18,13 +19,13 @@
                 localStorage.clear();
         
                 // Requisição para sair da conta
-                const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
+                const deslogar = await fetch(back + `/login/sair.php`);
         
                 const resposta = await deslogar.json();
         
                 console.log(resposta);
 
-                window.location.href = 'http://localhost:8080/';
+                window.location.href = raiz;
 
             } catch (erro) {
                 console.error(erro);
