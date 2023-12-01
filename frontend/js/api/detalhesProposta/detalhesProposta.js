@@ -222,8 +222,8 @@ const propostaAssinadaInput = document.getElementById('propostaAssinada');
 const cnpj = document.getElementById('cnpj');
 const nSGSET = document.getElementById('numeroSGSET');
 
-// Executando a função 'aceitarProposta'.
 
+// Executando a função 'aceitarProposta'.
 function eventListenerExibirModal(exibir) {
 
     // exibir = True || False
@@ -238,14 +238,8 @@ function eventListenerExibirModal(exibir) {
 
 
 aceitarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, true))
-
 declinarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, false))
 
-// const botaoDeclinarProposta = document.getElementById('declinarProposta');
-
-// botaoDeclinarProposta.addEventListener('click', () => {
-//     declinarPropostaBanco();
-// })
 
 // abrir modal de cadastro de produto
 document.querySelector('#btnNovoProduto').addEventListener('click', () => {

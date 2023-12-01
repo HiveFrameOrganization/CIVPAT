@@ -36,12 +36,8 @@ export default async function concluirProposta() {
     }
 
 
-
-
-    console.log(pdfObrigatorio);
-
-
     if (aceitar && pdfObrigatorio) {
+
         const botaoConcluir = document.getElementById('concluirProposta');
         const idProposta = localStorage.getItem('idProposta');
         const tipoConclusao = (botaoConcluir.value == 'CONCLUIR') ? 'Concluido' : 'Solicitação de conclusão';
@@ -85,5 +81,17 @@ export default async function concluirProposta() {
 const botaoConcluir = document.getElementById('concluirProposta');
 
 botaoConcluir.addEventListener('click', () => {
-    concluirProposta();
+    Swal.fire({
+        title: 'Concluir proposta?',
+        icon: 'info',
+        text: 'Você não poderá reverter isso!',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, concluir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+
+        result.isConfirmed && concluirProposta();
+    });
 });

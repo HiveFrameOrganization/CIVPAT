@@ -18,7 +18,25 @@ window.addEventListener('load', () => {
     exibirRelatorio(null)
 })
 
-let exibir = document.querySelector('#exibir')
+let exibir = document.querySelector('#exibir');
+
+exibir.addEventListener('click', event => {
+    const el = event.target;
+    const closest = el.closest('.cursor-pointer');
+    if (closest){
+        const produtos = closest.querySelectorAll('#produto');
+        for (let produto of produtos){
+            console.log(produto)
+            if (produto.classList.contains('hidden')) {
+                produto.classList.remove('hidden');
+                closest.querySelector('#setaDropdown').classList.add('rotate-180');
+            } else {
+                produto.classList.add('hidden');
+                closest.querySelector('#setaDropdown').classList.remove('rotate-180');
+            }
+        }
+    }
+});
 
 async function buscarRelatorio(mes, ano, valor = false) {
     const autenticado = await autenticacao(['adm', 'tec' ], false)
@@ -191,23 +209,8 @@ async function exibirRelatorio(res) {
                 for (let dado of res.dados) {
                     if (proposta === dado.TituloProposta && produto === dado.NomeProduto) {
                         let horas = createHoras();
-                        horas.innerHTML += criarHoras(dado)
-                        all.addEventListener('click', () => {
-                            if (horas.classList.contains('hidden')) {
-                                horas.classList.remove('hidden')
-                                all.classList.toggle('bg-component')
-                                document.querySelector('#setaDropdown').classList.add('rotate-180')
-                                cabeçalho.classList.add('bg-body')
-                                cabeçalho.classList.remove('bg-component')
-                            } else {
-                                horas.classList.add('hidden')
-                                all.classList.toggle('bg-component')
-                                document.querySelector('#setaDropdown').classList.remove('rotate-180')
-                                cabeçalho.classList.remove('bg-body')
-                                cabeçalho.classList.add('bg-component')
-                            }
-                        })
-                        all.appendChild(horas)
+                        horas.innerHTML += criarHoras(dado);
+                        all.appendChild(horas);
                     }
                 }
                 exibir.appendChild(all)
@@ -302,6 +305,7 @@ function createCabecalho() {
 function createHoras() {
     const horas = document.createElement('div');
     horas.classList = 'rounded-b-xl hidden bg-component flex flex-col pb-4 transition-all mb-8';
+    horas.id = 'produto';
     return horas;
 }
 
