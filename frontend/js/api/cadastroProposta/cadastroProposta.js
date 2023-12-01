@@ -115,11 +115,6 @@ formularioProposta.addEventListener('submit', async evento => {
 
 // Envia os dados contido no argumento para o back
 async function enviaBackEnd(dadosEnviados) {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
-
     try {
         let resposta = await fetch(back + `/cadastroProposta/cadastroProposta.php`, {
             method: 'POST',
@@ -146,11 +141,6 @@ async function enviaBackEnd(dadosEnviados) {
 
 // Funcao para retornar o nome, sobrenome e NIF dos gerentes
 async function pegarGerentes() {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
-
     try {
         let resposta = await fetch(back + '/cadastroProposta/pegarGerentes.php', {
             method: 'POST',
