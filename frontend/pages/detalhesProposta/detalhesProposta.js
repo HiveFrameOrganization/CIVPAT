@@ -63,7 +63,7 @@ numeroSGSET.addEventListener('input', function () {
     numeroSGSET.value = valorFormatado;
 
     if (isValidoNumeroSGSET(valorSanitizado)) {
-        localStorage.setItem('sgsetValido', 'válido')
+      localStorage.setItem('sgsetValido', 'válido')
     } else {
       localStorage.setItem('sgsetValido', 'inválido')
     }
