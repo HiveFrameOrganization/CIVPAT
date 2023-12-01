@@ -191,7 +191,7 @@ editandoProposta.addEventListener('click', () => {
 
         aceitarPropostaButton.parentElement.removeChild(aceitarPropostaButton);
         declinarPropostaButton.parentElement.removeChild(declinarPropostaButton);
-        concluirPropostaButton.parentElement.removeChild(concluirPropostaButton);
+        // concluirPropostaButton.parentElement.removeChild(concluirPropostaButton);
 
         editandoProposta.value = 'SALVAR'
 

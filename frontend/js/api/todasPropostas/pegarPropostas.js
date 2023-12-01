@@ -5,10 +5,6 @@ import exibirPropostas from './renderizarProposta.js';
 import { autenticacao } from '../login/autenticacao.js';
 
 export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
 
     document.getElementById('table').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>

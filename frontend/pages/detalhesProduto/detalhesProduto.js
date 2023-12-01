@@ -670,7 +670,7 @@ if (localStorage.getItem('cargo') == 'tec') {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
 
-            result.isConfirmed && aceitarProposta();
+            result.isConfirmed && concluirProduto();
         });
     }
 }
