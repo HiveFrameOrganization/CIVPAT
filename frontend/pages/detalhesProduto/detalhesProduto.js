@@ -3,8 +3,8 @@ import alertas from '../../js/feedback.js';
 
 window.addEventListener('load', async () => {
     alertas();
-    carregarTecnicos();
-    pegarUnidadesCriadoras();
+    await carregarTecnicos();
+    await pegarUnidadesCriadoras();
     // LancamentoHoras();
 
     const produtoSelect = document.getElementById("produto");
@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
     localStorage.setItem('tempoPessoa', dadosProduto['HoraPessoa']);
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
-    document.getElementById('valor').value = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(dadosProduto['Valor']);
+    document.getElementById('valor').value = dadosProduto['Valor'];
     document.getElementById('situacaoProduto').value = dadosProduto['Situacao'];
     localStorage.setItem('situacaoProduto', dadosProduto['Situacao']);
 
@@ -93,36 +93,36 @@ window.addEventListener('load', async () => {
 })
 
 
-async function gerarHora(){
-   
-    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    // try {
-    //     const resultado = await resposta.json();
+// async function gerarHora() {
 
-    //     const dataApi = resultado['datetime'];
+//     // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+//     // try {
+//     //     const resultado = await resposta.json();
 
-    //     const dataFormatada = dataApi.substring(0, 10);
+//     //     const dataApi = resultado['datetime'];
 
-    //     return dataFormatada.replace(/T/i, " ");  
+//     //     const dataFormatada = dataApi.substring(0, 10);
 
-    // } catch (error) {
-    //     console.log('Sistema de horas apresentou um erro');
+//     //     return dataFormatada.replace(/T/i, " ");
 
-    //     const data = Date()  
-    // }
+//     // } catch (error) {
+//     //     console.log('Sistema de horas apresentou um erro');
 
-    // Obtém a data atual
-    const dataAtual = new Date();
+//     //     const data = Date()
+//     // }
 
-    // Obtém a data atual em um formato legível
-    const dataAtualFormatada = dataAtual.toLocaleDateString();
+//     // Obtém a data atual
+//     const dataAtual = new Date();
 
-    return dataAtualFormatada;
-}
+//     // Obtém a data atual em um formato legível
+//     const dataAtualFormatada = dataAtual.toLocaleDateString();
+
+//     return dataAtualFormatada;
+// }
 
 
 // formatar a data
-const hoje = new Date(await gerarHora());
+const hoje = new Date();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
@@ -182,7 +182,7 @@ async function carregarTecnicos() {
 
 
 // window.addEventListener('load', async function () {
-    
+
 // })
 
 
@@ -240,7 +240,6 @@ async function carregarDetalhesProduto() {
 
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
-
 
     return dados[0];
 
@@ -318,13 +317,15 @@ async function atualizarProduto(dados) {
 
 if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))) {
 
-    const dataAtual = new Date(await gerarHora());
+    const dataAtual = new Date();
     var dataLimite = new Date('9999-12-31');
     var dataInserida = new Date(document.getElementById('dataInicial').value);
 
     const botaoModificarProduto = document.getElementById('modificarProduto');
 
-    botaoModificarProduto.addEventListener('click', () => {
+    botaoModificarProduto.addEventListener('click', async () => {
+        const dadosBanco = await carregarDetalhesProduto();
+
         const idProduto = localStorage.getItem('idProduto');
 
         const tempoMaquina = document.getElementById('tempoMaquina').value;
@@ -349,20 +350,20 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
             localStorage.setItem('mensagem', 'Data inicial inserida ja passou');
 
             alertas();
-        } else if (dataFinalInserida < dataInicialInserida){
+        } else if (dataFinalInserida < dataInicialInserida) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data final não pode ser antes da data inicial');
-    
+
             alertas();
         } else if (dataInicialInserida > dataLimite) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data inicial fora do limite');
-    
+
             alertas();
         } else if (dataFinalInserida > dataLimite) {
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'Data final fora do limite');
-    
+
             alertas();
         } else {
 
@@ -380,8 +381,8 @@ if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo')
                 tecnico: tecnico,
                 idProposta: idProposta
             }
-    
-    
+
+
             atualizarProduto(dadosParaEnviar);
         }
 
@@ -584,7 +585,7 @@ var horasRestantesMaquina;
 
 //         try {
 //             if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-                
+
 //                 localStorage.setItem('status', 'error');
 //                 localStorage.setItem('mensagem', 'Horas informadas invalidas');
 
@@ -652,18 +653,18 @@ if (localStorage.getItem('cargo') == 'tec') {
 
     }
 
-/////////////////////////////
+    /////////////////////////////
 
-// MODAL DE CONFIRMAÇÃO PARA FINALIZAR PRODUTO
-function modalConfirmar(fun) {
+    // MODAL DE CONFIRMAÇÃO PARA FINALIZAR PRODUTO
+    function modalConfirmar(fun) {
 
-    const div = document.createElement('div');
-    const aside = document.createElement('aside');
+        const div = document.createElement('div');
+        const aside = document.createElement('aside');
 
-    div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
-    aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+        div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
+        aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
 
-    const templateModalConfirmar = `
+        const templateModalConfirmar = `
     <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
         <div>
             <h2 class="text-2xl font-bold text-color-text">DESEJA FINALIZAR O PRODUTO?</h2>
@@ -680,28 +681,36 @@ function modalConfirmar(fun) {
     `;
 
 
-    div.innerHTML = templateModalConfirmar;
+        div.innerHTML = templateModalConfirmar;
 
-    document.body.appendChild(div);
-    document.body.appendChild(aside)
+        document.body.appendChild(div);
+        document.body.appendChild(aside)
 
-    // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
-    document.querySelector('#btn-confirmar').addEventListener('click', () => {
-        concluirProduto()
-    })
+        // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
+        document.querySelector('#btn-confirmar').addEventListener('click', () => {
+            concluirProduto()
+        })
 
-    // APAGAR ELEMENTOS DE MODAL
-    aside.addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
-    document.querySelector('#btn-cancelar').addEventListener('click', () => {
-        document.body.removeChild(div)
-        document.body.removeChild(aside)
-    })
+        // APAGAR ELEMENTOS DE MODAL
+        aside.addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+        document.querySelector('#btn-cancelar').addEventListener('click', () => {
+            document.body.removeChild(div)
+            document.body.removeChild(aside)
+        })
+    }
 }
-}
+
+var valor = document.getElementById('valor')
+
+valor.addEventListener('input', () => {
+    if (valor.value.length > valor.maxLength) {
+        valor.value = valor.value.slice(0, valor.maxLength);
+    }
+})

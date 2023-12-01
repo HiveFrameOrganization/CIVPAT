@@ -7,7 +7,7 @@
     <title>Visão Geral - HIVEFRAME</title>
     <script type="module">
         import { autenticacao } from '../../js/api/login/autenticacao.js';
-        autenticacao(['coor', 'adm', 'ger']);
+        autenticacao(['coor', 'adm', 'ger'], true);
     </script>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../../Componentes/telaLoad/style.css">
@@ -25,6 +25,9 @@
                 --green: 36 194 146;
                 --purple: 121 80 255;
                 --orange: 252 160 1;
+                --strong-green: 29 204 52;
+                --pink: 222 55 141;
+                --gray: 115 115 115;
             }
 
             @media (prefers-color-scheme: light) {
@@ -109,7 +112,10 @@
                     'color-red': 'rgb(var(--red) / <alpha-value>)',
                     'color-green': 'rgb(var(--green) / <alpha-value>)',
                     'color-purple': 'rgb(var(--purple) / <alpha-value>)',
-                    'color-orange': 'rgb(var(--orange) / <alpha-value>)'
+                    'color-orange': 'rgb(var(--orange) / <alpha-value>)',
+                    'color-green-strong': 'rgb(var(--strong-green) / <alpha-value>)',
+                    'color-gray': 'rgb(var(--gray) / <alpha-value>)',
+                    'color-pink': 'rgb(var(--pink) / <alpha-value>)'
                 }
             },
         }
@@ -285,19 +291,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" alt="Solicitações para aceitar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
                     </div>
                     <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
-                        <h5 class="font-medium text-sm text-primary whitespace-nowrap">Solicitações de aceite</h5>
+                        <h5 class="font-medium text-sm text-primary whitespace-nowrap">Solicitações</h5>
                         <span id="soli-aceite" class="font-medium text-lg text-color-text-secundary">
-                            
-                        </span>
-                    </div>
-                </div>
-                <div class="flex rounded-lg border border-[transparent] hover:border-primary transition-all">
-                    <div class="bg-primary/40 px-4 py-8 rounded-s-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" alt="Solicitações para declinar" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3976d1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
-                    </div>
-                    <div class="w-full bg-component rounded-e-lg flex flex-col justify-center items-start gap-2 px-3 py-6">
-                        <h5 class="font-medium text-sm text-primary whitespace-nowrap">Solicitações de declínio</h5>
-                        <span id="soli-declinio" class="font-medium text-lg text-color-text-secundary">
                             
                         </span>
                     </div>

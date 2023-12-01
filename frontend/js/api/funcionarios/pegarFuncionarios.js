@@ -1,9 +1,13 @@
 import { back } from '../Rotas/rotas.js'
 import exibir from './renderizarTelaFuncionarios.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 // Funão para retornar uma lisat de funcionários
 async function retornaFuncionarios(filtro, pesquisado) {
-
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
 
     document.getElementById('exibicao').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>

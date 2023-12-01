@@ -1,5 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 
 const botaoLancarHora = document.getElementById('lancarHoras');
@@ -9,6 +10,10 @@ botaoLancarHora.addEventListener('click', () => {
 })
 
 async function setarData(dadosEnviados) {
+    const autenticado = await autenticacao(['coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 
@@ -37,9 +42,9 @@ async function setarData(dadosEnviados) {
 
 async function lancarHoraParaOTecnico () {
     // const nifTec = localStorage.getItem('nifPerfil');
+
     try{
         
-    
         const horaPessoa = document.getElementById('horaPessoaParaLancar').value;
         const horaMaquina = document.getElementById('horaMaquinaParaLancar').value;
         const nifTecnico = document.getElementById('tecnicos').value;
@@ -58,10 +63,13 @@ async function lancarHoraParaOTecnico () {
         
         const horasRestantes = 10 - resposta['horaPessoaTrabalhadas']
     
-        const horasRestantesMaquina = 10 - resposta['horaMaquinaTrabalhadas']
+        const horasRestantesMaquina = 24 - resposta['horaMaquinaTrabalhadas']
         
 
         
+        console.log(horasRestantes)
+        console.log(horasRestantesMaquina)
+            
 
         if (horaPessoa > horasRestantes || horaMaquina > horasRestantesMaquina) {
             localStorage.setItem('status', 'error');
@@ -107,7 +115,7 @@ async function lancarHoraParaOTecnico () {
                 localStorage.setItem('mensagem', resposta.mensagem);
             
                 if (resposta.status == 'success'){
-                    // window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
+                    window.location.href = '../lancarHorasEsquecidas/lancarHorasEsquecidas.html';
                 } else {
                     alertas();
                 }

@@ -19,23 +19,17 @@ export default async function exibirProdutos(produtos) {
 
         valor = new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(valor);
     
-        let status = 'em análise'
+        let status = produto['Situacao'].toLowerCase();
 
-        if (status == 'em análise') {
+        if (status == 'concluido') {
             
-            statusDescricao = 'análise';
-            statusIMG = '../../img/icon/inventory.svg';
+            statusDescricao = 'Concluído';
+            statusIMG = '../../img/icon/check-circle.svg';
             optionIMG = '../../img/icon/more-vertical.svg';
             color = 'primary';
-        } else if (status == 'cancelado') {
+        } else if (status == 'em andamento') {
             
-            statusDescricao = 'cancelado';
-            statusIMG = '../../img/icon/alert-circle-red.svg';
-            optionIMG = '../../img/icon/more-vertical-red.svg';
-            color = 'color-red';
-        } else if (status == 'desenvolvendo') {
-            
-            statusDescricao = 'desenvolvendo';
+            statusDescricao = 'Em andamento';
             statusIMG = '../../img/icon/settings-green.svg';
             optionIMG = '../../img/icon/more-vertical-green.svg';
             color = 'color-green'
@@ -46,7 +40,7 @@ export default async function exibirProdutos(produtos) {
             <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
-                        <img src="${statusIMG}" alt="Em análise" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
+                        <img src="${statusIMG}" alt="${statusDescricao}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
                         <div class="w-[300px] max-w-[300px] overflow-hidden text-ellipsis">
                             <span title="${produto['NomeProduto']}" class="font-semibold text-lg leading-4 whitespace-nowrap capitalize">${produto['NomeProduto']}</span>
                             <div class="text-color-text-secundary font-semibold text-xs flex flex-wrap justify-between gap-1 whitespace-nowrap">
@@ -86,7 +80,7 @@ export default async function exibirProdutos(produtos) {
                         </div>
                     </div>
 
-                    <span class="${produto['Situacao'] == 'Concluido' ? 'bg-primary/20 text-primary' : 'bg-color-orange/20 text-color-orange'} rounded-md font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${produto['Situacao']}</span>
+                    <span class="bg-${color}/20 text-${color} rounded-md font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
             </div>`
           
 

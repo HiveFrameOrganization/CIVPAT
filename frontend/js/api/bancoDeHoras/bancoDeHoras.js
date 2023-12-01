@@ -1,4 +1,5 @@
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from "../login/autenticacao.js";
 
 window.addEventListener('load', ()=>{
     // RETORNANDO NADA AO CARREGAR A PAGINA PARA MOSTRAR MENSAGEM NA TELA
@@ -40,14 +41,20 @@ formularioBancoHoras.addEventListener('submit', async evento => {
 
 
 async function buscarHoras(mes, ano, nif, cargo) {
+    const autenticado = await autenticacao(['adm', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 
         console.log(nif)
 
+        const token = localStorage.getItem('token');
+
         if (!nif) throw new Error(`É nescessário o NIF do funcionário para pesquisar`);
 
-        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${nif}&cargo=${cargo}`);
+        const requisicao = await fetch(`${back}/relatorio/puxarRelatorio.php?mes=${mes}&ano=${ano}&valor=${nif}&cargo=${cargo}&token=${token}`)
 
         const resposta = await requisicao.json();
 

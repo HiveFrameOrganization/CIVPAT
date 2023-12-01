@@ -1,10 +1,14 @@
 import { back } from '../Rotas/rotas.js';
-
+import { autenticacao } from '../login/autenticacao.js';
 import FormularioEditarUsuario from './renderizarModalFuncionarios.js';
 import desativarUsuario from './desativarFuncionarios.js';
 import alertas from '../../feedback.js';
 
 async function getFotoFuncionario(nif) {
+    const autenticado = await autenticacao(['coor'], false)
+    if(!autenticado){
+        return;
+    }
 
     if (nif) {
 

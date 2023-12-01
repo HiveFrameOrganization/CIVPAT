@@ -2,39 +2,38 @@ import { back, frontPages } from '../../js/api/Rotas/rotas.js';
 import alertas from '../../js/feedback.js';
 
 
-async function gerarHora(){
+// async function gerarHora(){
    
-    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    // try {
-    //     const resultado = await resposta.json();
+//     // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
+//     // try {
+//     //     const resultado = await resposta.json();
 
-    //     const dataApi = resultado['datetime'];
+//     //     const dataApi = resultado['datetime'];
 
-    //     const dataFormatada = dataApi.substring(0, 10);
+//     //     const dataFormatada = dataApi.substring(0, 10);
 
-    //     return dataFormatada.replace(/T/i, " ");  
+//     //     return dataFormatada.replace(/T/i, " ");  
 
-    // } catch (error) {
-    //     console.log('Sistema de horas apresentou um erro');
+//     // } catch (error) {
+//     //     console.log('Sistema de horas apresentou um erro');
 
-    //     const data = Date()  
-    // }
+//     //     const data = Date()  
+//     // }
 
-    // Obtém a data atual
-    const dataAtual = new Date();
+//     // Obtém a data atual
+//     const dataAtual = new Date();
 
-    // Obtém a data atual em um formato legível
-    const dataAtualFormatada = dataAtual.toLocaleDateString();
+//     // Obtém a data atual em um formato legível
+//     const dataAtualFormatada = dataAtual.toLocaleDateString();
 
-    return dataAtualFormatada;
-}
+//     return dataAtualFormatada;
+// }
 
 // formatar a data
-const hoje = new Date(gerarHora());
+const hoje = new Date();
 const ano = hoje.getFullYear();
 let mes = hoje.getMonth() + 1;
 let dia = hoje.getDate();
-
 // Garantir que vai ter um 0 em meses que não tem dois números
 if (mes < 10) {
     mes = '0' + mes;
@@ -49,7 +48,7 @@ document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
 // Seta a data de lançamento para não ser depois de ontem
-let diaLancamento = dia > 10 ? `${dia-1}` : `0${dia-1}`
+let diaLancamento = dia > 10 ? `${dia}` : `0${dia}`;
 document.getElementById('dataDoLancamento').setAttribute('max', `${ano}-${mes}-${diaLancamento}`);
 ////////////////////////////////////////////////
 
@@ -86,11 +85,12 @@ async function carregarTecnicos () {
         i += 1;
     }
 
+
 }
 window.addEventListener('load', async function (){
-    carregarTecnicos();
-    pegarUnidadesCriadoras();
-    // lancamentoHoras();
+    await carregarTecnicos();
+    await pegarUnidadesCriadoras();
+    lancamentoHoras();   
 
     const produtoSelect = document.getElementById("produto");
     const servicoCategoriaSelect = document.getElementById('servico');
@@ -104,11 +104,12 @@ window.addEventListener('load', async function (){
     document.getElementById('horaMaquinaInput').value = dadosProduto['HoraMaquina'];
     document.getElementById('horaPessoaInput').value = dadosProduto['HoraPessoa'];
     document.getElementById('dataInicial').value = dadosProduto['DataInicial'];
+    document.getElementById('dataDoLancamento').setAttribute('min',  dadosProduto['DataInicial']);
     document.getElementById('dataFinal').value = dadosProduto['DataFinal'];
     document.getElementById('valor').value = dadosProduto['Valor'];
 
-    document.getElementById('horasPessoaAcumuladasCoor').value = dadosProduto['HorasPessoa'];
-    document.getElementById('horasMaquinaAcumuladasCoor').value = dadosProduto['HorasMaquina'];
+    // document.getElementById('horasPessoaAcumuladasCoor').value = dadosProduto['HorasPessoa'];
+    // document.getElementById('horasMaquinaAcumuladasCoor').value = dadosProduto['HorasMaquina'];
 
     // inativar horas maquina se nao houver maquina selecionada
     let tempo = document.getElementById('tempoMaquina')
@@ -142,29 +143,29 @@ window.addEventListener('load', async function (){
     // Excluir as options anteriores
     produtoSelect.innerHTML = "";
     
-    try {
-        const requisicao = await fetch(back + `/cadastroProduto/carregarProdutos.php?id=${idServicoCategoria}`);
+    // try {
+    //     const requisicao = await fetch(back + `/cadastroProduto/carregarProdutos.php?id=${idServicoCategoria}`);
 
-        // dados de todas as propostar recebidas (resposta da api)
-        const dados = await requisicao.json();
-
-        // caso a requisição de um erro, irá exibir uma mensagem de erro
-        if (dados.resposta === 'erro') throw new Error(dados.message);
-
-        // Loop pelos resultados e crie as options
-        dados.forEach(function(dado) {
-            var option = document.createElement('option');
-            option.classList.add('bg-body');
-            option.value = dado.idNomeProduto;
-            option.text = dado.NomeProduto;
-            produtoSelect.appendChild(option);
-        });
-
-        selecionarProduto(dadosProduto);
+    //     // dados de todas as propostar recebidas (resposta da api)
+    //     const dados = await requisicao.json();
         
-    } catch {
-        console.log('Error');
-    }
+    //     // caso a requisição de um erro, irá exibir uma mensagem de erro
+    //     if (dados.resposta === 'erro') throw new Error(dados.message);
+
+    //     // Loop pelos resultados e crie as options
+    //     dados.forEach(function(dado) {
+    //         var option = document.createElement('option');
+    //         option.classList.add('bg-body');
+    //         option.value = dado.idNomeProduto;
+    //         option.text = dado.NomeProduto;
+    //         produtoSelect.appendChild(option);
+    //     });
+
+    //     selecionarProduto(dadosProduto);
+        
+    // } catch {
+    //     console.log('Error');
+    // }
 
     
 })
@@ -222,27 +223,36 @@ async function carregarDetalhesProduto() {
     // caso a requisição de um erro, irá exibir uma mensagem de erro
     if (dados.resposta === 'erro') throw new Error(dados.message);
 
-    console.log(dados)
-    return dados;
-
-}
-
-async function selecionarProduto(dadosProduto) {
-
-    const produtoSelect = document.getElementById("produto");
-    // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
-    for (var i = 0; i < produtoSelect.options.length; i++) {
-        if (produtoSelect.options[i].value == dadosProduto.fk_idNomeProduto) {
-            produtoSelect.options[i].selected = true;
-            const titulo = document.getElementById('titulo');
-            titulo.innerText = produtoSelect.options[i].text.toUpperCase();
-
-            // console.log(produtoSelect.options[i].value)
+    let opcoesTecnicos = document.querySelector("#tecnicos")
+    
+    for (var j = 0; j < opcoesTecnicos.options.length; j++) {
+        if (opcoesTecnicos.options[j].value == dados[0]['fk_nifTecnico']) {
+            opcoesTecnicos.options[j].selected = true;
             break; // Saia do loop após encontrar a opção desejada
         }
     }
 
+    console.log(dados[0])
+    return dados[0];
+
 }
+
+// async function selecionarProduto(dadosProduto) {
+
+//     const produtoSelect = document.getElementById("produto");
+//     // Percorra as opções do <select> para encontrar a que corresponde ao valor desejado
+//     for (var i = 0; i < produtoSelect.options.length; i++) {
+//         if (produtoSelect.options[i].value == dadosProduto.fk_idNomeProduto) {
+//             produtoSelect.options[i].selected = true;
+//             const titulo = document.getElementById('titulo');
+//             titulo.innerText = produtoSelect.options[i].text.toUpperCase();
+
+//             // console.log(produtoSelect.options[i].value)
+//             break; // Saia do loop após encontrar a opção desejada
+//         }
+//     }
+
+// }
 
 
 async function pegarUnidadesCriadoras() {
@@ -268,147 +278,152 @@ async function pegarUnidadesCriadoras() {
 }
 
 
-// async function lancamentoHoras(){
-//     const id = localStorage.getItem('idProduto');
+async function lancamentoHoras(){
+    const id = localStorage.getItem('idProduto');
 
-//     try{
-//         const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
+    try{
+        const exibirHoras = await fetch(back + `/detalhesProduto/lancamentoHoras.php?id=${id}`)
 
-//         const resposta = await exibirHoras.json();
+        const resposta = await exibirHoras.json();
+        console.log(resposta)
 
-//         if (localStorage.getItem('cargo') == 'tec'){
-//             document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
-//             document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
-//             document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
-//             document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
-//         } else {
-//             if (resposta['horasAcumuladasPessoa'] == undefined){
-//                 document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
-//             } else {
-//                 document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
-//             }
+        if (localStorage.getItem('cargo') == 'tec'){
+            document.querySelector('#horasPessoa').value = resposta['horaTotalPessoa'];
+            document.querySelector('#horasMaquina').value = resposta['horaTotalMaquina'];
+            document.querySelector("#horasPessoaAcumuladas").value = resposta['horasAcumuladasPessoa'];
+            document.querySelector("#horasMaquinaAcumuladas").value = resposta['horasAcumuladasMaquina'];
+        } else {
+            if (resposta['horasAcumuladasPessoa'] == undefined){
+                document.querySelector("#horasPessoaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasPessoaAcumuladasCoor").value = resposta['horasAcumuladasPessoa'];
+            }
 
-//             if (resposta['horasAcumuladasMaquina'] == undefined){
-//                 document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
-//             } else {
-//                 document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
-//             }
-//         }
+            if (resposta['horasAcumuladasMaquina'] == undefined){
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = 0;
+            } else {
+                document.querySelector("#horasMaquinaAcumuladasCoor").value = resposta['horasAcumuladasMaquina'];
+            }
+        }
 
 
-//         if(localStorage.getItem('cargo') == 'tec'){
-//             const horasRestantes = 10 - resposta.horasDiariasPessoas;
-//             const horasRestantesMaquina = 10 - resposta.horasDiariasMaquina;
+        if(localStorage.getItem('cargo') == 'tec'){
+            const horasRestantes = 10 - resposta.horasDiariasPessoas;
+            const horasRestantesMaquina = 24 - resposta.horasDiariasMaquina;
     
-//             console.log(resposta.horasDiariasPessoas);
+            console.log(resposta.horasDiariasPessoas);
     
-//             const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
-//             const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
+            const opcoesHoraPessoa = document.getElementById('horaPessoaDiaria');
+            const opcoesHoraMaquina = document.getElementById('horaMaquinaDiaria');
     
            
-//                 opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
-//                 opcoesHoraMaquina.innerHTML = '';
+                opcoesHoraPessoa.innerHTML = ''; // Limpe as opções existentes em ambos os select
+                opcoesHoraMaquina.innerHTML = '';
         
-//                 if (horasRestantes == 0) {
-//                     let option = document.createElement('option');
-//                     option.classList.add('bg-body');
-//                     option.value = 0;
-//                     option.textContent = 0;
-//                     opcoesHoraPessoa.appendChild(option);
-//                 } else {
-//                     for (let i = 0; i < horasRestantes; i++) {
-//                         let option = document.createElement('option');
-//                         option.classList.add('bg-body');
-//                         option.value = i + 1;
-//                         option.textContent = i + 1;
-//                         opcoesHoraPessoa.appendChild(option);
-//                     }
-//                 }
+                if (horasRestantes == 0) {
+                    let option = document.createElement('option');
+                    option.classList.add('bg-body');
+                    option.value = 0;
+                    option.textContent = 0;
+                    opcoesHoraPessoa.appendChild(option);
+                } else {
+                    for (let i = 0; i < horasRestantes; i++) {
+                        let option = document.createElement('option');
+                        option.classList.add('bg-body');
+                        option.value = i + 1;
+                        option.textContent = i + 1;
+                        opcoesHoraPessoa.appendChild(option);
+                    }
+                }
         
-//                 if (horasRestantesMaquina == 0) {
-//                     let option = document.createElement('option');
-//                     option.classList.add('bg-body');
-//                     option.value = 0;
-//                     option.textContent = 0;
-//                     opcoesHoraMaquina.appendChild(option);
-//                 } else {
-//                     if (resposta.horasDiariasMaquina != null) {
-//                         for (let i = 0; i < horasRestantesMaquina; i++) {
-//                             let option = document.createElement('option');
-//                             option.classList.add('bg-body');
-//                             option.value = i + 1;
-//                             option.textContent = i + 1;
-//                             opcoesHoraMaquina.appendChild(option);
-//                         }
-//                     }
-//                 }
+                if (horasRestantesMaquina == 0) {
+                    let option = document.createElement('option');
+                    option.classList.add('bg-body');
+                    option.value = 0;
+                    option.textContent = 0;
+                    opcoesHoraMaquina.appendChild(option);
+                } else {
+                    if (resposta.horasDiariasMaquina != null) {
+                        for (let i = 0; i < horasRestantesMaquina; i++) {
+                            let option = document.createElement('option');
+                            option.classList.add('bg-body');
+                            option.value = i + 1;
+                            option.textContent = i + 1;
+                            opcoesHoraMaquina.appendChild(option);
+                        }
+                    }
+                }
 
-//                 if (horasRestantes == 0 && horasRestantesMaquina == 0){
-//                     document.querySelector('#salvarHoras').disabled = true;
-//                 }
+                if (horasRestantes == 0 && horasRestantesMaquina == 0){
+                    document.querySelector('#salvarHoras').disabled = true;
+                }
             
-//         }
+        }
 
 
-//     }catch (error) {
-//         console.error(error)
-//     }
+    }catch (error) {
+        console.error(error)
+    }
 
-// }
+}
 
-// if (localStorage.getItem('cargo') == 'tec'){
-//         document.getElementById('lancarHoras').addEventListener('click', async () => {
-//             const id = localStorage.getItem('idProduto');
-//             const nifPerfil = localStorage.getItem('nifPerfil');
+document.querySelector("#lancarHoras").addEventListener('click', () => {
+    
+})
 
-//             const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
-//             const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
+if (localStorage.getItem('cargo') == 'tec'){
+        document.getElementById('lancarHoras').addEventListener('click', async () => {
+            const id = localStorage.getItem('idProduto');
+            const nifPerfil = localStorage.getItem('nifPerfil');
+
+            const horaPessoaDiaria = document.getElementById('horaPessoaDiaria').value;
+            const horaMaquinaDiaria = document.getElementById('horaMaquinaDiaria').value;
 
 
 
-//             console.log(horaMaquinaDiaria + ' horas')
+            console.log(horaMaquinaDiaria + ' horas')
 
-//             const dados = {
-//                 nifPerfil: nifPerfil,
-//                 id: id,
-//                 horaPessoaDiaria: horaPessoaDiaria,
-//                 horaMaquinaDiaria: horaMaquinaDiaria
-//             };
+            const dados = {
+                nifPerfil: nifPerfil,
+                id: id,
+                horaPessoaDiaria: horaPessoaDiaria,
+                horaMaquinaDiaria: horaMaquinaDiaria
+            };
 
-//             console.log(dados);
+            console.log(dados);
 
-//             try {
+            try {
                  
-//                 if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
-//                     console.log('Horas informadas invalidas')
-//                 }
-//                 else{
-//                     const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
-//                         method: 'POST',
-//                         headers: {
-//                             'Content-Type': 'application/json',
-//                         },
-//                         body: JSON.stringify(dados)
-//                     });
+                if (horaPessoaDiaria > horasRestantes || horaMaquinaDiaria > horasRestantesMaquina){
+                    console.log('Horas informadas invalidas')
+                }
+                else{
+                    const requisicao = await fetch(back + `/detalhesProduto/salvarLancamentoHoras.php`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dados)
+                    });
 
-//                     const resposta = await requisicao.json();
-//                     // Faça algo com a resposta, se necessário.
-//                     console.log(resposta)
-//                     localStorage.setItem('status', resposta.status);
-//                     localStorage.setItem('mensagem', resposta.mensagem);
+                    const resposta = await requisicao.json();
+                    // Faça algo com a resposta, se necessário.
+                    console.log(resposta)
+                    localStorage.setItem('status', resposta.status);
+                    localStorage.setItem('mensagem', resposta.mensagem);
 
-//                     if (resposta.status == 'error'){
-//                         alertas();
-//                     } else {
-//                         window.location.href = '/frontend/pages/perfil/index.html';
-//                     }
-//                 }
+                    if (resposta.status == 'error'){
+                        alertas();
+                    } else {
+                        window.location.href = '/frontend/pages/perfil/index.html';
+                    }
+                }
             
-//             } catch (error) {
-//                 console.error(error);
-//                 // Trate o erro adequadamente, se necessário.
-//             }
-// })};
+            } catch (error) {
+                console.error(error);
+                // Trate o erro adequadamente, se necessário.
+            }
+})};
 
 
 

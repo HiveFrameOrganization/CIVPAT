@@ -1,6 +1,12 @@
 import { back } from '../Rotas/rotas.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 export default async function  verificarPdfExistente(idProposta) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     try {
 
         // Cria a requisição 
@@ -33,11 +39,7 @@ export default async function  verificarPdfExistente(idProposta) {
             }
         }
     } catch (error) {
-        console.error(error)
-
-        localStorage.setItem('status', 'error');
-        localStorage.setItem("mensagem", "Opa, um erro aconteceu ao verificar os PDF's existentes!");
-
+        console.error(error) 
         return;
     }
 

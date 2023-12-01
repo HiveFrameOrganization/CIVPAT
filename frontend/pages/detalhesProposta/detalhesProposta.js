@@ -19,6 +19,7 @@ modalEdit.addEventListener('click', function(e) {
 
 const botaoAceitar = document.getElementById('aceitarProposta');
 const botaoDeclinar =  document.getElementById('declinarProposta');
+const botaoConcluir = document.getElementById('concluirProposta');
 
 window.addEventListener('load', () => {
   const cargo = localStorage.getItem('cargo');
@@ -27,6 +28,7 @@ window.addEventListener('load', () => {
   if (cargo == 'ger'){
     botaoAceitar.value = 'SOLICITAR ACEITE';
     botaoDeclinar.value = 'SOLICITAR DECLINIO';
+    botaoConcluir.value = 'SOLICITAR CONCLUSÃO';
   }
 
 });
@@ -219,12 +221,6 @@ function salvarModal(){
   }
 }
 
-// esconde a opção de segundo gerente quando a propostra estiver diferente de Em analise
-if(localStorage.getItem(statusProposta) != 'Em Análise' && 'Declinado'){
-  document.querySelector('#segundoGerente').classList.add('hidden')
-  document.getElementById('semGerente').innerText = "Nenhum gerente selecionado"
-}
-
 var horaPes = document.getElementById('tempoPessoa')
 
 horaPes.addEventListener('input', () => {
@@ -238,6 +234,22 @@ var horaMaq = document.getElementById('tempoMaquina')
 horaMaq.addEventListener('input', () => {
   if (horaMaq.value.length > horaMaq.maxLength){
     horaMaq.value = horaMaq.value.slice(0, horaMaq.maxLength);
+  }
+})
+
+var numeroContato = document.getElementById('numeroContato')
+
+numeroContato.addEventListener('input', () => {
+  if (numeroContato.value.length > numeroContato.maxLength){
+    numeroContato.value = numeroContato.value.slice(0, numeroContato.maxLength)
+  }
+})
+
+var valorInput = document.getElementById('valor')
+
+valorInput.addEventListener('input', () => {
+  if (valorInput.value.length > valorInput.maxLength){
+    valorInput.value = valorInput.value.slice(0, valorInput.maxLength);
   }
 })
 

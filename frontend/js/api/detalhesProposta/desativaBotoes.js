@@ -1,96 +1,48 @@
-import { editandoProposta } from "./detalhesProposta.js"
-
 // DESATIVA BOTÃO DE EDITAR E NOVO PRODUTO QUANDO NAO ESTA MAIS EM ANALISE
 export default function desativaBotoes(){
-    let declinarProposta = document.querySelector('#declinarProposta')
-    // if(localStorage.getItem('statusProposta') == 'Em Análise'){
-    //     console.log('em analise ou solicitada')
-    // }else{
-    //     editandoProposta.setAttribute('disabled', 'true')
-    //     editandoProposta.classList.add('disabled:opacity-20')
-    //     editandoProposta.classList.remove('hover:bg-btn-blue/40')
-    //     editandoProposta.classList.remove('cursor-pointer')
-    
-    //     let btnNovoProduto = document.querySelector('#btnNovoProduto')
-    //     btnNovoProduto.setAttribute('disabled', 'true')
-    //     btnNovoProduto.classList.remove('hover:outline')
-    //     btnNovoProduto.classList.remove('hover:text-primary')
-    //     btnNovoProduto.classList.remove('hover:bg-[transparent]')
-    //     btnNovoProduto.classList.add('disabled:opacity-20')
 
-    //     declinarProposta.setAttribute('disabled', 'true')
-    //     declinarProposta.classList.add('disabled:opacity-20')
-    //     declinarProposta.classList.remove('hover:bg-color-red/40')
-    //     declinarProposta.classList.remove('cursor-pointer')
-    //     declinarProposta.classList.remove('hover:bg-[transparent]')
-    //     declinarProposta.classList.remove('hover:text-color-red')
-    // }
+    // Botões 
+    const btnDeclinar = document.querySelector('#declinarProposta');
+    const btnAceitar = document.querySelector('#aceitarProposta');
+    const btnEditar = document.querySelector('#editarProposta');
 
-    let botaoAceitar = document.querySelector('#aceitarProposta');
-    if(localStorage.getItem('statusProposta') == 'Aceito' || localStorage.getItem('statusProposta') == 'Declinado' || localStorage.getItem('statusProposta') == 'Concluido'){
-        botaoAceitar.setAttribute('disabled', 'true');
-        botaoAceitar.classList.add('disabled:opacity-20');
-        botaoAceitar.classList.remove('hover:bg-btn-blue/40');
-        botaoAceitar.classList.remove('cursor-pointer');
-        botaoAceitar.classList.remove('hover:bg-[transparent]');
-        botaoAceitar.classList.remove('hover:text-color-green')
+    if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'aceito') {
 
-        let botaoSalvar = document.querySelector('#editarProposta');
-        botaoSalvar.classList.remove('hover:text-primary');
-        botaoSalvar.classList.remove('hover:bg-[transparent]')
+        btnAceitar.parentElement.removeChild(btnAceitar);
+        btnDeclinar.parentElement.removeChild(btnDeclinar);
+    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'concluido') {
+
+        btnAceitar.parentElement.removeChild(btnAceitar);
+        btnDeclinar.parentElement.removeChild(btnDeclinar);
+        btnEditar.parentElement.removeChild(btnEditar);
+    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'declinado') {
+
+        btnAceitar.parentElement.removeChild(btnAceitar);
+        btnDeclinar.parentElement.removeChild(btnDeclinar);
+        btnEditar.parentElement.removeChild(btnEditar);
+    }  else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de aceite') {
+
+        if (localStorage.getItem('cargo').toLocaleLowerCase() != 'adm') {
+
+            btnAceitar.parentElement.removeChild(btnAceitar);
+            btnDeclinar.parentElement.removeChild(btnDeclinar);
+            btnEditar.parentElement.removeChild(btnEditar);
+        } else {
+
+            btnDeclinar.parentElement.removeChild(btnDeclinar);
+            btnEditar.parentElement.removeChild(btnEditar);
+        }
+    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de declinio') {
+
+        if (localStorage.getItem('cargo').toLocaleLowerCase() != 'adm') {
+
+            btnAceitar.parentElement.removeChild(btnAceitar);
+            btnDeclinar.parentElement.removeChild(btnDeclinar);
+            btnEditar.parentElement.removeChild(btnEditar);
+        } else {
+
+            btnEditar.parentElement.removeChild(btnEditar);
+            btnAceitar.parentElement.removeChild(btnAceitar);
+        }
     }
-
-    if(localStorage.getItem('statusProposta') == 'Declinado' || localStorage.getItem('statusProposta') == 'Concluido'){
-        let botaoPDF = document.querySelector('#botaoSalvarPdf');
-        botaoPDF.setAttribute('disabled', 'true');
-        botaoPDF.classList.add('disabled:opacity-20');
-        botaoPDF.classList.remove('hover:outline')
-        botaoPDF.classList.remove('hover:text-primary')
-        botaoPDF.classList.remove('hover:bg-btn-blue/40');
-        botaoPDF.classList.remove('hover:bg-[transparent]')
-        botaoPDF.classList.remove('cursor-pointer');
-
-        let botaoFollowUp = document.querySelector('#adicionar');
-        botaoFollowUp.setAttribute('disabled', 'true');
-        botaoFollowUp.classList.add('disabled:opacity-20');
-        botaoFollowUp.classList.remove('hover:outline')
-        botaoFollowUp.classList.remove('hover:text-primary')
-        botaoFollowUp.classList.remove('hover:bg-btn-blue/40');
-        botaoFollowUp.classList.remove('hover:bg-[transparent]')
-        botaoFollowUp.classList.remove('cursor-pointer');
-    }
-
-    if (localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
-        botaoAceitar.setAttribute('disabled', 'true');
-        botaoAceitar.classList.add('disabled:opacity-20');
-        botaoAceitar.classList.remove('hover:bg-btn-blue/40');
-        botaoAceitar.classList.remove('cursor-pointer');
-        botaoAceitar.classList.remove('hover:bg-[transparent]');
-        botaoAceitar.classList.remove('hover:text-color-green')
-
-        editandoProposta.setAttribute('disabled', 'true')
-        editandoProposta.classList.add('disabled:opacity-20')
-        editandoProposta.classList.remove('hover:bg-btn-blue/40')
-        editandoProposta.classList.remove('cursor-pointer')
-    } 
-
-    if (localStorage.getItem('statusProposta') == 'Solicitação de Aceite'){
-        let botaoAceitar = document.querySelector('#aceitarProposta');
-        botaoAceitar.removeAttribute('disabled');
-        botaoAceitar.classList.add('disabled:opacity-20');
-        botaoAceitar.classList.add('hover:bg-btn-blue/40');
-        botaoAceitar.classList.add('cursor-pointer');
-        botaoAceitar.classList.add('hover:bg-[transparent]');
-        botaoAceitar.classList.add('hover:text-color-green')
-
-        botaoDeclinar.removeAttribute('disabled');
-        editandoProposta.removeAttribute('disabled')
-        editandoProposta.classList.add('hover:bg-btn-blue/40')
-        editandoProposta.classList.add('cursor-pointer')
-        botaoDeclinar.classList.add('cursor-pointer')
-        botaoDeclinar.classList.add('hover:bg-[transparent]')
-        botaoDeclinar.classList.add('hover:text-color-red')
-
-    }
-    
 }

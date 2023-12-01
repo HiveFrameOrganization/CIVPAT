@@ -25,9 +25,9 @@ export async function autenticacao(cargo, load) {
 
             const resposta = await deslogar.json();
 
-            console.log(resposta);
-
             window.location.href = 'http://localhost:8080/';
+
+            return false;
         }
 
         const dados = {
@@ -43,7 +43,7 @@ export async function autenticacao(cargo, load) {
             body: JSON.stringify(dados)
         });
 
-        console.log(verificacao);
+        // console.log(verificacao);
 
         const resposta = await verificacao.json();
 
@@ -56,7 +56,7 @@ export async function autenticacao(cargo, load) {
 
     } catch (erro) {
         console.error(erro)
-        return;
+        return false;
     }
 
 }

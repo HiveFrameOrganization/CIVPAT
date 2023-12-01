@@ -1,5 +1,6 @@
 // Importando o arquivo de rotas
 import { back } from "../Rotas/rotas.js";
+import { autenticacao } from '../login/autenticacao.js';
 
 /*
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,6 +21,10 @@ window.addEventListener('load', () => {
 let exibir = document.querySelector('#exibir')
 
 async function buscarRelatorio(mes, ano, valor = false) {
+    const autenticado = await autenticacao(['adm', 'tec' ], false)
+    if(!autenticado){
+        return;
+    }
 
     try {
 

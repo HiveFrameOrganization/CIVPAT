@@ -14,6 +14,9 @@
         --green: 36 194 146;
         --purple: 121 80 255;
         --orange: 252 160 1;
+        --strong-green: 29 204 52;
+        --pink: 222 55 141;
+        --gray: 115 115 115;
     }
 
     @media (prefers-color-scheme: light) {
@@ -40,13 +43,13 @@
 }
 
 @font-face {
-    src: url('../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
+    src: url('../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
     font-family: 'Rubik';    
     font-style: normal;
 } 
 
 @font-face {
-    src: url('../../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
+    src: url('../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
     font-family: 'Rubik';    
     font-style: italic;
 } 
@@ -93,4 +96,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 input[type="month"]::-webkit-inner-spin-button,
 input[type="month"]::-webkit-calendar-picker-indicator {
     filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
+}
+
+/* Aplicando classes manualmente */
+.text-color-green-strong {
+    color: rgb(var(--strong-green));
+}
+
+.text-color-green {
+    color: rgb(var(--green));
+}
+
+.text-color-pink {
+    color: rgb(var(--pink));
+}
+
+.text-color-gray {
+    color: rgb(var(--gray));
+}
+
+.bg-color-green-strong\/20 {
+    background-color: rgb(var(--strong-green) / 0.2);
+}
+
+.bg-color-green\/20 {
+    background-color: rgb(var(--green) / 0.2);
+}
+
+.bg-color-pink\/20 {
+    background-color: rgb(var(--pink) / 0.2);
+}
+
+.bg-color-gray\/20 {
+    background-color: rgb(var(--gray) / 0.2);
 }

@@ -16,7 +16,7 @@ function verificarPdfExistente($idProposta, $conn){
     foreach ($tipoPdf as $pdf){
         $stmt = $conn->prepare('SELECT PDF FROM PDF WHERE fk_idProposta = ? AND fk_idTipoPDF = ?');
 
-        $stmt->bind_param('ss', $idProposta, $contador);
+        $stmt->bind_param('si', $idProposta, $contador);
         $stmt->execute();
         $resultado = $stmt->get_result();
 

@@ -1,6 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
-
+import { autenticacao } from '../login/autenticacao.js';
 
 // Controlar o Upload de images
 
@@ -63,6 +63,11 @@ imageInput.addEventListener('change', () => {
 });
 
 async function salvarFotoPerfil () {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
+
     const nif = localStorage.getItem('nifPerfil');
 
     const file = imageInput.files[0];

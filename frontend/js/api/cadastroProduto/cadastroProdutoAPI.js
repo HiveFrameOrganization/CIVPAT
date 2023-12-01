@@ -1,6 +1,7 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
 import salvarMudancasNaProposta from '../detalhesProposta/salvarMudancasNaProposta.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 async function gerarHora(){
    
@@ -49,6 +50,11 @@ window.addEventListener('load', () => {
 botaoSalvarProduto.addEventListener('click', () => salvarProduto());
 
 async function carregarTecnicos () {
+    const autenticado = await autenticacao(['coor', 'adm', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+
     const requisicao = await fetch(back + '/cadastroProduto/carregarTecnicos.php', {
         methods : 'GET'
     });
@@ -70,6 +76,11 @@ async function carregarTecnicos () {
 }
 
 async function salvarProduto () {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+    
     const idProposta = localStorage.getItem('idProposta');
 
      // Obter a data atual
@@ -150,6 +161,8 @@ async function salvarProduto () {
     }
     
     else {
+        const token = localStorage.getItem('token');
+
         const dadosEnviados = {
             tempoMaquina: tempoMaquina,
             tempoPessoa: tempoPessoa,
@@ -162,11 +175,11 @@ async function salvarProduto () {
             valor: valor,
             idProposta: idProposta,
             nifTecnico: nifTecnico,
-            maquina: Number(maquina)
+            maquina: Number(maquina),
+            token : token
         }
     
         try {
-    
             const resposta = await fetch(back + '/cadastroProduto/cadastroProduto.php', {
                 method: 'POST',
                 headers: {
@@ -204,7 +217,11 @@ async function salvarProduto () {
 }
 
 async function carregarMaquinas() {
-
+    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
+    if(!autenticado){
+        return;
+    }
+    
     try {
 
         const requisicao = await fetch(back + '/cadastroProduto/carregarMaquinas.php');

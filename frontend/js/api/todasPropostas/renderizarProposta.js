@@ -3,11 +3,16 @@
 
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
+import { autenticacao } from '../login/autenticacao.js';
 
 let inAlert = false;
 
 // Busca as fotos do gerente
 async function getFotoFuncionario(nif) {
+    const autenticado = await autenticacao(['adm', 'coor', 'ger', 'tec'], false)
+    if(!autenticado){
+        return;
+    }
 
     if (nif) {
 
@@ -174,19 +179,19 @@ async function exibirPropostas(propostas){
 
                 statusDescricao = 'Solicitação de Aceite';
                 optionIMG = '#1DCC34';
-                color = '[#1DCC34]';
+                color = 'color-green-strong';
                 statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`;
             } else  if (status == 'solicitação de declinio') {
-
+                
                 statusDescricao = 'Solicitação de Declinio';
                 optionIMG = '#DE378D';
-                color = '[#DE378D]';
+                color = 'color-pink';
                 statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`;
             } else {
 
                 statusDescricao = 'N/A';
                 optionIMG = '#737373';
-                color = '[#737373]';
+                color = 'gray';
                 statusIMG = `<svg xmlns="http://www.w3.org/2000/svg" alt="${statusDescricao}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${optionIMG}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-question w-10 h-10 p-2 bg-${color}/20 rounded-md"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>`;
             }
 

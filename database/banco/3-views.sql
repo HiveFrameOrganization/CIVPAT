@@ -16,8 +16,8 @@ SELECT
     SUM(CASE WHEN Status = "Aceito"     THEN 1 ELSE 0 END) AS somaAceito,
     SUM(CASE WHEN Status = "Declinado"  THEN 1 ELSE 0 END) AS somaDeclinado,
     SUM(CASE WHEN Status = "Concluido"  THEN 1 ELSE 0 END) AS somaConcluido,
-    SUM(CASE WHEN Status = "Solicitação de Declinio"  THEN 1 ELSE 0 END) AS somaSolicitacaoDeDeclinio,
-    SUM(CASE WHEN Status = "Solicitação de Aceite"  THEN 1 ELSE 0 END) AS somaSolicitacaoDeAceite
+    SUM(CASE WHEN Status = "Solicitação de Declinio" OR Status = "Solicitação de Aceite" OR Status = "Solicitação de conclusão" THEN 1 ELSE 0 END) AS somaSolicitacoes
+
     
     FROM Propostas;
 /*----------------------------------------------------------------------------------------------------*/
@@ -64,8 +64,9 @@ Usuarios.TipoUser, ServicoCategoria.ServicoCategoria, NomeProduto.NomeProduto, P
 
 /*--------------------------------------- LANÇAR HORAS -----------------------------------------------*/
 CREATE VIEW vw_produtosDoTecnico AS
-SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal, Maquinas.Maquina, NomeProduto.NomeProduto, 
+SELECT Produtos.idProduto, Produtos.area, Produtos.situacao, Produtos.DataFinal, Propostas.TituloProposta, Maquinas.Maquina, NomeProduto.NomeProduto, 
     ServicoCategoria.ServicoCategoria, Produtos.fk_nifTecnico FROM Produtos
+    INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta 
     INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
     INNER JOIN ServicoCategoria ON ServicoCategoria.idServicoCategoria = Produtos.fk_idServicoCategoria;
