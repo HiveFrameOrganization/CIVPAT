@@ -9,7 +9,8 @@ export async function autenticacao(cargo, load) {
 
     try {
         // Pegando o token para enviar na requisição
-        const token = localStorage.getItem('token');
+        var token;
+        setTimeout(() => {token = localStorage.getItem('token')}, 1000)
 
         if (!token) {
 
@@ -28,11 +29,6 @@ export async function autenticacao(cargo, load) {
             window.location.href = 'http://localhost:8080/';
 
             return false;
-        }
-
-        const dados = {
-            token: token,
-            cargo: cargo
         }
 
         const verificacao = await fetch(back + `/login/autenticacao.php`, {
