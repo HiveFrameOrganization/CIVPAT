@@ -23,3 +23,5 @@ https://container-dev.icyflower-ac75c6b1.eastus.azurecontainerapps.io/
 
 # DEPLOY PRODUÇÃO
 https://projeto-isi.bluebay-b5b46ab5.eastus.azurecontainerapps.io
+
+
