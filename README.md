@@ -17,3 +17,7 @@ Robert
 Leonardo
 Ribamar
 Matheus
+
+# DEPLOY DESENVOLVIMENTO
+
+https://container-dev.icyflower-ac75c6b1.eastus.azurecontainerapps.io/
