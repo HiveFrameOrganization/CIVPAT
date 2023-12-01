@@ -7,6 +7,7 @@ try {
         $cargo = $_SESSION['cargo'];
     }
 
+    
     $usuario = getenv("DATABASE_USER_$cargo"); // Usuário do banco de dados
     $senha = getenv("DATABASE_PASSWORD_$cargo"); // Senha do banco de dados
     $host = getenv("DATABASE_HOST"); // Host do banco de dados
