@@ -670,8 +670,57 @@ if (localStorage.getItem('cargo') == 'tec') {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
 
-            result.isConfirmed && aceitarProposta();
+            result.isConfirmed && concluirProduto();
         });
+
+
+
+    //     const div = document.createElement('div');
+    //     const aside = document.createElement('aside');
+
+    //     div.classList = 'bg-component w-[600px] max-w-[90%] rounded-md py-4 sm:py-8 fixed z-10 right-1/2 left-1/2 -translate-x-1/2 top-1/2 bottom-1/2 -translate-y-1/2 h-max';
+    //     aside.classList = 'bg-[black] opacity-50 w-full h-screen fixed top-0'
+
+    //     const templateModalConfirmar = `
+    // <div class="modal-header flex justify-between items-start mb-8 px-4 sm:px-8">
+    //     <div>
+    //         <h2 class="text-2xl font-bold text-color-text">DESEJA FINALIZAR O PRODUTO?</h2>
+    //         <h3 class="text-xs font-normal"><strong class="text-color-red">Confirme sua escolha!</strong></h3>
+    //     </div>
+    //     <button id="close-modal-confirmar" type="button" class="p-1 hover:bg-primary/20 transition-colors rounded-full w-10 h-10"><img src="../../img/icon/x.svg" alt="Fechar" class="w-full"></button>
+    // </div>
+    // <div class="modal-body">
+    //     <div class="px-4 sm:px-8 flex justify-between">
+    //         <button id="btn-confirmar" value="yes" type="button" class="bg-color-green py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-green hover:bg-[transparent] hover:text-color-green transition-colors">CONFIRMAR</button>
+    //         <button id="btn-cancelar" value="no" type="button" class="bg-color-red py-2 px-6 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors">CANCELAR</button>
+    //     </div>
+    // </div>
+    // `;
+
+
+    //     div.innerHTML = templateModalConfirmar;
+
+    //     document.body.appendChild(div);
+    //     document.body.appendChild(aside)
+
+    //     // CHAMA FUNÇAO PARA ACEITAR PROPOSTA OU DECLINAR PROPOSTA
+    //     document.querySelector('#btn-confirmar').addEventListener('click', () => {
+    //         concluirProduto()
+    //     })
+
+    //     // APAGAR ELEMENTOS DE MODAL
+    //     aside.addEventListener('click', () => {
+    //         document.body.removeChild(div)
+    //         document.body.removeChild(aside)
+    //     })
+    //     document.querySelector('#close-modal-confirmar').addEventListener('click', () => {
+    //         document.body.removeChild(div)
+    //         document.body.removeChild(aside)
+    //     })
+    //     document.querySelector('#btn-cancelar').addEventListener('click', () => {
+    //         document.body.removeChild(div)
+    //         document.body.removeChild(aside)
+    //     })
     }
 }
 
