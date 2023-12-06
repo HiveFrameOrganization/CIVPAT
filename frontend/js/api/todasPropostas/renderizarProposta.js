@@ -359,11 +359,29 @@ function reloadLinhas() {
 
 function selecionarAba(filtroAoCarregarPagina) {
 
-    if (filtroAoCarregarPagina != '') {
+    function corrigirOrtografiaFiltro(filtro) {
 
-        document.getElementById(`propostas${filtroAoCarregarPagina}`) && document.getElementById(`propostas${filtroAoCarregarPagina}`).classList.add('text-primary', 'border-b-2', 'border-primary');
         document.getElementById(`todasPropostas`).classList.remove('text-primary', 'border-b-2' , 'border-primary');
-    } 
+
+        document.getElementById(filtro).classList.add('text-primary', 'border-b-2', 'border-primary');
+    }
+
+    if (filtroAoCarregarPagina == '') {
+
+        document.getElementById(`todasPropostas`).classList.add('text-primary', 'border-b-2' , 'border-primary');
+        
+    } else {
+
+        if (filtroAoCarregarPagina == 'Concluido') {
+            corrigirOrtografiaFiltro('propostasConcluidas');
+            return
+        } else if (filtroAoCarregarPagina == 'solicitacoes') {
+            corrigirOrtografiaFiltro(filtroAoCarregarPagina);
+            return;
+        }
+
+        corrigirOrtografiaFiltro(`propostas${filtroAoCarregarPagina}`);
+    }
 
 }
 

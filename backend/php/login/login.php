@@ -44,7 +44,7 @@ function validarSenha($senhaUsuario, $dadosBanco)
 
         // resposta a ser mandado para o front-end
         $resposta = [
-            'mensagem' => 'Login ou senha inválido',
+            'mensagem' => 'E-mail e/ou senha inválidos',
             'login' => false,
             'status' => 'error'
         ];
