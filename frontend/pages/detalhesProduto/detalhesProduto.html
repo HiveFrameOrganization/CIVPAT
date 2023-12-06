@@ -141,8 +141,8 @@
                 <div id="sidebar" class="fixed top-0 h-screen -left-full w-60 sm:w-60 bg-component py-4 px-6 transition-all z-30 shadow-sm">
                     <div class="flex items-center gap-3 border-b-[1px] border-primary/30 pb-4">
                         <img class="sidebar-btn cursor-pointer w-8 h-8 p-1 rounded-full hover:bg-primary/20 transition-colors" src="../../img/icon/x.svg" alt="fechar menu lateral">
-                        <a href="../Home/index.html" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                        <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                        <a href="../Home/index.html" class="main-link" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
+                        <a href="../Home/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
                     </div>
                     <div id="sidebar-links" class="mt-4 space-y-4">
                         <script>
@@ -206,8 +206,8 @@
                         </script>
                     </div>
                 </div>
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
-                <a href="../Home/index.html" class="text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                <a href="../Home/index.html" class="main-link"><img src="../../img/icon/logo.svg" alt="Logo" class="w-8 h-8"></a>
+                <a href="../Home/index.html" class="main-link text-primary font-semibold max-[313px]:hidden text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
             </div>
             <div class="flex items-center gap-3 z-20">
                 <div id="switch-mode" class="w-10 h-10 p-1 cursor-pointer hover:bg-primary/20 transition-colors rounded-full">
@@ -479,12 +479,23 @@
       
     </main>
 
-    <footer class="w-full bg-body text-color-text py-12">
+    <footer class="w-full bg-body text-color-text py-4">
         <div class="container mx-auto px-6 flex items-center justify-center sm:justify-between flex-wrap gap-6">
-            <div class="flex items-center gap-3">
-                <a href="../Home/index.html"><img src="../../img/icon/logo.svg" alt="Logo" class="w-10 h-10"></a>
-                <a href="../Home/index.html" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
-            </div>
+            <div id="logo-link" class="flex items-center gap-3">
+                <script>
+                    let allMainLinks = document.getElementsByClassName('main-link');
+
+                    Array.from(allMainLinks).forEach(link => {
+                        
+                        localStorage.getItem('cargo') == 'tec' ? link.setAttribute('href', '../perfil/index.html') : link.setAttribute('href', '../Home/index.html')
+                    });
+
+                    document.getElementById('logo-link').innerHTML = `
+                    <a href="${localStorage.getItem('cargo') == 'tec' ? '../perfil/index.html' : '../Home/index.html'}" aria-label="Ir para a página inicial"><img src="../../img/icon/logo.svg" alt="Logo do hiveframe" class="w-10 h-10"></a>
+                    <a href="${localStorage.getItem('cargo') == 'tec' ? '../perfil/index.html' : '../Home/index.html'}" class="text-primary font-semibold text-lg" aria-label="Ir para página principal">HIVE<span class="text-color-text transition-colors">FRAME</span></a>
+                    `;
+                </script>
+            </div>  
             <div class="flex flex-col items-center gap-3">
                 <span class="uppercase text-sm font-semibold text-color-text">POWERED BY</span>
                 <img src="../../img/icon/senai.png" alt="Logo do Senai" class="w-32 h-8">

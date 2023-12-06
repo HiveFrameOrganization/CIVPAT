@@ -19,6 +19,7 @@ modalEdit.addEventListener('click', function(e) {
 
 const botaoAceitar = document.getElementById('aceitarProposta');
 const botaoDeclinar =  document.getElementById('declinarProposta');
+const botaoConcluir = document.getElementById('concluirProposta');
 
 window.addEventListener('load', () => {
   const cargo = localStorage.getItem('cargo');
@@ -27,6 +28,7 @@ window.addEventListener('load', () => {
   if (cargo == 'ger'){
     botaoAceitar.value = 'SOLICITAR ACEITE';
     botaoDeclinar.value = 'SOLICITAR DECLINIO';
+    botaoConcluir.value = 'SOLICITAR CONCLUSÃO';
   }
 
 });
@@ -61,7 +63,7 @@ numeroSGSET.addEventListener('input', function () {
     numeroSGSET.value = valorFormatado;
 
     if (isValidoNumeroSGSET(valorSanitizado)) {
-        localStorage.setItem('sgsetValido', 'válido')
+      localStorage.setItem('sgsetValido', 'válido')
     } else {
       localStorage.setItem('sgsetValido', 'inválido')
     }

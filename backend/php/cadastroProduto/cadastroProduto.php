@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($verificacao) {
 
+      
         $stmt2 = $conn->prepare('INSERT INTO Produtos (fk_idProposta, fk_nifTecnico, fk_idNomeProduto, fk_idServicoCategoria, Area, Valor,
         HoraPessoa, HoraMaquina, fk_idUnidadeRealizadora, DataInicial, DataFinal, fk_idMaquina, Situacao)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
@@ -71,14 +72,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmt5->execute();
             }
     
-            // $horaPessoa = 0;
-            // $horaMaquina = 0;
-            // $dataDeHoje = date("Y-m-d");
+            $horaPessoa = 0;
+            $horaMaquina = 0;
+            $dataDeHoje = date("Y-m-d");
             
     
-            // $stmt6 = $conn->prepare('INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (?, ?, ?, ?, ?)');
-            // $stmt6->bind_param('isiis', $idNovoProduto, $nifTecnico, $horaPessoa, $horaMaquina, $dataDeHoje);
-            // $stmt6->execute();
+            $stmt6 = $conn->prepare('INSERT INTO CargaHoraria (fk_idProduto, fk_nifTecnico, HorasPessoa, HorasMaquina, Datas) VALUES (?, ?, ?, ?, ?)');
+            $stmt6->bind_param('isiis', $idNovoProduto, $nifTecnico, $horaPessoa, $horaMaquina, $dataDeHoje);
+            $stmt6->execute();
     
     
             $stmt7 = $conn->prepare('SELECT Valor FROM Propostas WHERE idProposta = ?');
