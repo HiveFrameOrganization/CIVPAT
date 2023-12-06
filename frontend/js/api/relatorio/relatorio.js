@@ -18,7 +18,24 @@ window.addEventListener('load', () => {
     exibirRelatorio(null)
 })
 
-let exibir = document.querySelector('#exibir')
+let exibir = document.querySelector('#exibir');
+
+exibir.addEventListener('click', event => {
+    const el = event.target;
+    const closest = el.closest('.cursor-pointer');
+    if (closest){
+        const produtos = closest.querySelectorAll('#produto');
+        for (let produto of produtos){
+            if (produto.classList.contains('hidden')) {
+                produto.classList.remove('hidden');
+                closest.querySelector('#setaDropdown').classList.add('rotate-180');
+            } else {
+                produto.classList.add('hidden');
+                closest.querySelector('#setaDropdown').classList.remove('rotate-180');
+            }
+        }
+    }
+});
 
 async function buscarRelatorio(mes, ano, valor = false) {
     const autenticado = await autenticacao(['adm', 'tec' ], false)
@@ -171,8 +188,8 @@ async function exibirRelatorio(res) {
     } else {
 
         exibir.innerHTML = '';
-        let produto = '';
-        let proposta = '';
+        let idProduto = '';
+        let idProposta = '';
         let cabeçalho;
         let all;
         let horaTotal;
@@ -180,34 +197,21 @@ async function exibirRelatorio(res) {
         for (let i = 0; i < res.dados.length; i++) {
 
             // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
-            if (produto !== res.dados[i].NomeProduto) {
-                proposta = res.dados[i].TituloProposta;
-                produto = res.dados[i].NomeProduto;
-                horaTotal = somaHoraTotalMes(res, produto, proposta);
+            if (idProduto !== res.dados[i].idProduto) {
+                idProposta = res.dados[i].idProposta;
+                idProduto = res.dados[i].idProduto;
+                horaTotal = somaHoraTotalMes(res, idProduto, idProposta);
                 cabeçalho = createCabecalho();
                 cabeçalho.innerHTML = criarCabecalho(res, i, horaTotal);
                 all = createAll();
                 all.appendChild(cabeçalho)
                 for (let dado of res.dados) {
-                    if (proposta === dado.TituloProposta && produto === dado.NomeProduto) {
-                        let horas = createHoras();
-                        horas.innerHTML += criarHoras(dado)
-                        all.addEventListener('click', () => {
-                            if (horas.classList.contains('hidden')) {
-                                horas.classList.remove('hidden')
-                                all.classList.toggle('bg-component')
-                                document.querySelector('#setaDropdown').classList.add('rotate-180')
-                                cabeçalho.classList.add('bg-body')
-                                cabeçalho.classList.remove('bg-component')
-                            } else {
-                                horas.classList.add('hidden')
-                                all.classList.toggle('bg-component')
-                                document.querySelector('#setaDropdown').classList.remove('rotate-180')
-                                cabeçalho.classList.remove('bg-body')
-                                cabeçalho.classList.add('bg-component')
-                            }
-                        })
-                        all.appendChild(horas)
+                    if (idProposta === dado.idProposta && idProduto === dado.idProduto) {
+                        if (dado.HorasPessoa !== "0"){
+                            let horas = createHoras();
+                            horas.innerHTML += criarHoras(dado);
+                            all.appendChild(horas);
+                        }
                     }
                 }
                 exibir.appendChild(all)
@@ -302,6 +306,7 @@ function createCabecalho() {
 function createHoras() {
     const horas = document.createElement('div');
     horas.classList = 'rounded-b-xl hidden bg-component flex flex-col pb-4 transition-all mb-8';
+    horas.id = 'produto';
     return horas;
 }
 
@@ -311,10 +316,10 @@ function createAll() {
     return all;
 }
 
-function somaHoraTotalMes(res, produto, proposta) {
+function somaHoraTotalMes(res, idProduto, idProposta) {
     let totalHora = 0;
     for (let dado of res.dados) {
-        if (proposta === dado.TituloProposta && produto === dado.NomeProduto) {
+        if (idProposta === dado.idProposta && idProduto === dado.idProduto) {
             totalHora += Number(dado.HorasPessoa);
         }
     }

@@ -1,6 +1,10 @@
 export default function validarCNPJ(cnpj) {
-    if (cnpj == '') {
-        return true
+    
+    if (localStorage.getItem('statusProposta') == 'Em Análise' || localStorage.getItem('statusProposta') == 'Solicitação de Declinio'){
+
+        if (cnpj == '') {
+            return true
+        }
     }
 
     // Remover caracteres não numéricos
