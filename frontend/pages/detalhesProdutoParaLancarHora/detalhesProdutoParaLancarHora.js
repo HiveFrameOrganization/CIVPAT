@@ -48,7 +48,7 @@ document.getElementById('dataInicial').setAttribute('min', dataMaxima);
 // document.getElementsByName('dataFinal').setAttribute('max', dataMaxima);
 
 // Seta a data de lançamento para não ser depois de ontem
-let diaLancamento = dia > 10 ? `${dia}` : `0${dia}`;
+let diaLancamento = dia;
 document.getElementById('dataDoLancamento').setAttribute('max', `${ano}-${mes}-${diaLancamento}`);
 ////////////////////////////////////////////////
 

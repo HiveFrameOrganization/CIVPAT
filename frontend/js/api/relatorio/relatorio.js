@@ -188,8 +188,8 @@ async function exibirRelatorio(res) {
     } else {
 
         exibir.innerHTML = '';
-        let produto = '';
-        let proposta = '';
+        let idProduto = '';
+        let idProposta = '';
         let cabeçalho;
         let all;
         let horaTotal;
@@ -197,19 +197,21 @@ async function exibirRelatorio(res) {
         for (let i = 0; i < res.dados.length; i++) {
 
             // CRIANDO ELEMENTO QUE SERAO INSERIDOS OS DADOS
-            if (produto !== res.dados[i].NomeProduto) {
-                proposta = res.dados[i].TituloProposta;
-                produto = res.dados[i].NomeProduto;
-                horaTotal = somaHoraTotalMes(res, produto, proposta);
+            if (idProduto !== res.dados[i].idProduto) {
+                idProposta = res.dados[i].idProposta;
+                idProduto = res.dados[i].idProduto;
+                horaTotal = somaHoraTotalMes(res, idProduto, idProposta);
                 cabeçalho = createCabecalho();
                 cabeçalho.innerHTML = criarCabecalho(res, i, horaTotal);
                 all = createAll();
                 all.appendChild(cabeçalho)
                 for (let dado of res.dados) {
-                    if (proposta === dado.TituloProposta && produto === dado.NomeProduto) {
-                        let horas = createHoras();
-                        horas.innerHTML += criarHoras(dado);
-                        all.appendChild(horas);
+                    if (idProposta === dado.idProposta && idProduto === dado.idProduto) {
+                        if (dado.HorasPessoa !== "0"){
+                            let horas = createHoras();
+                            horas.innerHTML += criarHoras(dado);
+                            all.appendChild(horas);
+                        }
                     }
                 }
                 exibir.appendChild(all)
@@ -314,10 +316,10 @@ function createAll() {
     return all;
 }
 
-function somaHoraTotalMes(res, produto, proposta) {
+function somaHoraTotalMes(res, idProduto, idProposta) {
     let totalHora = 0;
     for (let dado of res.dados) {
-        if (proposta === dado.TituloProposta && produto === dado.NomeProduto) {
+        if (idProposta === dado.idProposta && idProduto === dado.idProduto) {
             totalHora += Number(dado.HorasPessoa);
         }
     }

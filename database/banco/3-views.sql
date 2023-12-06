@@ -27,17 +27,19 @@ SELECT
 
 /*--------------------------------------- RELATORIO --------------------------------------------------*/
 CREATE VIEW vw_relatorioSemMaquina AS
-SELECT NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, CargaHoraria.Datas, Usuarios.NIF
+SELECT NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, CargaHoraria.Datas, Usuarios.NIF,
+    Propostas.idProposta, Produtos.idProduto
 FROM Usuarios 
     INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
     INNER JOIN Produtos ON Produtos.idProduto = CargaHoraria.fk_idProduto 
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
     INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta
-    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF;
+    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF, Propostas.idProposta, Produtos.idProduto;
 
 CREATE VIEW vw_relatorioComMaquina AS
 SELECT NomeProduto.NomeProduto, Propostas.TituloProposta, SUM(CargaHoraria.HorasPessoa) as `HorasPessoa`, 
-    CargaHoraria.Datas, Usuarios.NIF, Usuarios.Nome, Usuarios.Sobrenome, Maquinas.Maquina, 
+    CargaHoraria.Datas, Usuarios.NIF, Usuarios.Nome, Usuarios.Sobrenome, Maquinas.Maquina,
+    Propostas.idProposta, Produtos.idProduto,
     SUM(CargaHoraria.HorasMaquina) as `HorasMaquina`
 FROM Usuarios 
     INNER JOIN CargaHoraria ON Usuarios.NIF = CargaHoraria.fk_nifTecnico 
@@ -45,7 +47,7 @@ FROM Usuarios
     INNER JOIN NomeProduto ON NomeProduto.idNomeProduto = Produtos.fk_idNomeProduto
     INNER JOIN Maquinas ON Maquinas.idMaquina = Produtos.fk_idMaquina 
     INNER JOIN Propostas ON Propostas.idProposta = Produtos.fk_idProposta
-    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF, Maquinas.Maquina;
+    GROUP BY Datas, Propostas.TituloProposta, NomeProduto.NomeProduto, Usuarios.NIF, Maquinas.Maquina, Propostas.idProposta, Produtos.idProduto;
 /*----------------------------------------------------------------------------------------------------*/
 
 
