@@ -2,12 +2,13 @@ USE `isihiveframe` ;
 
 /*------------------------------------------- HOME --------------------------------------------------*/
 CREATE VIEW vw_home AS
-SELECT DISTINCT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
-    `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, `Usuarios`.`Nome`,
-    `GerenteResponsavel`.`fk_nifGerente` FROM Propostas
-    INNER JOIN GerenteResponsavel ON `Propostas`.`idProposta` = `GerenteResponsavel`.`fk_idProposta`
-    INNER JOIN Usuarios ON `GerenteResponsavel`.`fk_nifGerente` = `Usuarios`.`NIF`
-    ORDER BY `Propostas`.`idProposta` DESC;
+SELECT `Propostas`.`idProposta`, `Propostas`.`nSGSET`, `Propostas`.`TituloProposta`,
+        `Propostas`.`Inicio`, `Propostas`.`Fim`, `Propostas`.`Status`, 
+        (SELECT fk_nifGerente FROM `GerenteResponsavel` LIMIT 1) as `fk_nifGerente`,
+        (SELECT Usuarios.Nome FROM `GerenteResponsavel` INNER JOIN `Usuarios` 
+            ON GerenteResponsavel.fk_nifGerente = Usuarios.`NIF` LIMIT 1) as Nome
+    FROM Propostas
+    ORDER BY `Propostas`.`idProposta` DESC LIMIT 0,100;
 
 
 CREATE VIEW vw_kpi AS
