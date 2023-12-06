@@ -18,9 +18,11 @@ function verificarHoras($idProduto, $conn) {
     $resultado = $stmt -> get_result();
 
    
+
     if ($resultado -> num_rows > 0){
         $dados = mysqli_fetch_assoc($resultado);
 
+        //Somar as horas diarias do tecnico para não ultrapassar de 10 horas
         $dataHoje = date('Y-m-d');
          $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS totalHorasPessoaDiarias FROM CargaHoraria WHERE datas = ? and fk_nifTecnico = ?");
         $stmt -> bind_param('ss', $dataHoje, $dados['NIF']);
@@ -36,7 +38,7 @@ function verificarHoras($idProduto, $conn) {
         $totalHorasMaquinaDiarias = mysqli_fetch_assoc($horasDiarias);
 
 
-        //Somar as horas acomuladas da pessoa 
+        //Somar as horas total da pessoa 
         $stmt = $conn -> prepare ("SELECT SUM(HorasPessoa) AS horasAcumuladasPessoa 
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
@@ -45,7 +47,7 @@ function verificarHoras($idProduto, $conn) {
         $horasTotalPessoa = $stmt -> get_result();
         $horasAcumuladasPessoa = mysqli_fetch_assoc($horasTotalPessoa);
         
-        //Somar a horas acomuladas da máquina
+        //Somar a horas total da máquina
         $stmt = $conn -> prepare ("SELECT SUM(HorasMaquina) AS horasAcumuladasMaquina
             FROM CargaHoraria WHERE fk_idProduto =?
          ");
@@ -55,7 +57,7 @@ function verificarHoras($idProduto, $conn) {
         $horasAcumuladasMaquina = mysqli_fetch_assoc($horasTotalMaquina);
         
 
-        //Somar as horas diarias do tecnico para não ultrapassar de 10 horas
+    
         $dataHoje = date('Y-m-d');
         $stmt = $conn -> prepare("SELECT SUM(HorasPessoa) AS somaHoras from CargaHoraria WHERE Datas = ? and fk_idProduto = ?");
         $stmt -> bind_param('ss', $dataHoje, $idProduto);
@@ -75,13 +77,17 @@ function verificarHoras($idProduto, $conn) {
 
         //Passar as informações como objeto para o front
         $resposta = [
-            "horaTotalPessoa" => $dados['HoraPessoa'],
-            "horaTotalMaquina" => $dados['HoraMaquina'],
-            "datas" => $dados['Datas'],
-            "horasAcumuladasPessoa" => $horasAcumuladasPessoa['horasAcumuladasPessoa'],
-            "horasAcumuladasMaquina" => $horasAcumuladasMaquina['horasAcumuladasMaquina'],
+            "horaTotalPessoa" => $horasAcumuladasPessoa['horasAcumuladasPessoa'],
+            "horaTotalMaquina" =>  $horasAcumuladasMaquina['horasAcumuladasMaquina'],
+
+            "datas" => $dataHoje,
+
+            "horasAcumuladasPessoa" => $somaHoras['somaHoras'],
+            "horasAcumuladasMaquina" => $somaHorasMaquina['somaHorasMaquina'],
+
             "horasDiariasPessoas" => $somaHoras['somaHoras'],
             "horasDiariasMaquina" => $somaHorasMaquina['somaHorasMaquina'],
+
             "totalHorasPessoaDiarias" => $totalHorasPessoaDiarias['totalHorasPessoaDiarias'],
             "totalHorasMaquinaDiarias" => $totalHorasMaquinaDiarias['totalHorasMaquinaDiarias'],
              
