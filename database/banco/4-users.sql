@@ -71,6 +71,8 @@ GRANT role1 TO 'adm'@'%';
 
 GRANT INSERT, UPDATE ON `isihiveframe`.`Usuarios` TO 'adm'@'%';
 GRANT SELECT, INSERT, UPDATE ON `isihiveframe`.`PDF` TO 'adm'@'%';
+GRANT INSERT ON `isihiveframe`.`CargaHoraria` TO 'adm'@'%';
+
 FLUSH PRIVILEGES;
 
 

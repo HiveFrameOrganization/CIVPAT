@@ -5,10 +5,6 @@ import exibirPropostas from './renderizarProposta.js';
 import { autenticacao } from '../login/autenticacao.js';
 
 export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
 
     document.getElementById('table').innerHTML = `
     <div class='flex flex-col justify-center items-center gap-4'>
@@ -63,8 +59,6 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
             document.getElementById('concluidos').textContent = dados['Concluido'] ? `# ${dados['Concluido']}` : 'N/A';
             document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] ? `# ${dados['SolicitacaoDeAceite']}` : 'N/A';
 
-
-            console.log(dados)
             if (dados.propostas.length > 0) {
 
                 exibirPropostas(dados.propostas);

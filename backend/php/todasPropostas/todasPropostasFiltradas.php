@@ -65,12 +65,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if ($aba == 'solicitacoes') {
                 $declinio = 'Solicitação de Declinio';
                 $aceito = 'Solicitação de Aceite';
+                $conclusao = 'Solicitação de conclusão';
 
                 $stmt = $conn->prepare('SELECT * FROM vw_home
-                WHERE Status in (?, ?) AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
+                WHERE Status in (?, ?, ?) AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?
                 LIMIT ?, ?');
                 // Limita os resultados a 10 propostas por página
-                $stmt->bind_param('ssssii', $aceito, $declinio, $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
+                $stmt->bind_param('sssssii', $aceito, $declinio, $conclusao, $pesquisaAtual, $nif, $inicioProposta, $qtdPropostasTela);
             } else {
                 $stmt = $conn->prepare('SELECT * FROM vw_home
                 WHERE Status = ? AND TituloProposta COLLATE utf8mb4_unicode_ci LIKE ? AND fk_nifGerente LIKE ?

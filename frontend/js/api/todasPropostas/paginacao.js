@@ -133,6 +133,7 @@ function colocarPagina(num) {
 }
 
 async function mudarAba(aba) {
+    
     colocarPagina(1);
     localStorage.setItem('filtroPadrao', aba);
     await pegarTodasAsPropostas(aba, sessionStorage.getItem('pesquisado'));
