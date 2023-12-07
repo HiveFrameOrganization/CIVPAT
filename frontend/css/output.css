@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.6 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -121,8 +121,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -131,8 +133,12 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-size: 1em;
+  font-feature-settings: normal;
   /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -1450,6 +1456,11 @@ video {
   border-color: rgb(var(--bg-body) / var(--tw-border-opacity));
 }
 
+.border-color-gray {
+  --tw-border-opacity: 1;
+  border-color: rgb(var(--gray) / var(--tw-border-opacity));
+}
+
 .border-color-green {
   --tw-border-opacity: 1;
   border-color: rgb(var(--green) / var(--tw-border-opacity));
@@ -1515,6 +1526,11 @@ video {
 .bg-body {
   --tw-bg-opacity: 1;
   background-color: rgb(var(--bg-body) / var(--tw-bg-opacity));
+}
+
+.bg-color-gray {
+  --tw-bg-opacity: 1;
+  background-color: rgb(var(--gray) / var(--tw-bg-opacity));
 }
 
 .bg-color-green {
@@ -1884,10 +1900,6 @@ video {
   text-transform: capitalize;
 }
 
-.italic {
-  font-style: italic;
-}
-
 .leading-4 {
   line-height: 1rem;
 }
@@ -2128,6 +2140,24 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
 }
 
+.naoSelecionavel {
+  -webkit-touch-callout: none;
+  /* iPhone OS, Safari */
+  -webkit-user-select: none;
+  /* Chrome, Safari 3 */
+  /* Safari 2 */
+  -moz-user-select: none;
+  /* Firefox */
+  /* IE10+ */
+  user-select: none;
+  /* Possível implementação no futuro */
+  /* cursor: default; */
+}
+
+option {
+  background-color: rgb(var(--bg-body));
+}
+
 /* Aplicando classes manualmente */
 
 .text-color-green-strong {
@@ -2219,6 +2249,11 @@ input[type="month"]::-webkit-calendar-picker-indicator {
 .hover\:text-\[\#fff\]:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-color-gray:hover {
+  --tw-text-opacity: 1;
+  color: rgb(var(--gray) / var(--tw-text-opacity));
 }
 
 .hover\:text-color-green:hover {
@@ -2654,15 +2689,15 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   .xl\:w-2\/3 {
     width: 66.666667%;
   }
+
+  .xl\:pb-0 {
+    padding-bottom: 0px;
+  }
 }
 
 @media (min-width: 1536px) {
   .\32xl\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
-  }
-
-  .\32xl\:pb-0 {
-    padding-bottom: 0px;
   }
 }
