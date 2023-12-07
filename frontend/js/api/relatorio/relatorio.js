@@ -24,7 +24,7 @@ exibir.addEventListener('click', event => {
     const el = event.target;
     const closest = el.closest('.cursor-pointer');
     if (closest){
-        const produtos = closest.querySelectorAll('#produto');
+        const produtos = closest.querySelectorAll('.produto');
         for (let produto of produtos){
             if (produto.classList.contains('hidden')) {
                 produto.classList.remove('hidden');
@@ -305,8 +305,7 @@ function createCabecalho() {
 
 function createHoras() {
     const horas = document.createElement('div');
-    horas.classList = 'rounded-b-xl hidden bg-component flex flex-col pb-4 transition-all mb-8';
-    horas.id = 'produto';
+    horas.classList = 'rounded-b-xl hidden bg-component flex flex-col pb-4 transition-all mb-8 produto';
     return horas;
 }
 

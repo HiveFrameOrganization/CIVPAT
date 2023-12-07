@@ -98,6 +98,20 @@ input[type="month"]::-webkit-calendar-picker-indicator {
     filter: invert(40%) sepia(91%) saturate(406%) hue-rotate(174deg) brightness(95%) contrast(97%);
 }
 
+.naoSelecionavel {
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
+    /* cursor: default; */
+}
+
+option {
+    background-color: rgb(var(--bg-body));
+}
+
 /* Aplicando classes manualmente */
 .text-color-green-strong {
     color: rgb(var(--strong-green));

@@ -4,11 +4,8 @@ module.exports = {
         './*.html',
         './frontend/pages/**/*',
         './frontend/js/**/*',
-        './frontend/js*'
+        './frontend/js/*.js'
     ],
-    colors: {
-        'pink': '#de378d'
-    },
     theme: {
         colors: {
             'body': 'rgb(var(--bg-body) / <alpha-value>)',

@@ -14,131 +14,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="../../css/output.css"> -->
     <link rel="stylesheet" href="../../Componentes/telaLoad/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js" integrity="sha512-Rdk63VC+1UYzGSgd3u2iadi0joUrcwX0IWp2rTh6KXFoAmgOjRS99Vynz1lJPT8dLjvo6JZOqpAHJyfCEZ5KoA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style type="text/tailwindcss">
-        @layer base {
-            :root {
-                /* DAFAULT: Dark */
-                --bg-body: 9 32 48;
-                --bg-component: 18 39 54;
-                --primary-color: 57 118 209;
-                --text-color: 255 255 255;
-                --text-secundary-color: 126 126 126;
-                --red: 245 74 76;
-                --green: 36 194 146;
-                --purple: 121 80 255;
-                --orange: 252 160 1;
-                --gray: 115 115 115;
-                --primary-smooth: 96 154 240;
-            }
-
-            @media (prefers-color-scheme: light) {
-                :root {
-                    --bg-body: 241 245 249;
-                    --bg-component: 255 255 255;
-                    --text-color: 30 41 59;
-                }
-            }
-
-            :root[data-theme="dark"] {
-                --bg-body: 9 32 48;
-                --bg-component: 18 39 54;
-                --primary-color: 57 118 209;
-                --text-color: 255 255 255;
-                --text-secundary-color: 126 126 126;
-            }   
-
-            :root[data-theme="light"] {
-                --bg-body: 241 245 249;
-                --bg-component: 255 255 255;
-                --text-color: 30 41 59;
-            }   
-        }
-
-        @font-face {
-            src: url('../../assets/fonts/Rubik/Rubik-VariableFont_wght.ttf');
-            font-family: 'Rubik';    
-            font-style: normal;
-        } 
-
-        @font-face {
-            src: url('../../assets/fonts/Rubik/Rubik-Italic-VariableFont_wght.ttf');
-            font-family: 'Rubik';    
-            font-style: italic;
-        } 
-
-        * {
-            font-family: 'Rubik', sans-serif;
-
-            /* Works on Firefox */
-            scrollbar-width: thin;
-            scrollbar-color: rgb(57, 118, 209) transparent;
-        }
-
-        /* Works on Chrome, Edge, and Safari */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: rgb(57, 118, 209);
-            border-radius: 0.375rem/* 6px */;
-        }
-
-        #fade {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 25;
-        }
-
-        #fade.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .naoSelecionavel {
-            -webkit-touch-callout: none;  /* iPhone OS, Safari */
-            -webkit-user-select: none;    /* Chrome, Safari 3 */
-            -khtml-user-select: none;     /* Safari 2 */
-            -moz-user-select: none;       /* Firefox */
-            -ms-user-select: none;        /* IE10+ */
-            user-select: none;            /* Possível implementação no futuro */
-            /* cursor: default; */
-        }
-
-        option {
-            background-color: rgb(var(--bg-body));
-        }
-
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                colors: {
-                    'body': 'rgb(var(--bg-body) / <alpha-value>)',
-                    'component': 'rgb(var(--bg-component) / <alpha-value>)',
-                    'primary': 'rgb(var(--primary-color) / <alpha-value>)',
-                    'color-text': 'rgb(var(--text-color) / <alpha-value>)',
-                    'color-text-secundary': 'rgb(var(--text-secundary-color) / <alpha-value>)',
-                    'color-red': 'rgb(var(--red) / <alpha-value>)',
-                    'color-green': 'rgb(var(--green) / <alpha-value>)',
-                    'color-purple': 'rgb(var(--purple) / <alpha-value>)',
-                    'color-orange': 'rgb(var(--orange) / <alpha-value>)',
-                    'color-gray': 'rgb(var(--gray) / <alpha-value>)'
-                }
-            },
-        }
-    </script>
+    <link rel="stylesheet" href="../../css/output.css">
 </head>
 
 <body class="bg-body text-color-text pt-20" onload="someCarregamento()">
@@ -608,7 +488,8 @@
                                     <input type="text" value="" id="baixarOrcamento"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="Orcamento.pdf"
-                                        onclick="document.querySelector('#botaoOrcamento').click()">
+                                        onclick="document.querySelector('#botaoOrcamento').click()"
+                                        readonly>
                                     <button type="button" id="botaoOrcamento" class="hidden">Baixar</button>
                                     
                                 </div>
@@ -642,7 +523,8 @@
                                     <input type="text" value="" id="baixarPropostaAssinada"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="PropostaAssinada.pdf"
-                                        onclick="document.querySelector('#botaoPropostaAssinada').click()">
+                                        onclick="document.querySelector('#botaoPropostaAssinada').click()"
+                                        readonly>
 
                                     <button type="button" id="botaoPropostaAssinada" class="hidden">Baixar</button>
                                 </div>
@@ -686,7 +568,8 @@
                                     <input type="text" value="" id="botaoOrcamento"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="RelatorioFinal.pdf"
-                                        onclick="document.querySelector('#botaoRelatorioFinal').click()">
+                                        onclick="document.querySelector('#botaoRelatorioFinal').click()"
+                                        readonly>
 
                                     <button type="button" id="botaoRelatorioFinal" class="hidden">Baixar</button>
                                 </div>
@@ -719,7 +602,8 @@
                                     <input type="text" value="" id="inputFileDown"
                                         class="text-primary box-border bg-component placeholder-color-text-secundary py-3 px-3 rounded-lg outline-none focus:outline-3 focus:outline-primary focus:placeholder-primary w-full cursor-pointer"
                                         placeholder="PesquisaDeSatisfacao.pdf"
-                                        onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()">
+                                        onclick="document.querySelector('#botaoPesquisaDeSatisfacao').click()"
+                                        readonly>
 
                                     <button type="button" id="botaoPesquisaDeSatisfacao" class="hidden">Baixar</button>
                                 </div>
