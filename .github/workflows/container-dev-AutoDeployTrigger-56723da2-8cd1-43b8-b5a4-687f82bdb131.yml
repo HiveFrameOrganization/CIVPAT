@@ -8,7 +8,7 @@ on:
       [ dev-deploy ]
     paths:
     - '**'
-    - '.github/workflows/container-dev-AutoDeployTrigger-93bea51e-e21d-49a1-ba61-f0671e8583c4.yml'
+    - '.github/workflows/container-dev-AutoDeployTrigger-56723da2-8cd1-43b8-b5a4-687f82bdb131.yml'
 
   # Allow manual trigger 
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
           containerAppName: container-dev
           resourceGroup: hiveframe
           imageToBuild: luizbrito6/container-dev:${{ github.sha }}
-          dockerfilePath: Dockerfile
+          
 
      
 

@@ -3,11 +3,7 @@ import selecionarGerente from './selecionarGerente.js';
 import { autenticacao } from '../login/autenticacao.js';
 
 export default async function carregarTecnicos() {
-    const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-    if(!autenticado){
-        return;
-    }
-
+    setTimeout(1000);
     const gerente1Dropdown = document.getElementById('primeiroGerente');
     const gerente2Dropdown = document.getElementById('segundoGerente');
 

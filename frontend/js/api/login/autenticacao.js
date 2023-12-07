@@ -1,5 +1,5 @@
 import alertas from '../../feedback.js';
-import { back } from '../Rotas/rotas.js'
+import { raiz, back } from '../Rotas/rotas.js'
 /*
 ------------------------- PROCESSO DE AUTENTICAÇÃO E NÍVEL DE ACESSO DO USUÁRIO ------------------------------
 */
@@ -9,23 +9,24 @@ export async function autenticacao(cargo, load) {
 
     try {
         // Pegando o token para enviar na requisição
-        const token = localStorage.getItem('token');
+        setTimeout(1000)
+        var token = localStorage.getItem('token')
 
         if (!token) {
 
             // Limpando residuos
-            localStorage.clear();   
-            sessionStorage.clear();
+            // localStorage.clear();   
+            // sessionStorage.clear();
 
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'É necessário realizar um novo login.');
 
             // Requisição para sair da conta
-            const deslogar = await fetch(`http://localhost:8080/backend/php/login/sair.php`);
+            const deslogar = await fetch(back + `/login/sair.php`);
 
             const resposta = await deslogar.json();
 
-            window.location.href = 'http://localhost:8080/';
+            // window.location.href = raiz;
 
             return false;
         }
@@ -48,7 +49,7 @@ export async function autenticacao(cargo, load) {
         const resposta = await verificacao.json();
 
         if (resposta.status === 'erro' && load ) {
-            window.location.pathname = '/frontend/pages/login/erro.html';
+            // window.location.pathname = '/frontend/pages/login/erro.html';
         } else {
             return resposta.autenticação;
         }
