@@ -258,11 +258,7 @@
                 </div>
 
                 
-                <div class="flex flex-col sm:flex-row mt-2">
-                    <div class="flex gap-5 flex-col sm:flex-row" id="botaoSalvar">
-                        
-                    </div>
-                </div>
+                
                 
             </form>
 
@@ -320,15 +316,6 @@
 
     <script>
 
-        // renderizando o botão de salvar de acordo com o cargo e status da proposta
-        
-        if (((localStorage.getItem('cargo') == 'coor') || (localStorage.getItem('cargo') == 'ger') || (localStorage.getItem('cargo') == 'adm')) && ((localStorage.getItem('statusProposta') == 'Em Análise') || (localStorage.getItem('statusProposta') == 'Aceito'))){
-            const divBotao = document.getElementById('botaoSalvar');
-            
-            divBotao.innerHTML += `<input 
-            class="text-btn-green bg-btn-green/20 hover:bg-btn-green/40 cursor-pointer px-12 py-2 rounded-md" 
-            type="button" id="modificarProduto" value="SALVAR">`;
-        }
 
         // desabilitando o botão de salvar para técnicos (apenas visualização)
         
