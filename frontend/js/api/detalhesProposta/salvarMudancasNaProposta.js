@@ -116,7 +116,7 @@ export default async function salvarMudancasNaProposta() {
             localStorage.setItem('mensagem', 'Erro ao salvar!');
         }
 
-        window.location.href = "../../pages/detalhesProposta/detalhesProposta.html";
+        window.location.reload();
 
     }
 }

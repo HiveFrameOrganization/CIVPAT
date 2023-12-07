@@ -179,12 +179,19 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
     baixarPdf(4)
 });
 
-export const editandoProposta = document.querySelector('#editarProposta');
-var antigoContato = document.querySelector('#numeroContato').innerHTML
-editandoProposta.addEventListener('click', () => {
-    console.log(antigoContato)
 
-    // document.querySelector('#numeroContato').setAttribute('type', 'number')
+const aceitarPropostaButton = document.getElementById('aceitarProposta');
+const declinarPropostaButton = document.getElementById('declinarProposta');
+const concluirPropostaButton = document.getElementById('concluirProposta');
+const orcamentoInput = document.getElementById('orcamento');
+const propostaAssinadaInput = document.getElementById('propostaAssinada');
+const cnpj = document.getElementById('cnpj');
+const nSGSET = document.getElementById('numeroSGSET');
+
+export const editandoProposta = document.querySelector('#editarProposta');
+
+editandoProposta.addEventListener('click', () => {
+
     // Mudando estado do botão
     let estadoInput = document.querySelectorAll('.estadoInput')
     if (editandoProposta.value == 'EDITAR') {
@@ -195,32 +202,31 @@ editandoProposta.addEventListener('click', () => {
             concluirPropostaButton.parentElement.removeChild(concluirPropostaButton);
         }
 
-        editandoProposta.value = 'SALVAR'
+        editandoProposta.value = 'SALVAR';
+
+        const cancelarEdicaoProposta = document.createElement('button');
+
+        cancelarEdicaoProposta.setAttribute('aria-label', 'Cancelar edição');
+        cancelarEdicaoProposta.classList = 'bg-color-red py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer';
+        cancelarEdicaoProposta.setAttribute('id', 'cancelarEdicaoProposta');
+        cancelarEdicaoProposta.textContent = 'CANCELAR';
+
+        cancelarEdicaoProposta.addEventListener('click', () => {
+
+            window.location.reload();
+        });
+
+        editandoProposta.parentElement.appendChild(cancelarEdicaoProposta);
 
         for (let i = 0; i < estadoInput.length; i++) {
             estadoInput[i].removeAttribute('disabled')
         }
+
+        
     } else {
         salvarMudancasNaProposta();
-
-        editandoProposta.value = 'EDITAR'
-
-        // DESATIVA OU ATIVA OS INPUTS PARA EDIÇÃO DA PROPOSTA
-        for (let i = 0; i < estadoInput.length; i++) {
-            estadoInput[i].setAttribute('disabled', 'true')
-        }
     }
-
-
 });
-
-const aceitarPropostaButton = document.getElementById('aceitarProposta');
-const declinarPropostaButton = document.getElementById('declinarProposta');
-const concluirPropostaButton = document.getElementById('concluirProposta');
-const orcamentoInput = document.getElementById('orcamento');
-const propostaAssinadaInput = document.getElementById('propostaAssinada');
-const cnpj = document.getElementById('cnpj');
-const nSGSET = document.getElementById('numeroSGSET');
 
 
 // Executando a função 'aceitarProposta'.
