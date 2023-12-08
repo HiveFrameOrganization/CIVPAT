@@ -6,6 +6,8 @@ import alertas from '../../feedback.js';
 import { autenticacao } from '../login/autenticacao.js';
 
 let inAlert = false;
+const table = document.getElementById('table');
+const divs = document.createElement('div');
 
 // Busca as fotos do gerente
 async function getFotoFuncionario(nif) {
@@ -66,7 +68,7 @@ async function exibirPropostas(propostas){
 
     if (propostas) {
 
-        table.innerHTML = '';
+        divs.innerHTML = '';
 
         paginacao.classList.remove('hidden');
         
@@ -271,15 +273,13 @@ async function exibirPropostas(propostas){
                     </div>
                 </button>
             </div>`;
-            
-            divRow.querySelector('.area-left').addEventListener('click', function() {
 
-                // Recuperando o botão o itemid, ao clicar na linha
-                verDetalhesDaProposta(divRow.querySelector('.view-btn'));
-            })
-
-            table.appendChild(divRow);
+            divs.appendChild(divRow);
         }
+
+        table.innerHTML = divs.outerHTML;
+
+        aplicarFuncaoClickEmTodasAsLinhas();
     
         reloadLinhas();
 
@@ -294,6 +294,19 @@ async function exibirPropostas(propostas){
         `;
     }
 };
+
+function aplicarFuncaoClickEmTodasAsLinhas() {
+
+    table.querySelectorAll('.area-left').forEach((linha) => {
+        
+        linha.addEventListener('click', function() {
+
+            // Recuperando o botão o itemid, ao clicar na linha
+            verDetalhesDaProposta(linha.parentElement.querySelector('.view-btn'));
+        })
+    });
+}
+
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
 function getTodosBotoes() {

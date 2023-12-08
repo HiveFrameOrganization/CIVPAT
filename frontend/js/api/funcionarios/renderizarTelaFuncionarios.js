@@ -4,6 +4,10 @@ import FormularioEditarUsuario from './renderizarModalFuncionarios.js';
 import desativarUsuario from './desativarFuncionarios.js';
 import alertas from '../../feedback.js';
 
+//Selecionando a div que vai ter os funcionário
+const exibe = document.querySelector('#exibicao');
+const divs = document.createElement("div");
+
 async function getFotoFuncionario(nif) {
     const autenticado = await autenticacao(['coor'], false)
     if(!autenticado){
@@ -58,10 +62,9 @@ async function getFotoFuncionario(nif) {
 } 
 
 async function exibir(dados) {
-    //Selecionando a div que vai ter os funcionário
-    const exibe = document.querySelector('#exibicao');
+
     // Removendo um possível elemento na div de exibição
-    exibe.innerHTML = '';
+    divs.innerHTML = '';
     
     for (let funcionario of dados) {
         // Criando os elementos
@@ -153,8 +156,10 @@ async function exibir(dados) {
             ` : '' }
         </div>`;
 
-        exibe.appendChild(div);
+        divs.appendChild(div);
     }
+
+    exibe.innerHTML = divs.outerHTML;
 
     reloadBotoesLinhas();
     recarregarLinhas();

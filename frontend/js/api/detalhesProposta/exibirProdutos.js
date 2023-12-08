@@ -1,8 +1,10 @@
+const table = document.getElementById('propostas');
+const divs = document.createElement('div');
+
 export default async function exibirProdutos(produtos) {
     // selecionando a div dos botões
-    const botoes = document.getElementById('propostas');
-    // limpando os possíveis elementos que possam estar na div
-    document.getElementById('propostas').innerHTML = '';
+
+    divs.innerHTML = '';
     
     for (let produto of produtos) {
         
@@ -37,7 +39,7 @@ export default async function exibirProdutos(produtos) {
     
         
         divRow.innerHTML = `
-            <div class="flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
+            <div itemid="${produto['idProduto']}" class="prod-row flex-1 flex flex-nowrap items-center justify-between rounded-l-md py-4 px-3 md:px-4 overflow-x-auto">
                 <div class="flex items-center gap-8 lg:w-full">
                     <div class="flex items-center gap-3 border-r border-color-text-secundary pr-8">
                         <img src="${statusIMG}" alt="${statusDescricao}" class="w-10 h-10 p-2 bg-${color}/20 rounded-md">
@@ -83,15 +85,23 @@ export default async function exibirProdutos(produtos) {
                     <span class="bg-${color}/20 text-${color} rounded-md font-semibold text-xs py-2 px-6 ml-9 lg:ml-auto uppercase whitespace-nowrap">${statusDescricao}</span>
             </div>`
           
+        divs.append(divRow)
+    }
 
+    table.innerHTML = divs.outerHTML;
 
-        divRow.onclick = () => {
-            localStorage.setItem('idProduto', produto['idProduto']);
+    verDetalhesProduto();
+}
+
+function verDetalhesProduto() {
+
+    table.querySelectorAll('.prod-row').forEach((linha) => {
+
+        linha.addEventListener('click', () => {
+
+            localStorage.setItem('idProduto', linha.getAttribute('itemid'));
 
             window.location.href = '../../pages/detalhesProduto/detalhesProduto.html';
-
-        }
-
-        botoes.append(divRow)
-    }
+        })
+    });
 }
