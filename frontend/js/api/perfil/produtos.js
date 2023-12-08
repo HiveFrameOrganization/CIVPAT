@@ -21,6 +21,7 @@ const userInfo = document.querySelector('#user-info');
 const paginacao = document.querySelector('#paginacao');
 
 const table = document.querySelector('#table');
+const divs = document.createElement('div');
 
 if (spanProdutos) {
 
@@ -61,7 +62,7 @@ async function buscarProdutos() {
 
     if (localStorage.getItem('nifPerfil') && !userProd.classList.contains('hidden')) {
 
-        document.getElementById('table').innerHTML = `
+        table.innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
             <div class="loading-spinner inline-block w-[50px] h-[50px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>
             <h2 class='font-bold text-color-text text-center'>CARREGANDO...</h2>
@@ -204,7 +205,7 @@ function exibirProdutos(produtos) {
     if (produtos.length > 0) {
 
         // Limpando a tabela
-        table.innerHTML = '';
+        divs.innerHTML = '';
 
         paginacao.classList.remove('hidden');
 
@@ -301,19 +302,30 @@ function exibirProdutos(produtos) {
                 </button>
             </div>`;
 
-            divRow.querySelector('.area-left').addEventListener('click', function() {
-
-                // Recuperando o botão o itemid, ao clicar na linha
-                verDetalhesProduto(divRow.querySelector('.view-btn'));
-            })
-
-            table.appendChild(divRow);
+            divs.appendChild(divRow);
         }
+
+        table.innerHTML = divs.outerHTML;
+
+        aplicarFuncaoClickEmTodasAsLinhas();
+
         reloadLinhas();
 
         return;
     }
 
+}
+
+function aplicarFuncaoClickEmTodasAsLinhas() {
+
+    table.querySelectorAll('.area-left').forEach((linha) => {
+        
+        linha.addEventListener('click', function() {
+
+            // Recuperando o botão o itemid, ao clicar na linha
+            verDetalhesProduto(linha.parentElement.querySelector('.view-btn'));
+        })
+    });
 }
 
 // Redirecionamento para ver 

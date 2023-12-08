@@ -365,13 +365,13 @@ function modalConfirmar(fun) {
     } else {
 
         Swal.fire({
-            title: `${fun ? 'Aceitar proposta?' : 'Declinar proposta?'}`,
+            title: `${fun ? localStorage.getItem('cargo') == 'ger' ? 'Solicitar aceite?' : 'Aceitar proposta?' : localStorage.getItem('cargo') == 'ger' ? 'Solicitar declínio?' : 'Declinar proposta?'}`,
             icon: `${fun ? 'info' : 'warning'}`,
             text: 'Você não poderá reverter isso!',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: `${fun ? 'Sim, aceitar' : 'Sim, declinar'}`,
+            confirmButtonText: `${fun ? localStorage.getItem('cargo') == 'ger' ? 'Sim, solicitar' : 'Sim, aceitar' : localStorage.getItem('cargo') == 'ger' ? 'Sim, solicitar' : 'Sim, declinar'}`,
             cancelButtonText: 'Cancelar'
         }).then((result) => {
 
