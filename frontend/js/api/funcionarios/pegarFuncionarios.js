@@ -16,7 +16,7 @@ async function retornaFuncionarios(filtro, pesquisado) {
     </div>
     `;
 
-    const pesquisa = document.querySelector('#pesquisarUsuario').value;
+    const pesquisa = document.querySelector('#hidden-input').value;
     // Caso a quantidade paginas não tenha sido definida, ela é definida para 1
     if (sessionStorage.getItem('paginaFun') == null) {
         sessionStorage.setItem('paginaFun', 1)

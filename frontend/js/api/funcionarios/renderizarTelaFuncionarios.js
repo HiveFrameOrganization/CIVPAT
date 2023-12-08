@@ -159,6 +159,8 @@ async function exibir(dados) {
         divs.appendChild(div);
     }
 
+    divs.classList.add('space-y-1');
+
     exibe.innerHTML = divs.outerHTML;
 
     reloadBotoesLinhas();

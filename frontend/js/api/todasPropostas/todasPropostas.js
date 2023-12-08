@@ -6,10 +6,9 @@ import alertas from '../../feedback.js';
 
 // const table = document.querySelector('#table');
 // const paginacao = document.querySelector('#paginacao');
-const inputPesquisa = document.getElementById('hidden-input');
-//Perguntar pro Michael sobre esta variavel
 
-window.addEventListener('load', async () => {
+async function buscarPropostas() {
+
     // ao carregar a página, a função irá executar
     const filtroAoCarregarPagina = localStorage.getItem('filtroPadrao');
     alertas();
@@ -34,18 +33,10 @@ window.addEventListener('load', async () => {
 
 
     selecionarAba(filtroAoCarregarPagina)
-})
+}
 
-// Fechar todos os menus de opções das linhas, ao clicar fora do botão
-window.addEventListener('click', (event) => {
+async function pesquisarProposta() {
 
-    if (!event.target.matches('.option-dropdown-trigger')) {
-
-        esconderTudo();
-    }
-});
-
-inputPesquisa.addEventListener('keyup', async () => {
     const filtroAoCarreparPagina = localStorage.getItem('filtroPadrao');
     sessionStorage.setItem('pesquisado', 'sim')
 
@@ -64,7 +55,45 @@ inputPesquisa.addEventListener('keyup', async () => {
     }
 
     botoesPaginacao(localStorage.getItem('filtroPadrao'))
+}
+
+// alternar visibilidade do input
+function toggleInputVisibility() {
+
+    searchButton.classList.contains('rounded-r-md') ? searchButton.classList.replace('rounded-r-md', 'rounded-md') : searchButton.classList.replace('rounded-md', 'rounded-r-md');
+    hiddenInput.classList.toggle('hidden');
+}
+
+// funções da barra de pesquisa
+
+const hiddenInput = document.querySelector('#hidden-input'),
+      searchButton = document.querySelector('#search-btn');
+
+
+hiddenInput.addEventListener('keyup', function(event) {
+
+    if ((this.value == '' && event.key === "Backspace") || event.key == 'Enter') {
+        
+        buscarPropostas()
+    }
 })
+
+searchButton.addEventListener('click', () => {
+
+    // Verifica se o input se visível ou não
+    if (!hiddenInput.classList.contains('hidden') && hiddenInput.value != '') {
+        
+        pesquisarProposta();
+        return;
+    } else if (!hiddenInput.classList.contains('hidden') && hiddenInput.value == '') {
+        // Visível, mas não preenchido
+
+        toggleInputVisibility();
+        return;
+    }   
+    // Escondido
+    toggleInputVisibility();
+});
 
 document.getElementById('todasPropostas').addEventListener('click', () => {
     // document.getElementById('pesquisa1').classList = 'in-page bg-body text-color-text text-sm px-3 py-1 rounded-md';
@@ -96,3 +125,4 @@ document.getElementById('solicitacoes').addEventListener('click', () => {
     mudarAba('solicitacoes')
 });
 
+buscarPropostas();
