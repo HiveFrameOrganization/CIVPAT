@@ -12,16 +12,10 @@ export default async function salvarMudancasNaProposta() {
     const idProposta = localStorage.getItem('idProposta');
 
     //Pegando os valores dos input's para transformalos em objeto
-    const nomeProposta = document.querySelector('#tituloProposta').value;
-    const statusProposta = document.querySelector('#statusProposta').value;
-    const criadorProposta = document.querySelector('#criadorProposta').value;
     const cnpj = document.querySelector('#cnpj').value.replace(/\D/g, '');
     const cnpjString = cnpj.toString();
     const empresa = document.querySelector('#empresa').value;
     const uniCriadora = document.querySelector('#uniCriadora').value;
-    const dataInicio = document.querySelector('#dataPrimeiroProduto').value;
-    const dataFim = document.querySelector('#dataUltimoProduto').value;
-    const valor = parseFloat(document.querySelector('#valorTotalProdutos').value.replace(/\R/g, '').replace(/\$/g, '').replace(/\./g, '').replace(/\s/g, ''));
     const funil = document.querySelector('#funil').value;
     const primeiroGerente = document.querySelector('#primeiroGerente').value;
     const segundoGerente = document.querySelector('#segundoGerente').value;
@@ -74,15 +68,9 @@ export default async function salvarMudancasNaProposta() {
     } else {
         const dados = {
             idProposta: idProposta,
-            nomeProposta: (nomeProposta == '') ? null : nomeProposta,
-            statusProposta: (statusProposta == '') ? null : statusProposta,
-            criadorProposta: (criadorProposta == '') ? null : criadorProposta,
             cnpj: (cnpjString == '') ? null : cnpjString,
             empresa: (empresa == '') ? null : empresa,
             uniCriadora: (uniCriadora == '') ? null : uniCriadora,
-            dataInicio: (dataInicio == '') ? null : dataInicio,
-            dataFim: (dataFim == '') ? null : dataFim,
-            valor: (valor == '') ? null : valor,
             funil: (funil == '') ? null : funil,
             primeiroGerenteAntigo: localStorage.getItem('gerente1'),
             segundoGerenteAntigo: localStorage.getItem('gerente2'),

@@ -17,15 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dados = json_decode($json, true);
 
     $idProposta = $dados['idProposta'];
-    $nomeProposta = $dados['nomeProposta'];
-    $statusProposta = $dados['statusProposta'];
-    // $criadorProposta = $dados['criadorProposta'];
-    $cnpj = $dados['cnpj'];
     $empresa = $dados['empresa'];
     $uniCriadora = $dados['uniCriadora'];
-    $dataInicio = $dados['dataInicio'];
-    $dataFim = $dados['dataFim'];
-    $valor = $dados['valor'];
     $funil = $dados['funil'];
     $primeiroGerenteAntigo = $dados['primeiroGerenteAntigo'];
     $segundoGerenteAntigo = $dados['segundoGerenteAntigo'];
@@ -40,20 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt2 = $conn->prepare('UPDATE Propostas SET 
     fk_idRepresentante = ?,
-    TituloProposta = ?,
     fk_idUnidadeCriadora = ?,
     Empresa = ?,
-    `Status` = ?,
     nSGSET = ?,
-    CNPJ = ?,
-    Inicio = ?,
-    Fim = ?,
-    Valor = ?
+    CNPJ = ?
     WHERE idProposta = ?');
 
-    $stmt2->bind_param('sssssssssss', $idRepresentante,
-    $nomeProposta, $uniCriadora, $empresa, $statusProposta,
-    $numeroSGSET, $cnpj, $dataInicio, $dataFim, $valor, $idProposta);
+    $stmt2->bind_param('ssssss', $idRepresentante, $uniCriadora, $empresa,
+    $numeroSGSET, $cnpj, $idProposta);
 
     $stmt2->execute();
 

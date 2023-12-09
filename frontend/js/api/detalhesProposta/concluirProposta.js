@@ -82,13 +82,13 @@ const botaoConcluir = document.getElementById('concluirProposta');
 
 botaoConcluir.addEventListener('click', () => {
     Swal.fire({
-        title: 'Concluir proposta?',
+        title: `${localStorage.getItem('cargo') == 'ger' ? 'Solicitar conclusão?' : 'Concluir proposta?'}`,
         icon: 'info',
         text: 'Você não poderá reverter isso!',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, concluir',
+        confirmButtonText: `${localStorage.getItem('cargo') == 'ger' ? 'Sim, solicitar' : 'Sim, concluir'}`,
         cancelButtonText: 'Cancelar'
     }).then((result) => {
 
