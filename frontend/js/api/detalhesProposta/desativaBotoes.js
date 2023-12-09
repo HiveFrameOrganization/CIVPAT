@@ -2,36 +2,19 @@
 export default function desativaBotoes(){
 
     // Botões 
-    const btnDeclinar = document.querySelector('#declinarProposta');
-    const btnAceitar = document.querySelector('#aceitarProposta');
-    const btnEditar = document.querySelector('#editarProposta');
-    const btnConcluir = document.querySelector('#concluirProposta');
     const btnPdf = document.querySelector('#botaoSalvarPdf');
     const inputsPdf = document.querySelectorAll('.pdf');
     const btnFollowUp = document.querySelector('#adicionar');
     const editFollowUp = document.querySelectorAll('.fa-edit');
     const btnProduto = document.querySelector('#btnNovoProduto');
 
-    // REMOVENDO BOTÕES DE PROPOSTA EM ANÁLISE
-    if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'em análise'){
-        btnConcluir.parentElement.removeChild(btnConcluir);
+    if (localStorage.getItem('statusProposta').toLowerCase() == 'aceito') {
 
-
-    // REMOVENDO BOTÕES DE PROPOSTA ACEITAS
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'aceito') {
-
-        btnAceitar.parentElement.removeChild(btnAceitar);
-        btnDeclinar.parentElement.removeChild(btnDeclinar);
-        btnEditar.parentElement.removeChild(btnEditar);
         btnProduto.parentElement.removeChild(btnProduto);
 
     // REMOVENDO BOTÕES DE PROPOSTA CONCLUÍDAS
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'concluido') {
+    } else if (localStorage.getItem('statusProposta').toLowerCase() == 'concluido') {
 
-        btnAceitar.parentElement.removeChild(btnAceitar);
-        btnDeclinar.parentElement.removeChild(btnDeclinar);
-        btnEditar.parentElement.removeChild(btnEditar);
-        btnConcluir.parentElement.removeChild(btnConcluir);
         btnPdf.parentElement.removeChild(btnPdf);
         btnFollowUp.parentElement.removeChild(btnFollowUp);
         inputsPdf.forEach((input) => {
@@ -43,12 +26,8 @@ export default function desativaBotoes(){
         btnProduto.parentElement.removeChild(btnProduto);
     
     // REMOVENDO BOTÕES DE PROPOSTA DECLINADAS
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'declinado') {
+    } else if (localStorage.getItem('statusProposta').toLowerCase() == 'declinado') {
 
-        btnAceitar.parentElement.removeChild(btnAceitar);
-        btnDeclinar.parentElement.removeChild(btnDeclinar);
-        btnEditar.parentElement.removeChild(btnEditar);
-        btnConcluir.parentElement.removeChild(btnConcluir);
         btnPdf.parentElement.removeChild(btnPdf);
         btnFollowUp.parentElement.removeChild(btnFollowUp);
         inputsPdf.forEach((input) => {
@@ -59,14 +38,10 @@ export default function desativaBotoes(){
         })
         btnProduto.parentElement.removeChild(btnProduto);
 
-    }  else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de aceite') {
+    }  else if (localStorage.getItem('statusProposta').toLowerCase() == 'solicitação de aceite') {
 
-        if (localStorage.getItem('cargo').toLocaleLowerCase() == 'ger' || localStorage.getItem('cargo').toLocaleLowerCase() == 'tec') {
+        if (localStorage.getItem('cargo').toLowerCase() == 'ger') {
 
-            btnAceitar.parentElement.removeChild(btnAceitar);
-            btnDeclinar.parentElement.removeChild(btnDeclinar);
-            btnEditar.parentElement.removeChild(btnEditar);
-            btnConcluir.parentElement.removeChild(btnConcluir);
             btnPdf.parentElement.removeChild(btnPdf);
             btnFollowUp.parentElement.removeChild(btnFollowUp);
             inputsPdf.forEach((input) => {
@@ -77,19 +52,13 @@ export default function desativaBotoes(){
             })
             btnProduto.parentElement.removeChild(btnProduto);
 
-        } else {
-            btnConcluir.parentElement.removeChild(btnConcluir);
         }
 
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de declinio') {
+    } else if (localStorage.getItem('statusProposta').toLowerCase() == 'solicitação de declinio') {
 
         // REMOVENDO BOTÕES DE PROPOSTAS EM SOLICITAÇÃO DE DECLÍNIO
-        if (localStorage.getItem('cargo').toLocaleLowerCase() == 'ger' || localStorage.getItem('cargo').toLocaleLowerCase() == 'tec') {
+        if (localStorage.getItem('cargo').toLowerCase() == 'ger') {
 
-            btnAceitar.parentElement.removeChild(btnAceitar);
-            btnDeclinar.parentElement.removeChild(btnDeclinar);
-            btnEditar.parentElement.removeChild(btnEditar);
-            btnConcluir.parentElement.removeChild(btnConcluir);
             btnPdf.parentElement.removeChild(btnPdf);
             btnFollowUp.parentElement.removeChild(btnFollowUp);
             inputsPdf.forEach((input) => {
@@ -100,18 +69,12 @@ export default function desativaBotoes(){
             })
             btnProduto.parentElement.removeChild(btnProduto);
 
-        } else {
-            btnConcluir.parentElement.removeChild(btnConcluir);
         }
-    } else if (localStorage.getItem('statusProposta').toLocaleLowerCase() == 'solicitação de conclusão'){
+    } else if (localStorage.getItem('statusProposta').toLowerCase() == 'solicitação de conclusão'){
         
         // REMOVENDO BOTÕES DE PROPOSTAS EM SOLICITAÇÃO DE CONCLUSÃO
-        if (localStorage.getItem('cargo').toLocaleLowerCase() == 'ger' || localStorage.getItem('cargo').toLocaleLowerCase() == 'tec') {
+        if (localStorage.getItem('cargo').toLowerCase() == 'ger') {
 
-            btnAceitar.parentElement.removeChild(btnAceitar);
-            btnDeclinar.parentElement.removeChild(btnDeclinar);
-            btnEditar.parentElement.removeChild(btnEditar);
-            btnConcluir.parentElement.removeChild(btnConcluir);
             btnPdf.parentElement.removeChild(btnPdf);
             btnFollowUp.parentElement.removeChild(btnFollowUp);
             inputsPdf.forEach((input) => {
@@ -122,9 +85,6 @@ export default function desativaBotoes(){
             })
             btnProduto.parentElement.removeChild(btnProduto);
 
-        } else {
-            btnAceitar.parentElement.removeChild(btnAceitar);
-            btnEditar.parentElement.removeChild(btnEditar);
         }
     }
 }
