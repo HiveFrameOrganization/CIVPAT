@@ -1,26 +1,23 @@
-import salvarMudancasNaProposta from './salvarMudancasNaProposta.js';
 import pegarUnidadesCriadoras from './pegarUnidadesCriadoras.js';
 import verificarPdfExistente from './verificarPDFExistente.js';
-import declinarPropostaBanco from './declinarPropostaBanco.js';
 import verificarBancoProposta from './verificarProposta.js';
 import carregarProdutos from './carregarProdutos.js';
-import aceitarProposta from './aceitarProposta.js';
 import alertas from '../../feedback.js';
 import { back } from '../Rotas/rotas.js';
 import baixarPdf from './baixarPDF.js';
-import validarCNPJ from './validarCNPJ.js';
-import validarSGSET from './validarSGSET.js';
 import { autenticacao } from '../login/autenticacao.js';
+import { renderizarBotoes } from './renderizarBotoes.js';
 
 // Ao carregar a pagina essa função irá pegar o id do local Storage para verificar no banco e trazer as informações
 window.addEventListener('load', async () => {
     const idProposta = localStorage.getItem('idProposta');
 
     // Levar o valor do id do local Storage atravez da função para o back end
-    verificarBancoProposta(idProposta);
-    verificarPdfExistente(idProposta);
-    pegarUnidadesCriadoras();
+    await verificarBancoProposta(idProposta);
+    await verificarPdfExistente(idProposta);
+    await pegarUnidadesCriadoras();
 
+    renderizarBotoes();
 
     if (await carregarProdutos(idProposta) === false) {
         document.getElementById('propostas').innerHTML = `
@@ -179,78 +176,11 @@ botaoPesquisaDeSatisfacao.addEventListener('click', () => {
     baixarPdf(4)
 });
 
-
-const aceitarPropostaButton = document.getElementById('aceitarProposta');
-const declinarPropostaButton = document.getElementById('declinarProposta');
-const concluirPropostaButton = document.getElementById('concluirProposta');
 const orcamentoInput = document.getElementById('orcamento');
 const propostaAssinadaInput = document.getElementById('propostaAssinada');
 const cnpj = document.getElementById('cnpj');
 const nSGSET = document.getElementById('numeroSGSET');
 
-export const editandoProposta = document.querySelector('#editarProposta');
-
-editandoProposta.addEventListener('click', () => {
-
-    // Mudando estado do botão
-    let estadoInput = document.querySelectorAll('.estadoInput')
-    if (editandoProposta.value == 'EDITAR') {
-
-        aceitarPropostaButton.parentElement.removeChild(aceitarPropostaButton);
-        declinarPropostaButton.parentElement.removeChild(declinarPropostaButton);
-        if (localStorage.getItem('statusProposta') == 'Aceito' || localStorage.getItem('statusProposta') == 'Solicitação de Conclusão'){
-            concluirPropostaButton.parentElement.removeChild(concluirPropostaButton);
-        }
-
-        editandoProposta.value = 'SALVAR';
-
-        const cancelarEdicaoProposta = document.createElement('button');
-
-        cancelarEdicaoProposta.setAttribute('aria-label', 'Cancelar edição');
-        cancelarEdicaoProposta.classList = 'bg-color-red py-2 px-12 text-[#fff] rounded-md text-xs font-semibold border border-color-red hover:bg-[transparent] hover:text-color-red transition-colors cursor-pointer';
-        cancelarEdicaoProposta.setAttribute('id', 'cancelarEdicaoProposta');
-        cancelarEdicaoProposta.textContent = 'CANCELAR';
-
-        cancelarEdicaoProposta.addEventListener('click', () => {
-
-            window.location.reload();
-        });
-
-        editandoProposta.parentElement.appendChild(cancelarEdicaoProposta);
-
-        for (let i = 0; i < estadoInput.length; i++) {
-            estadoInput[i].removeAttribute('disabled')
-        }
-
-        
-    } else {
-        salvarMudancasNaProposta();
-    }
-});
-
-
-// Executando a função 'aceitarProposta'.
-function eventListenerExibirModal(exibir) {
-
-    // exibir = True || False
-
-    try {
-        modalConfirmar(exibir)
-        // aceitarProposta()
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
-aceitarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, true))
-declinarPropostaButton.addEventListener('click', eventListenerExibirModal.bind(null, false))
-
-
-// abrir modal de cadastro de produto
-document.querySelector('#btnNovoProduto').addEventListener('click', () => {
-
-})
 
 // Modal de varias etapas de cadastro de produto
 let primerioCadastroProduto = document.querySelector('#primerioCadastroProduto')
@@ -301,100 +231,3 @@ document.querySelector('#btnResumo').addEventListener('click', () => {
         abaResumo.classList.remove('h-0')
     }
 })
-
-// MODAL DE CONFIRMAÇÃO PARA DECLINIO E ACEITAÇÃO DE PROPOSTA
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top',
-    showConfirmButton: false,
-    timer: 1500,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
-function modalConfirmar(fun) {
-
-    let cnpj = document.querySelector('#cnpj').value
-    let data = document.querySelector('#dataPrimeiroProduto').value
-    let sgset = document.querySelector('#numeroSGSET').value
-
-    const camposObrigatorios = document.querySelectorAll('.campoObrigatorio');
-    
-    if (fun && localStorage.getItem('cargo') == 'ger' && !cnpj) {
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Preencha todos os campos obrigatórios em vermelho!'
-        })
-
-        if(cnpj == ''){
-            camposObrigatorios[0].classList.add('bg-color-red/20')
-            camposObrigatorios[0].classList.add('outline')
-            camposObrigatorios[0].classList.add('outline-1')
-            camposObrigatorios[0].classList.add('outline-[red]')
-            camposObrigatorios[0].classList.remove('disabled:bg-body')
-        }
-    } else if (fun && localStorage.getItem('cargo') != 'ger' && (!cnpj || !sgset)) {
-        Toast.fire({
-            icon: 'error',
-            title: 'Preencha todos os campos obrigatórios em vermelho!'
-        })
-
-        if(cnpj == ''){
-            camposObrigatorios[0].classList.add('bg-color-red/20')
-            camposObrigatorios[0].classList.add('outline')
-            camposObrigatorios[0].classList.add('outline-1')
-            camposObrigatorios[0].classList.add('outline-[red]')
-            camposObrigatorios[0].classList.remove('disabled:bg-body')
-        }
-        if(sgset == ''){
-            camposObrigatorios[1].classList.add('bg-color-red/20')
-            camposObrigatorios[1].classList.add('outline')
-            camposObrigatorios[1].classList.add('outline-1')
-            camposObrigatorios[1].classList.add('outline-[red]')
-            camposObrigatorios[1].classList.remove('disabled:bg-body')
-        }
-    } else if (fun && !data) {
-
-        Toast.fire({
-            icon: 'error',
-            title: 'Cadastre algum produto para poder aceitar a proposta!'
-        })
-    } else {
-
-        Swal.fire({
-            title: `${fun ? localStorage.getItem('cargo') == 'ger' ? 'Solicitar aceite?' : 'Aceitar proposta?' : localStorage.getItem('cargo') == 'ger' ? 'Solicitar declínio?' : 'Declinar proposta?'}`,
-            icon: `${fun ? 'info' : 'warning'}`,
-            text: 'Você não poderá reverter isso!',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: `${fun ? localStorage.getItem('cargo') == 'ger' ? 'Sim, solicitar' : 'Sim, aceitar' : localStorage.getItem('cargo') == 'ger' ? 'Sim, solicitar' : 'Sim, declinar'}`,
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-
-            if (result.isConfirmed && fun) {
-
-                aceitarProposta();
-            } else if (result.isConfirmed && fun === false) {
-
-                declinarPropostaBanco();
-            }
-        });
-    }
-}
-
-const botaoAceitar = document.getElementById('aceitarProposta');
-const botaoDeclinar = document.getElementById('declinarProposta');
-
-window.addEventListener('load', () => {
-    const cargo = localStorage.getItem('cargo');
-
-    if (cargo == 'ger') {
-        botaoAceitar.value = 'SOLICITAR ACEITE';
-        botaoDeclinar.value = 'SOLICITAR DECLINIO';
-    }
-
-});

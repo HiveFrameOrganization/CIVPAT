@@ -80,7 +80,7 @@ function validarDados($dados, $conn)
     } else {
 
         $resposta = [
-            'mensagem' => 'Login ou senha inválido',
+            'mensagem' => 'E-mail e/ou senha inválidos',
             'login' => false,
             'status' => 'error'
         ];

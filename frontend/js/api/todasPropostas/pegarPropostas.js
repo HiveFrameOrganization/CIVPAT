@@ -13,14 +13,6 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
     </div>
     `;
 
-    // Adicionando o feedback de loading
-    document.getElementById('analise').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-    document.getElementById('aceitos').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-    document.getElementById('declinados').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-    document.getElementById('concluidos').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-    document.getElementById('soli-aceite').innerHTML = '<div class="inline-block w-[25px] h-[25px] border-4 border-[#e6e6e64d] rounded-full border-t-[#3976d1] animate-spin"></div>'
-
-
     const pesquisaAtual = '%' + document.getElementById('hidden-input').value + '%';
 
     if (sessionStorage.getItem('paginaProposta') == null) {
@@ -62,7 +54,6 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
             if (dados.propostas.length > 0) {
 
                 exibirPropostas(dados.propostas);
-
 
                 sessionStorage.setItem(`qtdBotoesProposta${aba}`, dados.qtdBotoes);
 

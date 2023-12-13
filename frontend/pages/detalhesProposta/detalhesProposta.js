@@ -17,22 +17,6 @@ modalEdit.addEventListener('click', function(e) {
   if (e.target == this) fechaModalEdit();
 });
 
-const botaoAceitar = document.getElementById('aceitarProposta');
-const botaoDeclinar =  document.getElementById('declinarProposta');
-const botaoConcluir = document.getElementById('concluirProposta');
-
-window.addEventListener('load', () => {
-  const cargo = localStorage.getItem('cargo');
-  console.log(cargo)
-
-  if (cargo == 'ger'){
-    botaoAceitar.value = 'SOLICITAR ACEITE';
-    botaoDeclinar.value = 'SOLICITAR DECLINIO';
-    botaoConcluir.value = 'SOLICITAR CONCLUSÃO';
-  }
-
-});
-
 function fechaModalEdit(){
     let modal = document.querySelector('.editar');
 

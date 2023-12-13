@@ -29,33 +29,6 @@ navButtons.forEach((button) => {
     })
 });
 
-
-// funções da barra de pesquisa
-const hiddenInput = document.querySelector('#pesquisarUsuario'),
-      searchButton = document.querySelector('#botaoPesquisar');
-
-// alternar visibilidade do input
-function toggleInputVisibility() {
-
-    searchButton.classList.contains('rounded-r-md') ? searchButton.classList.replace('rounded-r-md', 'rounded-md') : searchButton.classList.replace('rounded-md', 'rounded-r-md');
-    hiddenInput.classList.toggle('hidden');
-}
-
-searchButton.addEventListener('click', () => {
-
-    // Verifica se o input se visível ou não
-    if (!hiddenInput.classList.contains('hidden') && hiddenInput.value != '') {
-        // Visível e preenchido
-        return;
-    } else if (!hiddenInput.classList.contains('hidden') && hiddenInput.value == '') {
-        // Visível, mas não preenchido
-        toggleInputVisibility();
-        return;
-    }
-    // Escondido
-    toggleInputVisibility();
-});
-
 const modalCadastrar = document.querySelector('#modal-cadastrar');
 const fecharModalCadastrar = document.querySelector('#close-modal-cad');
 const modalCadFade = document.querySelector('#modal-fade-cad');

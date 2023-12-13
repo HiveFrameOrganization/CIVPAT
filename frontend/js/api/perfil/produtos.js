@@ -305,6 +305,8 @@ function exibirProdutos(produtos) {
             divs.appendChild(divRow);
         }
 
+        divs.classList.add('space-y-1');
+
         table.innerHTML = divs.outerHTML;
 
         aplicarFuncaoClickEmTodasAsLinhas();

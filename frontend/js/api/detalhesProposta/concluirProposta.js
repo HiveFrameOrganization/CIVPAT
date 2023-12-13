@@ -77,21 +77,3 @@ export default async function concluirProposta() {
     }
     
 }
-
-const botaoConcluir = document.getElementById('concluirProposta');
-
-botaoConcluir.addEventListener('click', () => {
-    Swal.fire({
-        title: 'Concluir proposta?',
-        icon: 'info',
-        text: 'Você não poderá reverter isso!',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim, concluir',
-        cancelButtonText: 'Cancelar'
-    }).then((result) => {
-
-        result.isConfirmed && concluirProposta();
-    });
-});
