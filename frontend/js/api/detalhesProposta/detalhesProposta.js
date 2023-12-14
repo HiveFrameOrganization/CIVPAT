@@ -59,7 +59,6 @@ function nomeDoArquivoPdfNoInput(inputAondeSobreOArquivo, inputAondeTemOPlacehol
 
     if (arquivoEstaNoInput) {
         campoComPlaceholder.setAttribute('placeholder', arquivoEstaNoInput.name);
-        console.log(arquivoEstaNoInput.size);
     }
 
     const tamanho = arquivoEstaNoInput.size / 1024;
@@ -92,7 +91,6 @@ botaoSalvarPdf.addEventListener('click', async () => {
     const pdfRelatorioFinal = document.getElementById('relatorioFinal').files[0];
     const pdfPesquisaDeSatisfacao = document.getElementById('pesquisaDeSatisfacao').files[0];
 
-    console.log(pdfOrcamento);
 
     if (pdfOrcamento != null && pdfOrcamento != undefined) {
 
@@ -129,11 +127,6 @@ botaoSalvarPdf.addEventListener('click', async () => {
         formData.append('pdfRelatorioFinal', pdfRelatorioFinal);
         formData.append('pdfPesquisaDeSatisfacao', pdfPesquisaDeSatisfacao);
 
-        console.log(formData);
-
-        // formData.forEach((valor, chave) => {
-        //     console.log(`${chave}: ${valor}`);
-        //   });
 
         // Enviar o formulário como uma solicitação POST usando fetch
         fetch(back + `/PDF/salvarPdf.php?id=${identificador}`, {

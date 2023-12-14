@@ -47,8 +47,6 @@ export default async function concluirProposta() {
 
         const resposta = await requisicao.json();
 
-        console.log(resposta);
-
         localStorage.setItem('status', resposta.status);
         localStorage.setItem('mensagem', resposta.mensagem);
 

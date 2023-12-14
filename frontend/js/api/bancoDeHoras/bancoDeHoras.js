@@ -27,12 +27,10 @@ formularioBancoHoras.addEventListener('submit', async evento => {
     // Conferindo a data mínima
     if (dataMaxima(mes, ano)) {
 
-        console.log(`Data Incorreta`);
 
         return;
     }
 
-    console.log(`Data correta`);
     await buscarHoras(mes, ano, nif, cargo);
 
 
@@ -48,7 +46,6 @@ async function buscarHoras(mes, ano, nif, cargo) {
 
     try {
 
-        console.log(nif)
 
         const token = localStorage.getItem('token');
 
@@ -58,7 +55,6 @@ async function buscarHoras(mes, ano, nif, cargo) {
 
         const resposta = await requisicao.json();
 
-        console.log(resposta);
         exibirBancoHoras(resposta)
 
     } catch (error) {
@@ -88,7 +84,6 @@ function dataMaxima(mes, ano) {
 
     if (Number(ano) > anoMin || Number(mes) > mesMin) {
 
-        console.log(mesMin);
         return true;
     }
 
@@ -100,8 +95,6 @@ function dataMaxima(mes, ano) {
 async function exibirBancoHoras(res) {
 
     exibir.innerHTML = ''
-
-    // console.log(res.dados[0].NomeProduto)
 
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
     if(res == null){

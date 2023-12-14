@@ -1,6 +1,5 @@
 import { back } from '../Rotas/rotas.js';
 import selecionarGerente from './selecionarGerente.js';
-import { autenticacao } from '../login/autenticacao.js';
 
 export default async function carregarTecnicos() {
     setTimeout(1000);

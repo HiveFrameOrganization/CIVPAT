@@ -50,7 +50,6 @@ export default function avisoData(res){
                 let diasRestantesMes = mesAtual - dataAtual.dia
                 
                 if(diasRestantesMes < 10){
-                    console.log('MENOS de 10 dia(s) para o fim do mes!')
                     
                     // VERIFICA SE FALTAM MENOS DE 10 DIAS PARA O FINAL DA PROPOSTA
                     if(diasRestantesMes + parseInt(dataFinal.dia) <= 10){

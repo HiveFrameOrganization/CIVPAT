@@ -11,7 +11,7 @@ div.innerHTML = `
 </div>`;
 
 const autenticado = await autenticacao(['adm', 'coor', 'ger'], false)
-console.log(autenticado)
+
 if(autenticado){
     // Acessa o backend para pegar os follow ups
     fetch(back + `/followUp/pegarFollowUp.php?idProposta=${idProposta}`, {method: 'GET'})

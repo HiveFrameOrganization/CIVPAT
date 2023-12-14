@@ -106,7 +106,6 @@ async function buscarProdutos() {
 
                 if (resposta.produtos && resposta.produtos.length > 0) {
 
-                    console.log(resposta.produtos)
                     exibirProdutos(resposta.produtos);
                     sessionStorage.setItem('qtdBotoesProduto', resposta.qtdBotoes);
                 } else {
@@ -158,8 +157,6 @@ function botoesPaginacao() {
         a.onclick = () => {
             colocarPagina(i)
         }
-
-        console.log(a);
         
         // Adiciona o botão antes da seta de proxima página
         let setaProxPagina = containerPaginacao.querySelector("a.w-4.h-4:last-child");
@@ -214,13 +211,6 @@ function exibirProdutos(produtos) {
             let statusIMG;
             let color;
             let optionIMG;
-            // var sgset = produto['nSGSET'];
-
-            // if (sgset.value.length == 3){
-            // sgset.value += '-'
-            // } else if (sgset.value.length == 6){
-            // sgset.value += '/'
-            // }
     
             if (produto['Situacao'].toLowerCase() == 'em andamento') {
                 

@@ -235,23 +235,5 @@ function esconderTudo() {
     }
 }
 
-// function exibirErro(erro) {
-//     //Selecionando a div que vai ter os funcionário
-//     const exibicao = document.querySelector('#exibicao');
-
-//     // Removendo um possível elemento na div de exibição
-//     exibicao.innerHTML = '';
-
-//     // Criando um elemnto para mostrar o erro na tela
-//     const titulo = document.createElement('h1');
-
-//     // Adicionando texto e estilo
-//     titulo.classList = 'w-full text-center'
-//     titulo.textContent = 'NENHUM FUNCIONÁRIO ENCONTRADO...';
-//     titulo.style.color = 'red';
-
-//     exibicao.appendChild(titulo);
-// }
-
 export default exibir
 export { esconderTudo }
