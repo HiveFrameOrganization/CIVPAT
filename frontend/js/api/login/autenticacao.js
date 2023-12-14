@@ -14,9 +14,6 @@ export async function autenticacao(cargo, load) {
 
         if (!token) {
 
-            // Limpando residuos
-            // localStorage.clear();   
-            // sessionStorage.clear();
 
             localStorage.setItem('status', 'error');
             localStorage.setItem('mensagem', 'É necessário realizar um novo login.');
@@ -44,7 +41,7 @@ export async function autenticacao(cargo, load) {
             body: JSON.stringify(dados)
         });
 
-        // console.log(verificacao);
+
 
         const resposta = await verificacao.json();
 

@@ -55,9 +55,6 @@ async function lancarHoraParaOTecnico () {
         
         const exibirHoras = await fetch(back + `/lancarHorasEsquecidas/verificarDataLancarHoras.php?nifTecnico=${nifTecnico}&dataDoLancamento=${dataLancamento}`);
         const resposta = await exibirHoras.json();
-
-        console.log(resposta)
-        console.log(nifTecnico)
             
 
         
@@ -66,10 +63,6 @@ async function lancarHoraParaOTecnico () {
         const horasRestantesMaquina = 24 - resposta['horaMaquinaTrabalhadas']
         
 
-        
-        console.log(horasRestantes)
-        console.log(horasRestantesMaquina)
-            
 
         if (horaPessoa > horasRestantes || horaMaquina > horasRestantesMaquina) {
             localStorage.setItem('status', 'error');

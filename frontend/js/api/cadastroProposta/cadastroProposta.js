@@ -1,6 +1,6 @@
 import { back } from '../Rotas/rotas.js';
 import alertas from '../../feedback.js';
-import { autenticacao }  from '../login/autenticacao.js';
+
 
 const formularioProposta = document.querySelector('#formularioProposta');
 const listaGerentes = document.querySelector('#listaGerentes');

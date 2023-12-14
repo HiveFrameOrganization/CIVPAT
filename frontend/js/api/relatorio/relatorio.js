@@ -107,8 +107,6 @@ function dataMaxima(mes, ano) {
     const anoMin = data.getFullYear();
 
     if (Number(ano) > anoMin || Number(mes) > mesMin) {
-
-        console.log(mesMin);
         return true;
     }
 
@@ -143,8 +141,6 @@ formularioRelatorio.addEventListener('submit', async evento => {
     // Conferindo a data mínima
     if (dataMaxima(mes, ano)) {
 
-        // console.log(`Data Incorreta`);
-
         exibir.innerHTML = `
         <div class='flex flex-col justify-center items-center gap-4'>
             <img src="../../img/icon/emergency.svg" alt="emergencia">
@@ -164,7 +160,6 @@ formularioRelatorio.addEventListener('submit', async evento => {
 async function exibirRelatorio(res) {
 
     exibir.innerHTML = ''
-    console.log(res)
 
     // QUANDO CARREGAR A PAGINA E NÃO OUVER NENHUM RELATORIO GERADO
     if (res == null) {

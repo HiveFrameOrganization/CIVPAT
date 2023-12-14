@@ -61,12 +61,10 @@ export default async function verificarBancoProposta(id) {
         const dataUltimoProduto = document.querySelector('#dataUltimoProduto').value = resposta['dataUltimoProduto'];
         const valorTotalProdutos = document.querySelector('#valorTotalProdutos').value = (resposta['valorTotalProdutos'] == null) ? 0 : resposta['valorTotalProdutos'];
         selecionarFunil(resposta['StatusFunil']);
-        // const primeiroGerente = document.querySelector('#primeiroGerente').value = resposta['Gerentes'][0]['Nome']; 
         const nomeContato = document.querySelector('#nomeContato').value = resposta['nomeContato'];
         const emailContato = document.querySelector('#emailContato').value = resposta['emailContato'];
         const numeroContato = document.querySelector('#numeroContato').value = resposta['numeroContato'];
         document.querySelector('#campoResumo').value = resposta['resumo']
-        // const segundoGerente = document.querySelector('#segundoGerente').value = resposta['Gerentes'][1]?.['Nome'] || '';
 
         // verifica se existe numeroSGSET cadastrado para ser mostrado no titulo da pagina
         let TelaNomeProposta = ''
@@ -109,22 +107,3 @@ export default async function verificarBancoProposta(id) {
         console.error(error)
     }
 }
-
-
-// mascara do numero de celular
-// function maskCelular(cel){
-//     let mask = cel.split('')
-//     let ret = '('
-  
-//     for (let i = 0; i < mask.length; i++) {
-      
-//       if(i == 1){
-//         ret += mask[i] + ')'
-//       }else{
-//         ret += mask[i]
-//       }    
-//     }
-
-//     console.log(ret)
-//     return ret
-//   }

@@ -34,7 +34,6 @@ export default async function aceitarProposta() {
         }
     }
 
-    console.log(pdfObrigatorio)
     if (aceitar && pdfObrigatorio) {
         const botaoAceitar = document.getElementById('aceitarProposta');
         const idProposta = localStorage.getItem('idProposta');

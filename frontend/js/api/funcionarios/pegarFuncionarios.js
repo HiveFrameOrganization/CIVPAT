@@ -43,14 +43,14 @@ async function retornaFuncionarios(filtro, pesquisado) {
 
         const dados = await resposta.json();
             // Caso retorne algum erro previsto no back-end
-        console.log(dados);
+
         if (dados.status === 'success') {
 
             if (dados.usuarios.length > 0) {
 
                 // Função específica para exibir o funcionário
                 exibir(dados.usuarios);
-                // console.log(dados.usuarios)
+
                 // Seta a quantidade de botões
                 // necessário desetar no cadastro de usuário
                 sessionStorage.setItem(`qtdBotoesFun${filtro}`, dados.qtdBotoes);

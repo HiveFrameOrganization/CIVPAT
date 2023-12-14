@@ -5,21 +5,6 @@ import { autenticacao } from '../login/autenticacao.js';
 
 async function gerarHora(){
    
-    // const resposta = await fetch("https://worldtimeapi.org/api/timezone/America/Sao_Paulo");
-    // try {
-    //     const resultado = await resposta.json();
-
-    //     const dataApi = resultado['datetime'];
-
-    //     const dataFormatada = dataApi.substring(0, 10);
-
-    //     return dataFormatada.replace(/T/i, " ");  
-
-    // } catch (error) {
-    //     console.log('Sistema de horas apresentou um erro');
-
-    //     const data = Date()  
-    // }
 
     // Obtém a data atual
     const dataAtual = new Date();
@@ -190,7 +175,6 @@ async function salvarProduto () {
             });
     
             const dados = await resposta.json();
-            console.log(dados);
 
     
             if (dados['status'] == 'success'){
@@ -201,9 +185,7 @@ async function salvarProduto () {
             
             setTimeout(salvarMudancasNaProposta, 5000);
 
-            console.log(dataInicialInserida);
-            console.log(dataAtual);
-    
+
             window.location.pathname = '/frontend/pages/detalhesProposta/detalhesProposta.html';
         
         } catch (erro) {
@@ -240,7 +222,7 @@ async function carregarMaquinas() {
 }
 
 function exibirMaquinas(vetor) {
-    // console.log(vetor)
+    
     
     // Selecionando o dropdown que vai guardar as máquinas
     const maquinas = document.querySelector('#maquinas');
