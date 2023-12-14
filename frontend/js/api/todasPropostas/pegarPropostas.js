@@ -45,11 +45,11 @@ export default async function pegarTodasAsPropostas(aba, pesquisaAnterior) {
         // caso a requisição de um erro, irá exibir uma mensagem de erro
         if (dados.status === 'success') {
             // Adicionando a quaqntidade de propostas de acordo com os seus status
-            document.getElementById('analise').textContent = dados['Em Análise'] ? `# ${dados['Em Análise']}` : 'N/A';
-            document.getElementById('aceitos').textContent = dados['Aceito'] ? `# ${dados['Aceito']}` : 'N/A';
-            document.getElementById('declinados').textContent = dados['Declinado'] ? `# ${dados['Declinado']}` : 'N/A';
-            document.getElementById('concluidos').textContent = dados['Concluido'] ? `# ${dados['Concluido']}` : 'N/A';
-            document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] ? `# ${dados['SolicitacaoDeAceite']}` : 'N/A';
+            document.getElementById('analise').textContent = dados['Em Análise'] && `# ${dados['Em Análise']}`;
+            document.getElementById('aceitos').textContent = dados['Aceito'] && `# ${dados['Aceito']}`;
+            document.getElementById('declinados').textContent = dados['Declinado'] && `# ${dados['Declinado']}`;
+            document.getElementById('concluidos').textContent = dados['Concluido'] && `# ${dados['Concluido']}`;
+            document.getElementById('soli-aceite').textContent = dados['SolicitacaoDeAceite'] && `# ${dados['SolicitacaoDeAceite']}`;
 
             if (dados.propostas.length > 0) {
 

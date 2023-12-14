@@ -3,7 +3,8 @@ import { autenticacao } from '../login/autenticacao.js';
 
 const botaoPesquisar = document.getElementById('pesquisar');
 
-let tabela = document.querySelector('#produtosDoTecnico');
+const tabela = document.querySelector('#produtosDoTecnico');
+const divs = document.createElement('div');
 
 botaoPesquisar.addEventListener('click', () => {
     exibirProdutosDoTecnico();
@@ -80,12 +81,11 @@ async function exibirProdutosDoTecnico () {
     } else {
 
         exibirAlerta('');
+        divs.innerHTML = "";
 
         // Loop pela lista
         for (var i = 0; i < resposta.length; i++) {
             // Cria um elemento de botão
-            
-            console.log(resposta[i]);
 
             let statusIMG;
             let color;
@@ -184,18 +184,30 @@ async function exibirProdutosDoTecnico () {
                 </button>
             </div>`;
 
-            div.querySelector('.area-left').addEventListener('click', function() {
-
-                // Recuperando o botão o itemid, ao clicar na linha
-                verDetalhesProduto(div.querySelector('.view-btn'));
-            })
-
-            tabela.appendChild(div);
+            divs.appendChild(div);
         }
+
+        divs.classList.add('space-y-1');
+
+        tabela.innerHTML = divs.outerHTML;
+
+        aplicarFuncaoClickEmTodasAsLinhas();
 
         reloadLinhas();
 
     }
+}
+
+function aplicarFuncaoClickEmTodasAsLinhas() {
+
+    tabela.querySelectorAll('.area-left').forEach((linha) => {
+        
+        linha.addEventListener('click', function() {
+
+            // Recuperando o botão o itemid, ao clicar na linha
+            verDetalhesProduto(linha.parentElement.querySelector('.view-btn'));
+        })
+    });
 }
 
 // Alocar uma função de visualizar proposta em todos os botões das propostas na tabela
